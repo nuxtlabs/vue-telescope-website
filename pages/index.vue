@@ -2,12 +2,20 @@
   <div>
     <h1 class="text-3xl">Vue Telemetry</h1>
     <form @submit.prevent="analyze">
-      <input v-model="url" type="text" class="border" />
+      <input
+        v-model="url"
+        type="text"
+        class="border"
+        placeholder="Enter a domain"
+      />
       <button type="submit" class="bg-green-200 px-4" :disabled="pending">
         {{ pending ? 'Scanning...' : 'scan' }}
       </button>
     </form>
-    <pre v-if="result">{{ result }}</pre>
+    <div v-if="result" class="p-4 bg-gray-100">
+      <pre v-if="result">{{ result }}</pre>
+      <img :src="result.screenshot" class="h-64 border rounded" />
+    </div>
     <div v-if="error" class="text-red-700">{{ error }}</div>
   </div>
 </template>
