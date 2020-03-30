@@ -13,7 +13,8 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.9.6",
     "@nuxtjs/dotenv": "^1.4.1",
-    "nuxt": "^2.12.1"
+    "nuxt": "^2.12.1",
+    "vue-telemetry-analyzer": "^0.1.2"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.2",
