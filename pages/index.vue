@@ -26,10 +26,17 @@ export default {
     async analyze() {
       if (this.pending) return
       this.pending = true
+      this.error = null
+      this.result = null
       try {
         this.result = await this.$http.$get(`api/analyze?url=${this.url}`)
       } catch (err) {
-        this.error = err.message
+        if (err.response) {
+          const { message } = await err.response.json()
+          this.error = message
+        } else {
+          this.error = 'Unkown error'
+        }
       }
       this.pending = false
     },
