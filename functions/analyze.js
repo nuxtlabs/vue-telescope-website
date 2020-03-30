@@ -1,18 +1,23 @@
 const analyze = require('vue-telemetry-analyzer')
 
-exports.handler = function (event, context, callback) {
-    const url = event.queryStringParameters.url
-    analyze(url)
-        .then(res => {
-            callback(null, {
-                statusCode: 200,
-                body: JSON.stringify(res)
-            })
-        })
-        .catch(err => {
-            callback(null, {
-                statusCode: 500,
-                body: JSON.stringify(err)
-            })
-        })
+exports.handler = async function (event, context) {
+  const url = event.queryStringParameters.url
+  try {
+    console.log(`Analyze ${url}...`)
+    const infos = await analyze(url)
+
+    return {
+      statusCode: 200,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(infos)
+    }
+  } catch (err) {
+    console.error(err)
+    return {
+      statusCode: 400,
+      body: err.message
+    }
+  }
 }
