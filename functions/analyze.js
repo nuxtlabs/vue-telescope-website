@@ -17,7 +17,10 @@ exports.handler = async function (event, context) {
     console.error(err)
     return {
       statusCode: 400,
-      body: err.message
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ message: err.message })
     }
   }
 }
