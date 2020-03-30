@@ -1,8 +1,5 @@
 # vue-telemetry-website
 
-https://telemetry.vuejs.org
-App NuxtJS + Netlify function (analyze + send mutation to Hasura) /.netlify/functions/analyze.
-
 > Curated list of vuejs websites
 
 ## Installation
