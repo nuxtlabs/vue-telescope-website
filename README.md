@@ -5,21 +5,35 @@ App NuxtJS + Netlify function (analyze + send mutation to Hasura) /.netlify/func
 
 > Curated list of vuejs websites
 
+## Installation
+
+Make sure to have [Yarn](https://classic.yarnpkg.com/en/) installed.
+
+After cloning the repository, install the dependencies:
+
+```bash
+yarn install
+```
+
+You also need to have Netlify CLI installed:
+
+```bash
+yarn global add netlify-cli
+```
+
+## Development
+
+```bash
+netlify dev
+```
+
+Then go to [http://localhost:8888](http://localhost:8888).
+
+
 ## Build Setup
 
 ```bash
-# install dependencies
-$ yarn install
-
-# serve with hot reload at localhost:3000
-$ yarn dev
-
-# build for production and launch server
-$ yarn build
-$ yarn start
-
-# generate static project
-$ yarn generate
+yarn generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
