@@ -1,5 +1,6 @@
 [dev]
   command = "yarn dev"
+  autoLaunch = false
 
 [build]
   command = "yarn generate"
