@@ -15,7 +15,7 @@
     "@nuxtjs/dotenv": "^1.4.1",
     "cloudinary": "^1.21.0",
     "nuxt": "^2.12.2",
-    "vue-telemetry-analyzer": "^0.1.6"
+    "vue-telemetry-analyzer": "^0.1.7"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.2",
