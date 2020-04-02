@@ -50,7 +50,11 @@ exports.handler = async function (event, context) {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ message: err.message })
+      body: JSON.stringify({
+        message: err.message,
+        statusCode: err.statusCode || 400,
+        body: err.body || null
+      })
     }
   }
 }

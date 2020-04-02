@@ -95,7 +95,7 @@
           </div>
         </div>
       </div>
-      <div :class="{ block: open, hidden: !open }" class="hidden sm:hidden">
+      <div class="hidden sm:hidden">
         <div class="pt-2 pb-4">
           <a
             href="#"
