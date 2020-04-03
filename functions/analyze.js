@@ -3,6 +3,8 @@ const path = require('path')
 const analyze = require('vue-telemetry-analyzer')
 const cloudinary = require('cloudinary').v2
 const { URL } = require('url')
+const axios = require('axios')
+const consola = require('consola')
 
 exports.handler = async function (event, context) {
   try {
@@ -10,19 +12,39 @@ exports.handler = async function (event, context) {
     // Only analyze root path at the moment
     const url = 'https://' + hostname
 
-    // TODO: Check if showcase exists in Redis
     // TODO: Check if showcase exists in Hasura
-    // Save in Redis
+    const QUERY_SHOWCASE_BY_HOSTNAME = `query {
+      showcases(where: {hostname: {_eq: "${hostname}"}}) {
+        id
+      }
+    }`
+    const { data } = await hasuraDB(QUERY_SHOWCASE_BY_HOSTNAME)
+    const showcase = data.showcases[0] ? data.showcases[0] : null
     // Return
+    if (showcase) {
+      return {
+        statusCode: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(showcase),
+      }
+    }
 
     console.log(`Analyze ${url}...`)
     const infos = await analyze(url)
 
     if (process.env.CLOUDINARY_URL) {
-      const { secure_url } = await cloudinary.uploader.upload(infos.screenshot, {
-        folder: 'vue-telemetry',
-        public_id: path.basename(infos.screenshot, path.extname(infos.screenshot))
-      })
+      const { secure_url } = await cloudinary.uploader.upload(
+        infos.screenshot,
+        {
+          folder: 'vue-telemetry',
+          public_id: path.basename(
+            infos.screenshot,
+            path.extname(infos.screenshot)
+          ),
+        }
+      )
       infos.screenshot = secure_url
     } else {
       // transform to base64
@@ -33,28 +55,64 @@ exports.handler = async function (event, context) {
     }
 
     // TODO: Mutation on Hasura
-    // TODO: Save in Redis
+    const INSERT_SHOWCASE = `mutation {
+      insert_showcases(
+        objects: {
+          url: "${infos.url}",
+          domain: "${infos.domain}",
+          hostname: "${infos.hostname}",
+          has_ssr: "${infos.hasSSR}",
+          is_static: "${infos.isStatic}",
+          screenshot_url: "${infos.screenshot}",
+          slug: "${slugify(infos.domain)}",
+          vue_version: "${infos.vueVersion}"
+        }) {
+        returning {
+          id
+        }
+      }
+    }`
+    const res = await hasuraDB(INSERT_SHOWCASE)
     // Return
 
     return {
       statusCode: 200,
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(infos)
+      body: JSON.stringify(res),
     }
   } catch (err) {
     console.error(err)
     return {
       statusCode: 400,
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         message: err.message,
         statusCode: err.statusCode || 400,
-        body: err.body || null
-      })
+        body: err.body || null,
+      }),
     }
   }
+}
+
+async function hasuraDB(gqlPayload) {
+  const { data } = await axios({
+    headers: {
+      'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET_KEY, // TODO: secure it
+    },
+    url: process.env.API_HASURA_URL,
+    method: 'post',
+    data: {
+      query: gqlPayload,
+    },
+  })
+  return data
+}
+
+function slugify(domain) {
+  // TODO: slugify domain
+  return domain.replace(/\./g, '-')
 }
