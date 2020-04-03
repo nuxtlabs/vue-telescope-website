@@ -15,6 +15,7 @@
     "@nuxtjs/dotenv": "^1.4.1",
     "axios": "^0.19.2",
     "cloudinary": "^1.21.0",
+    "consola": "^2.11.3",
     "nuxt": "^2.12.2",
     "vue-telemetry-analyzer": "^0.3.0"
   },
