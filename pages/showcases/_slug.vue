@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <h1 class="text-3xl">Vue Telemetry</h1>
-  </div>
+  <h1>{{ $route.params.slug }}</h1>
 </template>
 
 <script>

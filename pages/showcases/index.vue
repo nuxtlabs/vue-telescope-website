@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <h1 class="text-3xl">Vue Telemetry</h1>
-  </div>
+  <h1>showcases</h1>
 </template>
 
 <script>
