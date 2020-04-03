@@ -1,12 +1,17 @@
 <template>
   <div>
     <h1 class="text-xl font-bold">{{ showcase.hostname }}</h1>
-    <pre>{{ showcase }}</pre>
+    <showcaseItem :data="showcase" />
   </div>
 </template>
 
 <script>
+import showcaseItem from '@/components/ShowcaseItem'
+
 export default {
+  components: {
+    showcaseItem,
+  },
   async fetch({ $http, store, params }) {
     $http.setHeader(
       'x-hasura-admin-secret',
