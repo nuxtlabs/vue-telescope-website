@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="my-8">
     <h1 class="text-xl font-bold">All showcases</h1>
     <div class="mt-12 grid gap-5 max-w-lg mx-auto lg:grid-cols-3 lg:max-w-none">
       <showcasePreviewItem

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1 class="text-xl font-bold">{{ showcase.hostname }}</h1>
     <showcaseItem :data="showcase" />
   </div>
 </template>

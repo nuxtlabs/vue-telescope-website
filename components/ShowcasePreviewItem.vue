@@ -1,7 +1,7 @@
 <template>
   <nuxt-link
     :to="{ name: 'showcases-slug', params: { slug: data.slug } }"
-    class="flex flex-col rounded-lg shadow-lg overflow-hidden cursor-pointer"
+    class="flex flex-col rounded-lg shadow-lg overflow-hidden cursor-pointer hover:shadow-2xl"
     tag="div"
   >
     <div class="flex-shrink-0">
@@ -19,7 +19,7 @@
             {{ data.domain }}
           </h3>
           <p class="mt-3 text-base leading-6 text-gray-500">
-            {{ data.vue_version }}
+            vue version : {{ data.vue_version }}
           </p>
         </div>
       </div>
