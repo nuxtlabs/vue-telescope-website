@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="text-xl font-bold">All showcases</h1>
-    <div class="flex flex-col md:flex-row">
+    <div class="mt-12 grid gap-5 max-w-lg mx-auto lg:grid-cols-3 lg:max-w-none">
       <showcasePreviewItem
         v-for="showcase in showcases"
         :key="showcase.id"
@@ -22,6 +22,7 @@ const QUERY_ALL_SHOWCASES = `
       hostname
       domain
       screenshot_url
+      vue_version
       framework {
         name
         frameworks_modules {
