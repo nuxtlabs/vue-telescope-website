@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>showcases</h1>
+    <h1 class="text-xl font-bold">All showcases</h1>
     <div class="flex flex-col md:flex-row">
       <showcasePreviewItem
         v-for="showcase in showcases"
