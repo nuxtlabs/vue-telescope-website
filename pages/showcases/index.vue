@@ -1,15 +1,19 @@
 <template>
   <div>
     <h1>showcases</h1>
-    <ul>
-      <li v-for="showcase in showcases" :key="showcase.id">
-        <pre>{{ showcase }}</pre>
-      </li>
-    </ul>
+    <div class="flex flex-col md:flex-row">
+      <showcasePreviewItem
+        v-for="showcase in showcases"
+        :key="showcase.id"
+        :data="showcase"
+      />
+    </div>
   </div>
 </template>
 
 <script>
+import showcasePreviewItem from '@/components/ShowcasePreviewItem'
+
 const QUERY_ALL_SHOWCASES = `
   query {
     showcases {
@@ -17,6 +21,7 @@ const QUERY_ALL_SHOWCASES = `
       url
       hostname
       domain
+      screenshot_url
       framework {
         name
         frameworks_modules {
@@ -42,6 +47,9 @@ const QUERY_ALL_SHOWCASES = `
   }
 `
 export default {
+  components: {
+    showcasePreviewItem,
+  },
   async fetch({ $http, store }) {
     $http.setHeader(
       'x-hasura-admin-secret',
