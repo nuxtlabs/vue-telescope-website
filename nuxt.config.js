@@ -58,7 +58,7 @@ export default {
   // For TailwindUI
   webfontloader: {
     google: {
-      families: ["Inter"]
+      families: ['Inter']
     }
   },
   purgeCSS: {

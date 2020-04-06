@@ -9,7 +9,7 @@ import showcaseItem from '@/components/ShowcaseItem'
 
 export default {
   components: {
-    showcaseItem,
+    showcaseItem
   },
   async fetch({ $http, store, params }) {
     $http.setHeader(
@@ -41,7 +41,7 @@ export default {
             screenshot_url
           }
         }
-      `,
+      `
     })
     const { data } = await res.json()
     store.dispatch('setCurrentShowcase', data.showcases[0])
@@ -49,8 +49,8 @@ export default {
   computed: {
     showcase() {
       return this.$store.getters.currentShowcase
-    },
-  },
+    }
+  }
 }
 </script>
 

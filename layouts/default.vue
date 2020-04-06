@@ -15,8 +15,8 @@ import TheFooter from '@/components/TheFooter'
 export default {
   components: {
     TheNavbar,
-    TheFooter,
-  },
+    TheFooter
+  }
 }
 </script>
 

@@ -25,9 +25,9 @@ exports.handler = async function (event, context) {
       return {
         statusCode: 200,
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(showcase),
+        body: JSON.stringify(showcase)
       }
     }
 
@@ -42,7 +42,7 @@ exports.handler = async function (event, context) {
           public_id: path.basename(
             infos.screenshot,
             path.extname(infos.screenshot)
-          ),
+          )
         }
       )
       infos.screenshot = secure_url
@@ -78,22 +78,22 @@ exports.handler = async function (event, context) {
     return {
       statusCode: 200,
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(res),
+      body: JSON.stringify(res)
     }
   } catch (err) {
     console.error(err)
     return {
       statusCode: 400,
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         message: err.message,
         statusCode: err.statusCode || 400,
-        body: err.body || null,
-      }),
+        body: err.body || null
+      })
     }
   }
 }
@@ -101,13 +101,13 @@ exports.handler = async function (event, context) {
 async function hasuraDB(gqlPayload) {
   const { data } = await axios({
     headers: {
-      'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET_KEY, // TODO: secure it
+      'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET_KEY // TODO: secure it
     },
     url: process.env.API_HASURA_URL,
     method: 'post',
     data: {
-      query: gqlPayload,
-    },
+      query: gqlPayload
+    }
   })
   return data
 }

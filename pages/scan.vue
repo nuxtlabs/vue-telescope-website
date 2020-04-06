@@ -15,7 +15,9 @@
       <pre v-if="result">{{ result }}</pre>
       <img :src="result.screenshot" class="h-64 border rounded" />
     </div>
-    <div v-if="error" class="text-red-700">{{ error }}</div>
+    <div v-if="error" class="text-red-700">
+      {{ error }}
+    </div>
   </div>
 </template>
 
@@ -26,12 +28,14 @@ export default {
       url: 'https://nuxtjs.org',
       pending: false,
       result: null,
-      error: null,
+      error: null
     }
   },
   methods: {
     async analyze() {
-      if (this.pending) return
+      if (this.pending) {
+        return
+      }
       this.pending = true
       this.error = null
       this.result = null
@@ -46,8 +50,8 @@ export default {
         }
       }
       this.pending = false
-    },
-  },
+    }
+  }
 }
 </script>
 

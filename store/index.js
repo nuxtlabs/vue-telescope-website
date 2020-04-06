@@ -1,6 +1,6 @@
 export const state = () => ({
   showcases: [],
-  currentShowcase: null,
+  currentShowcase: null
 })
 
 export const getters = {
@@ -9,13 +9,13 @@ export const getters = {
   },
   currentShowcase(state) {
     return state.currentShowcase
-  },
+  }
 }
 
 export const mutations = {
   SET(state, { key, value }) {
     state[key] = value
-  },
+  }
 }
 
 export const actions = {
@@ -24,5 +24,5 @@ export const actions = {
   },
   setCurrentShowcase({ commit }, data) {
     commit('SET', { key: 'currentShowcase', value: data })
-  },
+  }
 }
