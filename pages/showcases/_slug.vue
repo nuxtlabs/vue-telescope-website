@@ -1,6 +1,7 @@
 <template>
   <div>
-    <showcaseItem :data="showcase" />
+    <template v-if="$fetchState.pending">loading...</template>
+    <showcaseItem v-else :data="showcase" />
   </div>
 </template>
 
@@ -11,15 +12,15 @@ export default {
   components: {
     showcaseItem
   },
-  async fetch({ $http, store, params }) {
-    $http.setHeader(
+  async fetch() {
+    this.$http.setHeader(
       'x-hasura-admin-secret',
       process.env.HASURA_ADMIN_SECRET_KEY
     ) // TODO: secure this
-    const res = await $http.post(process.env.API_HASURA_URL, {
+    const res = await this.$http.post(process.env.API_HASURA_URL, {
       query: `
         {
-          showcases(where: {slug: {_eq: "${params.slug}"}}) {
+          showcases(where: {slug: {_eq: "${this.$nuxt.context.params.slug}"}}) {
             id
             is_static
             hostname
@@ -44,7 +45,7 @@ export default {
       `
     })
     const { data } = await res.json()
-    store.dispatch('setCurrentShowcase', data.showcases[0])
+    this.$nuxt.context.store.dispatch('setCurrentShowcase', data.showcases[0])
   },
   computed: {
     showcase() {
