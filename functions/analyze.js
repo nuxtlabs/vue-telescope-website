@@ -1,3 +1,4 @@
+/* eslint-disable */
 const fs = require('fs').promises
 const path = require('path')
 const analyze = require('vue-telemetry-analyzer')
@@ -12,6 +13,10 @@ exports.handler = async function (event, context) {
     // Only analyze root path at the moment
     const url = 'https://' + hostname
 
+    // filter hostname
+    if (await isBlacklisted(hostname)) {
+      throw new Error('Invalid URL')
+    }
     // TODO: Check if showcase exists in Hasura
     const QUERY_SHOWCASE_BY_HOSTNAME = `query {
       showcases(where: {hostname: {_eq: "${hostname}"}}) {
@@ -115,4 +120,9 @@ async function hasuraDB(gqlPayload) {
 function slugify(domain) {
   // TODO: slugify domain
   return domain.replace(/\./g, '-')
+}
+
+async function isBlacklisted(hname) {
+  const hostnameBlacklist = /((local|dev(elopment)?|stag(e|ing)?|test(ing)?|demo(shop)?|admin|google|cache)\.|\/admin|\.local|localhost)/
+  return hostnameBlacklist.test(hname)
 }
