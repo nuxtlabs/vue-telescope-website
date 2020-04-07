@@ -8,11 +8,11 @@ const axios = require('axios')
 const consola = require('consola')
 
 exports.handler = async function (event, context) {
-  try {
-    const { hostname } = new URL(event.queryStringParameters.url)
-    // Only analyze root path at the moment
-    const url = 'https://' + hostname
+  const { hostname } = new URL(event.queryStringParameters.url)
+  // Only analyze root path at the moment
+  const url = 'https://' + hostname
 
+  try {
     // filter hostname
     if (await isBlacklisted(hostname)) {
       throw new Error('Invalid URL')
@@ -88,7 +88,23 @@ exports.handler = async function (event, context) {
       body: JSON.stringify(res)
     }
   } catch (err) {
-    console.error(err)
+    consola.error(err)
+
+    if (err.statusCode === 403) {
+      // redirect is more likely 30x code
+      const INSERT_SCANS = `mutation {
+        insert_scans(
+          objects: {
+            url: "${url}"
+          }) {
+          returning {
+            id
+          }
+        }
+      }`
+      await hasuraDB(INSERT_SCANS)
+    }
+
     return {
       statusCode: 400,
       headers: {
