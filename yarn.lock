@@ -6763,10 +6763,10 @@ prettier@^1.18.2:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.19.1.tgz#f7d7f5ff8a9cd872a7be4ca142095956a60797cb"
   integrity sha512-s7PoyDv/II1ObgQunCbB9PdLmUcBZcnWOcxDh7O0N/UwDEsHyqkW+Qh28jW+mVuCdx7gLB0BotYI1Y6uI9iyew==
 
-prettier@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.0.2.tgz#1ba8f3eb92231e769b7fcd7cb73ae1b6b74ade08"
-  integrity sha512-5xJQIPT8BraI7ZnaDwSbu5zLrB6vvi8hVV58yHQ+QK64qrY40dULy0HSRlQ2/2IdzeBpjhDkqdcFBnFeDEMVdg==
+prettier@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.0.4.tgz#2d1bae173e355996ee355ec9830a7a1ee05457ef"
+  integrity sha512-SVJIQ51spzFDvh4fIbCLvciiDMCrRhlN3mbZvv/+ycjvmF5E73bKdGfU8QDLNmjYJf+lsGnDBC4UUnvTe5OO0w==
 
 pretty-bytes@^5.3.0:
   version "5.3.0"
@@ -8518,10 +8518,10 @@ vue-style-loader@^4.1.0:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-vue-telemetry-analyzer@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/vue-telemetry-analyzer/-/vue-telemetry-analyzer-0.2.0.tgz#a8218f98fef97510f60a19e108d1121642c78d31"
-  integrity sha512-nhTiqskdKLvGB9/KFdCBnIT2HDkQpb3W9zOj8QJS/E9oy5h+DkNkbrIwqWJ5kHIe1kPClqQCecUkzx4y3xpn2Q==
+vue-telemetry-analyzer@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/vue-telemetry-analyzer/-/vue-telemetry-analyzer-0.2.1.tgz#c8ee06f625b93b6af176bfecf1d37d7afcc3b448"
+  integrity sha512-KRvJN3Y1dhQmA53Hp+aDCAkVMY/M52HEau17rSC2ESiks+tRIbqdnPiVALho+JsbMKIpNw20C49iP8UMdG4KkQ==
   dependencies:
     chrome-aws-lambda "^2.1.1"
     consola "^2.11.3"
