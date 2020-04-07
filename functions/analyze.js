@@ -134,8 +134,11 @@ async function hasuraDB(gqlPayload) {
 }
 
 function slugify(domain) {
-  // TODO: slugify domain
-  return domain.replace(/\./g, '-')
+  return domain
+    .toLowerCase()
+    .replace(/[^a-z0-9-]/g, '-')
+    .replace(/--+/g, '-')
+    .replace(/(?:^-|-$)/, '')
 }
 
 async function isBlacklisted(hname) {
