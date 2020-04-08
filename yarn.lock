@@ -8518,10 +8518,10 @@ vue-style-loader@^4.1.0:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-vue-telemetry-analyzer@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/vue-telemetry-analyzer/-/vue-telemetry-analyzer-0.2.1.tgz#c8ee06f625b93b6af176bfecf1d37d7afcc3b448"
-  integrity sha512-KRvJN3Y1dhQmA53Hp+aDCAkVMY/M52HEau17rSC2ESiks+tRIbqdnPiVALho+JsbMKIpNw20C49iP8UMdG4KkQ==
+vue-telemetry-analyzer@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/vue-telemetry-analyzer/-/vue-telemetry-analyzer-0.3.0.tgz#1f86c38dedf61ba07439219ea63319a78bb74e81"
+  integrity sha512-53mr72WrkuTXLKRfZNBNXld8J5Dyn2eOBImyzrlO2vagGWB1Ms5vejeOWR2CBVZCnu18zBtM/BLKQtaQ2RvAZQ==
   dependencies:
     chrome-aws-lambda "^2.1.1"
     consola "^2.11.3"
