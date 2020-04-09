@@ -22,22 +22,35 @@ export default {
         {
           showcases(where: {slug: {_eq: "${this.$nuxt.context.params.slug}"}}) {
             id
-            is_static
+            url
             hostname
-            has_ssr
-            framework_version
             domain
+            vue_version
+            is_static
+            has_ssr
             framework {
               name
               slug
               url
             }
             meta {
-              description
-              favicon
-              id
               language
               title
+              description
+            }
+            ui {
+              name
+            }
+            showcase_modules {
+              module {
+                id
+                name
+              }
+            }
+            showcases_plugins {
+              plugin {
+                name
+              }
             }
             screenshot_url
           }
