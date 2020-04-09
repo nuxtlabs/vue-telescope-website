@@ -4,8 +4,14 @@ const path = require('path')
 const analyze = require('vue-telemetry-analyzer')
 const cloudinary = require('cloudinary').v2
 const { URL } = require('url')
-const axios = require('axios')
 const consola = require('consola')
+const getFrameworkMutation = require('./utils/getFrameworkMutation')
+const getModuleMutation = require('./utils/getModuleMutation')
+const getPluginMutation = require('./utils/getPluginMutation')
+const getUIMutation = require('./utils/getUIMutation')
+const hasuraDB = require('./utils/hasuraDB')
+const isBlacklisted = require('./utils/isBlacklisted')
+const slugify = require('./utils/slugify')
 
 exports.handler = async function (event, context) {
   const { hostname } = new URL(event.queryStringParameters.url)
@@ -36,7 +42,7 @@ exports.handler = async function (event, context) {
       }
     }
 
-    console.log(`Analyze ${url}...`)
+    consola.info(`Analyze ${url}...`)
     const infos = await analyze(url)
 
     if (process.env.CLOUDINARY_URL) {
@@ -59,6 +65,18 @@ exports.handler = async function (event, context) {
       infos.screenshot = `data:image/${extname};base64,${base64}`
     }
 
+    // Build plugins mutation
+    const pluginMutation = await getPluginMutation(infos.plugins)
+
+    // Build modules mutation
+    const moduleMutation = await getModuleMutation(infos.frameworkModules)
+    // Build framework mutation
+    const frameworkMutation = await getFrameworkMutation(
+      infos.framework,
+      moduleMutation
+    )
+    // Build ui mutation
+    const uiMutation = await getUIMutation(infos.ui)
     // TODO: Mutation on Hasura
     const INSERT_SHOWCASE = `mutation {
       insert_showcases(
@@ -70,16 +88,32 @@ exports.handler = async function (event, context) {
           is_static: "${infos.isStatic}",
           screenshot_url: "${infos.screenshot}",
           slug: "${slugify(infos.domain)}",
-          vue_version: "${infos.vueVersion}"
+          vue_version: "${infos.vueVersion}",
+          showcases_plugins: {
+            data: [${pluginMutation}]
+          },
+          showcase_modules: {
+            data: [${moduleMutation}]
+          },
+          framework: ${frameworkMutation},
+          ui: ${uiMutation},
+          meta: {
+            data: {
+              language: "${infos.meta.language}",
+              title: "${infos.meta.title}",
+              description: "${infos.meta.description}"
+            }
+          }
         }) {
         returning {
           id
         }
       }
     }`
-    const res = await hasuraDB(INSERT_SHOWCASE)
-    // Return
 
+    const res = await hasuraDB(INSERT_SHOWCASE)
+
+    // Return
     return {
       statusCode: 200,
       headers: {
@@ -90,20 +124,18 @@ exports.handler = async function (event, context) {
   } catch (err) {
     consola.error(err)
 
-    if (err.statusCode === 403) {
-      // redirect is more likely 30x code
-      const INSERT_SCANS = `mutation {
-        insert_scans(
-          objects: {
-            url: "${url}"
-          }) {
-          returning {
-            id
-          }
+    const INSERT_SCANS = `mutation {
+      insert_scans(
+        objects: {
+          url: "${url}",
+          is_proxy_blocked: "${err.statusCode === 403}"
+        }) {
+        returning {
+          id
         }
-      }`
-      await hasuraDB(INSERT_SCANS)
-    }
+      }
+    }`
+    await hasuraDB(INSERT_SCANS)
 
     return {
       statusCode: 400,
@@ -117,31 +149,4 @@ exports.handler = async function (event, context) {
       })
     }
   }
-}
-
-async function hasuraDB(gqlPayload) {
-  const { data } = await axios({
-    headers: {
-      'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET_KEY // TODO: secure it
-    },
-    url: process.env.API_HASURA_URL,
-    method: 'post',
-    data: {
-      query: gqlPayload
-    }
-  })
-  return data
-}
-
-function slugify(domain) {
-  return domain
-    .toLowerCase()
-    .replace(/[^a-z0-9-]/g, '-')
-    .replace(/--+/g, '-')
-    .replace(/(?:^-|-$)/, '')
-}
-
-async function isBlacklisted(hname) {
-  const hostnameBlacklist = /((local|dev(elopment)?|stag(e|ing)?|test(ing)?|demo(shop)?|admin|google|cache)\.|pr(eview)?-[0-9]{1,}|\/admin|\.local|localhost)/
-  return hostnameBlacklist.test(hname)
 }
