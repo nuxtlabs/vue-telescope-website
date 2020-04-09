@@ -17,7 +17,8 @@
     "cloudinary": "^1.21.0",
     "consola": "^2.11.3",
     "nuxt": "^2.12.2",
-    "vue-telemetry-analyzer": "^0.3.0"
+    "vue-telemetry-analyzer": "^0.3.0",
+    "vuelidate": "^0.7.5"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.2",

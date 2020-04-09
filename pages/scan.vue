@@ -15,10 +15,10 @@
           </div>
           <input
             id="domain"
-            v-model="url"
+            v-model="$v.url.$model"
             type="text"
             class="form-input block w-full pl-16 sm:pl-14 sm:text-sm sm:leading-5"
-            placeholder="www.example.com"
+            placeholder="vuejs.org"
           />
           <button
             :disabled="pending"
@@ -50,41 +50,69 @@
       <pre v-if="result">{{ result }}</pre>
       <img :src="result.screenshot" class="h-64 border rounded" />
     </div>
-    <div v-if="error" class="text-red-700">{{ error }}</div>
+    <div v-if="error" class="text-sm text-red-600 mt-1">
+      {{ error }}
+    </div>
   </div>
 </template>
 
 <script>
+import { validationMixin } from 'vuelidate'
+import { required } from 'vuelidate/lib/validators'
+
+const urlRegex = /^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,}?\/?.*$/
+const mustBeValidUrl = (url) => urlRegex.test(url)
+
 export default {
+  mixins: [validationMixin],
+  validations: {
+    url: {
+      required,
+      mustBeValidUrl
+    }
+  },
   data() {
     return {
-      url: 'nuxtjs.org',
+      url: '',
       pending: false,
       result: null,
       error: null
     }
   },
+  watch: {
+    url(str) {
+      const pattern = /http(s)?:\/\/[A-Za-z0-9]/
+      if (pattern.test(str)) {
+        this.url = str.replace(/http(s)?:\/\//, '')
+      }
+    }
+  },
   methods: {
     async analyze() {
-      if (this.pending) {
-        return
-      }
-      this.pending = true
-      this.error = null
-      this.result = null
-      try {
-        this.result = await this.$http.$get(
-          `api/analyze?url=https://${this.url}`
-        )
-      } catch (err) {
-        if (err.response) {
-          const { message } = await err.response.json()
-          this.error = message
-        } else {
-          this.error = 'Unkown error'
+      this.$v.$touch()
+      if (this.$v.$invalid) {
+        this.error = 'Enter a valid domain, e.g. vuejs.org'
+      } else {
+        if (this.pending) {
+          return
         }
+        this.pending = true
+        this.error = null
+        this.result = null
+        try {
+          this.result = await this.$http.$get(
+            `api/analyze?url=https://${this.url}`
+          )
+        } catch (err) {
+          if (err.response) {
+            const { message } = await err.response.json()
+            this.error = message
+          } else {
+            this.error = 'Unkown error'
+          }
+        }
+        this.pending = false
       }
-      this.pending = false
     }
   }
 }
