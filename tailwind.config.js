@@ -11,6 +11,9 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans]
+      },
+      borderRadius: {
+        xl: '1rem'
       }
     }
   },
