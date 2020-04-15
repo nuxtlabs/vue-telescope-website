@@ -1,5 +1,5 @@
 <template>
-  <nav class="bg-white">
+  <nav :class="{ 'bg-white': $route.name !== 'index' }">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
       <div class="relative flex items-center justify-between h-16">
         <div class="absolute inset-y-0 right-0 flex items-center sm:hidden">
@@ -46,7 +46,12 @@
                 :key="id"
                 :to="link.to"
                 active-class="text-green-400 bg-green-50"
-                class="ml-4 px-3 py-2 rounded-md text-base font-medium leading-5 text-gray-700 hover:text-green-400 hover:bg-green-50 focus:outline-none focus:text-green-400 focus:bg-green-50 transition duration-150 ease-in-out"
+                :class="
+                  $route.name === 'index'
+                    ? 'text-white hover:bg-green-500'
+                    : 'text-gray-700 hover:text-green-400 hover:bg-green-50'
+                "
+                class="ml-4 px-3 py-2 rounded-md text-base font-medium leading-5 focus:outline-none focus:text-green-400 focus:bg-green-50 transition duration-150 ease-in-out"
                 >{{ link.label }}</nuxt-link
               >
             </div>

@@ -1,10 +1,14 @@
 <template>
-  <div class="flex flex-col min-h-screen">
+  <div class="relative flex flex-col min-h-screen">
+    <div
+      v-show="$route.name === 'index'"
+      class="absolute top-0 left-0 right-0"
+      :style="{ backgroundImage: `url('img/background.png')` }"
+      style="background-repeat: no-repeat; height: 855px; z-index: -1;"
+    ></div>
     <TheNavbar />
-    <div class="flex-1 bg-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <nuxt />
-      </div>
+    <div class="flex-1">
+      <nuxt />
     </div>
     <TheFooter />
   </div>
