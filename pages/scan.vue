@@ -46,13 +46,30 @@
         </div>
       </div>
     </form>
-    <div v-if="result" class="p-4 bg-gray-100">
-      <pre v-if="result">{{ result }}</pre>
-      <img :src="result.screenshot" class="h-64 border rounded" />
+    <div v-if="result" class="mt-4">
+      <nuxt-link
+        :to="`/showcases/${result.slug}`"
+        class="p-4 border rounded-md cursor-pointer"
+        tag="div"
+      >
+        <pre v-if="result">{{ result }}</pre>
+        <div class="text-xl text-green-400">{{ result.domain }}</div>
+        <!-- <img :src="result.screenshot_url" class="h-auto w-auto rounded" /> -->
+        <p v-if="result.framework">
+          <span class="text-green-400 font-bold">Framework :</span>
+          {{ result.framework.name }}
+        </p>
+        <div class="">
+          <p>Plugins :</p>
+          <ul>
+            <li v-for="sp in result.showcases_plugins" :key="sp.plugin.id">
+              {{ sp.plugin.name }}
+            </li>
+          </ul>
+        </div>
+      </nuxt-link>
     </div>
-    <div v-if="error" class="text-sm text-red-600 mt-1">
-      {{ error }}
-    </div>
+    <div v-if="error" class="text-sm text-red-600 mt-1">{{ error }}</div>
   </div>
 </template>
 
