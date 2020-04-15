@@ -1,28 +1,20 @@
 <template>
   <nuxt-link
     :to="{ name: 'showcases-slug', params: { slug: data.slug } }"
-    class="flex flex-col rounded-lg shadow-lg overflow-hidden cursor-pointer hover:shadow-2xl"
+    class="previewItem flex flex-col cursor-pointer"
     tag="div"
   >
-    <div class="flex-shrink-0">
-      <img class="h-48 w-full object-cover" :src="data.screenshot_url" alt="" />
-    </div>
-    <div class="flex-1 bg-white p-6 flex flex-col justify-between">
-      <div class="flex-1">
-        <p class="text-sm leading-5 font-medium text-indigo-600">
-          <span class="hover:underline">
-            category
-          </span>
-        </p>
-        <div class="block">
-          <h3 class="mt-2 text-xl leading-7 font-semibold text-gray-900">
-            {{ data.domain }}
-          </h3>
-          <p class="mt-3 text-base leading-6 text-gray-500">
-            vue version : {{ data.vue_version }}
-          </p>
-        </div>
-      </div>
+    <div
+      class="previewItem__img rounded h-48 bg-cover bg-top bg-no-repeat shadow transition ease-in-out duration-150"
+      :style="{ backgroundImage: 'url(' + data.screenshot_url + ')' }"
+    ></div>
+    <div class="mt-2 flex flex-col">
+      <p class="text-base font-semibold text-gray-900">
+        {{ data.domain }}
+      </p>
+      <p class="text-sm text-gray-400">
+        {{ data.vue_version }}
+      </p>
     </div>
   </nuxt-link>
 </template>
@@ -38,4 +30,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="postcss" scoped>
+.previewItem:hover .previewItem__img {
+  @apply shadow-xl;
+}
+</style>
