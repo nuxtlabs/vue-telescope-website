@@ -80,7 +80,19 @@
         <div
           class="grid gap-10 max-w-lg mx-auto sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:max-w-none"
         >
-          <template v-if="$fetchState.pending">loading...</template>
+          <template v-if="$fetchState.pending">
+            <content-loader
+              v-for="n in 12"
+              :key="n"
+              width="346"
+              height="245"
+              speed="2"
+            >
+              <rect x="0" y="0" rx="4" ry="4" width="346" height="192" />
+              <rect x="0" y="197" rx="4" ry="4" width="103" height="16" />
+              <rect x="0" y="216" rx="4" ry="4" width="68" height="16" />
+            </content-loader>
+          </template>
           <template v-else>
             <showcasePreviewItem
               v-for="showcase in showcases"
@@ -95,6 +107,7 @@
 </template>
 
 <script>
+import { ContentLoader } from 'vue-content-loader'
 import showcasePreviewItem from '@/components/ShowcasePreviewItem'
 
 const QUERY_ALL_SHOWCASES = `
@@ -132,7 +145,8 @@ const QUERY_ALL_SHOWCASES = `
 `
 export default {
   components: {
-    showcasePreviewItem
+    showcasePreviewItem,
+    ContentLoader
   },
   async fetch() {
     this.$http.setHeader(
