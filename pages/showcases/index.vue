@@ -42,13 +42,15 @@
                   <input
                     :id="f.slug"
                     type="checkbox"
-                    class="form-checkbox h-4 w-4 text-green-400 transition duration-150 ease-in-out"
+                    class="form-checkbox h-4 w-4 text-green-400 cursor-pointer transition duration-150 ease-in-out"
                   />
                 </div>
-                <div class="pl-7 text-sm leading-5">
-                  <label :for="f.slug" class="font-medium text-gray-700">{{
-                    f.name
-                  }}</label>
+                <div class="pl-7 text-sm leading-5 flex flex-1">
+                  <label
+                    :for="f.slug"
+                    class="font-medium text-gray-700 flex-1 cursor-pointer select-none"
+                    >{{ f.name }}</label
+                  >
                 </div>
               </div>
             </div>
@@ -63,13 +65,15 @@
                   <input
                     :id="u.slug"
                     type="checkbox"
-                    class="form-checkbox h-4 w-4 text-green-400 transition duration-150 ease-in-out"
+                    class="form-checkbox h-4 w-4 text-green-400 cursor-pointer transition duration-150 ease-in-out"
                   />
                 </div>
-                <div class="pl-7 text-sm leading-5">
-                  <label :for="u.slug" class="font-medium text-gray-700">{{
-                    u.name
-                  }}</label>
+                <div class="pl-7 text-sm leading-5 flex flex-1">
+                  <label
+                    :for="u.slug"
+                    class="font-medium text-gray-700 flex-1 cursor-pointer select-none"
+                    >{{ u.name }}</label
+                  >
                 </div>
               </div>
             </div>
