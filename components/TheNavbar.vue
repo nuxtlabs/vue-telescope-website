@@ -4,7 +4,8 @@
       <div class="relative flex items-center justify-between h-16">
         <div class="absolute inset-y-0 right-0 flex items-center sm:hidden">
           <button
-            class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-green-400 hover:bg-green-50 focus:outline-none focus:bg-green-50 focus:text-green-400 transition duration-150 ease-in-out"
+            :class="$route.name === 'index' ? 'text-white' : 'text-gray-700'"
+            class="inline-flex items-center justify-center p-2 rounded-md hover:text-green-400 hover:bg-green-50 focus:outline-none focus:bg-green-50 focus:text-green-400 transition duration-150 ease-in-out"
             @click="open = !open"
           >
             <svg
@@ -35,8 +36,18 @@
         >
           <div class="flex-shrink-0 flex items-center">
             <nuxt-link to="/" class="font-bold cursor-pointer">
-              <span class="text-green-400">VUE</span>
-              <span class="text-gray-700">TELEMETRY</span>
+              <span
+                :class="
+                  $route.name === 'index' ? 'text-white' : 'text-green-400'
+                "
+                >VUE</span
+              >
+              <span
+                :class="
+                  $route.name === 'index' ? 'text-white' : 'text-gray-700'
+                "
+                >TELEMETRY</span
+              >
             </nuxt-link>
           </div>
           <div :class="{ hidden: !open }" class="hidden sm:block sm:ml-6">
@@ -51,7 +62,7 @@
                     ? 'text-white hover:bg-green-500'
                     : 'text-gray-700 hover:text-green-400 hover:bg-green-50'
                 "
-                class="ml-4 px-3 py-2 rounded-md text-base font-medium leading-5 focus:outline-none focus:text-green-400 focus:bg-green-50 transition duration-150 ease-in-out"
+                class="ml-4 px-3 py-2 rounded-md text-base tracking-wide leading-5 focus:outline-none focus:text-green-400 focus:bg-green-50 transition duration-150 ease-in-out"
                 >{{ link.label }}</nuxt-link
               >
             </div>
@@ -66,7 +77,12 @@
           :key="id"
           :to="link.to"
           active-class="text-green-400 bg-green-50"
-          class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-400 hover:bg-green-50 focus:outline-none focus:text-green-400 focus:bg-green-50 transition duration-150 ease-in-out"
+          :class="
+            $route.name === 'index'
+              ? 'text-white hover:bg-green-500'
+              : 'text-gray-700 hover:text-green-400 hover:bg-green-50'
+          "
+          class="block px-3 py-2 rounded-md text-base tracking-wide focus:outline-none focus:text-green-400 focus:bg-green-50 transition duration-150 ease-in-out"
           >{{ link.label }}</nuxt-link
         >
       </div>
