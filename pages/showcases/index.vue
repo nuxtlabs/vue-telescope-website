@@ -31,53 +31,9 @@
             />
           </div>
         </div>
-        <form class="mt-4" action="#" method="POST">
-          <fieldset>
-            <legend class="text-sm leading-4 font-medium text-gray-900">
-              Frameworks
-            </legend>
-            <div v-for="(f, i) in frameworks" :key="i" class="mt-4">
-              <div class="flex items-start">
-                <div class="absolute flex items-center h-5">
-                  <input
-                    :id="f.slug"
-                    type="checkbox"
-                    class="form-checkbox h-4 w-4 text-green-400 cursor-pointer transition duration-150 ease-in-out"
-                  />
-                </div>
-                <div class="pl-7 text-sm leading-5 flex flex-1">
-                  <label
-                    :for="f.slug"
-                    class="font-medium text-gray-700 flex-1 cursor-pointer select-none"
-                    >{{ f.name }}</label
-                  >
-                </div>
-              </div>
-            </div>
-          </fieldset>
-          <fieldset class="mt-4">
-            <legend class="text-sm leading-4 font-medium text-gray-900">
-              UI
-            </legend>
-            <div v-for="(u, i) in uis" :key="i" class="mt-4">
-              <div class="flex items-start">
-                <div class="absolute flex items-center h-5">
-                  <input
-                    :id="u.slug"
-                    type="checkbox"
-                    class="form-checkbox h-4 w-4 text-green-400 cursor-pointer transition duration-150 ease-in-out"
-                  />
-                </div>
-                <div class="pl-7 text-sm leading-5 flex flex-1">
-                  <label
-                    :for="u.slug"
-                    class="font-medium text-gray-700 flex-1 cursor-pointer select-none"
-                    >{{ u.name }}</label
-                  >
-                </div>
-              </div>
-            </div>
-          </fieldset>
+        <form class="mt-4">
+          <filterCheckboxes type="frameworks" />
+          <filterCheckboxes type="uis" class="mt-4" />
         </form>
       </div>
       <div class="p-10 sm:flex-1" style="min-height: 1000px;">
@@ -113,44 +69,25 @@
 <script>
 import { ContentLoader } from 'vue-content-loader'
 import showcasePreviewItem from '@/components/ShowcasePreviewItem'
+import filterCheckboxes from '@/components/FilterCheckboxes'
 
 const QUERY_ALL_SHOWCASES = `
   query {
-    showcases(limit: 12) {
+    showcases {
       slug
       url
       hostname
       domain
       screenshot_url
       vue_version
-      framework {
-        name
-        frameworks_modules {
-          module {
-            name
-          }
-        }
-      }
-      showcases_categories {
-        category {
-          name
-        }
-      }
-      showcases_plugins {
-        plugin {
-          name
-        }
-      }
-      ui {
-        url
-      }
     }
   }
 `
 export default {
   components: {
     showcasePreviewItem,
-    ContentLoader
+    ContentLoader,
+    filterCheckboxes
   },
   async fetch() {
     this.$http.setHeader(
@@ -166,22 +103,6 @@ export default {
   computed: {
     showcases() {
       return this.$store.getters.showcases
-    },
-    frameworks() {
-      return [
-        { slug: 'vuejs', name: 'VueJS' },
-        { slug: 'nuxtjs', name: 'NuxtJS' },
-        { slug: 'gridsome', name: 'Gridsome' },
-        { slug: 'vuepress', name: 'Vuepress' }
-      ]
-    },
-    uis() {
-      return [
-        { slug: 'bootstrap', name: 'Bootstrap' },
-        { slug: 'vuetify', name: 'Vuetify' },
-        { slug: 'bulma', name: 'Bulma' },
-        { slug: 'tailwind', name: 'Tailwind' }
-      ]
     }
   }
 }
