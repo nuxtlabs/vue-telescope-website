@@ -46,7 +46,7 @@
               :key="n"
               width="346"
               height="245"
-              speed="2"
+              :speed="2"
             >
               <rect x="0" y="0" rx="4" ry="4" width="346" height="192" />
               <rect x="0" y="197" rx="4" ry="4" width="103" height="16" />
