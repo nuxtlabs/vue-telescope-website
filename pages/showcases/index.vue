@@ -118,11 +118,14 @@ export default {
     filterCheckboxes
   },
   async fetch() {
-    const res = await this.$hasura.post('', {
+    const { data } = await this.$hasura({
       query: print(QUERY_ALL_SHOWCASES)
     })
-    const { data } = await res.json()
-    this.$nuxt.context.store.dispatch('setShowcases', data.showcases)
+
+    this.$nuxt.context.store.dispatch(
+      'setShowcases',
+      data ? data.showcases : []
+    )
   },
   data() {
     return {
@@ -145,7 +148,7 @@ export default {
       await this.search()
     },
     async search() {
-      const res = await this.$hasura.post('', {
+      const { data } = await this.$hasura({
         query: print(QUERY_FILTERED_SHOWCASES),
         variables: {
           frameworks: this.checkedFrameworks,
@@ -153,8 +156,7 @@ export default {
         }
       })
 
-      const { data } = await res.json()
-      this.$store.dispatch('setShowcases', data.showcases)
+      this.$store.dispatch('setShowcases', data ? data.showcases : [])
     }
   }
 }

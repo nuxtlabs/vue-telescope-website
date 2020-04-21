@@ -71,7 +71,7 @@ export default {
     }
   },
   async fetch() {
-    const res = await this.$hasura.post('', {
+    const { data } = await this.$hasura({
       query: `
         query {
           ${this.type} {
@@ -81,8 +81,8 @@ export default {
         }
       `
     })
-    const { data } = await res.json()
-    this.items = data[this.type]
+
+    this.items = data ? data[this.type] : []
   },
   data() {
     return {

@@ -52,14 +52,17 @@ export default {
     showcaseItem
   },
   async fetch() {
-    const res = await this.$hasura.post('', {
+    const { data } = await this.$hasura({
       query: print(QUERY_SHOWCASE),
       variables: {
         slug: this.$nuxt.context.params.slug
       }
     })
-    const { data } = await res.json()
-    this.$nuxt.context.store.dispatch('setCurrentShowcase', data.showcases[0])
+
+    this.$nuxt.context.store.dispatch(
+      'setCurrentShowcase',
+      data ? data.showcases[0] : {}
+    )
   },
   computed: {
     showcase() {

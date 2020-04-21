@@ -5,5 +5,5 @@ export default function ({ $http, env }, inject) {
 
   $hasura.setHeader('x-hasura-admin-secret', env.HASURA_ADMIN_SECRET_KEY)
 
-  inject('hasura', $hasura)
+  inject('hasura', $hasura.$post.bind($hasura, ''))
 }
