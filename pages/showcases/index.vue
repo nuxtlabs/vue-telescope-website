@@ -68,12 +68,33 @@
 
 <script>
 import { ContentLoader } from 'vue-content-loader'
+import gql from 'graphql-tag'
+import { print } from 'graphql/language/printer'
 import showcasePreviewItem from '@/components/ShowcasePreviewItem'
 import filterCheckboxes from '@/components/FilterCheckboxes'
 
-const QUERY_ALL_SHOWCASES = `
+const QUERY_ALL_SHOWCASES = gql`
   query {
     showcases {
+      slug
+      url
+      hostname
+      domain
+      screenshot_url
+      vue_version
+    }
+  }
+`
+const QUERY_FILTERED_SHOWCASES = gql`
+  query($frameworks: [String!], $uis: [String!]) {
+    showcases(
+      where: {
+        _or: [
+          { framework: { slug: { _in: $frameworks } } }
+          { ui: { slug: { _in: $uis } } }
+        ]
+      }
+    ) {
       slug
       url
       hostname
@@ -90,12 +111,8 @@ export default {
     filterCheckboxes
   },
   async fetch() {
-    this.$http.setHeader(
-      'x-hasura-admin-secret',
-      process.env.HASURA_ADMIN_SECRET_KEY
-    ) // TODO: secure this
-    const res = await this.$http.post(process.env.API_HASURA_URL, {
-      query: QUERY_ALL_SHOWCASES
+    const res = await this.$hasura.post('', {
+      query: print(QUERY_ALL_SHOWCASES)
     })
     const { data } = await res.json()
     this.$nuxt.context.store.dispatch('setShowcases', data.showcases)

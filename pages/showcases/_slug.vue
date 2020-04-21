@@ -6,8 +6,47 @@
 </template>
 
 <script>
+import gql from 'graphql-tag'
+import { print } from 'graphql/language/printer'
 import showcaseItem from '@/components/ShowcaseItem'
 
+const QUERY_SHOWCASE = gql`
+  query($slug: String!) {
+    showcases(where: { slug: { _eq: $slug } }) {
+      id
+      url
+      hostname
+      domain
+      vue_version
+      is_static
+      has_ssr
+      framework {
+        name
+        slug
+        url
+      }
+      ui {
+        name
+      }
+      showcase_modules {
+        module {
+          id
+          name
+        }
+      }
+      showcases_plugins {
+        plugin {
+          name
+        }
+      }
+      meta {
+        title
+        description
+      }
+      screenshot_url
+    }
+  }
+`
 export default {
   components: {
     showcaseItem
