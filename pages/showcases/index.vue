@@ -141,13 +141,13 @@ export default {
   methods: {
     async handleCheckedFrameworks(frameworks) {
       this.checkedFrameworks = frameworks
-      await this.search()
+      await this.filter()
     },
     async handlecheckedUis(uis) {
       this.checkedUis = uis
-      await this.search()
+      await this.filter()
     },
-    async search() {
+    async filter() {
       let query
       let variables
       if (this.checkedFrameworks.length || this.checkedUis.length) {
