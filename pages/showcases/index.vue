@@ -25,6 +25,7 @@
             </div>
             <input
               id="search"
+              v-model="q"
               class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:border-blue-300 focus:shadow-outline-blue sm:text-sm transition duration-150 ease-in-out"
               placeholder="Search"
               type="search"
@@ -77,6 +78,7 @@
 import { ContentLoader } from 'vue-content-loader'
 import gql from 'graphql-tag'
 import { print } from 'graphql/language/printer'
+import _debounce from 'lodash.debounce'
 import showcasePreviewItem from '@/components/ShowcasePreviewItem'
 import filterCheckboxes from '@/components/FilterCheckboxes'
 
@@ -111,6 +113,26 @@ const QUERY_FILTERED_SHOWCASES = gql`
     }
   }
 `
+const QUERY_SEARCH_SHOWCASES = gql`
+  query($q: String!) {
+    showcases(
+      where: {
+        _or: [
+          { domain: { _ilike: $q } }
+          { hostname: { _ilike: $q } }
+          { slug: { _ilike: $q } }
+        ]
+      }
+    ) {
+      slug
+      url
+      hostname
+      domain
+      screenshot_url
+      vue_version
+    }
+  }
+`
 export default {
   components: {
     showcasePreviewItem,
@@ -129,6 +151,7 @@ export default {
   },
   data() {
     return {
+      q: '',
       checkedFrameworks: [],
       checkedUis: []
     }
@@ -137,6 +160,14 @@ export default {
     showcases() {
       return this.$store.getters.showcases
     }
+  },
+  watch: {
+    q() {
+      this.debouncedSearch()
+    }
+  },
+  created() {
+    this.debouncedSearch = _debounce(this.search, 500)
   },
   methods: {
     async handleCheckedFrameworks(frameworks) {
@@ -164,6 +195,13 @@ export default {
         variables
       })
 
+      this.$store.dispatch('setShowcases', data ? data.showcases : [])
+    },
+    async search() {
+      const { data } = await this.$hasura({
+        query: print(QUERY_SEARCH_SHOWCASES),
+        variables: { q: `%${this.q}%` }
+      })
       this.$store.dispatch('setShowcases', data ? data.showcases : [])
     }
   }
