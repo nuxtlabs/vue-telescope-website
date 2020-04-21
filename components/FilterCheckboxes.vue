@@ -68,11 +68,7 @@ export default {
     }
   },
   async fetch() {
-    this.$http.setHeader(
-      'x-hasura-admin-secret',
-      process.env.HASURA_ADMIN_SECRET_KEY
-    ) // TODO: secure this
-    const res = await this.$http.post(process.env.API_HASURA_URL, {
+    const res = await this.$hasura.post('', {
       query: `
         query {
           ${this.type} {

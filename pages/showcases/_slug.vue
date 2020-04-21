@@ -13,49 +13,11 @@ export default {
     showcaseItem
   },
   async fetch() {
-    this.$http.setHeader(
-      'x-hasura-admin-secret',
-      process.env.HASURA_ADMIN_SECRET_KEY
-    ) // TODO: secure this
-    const res = await this.$http.post(process.env.API_HASURA_URL, {
-      query: `
-        {
-          showcases(where: {slug: {_eq: "${this.$nuxt.context.params.slug}"}}) {
-            id
-            url
-            hostname
-            domain
-            vue_version
-            is_static
-            has_ssr
-            framework {
-              name
-              slug
-              url
-            }
-            meta {
-              language
-              title
-              description
-            }
-            ui {
-              name
-            }
-            showcase_modules {
-              module {
-                id
-                name
-              }
-            }
-            showcases_plugins {
-              plugin {
-                name
-              }
-            }
-            screenshot_url
-          }
-        }
-      `
+    const res = await this.$hasura.post('', {
+      query: print(QUERY_SHOWCASE),
+      variables: {
+        slug: this.$nuxt.context.params.slug
+      }
     })
     const { data } = await res.json()
     this.$nuxt.context.store.dispatch('setCurrentShowcase', data.showcases[0])
