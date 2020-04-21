@@ -148,12 +148,20 @@ export default {
       await this.search()
     },
     async search() {
-      const { data } = await this.$hasura({
-        query: print(QUERY_FILTERED_SHOWCASES),
-        variables: {
+      let query
+      let variables
+      if (this.checkedFrameworks.length || this.checkedUis.length) {
+        query = QUERY_FILTERED_SHOWCASES
+        variables = {
           frameworks: this.checkedFrameworks,
           uis: this.checkedUis
         }
+      } else {
+        query = QUERY_ALL_SHOWCASES
+      }
+      const { data } = await this.$hasura({
+        query: print(query),
+        variables
       })
 
       this.$store.dispatch('setShowcases', data ? data.showcases : [])
