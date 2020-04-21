@@ -32,8 +32,15 @@
           </div>
         </div>
         <form class="mt-4">
-          <filterCheckboxes type="frameworks" />
-          <filterCheckboxes type="uis" class="mt-4" />
+          <filterCheckboxes
+            type="frameworks"
+            @checkedItems="handleCheckedFrameworks"
+          />
+          <filterCheckboxes
+            type="uis"
+            class="mt-4"
+            @checkedItems="handlecheckedUis"
+          />
         </form>
       </div>
       <div class="p-10 sm:flex-1" style="min-height: 1000px;">
@@ -117,9 +124,37 @@ export default {
     const { data } = await res.json()
     this.$nuxt.context.store.dispatch('setShowcases', data.showcases)
   },
+  data() {
+    return {
+      checkedFrameworks: [],
+      checkedUis: []
+    }
+  },
   computed: {
     showcases() {
       return this.$store.getters.showcases
+    }
+  },
+  methods: {
+    async handleCheckedFrameworks(frameworks) {
+      this.checkedFrameworks = frameworks
+      await this.search()
+    },
+    async handlecheckedUis(uis) {
+      this.checkedUis = uis
+      await this.search()
+    },
+    async search() {
+      const res = await this.$hasura.post('', {
+        query: print(QUERY_FILTERED_SHOWCASES),
+        variables: {
+          frameworks: this.checkedFrameworks,
+          uis: this.checkedUis
+        }
+      })
+
+      const { data } = await res.json()
+      this.$store.dispatch('setShowcases', data.showcases)
     }
   }
 }
