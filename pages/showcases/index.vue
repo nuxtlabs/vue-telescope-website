@@ -63,18 +63,25 @@
           </template>
           <template v-else>
             <showcasePreviewItem
-              v-for="showcase in showcases"
+              v-for="showcase in list"
               :key="showcase.id"
               :data="showcase"
             />
           </template>
         </div>
+        <client-only>
+          <infinite-loading
+            :identifier="infiniteId"
+            @infinite="loadMore"
+          ></infinite-loading>
+        </client-only>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import InfiniteLoading from 'vue-infinite-loading'
 import { ContentLoader } from 'vue-content-loader'
 import gql from 'graphql-tag'
 import { print } from 'graphql/language/printer'
@@ -83,8 +90,8 @@ import showcasePreviewItem from '@/components/ShowcasePreviewItem'
 import filterCheckboxes from '@/components/FilterCheckboxes'
 
 const QUERY_ALL_SHOWCASES = gql`
-  query {
-    showcases {
+  query($limit: Int, $offset: Int) {
+    showcases(limit: $limit, offset: $offset) {
       slug
       url
       hostname
@@ -95,8 +102,10 @@ const QUERY_ALL_SHOWCASES = gql`
   }
 `
 const QUERY_FILTERED_SHOWCASES = gql`
-  query($frameworks: [String!], $uis: [String!]) {
+  query($limit: Int, $offset: Int, $frameworks: [String!], $uis: [String!]) {
     showcases(
+      limit: $limit
+      offset: $offset
       where: {
         _or: [
           { framework: { slug: { _in: $frameworks } } }
@@ -114,8 +123,10 @@ const QUERY_FILTERED_SHOWCASES = gql`
   }
 `
 const QUERY_SEARCH_SHOWCASES = gql`
-  query($q: String!) {
+  query($limit: Int, $offset: Int, $q: String!) {
     showcases(
+      limit: $limit
+      offset: $offset
       where: {
         _or: [
           { domain: { _ilike: $q } }
@@ -135,13 +146,18 @@ const QUERY_SEARCH_SHOWCASES = gql`
 `
 export default {
   components: {
+    InfiniteLoading,
     showcasePreviewItem,
     ContentLoader,
     filterCheckboxes
   },
   async fetch() {
     const { data } = await this.$hasura({
-      query: print(QUERY_ALL_SHOWCASES)
+      query: print(QUERY_ALL_SHOWCASES),
+      variables: {
+        limit: this.limit,
+        offset: this.offset
+      }
     })
 
     this.$nuxt.context.store.dispatch(
@@ -151,6 +167,10 @@ export default {
   },
   data() {
     return {
+      infiniteId: +new Date(),
+      limit: 12,
+      offset: null,
+      results: [],
       q: '',
       checkedFrameworks: [],
       checkedUis: []
@@ -159,6 +179,9 @@ export default {
   computed: {
     showcases() {
       return this.$store.getters.showcases
+    },
+    list() {
+      return [...this.showcases, ...this.results]
     }
   },
   watch: {
@@ -170,23 +193,64 @@ export default {
     this.debouncedSearch = _debounce(this.search, 500)
   },
   methods: {
+    async loadMore($state) {
+      let query
+      const variables = {
+        limit: this.limit,
+        offset: this.offset || this.limit
+      }
+      const hasChecks = this.checkedFrameworks.length || this.checkedUis.length
+
+      if (this.q.trim() !== '') {
+        query = QUERY_SEARCH_SHOWCASES
+        variables.q = this.q
+      } else if (hasChecks) {
+        query = QUERY_FILTERED_SHOWCASES
+        variables.frameworks = this.checkedFrameworks
+        variables.uis = this.checkedUis
+      } else {
+        query = QUERY_ALL_SHOWCASES
+      }
+
+      await this.$hasura({
+        query: print(query),
+        variables
+      }).then(({ data }) => {
+        if (data.showcases.length) {
+          this.offset += this.limit
+          this.results.push(...data.showcases)
+          $state.loaded()
+        } else {
+          $state.complete()
+        }
+      })
+    },
+    resetInfinite() {
+      this.limit = 12
+      this.offset = 0
+      this.results = []
+      this.infiniteId += 1
+    },
     async handleCheckedFrameworks(frameworks) {
+      this.resetInfinite()
       this.checkedFrameworks = frameworks
       await this.filter()
     },
     async handlecheckedUis(uis) {
+      this.resetInfinite()
       this.checkedUis = uis
       await this.filter()
     },
     async filter() {
       let query
-      let variables
+      const variables = {
+        limit: this.limit,
+        offset: this.offset
+      }
       if (this.checkedFrameworks.length || this.checkedUis.length) {
         query = QUERY_FILTERED_SHOWCASES
-        variables = {
-          frameworks: this.checkedFrameworks,
-          uis: this.checkedUis
-        }
+        variables.frameworks = this.checkedFrameworks
+        variables.uis = this.checkedUis
       } else {
         query = QUERY_ALL_SHOWCASES
       }
@@ -200,7 +264,11 @@ export default {
     async search() {
       const { data } = await this.$hasura({
         query: print(QUERY_SEARCH_SHOWCASES),
-        variables: { q: `%${this.q}%` }
+        variables: {
+          q: `%${this.q}%`,
+          limit: this.limit,
+          offset: this.offset
+        }
       })
       this.$store.dispatch('setShowcases', data ? data.showcases : [])
     }

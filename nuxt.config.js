@@ -27,7 +27,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/hasura.js'],
+  plugins: ['@/plugins/hasura.js', '@/plugins/infinite-loading.client.js'],
   /*
    ** Nuxt.js dev-modules
    */
