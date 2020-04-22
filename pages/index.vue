@@ -20,20 +20,26 @@
     </section>
     <section
       id="technos"
-      class="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8"
+      class="max-w-screen-xl mx-auto py-40 px-4 sm:px-6 lg:py-42 lg:px-8"
     >
-      <div class="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
-        <p class="text-center text-lg leading-6 text-gray-600 tracking-wider">
-          <span class="font-bold">1234</span> sites analyzed with
-          <span class="font-bold text-green-400">Vue Telemetry</span>
-        </p>
+      <div class="max-w-screen-xl mx-auto py-16 px-4 sm:px-6 lg:py-32 lg:px-8">
+        <h5
+          class="mb-16 text-center text-3xl leading-8 font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-10"
+        >
+          <span class="text-green-400">{{ count }}</span> sites analyzed with
+          <span class="text-green-400">Vue Telemetry</span>
+        </h5>
         <div class="mt-6 grid grid-cols-2 gap-0.5 md:grid-cols-4 lg:mt-8">
           <div
             v-for="(techno, id) in technos"
             :key="id"
-            class="col-span-1 flex justify-center py-8 px-8 bg-gray-50"
+            class="techno__wrapper col-span-1 flex justify-center py-8 px-8 bg-gray-50"
           >
-            <img class="max-h-12" :src="techno.logoPath" :alt="techno.alt" />
+            <img
+              class="techno__img max-h-12"
+              :src="techno.logoPath"
+              :alt="techno.alt"
+            />
           </div>
         </div>
       </div>
@@ -171,7 +177,29 @@
 </template>
 
 <script>
+import gql from 'graphql-tag'
+import { print } from 'graphql/language/printer'
+
+const QUERY_COUNT_SHOWCASES = gql`
+  query {
+    showcases_aggregate {
+      aggregate {
+        count
+      }
+    }
+  }
+`
+
 export default {
+  async asyncData({ app }) {
+    const { data } = await app.$hasura({
+      query: print(QUERY_COUNT_SHOWCASES)
+    })
+
+    return {
+      count: data.showcases_aggregate.aggregate.count
+    }
+  },
   data() {
     return {
       technos: [
@@ -213,4 +241,14 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.techno__img {
+  transition: filter ease-in-out 300ms;
+  filter: grayscale(1);
+  -webkit-filter: grayscale(1);
+}
+.techno__wrapper:hover .techno__img {
+  filter: grayscale(0);
+  -webkit-filter: grayscale(0);
+}
+</style>
