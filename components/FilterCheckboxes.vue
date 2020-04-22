@@ -25,11 +25,11 @@
         </template>
       </content-loader>
     </div>
-    <fieldset v-else>
-      <legend class="text-sm leading-4 font-medium text-gray-900 uppercase">
+    <fieldset v-else class="mt-8">
+      <legend class="text-base leading-4 font-bold text-gray-900 capitalize">
         {{ type }}
       </legend>
-      <div v-for="(el, i) in items" :key="`${type}-${i}`" class="mt-4">
+      <div v-for="(el, i) in items" :key="`${type}-${i}`" class="mt-3">
         <div class="flex items-start">
           <div class="absolute flex items-center h-5">
             <input

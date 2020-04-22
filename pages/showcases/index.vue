@@ -46,7 +46,7 @@
       </div>
       <div class="p-10 sm:flex-1" style="min-height: 1000px;">
         <div
-          class="grid gap-10 max-w-lg mx-auto sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:max-w-none"
+          class="grid gap-8 mx-auto sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
         >
           <template v-if="$fetchState.pending">
             <content-loader
