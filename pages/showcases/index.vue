@@ -242,6 +242,7 @@ export default {
       await this.filter()
     },
     async filter() {
+      this.$fetchState.pending = true
       let query
       const variables = {
         limit: this.limit,
@@ -260,8 +261,10 @@ export default {
       })
 
       this.$store.dispatch('setShowcases', data ? data.showcases : [])
+      this.$fetchState.pending = false
     },
     async search() {
+      this.$fetchState.pending = true
       const { data } = await this.$hasura({
         query: print(QUERY_SEARCH_SHOWCASES),
         variables: {
@@ -271,6 +274,7 @@ export default {
         }
       })
       this.$store.dispatch('setShowcases', data ? data.showcases : [])
+      this.$fetchState.pending = false
     }
   }
 }
