@@ -22,21 +22,21 @@
     "nuxt": "^2.12.2",
     "vue-content-loader": "^0.2.3",
     "vue-infinite-loading": "^2.4.5",
-    "vue-telemetry-analyzer": "^0.3.0",
+    "vue-telemetry-analyzer": "^0.3.2",
     "vuelidate": "^0.7.5"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.2",
     "@nuxtjs/eslint-module": "^1.1.0",
-    "@nuxtjs/tailwindcss": "^1.4.0",
-    "@tailwindcss/ui": "^0.1.3",
+    "@nuxtjs/tailwindcss": "^1.4.1",
+    "@tailwindcss/ui": "^0.2.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.1",
+    "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-nuxt": ">=0.5.2",
-    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-prettier": "^3.1.3",
     "nuxt-webfontloader": "^1.1.0",
-    "prettier": "^2.0.4",
-    "puppeteer": "^2.1.1"
+    "prettier": "^2.0.5",
+    "puppeteer": "^3.0.1"
   }
 }
