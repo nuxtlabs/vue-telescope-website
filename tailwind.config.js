@@ -12,6 +12,10 @@ module.exports = {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans]
       },
+      backgroundColor: (theme) => ({
+        'button-green': '#41B38A',
+        'button-green-hover': '#74cdad'
+      }),
       borderRadius: {
         xl: '1rem'
       }
