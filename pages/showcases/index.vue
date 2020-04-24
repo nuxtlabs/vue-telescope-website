@@ -1,9 +1,22 @@
 <template>
   <div>
-    <div class="flex flex-col sm:flex-row border-t border-gray-300">
+    <section
+      id="hero"
+      class="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8"
+    >
+      <h1 class="text-3xl font-extrabold text-gray-700">Showcases</h1>
+      <p class="mt-2 mb-6 text-gray-600">
+        Find all the websites built with VueJS
+      </p>
+      <nuxt-link
+        to="/scan"
+        class="inline-flex items-center px-6 py-3 border border-transparent text-lg leading-6 font-semibold rounded-full shadow-md text-green-400 bg-white hover:shadow-xl focus:outline-none focus:border-nuxt focus:shadow-outline-nuxt active:bg-nuxt-200 transition ease-in-out duration-150"
+        >Scan your url</nuxt-link
+      >
+    </section>
+    <div class="flex flex-col sm:flex-row border-t border-gray-200">
       <div
-        class="hidden sm:block p-2 w-60 overflow-auto sticky top-0 border-r border-gray-300"
-        style="height: 37rem;"
+        class="hidden sm:block p-2 h-screen w-60 overflow-auto sticky top-0 border-r border-gray-200"
       >
         <div class="w-full">
           <label for="search" class="sr-only">Search</label>
@@ -26,7 +39,7 @@
             <input
               id="search"
               v-model="q"
-              class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:border-blue-300 focus:shadow-outline-blue sm:text-sm transition duration-150 ease-in-out"
+              class="block w-full pl-10 pr-3 py-2 border border-transparent rounded-sm leading-5 bg-gray-100 placeholder-gray-400 focus:outline-none focus:placeholder-gray-400 focus:bg-white focus:shadow-outline-green sm:text-sm transition duration-150 ease-in-out"
               placeholder="Search"
               type="search"
             />

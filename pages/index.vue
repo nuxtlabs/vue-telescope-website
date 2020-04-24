@@ -1,30 +1,41 @@
 <template>
-  <div>
+  <div class="max-w-screen-xl mx-auto">
+    <div
+      class="absolute top-0 left-0 right-0"
+      :style="{ backgroundImage: `url('img/background.png')` }"
+      style="background-repeat: no-repeat; height: 855px; z-index: -9999;"
+    ></div>
     <section
       id="hero"
-      class="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8"
+      class="max-w-7xl mx-auto h-full px-4 pt-20 pb-10 sm:px-6 lg:px-8 lg:pt-0"
     >
-      <h1 class="text-3xl font-extrabold text-white">
-        Discover websites
-        <br />made with Vue.js
-      </h1>
-      <p class="mt-2 mb-6 text-white">
-        With Vue Telemetry, reveal the Vue technologies
-        <br />used on any website.
-      </p>
-      <nuxt-link
-        to="/showcases"
-        class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-6 font-bold rounded-full shadow-md uppercase text-green-400 bg-white hover:shadow-xl focus:outline-none focus:border-nuxt focus:shadow-outline-nuxt active:bg-nuxt-200 transition ease-in-out duration-150"
-        >browse showcase</nuxt-link
-      >
+      <div class="flex flex-col md:flex-row">
+        <div class="flex-1 flex flex-col justify-center lg:ml-10">
+          <h1 class="text-4xl font-extrabold text-white">
+            Discover websites
+            <br />made with Vue.js
+          </h1>
+          <p class="mt-2 mb-6 text-white text-lg">
+            With Vue Telemetry, reveal the Vue technologies
+            <br />used on any website.
+          </p>
+          <div class="text-center sm:text-left">
+            <nuxt-link
+              to="/showcases"
+              class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-6 font-semibold rounded-full shadow-md uppercase text-green-400 bg-white hover:shadow-xl focus:outline-none focus:border-nuxt focus:shadow-outline-nuxt active:bg-nuxt-200 transition ease-in-out duration-150"
+              >browse showcase</nuxt-link
+            >
+          </div>
+        </div>
+        <div class="flex-1 flex items-center justify-center">
+          <img src="/img/hero.svg" alt="hero" class="w-96 md:w-auto" />
+        </div>
+      </div>
     </section>
-    <section
-      id="technos"
-      class="max-w-screen-xl mx-auto py-40 px-4 sm:px-6 lg:py-42 lg:px-8"
-    >
-      <div class="max-w-screen-xl mx-auto py-16 px-4 sm:px-6 lg:py-32 lg:px-8">
+    <section id="technos" class="px-4 sm:px-6 pt-20 pb-12 sm:pt-40 lg:px-8">
+      <div class="">
         <h5
-          class="mb-16 text-center text-3xl leading-8 font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-10"
+          class="mt-8 mb-10 text-center text-3xl leading-8 font-bold tracking-tighter text-gray-700 sm:text-4xl sm:leading-10"
         >
           <span class="text-green-400">{{ count }}</span> sites analyzed with
           <span class="text-green-400">Vue Telemetry</span>
@@ -44,12 +55,9 @@
         </div>
       </div>
     </section>
-    <section
-      id="what"
-      class="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8"
-    >
+    <section id="what" class="py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
       <h5
-        class="mb-16 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10"
+        class="mb-10 text-3xl leading-8 font-bold tracking-tighter text-gray-700 sm:text-4xl sm:leading-10"
       >
         What’s
         <span class="text-green-400">telemetry ?</span>
@@ -60,12 +68,9 @@
         for statistical purposes.
       </p>
     </section>
-    <section
-      id="why"
-      class="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8"
-    >
+    <section id="why" class="py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
       <h5
-        class="text-center mb-16 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10"
+        class="text-center mb-16 text-3xl leading-8 font-bold tracking-tighter text-gray-700 sm:text-4xl sm:leading-10"
       >
         <span class="text-green-400">Why use</span> Vue Telemetry ?
       </h5>
@@ -89,7 +94,7 @@
             </svg>
           </div>
           <div class="sm:mt-5">
-            <h5 class="text-lg leading-6 font-medium text-gray-900">
+            <h5 class="text-lg leading-6 font-medium text-gray-700">
               Free
             </h5>
             <p class="mt-2 text-base leading-6 text-gray-500">
@@ -112,7 +117,7 @@
             </svg>
           </div>
           <div class="sm:mt-5">
-            <h5 class="text-lg leading-6 font-medium text-gray-900">
+            <h5 class="text-lg leading-6 font-medium text-gray-700">
               Anonymous
             </h5>
             <p class="mt-2 text-base leading-6 text-gray-500">
@@ -140,7 +145,7 @@
             </svg>
           </div>
           <div class="sm:mt-5">
-            <h5 class="text-lg leading-6 font-medium text-gray-900">
+            <h5 class="text-lg leading-6 font-medium text-gray-700">
               Contribute
             </h5>
             <p class="mt-2 text-base leading-6 text-gray-500">
@@ -151,27 +156,26 @@
         </div>
       </div>
     </section>
-    <section
-      id="how"
-      class="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8"
-    >
+    <section id="how" class="py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
       <h5
-        class="mb-16 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10"
+        class="mb-8 text-center text-3xl font-bold tracking-tighter text-gray-700 sm:text-4xl sm:text-left"
       >
         How to
         <span class="text-green-400">install it ?</span>
       </h5>
-      <p class="text-gray-500">
+      <p class="mb-8 text-gray-500">
         Vue Telemetry is available on Google Chrome and Mozilla Firefox. Its
-        installation is simple and quick.
+        installation is quick and simple.
         <br />You can also works locally and offline. <br />Click on the link
         for download app and choose your browser.
       </p>
-      <nuxt-link
-        to="/download"
-        class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-4 font-bold rounded-full shadow-md text-white bg-green-400 hover:shadow-xl focus:outline-none focus:border-green-400 focus:shadow-outline-green-400 active:bg-green-200 transition ease-in-out duration-150"
-        >Get browser extension</nuxt-link
-      >
+      <div class="text-center sm:text-left">
+        <nuxt-link
+          to="/download"
+          class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-6 capitalize font-semibold rounded-full shadow-md text-white bg-green-400 hover:shadow-xl focus:outline-none focus:border-green-400 focus:shadow-outline-green-400 active:bg-green-200 transition ease-in-out duration-150"
+          >Get browser extension</nuxt-link
+        >
+      </div>
     </section>
   </div>
 </template>

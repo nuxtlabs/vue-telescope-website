@@ -1,6 +1,11 @@
 <template>
-  <div>
-    <template v-if="$fetchState.pending">loading...</template>
+  <div class="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
+    <div v-if="$fetchState.pending" class="flex flex-col sm:flex-row">
+      <showcaseBrowser url="loading..." class="flex-1 sm:w-1/2" />
+      <div class="flex-1 sm:w-1/2">
+        TODO: content placeholders
+      </div>
+    </div>
     <showcaseItem v-else :data="showcase" />
   </div>
 </template>
@@ -9,6 +14,7 @@
 import gql from 'graphql-tag'
 import { print } from 'graphql/language/printer'
 import showcaseItem from '@/components/ShowcaseItem'
+import showcaseBrowser from '@/components/ShowcaseBrowser'
 
 const QUERY_SHOWCASE = gql`
   query($slug: String!) {
@@ -49,7 +55,8 @@ const QUERY_SHOWCASE = gql`
 `
 export default {
   components: {
-    showcaseItem
+    showcaseItem,
+    showcaseBrowser
   },
   async fetch() {
     const { data } = await this.$hasura({
