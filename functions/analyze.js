@@ -23,10 +23,47 @@ exports.handler = async function (event, context) {
     if (await isBlacklisted(hostname)) {
       throw new Error('Invalid URL')
     }
-    // TODO: Check if showcase exists in Hasura
+
+    const QUERY_SCAN_BY_URL = `query {
+      scans(where: {url: {_eq: "${url}"}}) {
+        url
+        is_proxy_blocked
+      }
+    }`
+    // check if showcase has been scanned
+    await hasuraDB(QUERY_SCAN_BY_URL).then(({ data }) => {
+      const scan = data.scans[0]
+      console.log('scan', scan)
+      if (scan) {
+        throw new Error(`We are unable to scan ${hostname} at the moment...`)
+      }
+    })
+
+    // Check if showcase exists in Hasura
     const QUERY_SHOWCASE_BY_HOSTNAME = `query {
       showcases(where: {hostname: {_eq: "${hostname}"}}) {
         id
+        slug
+        url
+        domain
+        hostname
+        has_ssr
+        is_static
+        vue_version
+        screenshot_url
+        framework {
+          name
+        }
+        showcases_plugins {
+          plugin {
+            name
+          }
+        }
+        showcase_modules {
+          module {
+            name
+          }
+        }
       }
     }`
     const { data } = await hasuraDB(QUERY_SHOWCASE_BY_HOSTNAME)
@@ -124,18 +161,19 @@ exports.handler = async function (event, context) {
   } catch (err) {
     consola.error(err)
 
-    const INSERT_SCANS = `mutation {
-      insert_scans(
-        objects: {
-          url: "${url}",
-          is_proxy_blocked: "${err.statusCode === 403}"
-        }) {
-        returning {
-          id
-        }
-      }
-    }`
-    await hasuraDB(INSERT_SCANS)
+    // TODO: define if url is valid to be inserted in scans table
+    // const INSERT_SCANS = `mutation {
+    //   insert_scans(
+    //     objects: {
+    //       url: "${url}",
+    //       is_proxy_blocked: "${err.statusCode === 403}"
+    //     }) {
+    //     returning {
+    //       id
+    //     }
+    //   }
+    // }`
+    // await hasuraDB(INSERT_SCANS)
 
     return {
       statusCode: 400,
