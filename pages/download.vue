@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-col lg:flex-row h-full lg:justify-around">
-    <div class="flex flex-col px-8 py-8 lg:px-12 text-gray-800 self-center">
+    <div class="flex flex-col px-8 py-8 lg:px-12 text-gray-700 self-center">
       <div class="flex flex-col">
-        <h2 class="text-2xl font-bold lg:text-3xl">Browser extension</h2>
+        <h2 class="text-2xl font-extrabold lg:text-3xl">Browser extension</h2>
         <p class="-mt-2 text-md lg:text-2xl">Get the free browser extension</p>
-        <p class="mt-2 text-base leading-6">
+        <p class="mt-2 text-base leading-6 text-cool-gray-600">
           Install the Vue Telemetry browser extension to see
           <br />the technologies used on websites you visit at a glance.
         </p>
@@ -12,7 +12,7 @@
       <div class="mt-6 sm:mt-10 flex flex-row">
         <button
           type="button"
-          class="flex items-center justify-center lg:h-12 xl:h-14 w-48 px-4 py-2 mr-2 border border-transparent text-base leading-6 font-medium rounded-full text-white bg-button-green hover:bg-button-green-hover focus:outline-none focus:bg-button-green-hover active:bg-button-green-hover transition ease-in-out duration-150"
+          class="flex items-center justify-center lg:h-12 xl:h-14 w-48 px-4 py-2 mr-2 border border-transparent text-base leading-6 font-semibold rounded-full text-white bg-green-400 hover:shadow-xl focus:outline-none focus:bg-green-400 active:bg-green-400 transition ease-in-out duration-150"
         >
           <svg
             class="-ml-1 mr-3 h-5 w-5"
@@ -30,7 +30,7 @@
         </button>
         <button
           type="button"
-          class="flex items-center justify-center lg:h-12 xl:h-14 w-48 px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-full text-white bg-button-green hover:bg-button-green-hover focus:outline-none focus:bg-button-green-hover active:bg-button-green-hover transition ease-in-out duration-150"
+          class="flex items-center justify-center lg:h-12 xl:h-14 w-48 px-4 py-2 border border-transparent text-base leading-6 font-semibold rounded-full text-white bg-green-400 hover:shadow-xl focus:outline-none focus:bg-green-400 active:bg-green-400 transition ease-in-out duration-150"
         >
           <svg
             x="0px"
