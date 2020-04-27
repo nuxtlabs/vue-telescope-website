@@ -12,6 +12,8 @@ const getUIMutation = require('./utils/getUIMutation')
 const hasuraDB = require('./utils/hasuraDB')
 const isBlacklisted = require('./utils/isBlacklisted')
 const slugify = require('./utils/slugify')
+const gql = require('graphql-tag')
+const { print } = require('graphql/language/printer')
 
 exports.handler = async function (event, context) {
   const { hostname } = new URL(event.queryStringParameters.url)
@@ -24,51 +26,61 @@ exports.handler = async function (event, context) {
       throw new Error('Invalid URL')
     }
 
-    const QUERY_SCAN_BY_URL = `query {
-      scans(where: {url: {_eq: "${url}"}}) {
-        url
-        is_proxy_blocked
+    const QUERY_SCAN_BY_URL = gql`
+      query($url: String!) {
+        scans(where: { url: { _eq: $url } }) {
+          url
+          is_proxy_blocked
+        }
       }
-    }`
+    `
     // check if showcase has been scanned
-    await hasuraDB(QUERY_SCAN_BY_URL).then(({ data }) => {
+    await hasuraDB({
+      query: print(QUERY_SCAN_BY_URL),
+      variables: { url }
+    }).then(({ data }) => {
       const scan = data.scans[0]
-      console.log('scan', scan)
+
       if (scan) {
         throw new Error(`We are unable to scan ${hostname} at the moment...`)
       }
     })
 
     // Check if showcase exists in Hasura
-    const QUERY_SHOWCASE_BY_HOSTNAME = `query {
-      showcases(where: {hostname: {_eq: "${hostname}"}}) {
-        id
-        slug
-        url
-        domain
-        hostname
-        has_ssr
-        is_static
-        vue_version
-        screenshot_url
-        framework {
-          name
-        }
-        showcases_plugins {
-          plugin {
+    const QUERY_SHOWCASE_BY_HOSTNAME = gql`
+      query($hostname: String!) {
+        showcases(where: { hostname: { _eq: $hostname } }) {
+          id
+          slug
+          url
+          domain
+          hostname
+          has_ssr
+          is_static
+          vue_version
+          screenshot_url
+          framework {
             name
           }
-        }
-        showcase_modules {
-          module {
-            name
+          showcases_plugins {
+            plugin {
+              name
+            }
+          }
+          showcase_modules {
+            module {
+              name
+            }
           }
         }
       }
-    }`
-    const { data } = await hasuraDB(QUERY_SHOWCASE_BY_HOSTNAME)
+    `
+    const { data } = await hasuraDB({
+      query: print(QUERY_SHOWCASE_BY_HOSTNAME),
+      variables: { hostname }
+    })
     const showcase = data.showcases[0] ? data.showcases[0] : null
-    // Return
+
     if (showcase) {
       return {
         statusCode: 200,
@@ -103,52 +115,54 @@ exports.handler = async function (event, context) {
     }
 
     // Build plugins mutation
-    const pluginMutation = await getPluginMutation(infos.plugins)
-
+    const plugins = await getPluginMutation(infos.plugins)
     // Build modules mutation
-    const moduleMutation = await getModuleMutation(infos.frameworkModules)
+    const modules = await getModuleMutation(infos.frameworkModules)
     // Build framework mutation
-    const frameworkMutation = await getFrameworkMutation(
-      infos.framework,
-      moduleMutation
-    )
+    const framework = await getFrameworkMutation(infos.framework, modules)
     // Build ui mutation
-    const uiMutation = await getUIMutation(infos.ui)
+    const ui = await getUIMutation(infos.ui)
     // TODO: Mutation on Hasura
-    const INSERT_SHOWCASE = `mutation {
-      insert_showcases(
-        objects: {
-          url: "${infos.url}",
-          domain: "${infos.domain}",
-          hostname: "${infos.hostname}",
-          has_ssr: "${infos.hasSSR}",
-          is_static: "${infos.isStatic}",
-          screenshot_url: "${infos.screenshot}",
-          slug: "${slugify(infos.domain)}",
-          vue_version: "${infos.vueVersion}",
-          showcases_plugins: {
-            data: [${pluginMutation}]
-          },
-          showcase_modules: {
-            data: [${moduleMutation}]
-          },
-          framework: ${frameworkMutation},
-          ui: ${uiMutation},
-          meta: {
-            data: {
-              language: "${infos.meta.language}",
-              title: "${infos.meta.title}",
-              description: "${infos.meta.description}"
-            }
-          }
-        }) {
-        returning {
-          id
+    const showcaseObject = {
+      url: infos.url,
+      domain: infos.domain,
+      hostname: infos.hostname,
+      has_ssr: infos.hasSSR,
+      is_static: infos.isStatic,
+      screenshot_url: infos.screenshot,
+      slug: slugify(infos.domain),
+      vue_version: infos.vueVersion,
+      showcases_plugins: {
+        data: plugins
+      },
+      showcase_modules: {
+        data: modules
+      },
+      framework: framework,
+      ui: ui,
+      meta: {
+        data: {
+          language: infos.meta.language,
+          title: infos.meta.title,
+          description: infos.meta.description
         }
       }
-    }`
+    }
 
-    const res = await hasuraDB(INSERT_SHOWCASE)
+    const INSERT_SHOWCASE = gql`
+      mutation($objects: [showcases_insert_input!]!) {
+        insert_showcases(objects: $objects) {
+          returning {
+            id
+          }
+        }
+      }
+    `
+
+    const res = await hasuraDB({
+      query: print(INSERT_SHOWCASE),
+      variables: { objects: showcaseObject }
+    })
 
     // Return
     return {
@@ -162,18 +176,25 @@ exports.handler = async function (event, context) {
     consola.error(err)
 
     // TODO: define if url is valid to be inserted in scans table
-    // const INSERT_SCANS = `mutation {
-    //   insert_scans(
-    //     objects: {
-    //       url: "${url}",
-    //       is_proxy_blocked: "${err.statusCode === 403}"
-    //     }) {
-    //     returning {
-    //       id
-    //     }
+    // if (isScanCandidate) {
+    //   const scanObject = {
+    //     url: url,
+    //     is_proxy_blocked: err.statusCode === 403
     //   }
-    // }`
-    // await hasuraDB(INSERT_SCANS)
+    //   const INSERT_SCANS = gql`
+    //     mutation($objects: [scans_insert_input!]!) {
+    //       insert_scans(objects: $objects) {
+    //         returning {
+    //           id
+    //         }
+    //       }
+    //     }
+    //   `
+    //   await hasuraDB({
+    //     query: INSERT_SCANS,
+    //     variables: { objects: scanObject }
+    //   })
+    // }
 
     return {
       statusCode: 400,

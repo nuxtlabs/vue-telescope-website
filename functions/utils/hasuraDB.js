@@ -1,6 +1,6 @@
 const axios = require('axios')
 
-module.exports = async function hasuraDB(gqlPayload) {
+module.exports = async function hasuraDB(payload) {
   const { data } = await axios({
     headers: {
       'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET_KEY // TODO: secure it
@@ -8,7 +8,8 @@ module.exports = async function hasuraDB(gqlPayload) {
     url: process.env.API_HASURA_URL,
     method: 'post',
     data: {
-      query: gqlPayload
+      query: payload.query,
+      variables: payload.variables
     }
   })
   return data
