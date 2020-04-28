@@ -9,7 +9,7 @@ const getFrameworkMutation = require('./utils/getFrameworkMutation')
 const getModuleMutation = require('./utils/getModuleMutation')
 const getPluginMutation = require('./utils/getPluginMutation')
 const getUIMutation = require('./utils/getUIMutation')
-const hasuraDB = require('./utils/hasuraDB')
+const hasura = require('./utils/hasura')
 const isBlacklisted = require('./utils/isBlacklisted')
 const slugify = require('./utils/slugify')
 const gql = require('graphql-tag')
@@ -35,7 +35,7 @@ exports.handler = async function (event, context) {
       }
     `
     // check if showcase has been scanned
-    await hasuraDB({
+    await hasura({
       query: print(QUERY_SCAN_BY_URL),
       variables: { url }
     }).then(({ data }) => {
@@ -75,7 +75,7 @@ exports.handler = async function (event, context) {
         }
       }
     `
-    const { data } = await hasuraDB({
+    const { data } = await hasura({
       query: print(QUERY_SHOWCASE_BY_HOSTNAME),
       variables: { hostname }
     })
@@ -159,7 +159,7 @@ exports.handler = async function (event, context) {
       }
     `
 
-    const res = await hasuraDB({
+    const res = await hasura({
       query: print(INSERT_SHOWCASE),
       variables: { objects: showcaseObject }
     })
@@ -190,7 +190,7 @@ exports.handler = async function (event, context) {
     //       }
     //     }
     //   `
-    //   await hasuraDB({
+    //   await hasura({
     //     query: INSERT_SCANS,
     //     variables: { objects: scanObject }
     //   })
