@@ -16,11 +16,6 @@
           </p>
           <form @submit.prevent="analyze">
             <div>
-              <!-- <label
-                for="domain"
-                class="block text-sm font-medium leading-5 text-gray-700"
-                >Enter a domain</label
-              > -->
               <div class="mt-1 relative rounded-sm">
                 <div
                   class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none"
@@ -63,22 +58,27 @@
               </div>
             </div>
           </form>
-          <div v-if="result" class="mt-4">
-            <nuxt-link
-              :to="`/showcases/${result.slug}`"
-              class="p-4 border border-gray-200 rounded-md cursor-pointer"
-              tag="div"
-            >
-              <pre v-if="result">{{ result }}</pre>
-              <div class="text-xl text-green-400">{{ result.domain }}</div>
-              <!-- <img :src="result.screenshot_url" class="h-auto w-auto rounded" /> -->
-              <p v-if="result.framework">
-                <span class="text-green-400 font-bold">Framework :</span>
-                {{ result.framework.name }}
-              </p>
-            </nuxt-link>
-          </div>
-          <div v-if="error" class="text-sm text-red-600 mt-1">{{ error }}</div>
+          <drawer v-if="openedDrawer">
+            <div v-if="pending">loading....</div>
+            <div v-if="result" class="mt-4">
+              <nuxt-link
+                :to="`/showcases/${result.slug}`"
+                class="p-4 border border-gray-200 rounded-md cursor-pointer"
+                tag="div"
+              >
+                <pre v-if="result">{{ result }}</pre>
+                <div class="text-xl text-green-400">{{ result.domain }}</div>
+                <!-- <img :src="result.screenshot_url" class="h-auto w-auto rounded" /> -->
+                <p v-if="result.framework">
+                  <span class="text-green-400 font-bold">Framework :</span>
+                  {{ result.framework.name }}
+                </p>
+              </nuxt-link>
+            </div>
+            <div v-if="error" class="text-sm text-red-600 mt-1">
+              {{ error }}
+            </div>
+          </drawer>
         </div>
         <div class="lg:w-1/2"></div>
       </div>
@@ -89,11 +89,15 @@
 <script>
 import { validationMixin } from 'vuelidate'
 import { required } from 'vuelidate/lib/validators'
+import drawer from '@/components/Drawer'
 
 const urlRegex = /^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,}?\/?.*$/
 const mustBeValidUrl = (url) => urlRegex.test(url)
 
 export default {
+  components: {
+    drawer
+  },
   mixins: [validationMixin],
   validations: {
     url: {
@@ -103,6 +107,7 @@ export default {
   },
   data() {
     return {
+      openedDrawer: false,
       url: '',
       pending: false,
       result: null,
@@ -126,6 +131,8 @@ export default {
         if (this.pending) {
           return
         }
+        // open drawer
+        this.openedDrawer = true
         this.pending = true
         this.error = null
         this.result = null
