@@ -2,8 +2,8 @@
   <div
     class="fixed inset-0 z-40 pointer-events-auto"
     :class="fadeAnimationClass"
-    @click.self="close"
     style="background-color: rgba(0, 0, 0, 0.5);"
+    @click.self="close"
   >
     <div
       class="bg-white fixed top-0 right-0 overflow-hidden z-50 flex h-screen w-full"
