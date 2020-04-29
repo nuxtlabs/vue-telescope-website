@@ -58,7 +58,7 @@
               </div>
             </div>
           </form>
-          <drawer v-if="openedDrawer">
+          <drawer v-if="openedDrawer" @close="openedDrawer = false">
             <div v-if="pending">loading....</div>
             <div v-if="result" class="mt-4">
               <nuxt-link
