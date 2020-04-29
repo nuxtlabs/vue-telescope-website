@@ -1,13 +1,17 @@
 <template>
-  <div class="overlay" :class="fadeAnimationClass" @click.self="close">
-    <div class="panel" :class="slideAnimationClass" :style="customStyle">
-      <div class="navigation">
-        <div class="button" @click="close">X</div>
-      </div>
-      <div class="body">
-        <div class="content">
-          <slot></slot>
-        </div>
+  <div
+    class="fixed inset-0 z-40 pointer-events-auto"
+    :class="fadeAnimationClass"
+    @click.self="close"
+    style="background-color: rgba(0, 0, 0, 0.5);"
+  >
+    <div
+      class="bg-white fixed top-0 right-0 overflow-hidden z-50 flex h-screen w-full"
+      :class="slideAnimationClass"
+      :style="customStyle"
+    >
+      <div class="px-6 py-8">
+        <slot></slot>
       </div>
     </div>
   </div>
@@ -31,7 +35,7 @@ export default {
   computed: {
     customStyle() {
       return {
-        width: this.panelWidth + 'px'
+        'max-width': this.panelWidth + 'px'
       }
     }
   },
@@ -45,102 +49,51 @@ export default {
         resolve()
       })
     },
-    close() {
-      //
+    async close() {
+      await this.setClosingAnimationClasses().then((_) => {
+        setTimeout(() => {
+          this.$emit('close')
+        }, 200)
+      })
+    }
+  },
+  head() {
+    return {
+      bodyAttrs: {
+        class: 'overflow-hidden'
+      }
     }
   }
 }
 </script>
 
-<style scoped>
-.overlay {
-  bottom: 0px;
-  left: 0px;
-  pointer-events: initial;
-  position: fixed;
-  right: 0px;
-  top: 0px;
-  z-index: 1000;
-  background-color: rgba(9, 30, 66, 0.5);
-}
+<style>
 .fade-in {
-  animation: fade-in 200ms;
+  animation: fade-in 400ms;
 }
 .fade-out {
   animation: fade-out 440ms;
 }
 .slide-out {
-  animation: slide-out 220ms;
+  animation: slide-out 420ms;
 }
 .slide-in {
-  animation: slide-in 220ms;
-}
-.panel {
-  background-color: #fff;
-  display: flex;
-  height: 100vh;
-  right: 0px;
-  position: fixed;
-  top: 0px;
-  z-index: 1001;
-  overflow: hidden;
-}
-.button {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  margin-bottom: 16px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 100ms ease-in;
-}
-.button:hover {
-  background-color: rgba(9, 30, 66, 0.08);
-}
-.navigation {
-  -webkit-box-align: center;
-  align-items: center;
-  box-sizing: border-box;
-  color: rgb(66, 82, 110);
-  display: flex;
-  flex-shrink: 0;
-  flex-direction: column;
-  height: 100vh;
-  padding-bottom: 16px;
-  padding-top: 24px;
-  width: 64px;
-}
-.body {
-  margin-top: 24px;
-  flex: 1 1 0%;
-  overflow: auto;
-  display: flex;
-  flex-direction: column;
-}
-.content {
-  flex: 1;
-  overflow-y: scroll;
-  padding: 0 36px 0 0;
-}
-.footer {
-  margin: 24px 0;
+  animation: slide-in 420ms;
 }
 @keyframes slide-in {
   from {
-    transform: translateX(0%);
+    transform: translateX(100%);
   }
   to {
-    transform: translateX(100%);
+    transform: translateX(0%);
   }
 }
 @keyframes slide-out {
   from {
-    transform: translateX(100%);
+    transform: translateX(0%);
   }
   to {
-    transform: translateX(0%);
+    transform: translateX(100%);
   }
 }
 @keyframes fade-in {
