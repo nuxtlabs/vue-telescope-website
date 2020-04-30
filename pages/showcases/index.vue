@@ -210,7 +210,7 @@ export default {
       let query
       const variables = {
         limit: this.limit,
-        offset: this.offset || this.limit
+        offset: this.offset + this.limit
       }
       const hasChecks = this.checkedFrameworks.length || this.checkedUis.length
 
@@ -240,7 +240,7 @@ export default {
     },
     resetInfinite() {
       this.limit = 12
-      this.offset = 0
+      this.offset = null
       this.results = []
       this.infiniteId += 1
     },
