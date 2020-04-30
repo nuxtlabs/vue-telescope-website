@@ -58,6 +58,9 @@
               </div>
             </div>
           </form>
+          <div v-if="inputError" class="text-sm text-red-600 mt-1">
+            {{ inputError }}
+          </div>
           <drawer v-if="openedDrawer" @close="openedDrawer = false">
             <div v-if="pending">loading....</div>
             <div v-if="result" class="mt-4">
@@ -115,6 +118,7 @@ export default {
       url: '',
       pending: false,
       result: null,
+      inputError: '',
       error: null
     }
   },
@@ -124,17 +128,21 @@ export default {
       if (pattern.test(str)) {
         this.url = str.replace(/http(s)?:\/\//, '')
       }
+      if (str === '') {
+        this.inputError = ''
+      }
     }
   },
   methods: {
     async analyze() {
       this.$v.$touch()
       if (this.$v.$invalid) {
-        this.error = 'Enter a valid domain, e.g. vuejs.org'
+        this.inputError = 'Enter a valid domain, e.g. vuejs.org'
       } else {
         if (this.pending) {
           return
         }
+        this.inputError = ''
         // open drawer
         this.openedDrawer = true
         this.pending = true
