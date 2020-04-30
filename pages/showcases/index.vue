@@ -4,13 +4,13 @@
       id="hero"
       class="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8"
     >
-      <h1 class="text-3xl font-extrabold text-gray-700">Showcases</h1>
+      <h1 class="text-3xl font-extrabold text-nuxt-gray">Showcases</h1>
       <p class="mt-2 mb-6 text-gray-600">
         Find all the websites built with VueJS
       </p>
       <nuxt-link
         to="/scan"
-        class="inline-flex items-center px-6 py-3 border border-transparent text-lg leading-6 font-semibold rounded-full shadow-md text-green-400 bg-white hover:shadow-xl focus:outline-none focus:border-nuxt focus:shadow-outline-nuxt active:bg-nuxt-200 transition ease-in-out duration-150"
+        class="inline-flex items-center px-6 py-3 border border-transparent text-lg leading-6 font-semibold rounded-full shadow-md text-nuxt-lightgreen bg-white hover:shadow-xl focus:outline-none focus:border-nuxt focus:shadow-outline-nuxt active:bg-nuxt-200 transition ease-in-out duration-150"
         >Scan your url</nuxt-link
       >
     </section>

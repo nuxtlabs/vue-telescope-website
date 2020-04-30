@@ -4,7 +4,7 @@
       <div class="hidden sm:flex">
         <span class="w-2 h-2 rounded-full bg-red-500"></span>
         <span class="mx-1 w-2 h-2 rounded-full bg-yellow-300"></span>
-        <span class="w-2 h-2 rounded-full bg-green-400"></span>
+        <span class="w-2 h-2 rounded-full bg-nuxt-lightgreen"></span>
       </div>
       <div class="hidden sm:flex mx-4">
         <div class="w-4 h-4 cursor-pointer mr-2" @click="navShowcase('prev')">

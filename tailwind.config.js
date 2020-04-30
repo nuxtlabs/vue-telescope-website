@@ -12,6 +12,13 @@ module.exports = {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans]
       },
+      colors: {
+        nuxt: {
+          gray: '#243746',
+          lightgreen: '#41B38A',
+          green: '#158876'
+        }
+      },
       borderRadius: {
         xl: '1rem'
       },

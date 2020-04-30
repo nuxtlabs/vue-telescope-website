@@ -6,7 +6,7 @@
     <div class="w-full sm:flex-1">
       <div class="px-4">
         <h1
-          class="text-4xl font-black tracking-tighter text-gray-700 leading-9 mb-4 mt-4 sm:mt-0"
+          class="text-4xl font-black tracking-tighter text-nuxt-gray leading-9 mb-4 mt-4 sm:mt-0"
         >
           {{ data.domain }}
         </h1>
@@ -26,37 +26,37 @@
             {{ data.meta.description }}
           </p>
         </div>
-        <div class="hidden">
+        <div class="">
           <div>
-            <p class="text-green-400 font-semibold">Vue version</p>
+            <p class="text-nuxt-lightgreen font-semibold">Vue version</p>
             <p class="text-sm text-gray-900">{{ data.vue_version }}</p>
           </div>
           <div>
-            <p class="text-green-400 font-semibold">Mode</p>
+            <p class="text-nuxt-lightgreen font-semibold">Mode</p>
             <p class="text-sm text-gray-900">
               {{ data.has_ssr ? 'SSR' : 'SPA' }}
             </p>
           </div>
           <div>
-            <p class="text-green-400 font-semibold">Target</p>
+            <p class="text-nuxt-lightgreen font-semibold">Target</p>
             <p class="text-sm text-gray-900">
               {{ data.is_static ? 'Static' : 'Dynamic' }}
             </p>
           </div>
           <div>
-            <p class="text-green-400 font-semibold">Framework</p>
+            <p class="text-nuxt-lightgreen font-semibold">Framework</p>
             <p class="text-sm text-gray-900">
               {{ data.framework ? data.framework.name : 'none detected' }}
             </p>
           </div>
           <div>
-            <p class="text-green-400 font-semibold">UI</p>
+            <p class="text-nuxt-lightgreen font-semibold">UI</p>
             <p class="text-sm text-gray-900">
               {{ data.ui ? data.ui.name : 'none detected' }}
             </p>
           </div>
           <div>
-            <p class="text-green-400 font-semibold">Modules</p>
+            <p class="text-nuxt-lightgreen font-semibold">Modules</p>
             <ul>
               <li
                 v-for="(m, i) in data.showcase_modules"
@@ -68,7 +68,7 @@
             </ul>
           </div>
           <div>
-            <p class="text-green-400 font-semibold">Plugins</p>
+            <p class="text-nuxt-lightgreen font-semibold">Plugins</p>
             <ul>
               <li
                 v-for="(p, i) in data.showcases_plugins"

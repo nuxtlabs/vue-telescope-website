@@ -26,7 +26,7 @@
       </content-loader>
     </div>
     <fieldset v-else class="mt-8">
-      <legend class="text-base leading-4 font-bold text-gray-700 capitalize">
+      <legend class="text-base leading-4 font-bold text-nuxt-gray capitalize">
         {{ type }}
       </legend>
       <div v-for="(el, i) in items" :key="`${type}-${i}`" class="mt-3">
@@ -37,14 +37,14 @@
               v-model="checkedItems"
               type="checkbox"
               :value="el.slug"
-              class="form-checkbox h-4 w-4 text-green-400 focus:shadow-outline-green cursor-pointer transition duration-150 ease-in-out"
+              class="form-checkbox h-4 w-4 text-nuxt-lightgreen focus:shadow-outline-green cursor-pointer transition duration-150 ease-in-out"
               @change="handleCheckedItems"
             />
           </div>
           <div class="pl-7 text-sm leading-5 flex flex-1">
             <label
               :for="el.slug"
-              class="font-medium text-gray-700 flex-1 cursor-pointer select-none capitalize hover:text-green-400 transition ease-in-out duration-150"
+              class="font-medium text-nuxt-gray flex-1 cursor-pointer select-none capitalize hover:text-nuxt-lightgreen transition ease-in-out duration-150"
               >{{ el.name }}</label
             >
           </div>

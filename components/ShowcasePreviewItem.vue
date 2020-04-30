@@ -12,14 +12,14 @@
         <div class="hidden sm:flex items-center">
           <span class="w-1 h-1 rounded-full bg-red-500"></span>
           <span class="mx-1 w-1 h-1 rounded-full bg-yellow-300"></span>
-          <span class="w-1 h-1 rounded-full bg-green-400"></span>
+          <span class="w-1 h-1 rounded-full bg-nuxt-lightgreen"></span>
         </div>
         <div class="h-2 w-full mx-10 rounded-sm bg-white"></div>
       </div>
     </div>
     <div class="mt-2 flex items-center justify-between">
       <p
-        class="previewItem__title text-base font-extrabold text-gray-700 transition ease-in-out duration-150"
+        class="previewItem__title text-base font-extrabold text-nuxt-gray transition ease-in-out duration-150"
       >
         {{ data.domain }}
       </p>
@@ -47,6 +47,6 @@ export default {
   @apply shadow-xl;
 }
 .previewItem:hover .previewItem__title {
-  @apply text-green-400;
+  @apply text-nuxt-lightgreen;
 }
 </style>

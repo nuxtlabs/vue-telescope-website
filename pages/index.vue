@@ -22,7 +22,7 @@
           <div class="text-center sm:text-left">
             <nuxt-link
               to="/showcases"
-              class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-6 font-semibold rounded-full shadow-md uppercase text-green-400 bg-white hover:shadow-xl focus:outline-none focus:border-nuxt focus:shadow-outline-nuxt active:bg-nuxt-200 transition ease-in-out duration-150"
+              class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-6 font-semibold rounded-full shadow-md uppercase text-nuxt-lightgreen bg-white hover:shadow-xl focus:outline-none focus:border-nuxt focus:shadow-outline-nuxt active:bg-nuxt-200 transition ease-in-out duration-150"
               >browse showcase</nuxt-link
             >
           </div>
@@ -35,10 +35,11 @@
     <section id="technos" class="px-4 sm:px-6 pt-20 pb-12 sm:pt-40 lg:px-8">
       <div class="">
         <h5
-          class="mt-8 mb-10 text-center text-3xl leading-8 font-bold tracking-tighter text-gray-700 sm:text-4xl sm:leading-10"
+          class="mt-8 mb-10 text-center text-3xl leading-8 font-bold tracking-tighter text-nuxt-gray sm:text-4xl sm:leading-10"
         >
-          <span class="text-green-400">{{ count }}</span> sites analyzed with
-          <span class="text-green-400">Vue Telemetry</span>
+          <span class="text-nuxt-lightgreen">{{ count }}</span> sites analyzed
+          with
+          <span class="text-nuxt-lightgreen">Vue Telemetry</span>
         </h5>
         <div class="mt-6 grid grid-cols-2 gap-0.5 md:grid-cols-4 lg:mt-8">
           <div
@@ -57,10 +58,10 @@
     </section>
     <section id="what" class="py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
       <h5
-        class="mb-10 text-3xl leading-8 font-bold tracking-tighter text-gray-700 sm:text-4xl sm:leading-10"
+        class="mb-10 text-3xl leading-8 font-bold tracking-tighter text-nuxt-gray sm:text-4xl sm:leading-10"
       >
         What’s
-        <span class="text-green-400">telemetry ?</span>
+        <span class="text-nuxt-lightgreen">telemetry ?</span>
       </h5>
       <p class="text-gray-500">
         Telemetry is a technique used to obtain information from an application
@@ -70,14 +71,14 @@
     </section>
     <section id="why" class="py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
       <h5
-        class="text-center mb-16 text-3xl leading-8 font-bold tracking-tighter text-gray-700 sm:text-4xl sm:leading-10"
+        class="text-center mb-16 text-3xl leading-8 font-bold tracking-tighter text-nuxt-gray sm:text-4xl sm:leading-10"
       >
-        <span class="text-green-400">Why use</span> Vue Telemetry ?
+        <span class="text-nuxt-lightgreen">Why use</span> Vue Telemetry ?
       </h5>
       <div class="lg:grid lg:grid-cols-3 lg:gap-8">
         <div class="flex flex-row sm:flex-col">
           <div
-            class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-md bg-green-400 text-white mr-5 sm:mr-0"
+            class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-md bg-nuxt-lightgreen text-white mr-5 sm:mr-0"
           >
             <svg
               class="h-6 w-6"
@@ -94,7 +95,7 @@
             </svg>
           </div>
           <div class="sm:mt-5">
-            <h5 class="text-lg leading-6 font-medium text-gray-700">
+            <h5 class="text-lg leading-6 font-medium text-nuxt-gray">
               Free
             </h5>
             <p class="mt-2 text-base leading-6 text-gray-500">
@@ -105,7 +106,7 @@
         </div>
         <div class="flex flex-row sm:flex-col mt-10 lg:mt-0">
           <div
-            class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-md bg-green-400 text-white mr-5 sm:mr-0"
+            class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-md bg-nuxt-lightgreen text-white mr-5 sm:mr-0"
           >
             <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none">
               <path
@@ -117,7 +118,7 @@
             </svg>
           </div>
           <div class="sm:mt-5">
-            <h5 class="text-lg leading-6 font-medium text-gray-700">
+            <h5 class="text-lg leading-6 font-medium text-nuxt-gray">
               Anonymous
             </h5>
             <p class="mt-2 text-base leading-6 text-gray-500">
@@ -128,7 +129,7 @@
         </div>
         <div class="flex flex-row sm:flex-col mt-10 lg:mt-0">
           <div
-            class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-md bg-green-400 text-white mr-5 sm:mr-0"
+            class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-md bg-nuxt-lightgreen text-white mr-5 sm:mr-0"
           >
             <svg
               class="h-6 w-6"
@@ -145,7 +146,7 @@
             </svg>
           </div>
           <div class="sm:mt-5">
-            <h5 class="text-lg leading-6 font-medium text-gray-700">
+            <h5 class="text-lg leading-6 font-medium text-nuxt-gray">
               Contribute
             </h5>
             <p class="mt-2 text-base leading-6 text-gray-500">
@@ -158,10 +159,10 @@
     </section>
     <section id="how" class="py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
       <h5
-        class="mb-8 text-center text-3xl font-bold tracking-tighter text-gray-700 sm:text-4xl sm:text-left"
+        class="mb-8 text-center text-3xl font-bold tracking-tighter text-nuxt-gray sm:text-4xl sm:text-left"
       >
         How to
-        <span class="text-green-400">install it ?</span>
+        <span class="text-nuxt-lightgreen">install it ?</span>
       </h5>
       <p class="mb-8 text-gray-500">
         Vue Telemetry is available on Google Chrome and Mozilla Firefox. Its
@@ -172,7 +173,7 @@
       <div class="text-center sm:text-left">
         <nuxt-link
           to="/download"
-          class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-6 capitalize font-semibold rounded-full shadow-md text-white bg-green-400 hover:shadow-xl focus:outline-none focus:border-green-400 focus:shadow-outline-green-400 active:bg-green-200 transition ease-in-out duration-150"
+          class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-6 capitalize font-semibold rounded-full shadow-md text-white bg-nuxt-lightgreen hover:shadow-xl focus:outline-none focus:border-green-400 focus:shadow-outline-green-400 active:bg-green-200 transition ease-in-out duration-150"
           >Get browser extension</nuxt-link
         >
       </div>

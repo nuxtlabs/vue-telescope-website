@@ -5,8 +5,8 @@
         <div class="xl:col-span-1">
           <div class="flex-shrink-0 flex items-center">
             <nuxt-link to="/" class="font-bold cursor-pointer">
-              <span class="text-green-400">VUE</span>
-              <span class="text-gray-700">TELEMETRY</span>
+              <span class="text-nuxt-lightgreen">VUE</span>
+              <span class="text-nuxt-gray">TELEMETRY</span>
             </nuxt-link>
           </div>
           <p class="mt-2 text-gray-500 text-base leading-6">
@@ -24,7 +24,7 @@
               <li v-for="(link, i) in links" :key="i" class="mt-2">
                 <nuxt-link
                   :to="link.to"
-                  class="text-base leading-6 text-gray-500 hover:text-green-400"
+                  class="text-base leading-6 text-gray-500 hover:text-nuxt-lightgreen"
                 >
                   {{ link.label }}
                 </nuxt-link>
@@ -42,7 +42,7 @@
                 <a
                   href="https://vuejs.org/?ref=vue-telemetry"
                   target="_blank"
-                  class="text-base leading-6 text-gray-500 hover:text-green-400"
+                  class="text-base leading-6 text-gray-500 hover:text-nuxt-lightgreen"
                 >
                   Website
                 </a>
@@ -50,7 +50,7 @@
               <li class="mt-2">
                 <a
                   href="#"
-                  class="text-base leading-6 text-gray-500 hover:text-green-400"
+                  class="text-base leading-6 text-gray-500 hover:text-nuxt-lightgreen"
                 >
                   Github
                 </a>
@@ -58,7 +58,7 @@
               <li class="mt-2">
                 <a
                   href="#"
-                  class="text-base leading-6 text-gray-500 hover:text-green-400"
+                  class="text-base leading-6 text-gray-500 hover:text-nuxt-lightgreen"
                 >
                   Twitter
                 </a>
@@ -76,7 +76,7 @@
                 <a
                   href="https://nuxtjs.org/?ref=vue-telemetry"
                   target="_blank"
-                  class="text-base leading-6 text-gray-500 hover:text-green-400"
+                  class="text-base leading-6 text-gray-500 hover:text-nuxt-lightgreen"
                 >
                   Website
                 </a>
@@ -84,7 +84,7 @@
               <li class="mt-2">
                 <a
                   href="#"
-                  class="text-base leading-6 text-gray-500 hover:text-green-400"
+                  class="text-base leading-6 text-gray-500 hover:text-nuxt-lightgreen"
                 >
                   Github
                 </a>
@@ -92,7 +92,7 @@
               <li class="mt-2">
                 <a
                   href="#"
-                  class="text-base leading-6 text-gray-500 hover:text-green-400"
+                  class="text-base leading-6 text-gray-500 hover:text-nuxt-lightgreen"
                 >
                   Twitter
                 </a>

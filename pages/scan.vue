@@ -7,7 +7,7 @@
     <div class="max-w-7xl px-8 mx-auto">
       <div class="flex">
         <div class="w-full lg:w-1/2">
-          <div class="text-5xl leading-10 font-extrabold text-green-400">
+          <div class="text-5xl leading-10 font-extrabold text-nuxt-lightgreen">
             Take a look.
           </div>
           <p class="text-cool-gray-700 mt-2 mb-4">
@@ -67,10 +67,14 @@
                 tag="div"
               >
                 <pre v-if="result">{{ result }}</pre>
-                <div class="text-xl text-green-400">{{ result.domain }}</div>
+                <div class="text-xl text-nuxt-lightgreen">
+                  {{ result.domain }}
+                </div>
                 <!-- <img :src="result.screenshot_url" class="h-auto w-auto rounded" /> -->
                 <p v-if="result.framework">
-                  <span class="text-green-400 font-bold">Framework :</span>
+                  <span class="text-nuxt-lightgreen font-bold"
+                    >Framework :</span
+                  >
                   {{ result.framework.name }}
                 </p>
               </nuxt-link>
