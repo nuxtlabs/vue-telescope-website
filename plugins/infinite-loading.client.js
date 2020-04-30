@@ -6,7 +6,7 @@ Vue.use(InfiniteLoading, {
     spinner: 'spiral'
   },
   slots: {
-    noMore: 'No more showcases',
-    noResults: 'No results'
+    noMore: "You've reached the end of the list",
+    noResults: "You've reached the end of the list"
   }
 })

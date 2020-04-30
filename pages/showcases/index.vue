@@ -83,10 +83,8 @@
           </template>
         </div>
         <client-only>
-          <infinite-loading
-            :identifier="infiniteId"
-            @infinite="loadMore"
-          ></infinite-loading>
+          <infinite-loading :identifier="infiniteId" @infinite="loadMore">
+          </infinite-loading>
         </client-only>
       </div>
     </div>
@@ -293,4 +291,11 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="postcss">
+.infinite-loading-container {
+  @apply mt-4;
+}
+.infinite-status-prompt {
+  @apply text-gray-400 !important;
+}
+</style>
