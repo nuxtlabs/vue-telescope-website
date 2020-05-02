@@ -11,6 +11,7 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
   },
   "dependencies": {
+    "@lottiefiles/lottie-player": "^0.5.1",
     "@nuxt/http": "^0.5.0",
     "@nuxtjs/dotenv": "^1.4.1",
     "axios": "^0.19.2",

@@ -1,18 +1,16 @@
 <template>
   <div
-    class="fixed inset-0 z-40 pointer-events-auto"
+    class="fixed inset-0 z-40 pointer-events-auto w-30"
     :class="fadeAnimationClass"
     style="background-color: rgba(0, 0, 0, 0.5);"
     @click.self="close"
   >
     <div
-      class="bg-white fixed top-0 right-0 overflow-hidden z-50 flex h-screen w-full"
+      class="fixed top-0 right-0 bottom-0 overflow-hidden z-50 w-full bg-white m-4 rounded-lg"
       :class="slideAnimationClass"
       :style="customStyle"
     >
-      <div class="px-6 py-8">
-        <slot></slot>
-      </div>
+      <slot></slot>
     </div>
   </div>
 </template>

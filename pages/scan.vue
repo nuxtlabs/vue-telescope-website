@@ -58,33 +58,14 @@
               </div>
             </div>
           </form>
-          <div v-if="inputError" class="text-sm text-red-600 mt-1">
-            {{ inputError }}
-          </div>
           <drawer v-if="openedDrawer" @close="openedDrawer = false">
-            <div v-if="pending">loading....</div>
-            <div v-if="result" class="mt-4">
-              <nuxt-link
-                :to="`/showcases/${result.slug}`"
-                class="p-4 border border-gray-200 rounded-md cursor-pointer"
-                tag="div"
-              >
-                <pre v-if="result">{{ result }}</pre>
-                <div class="text-xl text-nuxt-lightgreen">
-                  {{ result.domain }}
-                </div>
-                <!-- <img :src="result.screenshot_url" class="h-auto w-auto rounded" /> -->
-                <p v-if="result.framework">
-                  <span class="text-nuxt-lightgreen font-bold"
-                    >Framework :</span
-                  >
-                  {{ result.framework.name }}
-                </p>
+            <loader v-if="pending"></loader>
+            <div v-if="result">
+              <nuxt-link :to="`/showcases/${result.slug}`">
+                <dataResult :data="result"></dataResult>
               </nuxt-link>
             </div>
-            <div v-if="error" class="text-sm text-red-600 mt-1">
-              {{ error }}
-            </div>
+            <error v-if="error" code-error="400"></error>
           </drawer>
         </div>
         <div class="lg:w-1/2"></div>
@@ -97,13 +78,19 @@
 import { validationMixin } from 'vuelidate'
 import { required } from 'vuelidate/lib/validators'
 import drawer from '@/components/Drawer'
+import loader from '@/components/Drawer/Loader'
+import error from '@/components/Drawer/Error'
+import dataResult from '@/components/Drawer/Data'
 
 const urlRegex = /^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,}?\/?.*$/
 const mustBeValidUrl = (url) => urlRegex.test(url)
 
 export default {
   components: {
-    drawer
+    drawer,
+    loader,
+    error,
+    dataResult
   },
   mixins: [validationMixin],
   validations: {
