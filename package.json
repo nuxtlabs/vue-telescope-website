@@ -23,7 +23,7 @@
     "nuxt": "^2.12.2",
     "vue-content-loader": "^0.2.3",
     "vue-infinite-loading": "^2.4.5",
-    "vue-telemetry-analyzer": "^0.3.2",
+    "vue-telemetry-analyzer": "^0.4.0",
     "vuelidate": "^0.7.5"
   },
   "devDependencies": {

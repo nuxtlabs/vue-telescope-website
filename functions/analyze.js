@@ -204,6 +204,7 @@ exports.handler = async function (event, context) {
       body: JSON.stringify({
         message: err.message,
         statusCode: err.statusCode || 400,
+        apiErrorCode: err.apiCode,
         body: err.body || null
       })
     }
