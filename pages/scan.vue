@@ -58,14 +58,13 @@
               </div>
             </div>
           </form>
+          <div v-if="inputError" class="text-sm text-red-600 mt-1">
+            {{ inputError }}
+          </div>
           <drawer v-if="openedDrawer" @close="openedDrawer = false">
             <loader v-if="pending"></loader>
-            <div v-if="result">
-              <nuxt-link :to="`/showcases/${result.slug}`">
-                <dataResult :data="result"></dataResult>
-              </nuxt-link>
-            </div>
-            <error v-if="error" code-error="400"></error>
+            <dataResult v-if="result" :data="result"></dataResult>
+            <error v-if="errorCode" :code="errorCode"></error>
           </drawer>
         </div>
         <div class="lg:w-1/2"></div>
@@ -106,7 +105,8 @@ export default {
       pending: false,
       result: null,
       inputError: '',
-      error: null
+      error: null,
+      errorCode: null
     }
   },
   watch: {
@@ -141,8 +141,9 @@ export default {
           )
         } catch (err) {
           if (err.response) {
-            const { message } = await err.response.json()
+            const { message, apiErrorCode } = await err.response.json()
             this.error = message
+            this.errorCode = apiErrorCode
           } else {
             this.error = 'Unkown error'
           }

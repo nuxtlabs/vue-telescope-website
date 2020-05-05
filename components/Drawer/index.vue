@@ -6,11 +6,11 @@
     @click.self="close"
   >
     <div
-      class="fixed top-0 right-0 bottom-0 overflow-hidden z-50 w-full bg-white m-4 rounded-lg"
+      class="fixed top-0 right-0 bottom-0 overflow-hidden z-50 w-full bg-white p-4"
       :class="slideAnimationClass"
       :style="customStyle"
     >
-      <slot></slot>
+      <slot class="h-full"></slot>
     </div>
   </div>
 </template>

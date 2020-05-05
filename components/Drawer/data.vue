@@ -1,39 +1,79 @@
 <template>
-  <div class="flex flex-col h-screen overflow-y-scroll">
-    <img :src="data.screenshot_url" class="h-60 object-cover object-top" />
-    <div class="h-full flex flex-col p-4 items-center justify-center">
-      <div class="text-sm pb-2">{{ data.domain }}</div>
-      <div
-        class="rounded h-full mb-4 overflow-y-scroll shadow-inner bg-gray-100"
-      >
-        <div class="grid grid-cols-2 h-full max-h-72 w-full ml-8 text-sm">
-          <div
-            v-for="(category, index) in Object.keys(data)"
-            :key="`category-${index}`"
-            class="m-2 text-nuxt-green font-bold"
-          >
-            {{ setCategoryTitle(category) }}
-            <div
-              v-if="Array.isArray(data[category])"
-              class="text-nuxt-green font-normal"
-            >
-              <div
-                v-for="(item, index) in data[category]"
-                :key="`item-${index}`"
-              >
-                <div>{{ item }}</div>
-              </div>
+  <div class="h-full flex flex-col">
+    <div class="mb-4">
+      <img
+        :src="data.screenshot_url"
+        class="h-60 w-full object-cover object-top rounded border-2 border-gray-100"
+      />
+      <div class="flex items-center justify-between mt-2">
+        <span class="text-lg font-extrabold text-nuxt-gray capitalize">{{
+          data.domain
+        }}</span>
+        <div class="cursor-pointer" @click="openUrl">
+          <svg class="h-6 w-6 fill-current text-gray-300" viewBox="0 0 20 20">
+            <path
+              d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"
+            ></path>
+            <path
+              d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="flex-1 flex flex-col mb-4">
+      <div class="h-full rounded overflow-y-scroll bg-gray-50">
+        <div class="p-4 text-sm h-72">
+          <div class="mb-4">
+            <p class="text-nuxt-green font-semibold mb-3">Mode</p>
+            <div class="">{{ data.has_ssr ? 'SSR' : 'SPA' }}</div>
+          </div>
+          <div class="mb-4">
+            <p class="text-nuxt-green font-semibold mb-3">Target</p>
+            <div class="capitalize">
+              {{ data.is_static ? 'static' : 'dynamic' }}
             </div>
-            <div v-else class="text-nuxt-green font-normal">
-              <div v-if="category == 'hasSSR'">SSR</div>
-              <div v-else-if="category == 'isStatic'">Satic</div>
-              <div v-else>{{ data[category] }}</div>
+          </div>
+          <div v-if="data.vue_version" class="mb-4">
+            <p class="text-nuxt-green font-semibold mb-3">Vue version</p>
+            <div class="capitalize">{{ data.vue_version }}</div>
+          </div>
+          <div v-if="data.framework" class="mb-4">
+            <p class="text-nuxt-green font-semibold mb-3">Framework</p>
+            <div class="capitalize">{{ data.framework.name }}</div>
+          </div>
+          <div v-if="data.ui" class="mb-4">
+            <p class="text-nuxt-green font-semibold mb-3">UI</p>
+            <div class="capitalize">{{ data.ui.name }}</div>
+          </div>
+          <div v-if="data.showcases_plugins.length" class="mb-4">
+            <p class="text-nuxt-green font-semibold mb-3">Plugins</p>
+            <div class="flex flex-row items-center flex-wrap">
+              <span
+                v-for="(sp, i) in data.showcases_plugins"
+                :key="i"
+                class="px-2 py-1 text-nuxt-gray bg-cool-gray-200 rounded mr-2 last:mr-0 mb-2"
+              >
+                {{ sp.plugin.name }}
+              </span>
+            </div>
+          </div>
+          <div v-if="data.showcase_modules.length" class="mb-4">
+            <p class="text-nuxt-green font-semibold mb-3">Modules</p>
+            <div class="flex flex-row items-center flex-wrap">
+              <span
+                v-for="(sm, i) in data.showcase_modules"
+                :key="i"
+                class="px-2 py-1 text-nuxt-gray bg-cool-gray-200 rounded mr-2 last:mr-0 mb-2"
+              >
+                {{ sm.module.name }}
+              </span>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="flex w-full h-36 pb-4 items-center justify-around shadow-inner">
+    <div class="flex items-center justify-around">
       <svg width="49" height="87" class="mb-3">
         <path d="M23.283 2.738h1.535V13.19h-1.535V2.738z" fill="#158876" />
         <path
@@ -165,16 +205,17 @@
           </linearGradient>
         </defs>
       </svg>
-      <div class="flex flex-col w-4/5 h-full items-center justify-around">
-        <div>Get same results with the free browser extension</div>
-
-        <div class="flex justify-around h-1/2">
+      <div class="flex flex-col items-center justify-around">
+        <div class="text-sm text-nuxt-gray font-semibold mb-2">
+          Get same results with the free browser extension
+        </div>
+        <div class="flex justify-around">
           <button
             type="button"
-            class="flex items-center justify-center h-8 lg:h-10 xl:h-12 w-48 px-4 py-2 mr-2 border border-transparent text-base leading-6 font-semibold rounded-full text-white bg-nuxt-lightgreen hover:shadow-xl focus:outline-none focus:bg-nuxt-lightgreen active:bg-nuxt-lightgreen transition ease-in-out duration-150"
+            class="flex items-center justify-center px-4 py-2 mr-2 border border-transparent text-sm leading-4 font-semibold rounded-full text-white bg-nuxt-lightgreen hover:shadow-xl focus:outline-none focus:bg-nuxt-lightgreen active:bg-nuxt-lightgreen transition ease-in-out duration-150"
           >
             <svg
-              class="-ml-1 mr-3 h-5 w-5"
+              class="-ml-1 mr-3 h-4 w-4"
               fill="currentColor"
               enable-background="new 0 0 512 512"
               viewBox="0 0 512 512"
@@ -185,17 +226,17 @@
                 />
               </g>
             </svg>
-            Google chrome
+            Google Chrome
           </button>
           <button
             type="button"
-            class="flex items-center justify-center h-8 lg:h-10 xl:h-12 w-48 px-4 py-2 border border-transparent text-base leading-6 font-semibold rounded-full text-white bg-nuxt-lightgreen hover:shadow-xl focus:outline-none focus:bg-nuxt-lightgreen active:bg-nuxt-lightgreen transition ease-in-out duration-150"
+            class="flex items-center justify-center px-4 py-2 border border-transparent text-sm leading-4 font-semibold rounded-full text-white bg-nuxt-lightgreen hover:shadow-xl focus:outline-none focus:bg-nuxt-lightgreen active:bg-nuxt-lightgreen transition ease-in-out duration-150"
           >
             <svg
               x="0px"
               y="0px"
               fill="currentColor"
-              class="-ml-1 mr-3 h-5 w-5"
+              class="-ml-1 mr-3 h-4 w-4"
               viewBox="0 0 512 512"
               style="enable-background: new 0 0 512 512;"
               xml:space="preserve"
@@ -221,42 +262,16 @@ export default {
   name: 'Data',
   props: {
     data: {
-      default: null
-    }
-  },
-  data() {
-    return {
-      robotImg: '../../static/img/robot.svg'
+      type: Object,
+      required: true
     }
   },
   methods: {
-    setCategoryTitle(jsonKey) {
-      return jsonKey === 'hasSSR'
-        ? 'Mode'
-        : jsonKey === 'isStatic'
-        ? 'Target'
-        : jsonKey === 'vueVersion'
-        ? 'Vue version'
-        : jsonKey === 'ui'
-        ? 'UI'
-        : jsonKey === 'frameworkModules'
-        ? 'Modules'
-        : jsonKey
+    openUrl() {
+      window.open(this.data.url, '_blank')
     }
   }
 }
 </script>
-<style scoped>
-.data-container {
-  position: absolute;
-  content: '';
-  left: 50%;
-  z-index: 10;
-  width: 100px;
-  height: 100px;
-  transform: translateX(-50%) translateY(50%);
-  bottom: 0px;
-  border-radius: 50%;
-  background: inherit;
-}
-</style>
+
+<style></style>

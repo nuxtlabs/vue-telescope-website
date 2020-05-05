@@ -1,21 +1,21 @@
 <template>
-  <div class="rounded-lg bg-gray-100 w-full h-full flex">
+  <div class="w-full h-full flex flex-col">
     <div
-      class="pl-20 font-sans text-nuxt-gray h-full flex flex-col content-center justify-center"
+      class="flex-1 text-nuxt-gray flex flex-col items-center justify-center"
     >
-      <div class="text-7xl font-bold font-sans">
-        <div v-if="codeError === '1'">Ooh !</div>
+      <div class="text-6xl font-bold">
+        <div v-if="code === 1">Ooh !</div>
         <div v-else>Oops !</div>
       </div>
-      <div class="text-3xl">
-        <div v-if="codeError === '1'">
-          The site doesn’t use the technologies analyzed by Vue telemetry
-        </div>
-        <div v-else>Vue detected but we can’t analyze the site</div>
+      <div class="text-xl">
+        <p v-if="code === 1">
+          The site doesn’t use the technologies analyzed <br />by Vue telemetry
+        </p>
+        <p v-else>Vue detected but we can’t analyze the site</p>
       </div>
     </div>
     <div class="flex justify-end items-end justify-end mr-4 mb-4 self-end">
-      <svg v-if="codeError === '1'" width="156" height="144">
+      <svg v-if="code === 1" width="156" height="144">
         <g opacity=".9">
           <path
             opacity=".9"
@@ -662,9 +662,9 @@
 export default {
   name: 'Error',
   props: {
-    codeError: {
-      type: String,
-      default: '1' // 1 -> no vue
+    code: {
+      type: Number,
+      required: true
     }
   }
 }

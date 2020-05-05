@@ -59,6 +59,9 @@ exports.handler = async function (event, context) {
           is_static
           vue_version
           screenshot_url
+          ui {
+            name
+          }
           framework {
             name
           }
