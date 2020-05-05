@@ -1,9 +1,5 @@
 <template>
-  <nuxt-link
-    :to="{ name: 'showcases-slug', params: { slug: data.slug } }"
-    class="previewItem flex flex-col cursor-pointer"
-    tag="div"
-  >
+  <div class="previewItem flex flex-col cursor-pointer" @click="open">
     <div
       class="previewItem__img rounded-sm h-48 bg-cover bg-top bg-no-repeat border border-gray-100 shadow transition ease-in-out duration-150"
       :style="{ backgroundImage: 'url(' + data.screenshot_url + ')' }"
@@ -28,7 +24,7 @@
         <p class="text-xs text-gray-400">{{ data.vue_version }}</p>
       </div>
     </div>
-  </nuxt-link>
+  </div>
 </template>
 
 <script>
@@ -37,6 +33,11 @@ export default {
     data: {
       type: Object,
       required: true
+    }
+  },
+  methods: {
+    open() {
+      this.$emit('openDrawer')
     }
   }
 }

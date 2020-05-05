@@ -79,7 +79,11 @@
               v-for="showcase in list"
               :key="showcase.id"
               :data="showcase"
+              @openDrawer="handleOpen(showcase.id)"
             />
+            <drawer v-if="openedDrawer" panel-width="500" @close="handleClose">
+              <drawerData :data="currentShowcase" />
+            </drawer>
           </template>
         </div>
         <client-only>
@@ -99,16 +103,48 @@ import { print } from 'graphql/language/printer'
 import _debounce from 'lodash.debounce'
 import showcasePreviewItem from '@/components/ShowcasePreviewItem'
 import filterCheckboxes from '@/components/FilterCheckboxes'
+import drawer from '@/components/Drawer'
+import drawerData from '@/components/Drawer/Data'
 
 const QUERY_ALL_SHOWCASES = gql`
   query($limit: Int, $offset: Int) {
     showcases(limit: $limit, offset: $offset) {
+      id
       slug
       url
       hostname
       domain
       screenshot_url
       vue_version
+    }
+  }
+`
+const QUERY_SHOWCASE = gql`
+  query($id: uuid!) {
+    showcases_by_pk(id: $id) {
+      id
+      domain
+      url
+      is_static
+      has_ssr
+      screenshot_url
+      vue_version
+      ui {
+        name
+      }
+      framework {
+        name
+      }
+      showcases_plugins {
+        plugin {
+          name
+        }
+      }
+      showcase_modules {
+        module {
+          name
+        }
+      }
     }
   }
 `
@@ -124,6 +160,7 @@ const QUERY_FILTERED_SHOWCASES = gql`
         ]
       }
     ) {
+      id
       slug
       url
       hostname
@@ -146,6 +183,7 @@ const QUERY_SEARCH_SHOWCASES = gql`
         ]
       }
     ) {
+      id
       slug
       url
       hostname
@@ -160,7 +198,9 @@ export default {
     InfiniteLoading,
     showcasePreviewItem,
     ContentLoader,
-    filterCheckboxes
+    filterCheckboxes,
+    drawer,
+    drawerData
   },
   async fetch() {
     const { data } = await this.$hasura({
@@ -178,6 +218,7 @@ export default {
   },
   data() {
     return {
+      openedDrawer: false,
       infiniteId: +new Date(),
       limit: 12,
       offset: null,
@@ -190,6 +231,9 @@ export default {
   computed: {
     showcases() {
       return this.$store.getters.showcases
+    },
+    currentShowcase() {
+      return this.$store.getters.currentShowcase
     },
     list() {
       return [...this.showcases, ...this.results]
@@ -204,6 +248,19 @@ export default {
     this.debouncedSearch = _debounce(this.search, 500)
   },
   methods: {
+    async handleOpen(id) {
+      await this.$hasura({
+        query: print(QUERY_SHOWCASE),
+        variables: { id }
+      }).then(({ data }) => {
+        this.$store.dispatch('setCurrentShowcase', data.showcases_by_pk)
+        this.openedDrawer = true
+      })
+    },
+    handleClose() {
+      this.$store.dispatch('setCurrentShowcase', null)
+      this.openedDrawer = false
+    },
     async loadMore($state) {
       let query
       const variables = {
