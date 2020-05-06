@@ -1,12 +1,12 @@
 <template>
-  <div class="bg-white border-t border-gray-200">
+  <div class="bg-white border-t border-gray-100">
     <div
-      class="max-w-screen-xl mx-auto py-8 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8"
+      class="max-w-6xl mx-auto py-8 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8"
     >
       <div class="flex justify-center md:order-2">
         <a
           href="https://twitter.com/vuejs"
-          class="text-gray-400 hover:text-gray-500"
+          class="text-gray-400 hover:text-nuxt-lightgreen transition ease-in duration-150"
           target="_blank"
         >
           <span class="sr-only">Twitter</span>
@@ -18,7 +18,7 @@
         </a>
         <a
           href="https://github.com/vuejs/vue"
-          class="ml-6 text-gray-400 hover:text-gray-500"
+          class="ml-6 text-gray-400 hover:text-nuxt-lightgreen transition ease-in duration-150"
           target="_blank"
         >
           <span class="sr-only">GitHub</span>

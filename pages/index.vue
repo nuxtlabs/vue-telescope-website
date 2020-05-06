@@ -74,7 +74,7 @@
         </div>
       </div>
     </section>
-    <section id="explain" class="relative mt-36 sm:mt-72">
+    <section id="explain" class="relative mt-36 sm:mt-72 mb-28">
       <bgGradient klass="explain" />
       <div class="max-w-6xl mx-auto h-full px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col sm:grid sm:grid-cols-2 sm:gap-16 mb-14">
@@ -109,7 +109,7 @@
         <div
           class="flex flex-col-reverse sm:grid sm:grid-cols-2 sm:gap-16 mb-14"
         >
-          <div class="">
+          <div class>
             <div class="flex flex-row mb-4">
               <div
                 class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 text-nuxt-lightgreen"
@@ -125,7 +125,7 @@
                 >
                   <path
                     d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"
-                  ></path>
+                  />
                 </svg>
               </div>
               <div class="ml-4">
@@ -175,9 +175,9 @@
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 >
-                  <circle cx="18" cy="18" r="3"></circle>
-                  <circle cx="6" cy="6" r="3"></circle>
-                  <path d="M6 21V9a9 9 0 0 0 9 9"></path>
+                  <circle cx="18" cy="18" r="3" />
+                  <circle cx="6" cy="6" r="3" />
+                  <path d="M6 21V9a9 9 0 0 0 9 9" />
                 </svg>
               </div>
               <div class="ml-4">
