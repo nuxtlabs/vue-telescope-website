@@ -8,11 +8,6 @@
       <p class="mt-2 mb-6 text-gray-600">
         Find all the websites built with VueJS
       </p>
-      <nuxt-link
-        to="/scan"
-        class="inline-flex items-center px-6 py-3 border border-transparent text-lg leading-6 font-semibold rounded-full shadow-md text-nuxt-lightgreen bg-white hover:shadow-xl focus:outline-none focus:border-nuxt focus:shadow-outline-nuxt active:bg-nuxt-200 transition ease-in-out duration-150"
-        >Scan your url</nuxt-link
-      >
     </section>
     <div class="flex flex-col sm:flex-row border-t border-gray-200">
       <div
