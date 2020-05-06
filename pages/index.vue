@@ -102,7 +102,7 @@
               able to detect Vue on each and every url you visit.
             </p>
           </div>
-          <div class="flex items-center justify-center">
+          <div class="mb-8 sm:mb-0 flex items-center justify-center">
             <img src="/img/ecosystem.svg" alt="vue telemetry ecosystem" />
           </div>
         </div>
@@ -193,7 +193,7 @@
           </div>
           <div class="flex items-center justify-center">
             <h5
-              class="mb-6 sm:mb-0 text-4xl leading-8 font-bold tracking-tighter text-nuxt-gray"
+              class="mb-8 sm:mb-0 text-4xl leading-8 font-bold tracking-tighter text-nuxt-gray"
             >
               <span class="text-nuxt-lightgreen">Why use</span> Vue Telemetry ?
             </h5>
