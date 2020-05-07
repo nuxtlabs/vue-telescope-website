@@ -170,7 +170,7 @@ const QUERY_FILTERED_SHOWCASES = gql`
 `
 const QUERY_SEARCH_SHOWCASES = gql`
   query($limit: Int, $offset: Int, $q: String!) {
-    showcases(
+    showcases_aggregate(
       limit: $limit
       offset: $offset
       where: {
@@ -181,13 +181,18 @@ const QUERY_SEARCH_SHOWCASES = gql`
         ]
       }
     ) {
-      id
-      slug
-      url
-      hostname
-      domain
-      screenshot_url
-      vue_version
+      aggregate {
+        count
+      }
+      nodes {
+        id
+        slug
+        url
+        hostname
+        domain
+        screenshot_url
+        vue_version
+      }
     }
   }
 `
@@ -339,7 +344,10 @@ export default {
           offset: this.offset
         }
       })
-      this.$store.dispatch('setShowcases', data ? data.showcases : [])
+      this.$store.dispatch(
+        'setShowcases',
+        data ? data.showcases_aggregate.nodes : []
+      )
       this.$fetchState.pending = false
     }
   }
