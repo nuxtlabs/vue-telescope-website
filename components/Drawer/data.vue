@@ -25,29 +25,29 @@
       <div class="h-full rounded overflow-y-scroll bg-gray-50">
         <div class="p-4 text-sm h-72">
           <div class="mb-4">
-            <p class="text-nuxt-green font-semibold mb-3">Mode</p>
+            <p class="text-nuxt-lightgreen font-semibold mb-3">Mode</p>
             <div class="">{{ data.has_ssr ? 'SSR' : 'SPA' }}</div>
           </div>
           <div class="mb-4">
-            <p class="text-nuxt-green font-semibold mb-3">Target</p>
+            <p class="text-nuxt-lightgreen font-semibold mb-3">Target</p>
             <div class="capitalize">
               {{ data.is_static ? 'static' : 'dynamic' }}
             </div>
           </div>
           <div v-if="data.vue_version" class="mb-4">
-            <p class="text-nuxt-green font-semibold mb-3">Vue version</p>
+            <p class="text-nuxt-lightgreen font-semibold mb-3">Vue version</p>
             <div class="capitalize">{{ data.vue_version }}</div>
           </div>
           <div v-if="data.framework" class="mb-4">
-            <p class="text-nuxt-green font-semibold mb-3">Framework</p>
+            <p class="text-nuxt-lightgreen font-semibold mb-3">Framework</p>
             <div class="capitalize">{{ data.framework.name }}</div>
           </div>
           <div v-if="data.ui" class="mb-4">
-            <p class="text-nuxt-green font-semibold mb-3">UI</p>
+            <p class="text-nuxt-lightgreen font-semibold mb-3">UI</p>
             <div class="capitalize">{{ data.ui.name }}</div>
           </div>
           <div v-if="data.showcases_plugins.length" class="mb-4">
-            <p class="text-nuxt-green font-semibold mb-3">Plugins</p>
+            <p class="text-nuxt-lightgreen font-semibold mb-3">Plugins</p>
             <div class="flex flex-row items-center flex-wrap">
               <span
                 v-for="(sp, i) in data.showcases_plugins"
@@ -59,7 +59,7 @@
             </div>
           </div>
           <div v-if="data.showcase_modules.length" class="mb-4">
-            <p class="text-nuxt-green font-semibold mb-3">Modules</p>
+            <p class="text-nuxt-lightgreen font-semibold mb-3">Modules</p>
             <div class="flex flex-row items-center flex-wrap">
               <span
                 v-for="(sm, i) in data.showcase_modules"
