@@ -19,7 +19,7 @@ exports.handler = async function (event, context) {
   const { hostname } = new URL(event.queryStringParameters.url)
   // Only analyze root path at the moment
   const url = 'https://' + hostname
-
+  let codeError
   try {
     // filter hostname
     if (await isBlacklisted(hostname)) {
@@ -40,8 +40,8 @@ exports.handler = async function (event, context) {
       variables: { url }
     }).then(({ data }) => {
       const scan = data.scans[0]
-
       if (scan) {
+        codeError = 99
         throw new Error(`We are unable to scan ${hostname} at the moment...`)
       }
     })
@@ -125,7 +125,7 @@ exports.handler = async function (event, context) {
     const framework = await getFrameworkMutation(infos.framework, modules)
     // Build ui mutation
     const ui = await getUIMutation(infos.ui)
-    // TODO: Mutation on Hasura
+
     const showcaseObject = {
       url: infos.url,
       domain: infos.domain,
@@ -157,6 +157,30 @@ exports.handler = async function (event, context) {
         insert_showcases(objects: $objects) {
           returning {
             id
+            slug
+            url
+            domain
+            hostname
+            has_ssr
+            is_static
+            vue_version
+            screenshot_url
+            ui {
+              name
+            }
+            framework {
+              name
+            }
+            showcases_plugins {
+              plugin {
+                name
+              }
+            }
+            showcase_modules {
+              module {
+                name
+              }
+            }
           }
         }
       }
@@ -177,27 +201,30 @@ exports.handler = async function (event, context) {
     }
   } catch (err) {
     consola.error(err)
+    consola.error('apiCode', err.apiCode)
 
-    // TODO: define if url is valid to be inserted in scans table
-    // if (isScanCandidate) {
-    //   const scanObject = {
-    //     url: url,
-    //     is_proxy_blocked: err.statusCode === 403
-    //   }
-    //   const INSERT_SCANS = gql`
-    //     mutation($objects: [scans_insert_input!]!) {
-    //       insert_scans(objects: $objects) {
-    //         returning {
-    //           id
-    //         }
-    //       }
-    //     }
-    //   `
-    //   await hasura({
-    //     query: INSERT_SCANS,
-    //     variables: { objects: scanObject }
-    //   })
-    // }
+    if (err.apiCode !== null) { // 0: not crawlable, 1: Vue not detected (see: https://github.com/nuxt-company/vue-telemetry-analyzer/blob/master/src/index.js)
+      const scanObject = {
+        url: url,
+        is_proxy_blocked: err.statusCode === 403
+      }
+      const INSERT_SCANS = gql`
+        mutation($objects: [scans_insert_input!]!) {
+          insert_scans(
+            objects: $objects,
+            on_conflict: {
+              constraint: scanned_url_key,
+              update_columns: updated_at
+            }) {
+            affected_rows
+          }
+        }
+      `
+      await hasura({
+        query: print(INSERT_SCANS),
+        variables: { objects: scanObject }
+      })
+    }
 
     return {
       statusCode: 400,
@@ -207,7 +234,7 @@ exports.handler = async function (event, context) {
       body: JSON.stringify({
         message: err.message,
         statusCode: err.statusCode || 400,
-        apiErrorCode: err.apiCode,
+        apiErrorCode: err.apiCode || codeError,
         body: err.body || null
       })
     }

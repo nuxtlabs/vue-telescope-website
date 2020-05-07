@@ -9,9 +9,11 @@
       </div>
       <div class="text-xl">
         <p v-if="code === 1">
+          Vue detected but we can’t analyze the site
+        </p>
+        <p v-else>
           The site doesn’t use the technologies analyzed <br />by Vue telemetry
         </p>
-        <p v-else>Vue detected but we can’t analyze the site</p>
       </div>
     </div>
     <div class="flex justify-end items-end justify-end mr-4 mb-4 self-end">
