@@ -61,6 +61,7 @@ const urlRegex = /^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-
 const mustBeValidUrl = (url) => urlRegex.test(url)
 
 export default {
+  middleware: 'redirect',
   components: {
     bgGradient,
     drawer,
@@ -116,6 +117,7 @@ export default {
           this.result = await this.$http.$get(
             `api/analyze?url=https://${this.url}`
           )
+          this.$router.replace(`/scan?preview=${this.result.slug}`)
         } catch (err) {
           if (err.response) {
             const { message, apiErrorCode } = await err.response.json()
@@ -129,6 +131,7 @@ export default {
       }
     },
     closeDrawer() {
+      this.$router.replace('/scan')
       this.openedDrawer = false
       this.url = ''
       this.pending = false
