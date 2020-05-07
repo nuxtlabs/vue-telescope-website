@@ -126,6 +126,7 @@ const QUERY_SHOWCASE = gql`
   query($id: uuid!) {
     showcases_by_pk(id: $id) {
       id
+      slug
       domain
       url
       is_static
@@ -208,6 +209,7 @@ const QUERY_SEARCH_SHOWCASES = gql`
   }
 `
 export default {
+  middleware: 'preview',
   components: {
     InfiniteLoading,
     showcasePreviewItem,
@@ -259,6 +261,13 @@ export default {
     }
   },
   created() {
+    if (
+      this.$route.query &&
+      this.$route.query.preview !== '' &&
+      this.$store.getters.currentShowcase
+    ) {
+      this.openedDrawer = true
+    }
     this.debouncedSearch = _debounce(this.search, 500)
   },
   methods: {
@@ -269,11 +278,13 @@ export default {
       }).then(({ data }) => {
         this.$store.dispatch('setCurrentShowcase', data.showcases_by_pk)
         this.openedDrawer = true
+        this.$router.replace(`/showcases/?preview=${data.showcases_by_pk.slug}`)
       })
     },
     handleClose() {
       this.$store.dispatch('setCurrentShowcase', null)
       this.openedDrawer = false
+      this.$router.replace('/showcases')
     },
     async loadMore($state) {
       let query

@@ -63,6 +63,7 @@
             v-for="item in featured"
             :key="item.id"
             :data="item"
+            @click.native="handleClick(item.slug)"
           />
         </div>
         <div class="mt-16 text-center">
@@ -245,6 +246,7 @@ const QUERY = gql`
     }
     showcases(limit: 9) {
       id
+      slug
       domain
       vue_version
       screenshot_url
@@ -303,6 +305,11 @@ export default {
           alt: 'Tailwind'
         }
       ]
+    }
+  },
+  methods: {
+    handleClick(slug) {
+      this.$router.push(`/showcases?preview=${slug}`)
     }
   }
 }
