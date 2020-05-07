@@ -64,7 +64,6 @@
             <error v-if="errorCode" :code="errorCode"></error>
           </drawer>
         </div>
-        <div class="lg:w-1/2"></div>
       </div>
     </div>
   </div>
