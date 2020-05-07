@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
+  <div class="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
     <div v-if="$fetchState.pending" class="flex flex-col sm:flex-row">
       <showcaseBrowser url="loading..." class="flex-1 sm:w-1/2" />
       <div class="flex-1 sm:w-1/2">

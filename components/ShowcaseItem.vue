@@ -11,7 +11,8 @@
           {{ data.domain }}
         </h1>
         <div
-          class="relative text-sm italic leading-6 font-thin md:flex-grow ml-4"
+          v-if="data.meta.description"
+          class="relative text-sm italic leading-6 font-thin md:flex-grow ml-4 mb-8"
         >
           <svg
             class="absolute top-0 left-0 transform -translate-x-3 -translate-y-2 h-8 w-8 text-green-100"
@@ -26,58 +27,60 @@
             {{ data.meta.description }}
           </p>
         </div>
-        <div class="">
-          <div>
-            <p class="text-nuxt-lightgreen font-semibold">Vue version</p>
-            <p class="text-sm text-gray-900">{{ data.vue_version }}</p>
-          </div>
-          <div>
-            <p class="text-nuxt-lightgreen font-semibold">Mode</p>
-            <p class="text-sm text-gray-900">
-              {{ data.has_ssr ? 'SSR' : 'SPA' }}
-            </p>
-          </div>
-          <div>
-            <p class="text-nuxt-lightgreen font-semibold">Target</p>
-            <p class="text-sm text-gray-900">
-              {{ data.is_static ? 'Static' : 'Dynamic' }}
-            </p>
-          </div>
-          <div>
-            <p class="text-nuxt-lightgreen font-semibold">Framework</p>
-            <p class="text-sm text-gray-900">
-              {{ data.framework ? data.framework.name : 'none detected' }}
-            </p>
-          </div>
-          <div>
-            <p class="text-nuxt-lightgreen font-semibold">UI</p>
-            <p class="text-sm text-gray-900">
-              {{ data.ui ? data.ui.name : 'none detected' }}
-            </p>
-          </div>
-          <div>
-            <p class="text-nuxt-lightgreen font-semibold">Modules</p>
-            <ul>
-              <li
-                v-for="(m, i) in data.showcase_modules"
-                :key="i"
-                class="text-sm text-gray-900"
-              >
-                {{ m.module.name }}
-              </li>
-            </ul>
-          </div>
-          <div>
-            <p class="text-nuxt-lightgreen font-semibold">Plugins</p>
-            <ul>
-              <li
-                v-for="(p, i) in data.showcases_plugins"
-                :key="i"
-                class="text-sm text-gray-900"
-              >
-                {{ p.plugin.name }}
-              </li>
-            </ul>
+        <div class="flex flex-col">
+          <div class="h-full rounded overflow-y-scroll bg-gray-50">
+            <div class="p-4 text-sm h-72">
+              <div class="mb-4">
+                <p class="text-nuxt-lightgreen font-semibold mb-3">Mode</p>
+                <div class="">{{ data.has_ssr ? 'SSR' : 'SPA' }}</div>
+              </div>
+              <div class="mb-4">
+                <p class="text-nuxt-lightgreen font-semibold mb-3">Target</p>
+                <div class="capitalize">
+                  {{ data.is_static ? 'static' : 'dynamic' }}
+                </div>
+              </div>
+              <div v-if="data.vue_version" class="mb-4">
+                <p class="text-nuxt-lightgreen font-semibold mb-3">
+                  Vue version
+                </p>
+                <div class="capitalize">{{ data.vue_version }}</div>
+              </div>
+              <div v-if="data.framework" class="mb-4">
+                <p class="text-nuxt-lightgreen font-semibold mb-3">
+                  Framework
+                </p>
+                <div class="capitalize">{{ data.framework.name }}</div>
+              </div>
+              <div v-if="data.ui" class="mb-4">
+                <p class="text-nuxt-lightgreen font-semibold mb-3">UI</p>
+                <div class="capitalize">{{ data.ui.name }}</div>
+              </div>
+              <div v-if="data.showcases_plugins.length" class="mb-4">
+                <p class="text-nuxt-lightgreen font-semibold mb-3">Plugins</p>
+                <div class="flex flex-row items-center flex-wrap">
+                  <span
+                    v-for="(sp, i) in data.showcases_plugins"
+                    :key="i"
+                    class="px-2 py-1 text-nuxt-gray bg-cool-gray-200 rounded mr-2 last:mr-0 mb-2"
+                  >
+                    {{ sp.plugin.name }}
+                  </span>
+                </div>
+              </div>
+              <div v-if="data.showcase_modules.length" class="mb-4">
+                <p class="text-nuxt-lightgreen font-semibold mb-3">Modules</p>
+                <div class="flex flex-row items-center flex-wrap">
+                  <span
+                    v-for="(sm, i) in data.showcase_modules"
+                    :key="i"
+                    class="px-2 py-1 text-nuxt-gray bg-cool-gray-200 rounded mr-2 last:mr-0 mb-2"
+                  >
+                    {{ sm.module.name }}
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
