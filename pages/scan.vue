@@ -12,53 +12,32 @@
             ecosystem
           </p>
           <form @submit.prevent="analyze">
-            <div>
-              <div class="mt-1 relative rounded-sm">
-                <div
-                  class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none"
-                >
-                  <span class="text-gray-500 sm:text-sm sm:leading-5"
-                    >https://</span
-                  >
-                </div>
-                <input
-                  id="domain"
-                  v-model="$v.url.$model"
-                  type="text"
-                  class="form-input block w-full pl-16 sm:pl-14 sm:text-sm sm:leading-8 border-green-400 focus:shadow-outline-green focus:border-green-400"
-                  placeholder="vuejs.org"
-                />
-                <button
-                  :disabled="pending"
-                  type="submit"
-                  class="absolute inset-y-0 right-0 pr-2 flex items-center cursor-pointer"
-                >
-                  <span
-                    class="stroke-current text-gray-300 sm:text-sm sm:leading-5"
-                  >
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                  </span>
-                </button>
+            <div class="relative rounded-full">
+              <div
+                class="absolute inset-y-0 left-0 flex items-center justify-center pl-6 pointer-cursor"
+              >
+                <span class="text-gray-500 text-sm leading-5">https://</span>
               </div>
+              <input
+                id="domain"
+                v-model="$v.url.$model"
+                type="text"
+                class="form-input block w-full pl-18 rounded-full text-sm leading-8 border-2 border-green-400 focus:shadow-outline-green focus:border-green-400"
+                placeholder="vuejs.org"
+              />
+              <button
+                :disabled="pending"
+                type="submit"
+                class="absolute inset-y-0 right-0 flex items-center justify-center my-1 mr-1 px-4 rounded-full bg-nuxt-lightgreen text-white font-semibold cursor-pointer"
+              >
+                submit
+              </button>
+            </div>
+            <div v-if="inputError" class="pl-6 text-sm text-red-600 mt-1">
+              {{ inputError }}
             </div>
           </form>
-          <div v-if="inputError" class="text-sm text-red-600 mt-1">
-            {{ inputError }}
-          </div>
-          <drawer v-if="openedDrawer" @close="openedDrawer = false">
+          <drawer v-if="openedDrawer" @close="closeDrawer">
             <loader v-if="pending"></loader>
             <dataResult v-if="result" :data="result"></dataResult>
             <error v-if="errorCode" :code="errorCode"></error>
@@ -148,6 +127,15 @@ export default {
         }
         this.pending = false
       }
+    },
+    closeDrawer() {
+      this.openedDrawer = false
+      this.url = ''
+      this.pending = false
+      this.result = null
+      this.inputError = ''
+      this.error = null
+      this.errorCode = null
     }
   }
 }
