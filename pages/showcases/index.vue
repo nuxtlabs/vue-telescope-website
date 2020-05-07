@@ -1,19 +1,12 @@
 <template>
   <div>
-    <section
-      id="hero"
-      class="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8"
-    >
-      <h1 class="text-3xl font-extrabold text-nuxt-gray">Showcases</h1>
-      <p class="mt-2 mb-6 text-gray-600">
-        Find all the websites built with VueJS
-      </p>
-    </section>
-    <div class="flex flex-col sm:flex-row border-t border-gray-200">
-      <div
-        class="hidden sm:block p-2 h-screen w-60 overflow-auto sticky top-0 border-r border-gray-200"
-      >
-        <div class="w-full">
+    <section id="hero" class>
+      <div class="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
+        <h1 class="text-3xl font-extrabold text-nuxt-gray">Showcases</h1>
+        <p class="mt-2 mb-6 text-gray-600">
+          Find all the websites built with VueJS
+        </p>
+        <div class>
           <label for="search" class="sr-only">Search</label>
           <div class="relative">
             <div
@@ -34,57 +27,67 @@
             <input
               id="search"
               v-model="q"
-              class="block w-full pl-10 pr-3 py-2 border border-transparent rounded-sm leading-5 bg-gray-100 placeholder-gray-400 focus:outline-none focus:placeholder-gray-400 focus:bg-white focus:shadow-outline-green sm:text-sm transition duration-150 ease-in-out"
+              class="form-input rounded-full block pl-10 sm:text-sm sm:leading-8 border-gray-200 focus:shadow-outline-green focus:border-green-400"
               placeholder="Search"
               type="search"
             />
           </div>
         </div>
-        <form class="mt-4">
-          <filterCheckboxes
-            type="frameworks"
-            @checkedItems="handleCheckedFrameworks"
-          />
-          <filterCheckboxes
-            type="uis"
-            class="mt-4"
-            @checkedItems="handlecheckedUis"
-          />
-        </form>
       </div>
-      <div class="p-10 sm:flex-1" style="min-height: 1000px;">
-        <div
-          class="grid gap-8 mx-auto sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
-        >
-          <template v-if="$fetchState.pending">
-            <content-loader
-              v-for="n in 12"
-              :key="n"
-              width="346"
-              height="245"
-              :speed="2"
-            >
-              <rect x="0" y="0" rx="4" ry="4" width="346" height="192" />
-              <rect x="0" y="197" rx="4" ry="4" width="103" height="16" />
-              <rect x="0" y="216" rx="4" ry="4" width="68" height="16" />
-            </content-loader>
-          </template>
-          <template v-else>
-            <showcasePreviewItem
-              v-for="showcase in list"
-              :key="showcase.id"
-              :data="showcase"
-              @openDrawer="handleOpen(showcase.id)"
+    </section>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="pt-8 flex flex-col sm:flex-row">
+        <div class="hidden sm:block h-full w-60 overflow-auto sticky top-0">
+          <form class="mt-8">
+            <filterCheckboxes
+              type="frameworks"
+              @checkedItems="handleCheckedFrameworks"
             />
-            <drawer v-if="openedDrawer" panel-width="500" @close="handleClose">
-              <drawerData :data="currentShowcase" />
-            </drawer>
-          </template>
+            <filterCheckboxes
+              type="uis"
+              class="mt-4"
+              @checkedItems="handlecheckedUis"
+            />
+          </form>
         </div>
-        <client-only>
-          <infinite-loading :identifier="infiniteId" @infinite="loadMore">
-          </infinite-loading>
-        </client-only>
+        <div class="sm:flex-1" style="min-height: 1000px;">
+          <div
+            class="mt-8 grid gap-8 mx-auto sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
+          >
+            <template v-if="$fetchState.pending">
+              <content-loader
+                v-for="n in 12"
+                :key="n"
+                width="346"
+                height="245"
+                :speed="2"
+              >
+                <rect x="0" y="0" rx="4" ry="4" width="346" height="192" />
+                <rect x="0" y="197" rx="4" ry="4" width="103" height="16" />
+                <rect x="0" y="216" rx="4" ry="4" width="68" height="16" />
+              </content-loader>
+            </template>
+            <template v-else>
+              <showcasePreviewItem
+                v-for="showcase in list"
+                :key="showcase.id"
+                :data="showcase"
+                @openDrawer="handleOpen(showcase.id)"
+              />
+              <drawer
+                v-if="openedDrawer"
+                panel-width="500"
+                @close="handleClose"
+              >
+                <drawerData :data="currentShowcase" />
+              </drawer>
+            </template>
+          </div>
+          <client-only>
+            <infinite-loading :identifier="infiniteId" @infinite="loadMore">
+            </infinite-loading>
+          </client-only>
+        </div>
       </div>
     </div>
   </div>

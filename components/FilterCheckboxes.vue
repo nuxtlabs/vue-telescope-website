@@ -1,5 +1,5 @@
 <template>
-  <div class="ml-2">
+  <div class>
     <div v-if="$fetchState.pending">
       <content-loader width="190" height="160" :speed="2">
         <rect x="0" y="0" rx="2" ry="2" width="120" height="16" />
@@ -25,8 +25,10 @@
         </template>
       </content-loader>
     </div>
-    <fieldset v-else class="mt-8">
-      <legend class="text-base leading-4 font-bold text-nuxt-gray capitalize">
+    <fieldset v-else>
+      <legend
+        class="text-base leading-4 font-bold text-nuxt-lightgreen capitalize"
+      >
         {{ type }}
       </legend>
       <div v-for="(el, i) in items" :key="`${type}-${i}`" class="mt-3">
