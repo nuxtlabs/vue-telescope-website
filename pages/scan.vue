@@ -1,16 +1,13 @@
 <template>
-  <div class="px-8 py-40">
-    <div
-      class="absolute w-full h-full top-0 left-0 -z-1 bg-right bg-no-repeat"
-      :style="{ backgroundImage: `url('/img/galaxy.svg')` }"
-    ></div>
-    <div class="max-w-7xl px-8 mx-auto">
+  <div class="relative">
+    <bgGradient klass="scan" />
+    <div class="max-w-6xl px-8 py-40 mx-auto">
       <div class="flex">
         <div class="w-full lg:w-1/2">
           <div class="text-5xl leading-10 font-extrabold text-nuxt-lightgreen">
             Take a look.
           </div>
-          <p class="text-cool-gray-700 mt-2 mb-4">
+          <p class="text-sm text-cool-gray-700 mt-2 mb-4">
             You're seconds away to find out if a website is using Vue and its
             ecosystem
           </p>
@@ -76,6 +73,7 @@
 <script>
 import { validationMixin } from 'vuelidate'
 import { required } from 'vuelidate/lib/validators'
+import bgGradient from '@/components/BgGradient'
 import drawer from '@/components/Drawer'
 import loader from '@/components/Drawer/Loader'
 import error from '@/components/Drawer/Error'
@@ -86,6 +84,7 @@ const mustBeValidUrl = (url) => urlRegex.test(url)
 
 export default {
   components: {
+    bgGradient,
     drawer,
     loader,
     error,

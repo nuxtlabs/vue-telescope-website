@@ -19,7 +19,7 @@ export default {
       type: String,
       default: '',
       validator(str) {
-        return ['hero', 'featured', 'explain'].includes(str)
+        return ['hero', 'featured', 'explain', 'scan'].includes(str)
       }
     }
   }
@@ -108,5 +108,24 @@ export default {
     #fff,
     rgba(65, 179, 138, 0.15)
   );
+}
+/* scan page */
+.scan {
+  top: -370px;
+  height: 800px;
+  transform: skewY(6deg);
+  background-image: radial-gradient(circle at 10% 45%, #fff, #41b38a);
+}
+.scan .bottom {
+  display: block;
+}
+.scan .bottom .dark {
+  transform: rotate(182.5deg);
+  bottom: -40px;
+}
+.scan .bottom .light {
+  transform: rotate(181deg);
+  bottom: -16px;
+  opacity: 0.4;
 }
 </style>
