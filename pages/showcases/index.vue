@@ -106,14 +106,19 @@ import drawerData from '@/components/Drawer/Data'
 
 const QUERY_ALL_SHOWCASES = gql`
   query($limit: Int, $offset: Int) {
-    showcases(limit: $limit, offset: $offset) {
-      id
-      slug
-      url
-      hostname
-      domain
-      screenshot_url
-      vue_version
+    showcases_aggregate(limit: $limit, offset: $offset) {
+      aggregate {
+        count
+      }
+      nodes {
+        id
+        slug
+        url
+        hostname
+        domain
+        screenshot_url
+        vue_version
+      }
     }
   }
 `
@@ -148,7 +153,7 @@ const QUERY_SHOWCASE = gql`
 `
 const QUERY_FILTERED_SHOWCASES = gql`
   query($limit: Int, $offset: Int, $frameworks: [String!], $uis: [String!]) {
-    showcases(
+    showcases_aggregate(
       limit: $limit
       offset: $offset
       where: {
@@ -158,16 +163,22 @@ const QUERY_FILTERED_SHOWCASES = gql`
         ]
       }
     ) {
-      id
-      slug
-      url
-      hostname
-      domain
-      screenshot_url
-      vue_version
+      aggregate {
+        count
+      }
+      nodes {
+        id
+        slug
+        url
+        hostname
+        domain
+        screenshot_url
+        vue_version
+      }
     }
   }
 `
+
 const QUERY_SEARCH_SHOWCASES = gql`
   query($limit: Int, $offset: Int, $q: String!) {
     showcases_aggregate(
@@ -216,7 +227,7 @@ export default {
 
     this.$nuxt.context.store.dispatch(
       'setShowcases',
-      data ? data.showcases : []
+      data ? data.showcases_aggregate.nodes : []
     )
   },
   data() {
@@ -287,9 +298,9 @@ export default {
         query: print(query),
         variables
       }).then(({ data }) => {
-        if (data.showcases.length) {
+        if (data.showcases_aggregate.aggregate.count) {
           this.offset += this.limit
-          this.results.push(...data.showcases)
+          this.results.push(...data.showcases_aggregate.nodes)
           $state.loaded()
         } else {
           $state.complete()
@@ -331,7 +342,10 @@ export default {
         variables
       })
 
-      this.$store.dispatch('setShowcases', data ? data.showcases : [])
+      this.$store.dispatch(
+        'setShowcases',
+        data ? data.showcases_aggregate.nodes : []
+      )
       this.$fetchState.pending = false
     },
     async search() {
