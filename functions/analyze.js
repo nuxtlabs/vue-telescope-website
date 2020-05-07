@@ -20,6 +20,7 @@ exports.handler = async function (event, context) {
   // Only analyze root path at the moment
   const url = 'https://' + hostname
   let codeError
+  let showcase
   try {
     // filter hostname
     if (await isBlacklisted(hostname)) {
@@ -82,7 +83,7 @@ exports.handler = async function (event, context) {
       query: print(QUERY_SHOWCASE_BY_HOSTNAME),
       variables: { hostname }
     })
-    const showcase = data.showcases[0] ? data.showcases[0] : null
+    showcase = data.showcases[0] ? data.showcases[0] : null
 
     if (showcase) {
       return {
@@ -186,18 +187,20 @@ exports.handler = async function (event, context) {
       }
     `
 
-    const res = await hasura({
+    await hasura({
       query: print(INSERT_SHOWCASE),
       variables: { objects: showcaseObject }
     })
-
+    .then(({ data }) => {
+      showcase = data.insert_showcases.returning[0]
+    })
     // Return
     return {
       statusCode: 200,
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(res)
+      body: JSON.stringify(showcase)
     }
   } catch (err) {
     consola.error(err)
