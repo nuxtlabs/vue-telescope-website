@@ -44,8 +44,8 @@
           class="mt-8 mb-10 text-center text-3xl leading-8 font-bold tracking-tighter text-nuxt-gray sm:leading-10"
         >
           Over
-          <span class="text-nuxt-lightgreen">{{ count * 3245 }}</span> sites
-          analyzed with
+          <span class="text-nuxt-lightgreen">{{ count }}</span> sites analyzed
+          with
           <span class="text-nuxt-lightgreen">Vue Telemetry</span>
         </h5>
       </div>
