@@ -47,7 +47,11 @@
                 :alt="data.framework.name"
                 class="w-4 h-4"
               />
-              <p class="ml-2 capitalize">{{ data.framework.name }}</p>
+              <a
+                :href="data.framework.url"
+                class="ml-2 capitalize hover:text-nuxt-lightgreen transition ease-linear duration-150"
+                >{{ data.framework.name }}</a
+              >
             </div>
           </div>
           <div v-if="data.ui" class="mb-4">
@@ -59,7 +63,11 @@
                 :alt="data.ui.name"
                 class="w-4 h-4"
               />
-              <p class="ml-2 capitalize">{{ data.ui.name }}</p>
+              <a
+                :href="data.ui.url"
+                class="ml-2 capitalize hover:text-nuxt-lightgreen transition ease-linear duration-150"
+                >{{ data.ui.name }}</a
+              >
             </div>
           </div>
           <div v-if="data.showcases_plugins.length" class="mb-4">
@@ -70,7 +78,7 @@
                 :key="i"
                 :href="sp.plugin.url"
                 target="_blank"
-                class="px-2 py-1 text-nuxt-gray bg-cool-gray-200 rounded mr-2 last:mr-0 mb-2 hover:bg-cool-gray-300 transition ease-in-out duration-150"
+                class="px-2 py-1 text-nuxt-gray bg-cool-gray-200 rounded mr-2 last:mr-0 mb-2 hover:bg-cool-gray-300 transition ease-linear duration-150"
                 >{{ sp.plugin.name }}</a
               >
             </div>
@@ -83,7 +91,7 @@
                 :key="i"
                 :href="sm.module.url"
                 target="_blank"
-                class="px-2 py-1 text-nuxt-gray bg-cool-gray-200 rounded mr-2 last:mr-0 mb-2 hover:bg-cool-gray-300 transition ease-in-out duration-150"
+                class="px-2 py-1 text-nuxt-gray bg-cool-gray-200 rounded mr-2 last:mr-0 mb-2 hover:bg-cool-gray-300 transition ease-linear duration-150"
                 >{{ sm.module.name }}</a
               >
             </div>
@@ -230,7 +238,7 @@
         <div class="flex justify-around">
           <button
             type="button"
-            class="flex items-center justify-center px-4 py-2 mr-2 border border-transparent text-sm leading-4 font-semibold rounded-full text-white bg-nuxt-lightgreen hover:shadow-xl focus:outline-none focus:bg-nuxt-lightgreen active:bg-nuxt-lightgreen transition ease-in-out duration-150"
+            class="flex items-center justify-center px-4 py-2 mr-2 border border-transparent text-sm leading-4 font-semibold rounded-full text-white bg-nuxt-lightgreen hover:shadow-xl focus:outline-none focus:bg-nuxt-lightgreen active:bg-nuxt-lightgreen transition ease-linear duration-150"
           >
             <svg
               class="-ml-1 mr-3 h-4 w-4"
@@ -248,7 +256,7 @@
           </button>
           <button
             type="button"
-            class="flex items-center justify-center px-4 py-2 border border-transparent text-sm leading-4 font-semibold rounded-full text-white bg-nuxt-lightgreen hover:shadow-xl focus:outline-none focus:bg-nuxt-lightgreen active:bg-nuxt-lightgreen transition ease-in-out duration-150"
+            class="flex items-center justify-center px-4 py-2 border border-transparent text-sm leading-4 font-semibold rounded-full text-white bg-nuxt-lightgreen hover:shadow-xl focus:outline-none focus:bg-nuxt-lightgreen active:bg-nuxt-lightgreen transition ease-linear duration-150"
           >
             <svg
               x="0px"
