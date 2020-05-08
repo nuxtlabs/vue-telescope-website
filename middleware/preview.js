@@ -14,18 +14,26 @@ const QUERY_SHOWCASE = gql`
       vue_version
       ui {
         name
+        url
+        img_path
       }
       framework {
         name
+        url
+        img_path
       }
       showcases_plugins {
         plugin {
           name
+          url
+          img_path
         }
       }
       showcase_modules {
         module {
           name
+          url
+          img_path
         }
       }
     }

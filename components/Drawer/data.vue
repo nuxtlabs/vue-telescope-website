@@ -40,34 +40,52 @@
           </div>
           <div v-if="data.framework" class="mb-4">
             <p class="text-nuxt-lightgreen font-semibold mb-3">Framework</p>
-            <div class="capitalize">{{ data.framework.name }}</div>
+            <div class="flex flex-row items-center">
+              <img
+                v-if="data.framework.img_path"
+                :src="data.framework.img_path"
+                :alt="data.framework.name"
+                class="w-4 h-4"
+              />
+              <p class="ml-2 capitalize">{{ data.framework.name }}</p>
+            </div>
           </div>
           <div v-if="data.ui" class="mb-4">
             <p class="text-nuxt-lightgreen font-semibold mb-3">UI</p>
-            <div class="capitalize">{{ data.ui.name }}</div>
+            <div class="flex flex-row items-center">
+              <img
+                v-if="data.ui.img_path"
+                :src="data.ui.img_path"
+                :alt="data.ui.name"
+                class="w-4 h-4"
+              />
+              <p class="ml-2 capitalize">{{ data.ui.name }}</p>
+            </div>
           </div>
           <div v-if="data.showcases_plugins.length" class="mb-4">
             <p class="text-nuxt-lightgreen font-semibold mb-3">Plugins</p>
             <div class="flex flex-row items-center flex-wrap">
-              <span
+              <a
                 v-for="(sp, i) in data.showcases_plugins"
                 :key="i"
-                class="px-2 py-1 text-nuxt-gray bg-cool-gray-200 rounded mr-2 last:mr-0 mb-2"
+                :href="sp.plugin.url"
+                target="_blank"
+                class="px-2 py-1 text-nuxt-gray bg-cool-gray-200 rounded mr-2 last:mr-0 mb-2 hover:bg-cool-gray-300 transition ease-in-out duration-150"
+                >{{ sp.plugin.name }}</a
               >
-                {{ sp.plugin.name }}
-              </span>
             </div>
           </div>
           <div v-if="data.showcase_modules.length" class="mb-4">
             <p class="text-nuxt-lightgreen font-semibold mb-3">Modules</p>
             <div class="flex flex-row items-center flex-wrap">
-              <span
+              <a
                 v-for="(sm, i) in data.showcase_modules"
                 :key="i"
-                class="px-2 py-1 text-nuxt-gray bg-cool-gray-200 rounded mr-2 last:mr-0 mb-2"
+                :href="sm.module.url"
+                target="_blank"
+                class="px-2 py-1 text-nuxt-gray bg-cool-gray-200 rounded mr-2 last:mr-0 mb-2 hover:bg-cool-gray-300 transition ease-in-out duration-150"
+                >{{ sm.module.name }}</a
               >
-                {{ sm.module.name }}
-              </span>
             </div>
           </div>
         </div>
