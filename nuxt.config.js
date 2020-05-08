@@ -1,3 +1,5 @@
+import 'dotenv/config'
+
 export default {
   mode: 'universal',
   /*
@@ -25,6 +27,14 @@ export default {
    */
   css: [],
   /*
+  ** Public env
+  */
+  env: {
+    API_HASURA_URL: process.env.API_HASURA_URL,
+    // TODO: remove before production
+    HASURA_ADMIN_SECRET_KEY: process.env.HASURA_ADMIN_SECRET_KEY
+  },
+  /*
    ** Plugins to load before mounting the App
    */
   plugins: ['@/plugins/hasura.js', '@/plugins/infinite-loading.client.js'],
@@ -44,9 +54,7 @@ export default {
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxt/http',
-    // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxt/http'
   ],
   /*
    ** Axios module configuration
