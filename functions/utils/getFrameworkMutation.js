@@ -9,8 +9,10 @@ module.exports = async function getFrameworkMutation(
 
   return {
     data: {
-      slug: slugify(framework),
-      name: framework,
+      slug: slugify(framework.name),
+      name: framework.name,
+      url: framework.url,
+      img_path: framework.imgPath,
       frameworks_modules: {
         data: moduleMutation
       }

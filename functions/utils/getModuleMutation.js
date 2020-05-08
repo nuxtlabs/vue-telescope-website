@@ -8,8 +8,10 @@ module.exports = async function getModuleMutation(modules) {
     return {
       module: {
         data: {
-          slug: slugify(module),
-          name: module
+          slug: slugify(module.name),
+          name: module.name,
+          img_path: module.imgPath,
+          url: module.url
         },
         on_conflict: {
           constraint: 'modules_slug_key',

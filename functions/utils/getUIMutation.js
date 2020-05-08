@@ -6,8 +6,10 @@ module.exports = async function getUIMutation(ui) {
 
   return {
     data: {
-      slug: slugify(ui),
-      name: ui
+      slug: slugify(ui.name),
+      name: ui.name,
+      url: ui.url,
+      img_path: ui.imgPath
     },
     on_conflict: {
       constraint: 'uis_slug_key',

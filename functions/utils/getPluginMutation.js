@@ -8,8 +8,10 @@ module.exports = async function getPluginMutation(plugins) {
     return {
       plugin: {
         data: {
-          slug: slugify(plugin),
-          name: plugin
+          slug: slugify(plugin.name),
+          name: plugin.name,
+          url: plugin.url,
+          img_path: plugin.imgPath
         },
         on_conflict: {
           constraint: 'plugins_slug_key',

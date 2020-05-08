@@ -62,18 +62,26 @@ exports.handler = async function (event, context) {
           screenshot_url
           ui {
             name
+            url
+            img_path
           }
           framework {
             name
+            url
+            img_path
           }
           showcases_plugins {
             plugin {
               name
+              url
+              img_path
             }
           }
           showcase_modules {
             module {
               name
+              url
+              img_path
             }
           }
         }
@@ -168,18 +176,26 @@ exports.handler = async function (event, context) {
             screenshot_url
             ui {
               name
+              url
+              img_path
             }
             framework {
               name
+              url
+              img_path
             }
             showcases_plugins {
               plugin {
                 name
+                url
+                img_path
               }
             }
             showcase_modules {
               module {
                 name
+                url
+                img_path
               }
             }
           }
@@ -190,8 +206,7 @@ exports.handler = async function (event, context) {
     await hasura({
       query: print(INSERT_SHOWCASE),
       variables: { objects: showcaseObject }
-    })
-    .then(({ data }) => {
+    }).then(({ data }) => {
       showcase = data.insert_showcases.returning[0]
     })
     // Return
@@ -213,11 +228,12 @@ exports.handler = async function (event, context) {
       const INSERT_SCANS = gql`
         mutation($objects: [scans_insert_input!]!) {
           insert_scans(
-            objects: $objects,
+            objects: $objects
             on_conflict: {
-              constraint: scanned_url_key,
+              constraint: scanned_url_key
               update_columns: updated_at
-            }) {
+            }
+          ) {
             affected_rows
           }
         }
