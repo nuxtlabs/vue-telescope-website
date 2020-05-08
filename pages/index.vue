@@ -78,20 +78,15 @@
     <section id="explain" class="relative mt-36 sm:mt-72 mb-28">
       <bgGradient klass="explain" />
       <div class="max-w-6xl mx-auto h-full px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col sm:grid sm:grid-cols-2 sm:gap-16 mb-14">
-          <div class="flex-shrink-0 flex items-center justify-center">
+        <div class="grid grid-cols-1 mb-14">
+          <div class="flex items-center justify-center">
             <h5
               class="mb-6 sm:mb-0 text-4xl leading-8 font-bold tracking-tighter text-nuxt-gray sm:leading-10"
             >
               What’s
-              <span class="text-nuxt-lightgreen">telemetry ?</span>
+              <span class="text-nuxt-lightgreen">Vue Telemetry ?</span>
             </h5>
           </div>
-          <p class="text-gray-500">
-            Telemetry is a technique used to obtain information from an
-            application installed on your computer. It aims to provide feedback
-            and collect data for statistical purposes.
-          </p>
         </div>
         <div
           class="flex flex-col-reverse sm:grid sm:grid-cols-2 sm:gap-16 mb-14"
