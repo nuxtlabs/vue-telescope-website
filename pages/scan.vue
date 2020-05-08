@@ -53,9 +53,9 @@ import { validationMixin } from 'vuelidate'
 import { required } from 'vuelidate/lib/validators'
 import bgGradient from '@/components/BgGradient'
 import drawer from '@/components/Drawer'
-import loader from '@/components/Drawer/Loader'
-import error from '@/components/Drawer/Error'
-import dataResult from '@/components/Drawer/Data'
+import loader from '@/components/Drawer/loader'
+import error from '@/components/Drawer/error'
+import dataResult from '@/components/Drawer/data'
 
 const urlRegex = /^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,}?\/?.*$/
 const mustBeValidUrl = (url) => urlRegex.test(url)

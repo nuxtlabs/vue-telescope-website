@@ -102,7 +102,7 @@ import _debounce from 'lodash.debounce'
 import showcasePreviewItem from '@/components/ShowcasePreviewItem'
 import filterCheckboxes from '@/components/FilterCheckboxes'
 import drawer from '@/components/Drawer'
-import drawerData from '@/components/Drawer/Data'
+import drawerData from '@/components/Drawer/data'
 
 const QUERY_ALL_SHOWCASES = gql`
   query($limit: Int, $offset: Int) {
