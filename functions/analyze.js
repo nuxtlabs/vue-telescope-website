@@ -134,7 +134,7 @@ exports.handler = async function (event, context) {
       has_ssr: infos.hasSSR,
       is_static: infos.isStatic,
       screenshot_url: infos.screenshot,
-      slug: slugify(infos.domain),
+      slug: slugify(infos.hostname),
       vue_version: infos.vueVersion,
       showcases_plugins: {
         data: plugins
@@ -204,7 +204,6 @@ exports.handler = async function (event, context) {
     }
   } catch (err) {
     consola.error(err)
-    consola.error('apiCode', err.apiCode)
 
     if (err.apiCode !== null) { // 0: not crawlable, 1: Vue not detected (see: https://github.com/nuxt-company/vue-telemetry-analyzer/blob/master/src/index.js)
       const scanObject = {
