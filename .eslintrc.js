@@ -5,19 +5,19 @@ module.exports = {
     node: true
   },
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: "babel-eslint"
   },
-  extends: [
-    '@nuxtjs',
-    'prettier',
-    'prettier/vue',
-    'plugin:prettier/recommended',
-    'plugin:nuxt/recommended'
-  ],
-  plugins: [
-    'prettier'
-  ],
+  extends: ["@nuxtjs", "plugin:nuxt/recommended"],
   // add your custom rules here
   rules: {
+    "vue/no-unused-components": 1,
+    "vue/singleline-html-element-content-newline": 0,
+    "vue/html-self-closing": 0,
+    "vue/max-attributes-per-line": 0,
+    "vue/multiline-html-element-content-newline": 0,
+    "vue/no-v-html": 0,
+    "no-unused-vars": 1,
+    "no-console": 1,
+    camelcase: 0
   }
 }
