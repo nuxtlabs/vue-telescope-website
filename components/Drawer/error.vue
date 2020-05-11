@@ -4,11 +4,11 @@
       class="flex-1 text-nuxt-gray flex flex-col items-center justify-center"
     >
       <div class="text-6xl font-bold">
-        <div v-if="code === 1">Ooh !</div>
+        <div v-if="code === 2">Ooh !</div>
         <div v-else>Oops !</div>
       </div>
       <div class="text-xl">
-        <p v-if="code === 1">
+        <p v-if="code === 2">
           Vue detected but we can’t analyze the site
         </p>
         <p v-else>

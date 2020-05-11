@@ -1,7 +1,7 @@
 <template>
   <div>
     <section id="hero" class="relative">
-      <bgGradient klass="hero" />
+      <BgGradient klass="hero" />
       <div
         class="max-w-6xl mx-auto h-full px-4 pt-20 pb-10 sm:px-6 lg:px-8 lg:pt-0"
       >
@@ -45,7 +45,7 @@
           Explore over <span class="text-nuxt-lightgreen">{{ count }}</span> websites
         </h5>
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-          <showcaseFeaturedItem
+          <ShowcaseFeaturedItem
             v-for="item in featured"
             :key="item.id"
             :data="item"
@@ -61,7 +61,7 @@
       </div>
     </section>
     <section id="explain" class="relative mt-36 sm:mt-72 mb-28">
-      <bgGradient klass="explain" />
+      <BgGradient klass="explain" />
       <div class="max-w-6xl mx-auto h-full px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 mb-14">
           <div class="flex items-center justify-center">
@@ -206,8 +206,8 @@
 <script>
 import gql from 'graphql-tag'
 import { print } from 'graphql/language/printer'
-import showcaseFeaturedItem from '@/components/ShowcaseFeaturedItem'
-import bgGradient from '@/components/BgGradient'
+import ShowcaseFeaturedItem from '@/components/ShowcaseFeaturedItem'
+import BgGradient from '@/components/BgGradient'
 
 const QUERY = gql`
   query {
@@ -228,8 +228,8 @@ const QUERY = gql`
 
 export default {
   components: {
-    showcaseFeaturedItem,
-    bgGradient
+    ShowcaseFeaturedItem,
+    BgGradient
   },
   async asyncData ({ app }) {
     const { data } = await app.$hasura({
