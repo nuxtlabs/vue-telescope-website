@@ -58,7 +58,7 @@
                 class="ml-4 px-3 py-2 rounded-md text-base font-medium tracking-wide leading-5 focus:outline-none focus:text-nuxt-lightgreen transition duration-150 ease-in-out"
               >{{ link.label }}</nuxt-link>
               <nuxt-link
-                to="/scan"
+                to="/submit"
                 :class="
                   $route.name === 'index'
                     ? 'bg-white text-nuxt-lightgreen'
@@ -86,7 +86,7 @@
           class="block px-3 py-2 rounded-md text-base tracking-wide focus:outline-none focus:text-nuxt-lightgreen focus:bg-green-50 transition duration-150 ease-in-out"
         >{{ link.label }}</nuxt-link>
         <nuxt-link
-          to="/scan"
+          to="/submit"
           :class="
             $route.name === 'index'
               ? 'text-nuxt-gray hover:bg-nuxt-lightgreen hover:text-white'
@@ -105,7 +105,7 @@ export default {
     return {
       open: false,
       links: [
-        { to: '/showcases', label: 'Showcases' },
+        { to: '/explore', label: 'Explore' },
         { to: '/download', label: 'Download' }
       ]
     }

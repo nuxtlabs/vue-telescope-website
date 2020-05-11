@@ -2,7 +2,7 @@
   <div>
     <section id="hero" class>
       <div class="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
-        <h1 class="text-3xl font-extrabold text-nuxt-gray">Showcases</h1>
+        <h1 class="text-3xl font-extrabold text-nuxt-gray">Explore</h1>
         <p class="mt-2 mb-6 text-gray-600">
           Find all the websites built with VueJS
         </p>
@@ -286,13 +286,13 @@ export default {
       }).then(({ data }) => {
         this.$store.dispatch('setCurrentShowcase', data.showcases_by_pk)
         this.openedDrawer = true
-        this.$router.replace(`/showcases/?preview=${data.showcases_by_pk.slug}`)
+        this.$router.replace(`/explore?preview=${data.showcases_by_pk.slug}`)
       })
     },
     handleClose () {
       this.$store.dispatch('setCurrentShowcase', null)
       this.openedDrawer = false
-      this.$router.replace('/showcases')
+      this.$router.replace('/explore')
     },
     async loadMore ($state) {
       let query
@@ -313,18 +313,17 @@ export default {
         query = QUERY_ALL_SHOWCASES
       }
 
-      await this.$hasura({
+      const { data } = await this.$hasura({
         query: print(query),
         variables
-      }).then(({ data }) => {
-        if (data.showcases_aggregate.aggregate.count) {
-          this.offset += this.limit
-          this.results.push(...data.showcases_aggregate.nodes)
-          $state.loaded()
-        } else {
-          $state.complete()
-        }
       })
+      if (data.showcases_aggregate.aggregate.count) {
+        this.offset += this.limit
+        this.results.push(...data.showcases_aggregate.nodes)
+        $state.loaded()
+      } else {
+        $state.complete()
+      }
     },
     resetInfinite () {
       this.limit = 12

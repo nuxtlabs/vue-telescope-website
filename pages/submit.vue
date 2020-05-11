@@ -117,21 +117,23 @@ export default {
           this.result = await this.$http.$get(
             `api/analyze?url=https://${this.url}`
           )
-          this.$router.replace(`/scan?preview=${this.result.slug}`)
+          this.$router.replace(`/submit?preview=${this.result.slug}`)
         } catch (err) {
+          this.pending = false
+          this.error = 'Unkown error'
+          this.errorCode = 500
           if (err.response) {
-            const { message, apiErrorCode } = await err.response.json()
-            this.error = message
-            this.errorCode = apiErrorCode
-          } else {
-            this.error = 'Unkown error'
+            try {
+              const { message, apiErrorCode } = await err.response.json()
+              this.error = message
+              this.errorCode = apiErrorCode
+            } catch (err) {}
           }
         }
-        this.pending = false
       }
     },
     closeDrawer () {
-      this.$router.replace('/scan')
+      this.$router.replace('/submit')
       this.openedDrawer = false
       this.url = ''
       this.pending = false

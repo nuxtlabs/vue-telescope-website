@@ -39,6 +39,12 @@ export default {
    */
   plugins: ['@/plugins/hasura.js', '@/plugins/infinite-loading.client.js'],
   /*
+  ** generate config
+  */
+  generate: {
+    fallback: '404.html'
+  },
+  /*
    ** Nuxt.js dev-modules
    */
   buildModules: [

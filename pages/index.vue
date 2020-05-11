@@ -21,13 +21,13 @@
             </p>
             <div class="flex items-center justify-center sm:justify-start">
               <nuxt-link
-                to="/showcases"
+                to="/explore"
                 class="mr-4 inline-flex items-center px-6 py-3 border border-transparent text-base font-semibold rounded shadow text-nuxt-lightgreen bg-white hover:shadow-lg focus:outline-none focus:border-nuxt focus:shadow-outline-nuxt active:bg-nuxt-200 transition ease-in-out duration-150"
-              >Browse showcase</nuxt-link>
+              >Explore</nuxt-link>
               <nuxt-link
-                to="/scan"
+                to="/submit"
                 class="inline-flex items-center px-6 py-3 border border-transparent text-base font-semibold rounded shadow text-white bg-nuxt-lightgreen hover:shadow-lg focus:outline-none focus:border-nuxt focus:shadow-outline-nuxt active:bg-nuxt-200 transition ease-in-out duration-150"
-              >Submit your URL</nuxt-link>
+              >Submit an URL</nuxt-link>
             </div>
           </div>
           <div class="flex-1 flex items-center justify-center">
@@ -36,25 +36,13 @@
         </div>
       </div>
     </section>
-    <section id="technos" class="relative">
-      <div class="max-w-6xl mx-auto h-full my-48 pb-10 sm:px-6 lg:px-8 lg:pt-0">
-        <h5
-          class="mt-8 mb-10 text-center text-3xl leading-8 font-bold tracking-tighter text-nuxt-gray sm:leading-10"
-        >
-          Over
-          <span class="text-nuxt-lightgreen">{{ count }}</span> sites analyzed
-          with
-          <span class="text-nuxt-lightgreen">Vue Telemetry</span>
-        </h5>
-      </div>
-    </section>
     <section id="featured" class="relative">
       <bgGradient klass="featured" />
       <div class="max-w-6xl mx-auto h-full px-4 pb-10 sm:px-6 lg:px-8 lg:pt-0">
         <h5
-          class="mb-8 text-xl leading-8 font-bold tracking-tighter text-nuxt-lightgreen sm:leading-10"
+          class="mb-8 text-2xl leading-8 font-bold tracking-tighter text-nuxt-gray sm:leading-10"
         >
-          <span class="text-nuxt-gray">Featured</span> Showcases
+          Explore over <span class="text-nuxt-lightgreen">{{ count }}</span> websites
         </h5>
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
           <showcaseFeaturedItem
@@ -66,9 +54,9 @@
         </div>
         <div class="mt-16 text-center">
           <nuxt-link
-            to="/showcases"
+            to="/explore"
             class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-6 capitalize font-semibold rounded-full shadow-md text-white bg-nuxt-lightgreen hover:shadow-xl focus:outline-none focus:border-green-400 focus:shadow-outline-green-400 active:bg-green-200 transition ease-in-out duration-150"
-          >View All</nuxt-link>
+          >Explore</nuxt-link>
         </div>
       </div>
     </section>
@@ -123,7 +111,7 @@
               </div>
               <div class="ml-4">
                 <p class="text-base leading-6 text-gray-500">
-                  The application and the showcase is available online and
+                  The application and the showcase are available online and
                   access is
                   <span class="text-nuxt-lightgreen font-semibold">free</span>
                   for everyone.
@@ -147,9 +135,8 @@
               </div>
               <div class="ml-4">
                 <p class="text-base leading-6 text-gray-500">
-                  Your personal data (name, address, location) remains
-                  <span class="text-nuxt-lightgreen font-semibold">confidential</span>
-                  and will not be monetized.
+                  No personal data is collected, only the submitted url is
+                  scanned and saved.
                 </p>
               </div>
             </div>
@@ -173,9 +160,8 @@
               </div>
               <div class="ml-4">
                 <p class="text-base leading-6 text-gray-500">
-                  The extension is
-                  <span class="text-nuxt-lightgreen font-semibold">open source</span>, which means that anyone can add new technologies or respond
-                  to issues.
+                  The analyzer is
+                  <a href="https://github.com/nuxt-company/vue-telemetry-analyzer" target="_blank" rel="noopener" class="text-nuxt-lightgreen font-semibold">open source</a>, which means that anyone can add new technologies.
                 </p>
               </div>
             </div>
@@ -197,16 +183,15 @@
               <span class="text-nuxt-lightgreen">install it ?</span>
             </h5>
             <p class="mb-8 text-gray-500">
-              Vue Telemetry is available on Google Chrome and Mozilla Firefox.
-              Its installation is quick and simple.
-              <br />You can also works locally and offline. <br />Click on the
-              link for download app and choose your browser.
+              Vue Telemetry is also available on Google Chrome and Mozilla Firefox.
+              Quickly see when a website uses Vue and reveal the ecosystem used inside with one click.
+              <br />Start now and download Vue Telemetry for your favourite browser.
             </p>
             <div class="text-center">
               <nuxt-link
                 to="/download"
                 class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-6 capitalize font-semibold rounded-full shadow-md text-white bg-nuxt-lightgreen hover:shadow-xl focus:outline-none focus:border-green-400 focus:shadow-outline-green-400 active:bg-green-200 transition ease-in-out duration-150"
-              >Get browser extension</nuxt-link>
+              >Browser Extensions</nuxt-link>
             </div>
           </div>
           <div class="hidden sm:block">
@@ -296,7 +281,7 @@ export default {
   },
   methods: {
     handleClick (slug) {
-      this.$router.push(`/showcases?preview=${slug}`)
+      this.$router.push(`/explore?preview=${slug}`)
     }
   }
 }
