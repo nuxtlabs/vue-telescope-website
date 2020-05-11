@@ -5,17 +5,19 @@ const analyze = require('vue-telemetry-analyzer')
 const cloudinary = require('cloudinary').v2
 const { URL } = require('url')
 const consola = require('consola')
-const getFrameworkMutation = require('./utils/getFrameworkMutation')
-const getModuleMutation = require('./utils/getModuleMutation')
-const getPluginMutation = require('./utils/getPluginMutation')
-const getUIMutation = require('./utils/getUIMutation')
-const hasura = require('./utils/hasura')
-const isBlacklisted = require('./utils/isBlacklisted')
-const slugify = require('./utils/slugify')
+const {
+  getFrameworkMutation,
+  getModuleMutation,
+  getPluginMutation,
+  getUIMutation,
+  hasura,
+  isBlacklisted
+} = require('./utils')
+const { slugify } = require('./utils/helpers')
 const gql = require('graphql-tag')
 const { print } = require('graphql/language/printer')
 
-exports.handler = async function (event, context) {
+exports.handler = async function (event, _context) {
   const { hostname } = new URL(event.queryStringParameters.url)
   // Only analyze root path at the moment
   const url = 'https://' + hostname
@@ -220,7 +222,8 @@ exports.handler = async function (event, context) {
   } catch (err) {
     consola.error(err)
 
-    if (err.apiCode !== null) { // 0: not crawlable, 1: Vue not detected (see: https://github.com/nuxt-company/vue-telemetry-analyzer/blob/master/src/index.js)
+    if (err.apiCode !== null) {
+      // 0: not crawlable, 1: Vue not detected (see: https://github.com/nuxt-company/vue-telemetry-analyzer/blob/master/src/index.js)
       const scanObject = {
         url: url,
         is_proxy_blocked: err.statusCode === 403

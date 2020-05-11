@@ -1,4 +1,4 @@
-module.exports = function slugify(domain) {
+exports.slugify = function (domain) {
   return domain
     .toLowerCase()
     .replace(/[^a-z0-9-]/g, '-')
