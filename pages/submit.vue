@@ -1,6 +1,6 @@
 <template>
   <div class="relative">
-    <bgGradient klass="scan" />
+    <BgGradient klass="scan" />
     <div class="max-w-6xl px-8 py-40 mx-auto">
       <div class="flex">
         <div class="w-full lg:w-1/2">
@@ -42,11 +42,11 @@
               <span class="text-cool-gray-600">e.g. vuejs.org/guide will become vuejs.org/</span>
             </p>
           </form>
-          <drawer v-if="openedDrawer" @close="closeDrawer">
-            <loader v-if="pending"></loader>
-            <dataResult v-if="result" :data="result"></dataResult>
-            <error v-if="errorCode" :code="errorCode"></error>
-          </drawer>
+          <Drawer v-if="openedDrawer" @close="closeDrawer">
+            <DrawerLoader v-if="pending" />
+            <DrawerData v-if="result" :data="result" />
+            <DrawerError v-if="errorCode" :code="errorCode" />
+          </Drawer>
         </div>
       </div>
     </div>
@@ -54,22 +54,22 @@
 </template>
 
 <script>
-import bgGradient from '@/components/BgGradient'
-import drawer from '@/components/Drawer'
-import loader from '@/components/Drawer/loader'
-import error from '@/components/Drawer/error'
-import dataResult from '@/components/Drawer/data'
+import BgGradient from '@/components/BgGradient'
+import Drawer from '@/components/Drawer/Drawer'
+import DrawerLoader from '@/components/Drawer/DrawerLoader'
+import DrawerError from '@/components/Drawer/DrawerError'
+import DrawerData from '@/components/Drawer/DrawerData'
 
 const urlRegex = /^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,}?\/?.*$/
 const mustBeValidUrl = url => urlRegex.test(url)
 
 export default {
   components: {
-    bgGradient,
-    drawer,
-    loader,
-    error,
-    dataResult
+    BgGradient,
+    Drawer,
+    DrawerLoader,
+    DrawerError,
+    DrawerData
   },
   mixins: [],
   data () {

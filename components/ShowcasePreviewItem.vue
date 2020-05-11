@@ -17,7 +17,7 @@
       <p
         class="previewItem__title text-base font-extrabold text-nuxt-gray transition ease-in-out duration-150"
       >
-        {{ data.domain }}
+        {{ hostname }}
       </p>
       <div class="flex items-center">
         <img class="h-3 mr-px" src="/img/vuejs.svg" alt="vuejs" />
@@ -33,6 +33,11 @@ export default {
     data: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    hostname () {
+      return this.data.hostname.replace('www.', '')
     }
   },
   methods: {

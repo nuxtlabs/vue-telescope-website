@@ -39,11 +39,11 @@
       <div class="pt-8 flex flex-col sm:flex-row">
         <div class="hidden sm:block h-full w-60 overflow-auto sticky top-0">
           <form class="mt-8">
-            <filterCheckboxes
+            <FilterCheckboxes
               type="frameworks"
               @checkedItems="handleCheckedFrameworks"
             />
-            <filterCheckboxes
+            <FilterCheckboxes
               type="uis"
               class="mt-4"
               @checkedItems="handlecheckedUis"
@@ -55,7 +55,7 @@
             class="mt-8 grid gap-8 mx-auto sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
           >
             <template v-if="$fetchState.pending">
-              <content-loader
+              <ContentLoader
                 v-for="n in 12"
                 :key="n"
                 width="346"
@@ -65,28 +65,27 @@
                 <rect x="0" y="0" rx="4" ry="4" width="346" height="192" />
                 <rect x="0" y="197" rx="4" ry="4" width="103" height="16" />
                 <rect x="0" y="216" rx="4" ry="4" width="68" height="16" />
-              </content-loader>
+              </ContentLoader>
             </template>
             <template v-else>
-              <showcasePreviewItem
-                v-for="showcase in list"
-                :key="showcase.id"
-                :data="showcase"
-                @openDrawer="handleOpen(showcase.id)"
+              <ShowcasePreviewItem
+                v-for="item in list"
+                :key="item.id"
+                :data="item"
+                @openDrawer="handleOpen(item.id)"
               />
-              <drawer
+              <Drawer
                 v-if="openedDrawer"
                 panel-width="500"
                 @close="handleClose"
               >
-                <drawerData :data="showcase" />
-              </drawer>
+                <DrawerData :data="showcase" />
+              </Drawer>
             </template>
           </div>
-          <client-only>
-            <infinite-loading :identifier="infiniteId" @infinite="loadMore">
-            </infinite-loading>
-          </client-only>
+          <ClientOnly>
+            <InfiniteLoading :identifier="infiniteId" @infinite="loadMore" />
+          </ClientOnly>
         </div>
       </div>
     </div>
@@ -99,10 +98,11 @@ import { ContentLoader } from 'vue-content-loader'
 import gql from 'graphql-tag'
 import { print } from 'graphql/language/printer'
 import _debounce from 'lodash.debounce'
-import showcasePreviewItem from '@/components/ShowcasePreviewItem'
-import filterCheckboxes from '@/components/FilterCheckboxes'
-import drawer from '@/components/Drawer'
-import drawerData from '@/components/Drawer/data'
+
+import ShowcasePreviewItem from '@/components/ShowcasePreviewItem'
+import FilterCheckboxes from '@/components/FilterCheckboxes'
+import Drawer from '@/components/Drawer/Drawer'
+import DrawerData from '@/components/Drawer/DrawerData'
 
 const QUERY_SHOWCASES = gql`
   query($limit: Int, $offset: Int, $slug: String) {
@@ -124,6 +124,7 @@ const QUERY_SHOWCASES = gql`
       id
       slug
       domain
+      hostname
       url
       is_static
       has_ssr
@@ -162,6 +163,7 @@ const QUERY_SHOWCASE = gql`
       id
       slug
       domain
+      hostname
       url
       is_static
       has_ssr
@@ -253,11 +255,11 @@ const QUERY_SEARCH_SHOWCASES = gql`
 export default {
   components: {
     InfiniteLoading,
-    showcasePreviewItem,
+    ShowcasePreviewItem,
     ContentLoader,
-    filterCheckboxes,
-    drawer,
-    drawerData
+    FilterCheckboxes,
+    Drawer,
+    DrawerData
   },
   async fetch () {
     const preview = this.$nuxt.context.route.query.preview
