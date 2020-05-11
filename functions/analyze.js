@@ -214,6 +214,9 @@ exports.handler = async function (event, _context) {
       query: print(INSERT_SHOWCASE),
       variables: { objects: showcaseObject }
     }).then(({ data }) => {
+      if (!data) {
+        throw new Error('Could not insert in database, please try again')
+      }
       showcase = data.insert_showcases.returning[0]
     })
     // Return
