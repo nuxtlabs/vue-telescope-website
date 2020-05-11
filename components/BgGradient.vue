@@ -18,7 +18,7 @@ export default {
     klass: {
       type: String,
       default: '',
-      validator(str) {
+      validator (str) {
         return ['hero', 'featured', 'explain', 'scan'].includes(str)
       }
     }

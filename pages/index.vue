@@ -23,13 +23,11 @@
               <nuxt-link
                 to="/showcases"
                 class="mr-4 inline-flex items-center px-6 py-3 border border-transparent text-base font-semibold rounded shadow text-nuxt-lightgreen bg-white hover:shadow-lg focus:outline-none focus:border-nuxt focus:shadow-outline-nuxt active:bg-nuxt-200 transition ease-in-out duration-150"
-                >Browse showcase</nuxt-link
-              >
+              >Browse showcase</nuxt-link>
               <nuxt-link
                 to="/scan"
                 class="inline-flex items-center px-6 py-3 border border-transparent text-base font-semibold rounded shadow text-white bg-nuxt-lightgreen hover:shadow-lg focus:outline-none focus:border-nuxt focus:shadow-outline-nuxt active:bg-nuxt-200 transition ease-in-out duration-150"
-                >Submit your URL</nuxt-link
-              >
+              >Submit your URL</nuxt-link>
             </div>
           </div>
           <div class="flex-1 flex items-center justify-center">
@@ -70,8 +68,7 @@
           <nuxt-link
             to="/showcases"
             class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-6 capitalize font-semibold rounded-full shadow-md text-white bg-nuxt-lightgreen hover:shadow-xl focus:outline-none focus:border-green-400 focus:shadow-outline-green-400 active:bg-green-200 transition ease-in-out duration-150"
-            >View All</nuxt-link
-          >
+          >View All</nuxt-link>
         </div>
       </div>
     </section>
@@ -151,9 +148,7 @@
               <div class="ml-4">
                 <p class="text-base leading-6 text-gray-500">
                   Your personal data (name, address, location) remains
-                  <span class="text-nuxt-lightgreen font-semibold"
-                    >confidential</span
-                  >
+                  <span class="text-nuxt-lightgreen font-semibold">confidential</span>
                   and will not be monetized.
                 </p>
               </div>
@@ -179,9 +174,7 @@
               <div class="ml-4">
                 <p class="text-base leading-6 text-gray-500">
                   The extension is
-                  <span class="text-nuxt-lightgreen font-semibold"
-                    >open source</span
-                  >, which means that anyone can add new technologies or respond
+                  <span class="text-nuxt-lightgreen font-semibold">open source</span>, which means that anyone can add new technologies or respond
                   to issues.
                 </p>
               </div>
@@ -213,8 +206,7 @@
               <nuxt-link
                 to="/download"
                 class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-6 capitalize font-semibold rounded-full shadow-md text-white bg-nuxt-lightgreen hover:shadow-xl focus:outline-none focus:border-green-400 focus:shadow-outline-green-400 active:bg-green-200 transition ease-in-out duration-150"
-                >Get browser extension</nuxt-link
-              >
+              >Get browser extension</nuxt-link>
             </div>
           </div>
           <div class="hidden sm:block">
@@ -254,7 +246,7 @@ export default {
     showcaseFeaturedItem,
     bgGradient
   },
-  async asyncData({ app }) {
+  async asyncData ({ app }) {
     const { data } = await app.$hasura({
       query: print(QUERY)
     })
@@ -264,7 +256,7 @@ export default {
       featured: data.showcases
     }
   },
-  data() {
+  data () {
     return {
       technos: [
         {
@@ -303,7 +295,7 @@ export default {
     }
   },
   methods: {
-    handleClick(slug) {
+    handleClick (slug) {
       this.$router.push(`/showcases?preview=${slug}`)
     }
   }

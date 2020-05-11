@@ -47,8 +47,7 @@
             <label
               :for="el.slug"
               class="font-medium text-nuxt-gray flex-1 cursor-pointer select-none capitalize hover:text-nuxt-lightgreen transition ease-in-out duration-150"
-              >{{ el.name }}</label
-            >
+            >{{ el.name }}</label>
           </div>
         </div>
       </div>
@@ -72,7 +71,7 @@ export default {
       }
     }
   },
-  async fetch() {
+  async fetch () {
     const { data } = await this.$hasura({
       query: `
         query {
@@ -86,14 +85,14 @@ export default {
 
     this.items = data ? data[this.type] : []
   },
-  data() {
+  data () {
     return {
       checkedItems: [],
       items: []
     }
   },
   methods: {
-    handleCheckedItems() {
+    handleCheckedItems () {
       this.$emit('checkedItems', this.checkedItems)
     }
   }

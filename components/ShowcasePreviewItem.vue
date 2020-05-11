@@ -36,7 +36,7 @@ export default {
     }
   },
   methods: {
-    open() {
+    open () {
       this.$emit('openDrawer')
     }
   }

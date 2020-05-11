@@ -58,7 +58,7 @@ export default {
     showcaseItem,
     showcaseBrowser
   },
-  async fetch() {
+  async fetch () {
     const { data } = await this.$hasura({
       query: print(QUERY_SHOWCASE),
       variables: {
@@ -72,7 +72,7 @@ export default {
     )
   },
   computed: {
-    showcase() {
+    showcase () {
       return this.$store.getters.currentShowcase
     }
   }

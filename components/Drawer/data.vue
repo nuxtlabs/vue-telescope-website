@@ -50,8 +50,7 @@
               <a
                 :href="data.framework.url"
                 class="ml-2 capitalize hover:text-nuxt-lightgreen transition ease-linear duration-150"
-                >{{ data.framework.name }}</a
-              >
+              >{{ data.framework.name }}</a>
             </div>
           </div>
           <div v-if="data.ui" class="mb-4">
@@ -66,8 +65,7 @@
               <a
                 :href="data.ui.url"
                 class="ml-2 capitalize hover:text-nuxt-lightgreen transition ease-linear duration-150"
-                >{{ data.ui.name }}</a
-              >
+              >{{ data.ui.name }}</a>
             </div>
           </div>
           <div v-if="data.showcases_plugins.length" class="mb-4">
@@ -79,8 +77,7 @@
                 :href="sp.plugin.url"
                 target="_blank"
                 class="px-2 py-1 text-nuxt-gray bg-cool-gray-200 rounded mr-2 last:mr-0 mb-2 hover:bg-cool-gray-300 transition ease-linear duration-150"
-                >{{ sp.plugin.name }}</a
-              >
+              >{{ sp.plugin.name }}</a>
             </div>
           </div>
           <div v-if="data.showcase_modules.length" class="mb-4">
@@ -92,8 +89,7 @@
                 :href="sm.module.url"
                 target="_blank"
                 class="px-2 py-1 text-nuxt-gray bg-cool-gray-200 rounded mr-2 last:mr-0 mb-2 hover:bg-cool-gray-300 transition ease-linear duration-150"
-                >{{ sm.module.name }}</a
-              >
+              >{{ sm.module.name }}</a>
             </div>
           </div>
         </div>
@@ -293,7 +289,7 @@ export default {
     }
   },
   methods: {
-    openUrl() {
+    openUrl () {
       window.open(this.data.url, '_blank')
     }
   }

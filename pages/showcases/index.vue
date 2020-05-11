@@ -226,7 +226,7 @@ export default {
     drawer,
     drawerData
   },
-  async fetch() {
+  async fetch () {
     const { data } = await this.$hasura({
       query: print(QUERY_ALL_SHOWCASES),
       variables: {
@@ -240,7 +240,7 @@ export default {
       data ? data.showcases_aggregate.nodes : []
     )
   },
-  data() {
+  data () {
     return {
       openedDrawer: false,
       infiniteId: +new Date(),
@@ -253,22 +253,22 @@ export default {
     }
   },
   computed: {
-    showcases() {
+    showcases () {
       return this.$store.getters.showcases
     },
-    currentShowcase() {
+    currentShowcase () {
       return this.$store.getters.currentShowcase
     },
-    list() {
+    list () {
       return [...this.showcases, ...this.results]
     }
   },
   watch: {
-    q() {
+    q () {
       this.debouncedSearch()
     }
   },
-  created() {
+  created () {
     if (
       this.$route.query &&
       this.$route.query.preview !== '' &&
@@ -279,7 +279,7 @@ export default {
     this.debouncedSearch = _debounce(this.search, 500)
   },
   methods: {
-    async handleOpen(id) {
+    async handleOpen (id) {
       await this.$hasura({
         query: print(QUERY_SHOWCASE),
         variables: { id }
@@ -289,12 +289,12 @@ export default {
         this.$router.replace(`/showcases/?preview=${data.showcases_by_pk.slug}`)
       })
     },
-    handleClose() {
+    handleClose () {
       this.$store.dispatch('setCurrentShowcase', null)
       this.openedDrawer = false
       this.$router.replace('/showcases')
     },
-    async loadMore($state) {
+    async loadMore ($state) {
       let query
       const variables = {
         limit: this.limit,
@@ -326,23 +326,23 @@ export default {
         }
       })
     },
-    resetInfinite() {
+    resetInfinite () {
       this.limit = 12
       this.offset = null
       this.results = []
       this.infiniteId += 1
     },
-    async handleCheckedFrameworks(frameworks) {
+    async handleCheckedFrameworks (frameworks) {
       this.resetInfinite()
       this.checkedFrameworks = frameworks
       await this.filter()
     },
-    async handlecheckedUis(uis) {
+    async handlecheckedUis (uis) {
       this.resetInfinite()
       this.checkedUis = uis
       await this.filter()
     },
-    async filter() {
+    async filter () {
       this.$fetchState.pending = true
       let query
       const variables = {
@@ -367,7 +367,7 @@ export default {
       )
       this.$fetchState.pending = false
     },
-    async search() {
+    async search () {
       this.$fetchState.pending = true
       const { data } = await this.$hasura({
         query: print(QUERY_SEARCH_SHOWCASES),

@@ -56,8 +56,7 @@
                     : 'text-nuxt-gray hover:text-nuxt-lightgreen'
                 "
                 class="ml-4 px-3 py-2 rounded-md text-base font-medium tracking-wide leading-5 focus:outline-none focus:text-nuxt-lightgreen transition duration-150 ease-in-out"
-                >{{ link.label }}</nuxt-link
-              >
+              >{{ link.label }}</nuxt-link>
               <nuxt-link
                 to="/scan"
                 :class="
@@ -66,8 +65,7 @@
                     : 'text-white bg-nuxt-lightgreen'
                 "
                 class="ml-8 inline-flex items-center px-3 py-2 border border-transparent text-base font-semibold rounded shadow hover:shadow-lg focus:outline-none focus:border-nuxt focus:shadow-outline-green transition ease-in-out duration-150"
-                >Submit</nuxt-link
-              >
+              >Submit</nuxt-link>
             </div>
           </div>
         </div>
@@ -86,8 +84,7 @@
               : 'text-nuxt-gray hover:text-nuxt-lightgreen hover:bg-green-50'
           "
           class="block px-3 py-2 rounded-md text-base tracking-wide focus:outline-none focus:text-nuxt-lightgreen focus:bg-green-50 transition duration-150 ease-in-out"
-          >{{ link.label }}</nuxt-link
-        >
+        >{{ link.label }}</nuxt-link>
         <nuxt-link
           to="/scan"
           :class="
@@ -96,8 +93,7 @@
               : 'text-nuxt-gray hover:text-nuxt-lightgreen hover:bg-green-50'
           "
           class="block px-3 py-2 rounded-md text-base tracking-wide focus:outline-none focus:text-nuxt-lightgreen focus:bg-green-50 transition duration-150 ease-in-out"
-          >Submit</nuxt-link
-        >
+        >Submit</nuxt-link>
       </div>
     </div>
   </nav>
@@ -105,7 +101,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       open: false,
       links: [

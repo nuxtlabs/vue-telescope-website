@@ -58,7 +58,7 @@ import error from '@/components/Drawer/error'
 import dataResult from '@/components/Drawer/data'
 
 const urlRegex = /^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,}?\/?.*$/
-const mustBeValidUrl = (url) => urlRegex.test(url)
+const mustBeValidUrl = url => urlRegex.test(url)
 
 export default {
   middleware: 'redirect',
@@ -76,7 +76,7 @@ export default {
       mustBeValidUrl
     }
   },
-  data() {
+  data () {
     return {
       openedDrawer: false,
       url: '',
@@ -88,7 +88,7 @@ export default {
     }
   },
   watch: {
-    url(str) {
+    url (str) {
       const pattern = /http(s)?:\/\/[A-Za-z0-9]/
       if (pattern.test(str)) {
         this.url = str.replace(/http(s)?:\/\//, '')
@@ -99,7 +99,7 @@ export default {
     }
   },
   methods: {
-    async analyze() {
+    async analyze () {
       this.$v.$touch()
       if (this.$v.$invalid) {
         this.inputError = 'Enter a valid domain, e.g. vuejs.org'
@@ -130,7 +130,7 @@ export default {
         this.pending = false
       }
     },
-    closeDrawer() {
+    closeDrawer () {
       this.$router.replace('/scan')
       this.openedDrawer = false
       this.url = ''
