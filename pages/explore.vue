@@ -79,7 +79,7 @@
                 panel-width="500"
                 @close="handleClose"
               >
-                <drawerData :data="currentShowcase" />
+                <drawerData :data="showcase" />
               </drawer>
             </template>
           </div>
@@ -104,8 +104,8 @@ import filterCheckboxes from '@/components/FilterCheckboxes'
 import drawer from '@/components/Drawer'
 import drawerData from '@/components/Drawer/data'
 
-const QUERY_ALL_SHOWCASES = gql`
-  query($limit: Int, $offset: Int) {
+const QUERY_SHOWCASES = gql`
+  query($limit: Int, $offset: Int, $slug: String) {
     showcases_aggregate(limit: $limit, offset: $offset) {
       aggregate {
         count
@@ -118,6 +118,40 @@ const QUERY_ALL_SHOWCASES = gql`
         domain
         screenshot_url
         vue_version
+      }
+    }
+    showcases(where: { slug: { _eq: $slug } }) {
+      id
+      slug
+      domain
+      url
+      is_static
+      has_ssr
+      screenshot_url
+      vue_version
+      ui {
+        name
+        url
+        img_path
+      }
+      framework {
+        name
+        url
+        img_path
+      }
+      showcases_plugins {
+        plugin {
+          name
+          url
+          img_path
+        }
+      }
+      showcase_modules {
+        module {
+          name
+          url
+          img_path
+        }
       }
     }
   }
@@ -217,7 +251,6 @@ const QUERY_SEARCH_SHOWCASES = gql`
   }
 `
 export default {
-  middleware: 'preview',
   components: {
     InfiniteLoading,
     showcasePreviewItem,
@@ -227,18 +260,21 @@ export default {
     drawerData
   },
   async fetch () {
+    const preview = this.$nuxt.context.route.query.preview
     const { data } = await this.$hasura({
-      query: print(QUERY_ALL_SHOWCASES),
+      query: print(QUERY_SHOWCASES),
       variables: {
         limit: this.limit,
-        offset: this.offset
+        offset: this.offset,
+        slug: preview
       }
     })
 
-    this.$nuxt.context.store.dispatch(
-      'setShowcases',
-      data ? data.showcases_aggregate.nodes : []
-    )
+    this.showcases = data ? data.showcases_aggregate.nodes : []
+    if (preview && preview !== '') {
+      this.showcase = data.showcases[0]
+      this.openedDrawer = true
+    }
   },
   data () {
     return {
@@ -246,6 +282,8 @@ export default {
       infiniteId: +new Date(),
       limit: 12,
       offset: null,
+      showcases: [],
+      showcase: null,
       results: [],
       q: '',
       checkedFrameworks: [],
@@ -253,12 +291,6 @@ export default {
     }
   },
   computed: {
-    showcases () {
-      return this.$store.getters.showcases
-    },
-    currentShowcase () {
-      return this.$store.getters.currentShowcase
-    },
     list () {
       return [...this.showcases, ...this.results]
     }
@@ -269,13 +301,6 @@ export default {
     }
   },
   created () {
-    if (
-      this.$route.query &&
-      this.$route.query.preview !== '' &&
-      this.$store.getters.currentShowcase
-    ) {
-      this.openedDrawer = true
-    }
     this.debouncedSearch = _debounce(this.search, 500)
   },
   methods: {
@@ -284,13 +309,13 @@ export default {
         query: print(QUERY_SHOWCASE),
         variables: { id }
       }).then(({ data }) => {
-        this.$store.dispatch('setCurrentShowcase', data.showcases_by_pk)
+        this.showcase = data.showcases_by_pk
         this.openedDrawer = true
         this.$router.replace(`/explore?preview=${data.showcases_by_pk.slug}`)
       })
     },
     handleClose () {
-      this.$store.dispatch('setCurrentShowcase', null)
+      this.showcase = null
       this.openedDrawer = false
       this.$router.replace('/explore')
     },
@@ -310,7 +335,7 @@ export default {
         variables.frameworks = this.checkedFrameworks
         variables.uis = this.checkedUis
       } else {
-        query = QUERY_ALL_SHOWCASES
+        query = QUERY_SHOWCASES
       }
 
       const { data } = await this.$hasura({
@@ -353,17 +378,14 @@ export default {
         variables.frameworks = this.checkedFrameworks
         variables.uis = this.checkedUis
       } else {
-        query = QUERY_ALL_SHOWCASES
+        query = QUERY_SHOWCASES
       }
       const { data } = await this.$hasura({
         query: print(query),
         variables
       })
 
-      this.$store.dispatch(
-        'setShowcases',
-        data ? data.showcases_aggregate.nodes : []
-      )
+      this.showcases = data ? data.showcases_aggregate.nodes : []
       this.$fetchState.pending = false
     },
     async search () {
@@ -376,10 +398,7 @@ export default {
           offset: this.offset
         }
       })
-      this.$store.dispatch(
-        'setShowcases',
-        data ? data.showcases_aggregate.nodes : []
-      )
+      this.showcases = data ? data.showcases_aggregate.nodes : []
       this.$fetchState.pending = false
     }
   }
