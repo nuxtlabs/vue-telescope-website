@@ -7,9 +7,9 @@
           <div class="text-5xl leading-10 font-extrabold text-nuxt-lightgreen">
             Take a look.
           </div>
-          <p class="text-sm text-cool-gray-700 mt-2 mb-4">
+          <p class="text-sm text-gray-700 mt-4 mb-4">
             You're seconds away to find out if a website is using Vue and its
-            ecosystem
+            ecosystem.
           </p>
           <form @submit.prevent="analyze">
             <div class="relative rounded-full">
@@ -37,6 +37,10 @@
             <div v-if="inputError" class="pl-6 text-sm text-red-600 mt-1">
               {{ inputError }}
             </div>
+            <p class="text-sm italic text-cool-gray-700 mt-4 mb-4">
+              At the moment we only scan the root path of a domain.<br />
+              <span class="text-cool-gray-600">e.g. vuejs.org/guide will become vuejs.org/</span>
+            </p>
           </form>
           <drawer v-if="openedDrawer" @close="closeDrawer">
             <loader v-if="pending"></loader>
@@ -60,7 +64,6 @@ const urlRegex = /^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-
 const mustBeValidUrl = url => urlRegex.test(url)
 
 export default {
-  middleware: 'redirect',
   components: {
     bgGradient,
     drawer,
@@ -94,7 +97,7 @@ export default {
   methods: {
     async analyze () {
       if (!this.url || !mustBeValidUrl(this.url)) {
-        this.inputError = 'Enter a valid domain, e.g. vuejs.org'
+        this.inputError = 'Please enter a valid domain, e.g. vuejs.org'
         return
       }
       if (this.pending) {
@@ -112,20 +115,24 @@ export default {
         )
         this.$router.replace(`/submit?preview=${this.result.slug}`)
       } catch (err) {
-        this.error = 'Unkown error'
-        this.errorCode = 500
         if (err.response) {
           try {
-            const { message, apiErrorCode } = await err.response.json()
+            const { message, errorCode } = await err.response.json()
             this.error = message
-            this.errorCode = apiErrorCode
-          } catch (err) {}
+            this.errorCode = errorCode || 500
+          } catch (err) {
+            this.error = 'Could not parse API response'
+            this.errorCode = 500
+          }
+        } else {
+          this.error = 'Unkown error'
+          this.errorCode = 500
         }
       }
       this.pending = false
     },
     closeDrawer () {
-      this.$router.replace('/submit')
+      this.$route.query.prevuew && this.$router.replace('/submit')
       this.openedDrawer = false
       // this.url = ''
       this.pending = false

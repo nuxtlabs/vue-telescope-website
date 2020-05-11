@@ -2,6 +2,7 @@
 const fs = require('fs').promises
 const path = require('path')
 const analyze = require('vue-telemetry-analyzer')
+const ERROR_CODES = require('vue-telemetry-analyzer').ERROR_CODES
 const cloudinary = require('cloudinary').v2
 const { URL } = require('url')
 const consola = require('consola')
@@ -30,24 +31,28 @@ exports.handler = async function (event, _context) {
     }
 
     const QUERY_SCAN_BY_URL = gql`
-      query($url: String!) {
-        scans(where: { url: { _eq: $url } }) {
+      query($url: String!, $date: timestamptz!) {
+        scans(where: { url: { _eq: $url }, updated_at: { _gte: $date } }) {
           url
+          updated_at
           is_proxy_blocked
         }
       }
     `
-    // check if showcase has been scanned
-    await hasura({
-      query: print(QUERY_SCAN_BY_URL),
-      variables: { url }
-    }).then(({ data }) => {
-      const scan = data.scans[0]
+    // check if showcase has been scanned (only in production)
+    if (!process.env.NETLIFY_DEV) {
+      // date is now minus 24 hous
+      const date = new Date(new Date().setDate(new Date().getDate()-1))
+      const scanRes = await hasura({
+        query: print(QUERY_SCAN_BY_URL),
+        variables: { url, date }
+      })
+      const scan = scanRes.data.scans[0]
       if (scan) {
         codeError = 99
         throw new Error(`We are unable to scan ${hostname} at the moment...`)
       }
-    })
+    }
 
     // Check if showcase exists in Hasura
     const QUERY_SHOWCASE_BY_HOSTNAME = gql`
@@ -222,8 +227,9 @@ exports.handler = async function (event, _context) {
   } catch (err) {
     consola.error(err)
 
-    if (err.apiCode !== null) {
-      // 0: not crawlable, 1: Vue not detected (see: https://github.com/nuxt-company/vue-telemetry-analyzer/blob/master/src/index.js)
+    // Error from vue-telemetry-analyzer
+    if (err.code) {
+      // For ERROR_CODES, see: https://github.com/nuxt-company/vue-telemetry-analyzer/blob/master/src/index.js
       const scanObject = {
         url: url,
         is_proxy_blocked: err.statusCode === 403
@@ -255,7 +261,7 @@ exports.handler = async function (event, _context) {
       body: JSON.stringify({
         message: err.message,
         statusCode: err.statusCode || 400,
-        apiErrorCode: err.apiCode || codeError,
+        errorCode: err.code || codeError,
         body: err.body || null
       })
     }
