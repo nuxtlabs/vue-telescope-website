@@ -6,8 +6,8 @@
         class="h-60 w-full object-cover object-top rounded border-2 border-gray-100"
       />
       <div class="flex items-center justify-between mt-2">
-        <span class="text-lg font-extrabold text-nuxt-gray capitalize">{{
-          data.domain
+        <span class="text-lg font-extrabold text-nuxt-gray">{{
+          data.domain | capitalize
         }}</span>
         <div class="cursor-pointer" @click="openUrl">
           <svg class="h-6 w-6 fill-current text-gray-300" viewBox="0 0 20 20">
@@ -282,6 +282,12 @@
 <script>
 export default {
   name: 'Data',
+  filters: {
+    capitalize (str) {
+      if (typeof str !== 'string') { return '' }
+      return str.charAt(0).toUpperCase() + str.slice(1)
+    }
+  },
   props: {
     data: {
       type: Object,
