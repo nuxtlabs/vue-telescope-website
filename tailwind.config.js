@@ -39,5 +39,16 @@ module.exports = {
   variants: {
     margin: ['responsive', 'last']
   },
-  plugins: [require('@tailwindcss/ui')]
+  plugins: [require('@tailwindcss/ui')],
+  purge: {
+    // Learn more on https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
+    enabled: true,
+    content: [
+      'components/**/*.vue',
+      'layouts/**/*.vue',
+      'pages/**/*.vue',
+      'plugins/**/*.js',
+      'nuxt.config.js'
+    ]
+  }
 }
