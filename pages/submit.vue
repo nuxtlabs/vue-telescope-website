@@ -20,10 +20,11 @@
               </div>
               <input
                 id="domain"
-                v-model="$v.url.$model"
+                v-model="url"
                 type="text"
                 class="form-input block w-full pl-18 rounded-full text-sm leading-8 border-2 border-green-400 focus:shadow-outline-green focus:border-green-400"
                 placeholder="vuejs.org"
+                required
               />
               <button
                 :disabled="pending"
@@ -49,8 +50,6 @@
 </template>
 
 <script>
-import { validationMixin } from 'vuelidate'
-import { required } from 'vuelidate/lib/validators'
 import bgGradient from '@/components/BgGradient'
 import drawer from '@/components/Drawer'
 import loader from '@/components/Drawer/loader'
@@ -69,13 +68,7 @@ export default {
     error,
     dataResult
   },
-  mixins: [validationMixin],
-  validations: {
-    url: {
-      required,
-      mustBeValidUrl
-    }
-  },
+  mixins: [],
   data () {
     return {
       openedDrawer: false,
@@ -100,42 +93,41 @@ export default {
   },
   methods: {
     async analyze () {
-      this.$v.$touch()
-      if (this.$v.$invalid) {
+      if (!this.url || !mustBeValidUrl(this.url)) {
         this.inputError = 'Enter a valid domain, e.g. vuejs.org'
-      } else {
-        if (this.pending) {
-          return
-        }
-        this.inputError = ''
-        // open drawer
-        this.openedDrawer = true
-        this.pending = true
-        this.error = null
-        this.result = null
-        try {
-          this.result = await this.$http.$get(
-            `api/analyze?url=https://${this.url}`
-          )
-          this.$router.replace(`/submit?preview=${this.result.slug}`)
-        } catch (err) {
-          this.pending = false
-          this.error = 'Unkown error'
-          this.errorCode = 500
-          if (err.response) {
-            try {
-              const { message, apiErrorCode } = await err.response.json()
-              this.error = message
-              this.errorCode = apiErrorCode
-            } catch (err) {}
-          }
+        return
+      }
+      if (this.pending) {
+        return
+      }
+      this.inputError = ''
+      // open drawer
+      this.openedDrawer = true
+      this.pending = true
+      this.error = null
+      this.result = null
+      try {
+        this.result = await this.$http.$get(
+          `api/analyze?url=https://${this.url}`
+        )
+        this.$router.replace(`/submit?preview=${this.result.slug}`)
+      } catch (err) {
+        this.error = 'Unkown error'
+        this.errorCode = 500
+        if (err.response) {
+          try {
+            const { message, apiErrorCode } = await err.response.json()
+            this.error = message
+            this.errorCode = apiErrorCode
+          } catch (err) {}
         }
       }
+      this.pending = false
     },
     closeDrawer () {
       this.$router.replace('/submit')
       this.openedDrawer = false
-      this.url = ''
+      // this.url = ''
       this.pending = false
       this.result = null
       this.inputError = ''
