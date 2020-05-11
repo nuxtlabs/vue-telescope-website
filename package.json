@@ -13,6 +13,7 @@
   "dependencies": {
     "@nuxt/http": "^0.5.1",
     "axios": "^0.19.2",
+    "bufferutil": "^4.0.1",
     "cloudinary": "^1.21.0",
     "consola": "^2.12.1",
     "dotenv": "^8.2.0",
