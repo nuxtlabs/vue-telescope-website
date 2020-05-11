@@ -10,7 +10,14 @@
       :class="slideAnimationClass"
       :style="customStyle"
     >
-      <slot class="h-full"></slot>
+      <div class="flex flex-col">
+        <div class="flex-1">
+          <slot></slot>
+        </div>
+        <div class="flex items-center justify-center">
+          <p class="text-sm underline hover:text-nuxt-lightgreen cursor-pointer transition ease-linear duration-150" @click="close">close window</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
