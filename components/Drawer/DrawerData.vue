@@ -96,7 +96,7 @@
         </div>
       </div>
     </div>
-    <div class="flex items-center justify-around">
+    <div class="hidden sm:flex items-center justify-around">
       <svg width="49" height="87" class="mb-3">
         <path d="M23.283 2.738h1.535V13.19h-1.535V2.738z" fill="#158876" />
         <path
