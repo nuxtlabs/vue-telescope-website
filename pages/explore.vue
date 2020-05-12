@@ -204,35 +204,37 @@ const QUERY_SHOWCASE = gql`
     }
   }
 `
-const QUERY_FILTERED_SHOWCASES = gql`
-  query($limit: Int, $offset: Int, $frameworks: [String!], $uis: [String!], $plugins: [String!]) {
-    showcases_aggregate(
-      limit: $limit
-      offset: $offset
-      where: {
-        framework: { slug: { _in: $frameworks } }
-        ui: { slug: { _in: $uis } }
-        showcases_plugins: { plugin: { slug: { _in: $plugins } } }
+const QUERY_FILTERED_SHOWCASES = ({ limit, offset, where }) => {
+  const query = `
+    query {
+      showcases_aggregate(
+        limit: ${limit}
+        ${offset ? 'offset: ' + offset : ''}
+        where: {
+          ${where.frameworks ? 'framework: { slug: { _in: ' + JSON.stringify(where.frameworks) + ' } }' : ''}
+          ${where.uis ? 'ui: { slug: { _in: ' + JSON.stringify(where.uis) + ' } }' : ''}
+          ${where.plugins ? 'showcases_plugins: { plugin: { slug: { _in: ' + JSON.stringify(where.plugins) + ' } } }' : ''}
+        }
+      ) {
+        aggregate {
+          count
+        }
+        nodes {
+          id
+          slug
+          url
+          hostname
+          domain
+          screenshot_url
+          vue_version
+        }
       }
-    ) {
-      aggregate {
-        count
-      }
-      nodes {
-        id
-        slug
-        url
-        hostname
-        domain
-        screenshot_url
-        vue_version
-      }
-    }
-  }
-`
+    }`
+  return gql(query)
+}
 
 const QUERY_SEARCH_SHOWCASES = gql`
-  query($limit: Int, $offset: Int, $q: String!) {
+  query {
     showcases_aggregate(
       limit: $limit
       offset: $offset
@@ -336,7 +338,7 @@ export default {
     },
     async loadMore ($state) {
       let query
-      const variables = {
+      let variables = {
         limit: this.limit,
         offset: this.offset + this.limit
       }
@@ -345,8 +347,10 @@ export default {
         query = QUERY_SEARCH_SHOWCASES
         variables.q = this.q
       } else if (this.hasFilters) {
-        query = QUERY_FILTERED_SHOWCASES
-        Object.assign(variables, this.filters)
+        variables.where = this.filters
+        query = QUERY_FILTERED_SHOWCASES(variables)
+        // no variables to give
+        variables = {}
       } else {
         query = QUERY_SHOWCASES
       }
@@ -380,13 +384,14 @@ export default {
     async filter () {
       this.$fetchState.pending = true
       let query
-      const variables = {
+      let variables = {
         limit: this.limit,
         offset: this.offset
       }
       if (this.hasFilters) {
-        query = QUERY_FILTERED_SHOWCASES
-        Object.assign(variables, this.filters)
+        variables.where = this.filters
+        query = QUERY_FILTERED_SHOWCASES(variables)
+        variables = {}
       } else {
         query = QUERY_SHOWCASES
       }
