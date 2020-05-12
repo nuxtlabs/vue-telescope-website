@@ -241,44 +241,6 @@ export default {
       featured: data.showcases
     }
   },
-  data () {
-    return {
-      technos: [
-        {
-          logoPath: '/img/vuejs.svg',
-          alt: 'VueJS'
-        },
-        {
-          logoPath: '/img/nuxt.svg',
-          alt: 'NuxtJS'
-        },
-        {
-          logoPath: '/img/gridsome.svg',
-          alt: 'Gridsome'
-        },
-        {
-          logoPath: '/img/vuepress.svg',
-          alt: 'Vuepress'
-        },
-        {
-          logoPath: '/img/bootstrap.svg',
-          alt: 'Bootstrap'
-        },
-        {
-          logoPath: '/img/vuetify.svg',
-          alt: 'Vuetify'
-        },
-        {
-          logoPath: '/img/bulma.svg',
-          alt: 'Bulma'
-        },
-        {
-          logoPath: '/img/tailwind.svg',
-          alt: 'Tailwind'
-        }
-      ]
-    }
-  },
   methods: {
     handleClick (slug) {
       this.$router.push(`/explore?preview=${slug}`)
