@@ -25,16 +25,16 @@
     "utf-8-validate": "^5.0.2",
     "vue-content-loader": "^0.2.3",
     "vue-infinite-loading": "^2.4.5",
-    "vue-telemetry-analyzer": "^0.5.2"
+    "vue-telemetry-analyzer": "^0.6.1"
   },
   "devDependencies": {
-    "@nuxtjs/eslint-config": "^2.0.2",
+    "@nuxtjs/eslint-config": "^3.0.0",
     "@nuxtjs/eslint-module": "^2.0.0",
     "@nuxtjs/tailwindcss": "^2.0.0",
     "@tailwindcss/ui": "^0.3.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.0.0",
-    "eslint-plugin-nuxt": ">=0.5.2",
+    "eslint-plugin-nuxt": ">=1.0.0",
     "nuxt-webfontloader": "^1.1.0",
     "puppeteer": "^3.0.4"
   }

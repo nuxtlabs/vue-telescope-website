@@ -27,9 +27,9 @@
     </div>
     <fieldset v-else>
       <legend
-        class="text-base leading-4 font-bold text-nuxt-lightgreen capitalize"
+        class="text-base leading-4 font-bold text-nuxt-lightgreen"
       >
-        {{ type }}
+        {{ name }}
       </legend>
       <div v-for="(el, i) in items" :key="`${type}-${i}`" class="mt-3">
         <div class="flex items-start">
@@ -43,12 +43,17 @@
               @change="handleCheckedItems"
             />
           </div>
-          <div class="pl-7 text-sm leading-5 flex flex-1">
-            <label
-              :for="el.slug"
-              class="font-medium text-nuxt-gray flex-1 cursor-pointer select-none capitalize hover:text-nuxt-lightgreen transition ease-in-out duration-150"
-            >{{ el.name }}</label>
-          </div>
+          <label :for="el.slug" class="pl-7 text-sm leading-5 flex flex-row items-center cursor-pointer hover:text-nuxt-lightgreen transition ease-in-out duration-150">
+            <img
+              v-if="el.img_path"
+              :src="iconUrl(el.img_path)"
+              :alt="el.name"
+              class="w-4 h-4"
+            />
+            <span
+              class="ml-2 font-medium text-nuxt-gray select-none"
+            >{{ el.name }}</span>
+          </label>
         </div>
       </div>
     </fieldset>
@@ -69,15 +74,20 @@ export default {
       validator: (value) => {
         return ['frameworks', 'uis'].includes(value)
       }
+    },
+    name: {
+      type: String,
+      required: true
     }
   },
   async fetch () {
     const { data } = await this.$hasura({
       query: `
         query {
-          ${this.type} {
+          ${this.type.toLowerCase()} {
             slug
-            name
+            name,
+            img_path
           }
         }
       `
@@ -94,6 +104,9 @@ export default {
   methods: {
     handleCheckedItems () {
       this.$emit('checkedItems', this.checkedItems)
+    },
+    iconUrl (path) {
+      return `${process.env.ICON_URL}${path}`
     }
   }
 }

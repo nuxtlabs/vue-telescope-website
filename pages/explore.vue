@@ -41,10 +41,12 @@
           <form class="mt-8">
             <FilterCheckboxes
               type="frameworks"
+              name="Framework"
               @checkedItems="handleCheckedFrameworks"
             />
             <FilterCheckboxes
               type="uis"
+              name="UI"
               class="mt-4"
               @checkedItems="handlecheckedUis"
             />

@@ -43,7 +43,7 @@
             <div class="flex flex-row items-center">
               <img
                 v-if="data.framework.img_path"
-                :src="data.framework.img_path"
+                :src="iconUrl(data.framework.img_path)"
                 :alt="data.framework.name"
                 class="w-4 h-4"
               />
@@ -58,7 +58,7 @@
             <div class="flex flex-row items-center">
               <img
                 v-if="data.ui.img_path"
-                :src="data.ui.img_path"
+                :src="iconUrl(data.ui.img_path)"
                 :alt="data.ui.name"
                 class="w-4 h-4"
               />
@@ -296,6 +296,9 @@ export default {
   methods: {
     openUrl () {
       window.open(this.data.url, '_blank')
+    },
+    iconUrl (path) {
+      return `${process.env.ICON_URL}${path}`
     }
   }
 }
