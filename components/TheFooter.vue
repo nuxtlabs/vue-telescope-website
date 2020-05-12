@@ -33,7 +33,7 @@
       </div>
       <div class="flex mt-8 md:mt-0 md:order-1 items-center justify-center">
         <div class="flex items-center text-base leading-6 text-gray-500">
-          <div>&copy; 2020, <a href="https://nuxtjs.org" target="_blank" rel="noopener" class="underline">NuxtJS Team</a> for the VueJS Community</div>
+          <div>&copy; 2020, <a href="https://nuxtjs.org" target="_blank" rel="noopener" class="underline hover:text-nuxt-lightgreen transition ease-linear duration-150">NuxtJS Team</a> for the VueJS Community</div>
         </div>
       </div>
     </div>
