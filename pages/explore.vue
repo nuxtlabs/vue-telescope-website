@@ -38,7 +38,7 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="pt-8 flex flex-col sm:flex-row">
         <div class="hidden sm:block h-full w-60 sticky top-0" :class="{ 'opacity-50': q.length }">
-          <form class="mt-8">
+          <form class="ml-2 mt-8">
             <FilterCheckboxes
               type="frameworks"
               name="Framework"
