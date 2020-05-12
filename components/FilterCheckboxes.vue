@@ -84,7 +84,7 @@ export default {
     const { data } = await this.$hasura({
       query: `
         query {
-          ${this.type.toLowerCase()} {
+          ${this.type.toLowerCase()}(order_by: { name: asc } ) {
             slug
             name,
             img_path
