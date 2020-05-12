@@ -8,7 +8,6 @@ module.exports = {
     parser: 'babel-eslint'
   },
   extends: ['@nuxtjs', 'plugin:nuxt/recommended'],
-  // add your custom rules here
   rules: {
     'vue/no-unused-components': 1,
     'vue/singleline-html-element-content-newline': 0,
@@ -18,6 +17,9 @@ module.exports = {
     'vue/no-v-html': 0,
     'no-unused-vars': 1,
     'no-console': 1,
-    camelcase: 0
+    camelcase: 0,
+    indent: ['error', 2, { SwitchCase: 1 }],
+    quotes: ['error', 'single'],
+    semi: ['error', 'never']
   }
 }
