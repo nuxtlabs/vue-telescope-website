@@ -6,17 +6,13 @@
     @click.self="close"
   >
     <div
-      class="fixed top-0 right-0 bottom-0 overflow-hidden z-50 w-full bg-white p-4"
+      class="flex flex-col fixed top-0 right-0 bottom-0 overflow-hidden z-50 w-full bg-white p-4"
       :class="slideAnimationClass"
       :style="customStyle"
     >
-      <div class="flex flex-col">
-        <div class="flex-1">
-          <slot></slot>
-        </div>
-        <div class="flex items-center justify-center">
-          <p class="text-sm underline hover:text-nuxt-lightgreen cursor-pointer transition ease-linear duration-150" @click="close">close window</p>
-        </div>
+      <slot class="flex-1"></slot>
+      <div class="flex items-center justify-center">
+        <p class="text-sm underline hover:text-nuxt-lightgreen cursor-pointer transition ease-linear duration-150" @click="close">close window</p>
       </div>
     </div>
   </div>

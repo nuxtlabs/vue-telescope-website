@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center items-center w-full h-full">
+  <div class="h-full flex justify-center items-center">
     <lottie :options="animationFile" class="w-80" />
   </div>
 </template>
