@@ -48,10 +48,10 @@
               v-if="el.img_path"
               :src="iconUrl(el.img_path)"
               :alt="el.name"
-              class="w-4 h-4"
+              class="w-4 h-4 mr-2"
             />
             <span
-              class="ml-2 font-medium text-nuxt-gray select-none"
+              class="font-medium text-nuxt-gray select-none"
             >{{ el.name }}</span>
           </label>
         </div>
@@ -72,7 +72,7 @@ export default {
       type: String,
       required: true,
       validator: (value) => {
-        return ['frameworks', 'uis'].includes(value)
+        return ['frameworks', 'uis', 'plugins'].includes(value)
       }
     },
     name: {
@@ -106,7 +106,7 @@ export default {
       this.$emit('checkedItems', this.checkedItems)
     },
     iconUrl (path) {
-      return `${process.env.ICON_URL}${path}`
+      return `${process.env.ICONS_URL}${path}`
     }
   }
 }

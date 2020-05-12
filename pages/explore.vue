@@ -37,18 +37,24 @@
     </section>
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="pt-8 flex flex-col sm:flex-row">
-        <div class="hidden sm:block h-full w-60 sticky top-0">
+        <div class="hidden sm:block h-full w-60 sticky top-0" :class="{ 'opacity-50': q.length }">
           <form class="mt-8">
             <FilterCheckboxes
               type="frameworks"
               name="Framework"
-              @checkedItems="handleCheckedFrameworks"
+              @checkedItems="(items) => updateFilters('frameworks', items)"
             />
             <FilterCheckboxes
               type="uis"
               name="UI"
               class="mt-4"
-              @checkedItems="handlecheckedUis"
+              @checkedItems="(items) => updateFilters('uis', items)"
+            />
+            <FilterCheckboxes
+              type="plugins"
+              name="Plugin"
+              class="mt-4"
+              @checkedItems="(items) => updateFilters('plugins', items)"
             />
           </form>
         </div>
@@ -199,15 +205,14 @@ const QUERY_SHOWCASE = gql`
   }
 `
 const QUERY_FILTERED_SHOWCASES = gql`
-  query($limit: Int, $offset: Int, $frameworks: [String!], $uis: [String!]) {
+  query($limit: Int, $offset: Int, $frameworks: [String!], $uis: [String!], $plugins: [String!]) {
     showcases_aggregate(
       limit: $limit
       offset: $offset
       where: {
-        _or: [
-          { framework: { slug: { _in: $frameworks } } }
-          { ui: { slug: { _in: $uis } } }
-        ]
+        framework: { slug: { _in: $frameworks } }
+        ui: { slug: { _in: $uis } }
+        showcases_plugins: { plugin: { slug: { _in: $plugins } } }
       }
     ) {
       aggregate {
@@ -290,13 +295,19 @@ export default {
       showcase: null,
       results: [],
       q: '',
-      checkedFrameworks: [],
-      checkedUis: []
+      filters: {
+        frameworks: null,
+        uis: null,
+        plugins: null
+      }
     }
   },
   computed: {
     list () {
       return [...this.showcases, ...this.results]
+    },
+    hasFilters () {
+      return this.filters.frameworks || this.filters.uis || this.filters.plugins
     }
   },
   watch: {
@@ -329,15 +340,13 @@ export default {
         limit: this.limit,
         offset: this.offset + this.limit
       }
-      const hasChecks = this.checkedFrameworks.length || this.checkedUis.length
 
       if (this.q.trim() !== '') {
         query = QUERY_SEARCH_SHOWCASES
         variables.q = this.q
-      } else if (hasChecks) {
+      } else if (this.hasFilters) {
         query = QUERY_FILTERED_SHOWCASES
-        variables.frameworks = this.checkedFrameworks
-        variables.uis = this.checkedUis
+        Object.assign(variables, this.filters)
       } else {
         query = QUERY_SHOWCASES
       }
@@ -360,15 +369,13 @@ export default {
       this.results = []
       this.infiniteId += 1
     },
-    async handleCheckedFrameworks (frameworks) {
+    updateFilters (type, value) {
+      this.filters[type] = value.length ? value : null
+      if (this.q) {
+        return
+      }
       this.resetInfinite()
-      this.checkedFrameworks = frameworks
-      await this.filter()
-    },
-    async handlecheckedUis (uis) {
-      this.resetInfinite()
-      this.checkedUis = uis
-      await this.filter()
+      this.filter()
     },
     async filter () {
       this.$fetchState.pending = true
@@ -377,10 +384,9 @@ export default {
         limit: this.limit,
         offset: this.offset
       }
-      if (this.checkedFrameworks.length || this.checkedUis.length) {
+      if (this.hasFilters) {
         query = QUERY_FILTERED_SHOWCASES
-        variables.frameworks = this.checkedFrameworks
-        variables.uis = this.checkedUis
+        Object.assign(variables, this.filters)
       } else {
         query = QUERY_SHOWCASES
       }

@@ -30,7 +30,7 @@ export default {
   ** Public env
   */
   env: {
-    ICON_URL: 'https://nuxt-company.github.io/vue-telemetry-analyzer/',
+    ICONS_URL: 'https://nuxt-company.github.io/vue-telemetry-analyzer/',
     API_HASURA_URL: process.env.API_HASURA_URL,
     // TODO: remove before production
     HASURA_ADMIN_SECRET_KEY: process.env.HASURA_ADMIN_SECRET_KEY
@@ -79,8 +79,5 @@ export default {
     google: {
       families: ['Inter']
     }
-  },
-  purgeCSS: {
-    whitelistPatterns: [/[\w-/.:]+(?<!:)/g]
   }
 }

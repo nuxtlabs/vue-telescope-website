@@ -299,7 +299,7 @@ export default {
       window.open(this.data.url, '_blank')
     },
     iconUrl (path) {
-      return `${process.env.ICON_URL}${path}`
+      return `${process.env.ICONS_URL}${path}`
     }
   }
 }
