@@ -15,7 +15,7 @@
     </div>
     <div class="mt-2 flex items-center justify-between">
       <p
-        class="previewItem__title text-base font-extrabold text-nuxt-gray transition ease-in-out duration-150"
+        class="previewItem__title text-base font-extrabold text-nuxt-gray truncate transition ease-in-out duration-150"
       >
         {{ hostname }}
       </p>
