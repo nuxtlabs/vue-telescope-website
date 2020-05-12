@@ -59,8 +59,13 @@
           </form>
         </div>
         <div class="sm:flex-1" style="min-height: 1000px;">
+          <div class="mt-8 flex flex-row items-center justify-end">
+            <p class="text-nuxt-gray font-extrabold">
+              <span class="text-nuxt-lightgreen">{{ count }}</span> websites
+            </p>
+          </div>
           <div
-            class="mt-8 grid gap-8 mx-auto sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
+            class="mt-4 grid gap-8 mx-auto sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
           >
             <template v-if="pending && !list.length">
               <ContentLoader
@@ -117,6 +122,11 @@ import DrawerData from '@/components/Drawer/DrawerData'
 
 const QUERY_SHOWCASES = gql`
   query($limit: Int, $offset: Int, $slug: String) {
+    total: showcases_aggregate {
+      aggregate {
+        count
+      }
+    }
     showcases_aggregate(limit: $limit, offset: $offset) {
       aggregate {
         count
@@ -283,8 +293,8 @@ export default {
         slug: preview
       }
     })
-
-    this.showcases = data && data.showcases_aggregate ? data.showcases_aggregate.nodes : []
+    this.count = data.total.aggregate.count
+    this.showcases = data ? data.showcases_aggregate.nodes : []
     this.pending = false
     if (preview && preview !== '') {
       this.showcase = data.showcases[0]
@@ -298,6 +308,7 @@ export default {
       infiniteId: +new Date(),
       limit: 12,
       offset: null,
+      count: null,
       showcases: [],
       showcase: null,
       results: [],
