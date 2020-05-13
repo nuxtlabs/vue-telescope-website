@@ -138,7 +138,16 @@ const QUERY_SHOWCASES = gql`
         hostname
         domain
         screenshot_url
-        vue_version
+        ui {
+          name
+          url
+          img_path
+        }
+        framework {
+          name
+          url
+          img_path
+        }
       }
     }
     showcases(where: { slug: { _eq: $slug } }) {
@@ -239,7 +248,16 @@ const QUERY_FILTERED_SHOWCASES = ({ limit, offset, where }) => {
           hostname
           domain
           screenshot_url
-          vue_version
+          ui {
+            name
+            url
+            img_path
+          }
+          framework {
+            name
+            url
+            img_path
+          }
         }
       }
     }`
@@ -268,7 +286,16 @@ const QUERY_SEARCH_SHOWCASES = gql`
         hostname
         domain
         screenshot_url
-        vue_version
+        ui {
+          name
+          url
+          img_path
+        }
+        framework {
+          name
+          url
+          img_path
+        }
       }
     }
   }

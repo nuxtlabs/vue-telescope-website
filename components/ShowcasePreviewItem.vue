@@ -22,8 +22,19 @@
         {{ hostname }}
       </p>
       <div class="flex items-center">
-        <img class="h-3 mr-px" src="/img/vuejs.svg" alt="vuejs" />
-        <p class="text-xs text-gray-400">{{ data.vue_version }}</p>
+        <img
+          v-if="data.framework && data.framework.img_path"
+          :src="iconUrl(data.framework.img_path)"
+          :alt="data.framework.name"
+          class="w-3 h-3 mx-2"
+        />
+        <img v-else class="h-3 mr-2" src="/img/vuejs.svg" alt="vuejs" />
+        <img
+          v-if="data.ui && data.ui.img_path"
+          :src="iconUrl(data.ui.img_path)"
+          :alt="data.ui.name"
+          class="w-3 h-3"
+        />
       </div>
     </div>
   </div>
@@ -48,6 +59,9 @@ export default {
   methods: {
     open () {
       this.$emit('openDrawer')
+    },
+    iconUrl (path) {
+      return `${process.env.ICONS_URL}${path}`
     }
   }
 }
