@@ -215,7 +215,7 @@ const QUERY = gql`
         count
       }
     }
-    showcases(limit: 9) {
+    featured(limit: 9) {
       id
       slug
       domain
@@ -237,7 +237,7 @@ export default {
 
     return {
       count: data.showcases_aggregate.aggregate.count,
-      featured: data.showcases
+      featured: data.featured
     }
   },
   methods: {
