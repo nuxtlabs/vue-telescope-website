@@ -11,7 +11,7 @@
       </div>
       <div
         class="h-48 md:h-40 bg-cover bg-top bg-no-repeat border border-gray-100"
-        :style="{ backgroundImage: 'url(' + data.screenshot_url + ')' }"
+        :style="{ backgroundImage: 'url(' + screenshotUrl + ')' }"
       >
       </div>
     </div>
@@ -40,6 +40,9 @@ export default {
   computed: {
     hostname () {
       return this.data.hostname.replace('www.', '')
+    },
+    screenshotUrl () {
+      return this.data.screenshot_url.replace('/upload/', '/upload/c_scale,w_260/')
     }
   },
   methods: {
