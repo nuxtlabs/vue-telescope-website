@@ -37,7 +37,6 @@
       </div>
     </section>
     <section id="featured" class="relative">
-      <bgGradient klass="featured" />
       <div class="max-w-6xl mx-auto h-full px-4 pb-10 sm:px-6 lg:px-8 lg:pt-0">
         <h5
           class="mb-8 text-2xl leading-8 font-bold tracking-tighter text-nuxt-gray sm:leading-10"
