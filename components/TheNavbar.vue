@@ -37,7 +37,7 @@
           <div class="flex-shrink-0 flex items-center">
             <nuxt-link
               to="/"
-              class="text-base uppercase font-extrabold tracking-tight cursor-pointer"
+              class="text-base uppercase font-black tracking-tighter"
             >
               <span class="text-nuxt-lightgreen">vue</span>
               <span class="text-nuxt-gray">telemetry</span>
