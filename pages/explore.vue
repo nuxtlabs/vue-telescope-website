@@ -62,7 +62,7 @@
           <div
             class="mt-8 grid gap-8 mx-auto sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
           >
-            <template v-if="$fetchState.pending">
+            <template v-if="pending && !list.length">
               <ContentLoader
                 v-for="n in 12"
                 :key="n"
@@ -75,7 +75,7 @@
                 <rect x="0" y="216" rx="4" ry="4" width="68" height="16" />
               </ContentLoader>
             </template>
-            <template v-else>
+            <template v-else-if="list.length">
               <ShowcasePreviewItem
                 v-for="item in list"
                 :key="item.id"
@@ -90,9 +90,12 @@
                 <DrawerData :data="showcase" />
               </Drawer>
             </template>
+            <template v-else>
+              <p class="text-gray-600">No website found.</p>
+            </template>
           </div>
           <ClientOnly>
-            <InfiniteLoading :identifier="infiniteId" @infinite="loadMore" />
+            <InfiniteLoading v-if="list.length" :identifier="infiniteId" @infinite="loadMore" />
           </ClientOnly>
         </div>
       </div>
@@ -234,13 +237,12 @@ const QUERY_FILTERED_SHOWCASES = ({ limit, offset, where }) => {
 }
 
 const QUERY_SEARCH_SHOWCASES = gql`
-  query {
+  query($limit: Int, $offset: Int, $q: String) {
     showcases_aggregate(
       limit: $limit
       offset: $offset
       where: {
         _or: [
-          { domain: { _ilike: $q } }
           { hostname: { _ilike: $q } }
           { slug: { _ilike: $q } }
         ]
@@ -271,6 +273,7 @@ export default {
     DrawerData
   },
   async fetch () {
+    this.pending = true
     const preview = this.$nuxt.context.route.query.preview
     const { data } = await this.$hasura({
       query: print(QUERY_SHOWCASES),
@@ -281,7 +284,8 @@ export default {
       }
     })
 
-    this.showcases = data ? data.showcases_aggregate.nodes : []
+    this.showcases = data && data.showcases_aggregate ? data.showcases_aggregate.nodes : []
+    this.pending = false
     if (preview && preview !== '') {
       this.showcase = data.showcases[0]
       this.openedDrawer = true
@@ -289,6 +293,7 @@ export default {
   },
   data () {
     return {
+      pending: false,
       openedDrawer: false,
       infiniteId: +new Date(),
       limit: 12,
@@ -337,15 +342,19 @@ export default {
       this.$router.replace('/explore')
     },
     async loadMore ($state) {
+      if (this.pending || !this.showcases.length) {
+        return setTimeout(() => $state.loaded(), 500)
+      }
+      this.pending = true
       let query
       let variables = {
         limit: this.limit,
         offset: this.offset + this.limit
       }
 
-      if (this.q.trim() !== '') {
+      if (this.q.trim()) {
         query = QUERY_SEARCH_SHOWCASES
-        variables.q = this.q
+        variables.q = `${this.q}%`
       } else if (this.hasFilters) {
         variables.where = this.filters
         query = QUERY_FILTERED_SHOWCASES(variables)
@@ -366,6 +375,7 @@ export default {
       } else {
         $state.complete()
       }
+      this.pending = false
     },
     resetInfinite () {
       this.limit = 12
@@ -375,14 +385,14 @@ export default {
     },
     updateFilters (type, value) {
       this.filters[type] = value.length ? value : null
-      if (this.q) {
+      if (this.q.trim()) {
         return
       }
+      window.scrollTo && window.scrollTo(0, Math.min(window.scrollY, 380))
       this.resetInfinite()
       this.filter()
     },
     async filter () {
-      this.$fetchState.pending = true
       let query
       let variables = {
         limit: this.limit,
@@ -395,26 +405,34 @@ export default {
       } else {
         query = QUERY_SHOWCASES
       }
+      this.pending = true
+      this.showcases = []
       const { data } = await this.$hasura({
         query: print(query),
         variables
       })
 
       this.showcases = data ? data.showcases_aggregate.nodes : []
-      this.$fetchState.pending = false
+      this.pending = false
     },
     async search () {
-      this.$fetchState.pending = true
+      this.resetInfinite()
+      if (!this.q.trim()) {
+        this.filter()
+        return
+      }
+      this.pending = true
+      this.showcases = []
       const { data } = await this.$hasura({
         query: print(QUERY_SEARCH_SHOWCASES),
         variables: {
-          q: `%${this.q}%`,
+          q: `${this.q}%`,
           limit: this.limit,
           offset: this.offset
         }
       })
       this.showcases = data ? data.showcases_aggregate.nodes : []
-      this.$fetchState.pending = false
+      this.pending = false
     }
   }
 }
