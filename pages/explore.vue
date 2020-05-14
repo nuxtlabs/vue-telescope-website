@@ -67,7 +67,7 @@
           <div
             class="mt-4 grid gap-8 mx-auto sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
           >
-            <template v-if="pending && !list.length">
+            <template v-if="pending && !showcases.length">
               <ContentLoader
                 v-for="n in 12"
                 :key="n"
@@ -80,9 +80,9 @@
                 <rect x="0" y="216" rx="4" ry="4" width="68" height="16" />
               </ContentLoader>
             </template>
-            <template v-else-if="list.length">
+            <template v-else-if="showcases.length">
               <ShowcasePreviewItem
-                v-for="item in list"
+                v-for="item in showcases"
                 :key="item.id"
                 :data="item"
                 @openDrawer="handleOpen(item.id)"
@@ -96,11 +96,13 @@
               </Drawer>
             </template>
             <template v-else>
-              <p class="text-gray-600">No website found.</p>
+              <div class="sm:col-span-1 md:col-span-2 xl:col-span-3">
+                <p class="text-center text-sm text-gray-400">No website found.</p>
+              </div>
             </template>
           </div>
           <ClientOnly>
-            <InfiniteLoading v-if="list.length" :identifier="infiniteId" @infinite="loadMore" />
+            <InfiniteLoading v-if="showcases.length" :identifier="infiniteId" @infinite="loadMore" />
           </ClientOnly>
         </div>
       </div>
@@ -120,76 +122,25 @@ import FilterCheckboxes from '@/components/FilterCheckboxes'
 import Drawer from '@/components/Drawer/Drawer'
 import DrawerData from '@/components/Drawer/DrawerData'
 
-const QUERY_SHOWCASES = gql`
-  query($limit: Int, $offset: Int, $slug: String) {
-    total: showcases_aggregate {
-      aggregate {
-        count
+const QUERY_SHOWCASES = (args) => {
+  const query = `
+    query {
+      total: showcases_aggregate { aggregate { count } }
+      showcases: showcases_aggregate(limit: ${args.limit}, offset: ${args.offset}) {
+        aggregate {
+          count
+        }
+        nodes {id slug url hostname domain screenshot_url ui { name url img_path } framework { name url img_path } }
       }
+      ${args.slug ? 'previews: showcases(where: {slug: {_eq:' + JSON.stringify(args.slug) + ' }}) { id slug domain hostname url is_static has_ssr screenshot_url vue_version ui { name url img_path } framework { name url img_path } showcases_plugins { plugin { name url img_path } } showcase_modules { module { name url img_path } } }' : ''}
     }
-    showcases_aggregate(limit: $limit, offset: $offset) {
-      aggregate {
-        count
-      }
-      nodes {
-        id
-        slug
-        url
-        hostname
-        domain
-        screenshot_url
-        ui {
-          name
-          url
-          img_path
-        }
-        framework {
-          name
-          url
-          img_path
-        }
-      }
-    }
-    showcases(where: { slug: { _eq: $slug } }) {
-      id
-      slug
-      domain
-      hostname
-      url
-      is_static
-      has_ssr
-      screenshot_url
-      vue_version
-      ui {
-        name
-        url
-        img_path
-      }
-      framework {
-        name
-        url
-        img_path
-      }
-      showcases_plugins {
-        plugin {
-          name
-          url
-          img_path
-        }
-      }
-      showcase_modules {
-        module {
-          name
-          url
-          img_path
-        }
-      }
-    }
-  }
-`
+  `
+  return gql(query)
+}
+
 const QUERY_SHOWCASE = gql`
   query($id: uuid!) {
-    showcases_by_pk(id: $id) {
+    showcase: showcases_by_pk(id: $id) {
       id
       slug
       domain
@@ -229,7 +180,7 @@ const QUERY_SHOWCASE = gql`
 const QUERY_FILTERED_SHOWCASES = ({ limit, offset, where }) => {
   const query = `
     query {
-      showcases_aggregate(
+      showcases: showcases_aggregate(
         limit: ${limit}
         ${offset ? 'offset: ' + offset : ''}
         where: {
@@ -266,16 +217,7 @@ const QUERY_FILTERED_SHOWCASES = ({ limit, offset, where }) => {
 
 const QUERY_SEARCH_SHOWCASES = gql`
   query($limit: Int, $offset: Int, $q: String) {
-    showcases_aggregate(
-      limit: $limit
-      offset: $offset
-      where: {
-        _or: [
-          { hostname: { _ilike: $q } }
-          { slug: { _ilike: $q } }
-        ]
-      }
-    ) {
+    showcases: search_showcases_aggregate(args: { search: $q }, limit: $limit, offset: $offset) {
       aggregate {
         count
       }
@@ -312,19 +254,19 @@ export default {
   async fetch () {
     this.pending = true
     const preview = this.$nuxt.context.route.query.preview
+    const query = QUERY_SHOWCASES({
+      limit: this.limit,
+      offset: this.offset,
+      slug: preview
+    })
     const { data } = await this.$hasura({
-      query: print(QUERY_SHOWCASES),
-      variables: {
-        limit: this.limit,
-        offset: this.offset,
-        slug: preview
-      }
+      query: print(query)
     })
     this.count = data.total.aggregate.count
-    this.showcases = data ? data.showcases_aggregate.nodes : []
+    this.showcases = data ? data.showcases.nodes : []
     this.pending = false
     if (preview && preview !== '') {
-      this.showcase = data.showcases[0]
+      this.showcase = data.previews[0]
       this.openedDrawer = true
     }
   },
@@ -338,7 +280,6 @@ export default {
       count: null,
       showcases: [],
       showcase: null,
-      results: [],
       q: '',
       filters: {
         frameworks: null,
@@ -348,9 +289,6 @@ export default {
     }
   },
   computed: {
-    list () {
-      return [...this.showcases, ...this.results]
-    },
     hasFilters () {
       return this.filters.frameworks || this.filters.uis || this.filters.plugins
     }
@@ -369,9 +307,9 @@ export default {
         query: print(QUERY_SHOWCASE),
         variables: { id }
       }).then(({ data }) => {
-        this.showcase = data.showcases_by_pk
+        this.showcase = data.showcase
         this.openedDrawer = true
-        this.$router.replace(`/explore?preview=${data.showcases_by_pk.slug}`)
+        this.$router.replace(`/explore?preview=${data.showcase.slug}`)
       })
     },
     handleClose () {
@@ -399,16 +337,19 @@ export default {
         // no variables to give
         variables = {}
       } else {
-        query = QUERY_SHOWCASES
+        query = QUERY_SHOWCASES(variables)
+        // no variables to give
+        variables = {}
       }
 
       const { data } = await this.$hasura({
         query: print(query),
         variables
       })
-      if (data.showcases_aggregate.aggregate.count) {
+
+      if (data.showcases.nodes.length) {
         this.offset += this.limit
-        this.results.push(...data.showcases_aggregate.nodes)
+        this.showcases.push(...data.showcases.nodes)
         $state.loaded()
       } else {
         $state.complete()
@@ -418,7 +359,7 @@ export default {
     resetInfinite () {
       this.limit = 12
       this.offset = null
-      this.results = []
+      this.showcases = []
       this.infiniteId += 1
     },
     updateFilters (type, value) {
@@ -439,18 +380,19 @@ export default {
       if (this.hasFilters) {
         variables.where = this.filters
         query = QUERY_FILTERED_SHOWCASES(variables)
+        // no variables to give
         variables = {}
       } else {
-        query = QUERY_SHOWCASES
+        query = QUERY_SHOWCASES(variables)
+        // no variables to give
+        variables = {}
       }
       this.pending = true
-      this.showcases = []
       const { data } = await this.$hasura({
         query: print(query),
         variables
       })
-
-      this.showcases = data ? data.showcases_aggregate.nodes : []
+      this.showcases.push(...data.showcases.nodes)
       this.pending = false
     },
     async search () {
@@ -460,16 +402,23 @@ export default {
         return
       }
       this.pending = true
-      this.showcases = []
+      let variables = {
+        q: this.q,
+        limit: this.limit,
+        offset: this.offset
+      }
+      let query = QUERY_SEARCH_SHOWCASES
+      if (this.q.trim() === '') {
+        query = QUERY_SHOWCASES(variables)
+        // no variables to give
+        variables = {}
+      }
       const { data } = await this.$hasura({
-        query: print(QUERY_SEARCH_SHOWCASES),
-        variables: {
-          q: `${this.q}%`,
-          limit: this.limit,
-          offset: this.offset
-        }
+        query: print(query),
+        variables
       })
-      this.showcases = data ? data.showcases_aggregate.nodes : []
+
+      this.showcases = data ? data.showcases.nodes : []
       this.pending = false
     }
   }
