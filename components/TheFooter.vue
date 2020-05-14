@@ -16,6 +16,7 @@
               href="https://twitter.com/vuejs"
               class="text-gray-400 hover:text-nuxt-lightgreen transition ease-in duration-150"
               target="_blank"
+              rel="noopener"
             >
               <span class="sr-only">Twitter</span>
               <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -30,6 +31,7 @@
               href="https://github.com/vuejs/vue"
               class="text-gray-400 hover:text-nuxt-lightgreen transition ease-in duration-150"
               target="_blank"
+              rel="noopener"
             >
               <span class="sr-only">GitHub</span>
               <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -49,9 +51,9 @@
           <li class="text-gray-500">&copy; 2020, <a href="https://nuxtjs.org" target="_blank" rel="noopener" class="text-nuxt-lightgreen font-medium transition ease-linear duration-150">NuxtJS Team</a> for the VueJS Community</li>
         </ul>
         <ul class="flex items-center text-sm">
-          <li class="text-gray-500">Hosted on <a href="https://www.netlify.com/" target="_blank" class="text-nuxt-lightgreen font-medium">Netlify</a></li>
+          <li class="text-gray-500">Hosted on <a href="https://www.netlify.com/" target="_blank" rel="noopener" class="text-nuxt-lightgreen font-medium">Netlify</a></li>
           <span class="mx-2 text-gray-300">&bullet;</span>
-          <li class="text-gray-500">Images served by <a href="https://cloudinary.com/" target="_blank" class="text-nuxt-lightgreen font-medium">Cloudinary</a></li>
+          <li class="text-gray-500">Images served by <a href="https://cloudinary.com/" target="_blank" rel="noopener" class="text-nuxt-lightgreen font-medium">Cloudinary</a></li>
         </ul>
       </div>
     </div>
