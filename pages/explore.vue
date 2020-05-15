@@ -1,9 +1,9 @@
 <template>
   <div>
     <section id="hero" class>
-      <div class="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
-        <h1 class="text-3xl font-extrabold text-nuxt-gray">Explore</h1>
-        <p class="mt-2 mb-6 text-gray-600">
+      <div class="max-w-6xl mx-auto pt-4 pb-0 sm:py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
+        <h1 class="text-center sm:text-left text-3xl font-extrabold text-nuxt-gray">Explore</h1>
+        <p class="text-center sm:text-left mt-2 mb-6 text-gray-600">
           Find all the websites built with VueJS
         </p>
         <div class>
@@ -27,7 +27,7 @@
             <input
               id="search"
               v-model="q"
-              class="form-input rounded-full block pl-10 sm:text-sm sm:leading-8 border-gray-200 focus:shadow-outline-green focus:border-green-400"
+              class="form-input rounded-full block w-full sm:w-auto pl-10 sm:text-sm sm:leading-8 border-gray-200 focus:shadow-outline-green focus:border-green-400"
               placeholder="Search"
               type="search"
             />
@@ -36,31 +36,52 @@
       </div>
     </section>
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="pt-8 flex flex-col sm:flex-row">
-        <div class="hidden sm:block h-full w-60 sticky top-0 transition ease-linear duration-150" :class="{ 'opacity-50': q.length }">
-          <form class="ml-2 mt-8">
-            <FilterCheckboxes
-              type="frameworks"
-              name="Framework"
-              @checkedItems="(items) => updateFilters('frameworks', items)"
-            />
-            <FilterCheckboxes
-              type="uis"
-              name="UI"
-              class="mt-4"
-              @checkedItems="(items) => updateFilters('uis', items)"
-            />
-            <FilterCheckboxes
-              type="plugins"
-              name="Plugin"
-              class="mt-4"
-              @checkedItems="(items) => updateFilters('plugins', items)"
-            />
-          </form>
+      <div class="pt-0 sm:pt-8 flex flex-col sm:flex-row">
+        <div class="sm:h-full sm:w-60 sm:sticky sm:top-0 transition ease-linear duration-150" :class="{ 'opacity-50': q.length }">
+          <div class="relative block text-left">
+            <div class="sm:hidden mt-4 sm:mt-8 flex flex-row items-center justify-between">
+              <span class="rounded-md shadow-sm">
+                <button type="button" class="inline-flex justify-center w-full rounded-full border border-gray-200 px-4 py-2 bg-white text-sm leading-5 font-medium text-gray-600 hover:text-gray-500 focus:outline-none focus:border-green-400 focus:shadow-outline-green active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150" @click="toggleFilters">
+                  Filters
+                  <svg class="-mr-1 ml-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  </svg>
+                </button>
+              </span>
+              <p class="text-nuxt-gray font-extrabold">
+                <span class="text-nuxt-lightgreen">{{ count }}</span> websites
+              </p>
+            </div>
+            <div id="filters" tabindex="0" class="hidden sm:block origin-top-left absolute sm:relative left-0 mt-2 sm:mt-0 w-56 sm:w-auto rounded-md sm:rounded-none shadow-lg sm:shadow-none focus:outline-none" @focusout="toggleFilters">
+              <div class="rounded-md sm:rounded-none bg-white sm:bg-transparent shadow-xs sm:shadow-none">
+                <div class="p-4 sm:p-0">
+                  <form class="sm:ml-2 sm:mt-8">
+                    <FilterCheckboxes
+                      type="frameworks"
+                      name="Framework"
+                      @checkedItems="(items) => updateFilters('frameworks', items)"
+                    />
+                    <FilterCheckboxes
+                      type="uis"
+                      name="UI"
+                      class="mt-4"
+                      @checkedItems="(items) => updateFilters('uis', items)"
+                    />
+                    <FilterCheckboxes
+                      type="plugins"
+                      name="Plugin"
+                      class="mt-4"
+                      @checkedItems="(items) => updateFilters('plugins', items)"
+                    />
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="sm:flex-1" style="min-height: 1000px;">
-          <div class="mt-8 flex flex-row items-center justify-end">
-            <p class="text-nuxt-gray font-extrabold">
+          <div class="hidden sm:block">
+            <p class="text-nuxt-gray font-extrabold text-right">
               <span class="text-nuxt-lightgreen">{{ count }}</span> websites
             </p>
           </div>
@@ -302,6 +323,10 @@ export default {
     this.debouncedSearch = _debounce(this.search, 500)
   },
   methods: {
+    toggleFilters () {
+      document.getElementById('filters').classList.toggle('hidden')
+      document.getElementById('filters').focus()
+    },
     async handleOpen (id) {
       await this.$hasura({
         query: print(QUERY_SHOWCASE),
