@@ -132,7 +132,7 @@ export default {
       this.pending = false
     },
     closeDrawer () {
-      this.$route.query.prevuew && this.$router.replace('/submit')
+      this.$route.query.preview && this.$router.replace('/submit')
       this.openedDrawer = false
       // this.url = ''
       this.pending = false
