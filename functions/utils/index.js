@@ -99,3 +99,11 @@ exports.hasura = async function (payload) {
   })
   return data
 }
+exports.isOutdated = function (showcase) {
+  const weekAgo = 1000 * 60 * 60 * 24 * 7
+  const today = new Date()
+  const lastDetectedAt = new Date(showcase.last_detected_at)
+  const diff = +today - +lastDetectedAt
+
+  return diff >= weekAgo
+}
