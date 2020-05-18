@@ -41,7 +41,8 @@ export default {
   plugins: [
     '@/plugins/hasura.js',
     '@/plugins/infinite-loading.client.js',
-    '@/plugins/redirect.client.js'
+    '@/plugins/redirect.client.js',
+    '@/plugins/click-outside.client.js'
   ],
   /*
   ** generate config

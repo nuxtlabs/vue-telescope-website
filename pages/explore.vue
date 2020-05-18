@@ -41,7 +41,7 @@
           <div class="relative block text-left">
             <div class="sm:hidden mt-4 sm:mt-8 flex flex-row items-center justify-between">
               <span class="rounded-md shadow-sm">
-                <button type="button" class="inline-flex justify-center w-full rounded-full border border-gray-200 px-4 py-2 bg-white text-sm leading-5 font-medium text-gray-600 hover:text-gray-500 focus:outline-none focus:border-green-400 focus:shadow-outline-green active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150" @click="toggleFilters">
+                <button type="button" class="inline-flex justify-center w-full rounded-full border border-gray-200 px-4 py-2 bg-white text-sm leading-5 font-medium text-gray-600 hover:text-gray-500 focus:outline-none focus:border-green-400 focus:shadow-outline-green active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150" @click.stop="openFilters">
                   Filters
                   <svg class="-mr-1 ml-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -52,7 +52,7 @@
                 <span class="text-nuxt-lightgreen">{{ count }}</span> websites
               </p>
             </div>
-            <div id="filters" tabindex="0" class="hidden sm:block origin-top-left absolute sm:relative left-0 mt-2 sm:mt-0 w-56 sm:w-auto rounded-md sm:rounded-none shadow-lg sm:shadow-none focus:outline-none" @focusout="toggleFilters">
+            <div ref="filters" v-click-outside="closeFilters" class="hidden sm:block origin-top-left absolute sm:relative left-0 mt-2 sm:mt-0 w-56 sm:w-auto rounded-md sm:rounded-none shadow-lg sm:shadow-none focus:outline-none">
               <div class="rounded-md sm:rounded-none bg-white sm:bg-transparent shadow-xs sm:shadow-none">
                 <div class="p-4 sm:p-0">
                   <form class="sm:ml-2 sm:mt-8">
@@ -323,9 +323,11 @@ export default {
     this.debouncedSearch = _debounce(this.search, 500)
   },
   methods: {
-    toggleFilters () {
-      document.getElementById('filters').classList.toggle('hidden')
-      document.getElementById('filters').focus()
+    openFilters () {
+      this.$refs.filters.classList.toggle('hidden')
+    },
+    closeFilters () {
+      this.$refs.filters.classList.add('hidden')
     },
     async handleOpen (id) {
       await this.$hasura({

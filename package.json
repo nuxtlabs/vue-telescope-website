@@ -23,6 +23,7 @@
     "lottie-web": "^5.6.10",
     "nuxt": "^2.12.2",
     "utf-8-validate": "^5.0.2",
+    "v-click-outside": "^3.0.1",
     "vue-content-loader": "^0.2.3",
     "vue-infinite-loading": "^2.4.5",
     "vue-telemetry-analyzer": "^0.6.1"
