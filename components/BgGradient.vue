@@ -109,6 +109,18 @@ export default {
     rgba(65, 179, 138, 0.15)
   );
 }
+.explain .top {
+  display: block;
+}
+.explain .top .dark {
+  transform: rotate(2.6deg);
+  top: -20px;
+}
+.explain .top .light {
+  transform: rotate(1deg);
+  top: -2px;
+  opacity: 0.2;
+}
 /* scan page */
 .scan {
   top: -370px;

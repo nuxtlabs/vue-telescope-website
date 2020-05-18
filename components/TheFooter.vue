@@ -1,51 +1,61 @@
 <template>
-  <div class="bg-white border-t border-gray-100">
+  <div class="bg-transparent">
     <div
-      class="max-w-6xl mx-auto py-8 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8"
+      class="max-w-6xl mx-auto py-4 px-4 sm:px-6 lg:px-8"
     >
-      <div class="flex justify-center md:order-2">
-        <a
-          href="https://twitter.com/vuejs"
-          class="text-gray-400 hover:text-nuxt-lightgreen transition ease-in duration-150"
-          target="_blank"
-        >
-          <span class="sr-only">Twitter</span>
-          <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-            <path
-              d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"
-            />
-          </svg>
-        </a>
-        <a
-          href="https://github.com/vuejs/vue"
-          class="ml-6 text-gray-400 hover:text-nuxt-lightgreen transition ease-in duration-150"
-          target="_blank"
-        >
-          <span class="sr-only">GitHub</span>
-          <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-            <path
-              fill-rule="evenodd"
-              d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-              clip-rule="evenodd"
-            />
-          </svg>
-        </a>
-      </div>
-      <div class="flex mt-8 md:mt-0 md:order-1 items-center justify-center">
-        <div class="flex items-center text-base leading-6 text-gray-500">
-          <div>&copy; 2020, <a href="https://nuxtjs.org" target="_blank" rel="noopener" class="underline hover:text-nuxt-lightgreen transition ease-linear duration-150">NuxtJS Team</a> for the VueJS Community</div>
+      <div class="flex items-center justify-between">
+        <div>
+          <nuxt-link :to="{ name: 'index' }" class="font-black tracking-tighter">
+            <span class="text-nuxt-lightgreen">VUE</span>
+            <span class="text-nuxt-gray">TELEMETRY</span>
+          </nuxt-link>
         </div>
+        <ul class="flex items-center">
+          <li class="mr-2">
+            <a
+              href="https://twitter.com/vuejs"
+              class="text-gray-400 hover:text-nuxt-lightgreen transition ease-in duration-150"
+              target="_blank"
+              rel="noopener"
+            >
+              <span class="sr-only">Twitter</span>
+              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"
+                />
+              </svg>
+            </a>
+          </li>
+          <li class="">
+            <a
+              href="https://github.com/vuejs/vue"
+              class="text-gray-400 hover:text-nuxt-lightgreen transition ease-in duration-150"
+              target="_blank"
+              rel="noopener"
+            >
+              <span class="sr-only">GitHub</span>
+              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  fill-rule="evenodd"
+                  d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="border-t border-gray-50 my-4"></div>
+      <div class="flex flex-col sm:flex-row items-center justify-between">
+        <ul class="text-sm mb-2 sm:mb-0">
+          <li class="text-gray-500">&copy; 2020, <a href="https://nuxtjs.org" target="_blank" rel="noopener" class="text-nuxt-lightgreen font-medium transition ease-linear duration-150">NuxtJS Team</a> for the VueJS Community</li>
+        </ul>
+        <ul class="flex items-center text-sm">
+          <li class="text-gray-500">Hosted on <a href="https://www.netlify.com/" target="_blank" rel="noopener" class="text-nuxt-lightgreen font-medium">Netlify</a></li>
+          <span class="mx-2 text-gray-300">&bullet;</span>
+          <li class="text-gray-500">Images served by <a href="https://cloudinary.com/" target="_blank" rel="noopener" class="text-nuxt-lightgreen font-medium">Cloudinary</a></li>
+        </ul>
       </div>
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  data () {
-    return {}
-  }
-}
-</script>
-
-<style></style>

@@ -12,7 +12,8 @@ const {
   getPluginMutation,
   getUIMutation,
   hasura,
-  isBlacklisted
+  isBlacklisted,
+  isOutdated
 } = require('./utils')
 const { slugify } = require('./utils/helpers')
 const gql = require('graphql-tag')
@@ -91,6 +92,7 @@ exports.handler = async function (event, _context) {
               img_path
             }
           }
+          last_detected_at
         }
       }
     `
@@ -98,9 +100,9 @@ exports.handler = async function (event, _context) {
       query: print(QUERY_SHOWCASE_BY_HOSTNAME),
       variables: { hostname }
     })
-    showcase = data.showcases[0] ? data.showcases[0] : null
+    showcase = data && data.showcases[0] ? data.showcases[0] : null
 
-    if (showcase) {
+    if (showcase && !isOutdated(showcase)) {
       return {
         statusCode: 200,
         headers: {
@@ -108,6 +110,34 @@ exports.handler = async function (event, _context) {
         },
         body: JSON.stringify(showcase)
       }
+    }
+
+    if (showcase && isOutdated(showcase)) {
+      const DELETE_SHOWCASE = gql`
+        mutation($id: uuid!) {
+          delete_showcases_plugins(where: {showcase_id: {_eq: $id}}) {
+            affected_rows
+          }
+          delete_showcase_modules(where: {showcase_id: {_eq: $id}}) {
+            affected_rows
+          }
+          delete_metas(where: {showcase: {id: {_eq: $id}}}) {
+            affected_rows
+          }
+          delete_showcases(where: {id: {_eq: $id}}) {
+            affected_rows
+          }
+        }
+      `
+
+      await hasura({
+        query: print(DELETE_SHOWCASE),
+        variables: { id: showcase.id }
+      }).then(({ data }) => {
+        if (!data) {
+          throw new Error('Could not delete showcase')
+        }
+      })
     }
 
     consola.info(`Analyze ${url}...`)

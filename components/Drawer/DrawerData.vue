@@ -77,6 +77,7 @@
                 :key="i"
                 :href="sp.plugin.url"
                 target="_blank"
+                rel="noopener"
                 class="px-2 py-1 text-nuxt-gray bg-cool-gray-200 rounded mr-2 last:mr-0 mb-2 hover:bg-cool-gray-300 transition ease-linear duration-150"
               >{{ sp.plugin.name }}</a>
             </div>
@@ -89,6 +90,7 @@
                 :key="i"
                 :href="sm.module.url"
                 target="_blank"
+                rel="noopener"
                 class="px-2 py-1 text-nuxt-gray bg-cool-gray-200 rounded mr-2 last:mr-0 mb-2 hover:bg-cool-gray-300 transition ease-linear duration-150"
               >{{ sm.module.name }}</a>
             </div>
@@ -96,7 +98,7 @@
         </div>
       </div>
     </div>
-    <div class="flex items-center justify-around">
+    <div class="hidden sm:flex items-center justify-around">
       <svg width="49" height="87" class="mb-3">
         <path d="M23.283 2.738h1.535V13.19h-1.535V2.738z" fill="#158876" />
         <path

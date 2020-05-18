@@ -4,10 +4,10 @@
     <div class="max-w-6xl px-8 py-40 mx-auto">
       <div class="flex">
         <div class="w-full lg:w-1/2">
-          <div class="text-5xl leading-10 font-extrabold text-nuxt-lightgreen">
-            Take a look.
+          <div class="text-6xl leading-10 tracking-tight font-extrabold text-nuxt-lightgreen">
+            Take a look
           </div>
-          <p class="text-sm text-gray-700 mt-4 mb-4">
+          <p class="text-sm text-nuxt-gray mt-4 mb-4">
             You're seconds away to find out if a website is using Vue and its
             ecosystem.
           </p>
@@ -37,7 +37,7 @@
             <div v-if="inputError" class="pl-6 text-sm text-red-600 mt-1">
               {{ inputError }}
             </div>
-            <p class="text-sm italic text-cool-gray-700 mt-4 mb-4">
+            <p class="pl-6 text-sm italic text-cool-gray-700 mt-4 mb-4">
               At the moment we only scan the root path of a domain.<br />
               <span class="text-cool-gray-600">e.g. vuejs.org/guide will become vuejs.org/</span>
             </p>
@@ -132,7 +132,7 @@ export default {
       this.pending = false
     },
     closeDrawer () {
-      this.$route.query.prevuew && this.$router.replace('/submit')
+      this.$route.query.preview && this.$router.replace('/submit')
       this.openedDrawer = false
       // this.url = ''
       this.pending = false
