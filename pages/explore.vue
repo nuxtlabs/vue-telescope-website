@@ -40,7 +40,7 @@
         <div class="sm:h-full sm:w-60 sm:sticky sm:top-0 transition ease-linear duration-150" :class="{ 'opacity-50': q.length }">
           <div class="relative block text-left">
             <div class="sm:hidden mt-4 sm:mt-8 flex flex-row items-center justify-between">
-              <span class="rounded-md shadow-sm">
+              <span class="rounded-full">
                 <button type="button" class="inline-flex justify-center w-full rounded-full border border-gray-200 px-4 py-2 bg-white text-sm leading-5 font-medium text-gray-600 hover:text-gray-500 focus:outline-none focus:border-green-400 focus:shadow-outline-green active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150" @click.stop="openFilters">
                   Filters
                   <svg class="-mr-1 ml-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
