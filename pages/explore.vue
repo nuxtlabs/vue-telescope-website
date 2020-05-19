@@ -49,7 +49,9 @@
                 </button>
               </span>
               <p class="text-nuxt-gray font-extrabold">
-                <span class="text-nuxt-lightgreen">{{ count }}</span> websites
+                <span class="text-nuxt-lightgreen">
+                  <animated-number :value="count" :duration="200" :round="true" />
+                </span> websites
               </p>
             </div>
             <div ref="filters" v-click-outside="closeFilters" class="hidden sm:block origin-top-left absolute sm:relative left-0 mt-2 sm:mt-0 w-56 sm:w-auto rounded-md sm:rounded-none shadow-lg sm:shadow-none focus:outline-none">
@@ -82,7 +84,9 @@
         <div class="sm:flex-1" style="min-height: 1000px;">
           <div class="hidden sm:block">
             <p class="text-nuxt-gray font-extrabold text-right">
-              <span class="text-nuxt-lightgreen">{{ count }}</span> websites
+              <span class="text-nuxt-lightgreen">
+                <animated-number :value="count" :duration="200" :round="true" />
+              </span> websites
             </p>
           </div>
           <div
@@ -132,6 +136,7 @@
 </template>
 
 <script>
+import AnimatedNumber from 'animated-number-vue'
 import InfiniteLoading from 'vue-infinite-loading'
 import { ContentLoader } from 'vue-content-loader'
 import gql from 'graphql-tag'
@@ -201,6 +206,15 @@ const QUERY_SHOWCASE = gql`
 const QUERY_FILTERED_SHOWCASES = ({ limit, offset, where }) => {
   const query = `
     query {
+      total: showcases_aggregate(
+        where: {
+          ${where.frameworks ? 'framework: { slug: { _in: ' + JSON.stringify(where.frameworks) + ' } }' : ''}
+          ${where.uis ? 'ui: { slug: { _in: ' + JSON.stringify(where.uis) + ' } }' : ''}
+          ${where.plugins ? 'showcases_plugins: { plugin: { slug: { _in: ' + JSON.stringify(where.plugins) + ' } } }' : ''}
+        }
+      ) {
+        aggregate { count }
+      }
       showcases: showcases_aggregate(
         limit: ${limit}
         ${offset ? 'offset: ' + offset : ''}
@@ -238,6 +252,11 @@ const QUERY_FILTERED_SHOWCASES = ({ limit, offset, where }) => {
 
 const QUERY_SEARCH_SHOWCASES = gql`
   query($limit: Int, $offset: Int, $q: String) {
+    total: search_showcases_aggregate(args: { search: $q }) {
+      aggregate {
+        count
+      }
+    }
     showcases: search_showcases_aggregate(args: { search: $q }, limit: $limit, offset: $offset) {
       aggregate {
         count
@@ -265,6 +284,7 @@ const QUERY_SEARCH_SHOWCASES = gql`
 `
 export default {
   components: {
+    AnimatedNumber,
     InfiniteLoading,
     ShowcasePreviewItem,
     ContentLoader,
@@ -376,6 +396,7 @@ export default {
 
       if (data.showcases.nodes.length) {
         this.offset += this.limit
+        this.count = data.total.aggregate.count
         this.showcases.push(...data.showcases.nodes)
         $state.loaded()
       } else {
@@ -419,6 +440,7 @@ export default {
         query: print(query),
         variables
       })
+      this.count = data.total.aggregate.count
       this.showcases.push(...data.showcases.nodes)
       this.pending = false
     },
@@ -445,6 +467,7 @@ export default {
         variables
       })
 
+      this.count = data.total.aggregate.count
       this.showcases = data ? data.showcases.nodes : []
       this.pending = false
     }

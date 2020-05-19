@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@nuxt/http": "^0.5.1",
+    "animated-number-vue": "^1.0.0",
     "axios": "^0.19.2",
     "bufferutil": "^4.0.1",
     "cloudinary": "^1.21.0",
