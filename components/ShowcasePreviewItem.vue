@@ -53,6 +53,6 @@ export default {
   @apply shadow-xl;
 }
 .previewItem:hover .previewItem__title {
-  @apply text-nuxt-lightgreen;
+  @apply text-emerald;
 }
 </style>

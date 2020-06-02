@@ -16,11 +16,13 @@ module.exports = {
         '7xl': '6rem'
       },
       colors: {
-        nuxt: {
-          gray: '#243746',
-          lightgreen: '#41B38A',
-          green: '#158876'
-        }
+        emerald: '#0BDCA0'
+      },
+      textColor: {
+        emerald: '#0BDCA0'
+      },
+      borderColor: {
+        emerald: '#0BDCA0'
       },
       borderRadius: {
         xl: '1rem'

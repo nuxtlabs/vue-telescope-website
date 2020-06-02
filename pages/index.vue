@@ -1,41 +1,44 @@
 <template>
   <div>
-    <section id="hero" class="relative">
-      <BgGradient klass="hero" />
-      <div
-        class="max-w-6xl mx-auto h-full px-4 pt-20 pb-10 sm:px-6 lg:px-8 lg:pt-0"
-      >
-        <div class="flex flex-col md:flex-row">
-          <div class="flex-1 flex flex-col justify-center">
-            <h1
-              class="self-center sm:self-start text-center sm:text-left text-5xl font-bold text-nuxt-gray leading-none"
-            >
-              Discover websites
-              <br />made with Vue.js
-            </h1>
-            <p
-              class="self-center sm:self-start text-center sm:text-left mt-2 mb-6 text-gray-700 text-base"
-            >
-              With Vue Telemetry, reveal the Vue technologies
-              <br />used on any website.
-            </p>
-            <div class="flex items-center justify-center sm:justify-start">
-              <nuxt-link
-                to="/explore"
-                class="mr-4 inline-flex items-center px-6 py-3 border border-transparent text-base font-semibold rounded shadow text-nuxt-lightgreen bg-white hover:shadow-lg focus:outline-none focus:border-nuxt focus:shadow-outline-nuxt active:bg-nuxt-200 transition ease-in-out duration-150"
-              >Explore</nuxt-link>
-              <nuxt-link
-                to="/submit"
-                class="inline-flex items-center px-6 py-3 border border-transparent text-base font-semibold rounded shadow text-white bg-nuxt-lightgreen hover:shadow-lg focus:outline-none focus:border-nuxt focus:shadow-outline-nuxt active:bg-nuxt-200 transition ease-in-out duration-150"
-              >Submit an URL</nuxt-link>
-            </div>
-          </div>
-          <div class="flex-1 flex items-center justify-center">
-            <img src="/img/hero.svg" alt="hero" class="w-96 md:w-auto" />
-          </div>
+    <MagicSection color="white">
+      <div class="flex w-full items-center justify-between">
+        <div class="w-1/2 pr-8">
+          <h1 class="text-5xl font-semibold leading-tight pb-6">
+            Discover websites <br>made with <span class="text-emerald">Vue.js</span>
+          </h1>
+          <p class="text-xl pb-10">
+            Explore the Web with Vue Telemetry and reveal the Vue technologies used on any website.
+          </p>
+          <AnalyzeUrl/>
+        </div>
+        <div class="w-1/2 pl-8"><IllustrationHome/></div>
+      </div>
+    </MagicSection>
+    <MagicSection color="emerald">
+      Welcome
+      <div style="height: 800px;"></div>
+    </MagicSection>
+    <MagicSection color="black">
+      <div>
+        <h2 class="text-4xl text-white text-center pb-16">
+          Explore over <span class="text-emerald">{{ count }}</span> websites
+        </h2>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+          <ShowcaseFeaturedItem
+            v-for="item in featured"
+            :key="item.id"
+            :data="item"
+            @click.native="handleClick(item.slug)"
+          />
+        </div>
+        <div class="flex py-8 justify-center">
+          <ColorButton color="emerald">
+            Explore websites
+          </ColorButton>
         </div>
       </div>
-    </section>
+    </MagicSection>
+    <!--
     <section id="featured" class="relative">
       <bgGradient klass="featured" />
       <div class="max-w-6xl mx-auto h-full px-4 pb-10 sm:px-6 lg:px-8 lg:pt-0">
@@ -199,13 +202,17 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
   </div>
 </template>
 
 <script>
 import gql from 'graphql-tag'
 import { print } from 'graphql/language/printer'
+import ColorButton from '@/components/Commons/Button'
+import MagicSection from '@/components/Commons/Magic'
+import IllustrationHome from '@/components/Illustrations/Home'
+import AnalyzeUrl from '@/components/Commons/Submit'
 import ShowcaseFeaturedItem from '@/components/ShowcaseFeaturedItem'
 import BgGradient from '@/components/BgGradient'
 
@@ -216,7 +223,7 @@ const QUERY = gql`
         count
       }
     }
-    showcases(limit: 9) {
+    showcases(limit: 5) {
       id
       slug
       domain
@@ -228,6 +235,10 @@ const QUERY = gql`
 
 export default {
   components: {
+    ColorButton,
+    MagicSection,
+    IllustrationHome,
+    AnalyzeUrl,
     ShowcaseFeaturedItem,
     BgGradient
   },

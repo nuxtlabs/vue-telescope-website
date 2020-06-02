@@ -1,10 +1,10 @@
 <template>
-  <div class="antialiased relative flex flex-col min-h-screen">
-    <TheNavbar />
-    <div class="flex-1">
+  <div class="antialiased relative">
+    <!-- <TheNavbar /> -->
+    <!-- <div class="flex-1"> -->
       <nuxt />
-    </div>
-    <TheFooter />
+    <!-- </div> -->
+    <!-- <TheFooter /> -->
   </div>
 </template>
 <script>
@@ -18,4 +18,9 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600&display=swap');
+body {
+  font-family: 'Exo 2', sans-serif;
+}
+</style>
