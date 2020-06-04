@@ -22,7 +22,7 @@
     "graphql-tag": "^2.10.3",
     "lodash.debounce": "^4.0.8",
     "lottie-web": "^5.6.10",
-    "nuxt": "^2.12.2",
+    "nuxt-edge": "latest",
     "utf-8-validate": "^5.0.2",
     "v-click-outside": "^3.0.1",
     "vue-content-loader": "^0.2.3",
@@ -32,6 +32,7 @@
   "devDependencies": {
     "@nuxtjs/eslint-config": "^3.0.0",
     "@nuxtjs/eslint-module": "^2.0.0",
+    "@nuxtjs/svg": "^0.1.11",
     "@nuxtjs/tailwindcss": "^2.0.0",
     "@tailwindcss/ui": "^0.3.0",
     "babel-eslint": "^10.1.0",

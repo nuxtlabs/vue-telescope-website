@@ -1,7 +1,7 @@
 <template>
   <div class>
     <div v-if="$fetchState.pending">
-      <content-loader width="190" height="160" :speed="2">
+      <ContentLoader width="190" height="160" :speed="2">
         <rect x="0" y="0" rx="2" ry="2" width="120" height="16" />
         <template v-for="i in 4">
           <rect
@@ -23,7 +23,7 @@
             height="16"
           />
         </template>
-      </content-loader>
+      </ContentLoader>
     </div>
     <fieldset v-else>
       <legend

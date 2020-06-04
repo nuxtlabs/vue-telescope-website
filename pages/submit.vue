@@ -54,22 +54,13 @@
 </template>
 
 <script>
-import BgGradient from '@/components/BgGradient'
-import Drawer from '@/components/Drawer/Drawer'
-import DrawerLoader from '@/components/Drawer/DrawerLoader'
-import DrawerError from '@/components/Drawer/DrawerError'
-import DrawerData from '@/components/Drawer/DrawerData'
 
 const urlRegex = /^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,}?\/?.*$/
 const mustBeValidUrl = url => urlRegex.test(url)
 
 export default {
   components: {
-    BgGradient,
-    Drawer,
-    DrawerLoader,
-    DrawerError,
-    DrawerData
+    //
   },
   mixins: [],
   data () {

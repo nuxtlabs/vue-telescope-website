@@ -20,14 +20,18 @@
               <br />used on any website.
             </p>
             <div class="flex items-center justify-center sm:justify-start">
-              <nuxt-link
+              <NuxtLink
                 to="/explore"
                 class="mr-4 inline-flex items-center px-6 py-3 border border-transparent text-base font-semibold rounded shadow text-nuxt-lightgreen bg-white hover:shadow-lg focus:outline-none focus:border-nuxt focus:shadow-outline-nuxt active:bg-nuxt-200 transition ease-in-out duration-150"
-              >Explore</nuxt-link>
-              <nuxt-link
+              >
+                Explore
+              </NuxtLink>
+              <NuxtLink
                 to="/submit"
                 class="inline-flex items-center px-6 py-3 border border-transparent text-base font-semibold rounded shadow text-white bg-nuxt-lightgreen hover:shadow-lg focus:outline-none focus:border-nuxt focus:shadow-outline-nuxt active:bg-nuxt-200 transition ease-in-out duration-150"
-              >Submit an URL</nuxt-link>
+              >
+                Submit an URL
+              </NuxtLink>
             </div>
           </div>
           <div class="flex-1 flex items-center justify-center">
@@ -52,10 +56,12 @@
           />
         </div>
         <div class="mt-16 text-center">
-          <nuxt-link
+          <NuxtLink
             to="/explore"
             class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-6 capitalize font-semibold rounded-full shadow-md text-white bg-nuxt-lightgreen hover:shadow-xl focus:outline-none focus:border-green-400 focus:shadow-outline-green-400 active:bg-green-200 transition ease-in-out duration-150"
-          >Explore</nuxt-link>
+          >
+            Explore
+          </NuxtLink>
         </div>
       </div>
     </section>
@@ -94,19 +100,7 @@
               <div
                 class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 text-nuxt-lightgreen"
               >
-                <svg
-                  class="h-6 w-6"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"
-                  />
-                </svg>
+                <ScalesIcon class="h-6 w-6" />
               </div>
               <div class="ml-4">
                 <p class="text-base leading-6 text-gray-500">
@@ -121,16 +115,7 @@
               <div
                 class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100"
               >
-                <svg
-                  class="h-6 w-6 fill-current text-nuxt-lightgreen"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M12 2C8.71475 2 5.76681 3.43895 3.74975 5.72426C3.38429 6.13833 2.75235 6.17773 2.33828 5.81227C1.92421 5.4468 1.88481 4.81486 2.25027 4.40079C4.63088 1.70358 8.11712 0 12 0C15.8829 0 19.3691 1.70358 21.7498 4.40079C22.1152 4.81486 22.0758 5.4468 21.6617 5.81227C21.2477 6.17773 20.6157 6.13833 20.2503 5.72426C18.2332 3.43895 15.2853 2 12 2ZM12 6C8.13402 6 5.00001 9.13401 5.00001 13C5.00001 16.6378 6.49288 19.9251 8.90195 22.2858C9.29641 22.6723 9.30283 23.3054 8.91629 23.6999C8.52974 24.0944 7.89661 24.1008 7.50215 23.7142C4.72501 20.9929 3.00001 17.197 3.00001 13C3.00001 8.02944 7.02945 4 12 4C12.5523 4 13 4.44772 13 5C13 5.55228 12.5523 6 12 6ZM15.1344 5.56953C15.4109 5.09147 16.0227 4.92811 16.5007 5.20465C19.1882 6.75928 21 9.66747 21 13C21 14.6569 19.6569 16 18 16C16.3432 16 15 14.6569 15 13C15 11.3431 13.6569 10 12 10C11.2385 10 10.5454 10.2824 10.0159 10.7497C9.60185 11.1152 8.96991 11.0758 8.60445 10.6617C8.23898 10.2477 8.27838 9.61573 8.69245 9.25026C9.57327 8.47284 10.7326 8 12 8C14.7614 8 17 10.2386 17 13C17 13.5523 17.4477 14 18 14C18.5523 14 19 13.5523 19 13C19 10.4103 17.5942 8.14771 15.4993 6.93586C15.0212 6.65932 14.8579 6.04759 15.1344 5.56953ZM12 12C12.5523 12 13 12.4477 13 13C13 15.7614 15.2386 18 18 18C18.2851 18 18.5638 17.9762 18.8346 17.9308C19.3792 17.8394 19.8948 18.2069 19.9862 18.7516C20.0776 19.2963 19.7101 19.8119 19.1655 19.9033C18.7858 19.967 18.3964 20 18 20C14.134 20 11 16.866 11 13C11 12.4477 11.4477 12 12 12ZM7.95059 13.0049C8.50017 12.9503 8.98993 13.3516 9.04449 13.9012C9.46649 18.1515 12.8485 21.5335 17.0988 21.9555C17.6484 22.0101 18.0497 22.4998 17.9951 23.0494C17.9406 23.599 17.4508 24.0003 16.9012 23.9457C11.7026 23.4296 7.57043 19.2974 7.05428 14.0988C6.99971 13.5492 7.401 13.0595 7.95059 13.0049Z"
-                  />
-                </svg>
+                <FingerprintIcon class="h-6 w-6 " />
               </div>
               <div class="ml-4">
                 <p class="text-base leading-6 text-gray-500">
@@ -143,19 +128,7 @@
               <div
                 class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 text-nuxt-lightgreen"
               >
-                <svg
-                  class="h-6 w-6"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <circle cx="18" cy="18" r="3" />
-                  <circle cx="6" cy="6" r="3" />
-                  <path d="M6 21V9a9 9 0 0 0 9 9" />
-                </svg>
+                <GitBranchIcon class="h-6 w-6" />
               </div>
               <div class="ml-4">
                 <p class="text-base leading-6 text-gray-500">
@@ -187,10 +160,12 @@
               <br />Start now and download Vue Telemetry for your favourite browser.
             </p>
             <div class="text-center">
-              <nuxt-link
+              <NuxtLink
                 to="/download"
                 class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-6 capitalize font-semibold rounded-full shadow-md text-white bg-nuxt-lightgreen hover:shadow-xl focus:outline-none focus:border-green-400 focus:shadow-outline-green-400 active:bg-green-200 transition ease-in-out duration-150"
-              >Browser Extensions</nuxt-link>
+              >
+                Browser Extensions
+              </NuxtLink>
             </div>
           </div>
           <div class="hidden sm:block">
@@ -205,8 +180,9 @@
 <script>
 import gql from 'graphql-tag'
 import { print } from 'graphql/language/printer'
-import ShowcaseFeaturedItem from '@/components/ShowcaseFeaturedItem'
-import BgGradient from '@/components/BgGradient'
+import ScalesIcon from '@/assets/icons/scales.svg?inline'
+import FingerprintIcon from '@/assets/icons/fingerprint.svg?inline'
+import GitBranchIcon from '@/assets/icons/git-branch.svg?inline'
 
 const QUERY = gql`
   query {
@@ -227,8 +203,9 @@ const QUERY = gql`
 
 export default {
   components: {
-    ShowcaseFeaturedItem,
-    BgGradient
+    ScalesIcon,
+    FingerprintIcon,
+    GitBranchIcon
   },
   async asyncData ({ app }) {
     const { data } = await app.$hasura({

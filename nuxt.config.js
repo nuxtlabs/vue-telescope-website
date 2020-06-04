@@ -58,6 +58,7 @@ export default {
     '@nuxtjs/eslint-module',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/svg',
     // Doc: https://github.com/Developmint/nuxt-webfontloader
     'nuxt-webfontloader'
   ],
@@ -72,6 +73,7 @@ export default {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
+  components: true,
   http: {
     browserBaseURL: '/'
   },

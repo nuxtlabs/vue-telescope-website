@@ -12,17 +12,7 @@
             <div
               class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
             >
-              <svg
-                class="h-5 w-5 text-gray-400"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                  clip-rule="evenodd"
-                />
-              </svg>
+              <SearchIcon class="h-5 w-5 " />
             </div>
             <input
               id="search"
@@ -50,7 +40,7 @@
               </span>
               <p class="text-nuxt-gray font-extrabold">
                 <span class="text-nuxt-lightgreen">
-                  <animated-number :value="count" :duration="200" :round="true" />
+                  <AnimatedNumber :value="count" :duration="200" :round="true" />
                 </span> websites
               </p>
             </div>
@@ -85,7 +75,7 @@
           <div class="hidden sm:block">
             <p class="text-nuxt-gray font-extrabold text-right">
               <span class="text-nuxt-lightgreen">
-                <animated-number :value="count" :duration="200" :round="true" />
+                <AnimatedNumber :value="count" :duration="200" :round="true" />
               </span> websites
             </p>
           </div>
@@ -143,10 +133,7 @@ import gql from 'graphql-tag'
 import { print } from 'graphql/language/printer'
 import _debounce from 'lodash.debounce'
 
-import ShowcasePreviewItem from '@/components/ShowcasePreviewItem'
-import FilterCheckboxes from '@/components/FilterCheckboxes'
-import Drawer from '@/components/Drawer/Drawer'
-import DrawerData from '@/components/Drawer/DrawerData'
+import SearchIcon from '@/assets/icons/search.svg?inline'
 
 const QUERY_SHOWCASES = (args) => {
   const query = `
@@ -286,11 +273,8 @@ export default {
   components: {
     AnimatedNumber,
     InfiniteLoading,
-    ShowcasePreviewItem,
     ContentLoader,
-    FilterCheckboxes,
-    Drawer,
-    DrawerData
+    SearchIcon
   },
   async fetch () {
     this.pending = true

@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col sm:flex-row">
     <div class="w-full sm:flex-1 relative">
-      <showcaseBrowser :img="data.screenshot_url" :url="data.url" />
+      <ShowcaseBrowser :img="data.screenshot_url" :url="data.url" />
     </div>
     <div class="w-full sm:flex-1">
       <div class="px-4">
@@ -89,11 +89,8 @@
 </template>
 
 <script>
-import showcaseBrowser from '@/components/ShowcaseBrowser'
+
 export default {
-  components: {
-    showcaseBrowser
-  },
   props: {
     data: {
       type: Object,
