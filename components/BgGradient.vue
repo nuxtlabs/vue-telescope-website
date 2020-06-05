@@ -18,7 +18,7 @@ export default {
     klass: {
       type: String,
       default: '',
-      validator (str) {
+      validator(str) {
         return ['hero', 'featured', 'explain', 'scan'].includes(str)
       }
     }
@@ -103,11 +103,7 @@ export default {
   top: -200px;
   height: 1090px;
   transform: skewY(11deg);
-  background-image: radial-gradient(
-    circle at 70% 70%,
-    #fff,
-    rgba(65, 179, 138, 0.15)
-  );
+  background-image: radial-gradient(circle at 70% 70%, #fff, #0bdca0);
 }
 .explain .top {
   display: block;

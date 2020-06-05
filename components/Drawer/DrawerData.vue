@@ -46,7 +46,8 @@
               <a
                 :href="data.framework.url"
                 class="ml-2 capitalize hover:text-nuxt-lightgreen transition ease-linear duration-150"
-              >{{ data.framework.name }}</a>
+                >{{ data.framework.name }}</a
+              >
             </div>
           </div>
           <div v-if="data.ui" class="mb-4">
@@ -61,7 +62,8 @@
               <a
                 :href="data.ui.url"
                 class="ml-2 capitalize hover:text-nuxt-lightgreen transition ease-linear duration-150"
-              >{{ data.ui.name }}</a>
+                >{{ data.ui.name }}</a
+              >
             </div>
           </div>
           <div v-if="data.showcases_plugins.length" class="mb-4">
@@ -146,15 +148,15 @@ export default {
     }
   },
   computed: {
-    hostname () {
+    hostname() {
       return this.data.hostname.replace('www.', '')
     }
   },
   methods: {
-    openUrl () {
+    openUrl() {
       window.open(this.data.url, '_blank')
     },
-    iconUrl (path) {
+    iconUrl(path) {
       return `${process.env.ICONS_URL}${path}`
     }
   }

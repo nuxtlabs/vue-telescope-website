@@ -1,8 +1,6 @@
 <template>
   <div class="bg-transparent">
-    <div
-      class="max-w-6xl mx-auto py-4 px-4 sm:px-6 lg:px-8"
-    >
+    <div class="max-w-6xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between">
         <div>
           <NuxtLink :to="{ name: 'index' }" class="font-black tracking-tighter">
@@ -38,12 +36,40 @@
       <div class="border-t border-gray-50 my-4"></div>
       <div class="flex flex-col sm:flex-row items-center justify-between">
         <ul class="text-sm mb-2 sm:mb-0">
-          <li class="text-gray-500">&copy; 2020, <a href="https://nuxtjs.org" target="_blank" rel="noopener" class="text-nuxt-lightgreen font-medium transition ease-linear duration-150">NuxtJS Team</a> for the VueJS Community</li>
+          <li class="text-gray-500">
+            &copy; 2020,
+            <a
+              href="https://nuxtjs.org"
+              target="_blank"
+              rel="noopener"
+              class="text-nuxt-lightgreen font-medium transition ease-linear duration-150"
+              >NuxtJS Team</a
+            >
+            for the VueJS Community
+          </li>
         </ul>
         <ul class="flex items-center text-sm">
-          <li class="text-gray-500">Hosted on <a href="https://www.netlify.com/" target="_blank" rel="noopener" class="text-nuxt-lightgreen font-medium">Netlify</a></li>
+          <li class="text-gray-500">
+            Hosted on
+            <a
+              href="https://www.netlify.com/"
+              target="_blank"
+              rel="noopener"
+              class="text-nuxt-lightgreen font-medium"
+              >Netlify</a
+            >
+          </li>
           <span class="mx-2 text-gray-300">&bullet;</span>
-          <li class="text-gray-500">Images served by <a href="https://cloudinary.com/" target="_blank" rel="noopener" class="text-nuxt-lightgreen font-medium">Cloudinary</a></li>
+          <li class="text-gray-500">
+            Images served by
+            <a
+              href="https://cloudinary.com/"
+              target="_blank"
+              rel="noopener"
+              class="text-nuxt-lightgreen font-medium"
+              >Cloudinary</a
+            >
+          </li>
         </ul>
       </div>
     </div>

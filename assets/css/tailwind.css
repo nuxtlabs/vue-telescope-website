@@ -3,3 +3,25 @@
 @import 'tailwindcss/components';
 /* purgecss end ignore */
 @import 'tailwindcss/utilities';
+
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600&display=swap');
+
+/* @font-face {
+  font-family: 'Exo 2';
+  src: url('~assets/fonts/Exo2/Exo2-Regular.woff2')
+      format('woff2'),
+    url('~assets/fonts/Exo2/Exo2-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Exo 2';
+  src: url('~assets/fonts/Exo2/Exo2-SemiBold.woff2')
+      format('woff2'),
+    url('~assets/fonts/Exo2/Exo2-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+} */

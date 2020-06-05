@@ -3,7 +3,9 @@ const { slugify } = require('./helpers')
 
 // eslint-disable-next-line require-await
 exports.getFrameworkMutation = async function (framework, moduleMutation) {
-  if (!framework) { return null }
+  if (!framework) {
+    return null
+  }
 
   return {
     data: {
@@ -23,7 +25,9 @@ exports.getFrameworkMutation = async function (framework, moduleMutation) {
 }
 // eslint-disable-next-line require-await
 exports.getModuleMutation = async function (modules) {
-  if (!modules) { return [] }
+  if (!modules) {
+    return []
+  }
 
   return modules.map((module) => {
     return {
@@ -44,7 +48,9 @@ exports.getModuleMutation = async function (modules) {
 }
 // eslint-disable-next-line require-await
 exports.getPluginMutation = async function (plugins) {
-  if (!plugins) { return [] }
+  if (!plugins) {
+    return []
+  }
 
   return plugins.map((plugin) => {
     return {
@@ -65,7 +71,9 @@ exports.getPluginMutation = async function (plugins) {
 }
 // eslint-disable-next-line require-await
 exports.getUIMutation = async function (ui) {
-  if (!ui) { return null }
+  if (!ui) {
+    return null
+  }
 
   return {
     data: {

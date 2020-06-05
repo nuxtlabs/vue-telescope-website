@@ -10,17 +10,24 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter var', ...defaultTheme.fontFamily.sans]
+        sans: ['"Exo 2"', ...defaultTheme.fontFamily.sans]
       },
       fontSize: {
         '7xl': '6rem'
       },
       colors: {
+        emerald: '#0BDCA0',
         nuxt: {
           gray: '#243746',
           lightgreen: '#41B38A',
           green: '#158876'
         }
+      },
+      textColor: {
+        emerald: '#0BDCA0'
+      },
+      borderColor: {
+        emerald: '#0BDCA0'
       },
       borderRadius: {
         xl: '1rem'

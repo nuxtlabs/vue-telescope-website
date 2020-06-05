@@ -13,7 +13,7 @@ export default {
   components: {
     lottie
   },
-  data () {
+  data() {
     return {
       animationFile: {
         animationData: animationSearch

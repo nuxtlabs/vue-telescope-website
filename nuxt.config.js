@@ -13,10 +13,14 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: 'With Vue Telemetry, reveal the Vue technologies used on any website'
+        content:
+          'With Vue Telemetry, reveal the Vue technologies used on any website'
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    bodyAttrs: {
+      class: ['font-sans']
+    }
   },
   /*
    ** Customize the progress-bar color
@@ -27,8 +31,8 @@ export default {
    */
   css: [],
   /*
-  ** Public env
-  */
+   ** Public env
+   */
   env: {
     ICONS_URL: 'https://nuxt-company.github.io/vue-telemetry-analyzer/',
     API_HASURA_URL: process.env.API_HASURA_URL,
@@ -42,11 +46,12 @@ export default {
     '@/plugins/hasura.js',
     '@/plugins/infinite-loading.client.js',
     '@/plugins/redirect.client.js',
-    '@/plugins/click-outside.client.js'
+    '@/plugins/click-outside.client.js',
+    '@/plugins/gsap.client'
   ],
   /*
-  ** generate config
-  */
+   ** generate config
+   */
   generate: {
     fallback: '404.html'
   },
@@ -76,11 +81,11 @@ export default {
   components: true,
   http: {
     browserBaseURL: '/'
-  },
-  // For TailwindUI
-  webfontloader: {
-    google: {
-      families: ['Inter']
-    }
   }
+  // For TailwindUI
+  // webfontloader: {
+  //   google: {
+  //     families: ['Exo+2&display=swap']
+  //   }
+  // }
 }

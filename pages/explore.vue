@@ -1,8 +1,14 @@
 <template>
   <div>
     <section id="hero" class>
-      <div class="max-w-6xl mx-auto pt-4 pb-0 sm:py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
-        <h1 class="text-center sm:text-left text-3xl font-extrabold text-nuxt-gray">Explore</h1>
+      <div
+        class="max-w-6xl mx-auto pt-4 pb-0 sm:py-12 px-4 sm:px-6 lg:py-16 lg:px-8"
+      >
+        <h1
+          class="text-center sm:text-left text-3xl font-extrabold text-nuxt-gray"
+        >
+          Explore
+        </h1>
         <p class="text-center sm:text-left mt-2 mb-6 text-gray-600">
           Find all the websites built with VueJS
         </p>
@@ -12,7 +18,7 @@
             <div
               class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
             >
-              <SearchIcon class="h-5 w-5 " />
+              <SearchIcon class="h-5 w-5" />
             </div>
             <input
               id="search"
@@ -27,31 +33,61 @@
     </section>
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="pt-0 sm:pt-8 flex flex-col sm:flex-row">
-        <div class="sm:h-full sm:w-60 sm:sticky sm:top-0 transition ease-linear duration-150" :class="{ 'opacity-50': q.length }">
+        <div
+          class="sm:h-full sm:w-60 sm:sticky sm:top-0 transition ease-linear duration-150"
+          :class="{ 'opacity-50': q.length }"
+        >
           <div class="relative block text-left">
-            <div class="sm:hidden mt-4 sm:mt-8 flex flex-row items-center justify-between">
+            <div
+              class="sm:hidden mt-4 sm:mt-8 flex flex-row items-center justify-between"
+            >
               <span class="rounded-full">
-                <button type="button" class="inline-flex justify-center w-full rounded-full border border-gray-200 px-4 py-2 bg-white text-sm leading-5 font-medium text-gray-600 hover:text-gray-500 focus:outline-none focus:border-green-400 focus:shadow-outline-green active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150" @click.stop="openFilters">
+                <button
+                  type="button"
+                  class="inline-flex justify-center w-full rounded-full border border-gray-200 px-4 py-2 bg-white text-sm leading-5 font-medium text-gray-600 hover:text-gray-500 focus:outline-none focus:border-green-400 focus:shadow-outline-green active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150"
+                  @click.stop="openFilters"
+                >
                   Filters
-                  <svg class="-mr-1 ml-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  <svg
+                    class="-mr-1 ml-2 h-5 w-5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clip-rule="evenodd"
+                    />
                   </svg>
                 </button>
               </span>
               <p class="text-nuxt-gray font-extrabold">
                 <span class="text-nuxt-lightgreen">
-                  <AnimatedNumber :value="count" :duration="200" :round="true" />
-                </span> websites
+                  <AnimatedNumber
+                    :value="count"
+                    :duration="200"
+                    :round="true"
+                  />
+                </span>
+                websites
               </p>
             </div>
-            <div ref="filters" v-click-outside="closeFilters" class="hidden sm:block origin-top-left absolute sm:relative left-0 mt-2 sm:mt-0 w-56 sm:w-auto rounded-md sm:rounded-none shadow-lg sm:shadow-none focus:outline-none">
-              <div class="rounded-md sm:rounded-none bg-white sm:bg-transparent shadow-xs sm:shadow-none">
+            <div
+              ref="filters"
+              v-click-outside="closeFilters"
+              class="hidden sm:block origin-top-left absolute sm:relative left-0 mt-2 sm:mt-0 w-56 sm:w-auto rounded-md sm:rounded-none shadow-lg sm:shadow-none focus:outline-none"
+            >
+              <div
+                class="rounded-md sm:rounded-none bg-white sm:bg-transparent shadow-xs sm:shadow-none"
+              >
                 <div class="p-4 sm:p-0">
                   <form class="sm:ml-2 sm:mt-8">
                     <FilterCheckboxes
                       type="frameworks"
                       name="Framework"
-                      @checkedItems="(items) => updateFilters('frameworks', items)"
+                      @checkedItems="
+                        (items) => updateFilters('frameworks', items)
+                      "
                     />
                     <FilterCheckboxes
                       type="uis"
@@ -76,7 +112,8 @@
             <p class="text-nuxt-gray font-extrabold text-right">
               <span class="text-nuxt-lightgreen">
                 <AnimatedNumber :value="count" :duration="200" :round="true" />
-              </span> websites
+              </span>
+              websites
             </p>
           </div>
           <div
@@ -112,12 +149,18 @@
             </template>
             <template v-else>
               <div class="sm:col-span-1 md:col-span-2 xl:col-span-3">
-                <p class="text-center text-sm text-gray-400">No website found.</p>
+                <p class="text-center text-sm text-gray-400">
+                  No website found.
+                </p>
               </div>
             </template>
           </div>
           <ClientOnly>
-            <InfiniteLoading v-if="showcases.length" :identifier="infiniteId" @infinite="loadMore" />
+            <InfiniteLoading
+              v-if="showcases.length"
+              :identifier="infiniteId"
+              @infinite="loadMore"
+            />
           </ClientOnly>
         </div>
       </div>
@@ -129,146 +172,17 @@
 import AnimatedNumber from 'animated-number-vue'
 import InfiniteLoading from 'vue-infinite-loading'
 import { ContentLoader } from 'vue-content-loader'
-import gql from 'graphql-tag'
 import { print } from 'graphql/language/printer'
 import _debounce from 'lodash.debounce'
+import {
+  QUERY_SHOWCASES,
+  QUERY_SHOWCASE,
+  QUERY_FILTERED_SHOWCASES,
+  QUERY_SEARCH_SHOWCASES
+} from '@/gql/queries'
 
 import SearchIcon from '@/assets/icons/search.svg?inline'
 
-const QUERY_SHOWCASES = (args) => {
-  const query = `
-    query {
-      total: showcases_aggregate { aggregate { count } }
-      showcases: showcases_aggregate(limit: ${args.limit}, offset: ${args.offset}) {
-        aggregate {
-          count
-        }
-        nodes {id slug url hostname domain screenshot_url ui { name url img_path } framework { name url img_path } }
-      }
-      ${args.slug ? 'previews: showcases(where: {slug: {_eq:' + JSON.stringify(args.slug) + ' }}) { id slug domain hostname url is_static has_ssr screenshot_url vue_version ui { name url img_path } framework { name url img_path } showcases_plugins { plugin { name url img_path } } showcase_modules { module { name url img_path } } }' : ''}
-    }
-  `
-  return gql(query)
-}
-
-const QUERY_SHOWCASE = gql`
-  query($id: uuid!) {
-    showcase: showcases_by_pk(id: $id) {
-      id
-      slug
-      domain
-      hostname
-      url
-      is_static
-      has_ssr
-      screenshot_url
-      vue_version
-      ui {
-        name
-        url
-        img_path
-      }
-      framework {
-        name
-        url
-        img_path
-      }
-      showcases_plugins {
-        plugin {
-          name
-          url
-          img_path
-        }
-      }
-      showcase_modules {
-        module {
-          name
-          url
-          img_path
-        }
-      }
-    }
-  }
-`
-const QUERY_FILTERED_SHOWCASES = ({ limit, offset, where }) => {
-  const query = `
-    query {
-      total: showcases_aggregate(
-        where: {
-          ${where.frameworks ? 'framework: { slug: { _in: ' + JSON.stringify(where.frameworks) + ' } }' : ''}
-          ${where.uis ? 'ui: { slug: { _in: ' + JSON.stringify(where.uis) + ' } }' : ''}
-          ${where.plugins ? 'showcases_plugins: { plugin: { slug: { _in: ' + JSON.stringify(where.plugins) + ' } } }' : ''}
-        }
-      ) {
-        aggregate { count }
-      }
-      showcases: showcases_aggregate(
-        limit: ${limit}
-        ${offset ? 'offset: ' + offset : ''}
-        where: {
-          ${where.frameworks ? 'framework: { slug: { _in: ' + JSON.stringify(where.frameworks) + ' } }' : ''}
-          ${where.uis ? 'ui: { slug: { _in: ' + JSON.stringify(where.uis) + ' } }' : ''}
-          ${where.plugins ? 'showcases_plugins: { plugin: { slug: { _in: ' + JSON.stringify(where.plugins) + ' } } }' : ''}
-        }
-      ) {
-        aggregate {
-          count
-        }
-        nodes {
-          id
-          slug
-          url
-          hostname
-          domain
-          screenshot_url
-          ui {
-            name
-            url
-            img_path
-          }
-          framework {
-            name
-            url
-            img_path
-          }
-        }
-      }
-    }`
-  return gql(query)
-}
-
-const QUERY_SEARCH_SHOWCASES = gql`
-  query($limit: Int, $offset: Int, $q: String) {
-    total: search_showcases_aggregate(args: { search: $q }) {
-      aggregate {
-        count
-      }
-    }
-    showcases: search_showcases_aggregate(args: { search: $q }, limit: $limit, offset: $offset) {
-      aggregate {
-        count
-      }
-      nodes {
-        id
-        slug
-        url
-        hostname
-        domain
-        screenshot_url
-        ui {
-          name
-          url
-          img_path
-        }
-        framework {
-          name
-          url
-          img_path
-        }
-      }
-    }
-  }
-`
 export default {
   components: {
     AnimatedNumber,
@@ -276,7 +190,7 @@ export default {
     ContentLoader,
     SearchIcon
   },
-  async fetch () {
+  async fetch() {
     this.pending = true
     const preview = this.$nuxt.context.route.query.preview
     const query = QUERY_SHOWCASES({
@@ -295,7 +209,7 @@ export default {
       this.openedDrawer = true
     }
   },
-  data () {
+  data() {
     return {
       pending: false,
       openedDrawer: false,
@@ -314,26 +228,26 @@ export default {
     }
   },
   computed: {
-    hasFilters () {
+    hasFilters() {
       return this.filters.frameworks || this.filters.uis || this.filters.plugins
     }
   },
   watch: {
-    q () {
+    q() {
       this.debouncedSearch()
     }
   },
-  created () {
+  created() {
     this.debouncedSearch = _debounce(this.search, 500)
   },
   methods: {
-    openFilters () {
+    openFilters() {
       this.$refs.filters.classList.toggle('hidden')
     },
-    closeFilters () {
+    closeFilters() {
       this.$refs.filters.classList.add('hidden')
     },
-    async handleOpen (id) {
+    async handleOpen(id) {
       await this.$hasura({
         query: print(QUERY_SHOWCASE),
         variables: { id }
@@ -343,12 +257,12 @@ export default {
         this.$router.replace(`/explore?preview=${data.showcase.slug}`)
       })
     },
-    handleClose () {
+    handleClose() {
       this.showcase = null
       this.openedDrawer = false
       this.$router.replace('/explore')
     },
-    async loadMore ($state) {
+    async loadMore($state) {
       if (this.pending || !this.showcases.length) {
         return setTimeout(() => $state.loaded(), 500)
       }
@@ -388,13 +302,13 @@ export default {
       }
       this.pending = false
     },
-    resetInfinite () {
+    resetInfinite() {
       this.limit = 12
       this.offset = null
       this.showcases = []
       this.infiniteId += 1
     },
-    updateFilters (type, value) {
+    updateFilters(type, value) {
       this.filters[type] = value.length ? value : null
       if (this.q.trim()) {
         return
@@ -403,7 +317,7 @@ export default {
       this.resetInfinite()
       this.filter()
     },
-    async filter () {
+    async filter() {
       let query
       let variables = {
         limit: this.limit,
@@ -428,7 +342,7 @@ export default {
       this.showcases.push(...data.showcases.nodes)
       this.pending = false
     },
-    async search () {
+    async search() {
       this.resetInfinite()
       if (!this.q.trim()) {
         this.filter()

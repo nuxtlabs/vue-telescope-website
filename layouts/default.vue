@@ -1,6 +1,6 @@
 <template>
   <div class="antialiased relative flex flex-col min-h-screen">
-    <TheNavbar />
+    <TheHeader />
     <div class="flex-1 flex flex-col">
       <nuxt />
     </div>
@@ -9,7 +9,6 @@
 </template>
 
 <script>
-
 export default {
   //
 }

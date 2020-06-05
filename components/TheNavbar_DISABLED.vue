@@ -97,7 +97,7 @@ export default {
     HamburgerClosedIcon,
     HamburgerOpenedIcon
   },
-  data () {
+  data() {
     return {
       open: false,
       links: [

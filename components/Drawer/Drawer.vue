@@ -12,7 +12,12 @@
     >
       <slot class="flex-1"></slot>
       <div class="flex items-center justify-center">
-        <p class="text-sm underline hover:text-nuxt-lightgreen cursor-pointer transition ease-linear duration-150" @click="close">close window</p>
+        <p
+          class="text-sm underline hover:text-nuxt-lightgreen cursor-pointer transition ease-linear duration-150"
+          @click="close"
+        >
+          close window
+        </p>
       </div>
     </div>
   </div>
@@ -27,14 +32,14 @@ export default {
       default: '600'
     }
   },
-  data () {
+  data() {
     return {
       slideAnimationClass: 'slide-in',
       fadeAnimationClass: 'fade-in'
     }
   },
   computed: {
-    customStyle () {
+    customStyle() {
       return {
         'max-width': this.panelWidth + 'px'
       }
@@ -42,7 +47,7 @@ export default {
   },
   methods: {
     // eslint-disable-next-line require-await
-    async setClosingAnimationClasses () {
+    async setClosingAnimationClasses() {
       const self = this
       return new Promise(function (resolve, reject) {
         self.slideAnimationClass = 'slide-out'
@@ -50,7 +55,7 @@ export default {
         resolve()
       })
     },
-    async close () {
+    async close() {
       await this.setClosingAnimationClasses().then((_) => {
         setTimeout(() => {
           this.$emit('close')
@@ -58,7 +63,7 @@ export default {
       })
     }
   },
-  head () {
+  head() {
     return {
       bodyAttrs: {
         class: 'overflow-hidden'

@@ -26,9 +26,7 @@
       </ContentLoader>
     </div>
     <fieldset v-else>
-      <legend
-        class="text-base leading-4 font-bold text-nuxt-lightgreen"
-      >
+      <legend class="text-base leading-4 font-bold text-nuxt-lightgreen">
         {{ name }}
       </legend>
       <div v-for="(el, i) in items" :key="`${type}-${i}`" class="mt-3">
@@ -43,16 +41,19 @@
               @change="handleCheckedItems"
             />
           </div>
-          <label :for="el.slug" class="pl-7 text-sm leading-5 flex flex-row items-center cursor-pointer hover:text-nuxt-lightgreen transition ease-in-out duration-150">
+          <label
+            :for="el.slug"
+            class="pl-7 text-sm leading-5 flex flex-row items-center cursor-pointer hover:text-nuxt-lightgreen transition ease-in-out duration-150"
+          >
             <img
               v-if="el.img_path"
               :src="iconUrl(el.img_path)"
               :alt="el.name"
               class="w-4 h-4 mr-2"
             />
-            <span
-              class="font-medium text-nuxt-gray select-none"
-            >{{ el.name }}</span>
+            <span class="font-medium text-nuxt-gray select-none">{{
+              el.name
+            }}</span>
           </label>
         </div>
       </div>
@@ -80,7 +81,7 @@ export default {
       required: true
     }
   },
-  async fetch () {
+  async fetch() {
     const { data } = await this.$hasura({
       query: `
         query {
@@ -95,17 +96,17 @@ export default {
 
     this.items = data ? data[this.type] : []
   },
-  data () {
+  data() {
     return {
       checkedItems: [],
       items: []
     }
   },
   methods: {
-    handleCheckedItems () {
+    handleCheckedItems() {
       this.$emit('checkedItems', this.checkedItems)
     },
-    iconUrl (path) {
+    iconUrl(path) {
       return `${process.env.ICONS_URL}${path}`
     }
   }

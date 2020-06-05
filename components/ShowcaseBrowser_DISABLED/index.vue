@@ -100,30 +100,34 @@ export default {
       default: ''
     }
   },
-  data () {
+  data() {
     return {}
   },
   computed: {
-    showcases () {
+    showcases() {
       return this.$store.getters.showcases
     }
   },
   methods: {
-    openUrl () {
+    openUrl() {
       window.open(this.url, '_blank')
     },
-    newScan () {
+    newScan() {
       this.$store.dispatch('openModal')
     },
-    navShowcase (s = 'next') {
-      if (!/next|prev/.test(s)) { return }
+    navShowcase(s = 'next') {
+      if (!/next|prev/.test(s)) {
+        return
+      }
       const currIndex = this.showcases.findIndex(
-        showcase => showcase.url === this.url
+        (showcase) => showcase.url === this.url
       )
       const newIndex = s === 'next' ? currIndex + 1 : currIndex - 1
       const showcase = this.showcases[newIndex]
       const slug = showcase ? showcase.slug : null
-      if (slug) { this.$router.push(`/showcases/${slug}`) }
+      if (slug) {
+        this.$router.push(`/showcases/${slug}`)
+      }
     }
   }
 }

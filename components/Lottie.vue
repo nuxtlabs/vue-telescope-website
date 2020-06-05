@@ -12,7 +12,7 @@ export default {
       required: true
     }
   },
-  mounted () {
+  mounted() {
     this.anim = lottie.loadAnimation({
       container: this.$refs.lavContainer,
       renderer: 'svg',

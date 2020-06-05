@@ -43,7 +43,7 @@ exports.handler = async function (event, _context) {
     // check if showcase has been scanned (only in production)
     if (!process.env.NETLIFY_DEV) {
       // date is now minus 24 hous
-      const date = new Date(new Date().setDate(new Date().getDate()-1))
+      const date = new Date(new Date().setDate(new Date().getDate() - 1))
       const scanRes = await hasura({
         query: print(QUERY_SCAN_BY_URL),
         variables: { url, date }
@@ -115,16 +115,16 @@ exports.handler = async function (event, _context) {
     if (showcase && isOutdated(showcase)) {
       const DELETE_SHOWCASE = gql`
         mutation($id: uuid!) {
-          delete_showcases_plugins(where: {showcase_id: {_eq: $id}}) {
+          delete_showcases_plugins(where: { showcase_id: { _eq: $id } }) {
             affected_rows
           }
-          delete_showcase_modules(where: {showcase_id: {_eq: $id}}) {
+          delete_showcase_modules(where: { showcase_id: { _eq: $id } }) {
             affected_rows
           }
-          delete_metas(where: {showcase: {id: {_eq: $id}}}) {
+          delete_metas(where: { showcase: { id: { _eq: $id } } }) {
             affected_rows
           }
-          delete_showcases(where: {id: {_eq: $id}}) {
+          delete_showcases(where: { id: { _eq: $id } }) {
             affected_rows
           }
         }
