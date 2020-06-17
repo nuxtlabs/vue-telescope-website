@@ -1,9 +1,9 @@
 <template>
-  <div class="antialiased relative flex flex-col min-h-screen">
-    <TheHeader />
-    <div class="flex-1 flex flex-col">
+  <div class="">
+    <!-- <TheHeader /> -->
+    <main class="">
       <nuxt />
-    </div>
+    </main>
     <TheFooter />
   </div>
 </template>

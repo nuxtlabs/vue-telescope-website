@@ -9,6 +9,7 @@
   >
     <div ref="inner" class="w-full h-full flex items-center">
       <MagicLogo class="h-14" :appearance="appearance" />
+      <button>Add to Chrome</button>
     </div>
   </div>
 </template>

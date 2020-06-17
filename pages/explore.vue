@@ -377,7 +377,4 @@ export default {
 .infinite-loading-container {
   @apply mt-4;
 }
-.infinite-status-prompt {
-  @apply text-gray-400 !important;
-}
 </style>

@@ -71,11 +71,4 @@ export default {
 }
 </script>
 
-<style lang="postcss" scoped>
-.previewItem:hover .previewItem__img {
-  @apply shadow-xl;
-}
-.previewItem:hover .previewItem__title {
-  @apply text-nuxt-lightgreen;
-}
-</style>
+<style lang="postcss" scoped></style>
