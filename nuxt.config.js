@@ -16,7 +16,9 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     bodyAttrs: {
-      class: ['font-body antialiased overflow-x-hidden overflow-y-scroll']
+      class: [
+        'font-body antialiased overflow-x-hidden overflow-y-scroll text-grey-900'
+      ]
     }
   },
   loading: { color: '#fff' },

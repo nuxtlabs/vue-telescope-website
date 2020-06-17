@@ -1,6 +1,6 @@
 <template>
   <div class="bg-transparent">
-    <div class="max-w-6xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-container-max-width mx-auto py-4 px-4">
       <div class="flex items-center justify-between">
         <div>
           <NuxtLink :to="{ name: 'index' }" class="font-black tracking-tighter">

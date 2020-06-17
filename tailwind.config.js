@@ -61,6 +61,9 @@ module.exports = {
       'mono-weight': 400
     },
     colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+      white: 'white',
       primary: {
         50: '#E8FFF9',
         100: '#B7F8E7',
@@ -139,13 +142,17 @@ module.exports = {
         display: ['PTRootUI', ...defaultTheme.fontFamily.sans],
         body: ['PTRootUI', ...defaultTheme.fontFamily.sans],
         monospace: [...defaultTheme.fontFamily.mono]
+      },
+      maxWidth: {
+        'container-max-width': '1264px',
+        'readable-line-length': '820px'
       }
     }
   },
   variants: {
     margin: ['responsive', 'last']
   },
-  plugins: [require('@tailwindcss/ui')],
+  // plugins: [require('@tailwindcss/ui')],
   purge: {
     // Learn more on https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
     enabled: process.env.NODE_ENV === 'production',
