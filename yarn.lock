@@ -4330,10 +4330,9 @@ graphql@^15.0.0:
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-15.0.0.tgz#042a5eb5e2506a2e2111ce41eb446a8e570b8be9"
   integrity sha512-ZyVO1xIF9F+4cxfkdhOJINM+51B06Friuv4M66W7HzUOeFd+vNzUn4vtswYINPi6sysjf1M2Ri/rwZALqgwbaQ==
 
-gsap@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/gsap/-/gsap-3.3.0.tgz#1d3c94ad0e4c46742f5f751250afbdd238364ec5"
-  integrity sha512-MIcLOH8HCGvjyuLpzNBMKK+GdoL9wmJU+8nwauSZkqTyDlI1ugD0Sbhu7HO3805u7NqSv811murbu6eipVhJqw==
+gsap@./assets/js/gsap-bonus.tgz:
+  version "3.3.3"
+  resolved "./assets/js/gsap-bonus.tgz#6c0748df725954e59c7e3799409762e6f8829ef6"
 
 gzip-size@^5.0.0:
   version "5.1.1"

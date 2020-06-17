@@ -1,7 +1,6 @@
 <template>
   <div>
     <section id="hero" class="relative">
-      <!-- <BgGradient klass="hero" /> -->
       <div
         class="max-w-6xl mx-auto h-full px-4 pt-20 pb-10 sm:px-6 lg:px-8 lg:pt-0"
       >
@@ -23,7 +22,9 @@
         </div>
       </div>
     </section>
+
     <section id="welcome" class="w-full h-screen bg-emerald"></section>
+
     <section id="featured" class="relative bg-black">
       <div class="max-w-6xl mx-auto h-full px-4 pb-10 sm:px-6 lg:px-8 lg:pt-0">
         <h5
@@ -49,7 +50,6 @@
         </div>
       </div>
     </section>
-    <!-- <ExplainSection /> -->
   </div>
 </template>
 

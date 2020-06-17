@@ -10,7 +10,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Exo 2"', ...defaultTheme.fontFamily.sans]
+        sans: ['"PTRootUI"', ...defaultTheme.fontFamily.sans]
       },
       fontSize: {
         '7xl': '6rem'

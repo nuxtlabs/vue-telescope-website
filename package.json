@@ -20,7 +20,7 @@
     "dotenv": "^8.2.0",
     "graphql": "^15.0.0",
     "graphql-tag": "^2.10.3",
-    "gsap": "^3.3.0",
+    "gsap": "./assets/js/gsap-bonus.tgz",
     "lodash.debounce": "^4.0.8",
     "lottie-web": "^5.6.10",
     "nuxt-edge": "latest",
