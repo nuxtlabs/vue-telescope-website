@@ -1,14 +1,44 @@
 <template>
-  <div>
-    <input
-      class="border-2 bg-grey-200 border-transparent rounded-md px-4 py-3 font-bold-body-weight focus:border-grey-500 w-full focus:outline-none"
-      type="text"
-    />
-  </div>
+  <input
+    :class="[sizing.height, sizing.fontSize]"
+    class="border-2 bg-grey-200 border-transparent rounded-md px-4 font-bold-body-weight focus:border-grey-500 focus:outline-none"
+    type="text"
+  />
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    size: {
+      type: String,
+      default: 'base'
+    },
+    appearance: {
+      type: String,
+      default: ''
+    }
+  },
+  computed: {
+    sizing() {
+      if (this.size === 'small') {
+        return {
+          height: 'h-8',
+          fontSize: 'text-sm'
+        }
+      } else if (this.size === 'large') {
+        return {
+          height: 'h-12',
+          fontSize: 'text-eight'
+        }
+      } else {
+        return {
+          height: 'h-10',
+          fontSize: 'text-base'
+        }
+      }
+    }
+  }
+}
 </script>
 
 <style></style>

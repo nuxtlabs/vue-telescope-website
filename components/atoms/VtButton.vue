@@ -32,15 +32,15 @@ export default {
           height: 'h-8',
           fontSize: 'text-sm'
         }
-      } else if (this.size === 'base') {
-        return {
-          height: 'h-10',
-          fontSize: 'text-base'
-        }
-      } else {
+      } else if (this.size === 'large') {
         return {
           height: 'h-12',
           fontSize: 'text-eight'
+        }
+      } else {
+        return {
+          height: 'h-10',
+          fontSize: 'text-base'
         }
       }
     },
@@ -66,10 +66,17 @@ export default {
           bg: 'bg-green-500',
           text: 'text-white'
         }
+      } else if (this.appearance === 'info') {
+        return {
+          bg: 'bg-blue-500',
+          text: 'text-white',
+          outline: 'focus:border-blue-900'
+        }
       } else {
         return {
           bg: 'bg-grey-500',
-          text: 'text-grey-900'
+          text: 'text-grey-900',
+          outline: 'focus:border-grey-700'
         }
       }
     }
