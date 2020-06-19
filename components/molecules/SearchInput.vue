@@ -6,10 +6,10 @@
     >
       https://
     </span>
-    <VtInput ref="input" size="large" class="pl-18 rounded-r-none" />
-    <VtButton size="large" appearance="info" class="rounded-l-none">
+    <AppInput ref="input" size="large" class="pl-18 rounded-r-none" />
+    <AppButton size="large" appearance="info" class="rounded-l-none">
       Search
-    </VtButton>
+    </AppButton>
   </div>
 </template>
 

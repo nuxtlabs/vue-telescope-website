@@ -45,7 +45,13 @@ export default {
       }
     },
     color() {
-      if (this.appearance === 'primary') {
+      if (this.appearance === 'transparent') {
+        return {
+          bg: '',
+          text: '',
+          outline: ''
+        }
+      } else if (this.appearance === 'primary') {
         return {
           bg: 'bg-primary-500',
           text: 'text-white',
