@@ -11,7 +11,7 @@
             : activeTabs[0].id === tab.id) && 'pointer-events-none bg-grey-300'
         ]"
         class="h-12 text-eight font-bold-body-weight px-4 rounded-xl focus:outline-none border-2 border-transparent select-none mb-2"
-        @click="startTransition(tab)"
+        @click="startManualTransition(tab)"
       >
         {{ tab.title }}
       </button>
@@ -53,18 +53,39 @@ export default {
       transitioning: false,
       // activeTab: tabs[0],
       activeTabs: [tabs[0]],
-      tabs
+      tabs,
+      autoInterval: null
     }
   },
+  mounted() {
+    this.autoInterval = setInterval(() => {
+      this.animateSwitchTabs(this.getNextTab())
+    }, 5000)
+  },
   methods: {
-    async startTransition(tab) {
+    async startManualTransition(tab) {
       if (!this.activeTabs.some((t) => t.id === tab.id)) {
-        this.activeTabs.push(tab)
-        this.transitioning = true
-        await this.$refs.content[0].leave()
-        this.transitioning = false
-        this.activeTabs.shift()
+        clearInterval(this.autoInterval)
+        await this.animateSwitchTabs(tab)
+        setTimeout(() => {
+          clearInterval(this.autoInterval)
+          this.autoInterval = setInterval(() => {
+            this.animateSwitchTabs(this.getNextTab())
+          }, 5000)
+        }, 2000)
       }
+    },
+    async animateSwitchTabs(tab) {
+      this.activeTabs.push(tab)
+      this.transitioning = true
+      await this.$refs.content[0].leave()
+      this.transitioning = false
+      this.activeTabs.shift()
+    },
+    getNextTab() {
+      return this.activeTabs[0].id === this.tabs.length
+        ? this.tabs[0]
+        : this.tabs[this.activeTabs[0].id]
     }
   }
 }
