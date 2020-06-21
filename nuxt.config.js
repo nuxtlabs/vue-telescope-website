@@ -23,19 +23,13 @@ export default {
   },
   loading: { color: '#fff' },
   css: [],
-  env: {
-    ICONS_URL: 'https://nuxt-company.github.io/vue-telemetry-analyzer/',
-    API_HASURA_URL: process.env.API_HASURA_URL,
-    // TODO: remove before production
-    HASURA_ADMIN_SECRET_KEY: process.env.HASURA_ADMIN_SECRET_KEY
-  },
-  plugins: [
-    '@/plugins/hasura.js',
-    '@/plugins/infinite-loading.client.js',
-    '@/plugins/redirect.client.js',
-    '@/plugins/click-outside.client.js',
-    '@/plugins/gsap.client'
-  ],
+  // env: {
+  //   ICONS_URL: 'https://nuxt-company.github.io/vue-telemetry-analyzer/',
+  //   API_HASURA_URL: process.env.API_HASURA_URL,
+  //   // TODO: remove before production
+  //   HASURA_ADMIN_SECRET_KEY: process.env.HASURA_ADMIN_SECRET_KEY
+  // },
+  plugins: ['@/plugins/gsap.client'],
   generate: {
     fallback: '404.html'
   },
@@ -44,16 +38,7 @@ export default {
     '@nuxtjs/eslint-module',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/svg',
-    // Doc: https://github.com/Developmint/nuxt-webfontloader
-    'nuxt-webfontloader'
+    '@nuxtjs/svg'
   ],
-  modules: [
-    // Doc: https://axios.nuxtjs.org/usage
-    '@nuxt/http'
-  ],
-  components: true,
-  http: {
-    browserBaseURL: '/'
-  }
+  components: true
 }

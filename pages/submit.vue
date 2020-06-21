@@ -1,6 +1,5 @@
 <template>
   <div class="relative">
-    <BgGradient klass="scan" />
     <div class="max-w-6xl px-8 py-40 mx-auto">
       <div class="flex">
         <div class="w-full lg:w-1/2">
@@ -13,7 +12,6 @@
             You're seconds away to find out if a website is using Vue and its
             ecosystem.
           </p>
-          <WebsiteSubmit />
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 <template>
-  <div class="tabs-wrapper-molecule flex">
+  <div class="tabs-wrapper-molecule flex flex-col md:flex-row">
     <!-- <pre>{{ activeTabs }}</pre> -->
-    <div class="w-1/4 flex flex-col mx-2">
+    <div class="md:w-1/4 flex flex-col mx-2">
       <button
         v-for="(tab, i) in tabs"
         :key="i"
@@ -19,7 +19,7 @@
 
     <transition-group
       tag="div"
-      class="w-3/4 relative h-24 mx-2 rounded-xl overflow-hidden"
+      class="md:w-3/4 relative h-24 mx-2 rounded-xl overflow-hidden"
     >
       <component
         :is="activeTab.component"
@@ -76,6 +76,8 @@ export default {
       }
     },
     async animateSwitchTabs(tab) {
+      if (document.hidden) return
+      if (!this.$refs.content[0]) return
       this.activeTabs.push(tab)
       this.transitioning = true
       await this.$refs.content[0].leave()

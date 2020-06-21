@@ -1,7 +1,11 @@
 <template>
   <div class="">
-    <!-- <HeroSection class="mt-56 max-w-readable-line-length px-4 mx-auto" /> -->
+    <HeroPropositionSection
+      class="mt-56 max-w-readable-line-length px-4 mx-auto"
+    />
+    <HeroPresentationSection class="max-w-readable-line-length px-4 mx-auto" />
     <FeaturesSection class="my-8 px-4 max-w-container-max-width m-auto" />
+    <BenefitsSection class="my-8 px-4 max-w-container-max-width m-auto" />
     <CtaSection class="my-8" />
   </div>
 </template>

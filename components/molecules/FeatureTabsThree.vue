@@ -10,8 +10,7 @@
 export default {
   mounted() {
     this.$gsap.from(this.$refs.heading, {
-      scale: 2,
-      opacity: 0
+      scale: 0
     })
   },
   methods: {

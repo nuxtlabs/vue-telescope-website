@@ -1,5 +1,5 @@
 <template>
-  <section id="hero" class="flex flex-col items-center">
+  <section id="hero-proposition" class="flex flex-col items-center">
     <h1
       class="text-center text-two leading-two md:text-one md:leading-one font-bold-body-weight -tracking-4 mb-4"
     >
@@ -15,7 +15,6 @@
     <AppButton size="large" appearance="primary" class="mb-16">
       Add to Chrome
     </AppButton>
-    <SearchInput class="" />
   </section>
 </template>
 
