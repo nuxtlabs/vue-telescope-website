@@ -1,6 +1,9 @@
 [dev]
   command = "yarn dev"
-  autoLaunch = false
+  # autoLaunch = false
+  functions = "functions"
+  framework = "#custom" 
+  targetPort=8000
 
 [build]
   command = "yarn generate"

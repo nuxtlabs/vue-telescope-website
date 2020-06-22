@@ -15,7 +15,7 @@ exports.handler = async function (event, _context) {
   const url = 'https://' + hostname
   let codeError
   let showcase
-  showcase = 'hello world'
+  showcase = 'hello world!!!'
   try {
     // filter hostname
     if (await isBlacklisted(hostname)) {
