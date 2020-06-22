@@ -3,12 +3,18 @@
     :class="[sizing.height, sizing.fontSize]"
     class="border-2 bg-grey-200 border-transparent rounded-md px-4 font-bold-body-weight focus:border-grey-500 focus:outline-none"
     type="text"
+    :value="value"
+    @input="$emit('input', $event.target.value)"
   />
 </template>
 
 <script>
 export default {
   props: {
+    value: {
+      type: String,
+      default: ''
+    },
     size: {
       type: String,
       default: 'base'

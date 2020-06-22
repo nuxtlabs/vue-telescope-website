@@ -8,19 +8,30 @@ const { URL } = require('url')
 const consola = require('consola')
 const { isBlacklisted, isOutdated } = require('./utils')
 const slugify = require('speakingurl')
+// const Url = require('url-parse')
+const normalizeUrl = require('normalize-url')
 
 exports.handler = async function (event, _context) {
-  const { hostname } = new URL(event.queryStringParameters.url)
-  // Only analyze root path at the moment
-  const url = 'https://' + hostname
   let codeError
   let showcase
-  showcase = 'hello world!!!'
   try {
+    if (!event.queryStringParameters.url) {
+      throw new Error('Please provide URL')
+    }
+    const rawUrl = event.queryStringParameters.url
+    const normalizedUrl = normalizeUrl(rawUrl, { forceHttps: true })
+    const { hostname, origin } = new URL(normalizedUrl)
+    // const parsedUrl = new Url(rawUrl)
+    // console.log(new URL(normalizedUrl))
+
     // filter hostname
-    if (await isBlacklisted(hostname)) {
+    // was not good implementation, errors local.com
+    if (isBlacklisted(hostname)) {
       throw new Error('Invalid URL')
     }
+
+    // TODO: https://vue-telemetry-api.herokuapp.com/scans?url=google.com
+    // use scanned_at
 
     // // check if showcase has been scanned (only in production)
     // if (!process.env.NETLIFY_DEV) {
@@ -54,8 +65,9 @@ exports.handler = async function (event, _context) {
       // if true delete showcase
     }
 
-    // consola.info(`Analyze ${url}...`)
-    // const infos = await analyze(url)
+    consola.info(`Analyze ${origin}...`)
+    const infos = await analyze(origin)
+    console.log(infos)
 
     // if (process.env.CLOUDINARY_URL) {
     //   const { secure_url } = await cloudinary.uploader.upload(
@@ -85,9 +97,11 @@ exports.handler = async function (event, _context) {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(showcase)
+      body: JSON.stringify(infos)
     }
   } catch (err) {
+    console.log(err)
+
     return {
       statusCode: 400,
       headers: {

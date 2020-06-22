@@ -6,7 +6,13 @@
     >
       https://
     </span>
-    <AppInput ref="input" size="large" class="pl-20 rounded-r-none" />
+    <AppInput
+      ref="input"
+      size="large"
+      class="pl-20 rounded-r-none"
+      :value="url"
+      @input="formatUrlInput"
+    />
     <AppButton size="large" appearance="info" class="rounded-l-none">
       Search
     </AppButton>
@@ -14,7 +20,18 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      url: ''
+    }
+  },
+  methods: {
+    formatUrlInput(url) {
+      this.url = url.includes('://') ? url.split('://')[1] : url
+    }
+  }
+}
 </script>
 
 <style></style>
