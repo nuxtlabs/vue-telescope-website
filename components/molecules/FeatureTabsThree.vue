@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-24 bg-yellow-500">
+  <div class="absolute top-0 left-0 w-full h-full">
     <h1 ref="heading" class="font-display-weight text-three text-center">
       Three
     </h1>

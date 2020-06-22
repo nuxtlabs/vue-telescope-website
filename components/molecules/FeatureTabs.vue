@@ -64,6 +64,7 @@ export default {
   },
   methods: {
     async startManualTransition(tab) {
+      if (this.activeTabs.length >= 2) return
       if (!this.activeTabs.some((t) => t.id === tab.id)) {
         clearInterval(this.autoInterval)
         await this.animateSwitchTabs(tab)
