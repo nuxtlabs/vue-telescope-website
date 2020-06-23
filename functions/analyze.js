@@ -10,16 +10,19 @@ const { isBlacklisted, isOutdated } = require('./utils')
 const slugify = require('speakingurl')
 // const Url = require('url-parse')
 const normalizeUrl = require('normalize-url')
+const fetch = require('node-fetch')
 
 exports.handler = async function (event, _context) {
   let codeError
-  let showcase
   try {
     if (!event.queryStringParameters.url) {
       throw new Error('Please provide URL')
     }
     const rawUrl = event.queryStringParameters.url
-    const normalizedUrl = normalizeUrl(rawUrl, { forceHttps: true })
+    const normalizedUrl = normalizeUrl(rawUrl, {
+      forceHttps: true,
+      stripWWW: false
+    })
     const { hostname, origin } = new URL(normalizedUrl)
     // const parsedUrl = new Url(rawUrl)
     // console.log(new URL(normalizedUrl))
@@ -49,47 +52,124 @@ exports.handler = async function (event, _context) {
     // }
 
     // get showcase by hostname
+    const existingShowcase = await fetch(
+      `https://vue-telemetry-api.herokuapp.com/showcases?hostname=${hostname}`,
+      {
+        method: 'get',
+        headers: {
+          authorization: `Bearer ${process.env.STRAPI_TOKEN}`
+        }
+      }
+    )
+      .then((response) => {
+        return response.json()
+      })
+      .catch((err) => {
+        throw new Error(err)
+      })
+    // console.log('existingShowcase', existingShowcase)
+
     // showcase = data && data.showcases[0] ? data.showcases[0] : null
 
-    // if (showcase && !isOutdated(showcase)) {
-    //   return {
-    //     statusCode: 200,
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify(showcase)
-    //   }
-    // }
-
-    if (showcase && isOutdated(showcase)) {
-      // if true delete showcase
+    if (
+      existingShowcase &&
+      existingShowcase.length &&
+      !isOutdated(existingShowcase[0])
+    ) {
+      return {
+        statusCode: 200,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(existingShowcase[0])
+      }
     }
 
-    consola.info(`Analyze ${origin}...`)
-    const infos = await analyze(origin)
-    console.log(infos)
-
-    // if (process.env.CLOUDINARY_URL) {
-    //   const { secure_url } = await cloudinary.uploader.upload(
-    //     infos.screenshot,
+    // if (
+    //   existingShowcase &&
+    //   existingShowcase.length &&
+    //   isOutdated(existingShowcase[0])
+    // ) {
+    //   console.log('OUTDATED')
+    //   const deleteShowcase = await fetch(
+    //     `https://vue-telemetry-api.herokuapp.com/showcases/${existingShowcase[0].id}`,
     //     {
-    //       folder: 'vue-telemetry',
-    //       public_id: path.basename(
-    //         infos.screenshot,
-    //         path.extname(infos.screenshot)
-    //       )
+    //       method: 'delete',
+    //       headers: {
+    //         authorization: `Bearer ${process.env.STRAPI_TOKEN}`
+    //       }
     //     }
     //   )
-    //   infos.screenshot = secure_url
-    // } else {
-    //   // transform to base64
-    //   const extname = path.extname(infos.screenshot)
-    //   const base64 = await fs.readFile(infos.screenshot, { encoding: 'base64' })
-
-    //   infos.screenshot = `data:image/${extname};base64,${base64}`
+    //     .then((response) => {
+    //       return response.json()
+    //     })
+    //     .catch((err) => {
+    //       throw new Error(err)
+    //     })
+    //   throw new Error('Deleted outdated showcase')
     // }
 
+    consola.info(`Analyzing ${origin}...`)
+    const infos = await analyze(origin)
+    // console.log('infos', infos)
+
+    if (process.env.CLOUDINARY_URL) {
+      const { secure_url } = await cloudinary.uploader.upload(
+        infos.screenshot,
+        {
+          folder: 'vue-telemetry',
+          public_id: path.basename(
+            infos.screenshot,
+            path.extname(infos.screenshot)
+          )
+        }
+      )
+      infos.screenshot = secure_url
+    }
+
     // insert showcase
+
+    const showcaseData = {
+      url: infos.url,
+      domain: infos.domain,
+      hostname: infos.hostname,
+      hasSSR: infos.hasSSR,
+      isStatic: infos.isStatic,
+      screenshotUrl: infos.screenshot,
+      slug: slugify(infos.hostname),
+      vueVersion: infos.vueVersion
+      // plugins: infos.plugins
+      // modules: infos.frameworkModules,
+      // framework: infos.framework,
+      // ui: infos.ui,
+      // meta: {
+      //   data: {
+      //     language: infos.meta.language,
+      //     title: infos.meta.title,
+      //     description: infos.meta.description
+      //   }
+      // }
+    }
+
+    // console.log('showcaseData', showcaseData)
+
+    const response = await fetch(
+      'https://vue-telemetry-api.herokuapp.com/showcases',
+      {
+        method: 'post',
+        body: JSON.stringify(showcaseData),
+        headers: {
+          authorization: `Bearer ${process.env.STRAPI_TOKEN}`
+        }
+      }
+    )
+      .then((response) => {
+        return response.json()
+      })
+      .catch((err) => {
+        throw new Error(err)
+      })
+    // console.log('response', response)
 
     // return
     return {
@@ -97,7 +177,7 @@ exports.handler = async function (event, _context) {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(infos)
+      body: JSON.stringify(response)
     }
   } catch (err) {
     console.log(err)
