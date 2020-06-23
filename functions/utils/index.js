@@ -6,11 +6,9 @@ exports.isBlacklisted = function (hostname) {
   return blacklist.includes(hostname)
 }
 
-exports.isOutdated = function (showcase) {
-  const weekAgo = 1000 * 60 * 60 * 24 * 7
-
+exports.isOutdated = function (date, days) {
   const today = new Date()
-  const diff = +today - +new Date(showcase.lastDetectedAt)
+  const diff = +today - +new Date(date)
 
-  return diff >= weekAgo
+  return diff >= 1000 * 60 * 60 * 24 * days
 }

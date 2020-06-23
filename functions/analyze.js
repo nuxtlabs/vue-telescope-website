@@ -14,16 +14,33 @@ const fetch = require('node-fetch')
 
 exports.handler = async function (event, _context) {
   let codeError
-  try {
-    if (!event.queryStringParameters.url) {
-      throw new Error('Please provide URL')
+  if (!event.queryStringParameters.url) {
+    return {
+      statusCode: 500,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: 'Please provide URL',
+        statusCode: 500,
+        body: null
+      })
     }
+  }
+
+  let origin
+  let hostname
+
+  try {
     const rawUrl = event.queryStringParameters.url
     const normalizedUrl = normalizeUrl(rawUrl, {
       forceHttps: true,
-      stripWWW: false
+      stripWWW: true
     })
-    const { hostname, origin } = new URL(normalizedUrl)
+    // const { hostname, origin } = new URL(normalizedUrl)
+    const parsedUrl = new URL(normalizedUrl)
+    hostname = parsedUrl.hostname
+    origin = parsedUrl.origin
     // const parsedUrl = new Url(rawUrl)
     // console.log(new URL(normalizedUrl))
 
@@ -36,20 +53,57 @@ exports.handler = async function (event, _context) {
     // TODO: https://vue-telemetry-api.herokuapp.com/scans?url=google.com
     // use scanned_at
 
-    // // check if showcase has been scanned (only in production)
-    // if (!process.env.NETLIFY_DEV) {
-    //   // date is now minus 24 hous
-    //   const date = new Date(new Date().setDate(new Date().getDate() - 1))
-    //   const scanRes = await hasura({
-    //     query: print(QUERY_SCAN_BY_URL),
-    //     variables: { url, date }
-    //   })
-    //   const scan = scanRes.data.scans[0]
-    //   if (scan) {
-    //     codeError = 99
-    //     throw new Error(`We are unable to scan ${hostname} at the moment...`)
-    //   }
-    // }
+    // check if showcase has been scanned (only in production)
+    if (!process.env.NETLIFY_DEV) {
+      // date is now minus 24 hous
+      // const date = new Date(new Date().setDate(new Date().getDate() - 1))
+      // const scanRes = await hasura({
+      //   query: print(QUERY_SCAN_BY_URL),
+      //   variables: { url, date }
+      // })
+      // const scan = scanRes.data.scans[0]
+      // if (scan) {
+      //   codeError = 99
+      //   throw new Error(`We are unable to scan ${hostname} at the moment...`)
+      // }
+      const existingScan = await fetch(
+        `https://vue-telemetry-api.herokuapp.com/scans?url=${hostname}`,
+        {
+          method: 'get',
+          headers: {
+            authorization: `Bearer ${process.env.STRAPI_TOKEN}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      )
+        .then((response) => {
+          return response.json()
+        })
+        .catch((err) => {
+          throw new Error(err)
+        })
+
+      if (
+        existingScan &&
+        existingScan.length &&
+        !isOutdated(existingScan[0].scannedAt, 1)
+      ) {
+        return {
+          statusCode: 400,
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            message: `Vue is not detected on ${origin} (saved scan)`,
+            statusCode: 400,
+            body: null
+          })
+        }
+      }
+      // console.log('SCAN IS OUTDATED')
+
+      // console.log('EXISTING SCAN', existingScan)
+    }
 
     // get showcase by hostname
     const existingShowcase = await fetch(
@@ -57,7 +111,8 @@ exports.handler = async function (event, _context) {
       {
         method: 'get',
         headers: {
-          authorization: `Bearer ${process.env.STRAPI_TOKEN}`
+          authorization: `Bearer ${process.env.STRAPI_TOKEN}`,
+          'Content-Type': 'application/json'
         }
       }
     )
@@ -69,12 +124,10 @@ exports.handler = async function (event, _context) {
       })
     // console.log('existingShowcase', existingShowcase)
 
-    // showcase = data && data.showcases[0] ? data.showcases[0] : null
-
     if (
       existingShowcase &&
       existingShowcase.length &&
-      !isOutdated(existingShowcase[0])
+      !isOutdated(existingShowcase[0].lastDetectedAt, 7)
     ) {
       return {
         statusCode: 200,
@@ -85,29 +138,30 @@ exports.handler = async function (event, _context) {
       }
     }
 
-    // if (
-    //   existingShowcase &&
-    //   existingShowcase.length &&
-    //   isOutdated(existingShowcase[0])
-    // ) {
-    //   console.log('OUTDATED')
-    //   const deleteShowcase = await fetch(
-    //     `https://vue-telemetry-api.herokuapp.com/showcases/${existingShowcase[0].id}`,
-    //     {
-    //       method: 'delete',
-    //       headers: {
-    //         authorization: `Bearer ${process.env.STRAPI_TOKEN}`
-    //       }
-    //     }
-    //   )
-    //     .then((response) => {
-    //       return response.json()
-    //     })
-    //     .catch((err) => {
-    //       throw new Error(err)
-    //     })
-    //   throw new Error('Deleted outdated showcase')
-    // }
+    if (
+      existingShowcase &&
+      existingShowcase.length &&
+      isOutdated(existingShowcase[0].lastDetectedAt, 7)
+    ) {
+      // console.log('OUTDATED')
+      const deleteShowcase = await fetch(
+        `https://vue-telemetry-api.herokuapp.com/showcases/${existingShowcase[0].id}`,
+        {
+          method: 'delete',
+          headers: {
+            authorization: `Bearer ${process.env.STRAPI_TOKEN}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      )
+        .then((response) => {
+          return response.json()
+        })
+        .catch((err) => {
+          throw new Error(err)
+        })
+      throw new Error('Deleted outdated showcase')
+    }
 
     consola.info(`Analyzing ${origin}...`)
     const infos = await analyze(origin)
@@ -153,13 +207,14 @@ exports.handler = async function (event, _context) {
 
     // console.log('showcaseData', showcaseData)
 
-    const response = await fetch(
+    const saveShowcase = await fetch(
       'https://vue-telemetry-api.herokuapp.com/showcases',
       {
         method: 'post',
         body: JSON.stringify(showcaseData),
         headers: {
-          authorization: `Bearer ${process.env.STRAPI_TOKEN}`
+          authorization: `Bearer ${process.env.STRAPI_TOKEN}`,
+          'Content-Type': 'application/json'
         }
       }
     )
@@ -169,7 +224,7 @@ exports.handler = async function (event, _context) {
       .catch((err) => {
         throw new Error(err)
       })
-    // console.log('response', response)
+    // console.log('saveShowcase', saveShowcase)
 
     // return
     return {
@@ -177,10 +232,35 @@ exports.handler = async function (event, _context) {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(response)
+      body: JSON.stringify(saveShowcase)
     }
   } catch (err) {
-    console.log(err)
+    // Error from vue-telemetry-analyzer
+    if (err.code) {
+      // For ERROR_CODES, see: https://github.com/nuxt-company/vue-telemetry-analyzer/blob/master/src/index.js
+      const scanData = {
+        url: hostname,
+        isProxyBlocked: err.statusCode === 403
+      }
+
+      const insertScan = await fetch(
+        'https://vue-telemetry-api.herokuapp.com/scans',
+        {
+          method: 'post',
+          body: JSON.stringify(scanData),
+          headers: {
+            authorization: `Bearer ${process.env.STRAPI_TOKEN}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      )
+        .then((response) => {
+          return response.json()
+        })
+        .catch((err) => {
+          throw new Error(err)
+        })
+    }
 
     return {
       statusCode: 400,
