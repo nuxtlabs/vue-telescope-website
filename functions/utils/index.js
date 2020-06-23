@@ -16,18 +16,6 @@ exports.isOutdated = function (date, days) {
 }
 
 exports.fetchStrapi = async function (url, { method, body }) {
-  // console.log('suka', url)
-  // console.log('suka', method)
-  // console.log('suka', body)
-  // console.log('final suka', {
-  //   method,
-  //   ...(body ? { body } : {}),
-  //   headers: {
-  //     authorization: `Bearer ${process.env.STRAPI_TOKEN}`,
-  //     'Content-Type': 'application/json'
-  //   }
-  // })
-
   return await fetch(url, {
     method,
     ...(body ? { body } : {}),
