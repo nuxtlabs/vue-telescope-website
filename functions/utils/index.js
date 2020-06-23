@@ -8,7 +8,6 @@ exports.isBlacklisted = function (hostname) {
 
 exports.isOutdated = function (showcase) {
   const weekAgo = 1000 * 60 * 60 * 24 * 7
-  console.log('suka', new Date(showcase.lastDetectedAt))
 
   const today = new Date()
   const diff = +today - +new Date(showcase.lastDetectedAt)
