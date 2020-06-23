@@ -21,7 +21,6 @@
     "normalize-url": "^5.0.0",
     "nuxt-edge": "latest",
     "speakingurl": "^14.0.1",
-    "url-parse": "^1.4.7",
     "utf-8-validate": "^5.0.2",
     "vue-telemetry-analyzer": "^0.6.1"
   },
