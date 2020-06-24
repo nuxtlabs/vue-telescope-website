@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     changeSlide(i) {
-      console.log('pizda', i)
+      // console.log('pizda', i)
       this.activeIndex = i
     }
   }

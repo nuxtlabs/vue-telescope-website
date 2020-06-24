@@ -126,8 +126,6 @@ exports.handler = async function (event, _context) {
       infos.screenshot = secure_url
     }
 
-    console.log(infos)
-
     // insert showcase
     const showcaseData = {
       url: infos.url,

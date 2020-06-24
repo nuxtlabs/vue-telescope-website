@@ -1,5 +1,5 @@
 <template>
-  <section id="hero-presentation" class="flex flex-col items-center">
+  <section id="hero-presentation" class="flex flex-col items-center py-12">
     <div class="max-w-readable-line-length m-auto mb-12">
       <SearchInput class="" />
     </div>
