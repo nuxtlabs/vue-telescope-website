@@ -145,6 +145,7 @@ module.exports = {
       },
       maxWidth: {
         'container-max-width': '1264px',
+        'pretty-wide': '1020px',
         'readable-line-length': '820px'
       },
       spacing: {

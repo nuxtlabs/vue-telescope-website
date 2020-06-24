@@ -1,7 +1,7 @@
 <template>
   <div class="bg-transparent">
     <div class="max-w-container-max-width mx-auto py-4 px-4">
-      <div class="flex items-center justify-between">
+      <div class="flex items-center justify-between mb-8">
         <div>
           <NuxtLink :to="{ name: 'index' }" class="font-black tracking-tighter">
             <span class="text-nuxt-lightgreen">VUE</span>
@@ -33,7 +33,6 @@
           </li>
         </ul>
       </div>
-      <div class="border-t border-gray-50 my-4"></div>
       <div class="flex flex-col sm:flex-row items-center justify-between">
         <ul class="text-sm mb-2 sm:mb-0">
           <li class="text-gray-500">

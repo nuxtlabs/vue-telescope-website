@@ -1,12 +1,21 @@
 <template>
   <section id="hero-presentation" class="flex flex-col items-center">
-    <SearchInput class="" />
-    <div class="h-64"></div>
+    <div class="max-w-readable-line-length m-auto mb-12">
+      <SearchInput class="" />
+    </div>
+    <HeroPresentationSlider :featured="featured" />
   </section>
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    featured: {
+      type: Array,
+      default: () => []
+    }
+  }
+}
 </script>
 
 <style></style>

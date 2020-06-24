@@ -1,9 +1,12 @@
 <template>
   <div class="">
-    <HeroPropositionSection
+    <!-- <pre>
+      {{ featured }}
+    </pre> -->
+    <!-- <HeroPropositionSection
       class="mt-56 max-w-readable-line-length px-4 mx-auto"
-    />
-    <HeroPresentationSection class="max-w-readable-line-length px-4 mx-auto" />
+    /> -->
+    <HeroPresentationSection :featured="featured" class="px-4" />
     <FeaturesSection class="my-8 px-4 max-w-container-max-width m-auto" />
     <BenefitsSection class="my-8 px-4 max-w-container-max-width m-auto" />
     <CtaSection class="my-8" />
@@ -15,6 +18,20 @@ export default {
   async asyncData({ app }) {
     // https://vue-telemetry-api.herokuapp.com/showcases/count
     // https://vue-telemetry-api.herokuapp.com/showcases/featured
+    const featured = await fetch(
+      'https://vue-telemetry-api.herokuapp.com/showcases/featured'
+    )
+      .then((response) => {
+        return response.json()
+      })
+      .catch((err) => {
+        throw new Error(err)
+      })
+    return {
+      featured: featured.map((item, index) => {
+        return { ...item, index }
+      })
+    }
   },
   methods: {
     // handleClick(slug) {

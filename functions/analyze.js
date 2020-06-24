@@ -126,6 +126,8 @@ exports.handler = async function (event, _context) {
       infos.screenshot = secure_url
     }
 
+    console.log(infos)
+
     // insert showcase
     const showcaseData = {
       url: infos.url,
@@ -138,11 +140,11 @@ exports.handler = async function (event, _context) {
       vueVersion: infos.vueVersion,
       language: infos.meta.language,
       title: infos.meta.title,
-      description: infos.meta.description
-      // plugins: infos.plugins
-      // modules: infos.frameworkModules,
-      // framework: infos.framework,
-      // ui: infos.ui,
+      description: infos.meta.description,
+      plugins: infos.plugins,
+      modules: infos.frameworkModules,
+      framework: infos.framework,
+      ui: infos.ui
     }
 
     const saveShowcase = await fetchStrapi(
