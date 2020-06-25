@@ -3,7 +3,7 @@
     <div
       v-for="({ id, screenshotUrl }, i) in featured"
       :key="id"
-      class="inline-flex w-full md:w-1/2 rounded-md overflow-hidden shadow-md"
+      class="inline-flex w-full md:w-1/2"
       :class="[`slide-${i + 1}`, i === 2 ? 'relative' : 'absolute']"
     >
       <HeroPresentationSliderItem
