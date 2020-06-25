@@ -62,15 +62,16 @@ export default {
       this.$gsap.to(this.$refs['showcase-wrapper'][0], {
         x: this.getDirection() === 'left' ? '-100%' : '100%',
         // opacity: 0.5,
-        duration: 1.25,
-        ease: 'expo.in',
+        duration: 1,
+        ease: 'expo.inOut',
         onComplete: () => {}
       })
       this.$gsap.to(this.$refs.showcase[0], {
         x: this.getDirection() === 'left' ? '100%' : '-100%',
+        scale: 1.05,
         // opacity: 0.5,
-        duration: 1.25,
-        ease: 'expo.in',
+        duration: 1,
+        ease: 'expo.inOut',
         onComplete: () => {}
       })
 
@@ -82,8 +83,8 @@ export default {
         this.$gsap.from(this.$refs['showcase-wrapper'][1], {
           x: this.getDirection() === 'left' ? '100%' : '-100%',
           // opacity: 0.5,
-          duration: 1.25,
-          ease: 'expo.out',
+          duration: 1,
+          ease: 'expo.inOut',
           onComplete: () => {
             this.activeShowcases.shift()
           }
@@ -92,8 +93,8 @@ export default {
           x: this.getDirection() === 'left' ? '-100%' : '100%',
           scale: 1.05,
           // opacity: 0.5,
-          duration: 1.25,
-          ease: 'expo.out',
+          duration: 1,
+          ease: 'expo.inOut',
           onComplete: () => {}
         })
       })
