@@ -58,11 +58,11 @@ export default {
   watch: {
     activeIndex() {
       this.$gsap.to(this.$refs.showcase[0], {
-        scale: 0.95,
+        // scale: 0.95,
         x: this.getDirection() === 'left' ? -50 : 50,
         opacity: 0.5,
-        duration: 0.25,
-        ease: 'power4.in',
+        duration: 0.3,
+        ease: 'expo.in',
         onComplete: () => {}
       })
 
@@ -70,11 +70,11 @@ export default {
 
       this.$nextTick(() => {
         this.$gsap.from(this.$refs.showcase[1], {
-          scale: 1.05,
+          // scale: 1.05,
           x: this.getDirection() === 'left' ? 50 : -50,
           opacity: 0.5,
-          duration: 0.25,
-          ease: 'power4.out',
+          duration: 0.3,
+          ease: 'expo.out',
           onComplete: () => {
             this.activeShowcases.shift()
           }
