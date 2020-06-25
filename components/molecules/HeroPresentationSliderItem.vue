@@ -1,14 +1,14 @@
 <template>
   <div class="intrinsic w-full h-full" @click="changeSlider">
     <template v-if="activeShowcases.length">
-      <img
+      <div
         v-for="showcase in activeShowcases"
         :key="showcase.id"
-        ref="showcase"
-        :src="showcase.screenshotUrl"
-        alt=""
-        class="absolute top-0 left-0 w-full h-full object-top object-cover cursor-pointer"
-      />
+        ref="showcase-wrapper"
+        class="absolute top-0 left-0 w-full h-full object-top object-cover cursor-pointer overflow-hidden"
+      >
+        <img ref="showcase" :src="showcase.screenshotUrl" alt="" />
+      </div>
     </template>
 
     <!-- <img
@@ -57,11 +57,19 @@ export default {
   },
   watch: {
     activeIndex() {
+      // console.log(this.$refs['showcase-wrapper'])
+
+      this.$gsap.to(this.$refs['showcase-wrapper'][0], {
+        x: this.getDirection() === 'left' ? '-100%' : '100%',
+        // opacity: 0.5,
+        duration: 1.25,
+        ease: 'expo.in',
+        onComplete: () => {}
+      })
       this.$gsap.to(this.$refs.showcase[0], {
-        // scale: 0.95,
-        x: this.getDirection() === 'left' ? -50 : 50,
-        opacity: 0.5,
-        duration: 0.3,
+        x: this.getDirection() === 'left' ? '100%' : '-100%',
+        // opacity: 0.5,
+        duration: 1.25,
         ease: 'expo.in',
         onComplete: () => {}
       })
@@ -69,15 +77,24 @@ export default {
       this.activeShowcases.push(this.featured[this.getNextSlide()])
 
       this.$nextTick(() => {
-        this.$gsap.from(this.$refs.showcase[1], {
-          // scale: 1.05,
-          x: this.getDirection() === 'left' ? 50 : -50,
-          opacity: 0.5,
-          duration: 0.3,
+        // console.log(this.$refs['showcase-wrapper'][1])
+
+        this.$gsap.from(this.$refs['showcase-wrapper'][1], {
+          x: this.getDirection() === 'left' ? '100%' : '-100%',
+          // opacity: 0.5,
+          duration: 1.25,
           ease: 'expo.out',
           onComplete: () => {
             this.activeShowcases.shift()
           }
+        })
+        this.$gsap.from(this.$refs.showcase[1], {
+          x: this.getDirection() === 'left' ? '-100%' : '100%',
+          scale: 1.05,
+          // opacity: 0.5,
+          duration: 1.25,
+          ease: 'expo.out',
+          onComplete: () => {}
         })
       })
       // this.activeShowcases.shift()
@@ -88,7 +105,7 @@ export default {
   },
   methods: {
     changeSlider(e) {
-      // console.log('changeSlider', this.activeShowcases[0].index)
+      if (this.activeShowcases.length > 1) return
       this.$emit('change-slide', this.activeShowcases[0].index)
     },
     getNextSlide() {
