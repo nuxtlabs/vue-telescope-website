@@ -3,7 +3,7 @@
     <div class="max-w-readable-line-length m-auto mb-12">
       <SearchInput class="" />
     </div>
-    <HeroPresentationSlider :featured="featured" />
+    <HeroPresentationSlider :featured="featured" class="my-12" />
   </section>
 </template>
 

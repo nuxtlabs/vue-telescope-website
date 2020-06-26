@@ -1,19 +1,25 @@
 <template>
-  <div class="w-full relative flex items-center justify-center">
+  <div class="w-full relative">
+    <!-- <pre>{{ activeShowcase }}</pre> -->
+    <BrandLogosCloud />
     <div
-      v-for="({ id, screenshotUrl }, i) in featured"
-      :key="id"
-      class="inline-flex w-full md:w-1/2"
-      :class="[`slide-${i + 1}`, i === 2 ? 'relative' : 'absolute']"
+      class="overflow-hidden w-full relative flex items-center justify-center"
     >
-      <HeroPresentationSliderItem
-        :featured="featured"
-        :static-index="i"
-        :active-index="activeIndex"
-        @change-slide="changeSlide"
-      />
-      <!-- <div>{{ showcase }}</div> -->
-      <!-- <div class="bg-red-500 w-full h-full absolute top-0 left-0"></div> -->
+      <div
+        v-for="({ id, screenshotUrl }, i) in featured"
+        :key="id"
+        class="inline-flex w-full md:w-1/2"
+        :class="[`slide-${i + 1}`, i === 2 ? 'relative' : 'absolute']"
+      >
+        <HeroPresentationSliderItem
+          :featured="featured"
+          :static-index="i"
+          :active-index="activeIndex"
+          @change-slide="changeSlide"
+        />
+        <!-- <div>{{ showcase }}</div> -->
+        <!-- <div class="bg-red-500 w-full h-full absolute top-0 left-0"></div> -->
+      </div>
     </div>
   </div>
 </template>
@@ -29,6 +35,11 @@ export default {
   data() {
     return {
       activeIndex: null
+    }
+  },
+  computed: {
+    activeShowcase() {
+      return this.featured[this.activeIndex ? this.activeIndex : 2]
     }
   },
   methods: {

@@ -135,6 +135,42 @@ module.exports = {
         700: '#1B6BE3',
         800: '#1362D7',
         900: '#0C59CC'
+      },
+      quasar: {
+        base: '#1976D2',
+        light: '#E0F0FF'
+      },
+      tailwind: {
+        base: '#38B2AC',
+        light: '#D6FFFE'
+      },
+      element: {
+        base: '#409EFF',
+        light: '#D7EAFF'
+      },
+      vuetify: {
+        base: '#1867C0',
+        light: '#E0EFFF'
+      },
+      bootstrap: {
+        base: '#563D7C',
+        light: '#E5D9F9'
+      },
+      buefy: {
+        base: '#7957D5',
+        light: '#E6DDFF'
+      },
+      vue: {
+        base: '#41B883',
+        light: '#D6F9E9'
+      },
+      nuxt: {
+        base: '#00C58E',
+        light: '#EAFFF9'
+      },
+      gridsome: {
+        base: '#00A672',
+        light: '#D2F8EC'
       }
     },
     extend: {

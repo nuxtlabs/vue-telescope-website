@@ -3,10 +3,10 @@
     <!-- <pre>
       {{ featured }}
     </pre> -->
-    <!-- <HeroPropositionSection
+    <HeroPropositionSection
       class="mt-56 max-w-readable-line-length px-4 mx-auto"
-    /> -->
-    <HeroPresentationSection :featured="featured" class="px-4" />
+    />
+    <HeroPresentationSection :featured="featured" class="" />
     <FeaturesSection class="my-8 px-4 max-w-container-max-width m-auto" />
     <BenefitsSection class="my-8 px-4 max-w-container-max-width m-auto" />
     <CtaSection class="my-8" />
