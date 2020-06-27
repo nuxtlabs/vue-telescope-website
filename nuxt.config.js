@@ -2,6 +2,9 @@ import 'dotenv/config'
 
 export default {
   mode: 'universal',
+  env: {
+    STRAPI_TOKEN: process.env.STRAPI_TOKEN
+  },
   head: {
     title: 'Vue Telemetry | Discover websites made with Vue.js',
     meta: [
@@ -29,7 +32,7 @@ export default {
   //   // TODO: remove before production
   //   HASURA_ADMIN_SECRET_KEY: process.env.HASURA_ADMIN_SECRET_KEY
   // },
-  plugins: ['@/plugins/gsap.client'],
+  plugins: ['@/plugins/gsap.client', '@/plugins/twitter-like'],
   generate: {
     fallback: '404.html'
   },

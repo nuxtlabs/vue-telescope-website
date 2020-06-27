@@ -2,9 +2,7 @@
   <div class="w-full relative">
     <!-- <pre>{{ activeShowcase }}</pre> -->
     <BrandLogosCloud />
-    <div
-      class="overflow-hidden w-full relative flex items-center justify-center"
-    >
+    <div class="w-full relative flex items-center justify-center">
       <div
         v-for="({ id, screenshotUrl }, i) in featured"
         :key="id"
