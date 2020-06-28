@@ -81,7 +81,7 @@ export default {
       } else {
         return {
           bg: 'bg-grey-500',
-          text: 'text-grey-900',
+          text: 'text-white',
           outline: 'focus:border-grey-700'
         }
       }

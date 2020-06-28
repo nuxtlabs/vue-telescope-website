@@ -1,5 +1,5 @@
 <template>
-  <div class="brand-logos-cloud w-12 h-12">
+  <div class="brand-logos-cloud w-12 h-12 opacity-25">
     <ClientOnly>
       <div
         v-for="logo in knuthfisheryates(brands)"

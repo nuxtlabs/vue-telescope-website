@@ -1,7 +1,7 @@
 <template>
   <div class="">
-    <!-- <TheHeader /> -->
-    <main class="">
+    <TheHeader />
+    <main class="mt-16">
       <nuxt />
     </main>
     <TheFooter />

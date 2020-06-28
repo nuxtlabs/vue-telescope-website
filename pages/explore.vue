@@ -3,9 +3,12 @@
     <ExploreShowcasesGrid
       v-if="!$route.params.website || ($route.params.website && twitterLike)"
       :showcases="showcases"
+      class="px-2"
     />
 
-    <NuxtChild />
+    <!-- <transition name="page"> -->
+    <NuxtChild :key="$route.params.website" keep-alive />
+    <!-- </transition> -->
 
     <!-- <div v-if="$route.params.website">
       <div v-if="twitterLike">
@@ -29,13 +32,33 @@ import { mapState } from 'vuex'
 import { fetchStrapi } from '@/functions/utils'
 
 export default {
-  async asyncData({ app }) {
+  // async asyncData({ app }) {
+  //   const showcases = await fetchStrapi(
+  //     'https://vue-telemetry-api.herokuapp.com/showcases',
+  //     { method: 'get' }
+  //   )
+  //   return {
+  //     showcases
+  //   }
+  // },
+  async fetch() {
     const showcases = await fetchStrapi(
       'https://vue-telemetry-api.herokuapp.com/showcases',
       { method: 'get' }
     )
+    if (showcases.length) {
+      this.showcases = showcases
+    } else {
+      // set status code on server
+      if (process.server) {
+        this.$nuxt.context.res.statusCode = 404
+      }
+      throw new Error('Showcases not found')
+    }
+  },
+  data() {
     return {
-      showcases
+      showcases: null
     }
   },
   computed: {

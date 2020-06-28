@@ -1,6 +1,8 @@
 <template>
-  <header class="h-16 fixed top-0 left-0 w-full z-50 overflow-hidden">
-    <MagicHeader
+  <header
+    class="bg-white h-16 fixed top-0 left-0 w-full z-50 overflow-hidden px-4"
+  >
+    <!-- <MagicHeader
       v-for="({ appearance, trigger }, i) in [
         { appearance: 'white', trigger: '#hero' },
         { appearance: 'emerald', trigger: '#welcome' },
@@ -10,21 +12,40 @@
       :index="-Math.abs(i)"
       :appearance="appearance"
       :trigger="trigger"
-    />
-    <!-- <div class="magic absolute top-0 left-0 z-20 overflow-hidden w-full h-full bg-white flex items-center px-4">
-      <MagicLogo class="h-12" appearance="white" />
+    /> -->
+    <div
+      class="w-full h-full flex justify-between items-center max-w-container-max-width m-auto"
+    >
+      <NuxtLink to="/">
+        <OneLogo class="h-8" />
+        <!-- <TwoLogo class="h-8" /> -->
+        <!-- <ThreeLogo class="h-8" /> -->
+        <!-- <FourLogo class="h-8" /> -->
+        <!-- <OldLogo class="h-8" /> -->
+      </NuxtLink>
+      <AppButton size="base" appearance="primary" class="">
+        Add to Chrome
+      </AppButton>
     </div>
-    <div class="magic absolute top-0 left-0 z-10 overflow-hidden w-full h-full bg-emerald flex items-center px-4">
-      <MagicLogo class="h-12" appearance="emerald" />
-    </div>
-    <div class="magic absolute top-0 left-0 z-0 overflow-hidden w-full h-full bg-black flex items-center px-4">
-      <MagicLogo class="h-12" appearance="black" />
-    </div> -->
   </header>
 </template>
 
 <script>
-export default {}
+import OneLogo from '@/assets/logo/one.svg?inline'
+// import TwoLogo from '@/assets/logo/two.svg?inline'
+// import ThreeLogo from '@/assets/logo/three.svg?inline'
+// import FourLogo from '@/assets/logo/four.svg?inline'
+// import OldLogo from '@/assets/logo/old.svg?inline'
+
+export default {
+  components: {
+    OneLogo
+    // TwoLogo
+    // ThreeLogo
+    // FourLogo
+    // OldLogo
+  }
+}
 </script>
 
 <style></style>

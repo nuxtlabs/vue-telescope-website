@@ -1,18 +1,23 @@
 <template>
-  <div
-    class="slider-wrapper w-full"
-    @click="staticIndex === 2 ? goToShowcase() : changeSlider()"
-  >
+  <div class="slider-wrapper w-full">
     <template v-if="activeShowcases.length">
       <div class="showcase-wrapper">
         <div
-          class="intrinsic w-full h-full relative shadow-md rounded-md overflow-hidden bg-grey-200"
+          class="intrinsic w-full h-full relative shadow-xl rounded-xl overflow-hidden bg-grey-200"
         >
           <div
             v-for="showcase in activeShowcases"
             :key="showcase.id"
             ref="showcase-image-wrapper"
             class="showcase-image-wrapper absolute top-0 left-0 w-full h-full cursor-pointer overflow-hidden"
+            @click="
+              staticIndex === 2
+                ? $router.push({
+                    name: 'explore-website',
+                    params: { website: showcase.slug }
+                  })
+                : changeSlider()
+            "
           >
             <img ref="showcase" class="" :src="showcase.screenshotUrl" alt="" />
           </div>
@@ -20,14 +25,22 @@
 
         <template v-if="staticIndex === 2">
           <div class="relative mt-4">
-            <h2
+            <NuxtLink
               v-for="showcase in activeShowcases"
-              ref="showcase-title"
               :key="showcase.id"
-              class="absolute opacity-0 top-0 left-0 text-six leading-six font-display-weight overflow-hidden"
+              class="absolute top-0 left-0"
+              :to="{
+                name: 'explore-website',
+                params: { website: showcase.slug }
+              }"
             >
-              {{ showcase.title }}
-            </h2>
+              <h2
+                ref="showcase-title"
+                class="opacity-0 text-six leading-six font-display-weight overflow-hidden"
+              >
+                {{ showcase.title }}
+              </h2>
+            </NuxtLink>
           </div>
         </template>
       </div>
