@@ -1,5 +1,6 @@
 <template>
   <header
+    id="main-header"
     class="bg-white h-16 fixed top-0 left-0 w-full z-50 overflow-hidden px-4"
   >
     <!-- <MagicHeader

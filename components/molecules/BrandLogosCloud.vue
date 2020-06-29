@@ -26,13 +26,13 @@ export default {
     return {
       brands: [
         'quasar',
-        'tailwind',
+        'tailwind-css',
         'element',
         'vuetify',
         'bootstrap',
         'buefy',
         'vue',
-        'nuxt',
+        'nuxtjs',
         'gridsome'
       ],
       xMatrix: [-270, -250, -180, -100, 0, 100, 150, 200, 250],

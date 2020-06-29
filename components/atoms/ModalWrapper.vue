@@ -4,16 +4,16 @@
       class="w-full h-full overflow-auto"
       @click.self="$router.push('/explore')"
     >
-      <div class="w-full flex pointer-events-none">
+      <!-- <div class="w-full flex pointer-events-none">
         <div
           class="ml-auto p-8 cursor-pointer pointer-events-auto"
           @click="$router.push('/explore')"
         >
           <XmarkCircleIcon class="text-white" />
         </div>
-      </div>
+      </div> -->
       <div class="m-auto max-w-pretty-wide">
-        <div class="bg-white mb-4 mx-4 p-4 rounded-xl">
+        <div class="bg-white m-4 rounded-xl overflow-hidden">
           <slot></slot>
         </div>
       </div>
@@ -22,11 +22,22 @@
 </template>
 
 <script>
-import XmarkCircleIcon from '@/assets/icons/xmark-circle.svg?inline'
+// import XmarkCircleIcon from '@/assets/icons/xmark-circle.svg?inline'
 
 export default {
-  components: {
-    XmarkCircleIcon
+  // components: {
+  //   XmarkCircleIcon
+  // },
+  activated() {
+    document.querySelector('#explore-showcases-grid').style.filter =
+      'blur(10px)'
+    document.querySelector('#main-header').style.filter = 'blur(10px)'
+    document.body.style.overflow = 'hidden'
+  },
+  deactivated() {
+    document.querySelector('#explore-showcases-grid').style.filter = null
+    document.querySelector('#main-header').style.filter = null
+    document.body.style.overflow = null
   }
 }
 </script>

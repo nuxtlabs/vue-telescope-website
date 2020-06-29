@@ -2,6 +2,7 @@
   <div>
     <ExploreShowcasesGrid
       v-if="!$route.params.website || ($route.params.website && twitterLike)"
+      id="explore-showcases-grid"
       :showcases="showcases"
       class="px-2"
     />
