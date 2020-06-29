@@ -12,8 +12,10 @@
           <XmarkCircleIcon class="text-white" />
         </div>
       </div>
-      <div class="bg-white mx-4 mb-4 p-4 rounded-xl">
-        <slot></slot>
+      <div class="m-auto max-w-pretty-wide">
+        <div class="bg-white mb-4 mx-4 p-4 rounded-xl">
+          <slot></slot>
+        </div>
       </div>
     </div>
   </div>
