@@ -4,7 +4,8 @@
     <div v-if="twitterLike">
       <!-- <transition name="page"> -->
       <ModalWrapper>
-        <ExploreWebsite :website="website" />
+        <ExploreWebsite :website="website" class="mb-12" />
+        <CtaSection />
       </ModalWrapper>
       <!-- </transition> -->
     </div>

@@ -140,7 +140,7 @@ module.exports = {
         base: '#1976D2',
         light: '#E0F0FF'
       },
-      tailwind: {
+      'tailwind-css': {
         base: '#38B2AC',
         light: '#D6FFFE'
       },
@@ -164,7 +164,7 @@ module.exports = {
         base: '#41B883',
         light: '#D6F9E9'
       },
-      nuxt: {
+      nuxtjs: {
         base: '#00C58E',
         light: '#EAFFF9'
       },

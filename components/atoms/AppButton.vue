@@ -85,8 +85,8 @@ export default {
         }
       } else {
         return {
-          bg: 'bg-grey-500',
-          text: 'text-white',
+          bg: 'bg-grey-200',
+          text: 'text-grey-900',
           outline: 'focus:border-grey-700'
         }
       }
