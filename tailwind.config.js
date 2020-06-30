@@ -207,6 +207,9 @@ module.exports = {
       'pages/**/*.vue',
       'plugins/**/*.js',
       'nuxt.config.js'
-    ]
+    ],
+    options: {
+      whitelist: ['bg-nuxtjs-light']
+    }
   }
 }
