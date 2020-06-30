@@ -209,7 +209,7 @@ module.exports = {
       'nuxt.config.js'
     ],
     options: {
-      whitelist: ['bg-nuxtjs-light']
+      whitelist: ['bg-nuxtjs-light', 'bg-tailwind-css-light']
     }
   }
 }
