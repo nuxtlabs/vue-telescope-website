@@ -120,9 +120,7 @@
     <template v-if="website.framework">
       <div class="flex items-center px-8 mb-4">
         <div class="w-1/3">
-          <div
-            class="text-six leading-six font-bold-body-weight bg-nuxtjs-light"
-          >
+          <div class="text-six leading-six font-bold-body-weight">
             Framework:
           </div>
         </div>
