@@ -40,57 +40,136 @@
         alt=""
         class="absolute top-0 left-0 w-full h-full"
       />
-      <!-- <div
-        class="absolute top-0 right-0 z-10 p-4 cursor-pointer pointer-events-auto"
-        @click="$router.push('/explore')"
-      >
-        <XmarkCircleIcon class="text-white w-8 h-8" />
-      </div> -->
-      <!-- <div class="absolute bottom-0 right-0 z-10 p-4">
-        <AppButton
-          appearance="info"
-          size="small"
-          tag="a"
-          :href="website.url"
-          target="_blank"
-          class="rounded-full"
-        >
-          Visit
-        </AppButton>
-      </div> -->
-      <!-- 
-      <div class="hero-info">
-        <div
-          class="pt-5 mb-4 text-center text-white font-bold-body-weight tracking-4"
-        >
-          {{ website.hostname }}
-        </div>
-        <h1
-          class="px-4 text-center text-five leading-five md:text-three md:leading-three font-display-weight mb-2 text-white"
-        >
-          {{ website.title }}
-        </h1>
-      </div> -->
     </div>
 
     <div class="mb-10 px-8">
-      <!-- <div class="flex items-center justify-center mb-2">
-        <span class="w-3 h-3 rounded-full bg-grey-600 mr-2"></span>
-        <span
-          class="text-sm leading-sm uppercase font-bold-body-weight tracking-2 text-grey-600"
-        >
-          About
-        </span>
-      </div> -->
-      <!-- <h1
-        class="text-five leading-five md:text-three md:leading-three font-display-weight mb-2"
-      >
-        {{ website.title }}
-      </h1> -->
-      <p>{{ website.description }}</p>
+      <p class="text-eight leading-eight">{{ website.description }}</p>
     </div>
 
-    <div class="flex flex-wrap px-8 mb-10">
+    <div class="mb-10">
+      <div class="px-8 mb-4">
+        <h3
+          class="flex items-center font-display-weight pl-2 text-eight uppercase"
+        >
+          <ConfigIcon class="h-5 mr-2" />
+          Info
+        </h3>
+      </div>
+      <div class="flex flex-wrap px-6">
+        <ExploreDataItem>
+          <VueIcon class="w-8 h-8" />
+          <div class="text-eight font-bold-body-weight">
+            {{ website.vueVersion }}
+          </div>
+        </ExploreDataItem>
+
+        <ExploreDataItem>
+          <div class="text-seven leading-seven font-bold-body-weight mr-2">
+            SSR
+          </div>
+          <div class="w-8 h-8 flex items-center justify-center">
+            <CheckmarkCircleFillIcon
+              v-if="website.hasSSR"
+              class="w-6 text-green-500"
+            />
+            <XmarkCircleFillIcon v-else class="w-6 text-grey-400" />
+          </div>
+        </ExploreDataItem>
+
+        <ExploreDataItem>
+          <div class="text-seven leading-seven font-bold-body-weight mr-2">
+            Static
+          </div>
+          <div class="w-8 h-8 flex items-center justify-center">
+            <CheckmarkCircleFillIcon
+              v-if="website.isStatic"
+              class="w-6 text-green-500"
+            />
+            <XmarkCircleFillIcon v-else class="w-6 text-grey-400" />
+          </div>
+        </ExploreDataItem>
+
+        <ExploreDataItem v-if="website.framework">
+          <div class="text-seven leading-seven font-bold-body-weight mr-2">
+            Framework
+          </div>
+          <a :href="website.framework.url" target="_blank" class="">
+            <img
+              :src="require(`~/assets/brands/${website.framework.slug}.svg`)"
+              alt=""
+              class="w-8 h-8"
+            />
+          </a>
+        </ExploreDataItem>
+
+        <ExploreDataItem v-if="website.ui">
+          <div class="text-seven leading-seven font-bold-body-weight mr-2">
+            UI Framework
+          </div>
+          <a :href="website.ui.url" target="_blank" class="">
+            <img
+              :src="require(`~/assets/brands/${website.ui.slug}.svg`)"
+              alt=""
+              class="w-8 h-8"
+            />
+          </a>
+        </ExploreDataItem>
+      </div>
+    </div>
+
+    <div v-if="website.plugins.length" class="mb-10">
+      <div class="px-8 mb-4">
+        <h3
+          class="flex items-center font-display-weight pl-2 text-eight uppercase"
+        >
+          <PluginsIcon class="h-6 mr-2" />
+          Plugins
+        </h3>
+      </div>
+      <div class="flex flex-wrap px-8">
+        <a
+          v-for="plugin in website.plugins"
+          :key="plugin.id"
+          :href="plugin.url"
+          target="_blank"
+          class="mr-4 mb-4"
+        >
+          <span
+            class="block bg-grey-50 font-bold-body-weight px-4 py-2 rounded-xl"
+          >
+            {{ plugin.name }}
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <div v-if="website.modules.length" class="mb-10">
+      <div class="px-8 mb-4">
+        <h3
+          class="flex items-center font-display-weight pl-2 text-eight uppercase"
+        >
+          <ModulesIcon class="h-6 mr-2" />
+          Nuxt Modules
+        </h3>
+      </div>
+      <div class="flex flex-wrap px-8">
+        <a
+          v-for="module in website.modules"
+          :key="module.id"
+          :href="module.url"
+          target="_blank"
+          class="mr-4 mb-4"
+        >
+          <span
+            class="block bg-grey-50 font-bold-body-weight px-4 py-2 rounded-xl"
+          >
+            {{ module.name }}
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <!-- <div class="flex flex-wrap px-8 mb-10">
       <div class="flex flex-col items-center w-1/3">
         <VueIcon class="w-12 h-12" />
         <div class="text-eight font-bold-body-weight">
@@ -115,9 +194,9 @@
         />
         <XmarkCircleFillIcon v-else class="w-8 text-grey-400" />
       </div>
-    </div>
+    </div> -->
 
-    <template v-if="website.framework">
+    <!-- <template v-if="website.framework">
       <div class="flex items-center px-8 mb-4">
         <div class="w-1/3">
           <div class="text-six leading-six font-bold-body-weight">
@@ -140,19 +219,9 @@
         </div>
         <div class="w-1/3"></div>
       </div>
-    </template>
+    </template> -->
 
-    <!-- <div v-if="website.ui">
-      <h2 class="text-six font-display-weight">UI:</h2>
-      <img
-        :src="require(`~/assets/brands/${website.ui.slug}.svg`)"
-        alt=""
-        class="w-8 h-8"
-      />
-      <ExternalLink :url="website.ui.url" :text="website.ui.name" />
-    </div> -->
-
-    <template v-if="website.ui">
+    <!-- <template v-if="website.ui">
       <div class="flex items-center px-8 py-4">
         <div class="w-1/3">
           <div class="text-six leading-six font-bold-body-weight">
@@ -175,9 +244,9 @@
         </div>
         <div class="w-1/3"></div>
       </div>
-    </template>
+    </template> -->
 
-    <template v-if="website.plugins.length">
+    <!-- <template v-if="website.plugins.length">
       <div class="flex items-start px-8 py-4">
         <div class="w-1/2">
           <div class="text-six leading-six font-bold-body-weight">
@@ -193,13 +262,12 @@
             class="mr-2 mb-2 bg-primary-50 text-primary-700 font-bold-body-weight px-3 py-1 rounded-xl"
           >
             {{ plugin.name }}
-            <!-- <ExternalLink :url="plugin.url" :text="plugin.name" /> -->
           </a>
         </div>
       </div>
-    </template>
+    </template> -->
 
-    <template v-if="website.modules.length">
+    <!-- <template v-if="website.modules.length">
       <div class="flex items-start px-8 py-4">
         <div class="w-1/2">
           <div class="text-six leading-six font-bold-body-weight">
@@ -215,18 +283,10 @@
             class="mr-2 mb-2 bg-primary-50 text-primary-700 font-bold-body-weight px-3 py-1 rounded-xl"
           >
             {{ module.name }}
-            <!-- <ExternalLink :url="plugin.url" :text="plugin.name" /> -->
           </a>
         </div>
       </div>
-    </template>
-
-    <!-- <div v-if="website.modules.length">
-      <h2 class="text-six font-display-weight">Modules:</h2>
-      <div v-for="module in website.modules" :key="module.id">
-        <ExternalLink :url="module.url" :text="module.name" />
-      </div>
-    </div> -->
+    </template> -->
   </div>
 </template>
 
@@ -236,6 +296,9 @@ import XmarkCircleFillIcon from '@/assets/icons/xmark-circle-fill.svg?inline'
 import CheckmarkCircleFillIcon from '@/assets/icons/checkmark-circle-fill.svg?inline'
 import LinkIcon from '@/assets/icons/link.svg?inline'
 import VueIcon from '@/assets/brands/vue.svg?inline'
+import ModulesIcon from '@/assets/icons/modules.svg?inline'
+import PluginsIcon from '@/assets/icons/plugins.svg?inline'
+import ConfigIcon from '@/assets/icons/config.svg?inline'
 
 export default {
   components: {
@@ -243,7 +306,10 @@ export default {
     XmarkCircleFillIcon,
     CheckmarkCircleFillIcon,
     LinkIcon,
-    VueIcon
+    VueIcon,
+    ModulesIcon,
+    PluginsIcon,
+    ConfigIcon
   },
   props: {
     website: {
