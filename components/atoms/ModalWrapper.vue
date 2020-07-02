@@ -31,13 +31,17 @@ export default {
   //   XmarkCircleIcon
   // },
   activated() {
-    document.querySelector('#explore-showcases-grid').style.filter =
+    // const mainContent = document.querySelector('#explore-showcases-section')
+    // if (mainContent) {
+    //   mainContent.style.filter = 'blur(10px)'
+    // }
+    document.querySelector('#explore-showcases-section').style.filter =
       'blur(10px)'
     document.querySelector('#main-header').style.filter = 'blur(10px)'
     document.body.style.overflow = 'hidden'
   },
   deactivated() {
-    document.querySelector('#explore-showcases-grid').style.filter = null
+    document.querySelector('#explore-showcases-section').style.filter = null
     document.querySelector('#main-header').style.filter = null
     document.body.style.overflow = null
   }

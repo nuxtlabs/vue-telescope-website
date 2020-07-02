@@ -49,9 +49,9 @@
     <div class="mb-10">
       <div class="px-8 mb-4">
         <h3
-          class="flex items-center font-display-weight pl-2 text-eight uppercase"
+          class="flex items-center font-display-weight pl-2 text-eight text-primary-700 uppercase"
         >
-          <ConfigIcon class="h-5 mr-2" />
+          <ConfigIcon class="h-5 mr-2 text-primary-700 opacity-25" />
           Info
         </h3>
       </div>
@@ -120,9 +120,9 @@
     <div v-if="website.plugins.length" class="mb-10">
       <div class="px-8 mb-4">
         <h3
-          class="flex items-center font-display-weight pl-2 text-eight uppercase"
+          class="flex items-center font-display-weight pl-2 text-eight text-primary-700 uppercase"
         >
-          <PluginsIcon class="h-6 mr-2" />
+          <PluginsIcon class="h-6 mr-2 text-primary-700 opacity-25" />
           Plugins
         </h3>
       </div>
@@ -146,9 +146,9 @@
     <div v-if="website.modules.length" class="mb-10">
       <div class="px-8 mb-4">
         <h3
-          class="flex items-center font-display-weight pl-2 text-eight uppercase"
+          class="flex items-center font-display-weight pl-2 text-eight text-primary-700 uppercase"
         >
-          <ModulesIcon class="h-6 mr-2" />
+          <ModulesIcon class="h-6 mr-2 text-primary-700 opacity-25" />
           Nuxt Modules
         </h3>
       </div>

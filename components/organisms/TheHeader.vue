@@ -1,7 +1,7 @@
 <template>
   <header
     id="main-header"
-    class="bg-white h-16 fixed top-0 left-0 w-full z-50 overflow-hidden px-4"
+    class="bg-white h-16 fixed top-0 left-0 w-full z-50 overflow-hidden"
   >
     <!-- <MagicHeader
       v-for="({ appearance, trigger }, i) in [
@@ -15,7 +15,7 @@
       :trigger="trigger"
     /> -->
     <div
-      class="w-full h-full flex justify-between items-center max-w-container-max-width m-auto"
+      class="w-full h-full flex justify-between items-center max-w-container-max-width m-auto px-4"
     >
       <NuxtLink to="/">
         <OneLogo class="h-8" />

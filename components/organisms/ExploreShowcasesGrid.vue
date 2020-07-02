@@ -1,6 +1,13 @@
 <template>
-  <div class="flex flex-wrap">
-    <div v-for="showcase in showcases" :key="showcase.id" class="w-1/3 p-2">
+  <div id="explore-showcases-grid" class="flex flex-wrap">
+    <div v-if="!showcases || !showcases.length">
+      No showcases found. Please clear the filters
+    </div>
+    <div
+      v-for="showcase in showcases"
+      :key="showcase.id"
+      class="w-full sm:w-1/2 md:w-1/3 p-2"
+    >
       <div
         class="bg-grey-200 rounded-lg cursor-pointer"
         @click="
@@ -39,5 +46,3 @@ export default {
   }
 }
 </script>
-
-<style></style>
