@@ -1,15 +1,21 @@
 <template>
   <div class="px-2">
-    <div>
-      <div
-        class="text-primary-700 text-seven leading-seven font-display-weight"
-      >
-        SSR
-      </div>
-      <div
-        class="border border-grey-300 inline-flex rounded-lg overflow-hidden"
-      >
-        <div
+    <div class="mb-4">
+      <AppFilterLabel>SSR</AppFilterLabel>
+      <div class="flex flex-col">
+        <div v-for="(value, i) in [true, false]" :key="i" class="mb-1">
+          <AppCheckbox
+            :id="`ssr-${value}`"
+            :checked="
+              queryFilter['hasSSR'] && queryFilter['hasSSR'].includes(value)
+            "
+            class=""
+            :label="value ? 'have SSR' : 'doesn\'t have SSR'"
+            @input="checkboxFilter('hasSSR', value)"
+          />
+        </div>
+
+        <!-- <div
           v-for="(value, i) in [true, false]"
           :key="i"
           class="px-3 py-1"
@@ -18,12 +24,30 @@
         >
           <CheckmarkCircleFillIcon v-if="value" class="w-4 text-green-500" />
           <XmarkCircleFillIcon v-else class="w-4 text-grey-700" />
+        </div> -->
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <AppFilterLabel>Static</AppFilterLabel>
+      <div class="flex flex-col">
+        <div v-for="(value, i) in [true, false]" :key="i" class="mb-1">
+          <AppCheckbox
+            :id="`static-${value}`"
+            :checked="
+              queryFilter['isStatic'] && queryFilter['isStatic'].includes(value)
+            "
+            class=""
+            :label="value ? 'static' : 'not static'"
+            @input="checkboxFilter('isStatic', value)"
+          />
         </div>
       </div>
     </div>
 
-    <div>
-      <div
+    <div class="mb-4">
+      <AppFilterLabel>Framework</AppFilterLabel>
+      <!-- <div
         v-for="framework in frameworks"
         :key="framework.id"
         :class="[
@@ -32,13 +56,24 @@
             'bg-grey-400'
         ]"
         @click="radioFilter('framework.slug', framework.slug)"
-      >
-        {{ framework.name }}
+      > -->
+      <div v-for="framework in frameworks" :key="framework.id" class="mb-1">
+        <AppRadio
+          :id="`framework-${framework.slug}`"
+          :checked="
+            queryFilter['framework.slug'] &&
+            queryFilter['framework.slug'].includes(framework.slug)
+          "
+          class=""
+          :label="framework.name"
+          @input="radioFilter('framework.slug', framework.slug)"
+        />
       </div>
     </div>
 
-    <div>
-      <div
+    <div class="mb-4">
+      <AppFilterLabel>UI Framework</AppFilterLabel>
+      <!-- <div
         v-for="ui in uis"
         :key="ui.id"
         :class="[
@@ -47,13 +82,23 @@
             'bg-grey-400'
         ]"
         @click="radioFilter('ui.slug', ui.slug)"
-      >
-        {{ ui.name }}
+      > -->
+      <div v-for="ui in uis" :key="ui.id" class="mb-1">
+        <AppRadio
+          :id="`ui-${ui.slug}`"
+          :checked="
+            queryFilter['ui.slug'] && queryFilter['ui.slug'].includes(ui.slug)
+          "
+          class=""
+          :label="ui.name"
+          @input="radioFilter('ui.slug', ui.slug)"
+        />
       </div>
     </div>
 
-    <div>
-      <div
+    <div class="mb-4">
+      <AppFilterLabel>Plugins</AppFilterLabel>
+      <!-- <div
         v-for="plugin in plugins"
         :key="plugin.id"
         :class="[
@@ -62,12 +107,24 @@
             'bg-grey-400'
         ]"
         @click="checkboxFilter('plugins.slug', plugin.slug)"
-      >
-        {{ plugin.name }}
+      > -->
+      <div v-for="plugin in plugins" :key="plugin.id" class="mb-1">
+        <AppCheckbox
+          :id="`plugin-${plugin.slug}`"
+          :checked="
+            queryFilter['plugins.slug'] &&
+            queryFilter['plugins.slug'].includes(plugin.slug)
+          "
+          class=""
+          :label="plugin.name"
+          @input="checkboxFilter('plugins.slug', plugin.slug)"
+        />
       </div>
     </div>
-    <div>
-      <div
+
+    <div class="mb-4">
+      <AppFilterLabel>Modules</AppFilterLabel>
+      <!-- <div
         v-for="module in modules"
         :key="module.id"
         :class="[
@@ -76,8 +133,18 @@
             'bg-grey-400'
         ]"
         @click="checkboxFilter('modules.slug', module.slug)"
-      >
-        {{ module.name }}
+      > -->
+      <div v-for="module in modules" :key="module.id" class="mb-1">
+        <AppCheckbox
+          :id="`module-${module.slug}`"
+          :checked="
+            queryFilter['modules.slug'] &&
+            queryFilter['modules.slug'].includes(module.slug)
+          "
+          class=""
+          :label="module.name"
+          @input="checkboxFilter('modules.slug', module.slug)"
+        />
       </div>
     </div>
 
@@ -88,13 +155,13 @@
 <script>
 import qs from 'qs'
 import { fetchStrapi } from '@/functions/utils'
-import XmarkCircleFillIcon from '@/assets/icons/xmark-circle-fill.svg?inline'
-import CheckmarkCircleFillIcon from '@/assets/icons/checkmark-circle-fill.svg?inline'
+// import XmarkCircleFillIcon from '@/assets/icons/xmark-circle-fill.svg?inline'
+// import CheckmarkCircleFillIcon from '@/assets/icons/checkmark-circle-fill.svg?inline'
 
 export default {
   components: {
-    XmarkCircleFillIcon,
-    CheckmarkCircleFillIcon
+    // XmarkCircleFillIcon,
+    // CheckmarkCircleFillIcon
   },
   async fetch() {
     // https://vue-telemetry-api.herokuapp.com/frameworks
@@ -126,7 +193,9 @@ export default {
       modules: null,
       plugins: null,
       uis: null,
-      queryFilter: {}
+      queryFilter: {
+        _limit: 9
+      }
     }
   },
   // watch: {

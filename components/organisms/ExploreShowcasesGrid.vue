@@ -18,6 +18,7 @@
         "
       >
         <div class="rounded-lg overflow-hidden">
+          <!-- TODO: responsive https://res.cloudinary.com/nuxt/image/upload/w_1200,h_675,c_fill,f_auto,g_north/v1593006976/vue-telemetry/cacd07c28f622c286e5146fb8dc7a46e.jpg -->
           <img :src="showcase.screenshotUrl" alt="" />
         </div>
         <div class="p-4">

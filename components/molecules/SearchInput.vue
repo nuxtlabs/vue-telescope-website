@@ -9,7 +9,7 @@
     <AppInput
       ref="input"
       size="large"
-      class="pl-20 rounded-r-none"
+      class="pl-20 rounded-r-none border-r-0"
       :value="url"
       @input="formatUrlInput"
     />

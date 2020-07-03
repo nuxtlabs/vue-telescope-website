@@ -1,8 +1,5 @@
 <template>
   <div class="">
-    <!-- <pre>
-      {{ featured }}
-    </pre> -->
     <HeroPropositionSection
       class="mt-56 max-w-readable-line-length px-4 mx-auto"
     />
@@ -14,23 +11,43 @@
 </template>
 
 <script>
+import { fetchStrapi } from '@/functions/utils'
+
 export default {
-  async asyncData({ app }) {
+  async fetch() {
     // https://vue-telemetry-api.herokuapp.com/showcases/count
     // https://vue-telemetry-api.herokuapp.com/showcases/featured
-    const featured = await fetch(
-      'https://vue-telemetry-api.herokuapp.com/showcases/featured'
+    const featured = await fetchStrapi(
+      'https://vue-telemetry-api.herokuapp.com/showcases?featured=true',
+      { method: 'get' }
     )
-      .then((response) => {
-        return response.json()
-      })
-      .catch((err) => {
-        throw new Error(err)
-      })
+    // const featured = await fetch(
+    //   'https://vue-telemetry-api.herokuapp.com/showcases/featured'
+    // )
+    //   .then((response) => {
+    //     console.log('FUCK')
+    //     return response.json()
+    //   })
+    //   .catch((err) => {
+    //     // throw new Error(err)
+    //     return error({
+    //       statusCode: err.statusCode,
+    //       message: err.message
+    //     })
+    //   })
+    this.featured = featured.map((item, index) => {
+      return { ...item, index }
+    })
+
+    // return {
+    //   featured: featured.map((item, index) => {
+    //     return { ...item, index }
+    //   })
+    // }
+  },
+  data() {
     return {
-      featured: featured.map((item, index) => {
-        return { ...item, index }
-      })
+      featured: null
     }
   },
   methods: {

@@ -39,7 +39,7 @@ export default {
   data() {
     return {
       showcases: null,
-      filterQuery: ''
+      filterQuery: '?_limit=9'
     }
   }
 }
