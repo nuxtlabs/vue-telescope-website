@@ -5,7 +5,7 @@
         v-for="logo in knuthfisheryates(brands)"
         :key="logo"
         ref="logo"
-        class="fuck w-12 h-12 absolute top-0 left-0 rounded-md"
+        class="logo-wrapper w-12 h-12 absolute top-0 left-0 rounded-md"
         :class="[`bg-${logo}-light`]"
       >
         <img
@@ -85,7 +85,7 @@ export default {
   transform: translateY(-100%) translateX(-50%);
   z-index: -1;
 }
-.fuck {
+.logo-wrapper {
   transform: scale(0);
   opacity: 0;
 }

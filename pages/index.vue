@@ -17,6 +17,7 @@ export default {
   async fetch() {
     // https://vue-telemetry-api.herokuapp.com/showcases/count
     // https://vue-telemetry-api.herokuapp.com/showcases/featured
+
     const featured = await this.$strapi.find('showcases?isFeatured=true')
 
     this.featured = featured.map((item, index) => {

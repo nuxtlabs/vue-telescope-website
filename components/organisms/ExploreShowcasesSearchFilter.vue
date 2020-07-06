@@ -154,7 +154,7 @@
 
 <script>
 import qs from 'qs'
-import { fetchStrapi } from '@/functions/utils'
+// import { fetchStrapi } from '@/functions/utils'
 // import XmarkCircleFillIcon from '@/assets/icons/xmark-circle-fill.svg?inline'
 // import CheckmarkCircleFillIcon from '@/assets/icons/checkmark-circle-fill.svg?inline'
 

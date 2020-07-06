@@ -33,7 +33,12 @@ export default {
   //   // TODO: remove before production
   //   HASURA_ADMIN_SECRET_KEY: process.env.HASURA_ADMIN_SECRET_KEY
   // },
-  plugins: ['@/plugins/gsap.client', '@/plugins/twitter-like'],
+  plugins: [
+    '@/plugins/gsap.client',
+    '@/plugins/twitter-like',
+    '@/plugins/intersection-observer.client.js',
+    '@/plugins/vue-observe-visibility.client.js'
+  ],
   generate: {
     fallback: '404.html'
   },
