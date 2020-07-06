@@ -4,9 +4,9 @@
       class="mt-56 max-w-readable-line-length px-4 mx-auto"
     />
     <HeroPresentationSection :featured="featured" class="" />
-    <FeaturesSection class="my-8 px-4 max-w-container-max-width m-auto" />
-    <BenefitsSection class="my-8 px-4 max-w-container-max-width m-auto" />
-    <CtaSection class="my-8" />
+    <FeaturesSection class="px-4 max-w-container-max-width m-auto" />
+    <BenefitsSection class="px-4 max-w-container-max-width m-auto" />
+    <CtaSection class="" />
   </div>
 </template>
 

@@ -9,7 +9,7 @@
       class="w-full sm:w-1/2 md:w-1/3 p-2"
     >
       <div
-        class="bg-grey-200 rounded-lg cursor-pointer"
+        class="bg-grey-200 rounded-xl overflow-hidden cursor-pointer"
         @click="
           $router.push({
             name: 'explore-website',
@@ -17,7 +17,7 @@
           })
         "
       >
-        <div class="rounded-lg overflow-hidden">
+        <div class="">
           <!-- TODO: responsive https://res.cloudinary.com/nuxt/image/upload/w_1200,h_675,c_fill,f_auto,g_north/v1593006976/vue-telemetry/cacd07c28f622c286e5146fb8dc7a46e.jpg -->
           <img :src="showcase.screenshotUrl" alt="" />
         </div>

@@ -37,11 +37,13 @@ export default {
     // }
     document.querySelector('#explore-showcases-section').style.filter =
       'blur(10px)'
+    document.querySelector('#main-footer').style.filter = 'blur(10px)'
     document.querySelector('#main-header').style.filter = 'blur(10px)'
     document.body.style.overflow = 'hidden'
   },
   deactivated() {
     document.querySelector('#explore-showcases-section').style.filter = null
+    document.querySelector('#main-footer').style.filter = null
     document.querySelector('#main-header').style.filter = null
     document.body.style.overflow = null
   }

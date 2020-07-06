@@ -8,7 +8,7 @@
       color.text,
       color.outline
     ]"
-    class="inline-flex items-center font-bold-body-weight px-4 rounded-md focus:outline-none border-2 border-transparent"
+    class="inline-flex items-center font-bold-body-weight px-4 rounded-lg focus:outline-none border-2 border-transparent"
   >
     <slot></slot>
   </component>

@@ -1,7 +1,7 @@
 <template>
   <div
     id="explore-showcases-section"
-    class="flex max-w-container-max-width m-auto px-2"
+    class="flex items-start max-w-container-max-width m-auto px-2"
   >
     <ExploreShowcasesSearchFilter
       class="w-1/4"

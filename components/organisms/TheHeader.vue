@@ -24,9 +24,14 @@
         <!-- <FourLogo class="h-8" /> -->
         <!-- <OldLogo class="h-8" /> -->
       </NuxtLink>
-      <AppButton size="base" appearance="primary" class="">
-        Add to Chrome
-      </AppButton>
+      <div>
+        <NuxtLink to="/explore" class="mr-4 font-display-weight">
+          Explore
+        </NuxtLink>
+        <AppButton size="base" appearance="primary" class="">
+          Add to Chrome
+        </AppButton>
+      </div>
     </div>
   </header>
 </template>

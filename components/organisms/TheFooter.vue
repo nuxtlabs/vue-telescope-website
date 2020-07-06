@@ -1,12 +1,9 @@
 <template>
-  <div class="bg-transparent">
+  <div id="main-footer" class="bg-grey-100 py-6">
     <div class="max-w-container-max-width mx-auto py-4 px-4">
-      <div class="flex items-center justify-between mb-8">
+      <div class="flex items-center justify-between mb-4">
         <div>
-          <NuxtLink :to="{ name: 'index' }" class="font-black tracking-tighter">
-            <span class="text-nuxt-lightgreen">VUE</span>
-            <span class="text-nuxt-gray">TELEMETRY</span>
-          </NuxtLink>
+          <OneLogo class="h-6" />
         </div>
         <ul class="flex items-center">
           <li class="mr-2">
@@ -78,11 +75,13 @@
 <script>
 import TwitterIcon from '@/assets/icons/twitter.svg?inline'
 import GithubIcon from '@/assets/icons/github.svg?inline'
+import OneLogo from '@/assets/logo/one.svg?inline'
 
 export default {
   components: {
     TwitterIcon,
-    GithubIcon
+    GithubIcon,
+    OneLogo
   }
 }
 </script>

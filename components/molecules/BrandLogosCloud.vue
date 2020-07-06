@@ -27,9 +27,9 @@ export default {
       brands: [
         'quasar',
         'tailwind-css',
-        'element',
+        'element-ui',
         'vuetify',
-        'bootstrap',
+        'bootstrap-vue',
         'buefy',
         'vue',
         'nuxtjs',

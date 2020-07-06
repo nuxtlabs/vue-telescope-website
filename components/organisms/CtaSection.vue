@@ -10,7 +10,7 @@
         Add to Chrome
       </AppButton>
       <div>
-        <p class="text-center mb-2 text-seven">Available on:</p>
+        <p class="text-center mb-2 text-base leading-base">Available on:</p>
         <div class="flex">
           <AppButton appearance="primary" size="small" class="mr-2">
             Chrome
