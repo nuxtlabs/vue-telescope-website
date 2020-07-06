@@ -3,7 +3,8 @@ import 'dotenv/config'
 export default {
   mode: 'universal',
   env: {
-    STRAPI_TOKEN: process.env.STRAPI_TOKEN
+    STRAPI_TOKEN: process.env.STRAPI_TOKEN,
+    STRAPI_URL: process.env.STRAPI_URL
   },
   head: {
     title: 'Vue Telemetry | Discover websites made with Vue.js',
@@ -41,7 +42,8 @@ export default {
     '@nuxtjs/eslint-module',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/svg'
+    '@nuxtjs/svg',
+    '@nuxtjs/strapi'
   ],
   components: true
 }

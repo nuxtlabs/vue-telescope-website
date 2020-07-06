@@ -170,12 +170,7 @@ export default {
     // https://vue-telemetry-api.herokuapp.com/uis
     // TODO: rewrite to parallel
     for (const t of ['frameworks', 'modules', 'plugins', 'uis']) {
-      const technology = await fetchStrapi(
-        `https://vue-telemetry-api.herokuapp.com/${t}`,
-        {
-          method: 'get'
-        }
-      )
+      const technology = await this.$strapi.find(t)
       if (technology.length) {
         this[t] = technology
       } else {

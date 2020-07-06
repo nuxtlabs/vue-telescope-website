@@ -17,14 +17,9 @@
 </template>
 
 <script>
-import { fetchStrapi } from '@/functions/utils'
-
 export default {
   async fetch() {
-    const showcases = await fetchStrapi(
-      `https://vue-telemetry-api.herokuapp.com/showcases${this.filterQuery}`,
-      { method: 'get' }
-    )
+    const showcases = await this.$strapi.find(`showcases${this.filterQuery}`)
     if (showcases.length) {
       this.showcases = showcases
     } else {

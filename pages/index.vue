@@ -11,30 +11,14 @@
 </template>
 
 <script>
-import { fetchStrapi } from '@/functions/utils'
+// import { fetchStrapi } from '@/functions/utils'
 
 export default {
   async fetch() {
     // https://vue-telemetry-api.herokuapp.com/showcases/count
     // https://vue-telemetry-api.herokuapp.com/showcases/featured
-    const featured = await fetchStrapi(
-      'https://vue-telemetry-api.herokuapp.com/showcases?featured=true',
-      { method: 'get' }
-    )
-    // const featured = await fetch(
-    //   'https://vue-telemetry-api.herokuapp.com/showcases/featured'
-    // )
-    //   .then((response) => {
-    //     console.log('FUCK')
-    //     return response.json()
-    //   })
-    //   .catch((err) => {
-    //     // throw new Error(err)
-    //     return error({
-    //       statusCode: err.statusCode,
-    //       message: err.message
-    //     })
-    //   })
+    const featured = await this.$strapi.find('showcases?isFeatured=true')
+
     this.featured = featured.map((item, index) => {
       return { ...item, index }
     })

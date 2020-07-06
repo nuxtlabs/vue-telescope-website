@@ -22,13 +22,16 @@
 
 <script>
 import { mapState } from 'vuex'
-import { fetchStrapi } from '@/functions/utils'
+// import { fetchStrapi } from '@/functions/utils'
 
 export default {
   async fetch() {
-    const website = await fetchStrapi(
-      `https://vue-telemetry-api.herokuapp.com/showcases?slug=${this.$route.params.website}`,
-      { method: 'get' }
+    // const website = await fetchStrapi(
+    //   `https://vue-telemetry-api.herokuapp.com/showcases?slug=${this.$route.params.website}`,
+    //   { method: 'get' }
+    // )
+    const website = await this.$strapi.find(
+      `showcases?slug=${this.$route.params.website}`
     )
     if (website.length) {
       this.website = website[0]
