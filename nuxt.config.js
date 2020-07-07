@@ -48,7 +48,13 @@ export default {
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
     '@nuxtjs/svg',
-    '@nuxtjs/strapi'
+    '@nuxtjs/strapi',
+    '@nuxtjs/proxy'
   ],
+  proxy: {
+    '/api/analyze': {
+      target: 'http://localhost:8888'
+    }
+  },
   components: true
 }
