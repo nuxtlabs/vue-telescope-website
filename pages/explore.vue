@@ -18,7 +18,7 @@ export default {
     })
   },
   mounted() {
-    console.log('NETLIFY_DEV', process.env.NETLIFY_DEV)
+    console.log('NETLIFY', process.env.NETLIFY)
   }
 }
 </script>
