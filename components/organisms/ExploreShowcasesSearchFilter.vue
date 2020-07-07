@@ -148,21 +148,12 @@
       </div>
     </div>
 
-    <pre>{{ queryFilter }}</pre>
+    <!-- <pre>{{ queryFilter }}</pre> -->
   </div>
 </template>
 
 <script>
-import qs from 'qs'
-// import { fetchStrapi } from '@/functions/utils'
-// import XmarkCircleFillIcon from '@/assets/icons/xmark-circle-fill.svg?inline'
-// import CheckmarkCircleFillIcon from '@/assets/icons/checkmark-circle-fill.svg?inline'
-
 export default {
-  components: {
-    // XmarkCircleFillIcon,
-    // CheckmarkCircleFillIcon
-  },
   async fetch() {
     // https://vue-telemetry-api.herokuapp.com/frameworks
     // https://vue-telemetry-api.herokuapp.com/modules
@@ -189,7 +180,7 @@ export default {
       plugins: null,
       uis: null,
       queryFilter: {
-        _limit: 9
+        // _limit: 9
       }
     }
   },
@@ -203,7 +194,7 @@ export default {
   // },
   methods: {
     checkboxFilter(key, value) {
-      console.log('checkbox', value)
+      // console.log('checkbox', value)
       this.$set(
         this.queryFilter,
         key,
@@ -218,7 +209,7 @@ export default {
     },
     radioFilter(key, value) {
       if (this.queryFilter[key] === value) {
-        console.log('radio', value)
+        // console.log('radio', value)
         this.$delete(this.queryFilter, key)
       } else {
         this.$set(this.queryFilter, key, value)
@@ -230,10 +221,11 @@ export default {
     updateFilters() {
       this.$emit(
         'update-filters',
-        qs.stringify(this.queryFilter, {
-          arrayFormat: 'repeat',
-          addQueryPrefix: true
-        })
+        this.queryFilter
+        // qs.stringify(this.queryFilter, {
+        //   arrayFormat: 'repeat',
+        //   addQueryPrefix: true
+        // })
       )
     }
   }
