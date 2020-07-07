@@ -21,7 +21,7 @@
         v-for="(showcase, i) in showcases"
         :key="showcase.id"
         v-observe-visibility="{
-          callback: i === showcases.length - 1 ? lazyLoadShowcases : false,
+          callback: i === showcases.length - 1 ? lazyLoadShowcases : () => {},
           once: true
         }"
         :showcase="showcase"

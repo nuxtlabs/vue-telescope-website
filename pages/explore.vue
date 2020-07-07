@@ -16,6 +16,9 @@ export default {
     ...mapState({
       twitterLike: (state) => state.twitterLike
     })
+  },
+  mounted() {
+    console.log('NETLIFY_DEV', process.env.NETLIFY_DEV)
   }
 }
 </script>

@@ -21,7 +21,7 @@
       </div>
       <div class="">
         <NuxtLink
-          class="font-display-weight text-eight leading-eight"
+          class="font-display-weight text-eight leading-eight truncate-multiline-3"
           :to="{
             name: 'explore-website',
             params: { website: showcase.slug }
