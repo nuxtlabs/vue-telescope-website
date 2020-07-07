@@ -34,13 +34,19 @@
       </AppButton> -->
     </div>
 
-    <div class="hero-image bg-primary-50 relative overflow-hidden mb-8">
+    <!-- <div class="hero-image bg-primary-50 relative overflow-hidden mb-8">
       <img
         :src="website.screenshotUrl"
         alt=""
         class="absolute top-0 left-0 w-full h-full"
       />
-    </div>
+    </div> -->
+    <AppResponsiveCloudinaryImage
+      :src="website.screenshotUrl"
+      ratio="4:3"
+      sizes="100vw"
+      class="absolute top-0 left-0 w-full h-full mb-8"
+    />
 
     <div class="mb-10 px-8">
       <p class="text-eight leading-eight">{{ website.description }}</p>

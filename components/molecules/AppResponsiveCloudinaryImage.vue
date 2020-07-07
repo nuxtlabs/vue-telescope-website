@@ -51,7 +51,10 @@
       :sizes="sizes"
       :alt="alt"
       class="w-full transition-opacity duration-500"
-      :class="[ratio && 'absolute top-0 left-0']"
+      :class="[
+        ratio && 'absolute top-0 left-0',
+        loaded ? 'opacity-1' : 'opacity-0'
+      ]"
     />
   </div>
 </template>
@@ -78,7 +81,8 @@ export default {
   },
   data() {
     return {
-      show: false
+      show: false,
+      loaded: false
     }
   },
   computed: {
@@ -107,12 +111,12 @@ export default {
         this.$nextTick(() => {
           const lazyImage = this.$refs.img
           lazyImage.addEventListener('load', () => {
-            lazyImage.classList.add('lazy-loaded')
-            // this.loaded = true
+            // lazyImage.classList.add('lazy-loaded')
+            this.loaded = true
           })
-          lazyImage.addEventListener('error', () => {
-            lazyImage.classList.add('lazy-load-error')
-          })
+          // lazyImage.addEventListener('error', () => {
+          //   lazyImage.classList.add('lazy-load-error')
+          // })
         })
       }
     }
