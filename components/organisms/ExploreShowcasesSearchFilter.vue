@@ -1,7 +1,7 @@
 <template>
   <div class="px-2">
     <div class="mb-4">
-      <AppFilterLabel>SSR</AppFilterLabel>
+      <AppFilterLabel>Rendering</AppFilterLabel>
       <div class="flex flex-col">
         <div v-for="(value, i) in [true, false]" :key="i" class="mb-1">
           <AppCheckbox
@@ -10,7 +10,7 @@
               queryFilter['hasSSR'] && queryFilter['hasSSR'].includes(value)
             "
             class=""
-            :label="value ? 'have SSR' : 'doesn\'t have SSR'"
+            :label="value ? 'Server-side' : 'Client-side'"
             @input="checkboxFilter('hasSSR', value)"
           />
         </div>
@@ -29,7 +29,7 @@
     </div>
 
     <div class="mb-4">
-      <AppFilterLabel>Static</AppFilterLabel>
+      <AppFilterLabel>Deployment</AppFilterLabel>
       <div class="flex flex-col">
         <div v-for="(value, i) in [true, false]" :key="i" class="mb-1">
           <AppCheckbox
@@ -38,7 +38,7 @@
               queryFilter['isStatic'] && queryFilter['isStatic'].includes(value)
             "
             class=""
-            :label="value ? 'static' : 'not static'"
+            :label="value ? 'Static' : 'Server'"
             @input="checkboxFilter('isStatic', value)"
           />
         </div>
@@ -47,6 +47,15 @@
 
     <div class="mb-4">
       <AppFilterLabel>Framework</AppFilterLabel>
+      <div class="mb-1">
+        <AppRadio
+          :id="`framework-null`"
+          :checked="queryFilter['framework_null']"
+          class=""
+          label="None"
+          @input="selectNoFramework"
+        />
+      </div>
       <div v-for="framework in frameworks" :key="framework.id" class="mb-1">
         <AppRadio
           :id="`framework-${framework.slug}`"
@@ -59,19 +68,19 @@
           @input="radioFilter('framework.slug', framework.slug)"
         />
       </div>
-      <div class="mb-1">
-        <AppRadio
-          :id="`framework-null`"
-          :checked="queryFilter['framework_null']"
-          class=""
-          label="None"
-          @input="selectNoFramework"
-        />
-      </div>
     </div>
 
     <div class="mb-4">
       <AppFilterLabel>UI Framework</AppFilterLabel>
+      <div class="mb-1">
+        <AppRadio
+          :id="`ui-null`"
+          :checked="queryFilter['ui_null']"
+          class=""
+          label="None"
+          @input="selectNoUIFramework"
+        />
+      </div>
       <div v-for="ui in uis" :key="ui.id" class="mb-1">
         <AppRadio
           :id="`ui-${ui.slug}`"
@@ -81,15 +90,6 @@
           class=""
           :label="ui.name"
           @input="radioFilter('ui.slug', ui.slug)"
-        />
-      </div>
-      <div class="mb-1">
-        <AppRadio
-          :id="`ui-null`"
-          :checked="queryFilter['ui_null']"
-          class=""
-          label="None"
-          @input="selectNoUIFramework"
         />
       </div>
     </div>
