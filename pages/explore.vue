@@ -18,22 +18,19 @@ export default {
     })
   },
   async mounted() {
-    // const aaa = await fetch(
-    //   'http://localhost:8888/api/analyze?url=https://nuxtjs.org',
-    //   {
-    //     method: 'GET',
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     }
-    //   }
-    // )
-    //   .then((response) => {
-    //     return response.json()
-    //   })
-    //   .catch((err) => {
-    //     throw new Error(err)
-    //   })
-    // console.log(aaa)
+    const aaa = await fetch('/api/analyze?url=https://life.ru', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then((response) => {
+        return response.json()
+      })
+      .catch((err) => {
+        throw new Error(err)
+      })
+    console.log(aaa)
   }
 }
 </script>

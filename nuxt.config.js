@@ -36,8 +36,8 @@ export default {
   plugins: [
     '@/plugins/gsap.client',
     '@/plugins/twitter-like',
-    '@/plugins/intersection-observer.client.js',
-    '@/plugins/vue-observe-visibility.client.js'
+    '@/plugins/intersection-observer.client',
+    '@/plugins/vue-observe-visibility.client'
   ],
   generate: {
     fallback: '404.html'
