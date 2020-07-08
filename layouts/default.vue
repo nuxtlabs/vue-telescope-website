@@ -10,6 +10,8 @@
 
 <script>
 export default {
-  //
+  created() {
+    this.$store.dispatch('INIT_APP')
+  }
 }
 </script>

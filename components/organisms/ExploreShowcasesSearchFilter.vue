@@ -156,53 +156,52 @@
       </div>
     </template>
 
-    <pre>{{ queryFilter }}</pre>
+    <!-- <pre>{{ queryFilter }}</pre> -->
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   async fetch() {
     // https://vue-telemetry-api.herokuapp.com/frameworks
     // https://vue-telemetry-api.herokuapp.com/modules
     // https://vue-telemetry-api.herokuapp.com/plugins
     // https://vue-telemetry-api.herokuapp.com/uis
-    // TODO: rewrite to parallel
-    for (const t of ['frameworks', 'modules', 'plugins', 'uis']) {
-      const technology = await this.$strapi.find(t)
-      if (technology.length) {
-        this[t] = technology.sort((a, b) => a.slug.localeCompare(b.slug))
-      } else {
-        // set status code on server
-        if (process.server) {
-          this.$nuxt.context.res.statusCode = 404
-        }
-        throw new Error('Thing not found')
-      }
-    }
+    // TODO: rewrite to parallel OR unite endpoint calls
+    // for (const t of ['frameworks', 'modules', 'plugins', 'uis']) {
+    //   const technology = await this.$strapi.find(t)
+    //   if (technology.length) {
+    //     this[t] = technology.sort((a, b) => a.slug.localeCompare(b.slug))
+    //   } else {
+    //     // set status code on server
+    //     if (process.server) {
+    //       this.$nuxt.context.res.statusCode = 404
+    //     }
+    //     throw new Error('Thing not found')
+    //   }
+    // }
   },
   data() {
     return {
-      frameworks: null,
-      modules: null,
-      plugins: null,
-      uis: null,
-      queryFilter: {
-        // _limit: 9
-      }
+      // frameworks: null,
+      // modules: null,
+      // plugins: null,
+      // uis: null,
+      queryFilter: {}
     }
   },
-  // watch: {
-  //   queryFilter: {
-  //     deep: true,
-  //     handler(newValue) {
-  //       console.log('WATCH')
-  //     }
-  //   }
-  // },
+  computed: {
+    ...mapState({
+      frameworks: (state) => state.frameworks,
+      modules: (state) => state.modules,
+      plugins: (state) => state.plugins,
+      uis: (state) => state.uis
+    })
+  },
   methods: {
     checkboxFilter(key, value) {
-      // console.log('checkbox', value)
       this.$set(
         this.queryFilter,
         key,
@@ -212,12 +211,10 @@ export default {
             : [...this.queryFilter[key], value]
           : [value]
       )
-      // console.log(qs.stringify(this.queryFilter, { arrayFormat: 'repeat' }))
       this.updateFilters()
     },
     radioFilter(key, value) {
       if (this.queryFilter[key] === value) {
-        // console.log('radio', value)
         this.$delete(this.queryFilter, key)
       } else {
         this.$set(this.queryFilter, key, value)
@@ -232,17 +229,9 @@ export default {
       }
 
       this.updateFilters()
-      // console.log()
     },
     updateFilters() {
-      this.$emit(
-        'update-filters',
-        this.queryFilter
-        // qs.stringify(this.queryFilter, {
-        //   arrayFormat: 'repeat',
-        //   addQueryPrefix: true
-        // })
-      )
+      this.$emit('update-filters', this.queryFilter)
     },
     selectNoFramework() {
       this.$delete(this.queryFilter, 'framework.slug')
