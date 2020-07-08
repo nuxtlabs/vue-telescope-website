@@ -16,21 +16,21 @@ export default {
     ...mapState({
       twitterLike: (state) => state.twitterLike
     })
-  },
-  async mounted() {
-    const aaa = await fetch('/api/analyze?url=https://life.ru', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then((response) => {
-        return response.json()
-      })
-      .catch((err) => {
-        throw new Error(err)
-      })
-    console.log(aaa)
   }
+  // async mounted() {
+  //   const aaa = await fetch('/api/analyze?url=https://life.ru', {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     }
+  //   })
+  //     .then((response) => {
+  //       return response.json()
+  //     })
+  //     .catch((err) => {
+  //       throw new Error(err)
+  //     })
+  //   console.log(aaa)
+  // }
 }
 </script>

@@ -122,33 +122,25 @@
       </div>
     </div>
 
-    <div class="mb-4">
-      <AppFilterLabel>Modules</AppFilterLabel>
-      <!-- <div
-        v-for="module in modules"
-        :key="module.id"
-        :class="[
-          queryFilter['modules.slug'] &&
-            queryFilter['modules.slug'].includes(module.slug) &&
-            'bg-grey-400'
-        ]"
-        @click="checkboxFilter('modules.slug', module.slug)"
-      > -->
-      <div v-for="module in modules" :key="module.id" class="mb-1">
-        <AppCheckbox
-          :id="`module-${module.slug}`"
-          :checked="
-            queryFilter['modules.slug'] &&
-            queryFilter['modules.slug'].includes(module.slug)
-          "
-          class=""
-          :label="module.name"
-          @input="checkboxFilter('modules.slug', module.slug)"
-        />
+    <template v-if="queryFilter['framework.slug'] === 'nuxtjs'">
+      <div class="mb-4">
+        <AppFilterLabel>Modules</AppFilterLabel>
+        <div v-for="module in modules" :key="module.id" class="mb-1">
+          <AppCheckbox
+            :id="`module-${module.slug}`"
+            :checked="
+              queryFilter['modules.slug'] &&
+              queryFilter['modules.slug'].includes(module.slug)
+            "
+            class=""
+            :label="module.name"
+            @input="checkboxFilter('modules.slug', module.slug)"
+          />
+        </div>
       </div>
-    </div>
+    </template>
 
-    <!-- <pre>{{ queryFilter }}</pre> -->
+    <pre>{{ queryFilter }}</pre>
   </div>
 </template>
 
@@ -163,7 +155,7 @@ export default {
     for (const t of ['frameworks', 'modules', 'plugins', 'uis']) {
       const technology = await this.$strapi.find(t)
       if (technology.length) {
-        this[t] = technology
+        this[t] = technology.sort((a, b) => a.slug.localeCompare(b.slug))
       } else {
         // set status code on server
         if (process.server) {
