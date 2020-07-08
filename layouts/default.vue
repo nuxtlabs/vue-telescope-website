@@ -9,9 +9,5 @@
 </template>
 
 <script>
-export default {
-  created() {
-    this.$store.dispatch('INIT_APP')
-  }
-}
+export default {}
 </script>
