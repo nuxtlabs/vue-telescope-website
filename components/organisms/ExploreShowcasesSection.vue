@@ -11,7 +11,7 @@
         }
       "
     />
-    <pre>{{ filterQuery }}</pre>
+    <!-- <pre>{{ filterQuery }}</pre> -->
     <!-- <ExploreShowcasesGrid :showcases="showcases" class="w-3/4" /> -->
     <div id="explore-showcases-grid" class="flex flex-wrap w-3/4">
       <div v-if="!showcases || !showcases.length">

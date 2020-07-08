@@ -49,7 +49,7 @@ exports.handler = async function (event, _context) {
     // check if showcase has been scanned (only in production)
     if (!process.env.NETLIFY_DEV) {
       const existingScan = await fetchStrapi(
-        `https://vue-telemetry-api.herokuapp.com/scans?url=${hostname}`,
+        `${process.env.STRAPI_URL}/scans?url=${hostname}`,
         {
           method: 'get'
         }
@@ -76,7 +76,7 @@ exports.handler = async function (event, _context) {
 
     // get showcase by hostname
     const existingShowcase = await fetchStrapi(
-      `https://vue-telemetry-api.herokuapp.com/showcases?hostname=${hostname}`,
+      `${process.env.STRAPI_URL}/showcases?hostname=${hostname}`,
       {
         method: 'get'
       }
@@ -102,7 +102,7 @@ exports.handler = async function (event, _context) {
       isOutdated(existingShowcase[0].lastDetectedAt, 7)
     ) {
       const deleteShowcase = await fetchStrapi(
-        `https://vue-telemetry-api.herokuapp.com/showcases/${existingShowcase[0].id}`,
+        `${process.env.STRAPI_URL}/showcases/${existingShowcase[0].id}`,
         {
           method: 'delete'
         }
@@ -146,7 +146,7 @@ exports.handler = async function (event, _context) {
     }
 
     const saveShowcase = await fetchStrapi(
-      'https://vue-telemetry-api.herokuapp.com/showcases',
+      '${process.env.STRAPI_URL}/showcases',
       {
         method: 'post',
         body: JSON.stringify(showcaseData)
@@ -169,13 +169,10 @@ exports.handler = async function (event, _context) {
         isProxyBlocked: err.statusCode === 403
       }
 
-      const insertScan = await fetchStrapi(
-        'https://vue-telemetry-api.herokuapp.com/scans',
-        {
-          method: 'post',
-          body: JSON.stringify(scanData)
-        }
-      )
+      const insertScan = await fetchStrapi('${process.env.STRAPI_URL}/scans', {
+        method: 'post',
+        body: JSON.stringify(scanData)
+      })
     }
 
     return {
