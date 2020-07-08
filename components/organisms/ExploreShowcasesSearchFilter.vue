@@ -47,16 +47,6 @@
 
     <div class="mb-4">
       <AppFilterLabel>Framework</AppFilterLabel>
-      <!-- <div
-        v-for="framework in frameworks"
-        :key="framework.id"
-        :class="[
-          queryFilter['framework.slug'] &&
-            queryFilter['framework.slug'].includes(framework.slug) &&
-            'bg-grey-400'
-        ]"
-        @click="radioFilter('framework.slug', framework.slug)"
-      > -->
       <div v-for="framework in frameworks" :key="framework.id" class="mb-1">
         <AppRadio
           :id="`framework-${framework.slug}`"
@@ -69,20 +59,19 @@
           @input="radioFilter('framework.slug', framework.slug)"
         />
       </div>
+      <div class="mb-1">
+        <AppRadio
+          :id="`framework-null`"
+          :checked="queryFilter['framework_null']"
+          class=""
+          label="None"
+          @input="selectNoFramework"
+        />
+      </div>
     </div>
 
     <div class="mb-4">
       <AppFilterLabel>UI Framework</AppFilterLabel>
-      <!-- <div
-        v-for="ui in uis"
-        :key="ui.id"
-        :class="[
-          queryFilter['ui.slug'] &&
-            queryFilter['ui.slug'].includes(ui.slug) &&
-            'bg-grey-400'
-        ]"
-        @click="radioFilter('ui.slug', ui.slug)"
-      > -->
       <div v-for="ui in uis" :key="ui.id" class="mb-1">
         <AppRadio
           :id="`ui-${ui.slug}`"
@@ -92,6 +81,15 @@
           class=""
           :label="ui.name"
           @input="radioFilter('ui.slug', ui.slug)"
+        />
+      </div>
+      <div class="mb-1">
+        <AppRadio
+          :id="`ui-null`"
+          :checked="queryFilter['ui_null']"
+          class=""
+          label="None"
+          @input="selectNoUIFramework"
         />
       </div>
     </div>
@@ -207,6 +205,14 @@ export default {
         this.$set(this.queryFilter, key, value)
       }
 
+      // cleanup NONE selection
+      if (key === 'framework.slug') {
+        this.$delete(this.queryFilter, 'framework_null')
+      }
+      if (key === 'ui.slug') {
+        this.$delete(this.queryFilter, 'ui_null')
+      }
+
       this.updateFilters()
       // console.log()
     },
@@ -219,6 +225,20 @@ export default {
         //   addQueryPrefix: true
         // })
       )
+    },
+    selectNoFramework() {
+      this.$delete(this.queryFilter, 'framework.slug')
+      this.$set(this.queryFilter, 'framework_null', true)
+      this.$nextTick(() => {
+        this.updateFilters()
+      })
+    },
+    selectNoUIFramework() {
+      this.$delete(this.queryFilter, 'ui.slug')
+      this.$set(this.queryFilter, 'ui_null', true)
+      this.$nextTick(() => {
+        this.updateFilters()
+      })
     }
   }
 }

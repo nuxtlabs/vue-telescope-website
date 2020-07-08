@@ -11,7 +11,7 @@
         }
       "
     />
-    <!-- <pre>{{ filterQueryString }}</pre> -->
+    <pre>{{ filterQuery }}</pre>
     <!-- <ExploreShowcasesGrid :showcases="showcases" class="w-3/4" /> -->
     <div id="explore-showcases-grid" class="flex flex-wrap w-3/4">
       <div v-if="!showcases || !showcases.length">
@@ -53,9 +53,8 @@ export default {
     return {
       showcases: [],
       currentPage: 0,
-      filterQuery: {
-        _limit: 12
-      }
+      showcasesPerPage: 12,
+      filterQuery: {}
     }
   },
   computed: {
@@ -63,7 +62,8 @@ export default {
       return qs.stringify(
         {
           ...this.filterQuery,
-          _start: this.currentPage * this.filterQuery._limit
+          _limit: this.showcasesPerPage,
+          _start: this.currentPage * this.showcasesPerPage
         },
         {
           arrayFormat: 'repeat',
@@ -84,7 +84,9 @@ export default {
   },
   methods: {
     updateQuery(query) {
-      this.filterQuery = { ...this.filterQuery, ...query }
+      // console.log(query)
+      // this.filterQuery = { ...this.filterQuery, ...query }
+      this.filterQuery = query
       this.currentPage = 0
       this.showcases = []
       this.$fetch()
