@@ -25,7 +25,7 @@
     "speakingurl": "^14.0.1",
     "utf-8-validate": "^5.0.2",
     "vue-observe-visibility": "^0.4.6",
-    "vue-telemetry-analyzer": "latest"
+    "vue-telemetry-analyzer": "^0.6.6"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^3.0.0",

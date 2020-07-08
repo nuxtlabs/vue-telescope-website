@@ -7,7 +7,9 @@
       :checked="checked"
       @change="$emit('input', checked)"
     />
-    <label :for="id" class="text-sm leading-sm">{{ label }}</label>
+    <label :for="id" class="text-sm leading-sm">
+      <slot />
+    </label>
   </div>
 </template>
 
@@ -17,10 +19,6 @@ export default {
     checked: {
       type: Boolean,
       default: false
-    },
-    label: {
-      type: String,
-      default: 'Default label'
     },
     id: {
       type: String,

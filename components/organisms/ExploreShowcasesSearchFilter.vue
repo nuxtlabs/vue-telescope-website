@@ -52,9 +52,10 @@
           :id="`framework-null`"
           :checked="queryFilter['framework_null']"
           class=""
-          label="None"
           @input="selectNoFramework"
-        />
+        >
+          <span>None</span>
+        </AppRadio>
       </div>
       <div v-for="framework in frameworks" :key="framework.id" class="mb-1">
         <AppRadio
@@ -64,9 +65,17 @@
             queryFilter['framework.slug'].includes(framework.slug)
           "
           class=""
-          :label="framework.name"
           @input="radioFilter('framework.slug', framework.slug)"
-        />
+        >
+          <div class="flex">
+            <img
+              :src="require(`~/assets/brands/${framework.slug}.svg`)"
+              alt=""
+              class="w-4 h-4 mr-2"
+            />
+            <span>{{ framework.name }}</span>
+          </div>
+        </AppRadio>
       </div>
     </div>
 
@@ -77,9 +86,10 @@
           :id="`ui-null`"
           :checked="queryFilter['ui_null']"
           class=""
-          label="None"
           @input="selectNoUIFramework"
-        />
+        >
+          <span>None</span>
+        </AppRadio>
       </div>
       <div v-for="ui in uis" :key="ui.id" class="mb-1">
         <AppRadio
@@ -88,9 +98,17 @@
             queryFilter['ui.slug'] && queryFilter['ui.slug'].includes(ui.slug)
           "
           class=""
-          :label="ui.name"
           @input="radioFilter('ui.slug', ui.slug)"
-        />
+        >
+          <div class="flex">
+            <img
+              :src="require(`~/assets/brands/${ui.slug}.svg`)"
+              alt=""
+              class="w-4 h-4 mr-2"
+            />
+            <span>{{ ui.name }}</span>
+          </div>
+        </AppRadio>
       </div>
     </div>
 
