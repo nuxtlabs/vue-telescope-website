@@ -146,7 +146,7 @@ exports.handler = async function (event, _context) {
     }
 
     const saveShowcase = await fetchStrapi(
-      '${process.env.STRAPI_URL}/showcases',
+      `${process.env.STRAPI_URL}/showcases`,
       {
         method: 'post',
         body: JSON.stringify(showcaseData)
@@ -169,7 +169,7 @@ exports.handler = async function (event, _context) {
         isProxyBlocked: err.statusCode === 403
       }
 
-      const insertScan = await fetchStrapi('${process.env.STRAPI_URL}/scans', {
+      const insertScan = await fetchStrapi(`${process.env.STRAPI_URL}/scans`, {
         method: 'post',
         body: JSON.stringify(scanData)
       })
