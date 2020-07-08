@@ -12,6 +12,7 @@
 import { mapState } from 'vuex'
 
 export default {
+  scrollToTop: true,
   computed: {
     ...mapState({
       twitterLike: (state) => state.twitterLike

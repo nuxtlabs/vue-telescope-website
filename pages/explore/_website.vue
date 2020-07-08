@@ -25,6 +25,7 @@ import { mapState } from 'vuex'
 // import { fetchStrapi } from '@/functions/utils'
 
 export default {
+  scrollToTop: true,
   async fetch() {
     // const website = await fetchStrapi(
     //   `https://vue-telemetry-api.herokuapp.com/showcases?slug=${this.$route.params.website}`,
