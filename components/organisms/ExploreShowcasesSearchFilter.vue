@@ -156,7 +156,13 @@
       </div>
     </template>
 
-    <!-- <pre>{{ queryFilter }}</pre> -->
+    <div>
+      <button class="font-bold-body-weight text-base" @click="clearFilters">
+        Clear filters
+      </button>
+    </div>
+
+    <pre>{{ queryFilter }}</pre>
   </div>
 </template>
 
@@ -232,6 +238,7 @@ export default {
     },
     updateFilters() {
       this.$emit('update-filters', this.queryFilter)
+      window.scrollTo(0, 0)
     },
     selectNoFramework() {
       this.$delete(this.queryFilter, 'framework.slug')
@@ -246,6 +253,10 @@ export default {
       this.$nextTick(() => {
         this.updateFilters()
       })
+    },
+    clearFilters() {
+      this.queryFilter = {}
+      this.updateFilters()
     }
   }
 }
