@@ -10,9 +10,6 @@
       "
     >
       <div class="rounded-lg overflow-hidden mb-4">
-        <!-- TODO: responsive https://res.cloudinary.com/nuxt/image/upload/w_1200,h_675,c_fill,f_auto,g_north/v1593006976/vue-telemetry/cacd07c28f622c286e5146fb8dc7a46e.jpg -->
-        <!-- <img :src="showcase.screenshotUrl" alt="" /> -->
-        <!-- <pre>{{ showcase.screenshotUrl.split('/').pop() }}</pre> -->
         <AppResponsiveCloudinaryImage
           :src="showcase.screenshotUrl"
           ratio="4:3"
@@ -27,7 +24,7 @@
             params: { website: showcase.slug }
           }"
         >
-          {{ showcase.title }}
+          {{ showcase.siteName || showcase.title }}
         </NuxtLink>
       </div>
     </div>

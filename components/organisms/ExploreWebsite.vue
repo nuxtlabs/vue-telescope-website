@@ -11,7 +11,7 @@
         <h1
           class="truncate-multiline-2 pr-4 text-five leading-five md:text-five md:leading-five font-display-weight"
         >
-          {{ website.title }}
+          {{ website.siteName || website.title }}
         </h1>
         <a
           :href="website.url"

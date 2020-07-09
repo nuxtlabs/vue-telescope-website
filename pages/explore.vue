@@ -19,7 +19,11 @@ export default {
     })
   },
   beforeRouteEnter(to, from, next) {
-    window.scrollTo(0, 0)
+    if (process.browser) {
+      setTimeout(() => {
+        window.scrollTo(0, 0)
+      })
+    }
     next()
   }
   // async mounted() {

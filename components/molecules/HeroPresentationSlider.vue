@@ -50,17 +50,6 @@ export default {
 </script>
 
 <style>
-.suka {
-  position: relative;
-  -webkit-overflow-scrolling: touch;
-  list-style: none;
-  white-space: nowrap;
-  margin: 0 0 -20px;
-  padding: 0 0 1rem;
-  overflow-x: scroll;
-  text-align: center;
-}
-
 .slide-1 {
   left: -15%;
   top: 0;
@@ -94,10 +83,5 @@ export default {
 .slide-2,
 .slide-4 {
   transform: scale(0.75);
-}
-
-.intrinsic {
-  padding-bottom: 56.25%;
-  position: relative;
 }
 </style>

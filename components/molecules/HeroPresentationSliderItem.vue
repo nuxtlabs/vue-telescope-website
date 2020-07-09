@@ -19,7 +19,12 @@
                 : changeSlider()
             "
           >
-            <img ref="showcase" class="" :src="showcase.screenshotUrl" alt="" />
+            <img
+              ref="showcase"
+              class=""
+              :src="`https://res.cloudinary.com/nuxt/image/upload/w_1200,h_900/${showcase.screenshotUrl}`"
+              alt=""
+            />
           </div>
         </div>
 
@@ -38,26 +43,13 @@
                 ref="showcase-title"
                 class="opacity-0 text-six leading-six font-display-weight overflow-hidden"
               >
-                {{ showcase.title }}
+                {{ showcase.siteName || showcase.title }}
               </h2>
             </NuxtLink>
           </div>
         </template>
       </div>
     </template>
-
-    <!-- <img
-      v-if="activeShowcases.length"
-      :src="activeShowcases[0].screenshotUrl"
-      alt=""
-      class="absolute top-0 left-0 w-full h-full object-top object-cover"
-    />
-    <img
-      v-if="activeShowcases.length > 1"
-      :src="activeShowcases[1].screenshotUrl"
-      alt=""
-      class="absolute top-0 left-0 w-full h-full object-top object-cover"
-    /> -->
   </div>
 </template>
 
@@ -232,18 +224,8 @@ export default {
 </script>
 
 <style scoped>
-/* .slider-wrapper:after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  z-index: 0;
-} */
+.intrinsic {
+  padding-bottom: 56.25%;
+  position: relative;
+}
 </style>
