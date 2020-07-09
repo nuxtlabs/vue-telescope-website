@@ -41,7 +41,7 @@ exports.handler = async function (event, _context) {
     origin = parsedUrl.origin
 
     // filter hostname
-    // was not good implementation, errors local.com
+    // old implementation wasn't reliable: errors local.com
     if (isBlacklisted(hostname)) {
       throw new Error('Invalid URL')
     }
@@ -85,7 +85,7 @@ exports.handler = async function (event, _context) {
     if (
       existingShowcase &&
       existingShowcase.length &&
-      !isOutdated(existingShowcase[0].lastDetectedAt, 7)
+      !isOutdated(existingShowcase[0].lastDetectedAt, 0)
     ) {
       return {
         statusCode: 200,
@@ -99,7 +99,7 @@ exports.handler = async function (event, _context) {
     if (
       existingShowcase &&
       existingShowcase.length &&
-      isOutdated(existingShowcase[0].lastDetectedAt, 7)
+      isOutdated(existingShowcase[0].lastDetectedAt, 0)
     ) {
       const deleteShowcase = await fetchStrapi(
         `${process.env.STRAPI_URL}/showcases/${existingShowcase[0].id}`,
@@ -113,17 +113,19 @@ exports.handler = async function (event, _context) {
     const infos = await analyze(origin)
 
     if (process.env.CLOUDINARY_URL) {
-      const { secure_url } = await cloudinary.uploader.upload(
-        infos.screenshot,
-        {
-          folder: 'vue-telemetry',
-          public_id: path.basename(
-            infos.screenshot,
-            path.extname(infos.screenshot)
-          )
-        }
-      )
-      infos.screenshot = secure_url
+      const {
+        secure_url,
+        format,
+        original_filename,
+        public_id
+      } = await cloudinary.uploader.upload(infos.screenshot, {
+        folder: 'vue-telemetry',
+        public_id: path.basename(
+          infos.screenshot,
+          path.extname(infos.screenshot)
+        )
+      })
+      infos.screenshot = `${public_id}.${format}`
     }
 
     // insert showcase
@@ -139,10 +141,12 @@ exports.handler = async function (event, _context) {
       language: infos.meta.language,
       title: infos.meta.title,
       description: infos.meta.description,
+      siteName: infos.meta.siteName,
       plugins: infos.plugins,
       modules: infos.frameworkModules,
       framework: infos.framework,
-      ui: infos.ui
+      ui: infos.ui,
+      isAdultContent: infos.meta.isRtaLabel
     }
 
     const saveShowcase = await fetchStrapi(
