@@ -3,17 +3,18 @@
     <div class="mb-4">
       <AppFilterLabel>Rendering</AppFilterLabel>
       <div class="flex flex-col">
-        <div v-for="(value, i) in [true, false]" :key="i" class="mb-1">
+        <template v-for="(value, i) in [true, false]" class="">
           <AppCheckbox
             :id="`ssr-${value}`"
+            :key="i"
             :checked="
               queryFilter['hasSSR'] && queryFilter['hasSSR'].includes(value)
             "
-            class=""
+            class="mb-1"
             :label="value ? 'Server-side' : 'Client-side'"
             @input="checkboxFilter('hasSSR', value)"
           />
-        </div>
+        </template>
 
         <!-- <div
           v-for="(value, i) in [true, false]"
@@ -31,17 +32,18 @@
     <div class="mb-4">
       <AppFilterLabel>Deployment</AppFilterLabel>
       <div class="flex flex-col">
-        <div v-for="(value, i) in [true, false]" :key="i" class="mb-1">
+        <template v-for="(value, i) in [true, false]" class="">
           <AppCheckbox
             :id="`static-${value}`"
+            :key="i"
             :checked="
               queryFilter['isStatic'] && queryFilter['isStatic'].includes(value)
             "
-            class=""
+            class="mb-1"
             :label="value ? 'Static' : 'Server'"
             @input="checkboxFilter('isStatic', value)"
           />
-        </div>
+        </template>
       </div>
     </div>
 
@@ -124,34 +126,40 @@
         ]"
         @click="checkboxFilter('plugins.slug', plugin.slug)"
       > -->
-      <div v-for="plugin in plugins" :key="plugin.id" class="mb-1">
-        <AppCheckbox
-          :id="`plugin-${plugin.slug}`"
-          :checked="
-            queryFilter['plugins.slug'] &&
-            queryFilter['plugins.slug'].includes(plugin.slug)
-          "
-          class=""
-          :label="plugin.name"
-          @input="checkboxFilter('plugins.slug', plugin.slug)"
-        />
+      <div class="flex flex-col">
+        <template v-for="plugin in plugins" class="">
+          <AppCheckbox
+            :id="`plugin-${plugin.slug}`"
+            :key="plugin.id"
+            :checked="
+              queryFilter['plugins.slug'] &&
+              queryFilter['plugins.slug'].includes(plugin.slug)
+            "
+            class="mb-1"
+            :label="plugin.name"
+            @input="checkboxFilter('plugins.slug', plugin.slug)"
+          />
+        </template>
       </div>
     </div>
 
     <template v-if="queryFilter['framework.slug'] === 'nuxtjs'">
       <div class="mb-4">
         <AppFilterLabel>Modules</AppFilterLabel>
-        <div v-for="module in modules" :key="module.id" class="mb-1">
-          <AppCheckbox
-            :id="`module-${module.slug}`"
-            :checked="
-              queryFilter['modules.slug'] &&
-              queryFilter['modules.slug'].includes(module.slug)
-            "
-            class=""
-            :label="module.name"
-            @input="checkboxFilter('modules.slug', module.slug)"
-          />
+        <div class="flex flex-col">
+          <template v-for="module in modules" class="">
+            <AppCheckbox
+              :id="`module-${module.slug}`"
+              :key="module.id"
+              :checked="
+                queryFilter['modules.slug'] &&
+                queryFilter['modules.slug'].includes(module.slug)
+              "
+              class="mb-1"
+              :label="module.name"
+              @input="checkboxFilter('modules.slug', module.slug)"
+            />
+          </template>
         </div>
       </div>
     </template>
