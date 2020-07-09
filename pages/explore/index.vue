@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  scrollToTop: true
+  // scrollToTop: true
 }
 </script>
 

@@ -12,11 +12,15 @@
 import { mapState } from 'vuex'
 
 export default {
-  scrollToTop: true,
+  // scrollToTop: true,
   computed: {
     ...mapState({
       twitterLike: (state) => state.twitterLike
     })
+  },
+  beforeRouteEnter(to, from, next) {
+    window.scrollTo(0, 0)
+    next()
   }
   // async mounted() {
   //   const aaa = await fetch('/api/analyze?url=https://life.ru', {
