@@ -50,24 +50,23 @@
     <div class="mb-4">
       <AppFilterLabel>Framework</AppFilterLabel>
       <div class="flex flex-col">
-        <div class="">
-          <AppRadio
-            :id="`framework-null`"
-            :checked="queryFilter['framework_null']"
-            class="mb-1"
-            @input="selectNoFramework"
-          >
-            <span>None</span>
-          </AppRadio>
-        </div>
-        <div v-for="framework in frameworks" :key="framework.id" class="">
+        <AppRadio
+          :id="`framework-null`"
+          :checked="queryFilter['framework_null']"
+          class="mb-1"
+          @input="selectNoFramework"
+        >
+          <span>None</span>
+        </AppRadio>
+        <template v-for="framework in frameworks" class="">
           <AppRadio
             :id="`framework-${framework.slug}`"
+            :key="framework.id"
             :checked="
               queryFilter['framework.slug'] &&
               queryFilter['framework.slug'].includes(framework.slug)
             "
-            class=""
+            class="mb-1"
             @input="radioFilter('framework.slug', framework.slug)"
           >
             <div class="flex items-center">
@@ -79,40 +78,41 @@
               <span>{{ framework.name }}</span>
             </div>
           </AppRadio>
-        </div>
+        </template>
       </div>
     </div>
 
     <div class="mb-4">
       <AppFilterLabel>UI Framework</AppFilterLabel>
-      <div class="mb-1">
+      <div class="flex flex-col">
         <AppRadio
           :id="`ui-null`"
           :checked="queryFilter['ui_null']"
-          class=""
+          class="mb-1"
           @input="selectNoUIFramework"
         >
           <span>None</span>
         </AppRadio>
-      </div>
-      <div v-for="ui in uis" :key="ui.id" class="mb-1">
-        <AppRadio
-          :id="`ui-${ui.slug}`"
-          :checked="
-            queryFilter['ui.slug'] && queryFilter['ui.slug'].includes(ui.slug)
-          "
-          class=""
-          @input="radioFilter('ui.slug', ui.slug)"
-        >
-          <div class="flex">
-            <img
-              :src="require(`~/assets/brands/${ui.slug}.svg`)"
-              alt=""
-              class="w-4 h-4 mr-2"
-            />
-            <span>{{ ui.name }}</span>
-          </div>
-        </AppRadio>
+        <template v-for="ui in uis" class="">
+          <AppRadio
+            :id="`ui-${ui.slug}`"
+            :key="ui.id"
+            :checked="
+              queryFilter['ui.slug'] && queryFilter['ui.slug'].includes(ui.slug)
+            "
+            class="mb-1"
+            @input="radioFilter('ui.slug', ui.slug)"
+          >
+            <div class="flex items-center">
+              <img
+                :src="require(`~/assets/brands/${ui.slug}.svg`)"
+                alt=""
+                class="w-4 h-4 mr-2"
+              />
+              <span>{{ ui.name }}</span>
+            </div>
+          </AppRadio>
+        </template>
       </div>
     </div>
 
