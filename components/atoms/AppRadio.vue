@@ -19,7 +19,7 @@
         ]"
       >
         <svg
-          class="w-full h-full overflow-visible"
+          class="w-full h-auto overflow-visible"
           :class="[checked && 'text-primary-500']"
           viewBox="0 0 16 16"
           fill="none"
