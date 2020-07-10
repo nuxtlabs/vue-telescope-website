@@ -1,7 +1,7 @@
 <template>
   <input
-    :class="[sizing.height, sizing.fontSize]"
-    class="border-2 bg-grey-200 border-transparent rounded-lg px-4 font-bold-body-weight focus:border-grey-500 focus:bg-grey-50 focus:outline-none"
+    :class="[sizing.height, sizing.fontSize, sizing.rounded, sizing.padding]"
+    class="w-full border-2 bg-grey-200 border-transparent font-bold-body-weight focus:border-grey-500 focus:bg-grey-50 focus:outline-none"
     type="text"
     :value="value"
     @input="$emit('input', $event.target.value)"
@@ -29,17 +29,23 @@ export default {
       if (this.size === 'small') {
         return {
           height: 'h-8',
-          fontSize: 'text-sm'
+          fontSize: 'text-sm',
+          rounded: 'rounded-md',
+          padding: 'px-2'
         }
       } else if (this.size === 'large') {
         return {
           height: 'h-12',
-          fontSize: 'text-eight'
+          fontSize: 'text-eight',
+          rounded: 'rounded-lg',
+          padding: 'px-2'
         }
       } else {
         return {
           height: 'h-10',
-          fontSize: 'text-base'
+          fontSize: 'text-base',
+          rounded: 'rounded-md',
+          padding: 'px-2'
         }
       }
     }

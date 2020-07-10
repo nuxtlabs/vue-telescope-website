@@ -3,10 +3,15 @@
     id="explore-showcases-section"
     class="flex items-start max-w-container-max-width m-auto px-2"
   >
-    <div id="explore-showcases-controls" class="w-1/4 h-full">
+    <div id="explore-showcases-aside" class="flex flex-col w-1/4">
       <div>{{ totalCount }}</div>
+      <div class="px-2 pr-6 mb-4">
+        <AppInput class="pl-8" size="base" />
+      </div>
       <ExploreShowcasesSearchFilter
+        id="explore-showcases-controls"
         ref="filter"
+        class="h-full"
         @update-filters="
           (query) => {
             updateQuery(query)
@@ -118,10 +123,13 @@ export default {
 </script>
 
 <style scoped>
-#explore-showcases-controls {
+#explore-showcases-aside {
   position: sticky;
   top: calc(theme('spacing.16') + theme('spacing.8'));
   height: calc(100vh - theme('spacing.16') - theme('spacing.8'));
+}
+#explore-showcases-controls {
+  /* height: calc(100vh - theme('spacing.16') - theme('spacing.8')); */
   overflow-y: auto;
   overflow-x: hidden;
 }

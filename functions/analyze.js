@@ -85,21 +85,25 @@ exports.handler = async function (event, _context) {
     if (
       existingShowcase &&
       existingShowcase.length &&
-      !isOutdated(existingShowcase[0].lastDetectedAt, 0)
+      !isOutdated(existingShowcase[0].lastDetectedAt, 7)
     ) {
       return {
         statusCode: 200,
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(existingShowcase[0])
+        body: JSON.stringify({
+          message: 'Existing showcase found',
+          statusCode: 200,
+          body: existingShowcase[0]
+        })
       }
     }
 
     if (
       existingShowcase &&
       existingShowcase.length &&
-      isOutdated(existingShowcase[0].lastDetectedAt, 0)
+      isOutdated(existingShowcase[0].lastDetectedAt, 7)
     ) {
       const deleteShowcase = await fetchStrapi(
         `${process.env.STRAPI_URL}/showcases/${existingShowcase[0].id}`,
@@ -162,7 +166,11 @@ exports.handler = async function (event, _context) {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(saveShowcase)
+      body: JSON.stringify({
+        message: 'Showcase analyzed',
+        statusCode: 200,
+        body: saveShowcase
+      })
     }
   } catch (err) {
     // error from vue-telemetry-analyzer

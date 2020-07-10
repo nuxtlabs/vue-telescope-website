@@ -4,11 +4,13 @@
     :class="[
       sizing.height,
       sizing.fontSize,
+      sizing.rounded,
+      sizing.padding,
       color.bg,
       color.text,
       color.outline
     ]"
-    class="inline-flex items-center font-bold-body-weight px-4 rounded-lg focus:outline-none border-2 border-transparent"
+    class="inline-flex items-center font-bold-body-weight focus:outline-none border-2 border-transparent"
   >
     <slot></slot>
   </component>
@@ -35,17 +37,23 @@ export default {
       if (this.size === 'small') {
         return {
           height: 'h-8',
-          fontSize: 'text-sm'
+          fontSize: 'text-sm',
+          rounded: 'rounded-md',
+          padding: 'px-2'
         }
       } else if (this.size === 'large') {
         return {
           height: 'h-12',
-          fontSize: 'text-eight'
+          fontSize: 'text-eight',
+          rounded: 'rounded-lg',
+          padding: 'px-4'
         }
       } else {
         return {
           height: 'h-10',
-          fontSize: 'text-base'
+          fontSize: 'text-base',
+          rounded: 'rounded-md',
+          padding: 'px-2'
         }
       }
     },

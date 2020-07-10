@@ -19,7 +19,9 @@
           class="h-6 absolute top-0 left-0 flex -mt-6 text-primary-300 font-bold-body-weight"
         >
           <LinkIcon class="w-3 mr-2" />
-          <span class="">{{ website.hostname }}</span>
+          <span class="" style="width: max-content;">
+            {{ website.hostname }}
+          </span>
         </a>
       </div>
       <!-- <AppButton

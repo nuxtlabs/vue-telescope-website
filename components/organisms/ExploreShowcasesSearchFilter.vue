@@ -70,11 +70,7 @@
             @input="radioFilter('framework.slug', framework.slug)"
           >
             <div class="flex items-center">
-              <img
-                :src="require(`~/assets/brands/${framework.slug}.svg`)"
-                alt=""
-                class="w-4 h-4 mr-1"
-              />
+              <BrandIcon class="w-4 h-4 mr-1" :brand="framework.slug" />
               <span>{{ framework.name }}</span>
             </div>
           </AppRadio>
@@ -104,11 +100,7 @@
             @input="radioFilter('ui.slug', ui.slug)"
           >
             <div class="flex items-center">
-              <img
-                :src="require(`~/assets/brands/${ui.slug}.svg`)"
-                alt=""
-                class="w-4 h-4 mr-2"
-              />
+              <BrandIcon class="w-4 h-4 mr-1" :brand="ui.slug" />
               <span>{{ ui.name }}</span>
             </div>
           </AppRadio>

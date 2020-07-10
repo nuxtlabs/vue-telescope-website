@@ -24,7 +24,7 @@
             params: { website: showcase.slug }
           }"
         >
-          {{ showcase.siteName || showcase.title }}
+          {{ showcase.siteName || showcase.hostname }}
         </NuxtLink>
       </div>
     </div>
