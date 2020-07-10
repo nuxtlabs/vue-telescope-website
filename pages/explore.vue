@@ -22,7 +22,7 @@ export default {
     if (process.browser) {
       setTimeout(() => {
         window.scrollTo(0, 0)
-      })
+      }, 50)
     }
     next()
   }

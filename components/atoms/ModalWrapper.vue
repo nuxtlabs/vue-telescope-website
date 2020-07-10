@@ -33,12 +33,12 @@ export default {
   activated() {
     // const mainContent = document.querySelector('#explore-showcases-section')
     // if (mainContent) {
-    //   mainContent.style.filter = 'blur(10px)'
+    //   mainContent.style.filter = 'blur(18px)'
     // }
     document.querySelector('#explore-showcases-section').style.filter =
-      'blur(10px)'
-    document.querySelector('#main-footer').style.filter = 'blur(10px)'
-    document.querySelector('#main-header').style.filter = 'blur(10px)'
+      'blur(18px)'
+    document.querySelector('#main-footer').style.filter = 'blur(18px)'
+    document.querySelector('#main-header').style.filter = 'blur(18px)'
     document.body.style.overflow = 'hidden'
   },
   deactivated() {
@@ -58,7 +58,7 @@ export default {
   width: 100%;
   height: 100%;
   /* background: rgba(255, 255, 255, 0.42); */
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.3);
   z-index: 1000;
   /* backdrop-filter: blur(18px); */
   /* display: flex;

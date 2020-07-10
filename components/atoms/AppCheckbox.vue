@@ -6,7 +6,7 @@
     <div class="relative">
       <input
         :id="id"
-        class="absolute opacity-0 w-full h-full"
+        class="absolute opacity-0 w-full h-full cursor-pointer"
         type="checkbox"
         :checked="checked"
         @change="$emit('input', checked)"
@@ -32,7 +32,7 @@
     </div>
     <label
       :for="id"
-      class="text-base leading-base font-bold-body-weight text-grey-800"
+      class="text-base leading-base font-bold-body-weight text-grey-800 cursor-pointer select-none"
     >
       {{ label }}
     </label>

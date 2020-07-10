@@ -49,35 +49,37 @@
 
     <div class="mb-4">
       <AppFilterLabel>Framework</AppFilterLabel>
-      <div class="mb-1">
-        <AppRadio
-          :id="`framework-null`"
-          :checked="queryFilter['framework_null']"
-          class=""
-          @input="selectNoFramework"
-        >
-          <span>None</span>
-        </AppRadio>
-      </div>
-      <div v-for="framework in frameworks" :key="framework.id" class="mb-1">
-        <AppRadio
-          :id="`framework-${framework.slug}`"
-          :checked="
-            queryFilter['framework.slug'] &&
-            queryFilter['framework.slug'].includes(framework.slug)
-          "
-          class=""
-          @input="radioFilter('framework.slug', framework.slug)"
-        >
-          <div class="flex">
-            <img
-              :src="require(`~/assets/brands/${framework.slug}.svg`)"
-              alt=""
-              class="w-4 h-4 mr-2"
-            />
-            <span>{{ framework.name }}</span>
-          </div>
-        </AppRadio>
+      <div class="flex flex-col">
+        <div class="">
+          <AppRadio
+            :id="`framework-null`"
+            :checked="queryFilter['framework_null']"
+            class="mb-1"
+            @input="selectNoFramework"
+          >
+            <span>None</span>
+          </AppRadio>
+        </div>
+        <div v-for="framework in frameworks" :key="framework.id" class="">
+          <AppRadio
+            :id="`framework-${framework.slug}`"
+            :checked="
+              queryFilter['framework.slug'] &&
+              queryFilter['framework.slug'].includes(framework.slug)
+            "
+            class=""
+            @input="radioFilter('framework.slug', framework.slug)"
+          >
+            <div class="flex items-center">
+              <img
+                :src="require(`~/assets/brands/${framework.slug}.svg`)"
+                alt=""
+                class="w-4 h-4 mr-1"
+              />
+              <span>{{ framework.name }}</span>
+            </div>
+          </AppRadio>
+        </div>
       </div>
     </div>
 
@@ -170,7 +172,7 @@
       </button>
     </div>
 
-    <pre>{{ queryFilter }}</pre>
+    <!-- <pre>{{ queryFilter }}</pre> -->
   </div>
 </template>
 
