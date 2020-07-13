@@ -1,5 +1,5 @@
 <template>
-  <div class="px-3 flex flex-wrap">
+  <div class="px-3 flex items-center flex-wrap min-h-6">
     <template v-for="(value, key, i) in selectedFilters">
       <div
         :key="i"
@@ -23,7 +23,7 @@
     </template>
     <button
       v-if="Object.entries(selectedFilters).length !== 0"
-      class="focus:outline-none rounded-full mx-1 my-1 px-2 py-1 inline-flex items-center bg-red-50 text-red-500 border border-red-500"
+      class="focus:outline-none rounded-full mx-1 my-1 mr-2 px-2 py-1 inline-flex items-center bg-grey-50 text-grey-500 border border-grey-500"
       @click="$emit('clear-filters')"
     >
       <div class="font-bold-body-weight text-sm leading-sm px-2">
@@ -31,6 +31,10 @@
       </div>
       <XmarkCircleFill class="w-4 h-4" />
     </button>
+    <div class="font-bold-body-weight h-10 flex items-center mx-2">
+      <span class="">{{ animatedNumber }}</span>
+      <span class="font-body-weight text-sm">&nbsp;websites found</span>
+    </div>
   </div>
 </template>
 
@@ -45,6 +49,30 @@ export default {
     selectedFilters: {
       type: Object,
       default: () => {}
+    },
+    totalCount: {
+      type: Number,
+      default: 0
+    }
+  },
+  data() {
+    return {
+      tweenedCount: 0
+    }
+  },
+  computed: {
+    animatedNumber() {
+      return this.tweenedCount.toFixed(0)
+    }
+  },
+  watch: {
+    totalCount: {
+      immediate: true,
+      handler(newValue) {
+        if (process.browser) {
+          this.$gsap.to(this.$data, { duration: 0.5, tweenedCount: newValue })
+        }
+      }
     }
   },
   methods: {

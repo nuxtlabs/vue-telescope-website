@@ -158,12 +158,6 @@
       </div>
     </template>
 
-    <div>
-      <button class="font-bold-body-weight text-base" @click="clearFilters">
-        Clear filters
-      </button>
-    </div>
-
     <!-- <pre>{{ queryFilter }}</pre> -->
   </div>
 </template>

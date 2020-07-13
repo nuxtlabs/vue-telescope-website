@@ -31,7 +31,12 @@
       <div v-if="!pending">
         Search
       </div>
-      <AppLoader v-else />
+      <AppLoader
+        v-else
+        class="w-6 h-6"
+        background="text-blue-400"
+        path="text-blue-800"
+      />
     </AppButton>
   </div>
 </template>
