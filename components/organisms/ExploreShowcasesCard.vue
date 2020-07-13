@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full sm:w-1/2 md:w-1/3 p-2">
+  <div class="p-2">
     <div
       class="hover-effect relative cursor-pointer p-3"
       @click="

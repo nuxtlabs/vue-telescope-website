@@ -210,15 +210,30 @@ export default {
   },
   methods: {
     checkboxFilter(key, value) {
-      this.$set(
-        this.queryFilter,
-        key,
-        this.queryFilter[key]
-          ? this.queryFilter[key].includes(value)
-            ? [...this.queryFilter[key].filter((i) => i !== value)]
-            : [...this.queryFilter[key], value]
-          : [value]
-      )
+      if (!this.queryFilter[key]) {
+        // init, if no key/value set
+        this.$set(this.queryFilter, key, [value])
+      } else if (this.queryFilter[key].includes(value)) {
+        const filteredArray = this.queryFilter[key].filter((i) => i !== value)
+        this.$set(this.queryFilter, key, [...filteredArray])
+        if (!filteredArray.length) {
+          // if array is empty - delete key
+          this.$delete(this.queryFilter, key)
+        }
+      } else {
+        this.$set(this.queryFilter, key, [...this.queryFilter[key], value])
+      }
+
+      // this.$set(
+      //   this.queryFilter,
+      //   key,
+      //   this.queryFilter[key]
+      //     ? this.queryFilter[key].includes(value)
+      //       ? [...this.queryFilter[key].filter((i) => i !== value)]
+      //       : [...this.queryFilter[key], value]
+      //     : [value]
+      // )
+
       this.updateFilters()
     },
     radioFilter(key, value) {
@@ -258,6 +273,10 @@ export default {
     },
     clearFilters() {
       this.queryFilter = {}
+      this.updateFilters()
+    },
+    clearFilter(key) {
+      this.$delete(this.queryFilter, key)
       this.updateFilters()
     }
   }

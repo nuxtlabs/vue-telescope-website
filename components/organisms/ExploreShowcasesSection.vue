@@ -20,29 +20,37 @@
       />
     </div>
     <!-- <pre>{{ filterQuery }}</pre> -->
-    <div id="explore-showcases-grid" class="flex flex-wrap w-3/4">
-      <div v-if="$fetchState.pending && !showcases.length">
-        Data is fetching...
-      </div>
-      <div v-else-if="!showcases || !showcases.length">
-        No showcases found. Please
-        <span
-          class="text-primary-500 cursor-pointer"
-          @click="$refs.filter && $refs.filter.clearFilters()"
-        >
-          clear the filters
-        </span>
-      </div>
-      <ExploreShowcasesCard
-        v-for="(showcase, i) in showcases"
-        v-else
-        :key="showcase.id"
-        v-observe-visibility="{
-          callback: i === showcases.length - 1 ? lazyLoadShowcases : () => {},
-          once: true
-        }"
-        :showcase="showcase"
+    <div id="explore-showcases-grid" class="w-3/4">
+      <ExploreShowcasesSelectedFilters
+        :selected-filters="filterQuery"
+        @clear-filters="$refs.filter && $refs.filter.clearFilters()"
+        @clear-filter="$refs.filter && $refs.filter.clearFilter($event)"
       />
+      <div class="flex flex-wrap">
+        <div v-if="$fetchState.pending && !showcases.length">
+          Data is fetching...
+        </div>
+        <div v-else-if="!showcases || !showcases.length">
+          No showcases found. Please
+          <span
+            class="text-primary-500 cursor-pointer"
+            @click="$refs.filter && $refs.filter.clearFilters()"
+          >
+            clear the filters
+          </span>
+        </div>
+        <ExploreShowcasesCard
+          v-for="(showcase, i) in showcases"
+          v-else
+          :key="showcase.id"
+          v-observe-visibility="{
+            callback: i === showcases.length - 1 ? lazyLoadShowcases : () => {},
+            once: true
+          }"
+          :showcase="showcase"
+          class="w-full sm:w-1/2 md:w-1/3"
+        />
+      </div>
     </div>
   </div>
 </template>
