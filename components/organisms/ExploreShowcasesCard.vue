@@ -16,9 +16,9 @@
           sizes="(min-width: 834px) 33vw, (min-width: 640px) 50vw, 100vw"
         />
       </div>
-      <div class="">
+      <div class="flex flex-wrap items-center">
         <NuxtLink
-          class="font-display-weight text-eight leading-eight truncate-multiline-3"
+          class="font-display-weight text-eight leading-eight truncate-multiline-3 mr-2"
           :to="{
             name: 'explore-website',
             params: { website: showcase.slug }
@@ -26,6 +26,16 @@
         >
           {{ showcase.siteName || showcase.hostname }}
         </NuxtLink>
+        <BrandIcon
+          v-if="showcase.framework"
+          :brand="showcase.framework.slug"
+          class="w-4 h-4 mr-1"
+        />
+        <BrandIcon
+          v-if="showcase.ui"
+          :brand="showcase.ui.slug"
+          class="w-4 h-4"
+        />
       </div>
     </div>
   </div>

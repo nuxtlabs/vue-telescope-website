@@ -83,7 +83,7 @@ export default {
     },
     async analyzeWebsite() {
       this.pending = true
-      console.log('analyzeWebsite', this.url)
+      // console.log('analyzeWebsite', this.url)
       const res = await fetch(`/api/analyze?url=${this.url}`, {
         method: 'GET'
       })

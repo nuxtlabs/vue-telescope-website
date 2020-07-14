@@ -3,7 +3,7 @@
     <template v-for="(value, key, i) in selectedFilters">
       <div
         :key="i"
-        class="rounded-full mx-1 my-1 px-2 py-1 inline-flex items-center bg-primary-50 text-primary-500 border border-primary-500"
+        class="rounded-full mx-1 my-1 px-2 py-1 inline-flex items-center bg-primary-50 text-primary-500 border-2 border-primary-100"
       >
         <div
           class="font-bold-body-weight text-sm leading-sm px-2 flex items-center"
@@ -23,7 +23,7 @@
     </template>
     <button
       v-if="Object.entries(selectedFilters).length !== 0"
-      class="focus:outline-none rounded-full mx-1 my-1 mr-2 px-2 py-1 inline-flex items-center bg-grey-50 text-grey-500 border border-grey-500"
+      class="focus:outline-none rounded-full mx-1 my-1 mr-2 px-2 py-1 inline-flex items-center bg-grey-50 text-grey-500 border-2 border-grey-300"
       @click="$emit('clear-filters')"
     >
       <div class="font-bold-body-weight text-sm leading-sm px-2">

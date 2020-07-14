@@ -1,6 +1,6 @@
 <template>
   <div class="px-2">
-    <div class="mb-4">
+    <!-- <div class="mb-4">
       <AppFilterLabel>Rendering</AppFilterLabel>
       <div class="flex flex-col">
         <template v-for="(value, i) in [true, false]" class="">
@@ -15,21 +15,10 @@
             @input="checkboxFilter('hasSSR', value)"
           />
         </template>
-
-        <!-- <div
-          v-for="(value, i) in [true, false]"
-          :key="i"
-          class="px-3 py-1"
-          :class="[queryFilter['hasSSR'] === value && 'bg-grey-300']"
-          @click="radioFilter('hasSSR', value)"
-        >
-          <CheckmarkCircleFillIcon v-if="value" class="w-4 text-green-500" />
-          <XmarkCircleFillIcon v-else class="w-4 text-grey-700" />
-        </div> -->
       </div>
-    </div>
+    </div> -->
 
-    <div class="mb-4">
+    <!-- <div class="mb-4">
       <AppFilterLabel>Deployment</AppFilterLabel>
       <div class="flex flex-col">
         <template v-for="(value, i) in [true, false]" class="">
@@ -45,7 +34,7 @@
           />
         </template>
       </div>
-    </div>
+    </div> -->
 
     <div class="mb-4">
       <AppFilterLabel>Framework</AppFilterLabel>
@@ -110,16 +99,6 @@
 
     <div class="mb-4">
       <AppFilterLabel>Plugins</AppFilterLabel>
-      <!-- <div
-        v-for="plugin in plugins"
-        :key="plugin.id"
-        :class="[
-          queryFilter['plugins.slug'] &&
-            queryFilter['plugins.slug'].includes(plugin.slug) &&
-            'bg-grey-400'
-        ]"
-        @click="checkboxFilter('plugins.slug', plugin.slug)"
-      > -->
       <div class="flex flex-col">
         <template v-for="plugin in plugins" class="">
           <AppCheckbox

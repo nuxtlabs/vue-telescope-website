@@ -4,15 +4,15 @@
     class="flex max-w-container-max-width m-auto px-2"
   >
     <div id="explore-showcases-aside" class="flex flex-col w-1/4">
-      <div class="mx-2 mr-0 mb-4 relative">
-        <button
-          class="absolute top-0 left-0 focus:outline-none h-10 w-10 flex items-center justify-center"
-        >
-          <SearchIcon class="w-6 h-6 text-grey-600" />
-        </button>
-        <AppInput class="pl-10" size="base" />
-      </div>
-      <ExploreShowcasesSearchFilter
+      <!-- <ExploreShowcasesSearchInput
+        class="mx-2 mr-0 mb-8"
+        @update-filters="
+          (query) => {
+            updateQuery(query)
+          }
+        "
+      /> -->
+      <ExploreShowcasesSearchFilters
         id="explore-showcases-controls"
         ref="filter"
         class="h-full"
@@ -23,11 +23,14 @@
         "
       />
     </div>
+
     <!-- <pre>{{ filterQuery }}</pre> -->
+
     <div id="explore-showcases-grid" class="w-3/4">
       <ExploreShowcasesSelectedFilters
         :selected-filters="filterQuery"
         :total-count="totalCount"
+        class="mb-4"
         @clear-filters="$refs.filter && $refs.filter.clearFilters()"
         @clear-filter="$refs.filter && $refs.filter.clearFilter($event)"
       />
@@ -76,12 +79,8 @@
 
 <script>
 import qs from 'qs'
-import SearchIcon from '@/assets/icons/search.svg?inline'
 
 export default {
-  components: {
-    SearchIcon
-  },
   async fetch() {
     const showcases = await this.$strapi.find(
       `showcases${this.filterQueryString}`
