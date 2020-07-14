@@ -1,6 +1,6 @@
 <template>
   <div
-    class="text-primary-500 text-seven leading-seven font-display-weight mb-2"
+    class="text-primary-500 text-eight leading-eight font-display-weight mb-2"
   >
     <slot />
   </div>

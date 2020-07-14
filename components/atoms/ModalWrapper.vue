@@ -14,15 +14,20 @@
       </div> -->
       <div class="h-full md:h-auto md:m-4 pointer-events-none">
         <div
+          v-if="fetched"
+          ref="modal-wrapper"
           class="pointer-events-auto h-full relative md:h-auto bg-white m-auto max-w-readable-line-length md:mt-12 md:rounded-xl overflow-auto md:overflow-hidden"
         >
           <div
+            ref="close-button"
             class="absolute top-0 right-0 z-10 p-4 cursor-pointer pointer-events-auto"
             @click="$router.push('/explore')"
           >
             <XmarkCircleIcon class="text-grey-900 w-6 h-6" />
           </div>
-          <slot></slot>
+          <div ref="modal-content" class="">
+            <slot></slot>
+          </div>
         </div>
       </div>
     </div>
@@ -36,7 +41,27 @@ export default {
   components: {
     XmarkCircleIcon
   },
+  props: {
+    fetched: {
+      type: Boolean,
+      default: false
+    }
+  },
+  watch: {
+    fetched(value) {
+      if (value) {
+        this.$nextTick(() => {
+          // console.log('ANIMATE', this.$refs['modal-wrapper'])
+          this.animateEnter()
+        })
+      }
+    }
+  },
   activated() {
+    if (this.fetched) {
+      this.animateEnter()
+    }
+    // console.log('ACTIVATED', this.fetched)
     // const mainContent = document.querySelector('#explore-showcases-section')
     // if (mainContent) {
     //   mainContent.style.filter = 'blur(18px)'
@@ -52,6 +77,50 @@ export default {
     document.querySelector('#main-footer').style.filter = null
     document.querySelector('#main-header').style.filter = null
     document.body.style.overflow = null
+  },
+  methods: {
+    animateEnter() {
+      this.$gsap.set(this.$refs['modal-wrapper'], {
+        transformOrigin: 'top'
+      })
+      this.$gsap.set(this.$refs['modal-content'], {
+        opacity: 0
+      })
+      this.$gsap.set(this.$refs['close-button'], {
+        scale: 0
+      })
+      this.$gsap.from(this.$refs['modal-wrapper'], {
+        scaleY: 0,
+        // opacity: 0,
+        duration: 0.5,
+        ease: 'power4.inOut',
+        onComplete: () => {
+          this.$gsap.fromTo(
+            this.$refs['modal-content'],
+            {
+              opacity: 0
+            },
+            {
+              opacity: 1,
+              duration: 0.3,
+              clearProps: true
+            }
+          )
+          this.$gsap.fromTo(
+            this.$refs['close-button'],
+            {
+              scale: 0
+            },
+            {
+              scale: 1,
+              duration: 0.5,
+              clearProps: true,
+              ease: 'elastic.inOut(1.5, 0.5)'
+            }
+          )
+        }
+      })
+    }
   }
 }
 </script>
@@ -64,7 +133,7 @@ export default {
   width: 100%;
   height: 100%;
   /* background: rgba(255, 255, 255, 0.42); */
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.2);
   z-index: 1000;
   /* backdrop-filter: blur(18px); */
   /* display: flex;

@@ -3,7 +3,7 @@
     <!-- <ExploreWebsite /> -->
     <div v-if="twitterLike">
       <!-- <transition name="page"> -->
-      <ModalWrapper>
+      <ModalWrapper :fetched="website ? true : false">
         <ExploreWebsite :website="website" class="twitter-like mb-12" />
         <CtaSection />
       </ModalWrapper>
@@ -55,11 +55,11 @@ export default {
     })
   },
   mounted() {
-    console.log('mounted', this.$route)
+    // console.log('mounted', this.$route)
   },
   activated() {
-    console.log('ACTIVATED')
-    console.log('ISSUE:', this.$route)
+    // console.log('ACTIVATED')
+    // console.log('ISSUE:', this.$route)
 
     if (this.$fetchState.timestamp <= Date.now() - 60000) {
       this.$fetch()

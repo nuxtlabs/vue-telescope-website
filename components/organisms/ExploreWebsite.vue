@@ -165,8 +165,8 @@
 
 <script>
 // import XmarkCircleIcon from '@/assets/icons/xmark-circle.svg?inline'
-import XmarkCircleFillIcon from '@/assets/icons/xmark-circle-fill.svg?inline'
-import CheckmarkCircleFillIcon from '@/assets/icons/checkmark-circle-fill.svg?inline'
+// import XmarkCircleFillIcon from '@/assets/icons/xmark-circle-fill.svg?inline'
+// import CheckmarkCircleFillIcon from '@/assets/icons/checkmark-circle-fill.svg?inline'
 import LinkIcon from '@/assets/icons/link.svg?inline'
 import VueIcon from '@/assets/brands/vue.svg?inline'
 import ModulesIcon from '@/assets/icons/modules.svg?inline'
@@ -177,8 +177,8 @@ import InfoIcon from '@/assets/icons/info.svg?inline'
 export default {
   components: {
     // XmarkCircleIcon,
-    XmarkCircleFillIcon,
-    CheckmarkCircleFillIcon,
+    // XmarkCircleFillIcon,
+    // CheckmarkCircleFillIcon,
     LinkIcon,
     VueIcon,
     ModulesIcon,

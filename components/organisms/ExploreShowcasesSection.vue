@@ -3,7 +3,10 @@
     id="explore-showcases-section"
     class="flex max-w-container-max-width m-auto px-2"
   >
-    <div id="explore-showcases-aside" class="flex flex-col w-1/4">
+    <div
+      id="explore-showcases-aside"
+      class="flex flex-col w-1/4 hidden md:block"
+    >
       <!-- <ExploreShowcasesSearchInput
         class="mx-2 mr-0 mb-8"
         @update-filters="
@@ -26,7 +29,7 @@
 
     <!-- <pre>{{ filterQuery }}</pre> -->
 
-    <div id="explore-showcases-grid" class="w-3/4">
+    <div id="explore-showcases-grid" class="md:w-3/4 w-full">
       <ExploreShowcasesSelectedFilters
         :selected-filters="filterQuery"
         :total-count="totalCount"
