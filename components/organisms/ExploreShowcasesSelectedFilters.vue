@@ -22,7 +22,7 @@
       </div>
     </template>
     <button
-      v-if="Object.entries(selectedFilters).length !== 0"
+      v-if="Object.entries(selectedFilters).length > 1"
       class="focus:outline-none rounded-full mx-1 my-1 mr-2 px-2 py-1 inline-flex items-center bg-grey-50 text-grey-500 border-2 border-grey-300"
       @click="$emit('clear-filters')"
     >

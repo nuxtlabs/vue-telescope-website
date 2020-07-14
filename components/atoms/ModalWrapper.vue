@@ -14,8 +14,14 @@
       </div> -->
       <div class="h-full md:h-auto md:m-4 pointer-events-none">
         <div
-          class="h-full md:h-auto bg-white m-auto max-w-readable-line-length md:mt-12 md:rounded-xl overflow-auto md:overflow-hidden"
+          class="pointer-events-auto h-full relative md:h-auto bg-white m-auto max-w-readable-line-length md:mt-12 md:rounded-xl overflow-auto md:overflow-hidden"
         >
+          <div
+            class="absolute top-0 right-0 z-10 p-4 cursor-pointer pointer-events-auto"
+            @click="$router.push('/explore')"
+          >
+            <XmarkCircleIcon class="text-grey-900 w-6 h-6" />
+          </div>
           <slot></slot>
         </div>
       </div>
@@ -24,12 +30,12 @@
 </template>
 
 <script>
-// import XmarkCircleIcon from '@/assets/icons/xmark-circle.svg?inline'
+import XmarkCircleIcon from '@/assets/icons/xmark-circle.svg?inline'
 
 export default {
-  // components: {
-  //   XmarkCircleIcon
-  // },
+  components: {
+    XmarkCircleIcon
+  },
   activated() {
     // const mainContent = document.querySelector('#explore-showcases-section')
     // if (mainContent) {
