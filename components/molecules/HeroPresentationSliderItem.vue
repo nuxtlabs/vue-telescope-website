@@ -156,14 +156,13 @@ export default {
           }
         })
         .filter((i) => i !== undefined)[0]
-
       return activeMatrix.findIndex((i) => i === this.activeIndex) >= 2
         ? 'left'
         : 'right'
     },
-    goToShowcase() {
-      console.log('goToShowcase')
-    },
+    // goToShowcase() {
+    //   console.log('goToShowcase')
+    // },
     leaveTitleAnimation() {
       if (this.staticIndex === 2) {
         this.$gsap.set(this.$refs['showcase-title'][0], {

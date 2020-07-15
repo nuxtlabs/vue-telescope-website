@@ -18,24 +18,28 @@
       </div>
       <div class="flex flex-wrap items-center">
         <NuxtLink
-          class="font-display-weight text-eight leading-eight truncate-multiline-3 mr-2"
+          class="items-center font-display-weight text-eight leading-eight mr-2"
           :to="{
             name: 'explore-website',
             params: { website: showcase.slug }
           }"
         >
-          {{ showcase.siteName || showcase.hostname }}
+          <span class="break-all">
+            {{ showcase.siteName || showcase.hostname }}
+          </span>
+          <div class="h-full inline-flex items-center ml-2">
+            <BrandIcon
+              v-if="showcase.framework"
+              :brand="showcase.framework.slug"
+              class="inline-block w-4 h-4 mr-1"
+            />
+            <BrandIcon
+              v-if="showcase.ui"
+              :brand="showcase.ui.slug"
+              class="inline-block w-4 h-4"
+            />
+          </div>
         </NuxtLink>
-        <BrandIcon
-          v-if="showcase.framework"
-          :brand="showcase.framework.slug"
-          class="w-4 h-4 mr-1"
-        />
-        <BrandIcon
-          v-if="showcase.ui"
-          :brand="showcase.ui.slug"
-          class="w-4 h-4"
-        />
       </div>
     </div>
   </div>
