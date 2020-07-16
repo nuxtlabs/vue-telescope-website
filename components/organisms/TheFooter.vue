@@ -8,7 +8,7 @@
         <ul class="flex items-center">
           <li class="mr-2">
             <a
-              href="https://twitter.com/vuejs"
+              href="https://twitter.com/VueTelemetry"
               class="text-gray-400 hover:text-nuxt-lightgreen transition ease-in duration-150"
               target="_blank"
               rel="noopener"
@@ -19,7 +19,7 @@
           </li>
           <li class="">
             <a
-              href="https://github.com/vuejs/vue"
+              href="https://github.com/nuxt-company/vue-telemetry-analyzer"
               class="text-gray-400 hover:text-nuxt-lightgreen transition ease-in duration-150"
               target="_blank"
               rel="noopener"
