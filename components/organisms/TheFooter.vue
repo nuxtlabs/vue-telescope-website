@@ -9,7 +9,7 @@
           <li class="mr-2">
             <a
               href="https://twitter.com/VueTelemetry"
-              class="text-grey-700 hover:text-primary-500 transition ease-in duration-150"
+              class="text-grey-900 hover:text-primary-500 transition ease-in duration-150"
               target="_blank"
               rel="noopener"
             >
@@ -20,7 +20,7 @@
           <li class="">
             <a
               href="https://github.com/nuxt-company/vue-telemetry-analyzer"
-              class="text-grey-700 hover:text-primary-500 transition ease-in duration-150"
+              class="text-grey-900 hover:text-primary-500 transition ease-in duration-150"
               target="_blank"
               rel="noopener"
             >
