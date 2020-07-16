@@ -33,9 +33,6 @@ export default {
     '~/plugins/intersection-observer.client',
     '~/plugins/vue-observe-visibility.client'
   ],
-  router: {
-    prefetchPayloads: false
-  },
   generate: {
     fallback: '404.html' // For Netlify
   },
