@@ -84,16 +84,6 @@
 import qs from 'qs'
 
 export default {
-  data() {
-    return {
-      showcases: [],
-      totalCount: 0,
-      currentPage: 0,
-      showcasesPerPage: 12,
-      filterQuery: {}
-    }
-  },
-  fetchOnServer: false,
   async fetch() {
     const showcases = await this.$strapi.find(
       `showcases${this.filterQueryString}`
@@ -107,6 +97,16 @@ export default {
     }
     this.showcases.push(...showcases)
   },
+  data() {
+    return {
+      showcases: [],
+      totalCount: 0,
+      currentPage: 0,
+      showcasesPerPage: 12,
+      filterQuery: {}
+    }
+  },
+  fetchOnServer: false,
   computed: {
     filterQueryString() {
       return qs.stringify(

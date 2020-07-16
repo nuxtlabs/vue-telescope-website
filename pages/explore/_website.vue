@@ -25,13 +25,6 @@ import { mapState } from 'vuex'
 // import { fetchStrapi } from '@/functions/utils'
 
 export default {
-  // scrollToTop: true,
-  data() {
-    return {
-      website: null
-    }
-  },
-  fetchOnServer: false,
   async fetch() {
     // const website = await fetchStrapi(
     //   `https://vue-telemetry-api.herokuapp.com/showcases?slug=${this.$route.params.website}`,
@@ -50,6 +43,13 @@ export default {
       throw new Error('Website not found')
     }
   },
+  // scrollToTop: true,
+  data() {
+    return {
+      website: null
+    }
+  },
+  fetchOnServer: false,
   computed: {
     ...mapState({
       twitterLike: (state) => state.twitterLike

@@ -66,29 +66,6 @@
           </div>
         </ExploreDataItem>
 
-        <ExploreDataItem label="Rendering">
-          <div
-            class="h-8 flex items-center text-seven leading-seven font-bold-body-weight mr-2"
-          >
-            {{ website.hasSSR ? 'Server-side' : 'Client-side' }}
-          </div>
-        </ExploreDataItem>
-
-        <ExploreDataItem label="Deployment">
-          <div
-            class="h-8 flex items-center text-seven leading-seven font-bold-body-weight mr-2"
-          >
-            {{ website.isStatic ? 'Static' : 'Server' }}
-          </div>
-          <!-- <div class="w-8 h-8 flex items-center justify-center">
-            <CheckmarkCircleFillIcon
-              v-if="website.isStatic"
-              class="w-6 text-green-500"
-            />
-            <XmarkCircleFillIcon v-else class="w-6 text-grey-400" />
-          </div> -->
-        </ExploreDataItem>
-
         <ExploreDataItem v-if="website.framework" label="Framework">
           <a
             :href="website.framework.url"
@@ -122,6 +99,22 @@
           </a>
           <div class="text-seven leading-seven font-bold-body-weight">
             {{ website.ui.name }}
+          </div>
+        </ExploreDataItem>
+
+        <ExploreDataItem label="Rendering">
+          <div
+            class="h-8 flex items-center text-seven leading-seven font-bold-body-weight mr-2"
+          >
+            {{ website.hasSSR ? 'Server-side' : 'Client-side' }}
+          </div>
+        </ExploreDataItem>
+
+        <ExploreDataItem label="Deployment">
+          <div
+            class="h-8 flex items-center text-seven leading-seven font-bold-body-weight mr-2"
+          >
+            {{ website.isStatic ? 'Static' : 'Server' }}
           </div>
         </ExploreDataItem>
       </div>
