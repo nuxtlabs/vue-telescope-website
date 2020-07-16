@@ -47,7 +47,7 @@
       </div>
 
       <div
-        v-else-if="!showcases || !showcases.length"
+        v-else-if="!showcases.length"
         class="flex flex-wrap min-h-full items-center justify-center"
       >
         <div>
@@ -62,11 +62,11 @@
       </div>
 
       <div v-else class="flex flex-wrap">
-        <!-- 
+        <!--
           v-observe-visibility="{
             callback: i === showcases.length - 1 ? lazyLoadShowcases : () => {},
             once: true
-          }" 
+          }"
           -->
         <ExploreShowcasesCard
           v-for="showcase in showcases"
@@ -84,7 +84,7 @@
           </AppButton> -->
 
           <AppButton
-            v-if="showcases.length < 96"
+            v-if="hasMoreShowcases"
             appearance="info"
             class="w-1/3 flex items-center justify-center"
             @click.native="lazyLoadShowcases"
@@ -124,6 +124,7 @@
 import qs from 'qs'
 
 export default {
+  fetchOnServer: false,
   async fetch() {
     const showcases = await this.$strapi.find(
       `showcases${this.filterQueryString}`
@@ -132,21 +133,24 @@ export default {
       `showcases/count${this.filterQueryString}`
     )
     this.totalCount = totalCount
-    if (!showcases.length) {
-      throw new Error('Showcases not found')
-    }
     this.showcases.push(...showcases)
+    if (
+      showcases.length < this.showcasesPerPage ||
+      this.showcases.length >= 96
+    ) {
+      this.hasMoreShowcases = false
+    }
   },
   data() {
     return {
       showcases: [],
       totalCount: 0,
       currentPage: 0,
-      showcasesPerPage: 12,
+      showcasesPerPage: 24,
+      hasMoreShowcases: true,
       filterQuery: {}
     }
   },
-  fetchOnServer: false,
   computed: {
     filterQueryString() {
       return qs.stringify(
@@ -179,6 +183,7 @@ export default {
       this.filterQuery = query
       this.currentPage = 0
       this.showcases = []
+      this.hasMoreShowcases = true
       this.$fetch()
     },
     lazyLoadShowcases(isVisible) {
