@@ -89,8 +89,9 @@ export default {
       this.url = url.includes('://') ? url.split('://')[1] : url
       this.errorMessage = ''
       const parsedURL = new URL('https://' + this.url)
+      console.log(parsedURL)
       if (parsedURL.pathname !== '/') {
-        this.errorMessage = `Only top-level domains are analyzed: https://${this.url}`
+        this.errorMessage = `Only top-level domains are analyzed: ${parsedURL.origin}`
       }
     },
     async analyzeWebsite() {
