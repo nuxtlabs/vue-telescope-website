@@ -72,7 +72,7 @@
           v-for="showcase in showcases"
           :key="showcase.id"
           :showcase="showcase"
-          class="w-full sm:w-1/2 md:w-1/3"
+          class="w-full sm:w-1/2 md:w-1/3 mb-4"
         />
         <div class="w-full flex items-center justify-center px-8">
           <!-- <AppButton
