@@ -48,7 +48,7 @@ export default {
     // Doc: https://github.com/nuxt-community/proxy-module
     '@nuxtjs/proxy',
     // Doc: https://github.com/pimlie/nuxt-matomo
-    ['nuxt-matomo', { url: '//vuetelemetry.matomo.cloud/', siteId: 1 }]
+    ['nuxt-matomo', { matomoUrl: '//vuetelemetry.matomo.cloud/', siteId: 1 }]
   ],
   proxy: {
     '/api/analyze': {
