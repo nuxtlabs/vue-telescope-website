@@ -57,7 +57,7 @@
       <div class="data-wrapper flex flex-wrap">
         <ExploreDataItem label="Vue Version">
           <img
-            class="w-8 h-8 mr-2"
+            class="w-6 h-6 mr-2"
             :src="`https://icons.vuetelemetry.com/vue.svg`"
             alt=""
           />
@@ -74,7 +74,7 @@
             class="mr-2"
           >
             <img
-              class="w-8 h-8"
+              class="w-6 h-6"
               :src="`https://icons.vuetelemetry.com${website.framework.imgPath}`"
               alt=""
             />
@@ -92,7 +92,7 @@
             class="mr-2"
           >
             <img
-              class="w-8 h-8"
+              class="w-6 h-6"
               :src="`https://icons.vuetelemetry.com${website.ui.imgPath}`"
               alt=""
             />
@@ -104,7 +104,7 @@
 
         <ExploreDataItem label="Rendering">
           <div
-            class="h-8 flex items-center text-seven leading-seven font-bold-body-weight mr-2"
+            class="flex items-center text-seven leading-seven font-bold-body-weight mr-2"
           >
             {{ website.hasSSR ? 'Server-side' : 'Client-side' }}
           </div>
@@ -112,7 +112,7 @@
 
         <ExploreDataItem label="Deployment">
           <div
-            class="h-8 flex items-center text-seven leading-seven font-bold-body-weight mr-2"
+            class="flex items-center text-seven leading-seven font-bold-body-weight mr-2"
           >
             {{ website.isStatic ? 'Static' : 'Server' }}
           </div>
