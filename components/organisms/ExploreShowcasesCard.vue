@@ -18,14 +18,14 @@
       </div>
       <div class="flex flex-wrap items-center">
         <NuxtLink
-          class="items-center font-display-weight text-eight leading-eight mr-2"
+          class="flex items-center justify-between w-full font-display-weight text-eight leading-eight"
           :to="{
             name: 'explore-website',
             params: { website: showcase.slug }
           }"
         >
-          <span class="break-all">
-            {{ showcase.siteName || showcase.hostname }}
+          <span class="truncate">
+            {{ showcase.hostname }}
           </span>
           <div class="h-full inline-flex items-center ml-2">
             <img
@@ -36,8 +36,14 @@
             />
             <img
               v-if="showcase.ui"
-              class="inline-block w-4 h-4"
+              class="inline-block w-4 h-4 mr-1"
               :src="`https://icons.vuetelemetry.com${showcase.ui.imgPath}`"
+              alt=""
+            />
+            <img
+              v-if="!showcase.framework"
+              class="inline-block w-4 h-4 mr-1"
+              :src="`https://icons.vuetelemetry.com/vue.svg`"
               alt=""
             />
             <!-- <BrandIcon
