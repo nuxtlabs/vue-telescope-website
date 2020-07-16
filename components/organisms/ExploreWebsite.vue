@@ -55,7 +55,13 @@
         </AppWebsiteDataLabel>
       </div>
       <div class="data-wrapper flex flex-wrap">
-        <ExploreDataItem label="Vue Version">
+        <ExploreDataItem
+          label="Vue Version"
+          tag="a"
+          href="https://vuejs.org"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
           <img
             class="w-6 h-6 mr-2"
             :src="`https://icons.vuetelemetry.com/vue.svg`"
@@ -66,37 +72,37 @@
           </div>
         </ExploreDataItem>
 
-        <ExploreDataItem v-if="website.framework" label="Framework">
-          <a
-            :href="website.framework.url"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="mr-2"
-          >
-            <img
-              class="w-6 h-6"
-              :src="`https://icons.vuetelemetry.com${website.framework.imgPath}`"
-              alt=""
-            />
-          </a>
+        <ExploreDataItem
+          v-if="website.framework"
+          label="Framework"
+          tag="a"
+          :href="website.framework.url"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <img
+            class="w-6 h-6 mr-2"
+            :src="`https://icons.vuetelemetry.com${website.framework.imgPath}`"
+            alt=""
+          />
           <div class="text-seven leading-seven font-bold-body-weight">
             {{ website.framework.name }}
           </div>
         </ExploreDataItem>
 
-        <ExploreDataItem v-if="website.ui" label="UI Framework">
-          <a
-            :href="website.ui.url"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="mr-2"
-          >
-            <img
-              class="w-6 h-6"
-              :src="`https://icons.vuetelemetry.com${website.ui.imgPath}`"
-              alt=""
-            />
-          </a>
+        <ExploreDataItem
+          v-if="website.ui"
+          label="UI Framework"
+          tag="a"
+          :href="website.ui.url"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <img
+            class="w-6 h-6 mr-2"
+            :src="`https://icons.vuetelemetry.com${website.ui.imgPath}`"
+            alt=""
+          />
           <div class="text-seven leading-seven font-bold-body-weight">
             {{ website.ui.name }}
           </div>

@@ -1,10 +1,11 @@
 <template>
-  <div
+  <component
+    :is="tag"
     class="flex flex-col items-center w-full sm:w-1/2 md:w-1/3 p-2 max-w-sm m-auto sm:m-0"
   >
     <div class="relative w-full h-full pt-0">
       <div
-        class="flex flex-col items-center justify-between sm:justify-center bg-grey-50 rounded-xl p-2 pt-0 pl-0 w-full h-full border-2 border-grey-100"
+        class="flex flex-col items-center justify-between bg-grey-50 rounded-xl p-2 pt-0 pl-0 w-full h-full border-2 border-grey-200"
       >
         <div
           style="
@@ -21,7 +22,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </component>
 </template>
 
 <script>
@@ -30,6 +31,10 @@ export default {
     label: {
       type: String,
       default: ''
+    },
+    tag: {
+      type: String,
+      default: 'div'
     }
   }
 }
