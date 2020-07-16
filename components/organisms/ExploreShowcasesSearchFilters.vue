@@ -153,31 +153,8 @@
 import { mapState } from 'vuex'
 
 export default {
-  async fetch() {
-    // https://vue-telemetry-api.herokuapp.com/frameworks
-    // https://vue-telemetry-api.herokuapp.com/modules
-    // https://vue-telemetry-api.herokuapp.com/plugins
-    // https://vue-telemetry-api.herokuapp.com/uis
-    // TODO: rewrite to parallel OR unite endpoint calls
-    // for (const t of ['frameworks', 'modules', 'plugins', 'uis']) {
-    //   const technology = await this.$strapi.find(t)
-    //   if (technology.length) {
-    //     this[t] = technology.sort((a, b) => a.slug.localeCompare(b.slug))
-    //   } else {
-    //     // set status code on server
-    //     if (process.server) {
-    //       this.$nuxt.context.res.statusCode = 404
-    //     }
-    //     throw new Error('Thing not found')
-    //   }
-    // }
-  },
   data() {
     return {
-      // frameworks: null,
-      // modules: null,
-      // plugins: null,
-      // uis: null,
       queryFilter: {}
     }
   },
