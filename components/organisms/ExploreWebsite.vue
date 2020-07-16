@@ -56,10 +56,14 @@
       </div>
       <div class="data-wrapper flex flex-wrap">
         <ExploreDataItem label="Vue Version">
-          <div class="text-eight font-bold-body-weight mr-2">
+          <img
+            class="w-8 h-8 mr-2"
+            :src="`https://icons.vuetelemetry.com/vue.svg`"
+            alt=""
+          />
+          <div class="text-eight font-bold-body-weight">
             {{ website.vueVersion }}
           </div>
-          <VueIcon class="w-8 h-8" />
         </ExploreDataItem>
 
         <ExploreDataItem label="Rendering">
@@ -86,29 +90,39 @@
         </ExploreDataItem>
 
         <ExploreDataItem v-if="website.framework" label="Framework">
-          <div class="text-seven leading-seven font-bold-body-weight mr-2">
-            {{ website.framework.name }}
-          </div>
-          <a :href="website.framework.url" target="_blank" class="">
+          <a
+            :href="website.framework.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mr-2"
+          >
             <img
-              :src="require(`~/assets/brands/${website.framework.slug}.svg`)"
-              alt=""
               class="w-8 h-8"
+              :src="`https://icons.vuetelemetry.com${website.framework.imgPath}`"
+              alt=""
             />
           </a>
+          <div class="text-seven leading-seven font-bold-body-weight">
+            {{ website.framework.name }}
+          </div>
         </ExploreDataItem>
 
         <ExploreDataItem v-if="website.ui" label="UI Framework">
-          <div class="text-seven leading-seven font-bold-body-weight mr-2">
-            {{ website.ui.name }}
-          </div>
-          <a :href="website.ui.url" target="_blank" class="">
+          <a
+            :href="website.ui.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mr-2"
+          >
             <img
-              :src="require(`~/assets/brands/${website.ui.slug}.svg`)"
-              alt=""
               class="w-8 h-8"
+              :src="`https://icons.vuetelemetry.com${website.ui.imgPath}`"
+              alt=""
             />
           </a>
+          <div class="text-seven leading-seven font-bold-body-weight">
+            {{ website.ui.name }}
+          </div>
         </ExploreDataItem>
       </div>
     </div>
@@ -168,7 +182,7 @@
 // import XmarkCircleFillIcon from '@/assets/icons/xmark-circle-fill.svg?inline'
 // import CheckmarkCircleFillIcon from '@/assets/icons/checkmark-circle-fill.svg?inline'
 import LinkIcon from '@/assets/icons/link.svg?inline'
-import VueIcon from '@/assets/brands/vue.svg?inline'
+// import VueIcon from '@/assets/brands/vue.svg?inline'
 import ModulesIcon from '@/assets/icons/modules.svg?inline'
 import PluginsIcon from '@/assets/icons/plugins.svg?inline'
 // import ConfigIcon from '@/assets/icons/config.svg?inline'
@@ -180,7 +194,7 @@ export default {
     // XmarkCircleFillIcon,
     // CheckmarkCircleFillIcon,
     LinkIcon,
-    VueIcon,
+    // VueIcon,
     ModulesIcon,
     PluginsIcon,
     // ConfigIcon,

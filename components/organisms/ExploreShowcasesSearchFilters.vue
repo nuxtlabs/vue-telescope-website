@@ -59,7 +59,11 @@
             @input="radioFilter('framework.slug', framework.slug)"
           >
             <div class="flex items-center">
-              <BrandIcon class="w-4 h-4 mr-1" :brand="framework.slug" />
+              <img
+                class="w-4 h-4 mr-1"
+                :src="`https://icons.vuetelemetry.com${framework.imgPath}`"
+                alt=""
+              />
               <span>{{ framework.name }}</span>
             </div>
           </AppRadio>
@@ -89,7 +93,11 @@
             @input="radioFilter('ui.slug', ui.slug)"
           >
             <div class="flex items-center">
-              <BrandIcon class="w-4 h-4 mr-1" :brand="ui.slug" />
+              <img
+                class="w-4 h-4 mr-1"
+                :src="`https://icons.vuetelemetry.com${ui.imgPath}`"
+                alt=""
+              />
               <span>{{ ui.name }}</span>
             </div>
           </AppRadio>

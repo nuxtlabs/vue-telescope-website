@@ -28,16 +28,28 @@
             {{ showcase.siteName || showcase.hostname }}
           </span>
           <div class="h-full inline-flex items-center ml-2">
-            <BrandIcon
+            <img
+              v-if="showcase.framework"
+              class="inline-block w-4 h-4 mr-1"
+              :src="`https://icons.vuetelemetry.com${showcase.framework.imgPath}`"
+              alt=""
+            />
+            <img
+              v-if="showcase.ui"
+              class="inline-block w-4 h-4"
+              :src="`https://icons.vuetelemetry.com${showcase.ui.imgPath}`"
+              alt=""
+            />
+            <!-- <BrandIcon
               v-if="showcase.framework"
               :brand="showcase.framework.slug"
               class="inline-block w-4 h-4 mr-1"
-            />
-            <BrandIcon
+            /> -->
+            <!-- <BrandIcon
               v-if="showcase.ui"
               :brand="showcase.ui.slug"
               class="inline-block w-4 h-4"
-            />
+            /> -->
           </div>
         </NuxtLink>
       </div>

@@ -2,17 +2,21 @@
   <div class="brand-logos-cloud w-12 h-12 opacity-25">
     <ClientOnly>
       <div
-        v-for="logo in knuthfisheryates(brands)"
-        :key="logo"
+        v-for="brand in knuthfisheryates(brands)"
+        :key="brand.slug"
         ref="logo"
         class="logo-wrapper w-12 h-12 absolute top-0 left-0 rounded-md"
-        :class="[`bg-${logo}-light`]"
       >
         <img
+          class="w-full h-full"
+          :src="`https://icons.vuetelemetry.com${brand.imgPath}`"
+          alt=""
+        />
+        <!-- <img
           :src="require(`~/assets/brands/${logo}.svg`)"
           alt=""
           class="w-full h-full"
-        />
+        /> -->
       </div>
     </ClientOnly>
   </div>
@@ -24,19 +28,24 @@ import { knuthfisheryates } from '@/helpers/shuffle'
 export default {
   data() {
     return {
-      brands: [
-        'quasar',
-        'tailwind-css',
-        'element-ui',
-        'vuetify',
-        'bootstrap-vue',
-        'buefy',
-        'vue',
-        'nuxtjs',
-        'gridsome'
-      ],
+      // brands: [
+      //   'quasar',
+      //   'tailwind-css',
+      //   'element-ui',
+      //   'vuetify',
+      //   'bootstrap-vue',
+      //   'buefy',
+      //   'vue',
+      //   'nuxtjs',
+      //   'gridsome'
+      // ],
       xMatrix: [-270, -250, -180, -100, 0, 100, 150, 200, 250],
       yMatrix: [-30, -170, -255, -190, -165, -180, -200, -270, -30]
+    }
+  },
+  computed: {
+    brands() {
+      return [...this.$store.state.frameworks, ...this.$store.state.uis]
     }
   },
   mounted() {
