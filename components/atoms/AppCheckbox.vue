@@ -55,6 +55,11 @@ export default {
       default: 'Default label'
     }
   },
+  mounted() {
+    if (this.checked) {
+      this.animateCheckmark(this.checked)
+    }
+  },
   watch: {
     checked(value) {
       this.animateCheckmark(value)
