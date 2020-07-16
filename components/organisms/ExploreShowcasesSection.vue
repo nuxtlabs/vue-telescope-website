@@ -84,25 +84,6 @@
 import qs from 'qs'
 
 export default {
-  async fetch() {
-    const showcases = await this.$strapi.find(
-      `showcases${this.filterQueryString}`
-    )
-    const totalCount = await this.$strapi.find(
-      `showcases/count${this.filterQueryString}`
-    )
-    this.totalCount = totalCount
-    if (showcases.length) {
-      this.showcases.push(...showcases)
-    } else {
-      // set status code on server
-      if (process.server) {
-        this.$nuxt.context.res.statusCode = 404
-      }
-      // this.showcases = []
-      throw new Error('Showcases not found')
-    }
-  },
   data() {
     return {
       showcases: [],
@@ -111,6 +92,20 @@ export default {
       showcasesPerPage: 12,
       filterQuery: {}
     }
+  },
+  fetchOnServer: false,
+  async fetch() {
+    const showcases = await this.$strapi.find(
+      `showcases${this.filterQueryString}`
+    )
+    const totalCount = await this.$strapi.find(
+      `showcases/count${this.filterQueryString}`
+    )
+    this.totalCount = totalCount
+    if (!showcases.length) {
+      throw new Error('Showcases not found')
+    }
+    this.showcases.push(...showcases)
   },
   computed: {
     filterQueryString() {

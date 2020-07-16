@@ -32,7 +32,7 @@
     </div>
     <label
       :for="id"
-      class="text-base leading-base font-bold-body-weight text-grey-800 cursor-pointer select-none"
+      class="text-base leading-base font-bold-body-weight text-grey-800 cursor-pointer select-none truncate"
     >
       {{ label }}
     </label>

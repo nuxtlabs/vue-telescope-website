@@ -150,7 +150,7 @@ exports.handler = async function (event, _context) {
       modules: infos.frameworkModules,
       framework: infos.framework,
       ui: infos.ui,
-      isAdultContent: infos.meta.isRtaLabel
+      isAdultContent: infos.meta.isAdultContent || infos.meta.isRtaLabel
     }
 
     const saveShowcase = await fetchStrapi(

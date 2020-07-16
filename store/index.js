@@ -1,5 +1,5 @@
 export const state = () => ({
-  hello: 'world',
+  isReady: false,
   twitterLike: false,
   frameworks: [],
   uis: [],
@@ -8,6 +8,9 @@ export const state = () => ({
 })
 
 export const mutations = {
+  isReady(state) {
+    state.isReady = true
+  },
   SET_TWITTER_LIKE(state) {
     state.twitterLike = true
   },
@@ -26,18 +29,30 @@ export const mutations = {
 }
 
 export const actions = {
-  async INIT_APP({ commit }) {
-    for (const t of ['frameworks', 'modules', 'plugins', 'uis']) {
-      const technology = await this.$strapi.find(t)
-      if (technology.length) {
-        commit(
-          `SET_${t.toUpperCase()}`,
-          technology.sort((a, b) => a.slug.localeCompare(b.slug))
-        )
-      }
-    }
-  },
-  async nuxtServerInit({ dispatch }) {
-    await dispatch('INIT_APP')
+  async INIT_APP({ state, commit }) {
+    const entities = ['frameworks', 'modules', 'plugins', 'uis']
+
+    await Promise.all(
+      entities.map(async (entity) => {
+        // Fetch technologies on Strapi
+        let technologies = await this.$strapi.find(entity)
+
+        if (!technologies.length) {
+          return
+        }
+        // Keep only need keys
+        technologies = technologies.map(({ slug, name, imgPath, url }) => ({
+          slug,
+          name,
+          imgPath,
+          url
+        }))
+        // Sort alphabetically
+        technologies.sort((a, b) => a.name.localeCompare(b.name))
+        // Add to state
+        commit(`SET_${entity.toUpperCase()}`, technologies)
+      })
+    )
+    commit('isReady')
   }
 }

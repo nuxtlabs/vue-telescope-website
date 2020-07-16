@@ -26,6 +26,12 @@ import { mapState } from 'vuex'
 
 export default {
   // scrollToTop: true,
+  data() {
+    return {
+      website: null
+    }
+  },
+  fetchOnServer: false,
   async fetch() {
     // const website = await fetchStrapi(
     //   `https://vue-telemetry-api.herokuapp.com/showcases?slug=${this.$route.params.website}`,
@@ -42,11 +48,6 @@ export default {
         this.$nuxt.context.res.statusCode = 404
       }
       throw new Error('Website not found')
-    }
-  },
-  data() {
-    return {
-      website: null
     }
   },
   computed: {
