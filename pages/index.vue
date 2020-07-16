@@ -4,7 +4,7 @@
       class="mt-56 max-w-readable-line-length px-4 mx-auto"
     />
     <HeroPresentationSection
-      v-if="featured && featured.length >= 5"
+      v-if="featured.length >= 5"
       :featured="featured"
       class=""
     />
@@ -18,6 +18,12 @@
 // import { fetchStrapi } from '@/functions/utils'
 
 export default {
+  data() {
+    return {
+      featured: []
+    }
+  },
+  fetchOnServer: false,
   async fetch() {
     // https://vue-telemetry-api.herokuapp.com/showcases/count
     // https://vue-telemetry-api.herokuapp.com/showcases/featured
@@ -29,17 +35,6 @@ export default {
     this.featured = featured.map((item, index) => {
       return { ...item, index }
     })
-
-    // return {
-    //   featured: featured.map((item, index) => {
-    //     return { ...item, index }
-    //   })
-    // }
-  },
-  data() {
-    return {
-      featured: null
-    }
   },
   methods: {
     // handleClick(slug) {
