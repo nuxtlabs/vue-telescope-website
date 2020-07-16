@@ -2,7 +2,7 @@
   <div class="search-input-molecule relative flex">
     <div
       v-if="errorMessage"
-      class="absolute bottom-0 left-0 text-red-500 text-sm leading-sm -mb-6"
+      class="absolute bottom-0 left-0 text-red-500 text-sm leading-sm -mb-6 ml-2 truncate font-bold-body-weight w-full"
     >
       {{ errorMessage }}
     </div>
@@ -25,18 +25,25 @@
     <AppButton
       :size="size"
       appearance="info"
-      class="rounded-l-none"
+      class="flex items-center justify-center rounded-l-none border-l-0"
       @click.native="analyzeWebsite"
     >
-      <div v-if="!pending">
-        Search
+      <div
+        :class="[!pending ? 'opacity-100 scale-100' : 'opacity-0 scale-0']"
+        class="transition duration-200 transform ease-in-out"
+      >
+        Lookup
       </div>
-      <AppLoader
-        v-else
-        class="w-6 h-6"
-        background="text-blue-400"
-        path="text-blue-800"
-      />
+      <div
+        :class="[pending ? 'opacity-100 scale-100' : 'opacity-0 scale-0']"
+        class="absolute transition duration-200 transform ease-in-out"
+      >
+        <AppLoader
+          class="w-6 h-6"
+          background="text-blue-400"
+          path="text-blue-300"
+        />
+      </div>
     </AppButton>
   </div>
 </template>

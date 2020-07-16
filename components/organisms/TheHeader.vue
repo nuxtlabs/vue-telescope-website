@@ -18,10 +18,10 @@
       class="w-full h-full flex justify-between items-center max-w-container-max-width m-auto px-4"
     >
       <NuxtLink to="/">
-        <OneLogo class="h-8" />
+        <!-- <OneLogo class="h-8" /> -->
         <!-- <TwoLogo class="h-8" /> -->
         <!-- <ThreeLogo class="h-8" /> -->
-        <!-- <FourLogo class="h-8" /> -->
+        <FourLogo class="h-8" />
         <!-- <OldLogo class="h-8" /> -->
       </NuxtLink>
       <div>
@@ -37,18 +37,18 @@
 </template>
 
 <script>
-import OneLogo from '@/assets/logo/one.svg?inline'
+// import OneLogo from '@/assets/logo/one.svg?inline'
 // import TwoLogo from '@/assets/logo/two.svg?inline'
 // import ThreeLogo from '@/assets/logo/three.svg?inline'
-// import FourLogo from '@/assets/logo/four.svg?inline'
+import FourLogo from '@/assets/logo/four.svg?inline'
 // import OldLogo from '@/assets/logo/old.svg?inline'
 
 export default {
   components: {
-    OneLogo
+    // OneLogo
     // TwoLogo
     // ThreeLogo
-    // FourLogo
+    FourLogo
     // OldLogo
   }
 }
