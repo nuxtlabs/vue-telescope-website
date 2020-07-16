@@ -2,7 +2,7 @@
   <div class="search-input-molecule relative flex">
     <div
       v-if="errorMessage"
-      class="absolute bottom-0 left-0 text-red-500 text-sm leading-sm -mb-6 ml-2 truncate font-bold-body-weight w-full"
+      class="absolute bottom-0 left-0 text-orange-500 text-sm leading-sm -mb-6 ml-2 truncate font-bold-body-weight w-full"
     >
       {{ errorMessage }}
     </div>
@@ -85,8 +85,13 @@ export default {
   },
   methods: {
     formatUrlInput(url) {
+      if (!url) return
       this.url = url.includes('://') ? url.split('://')[1] : url
       this.errorMessage = ''
+      const parsedURL = new URL('https://' + this.url)
+      if (parsedURL.pathname !== '/') {
+        this.errorMessage = `Only top-level domains are analyzed: https://${this.url}`
+      }
     },
     async analyzeWebsite() {
       this.pending = true
