@@ -26,7 +26,7 @@
 
     <!-- <pre>{{ filterQuery }}</pre> -->
 
-    <div id="explore-showcases-grid" class="md:w-3/4 w-full">
+    <div id="explore-showcases-grid" class="md:w-3/4 w-full mb-4">
       <ExploreShowcasesSelectedFilters
         :selected-filters="filterQuery"
         :total-count="totalCount"
@@ -62,16 +62,59 @@
       </div>
 
       <div v-else class="flex flex-wrap">
-        <ExploreShowcasesCard
-          v-for="(showcase, i) in showcases"
-          :key="showcase.id"
+        <!-- 
           v-observe-visibility="{
             callback: i === showcases.length - 1 ? lazyLoadShowcases : () => {},
             once: true
-          }"
+          }" 
+          -->
+        <ExploreShowcasesCard
+          v-for="showcase in showcases"
+          :key="showcase.id"
           :showcase="showcase"
           class="w-full sm:w-1/2 md:w-1/3"
         />
+        <div class="w-full flex items-center justify-center px-8">
+          <!-- <AppButton
+            class="w-1/3 flex items-center justify-center"
+            @click.native="lazyLoadShowcases"
+          >
+            <span v-if="$fetchState.pending">LOADING</span>
+            <span v-else>Load More</span>
+          </AppButton> -->
+
+          <AppButton
+            v-if="showcases.length < 96"
+            appearance="info"
+            class="w-1/3 flex items-center justify-center"
+            @click.native="lazyLoadShowcases"
+          >
+            <div
+              :class="[
+                !$fetchState.pending
+                  ? 'opacity-100 scale-100'
+                  : 'opacity-0 scale-0'
+              ]"
+              class="transition duration-200 transform ease-in-out"
+            >
+              Load More
+            </div>
+            <div
+              :class="[
+                $fetchState.pending
+                  ? 'opacity-100 scale-100'
+                  : 'opacity-0 scale-0'
+              ]"
+              class="absolute transition duration-200 transform ease-in-out"
+            >
+              <AppLoader
+                class="w-6 h-6"
+                background="text-blue-400"
+                path="text-blue-300"
+              />
+            </div>
+          </AppButton>
+        </div>
       </div>
     </div>
   </div>
