@@ -1,40 +1,48 @@
 <template>
-  <div class="px-3 flex items-center flex-wrap min-h-6">
-    <template v-for="(value, key, i) in selectedFilters">
-      <div
-        :key="i"
-        class="rounded-full mx-1 my-1 px-2 py-1 inline-flex items-center bg-primary-50 text-primary-500 border-2 border-primary-100"
-      >
-        <div
-          class="font-bold-body-weight text-sm leading-sm px-2 flex items-center"
-        >
-          <span class="mr-1">{{ title(key) }}:</span>
-          <BrandIcon
-            v-if="key === 'framework.slug' || key === 'ui.slug'"
-            class="w-4 h-4 inline-block"
-            :brand="value"
-          />
-          <span v-else>{{ content({ key, value }) }}</span>
-        </div>
-        <button class="focus:outline-none" @click="$emit('clear-filter', key)">
-          <XmarkCircleFill class="w-4 h-4" />
-        </button>
-      </div>
-    </template>
-    <button
-      v-if="Object.entries(selectedFilters).length > 1"
-      class="focus:outline-none rounded-full mx-1 my-1 mr-2 px-2 py-1 inline-flex items-center bg-grey-50 text-grey-500 border-2 border-grey-300"
-      @click="$emit('clear-filters')"
+  <div class="relative px-3 flex items-center flex-wrap min-h-6">
+    <div
+      class="absolute top-0 left-0 -mt-10 font-bold-body-weight h-10 flex items-center mx-6"
     >
-      <div class="font-bold-body-weight text-sm leading-sm px-2">
-        Clear all
-      </div>
-      <XmarkCircleFill class="w-4 h-4" />
-    </button>
-    <div class="font-bold-body-weight h-10 flex items-center mx-2">
       <span class="">{{ animatedNumber }}</span>
       <span class="font-body-weight text-sm">&nbsp;websites found</span>
     </div>
+    <transition-group name="scale">
+      <template v-for="(value, key) in selectedFilters">
+        <div
+          :key="key"
+          class="scale-item rounded-full mx-1 mb-2 mt-0 px-2 py-1 inline-flex items-center bg-primary-50 text-primary-500 border-2 border-primary-100"
+        >
+          <div
+            class="font-bold-body-weight text-sm leading-sm px-2 flex items-center"
+          >
+            <span class="mr-1">{{ title(key) }}:</span>
+            <BrandIcon
+              v-if="key === 'framework.slug' || key === 'ui.slug'"
+              class="w-4 h-4 inline-block"
+              :brand="value"
+            />
+            <span v-else>{{ content({ key, value }) }}</span>
+          </div>
+          <button
+            class="focus:outline-none"
+            @click="$emit('clear-filter', key)"
+          >
+            <XmarkCircleFill class="w-4 h-4" />
+          </button>
+        </div>
+      </template>
+      <button
+        v-if="Object.entries(selectedFilters).length > 1"
+        key="clear-button"
+        class="scale-item focus:outline-none rounded-full mx-1 mb-2 mr-2 mt-0 px-2 py-1 inline-flex items-center bg-grey-50 text-grey-500 border-2 border-grey-300"
+        @click="$emit('clear-filters')"
+      >
+        <div class="font-bold-body-weight text-sm leading-sm px-2">
+          Clear all
+        </div>
+        <XmarkCircleFill class="w-4 h-4" />
+      </button>
+    </transition-group>
   </div>
 </template>
 
@@ -114,4 +122,16 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.scale-item {
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.scale-enter,
+.scale-leave-to {
+  opacity: 0;
+  transform: scale(0.8);
+}
+.scale-leave-active {
+  position: absolute;
+}
+</style>

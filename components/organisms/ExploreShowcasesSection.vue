@@ -3,10 +3,7 @@
     id="explore-showcases-section"
     class="flex max-w-container-max-width m-auto px-2"
   >
-    <div
-      id="explore-showcases-aside"
-      class="flex flex-col w-1/4 hidden md:block"
-    >
+    <div id="explore-showcases-aside" class="w-1/4 hidden md:block">
       <!-- <ExploreShowcasesSearchInput
         class="mx-2 mr-0 mb-8"
         @update-filters="
@@ -33,7 +30,7 @@
       <ExploreShowcasesSelectedFilters
         :selected-filters="filterQuery"
         :total-count="totalCount"
-        class="mb-4"
+        class=""
         @clear-filters="$refs.filter && $refs.filter.clearFilters()"
         @clear-filter="$refs.filter && $refs.filter.clearFilter($event)"
       />
