@@ -46,7 +46,9 @@ export default {
     // Doc: https://strapi.nuxtjs.org
     '@nuxtjs/strapi',
     // Doc: https://github.com/nuxt-community/proxy-module
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
+    // Doc: https://github.com/pimlie/nuxt-matomo
+    ['nuxt-matomo', { url: '//vuetelemetry.matomo.cloud/', siteId: 1 }]
   ],
   proxy: {
     '/api/analyze': {
