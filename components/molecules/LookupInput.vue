@@ -108,13 +108,15 @@ export default {
           this.pending = false
           throw new Error(err)
         })
-      if (res.statusCode === 200) {
+      if (res.statusCode === 200 && !res.body.isAdultContent) {
         this.$router.push({
           name: 'explore-website',
           params: {
             website: res.body.slug
           }
         })
+      } else if (res.body.isAdultContent) {
+        this.errorMessage = 'Website has adult content ;)'
       } else {
         this.errorMessage = res.message
       }
