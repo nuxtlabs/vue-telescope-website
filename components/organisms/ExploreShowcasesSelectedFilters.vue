@@ -16,12 +16,23 @@
             class="font-bold-body-weight text-sm leading-sm px-2 flex items-center"
           >
             <span class="mr-1">{{ title(key) }}:</span>
-            <BrandIcon
-              v-if="key === 'framework.slug' || key === 'ui.slug'"
+            <img
+              v-if="key === 'framework.slug'"
               class="w-4 h-4 inline-block"
-              :brand="value"
+              :src="`https://icons.vuetelemetry.com${
+                frameworks.find((framework) => framework.slug === value).imgPath
+              }`"
+              alt=""
             />
-            <span v-else>{{ content({ key, value }) }}</span>
+            <img
+              v-else-if="key === 'ui.slug'"
+              class="w-4 h-4 inline-block"
+              :src="`https://icons.vuetelemetry.com${
+                uis.find((ui) => ui.slug === value).imgPath
+              }`"
+              alt=""
+            />
+            <span>{{ content({ key, value }) }}</span>
           </div>
           <button
             class="focus:outline-none"
@@ -47,6 +58,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import XmarkCircleFill from '@/assets/icons/xmark-circle-fill.svg?inline'
 
 export default {
@@ -69,6 +81,10 @@ export default {
     }
   },
   computed: {
+    ...mapState({
+      uis: (state) => state.uis,
+      frameworks: (state) => state.frameworks
+    }),
     animatedNumber() {
       return this.tweenedCount.toFixed(0)
     }
@@ -100,6 +116,7 @@ export default {
       }
     },
     content({ key, value }) {
+      // console.log('suka', this.uis.find((ui) => ui.slug === value).imgPath)
       if (key === 'isStatic' || key === 'hasSSR') {
         if (value.length > 1) {
           return 'Any'
