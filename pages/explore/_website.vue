@@ -13,14 +13,11 @@
       <!-- <transition name="page"> -->
       <div
         v-if="$fetchState.pending"
-        class="max-w-readable-line-length m-auto mt-8"
+        class="max-w-readable-line-length m-auto mt-10"
       >
         <content-placeholders rounded>
           <content-placeholders-text class="custom h-2 w-32 mb-2" :lines="1" />
-          <content-placeholders-text
-            class="custom h-12 w-2/3 mb-6"
-            :lines="1"
-          />
+          <content-placeholders-text class="custom h-8 w-2/3 mb-8" :lines="1" />
           <content-placeholders-text
             class="custom relative h-full w-full mb-4 rounded-xl overflow-hidden"
             :lines="1"

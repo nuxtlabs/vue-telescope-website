@@ -76,7 +76,9 @@ export default {
     document.querySelector('#explore-showcases-section').style.filter = null
     document.querySelector('#main-footer').style.filter = null
     document.querySelector('#main-header').style.filter = null
-    document.body.style.overflow = null
+    setTimeout(() => {
+      document.body.style.overflow = null
+    })
   },
   methods: {
     animateEnter() {

@@ -35,7 +35,7 @@
         @clear-filter="$refs.filter && $refs.filter.clearFilter($event)"
       />
 
-      <div
+      <!-- <div
         v-if="$fetchState.pending && !showcases.length"
         class="flex flex-wrap min-h-full items-center justify-center"
       >
@@ -44,6 +44,38 @@
           background="text-primary-200"
           path="text-primary-500"
         />
+      </div> -->
+
+      <div
+        v-if="$fetchState.pending && !showcases.length"
+        class="flex flex-wrap mt-5"
+      >
+        <div
+          v-for="showcasePlaceholder in showcasesPerPage"
+          :key="showcasePlaceholder"
+          class="w-full sm:w-1/2 md:w-1/3 mb-16 px-5"
+        >
+          <content-placeholders rounded>
+            <content-placeholders-text
+              class="custom relative h-full w-full mb-4 rounded-lg overflow-hidden"
+              :lines="1"
+              style="padding-bottom: 75%;"
+            />
+            <div class="flex justify-between">
+              <content-placeholders-text class="custom h-4 w-2/3" :lines="1" />
+              <div class="flex">
+                <content-placeholders-text
+                  class="custom rounded-full overflow-hidden h-4 w-4 mr-1"
+                  :lines="1"
+                />
+                <content-placeholders-text
+                  class="custom rounded-full overflow-hidden h-4 w-4"
+                  :lines="1"
+                />
+              </div>
+            </div>
+          </content-placeholders>
+        </div>
       </div>
 
       <div
