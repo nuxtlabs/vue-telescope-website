@@ -4,7 +4,9 @@ export const state = () => ({
   frameworks: [],
   uis: [],
   plugins: [],
-  modules: []
+  modules: [],
+  browser: '',
+  isMobile: true
 })
 
 export const mutations = {
@@ -25,6 +27,12 @@ export const mutations = {
   },
   SET_MODULES(state, modules) {
     state.modules = modules
+  },
+  SET_BROWSER(state, browser) {
+    state.browser = browser
+  },
+  SET_MOBILE(state, isMobile) {
+    state.isMobile = isMobile
   }
 }
 

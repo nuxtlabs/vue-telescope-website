@@ -28,9 +28,7 @@
         <NuxtLink to="/explore" class="mr-4 font-display-weight">
           Explore
         </NuxtLink>
-        <AppButton size="base" appearance="primary" class="">
-          Add to Chrome
-        </AppButton>
+        <InstallExtensionButton />
       </div>
     </div>
   </header>

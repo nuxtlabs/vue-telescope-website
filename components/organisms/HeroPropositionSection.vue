@@ -12,9 +12,7 @@
       Explore the Web with Vue Telemetry and reveal the Vue technologies used on
       any website and our database consist of 5000+ websites.
     </p>
-    <AppButton size="large" appearance="primary" class="mb-16">
-      Add to Chrome
-    </AppButton>
+    <InstallExtensionButton size="large" class="mb-16" />
   </section>
 </template>
 

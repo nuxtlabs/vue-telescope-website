@@ -6,9 +6,7 @@
       <h1 class="text-five leading-five font-display-weight mb-4">
         5000+ websites in databse
       </h1>
-      <AppButton appearance="primary" size="large" class="mb-4">
-        Add to Chrome
-      </AppButton>
+      <InstallExtensionButton size="large" class="mb-4" />
       <div>
         <p class="text-center mb-2 text-base leading-base">Available on:</p>
         <div class="flex">
