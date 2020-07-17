@@ -30,6 +30,10 @@ export default {
     tag: {
       type: String,
       default: 'button'
+    },
+    outlined: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -65,10 +69,18 @@ export default {
           outline: ''
         }
       } else if (this.appearance === 'primary') {
-        return {
-          bg: 'bg-primary-500',
-          text: 'text-white',
-          outline: 'focus:border-primary-700'
+        if (this.outlined) {
+          return {
+            // bg: 'bg-primary-500',
+            text: 'text-primary-500',
+            outline: 'border-primary-500'
+          }
+        } else {
+          return {
+            bg: 'bg-primary-500',
+            text: 'text-white',
+            outline: 'focus:border-primary-700'
+          }
         }
       } else if (this.appearance === 'danger') {
         return {
@@ -86,10 +98,18 @@ export default {
           text: 'text-white'
         }
       } else if (this.appearance === 'info') {
-        return {
-          bg: 'bg-blue-500',
-          text: 'text-white',
-          outline: 'focus:border-blue-900'
+        if (this.outlined) {
+          return {
+            // bg: 'bg-blue-500',
+            text: 'text-blue-900',
+            outline: 'border-blue-900'
+          }
+        } else {
+          return {
+            bg: 'bg-blue-500',
+            text: 'text-white',
+            outline: 'focus:border-blue-900'
+          }
         }
       } else {
         return {

@@ -50,10 +50,10 @@
         v-else-if="!showcases.length"
         class="flex flex-wrap min-h-full items-center justify-center"
       >
-        <div>
+        <div class="text-seven leading-seven mb-12">
           No showcases found. Please
           <span
-            class="text-primary-500 cursor-pointer"
+            class="text-primary-500 cursor-pointer font-bold-body-weight"
             @click="$refs.filter && $refs.filter.clearFilters()"
           >
             clear the filters
@@ -62,12 +62,12 @@
       </div>
 
       <div v-else class="flex flex-wrap">
-        <!--
+        <!-- 
           v-observe-visibility="{
             callback: i === showcases.length - 1 ? lazyLoadShowcases : () => {},
             once: true
           }"
-          -->
+         -->
         <ExploreShowcasesCard
           v-for="showcase in showcases"
           :key="showcase.id"
@@ -75,17 +75,11 @@
           class="w-full sm:w-1/2 md:w-1/3 mb-4"
         />
         <div class="w-full flex items-center justify-center px-8">
-          <!-- <AppButton
-            class="w-1/3 flex items-center justify-center"
-            @click.native="lazyLoadShowcases"
-          >
-            <span v-if="$fetchState.pending">LOADING</span>
-            <span v-else>Load More</span>
-          </AppButton> -->
-
           <AppButton
             v-if="hasMoreShowcases"
-            appearance="info"
+            ref="load-more-button"
+            outlined
+            appearance="primary"
             class="w-1/3 flex items-center justify-center"
             @click.native="lazyLoadShowcases"
           >
@@ -109,8 +103,8 @@
             >
               <AppLoader
                 class="w-6 h-6"
-                background="text-blue-400"
-                path="text-blue-300"
+                background="text-primary-100"
+                path="text-primary-400"
               />
             </div>
           </AppButton>
@@ -167,12 +161,9 @@ export default {
     }
   },
   watch: {
-    currentPage: {
-      deep: true,
-      handler() {
-        if (process.browser) {
-          this.$fetch()
-        }
+    currentPage() {
+      if (process.browser) {
+        this.$fetch()
       }
     }
   },
@@ -187,7 +178,9 @@ export default {
       this.$fetch()
     },
     lazyLoadShowcases(isVisible) {
+      // initialy for intersection observer
       if (isVisible) {
+        this.$refs['load-more-button'].$el.blur()
         this.currentPage++
       }
     }
