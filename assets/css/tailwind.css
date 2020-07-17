@@ -35,3 +35,16 @@
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
+
+.custom .vue-content-placeholders-text__line {
+  height: 100% !important;
+  width: 100% !important;
+  margin-bottom: 0 !important;
+}
+
+.custom.relative .vue-content-placeholders-text__line {
+  position: absolute;
+  height: 100% !important;
+  width: 100% !important;
+  margin-bottom: 0 !important;
+}

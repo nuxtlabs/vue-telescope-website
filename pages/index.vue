@@ -3,11 +3,7 @@
     <HeroPropositionSection
       class="mt-56 max-w-readable-line-length px-4 mx-auto"
     />
-    <HeroPresentationSection
-      v-if="featured.length >= 5"
-      :featured="featured"
-      class=""
-    />
+    <HeroPresentationSection :featured="featured" class="" />
     <FeaturesSection class="px-4 max-w-container-max-width m-auto" />
     <BenefitsSection class="px-4 max-w-container-max-width m-auto" />
     <CtaSection class="" />

@@ -11,7 +11,6 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
   },
   "dependencies": {
-    "@nuxtjs/proxy": "^2.0.0",
     "bufferutil": "^4.0.1",
     "cloudinary": "^1.21.0",
     "consola": "^2.12.1",
@@ -24,10 +23,12 @@
     "nuxt-edge": "latest",
     "speakingurl": "^14.0.1",
     "utf-8-validate": "^5.0.2",
+    "vue-content-placeholders": "^0.2.1",
     "vue-observe-visibility": "^0.4.6",
     "vue-telemetry-analyzer": "^0.6.8"
   },
   "devDependencies": {
+    "@nuxtjs/proxy": "^2.0.0",
     "@nuxtjs/eslint-config": "^3.0.0",
     "@nuxtjs/eslint-module": "^2.0.0",
     "@nuxtjs/strapi": "^0.1.2",

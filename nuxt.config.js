@@ -29,6 +29,7 @@ export default {
   plugins: [
     '~/plugins/init',
     '~/plugins/gsap.client',
+    '~/plugins/vue-placeholders',
     '~/plugins/detect-client.client',
     '~/plugins/twitter-like',
     '~/plugins/intersection-observer.client',
