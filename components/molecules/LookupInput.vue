@@ -115,7 +115,7 @@ export default {
             website: res.body.slug
           }
         })
-      } else if (res.body.isAdultContent) {
+      } else if (res.statusCode === 200 && res.body.isAdultContent) {
         this.errorMessage = 'Website has adult content ;)'
       } else {
         this.errorMessage = res.message
