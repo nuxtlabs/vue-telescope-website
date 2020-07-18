@@ -116,6 +116,8 @@ exports.handler = async function (event, _context) {
     consola.info(`Analyzing ${origin}...`)
     const infos = await analyze(origin)
 
+    console.log('infos', infos)
+
     if (process.env.CLOUDINARY_URL) {
       const {
         secure_url,
