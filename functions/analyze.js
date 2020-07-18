@@ -116,7 +116,20 @@ exports.handler = async function (event, _context) {
     consola.info(`Analyzing ${origin}...`)
     const infos = await analyze(origin)
 
-    console.log('infos', infos)
+    if (!infos.vueVersion) {
+      // temporary return error message when Vue 3 or unknown Vue version
+      return {
+        statusCode: 400,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          message: 'Sorry, we cant analyze Vue 3 right now ;(',
+          statusCode: 400,
+          body: null
+        })
+      }
+    }
 
     if (process.env.CLOUDINARY_URL) {
       const {
