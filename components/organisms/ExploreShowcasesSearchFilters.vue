@@ -11,7 +11,7 @@
               queryFilter['hasSSR'] && queryFilter['hasSSR'].includes(value)
             "
             class="mb-1"
-            :label="value ? 'Server-side' : 'Client-side'"
+            :label="value ? 'Universal' : 'Client-side'"
             @input="checkboxFilter('hasSSR', value)"
           />
         </template>

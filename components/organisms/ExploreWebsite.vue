@@ -112,11 +112,14 @@
           <div
             class="flex items-center text-seven leading-seven font-bold-body-weight mr-2"
           >
-            {{ website.hasSSR ? 'Server-side' : 'Client-side' }}
+            {{ website.hasSSR ? 'Universal' : 'Client-side' }}
           </div>
         </ExploreDataItem>
 
-        <ExploreDataItem label="Deployment">
+        <ExploreDataItem
+          v-if="website.framework && website.framework.slug === 'nuxtjs'"
+          label="Deployment"
+        >
           <div
             class="flex items-center text-seven leading-seven font-bold-body-weight mr-2"
           >
