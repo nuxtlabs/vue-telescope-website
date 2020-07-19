@@ -196,10 +196,12 @@ module.exports = {
         'readable-line-length': '820px'
       },
       spacing: {
+        '2px': '2px',
         '3px': '3px',
         '4px': '4px',
         '5px': '5px',
         '7': '1.75rem',
+        '9': '2.25rem',
         '13': '3.25rem',
         '14': '3.5rem',
         '18': '4.5rem'

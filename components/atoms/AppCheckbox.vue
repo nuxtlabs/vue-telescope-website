@@ -12,7 +12,8 @@
         @change="$emit('input', checked)"
       />
       <div
-        class="checkmark w-5 h-5 mr-2 p-3px pointer-events-none text-white rounded-md border-2 border-grey-700 transition-colors duration-300"
+        style="border-radius: 4px;"
+        class="checkmark w-5 h-5 mr-2 p-3px pointer-events-none text-white border border-grey-700 transition-colors duration-300"
       >
         <svg
           class="w-full h-full"

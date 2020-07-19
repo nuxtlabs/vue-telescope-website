@@ -26,9 +26,9 @@
 
     <div id="explore-showcases-grid" class="relative md:w-3/4 w-full mb-4">
       <button
-        class="focus:outline-none flex md:hidden items-center justify-center h-10 w-10 absolute top-0 right-0 bg-grey-200 text-grey-900 hover:bg-primary-50 hover:text-primary-500 -mt-8 rounded-md"
+        class="focus:outline-none flex md:hidden items-center justify-center absolute top-0 right-0 text-grey-700 hover:text-primary-500 -mt-9 mr-2"
       >
-        <FilterIcon class="h-6 w-6 overflow-visible" />
+        <FilterIcon class="h-7 w-7 overflow-visible" />
       </button>
       <ExploreShowcasesSelectedFilters
         :selected-filters="filterQuery"
