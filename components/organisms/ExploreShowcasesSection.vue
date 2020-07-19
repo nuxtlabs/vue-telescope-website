@@ -24,9 +24,12 @@
       />
     </div>
 
-    <!-- <pre>{{ filterQuery }}</pre> -->
-
-    <div id="explore-showcases-grid" class="md:w-3/4 w-full mb-4">
+    <div id="explore-showcases-grid" class="relative md:w-3/4 w-full mb-4">
+      <button
+        class="focus:outline-none flex md:hidden items-center justify-center h-10 w-10 absolute top-0 right-0 bg-grey-200 text-grey-900 hover:bg-primary-50 hover:text-primary-500 -mt-8 rounded-md"
+      >
+        <FilterIcon class="h-6 w-6 overflow-visible" />
+      </button>
       <ExploreShowcasesSelectedFilters
         :selected-filters="filterQuery"
         :total-count="totalCount"
@@ -148,8 +151,12 @@
 
 <script>
 import qs from 'qs'
+import FilterIcon from '@/assets/icons/filter.svg?inline'
 
 export default {
+  components: {
+    FilterIcon
+  },
   fetchOnServer: false,
   async fetch() {
     const showcases = await this.$strapi.find(
