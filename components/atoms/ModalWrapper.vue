@@ -61,6 +61,8 @@ export default {
     if (this.fetched) {
       this.animateEnter()
     }
+    const scrollBarGap =
+      window.innerWidth - document.documentElement.clientWidth
     // console.log('ACTIVATED', this.fetched)
     // const mainContent = document.querySelector('#explore-showcases-section')
     // if (mainContent) {
@@ -71,6 +73,10 @@ export default {
     document.querySelector('#main-footer').style.filter = 'blur(18px)'
     document.querySelector('#main-header').style.filter = 'blur(18px)'
     document.body.style.overflow = 'hidden'
+    document.body.style.paddingRight = `${scrollBarGap}px`
+    document.querySelector(
+      '#main-header'
+    ).style.paddingRight = `${scrollBarGap}px`
   },
   deactivated() {
     document.querySelector('#explore-showcases-section').style.filter = null
@@ -78,6 +84,8 @@ export default {
     document.querySelector('#main-header').style.filter = null
     setTimeout(() => {
       document.body.style.overflow = null
+      document.body.style.paddingRight = null
+      document.querySelector('#main-header').style.paddingRight = null
     })
   },
   methods: {
