@@ -42,16 +42,24 @@ import { mapState } from 'vuex'
 
 export default {
   async fetch() {
-    // const website = await fetchStrapi(
-    //   `https://vue-telemetry-api.herokuapp.com/showcases?slug=${this.$route.params.website}`,
-    //   { method: 'get' }
+    // const website = await this.$strapi.find(
+    //   `showcases?slug=${this.$route.params.website}`
     // )
-    const website = await this.$strapi.find(
-      `showcases?slug=${this.$route.params.website}`
-    )
-    if (website.length) {
-      this.website = website[0]
-    } else {
+    try {
+      const website = await this.$strapi.findOne(
+        'showcases',
+        this.$route.params.website
+      )
+      if (website) {
+        this.website = website
+      } else {
+        // set status code on server
+        if (process.server) {
+          this.$nuxt.context.res.statusCode = 404
+        }
+        throw new Error('Website not found')
+      }
+    } catch (err) {
       // set status code on server
       if (process.server) {
         this.$nuxt.context.res.statusCode = 404
