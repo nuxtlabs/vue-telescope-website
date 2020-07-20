@@ -36,6 +36,12 @@ export default {
     '~/plugins/vue-observe-visibility.client'
   ],
   generate: {
+    cache: {
+      ignore: [
+        'netlify.toml',
+        'jsconfig.json'
+      ]
+    },
     fallback: '404.html' // For Netlify
   },
   buildModules: [
