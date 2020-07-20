@@ -3,10 +3,10 @@
     <!-- <ExploreWebsite /> -->
     <div v-if="twitterLike">
       <!-- <transition name="page"> -->
-      <ModalWrapper :fetched="website ? true : false">
+      <TwitterLikeModalWrapper :fetched="website ? true : false">
         <ExploreWebsite :website="website" class="twitter-like mb-12" />
         <CtaSection />
-      </ModalWrapper>
+      </TwitterLikeModalWrapper>
       <!-- </transition> -->
     </div>
     <div v-else class="px-4">
@@ -15,16 +15,16 @@
         v-if="$fetchState.pending"
         class="max-w-readable-line-length m-auto mt-10"
       >
-        <content-placeholders rounded>
-          <content-placeholders-text class="custom h-2 w-32 mb-2" :lines="1" />
-          <content-placeholders-text class="custom h-8 w-2/3 mb-8" :lines="1" />
-          <content-placeholders-text
+        <ContentPlaceholders rounded>
+          <ContentPlaceholdersText class="custom h-2 w-32 mb-2" :lines="1" />
+          <ContentPlaceholdersText class="custom h-8 w-2/3 mb-8" :lines="1" />
+          <ContentPlaceholdersText
             class="custom relative h-full w-full mb-4 rounded-xl overflow-hidden"
             :lines="1"
             style="padding-bottom: 75%;"
           />
-          <content-placeholders-text :lines="8" />
-        </content-placeholders>
+          <ContentPlaceholdersText :lines="8" />
+        </ContentPlaceholders>
       </div>
       <ExploreWebsite
         v-else

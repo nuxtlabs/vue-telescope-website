@@ -14,7 +14,7 @@
       /> -->
       <ExploreShowcasesSearchFilters
         id="explore-showcases-controls"
-        ref="filter"
+        ref="filters"
         class="h-full"
         @update-filters="
           (query) => {
@@ -25,17 +25,20 @@
     </div>
 
     <div id="explore-showcases-grid" class="relative md:w-3/4 w-full mb-4">
-      <button
-        class="focus:outline-none flex md:hidden items-center justify-center absolute top-0 right-0 text-grey-700 hover:text-primary-500 -mt-9 mr-2"
-      >
-        <FilterIcon class="h-7 w-7 overflow-visible" />
-      </button>
+      <ExploreShowcasesMobileSearchFilters
+        @update-filters="
+          (query) => {
+            updateQuery(query)
+          }
+        "
+      />
+
       <ExploreShowcasesSelectedFilters
         :selected-filters="filterQuery"
         :total-count="totalCount"
         class=""
-        @clear-filters="$refs.filter && $refs.filter.clearFilters()"
-        @clear-filter="$refs.filter && $refs.filter.clearFilter($event)"
+        @clear-filters="$refs.filters && $refs.filters.clearFilters()"
+        @clear-filter="$refs.filters && $refs.filters.clearFilter($event)"
       />
 
       <!-- <div
@@ -58,26 +61,26 @@
           :key="showcasePlaceholder"
           class="w-full sm:w-1/2 md:w-1/3 mb-16 px-5"
         >
-          <content-placeholders rounded>
-            <content-placeholders-text
+          <ContentPlaceholders rounded>
+            <ContentPlaceholdersText
               class="custom relative h-full w-full mb-4 rounded-lg overflow-hidden"
               :lines="1"
               style="padding-bottom: 75%;"
             />
             <div class="flex justify-between">
-              <content-placeholders-text class="custom h-4 w-2/3" :lines="1" />
+              <ContentPlaceholdersText class="custom h-4 w-2/3" :lines="1" />
               <div class="flex">
-                <content-placeholders-text
+                <ContentPlaceholdersText
                   class="custom rounded-full overflow-hidden h-4 w-4 mr-1"
                   :lines="1"
                 />
-                <content-placeholders-text
+                <ContentPlaceholdersText
                   class="custom rounded-full overflow-hidden h-4 w-4"
                   :lines="1"
                 />
               </div>
             </div>
-          </content-placeholders>
+          </ContentPlaceholders>
         </div>
       </div>
 
@@ -89,7 +92,7 @@
           No showcases found. Please
           <span
             class="text-primary-500 cursor-pointer font-bold-body-weight"
-            @click="$refs.filter && $refs.filter.clearFilters()"
+            @click="$refs.filters && $refs.filters.clearFilters()"
           >
             clear the filters
           </span>
@@ -151,12 +154,8 @@
 
 <script>
 import qs from 'qs'
-import FilterIcon from '@/assets/icons/filter.svg?inline'
 
 export default {
-  components: {
-    FilterIcon
-  },
   fetchOnServer: false,
   async fetch() {
     const showcases = await this.$strapi.find(
@@ -208,6 +207,7 @@ export default {
   },
   methods: {
     updateQuery(query) {
+      console.log('WTF')
       // console.log(query)
       // this.filterQuery = { ...this.filterQuery, ...query }
       this.filterQuery = query

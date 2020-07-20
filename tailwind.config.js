@@ -207,7 +207,10 @@ module.exports = {
         '18': '4.5rem'
       },
       borderRadius: {
-        xl: '0.875rem'
+        xl: '0.875rem',
+        '2xl': '1rem',
+        '3xl': '1.25rem',
+        '4xl': '1.5rem'
       }
     }
   },

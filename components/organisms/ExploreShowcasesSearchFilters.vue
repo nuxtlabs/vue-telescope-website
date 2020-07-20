@@ -145,7 +145,7 @@
       </div>
     </template>
 
-    <!-- <pre>{{ queryFilter }}</pre> -->
+    <pre>{{ queryFilter }}</pre>
   </div>
 </template>
 

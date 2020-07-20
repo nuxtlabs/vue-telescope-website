@@ -63,11 +63,6 @@ export default {
     }
     const scrollBarGap =
       window.innerWidth - document.documentElement.clientWidth
-    // console.log('ACTIVATED', this.fetched)
-    // const mainContent = document.querySelector('#explore-showcases-section')
-    // if (mainContent) {
-    //   mainContent.style.filter = 'blur(18px)'
-    // }
     document.querySelector('#explore-showcases-section').style.filter =
       'blur(18px)'
     document.querySelector('#main-footer').style.filter = 'blur(18px)'
