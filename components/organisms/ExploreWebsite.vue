@@ -6,7 +6,7 @@
         @click="$router.push('/explore')"
       >
         <XmarkCircleIcon class="text-grey-900 w-6 h-6" />
-      </div> -->
+      </div>-->
       <div class="relative">
         <h1
           class="truncate-multiline-2 pr-4 text-five leading-five md:text-five md:leading-five font-display-weight"
@@ -14,14 +14,13 @@
           {{ website.siteName || website.title }}
         </h1>
         <a
+          v-if="!website.isAdultContent"
           :href="website.url"
           target="_blank"
           class="h-6 absolute top-0 left-0 flex -mt-6 text-primary-300 font-bold-body-weight"
         >
           <LinkIcon class="w-3 mr-2" />
-          <span class="" style="width: max-content;">
-            {{ website.hostname }}
-          </span>
+          <span class style="width: max-content;">{{ website.hostname }}</span>
         </a>
       </div>
       <!-- <AppButton
@@ -33,11 +32,18 @@
         class="rounded-lg"
       >
         Visit
-      </AppButton> -->
+      </AppButton>-->
+      <div
+        v-if="website.isAdultContent"
+        class="flex items-center font-display-weight text-orange-500"
+      >
+        <ExclamationIcon class="w-5 h-5 mr-2" />18+
+      </div>
     </div>
 
     <AppResponsiveCloudinaryImage
-      :src="website.screenshotUrl"
+      :url="website.screenshotUrl"
+      :pixelate="website.isAdultContent"
       ratio="4:3"
       sizes="100vw"
       class="image absolute top-0 left-0 w-full h-full mb-8 rounded-xl"
@@ -50,8 +56,7 @@
     <div class="mb-10">
       <div class="label mb-4">
         <AppWebsiteDataLabel>
-          <InfoIcon class="h-5 mr-2 opacity-50" />
-          Info
+          <InfoIcon class="h-5 mr-2 opacity-50" />Info
         </AppWebsiteDataLabel>
       </div>
       <div class="data-wrapper flex flex-wrap">
@@ -65,7 +70,7 @@
           <img
             class="w-6 h-6 mr-2"
             :src="`https://icons.vuetelemetry.com/vue.svg`"
-            alt=""
+            alt
           />
           <div class="text-eight font-bold-body-weight">
             {{ website.vueVersion }}
@@ -83,7 +88,7 @@
           <img
             class="w-6 h-6 mr-2"
             :src="`https://icons.vuetelemetry.com${website.framework.imgPath}`"
-            alt=""
+            alt
           />
           <div class="text-seven leading-seven font-bold-body-weight">
             {{ website.framework.name }}
@@ -101,7 +106,7 @@
           <img
             class="w-6 h-6 mr-2"
             :src="`https://icons.vuetelemetry.com${website.ui.imgPath}`"
-            alt=""
+            alt
           />
           <div class="text-seven leading-seven font-bold-body-weight">
             {{ website.ui.name }}
@@ -132,8 +137,7 @@
     <div v-if="website.plugins.length" class="mb-10">
       <div class="label mb-4">
         <AppWebsiteDataLabel>
-          <PluginsIcon class="h-6 mr-2 opacity-50" />
-          Plugins
+          <PluginsIcon class="h-6 mr-2 opacity-50" />Plugins
         </AppWebsiteDataLabel>
       </div>
       <div class="data-wrapper flex flex-wrap">
@@ -146,9 +150,8 @@
         >
           <span
             class="block bg-grey-50 border border-grey-200 font-bold-body-weight px-4 py-2 rounded-xl"
+            >{{ plugin.name }}</span
           >
-            {{ plugin.name }}
-          </span>
         </a>
       </div>
     </div>
@@ -156,8 +159,7 @@
     <div v-if="website.modules.length" class="mb-10">
       <div class="label mb-4">
         <AppWebsiteDataLabel>
-          <ModulesIcon class="h-6 mr-2 opacity-50" />
-          Nuxt Modules
+          <ModulesIcon class="h-6 mr-2 opacity-50" />Nuxt Modules
         </AppWebsiteDataLabel>
       </div>
       <div class="data-wrapper flex flex-wrap">
@@ -170,9 +172,8 @@
         >
           <span
             class="block bg-grey-50 border border-grey-200 font-bold-body-weight px-4 py-2 rounded-xl"
+            >{{ module.name }}</span
           >
-            {{ module.name }}
-          </span>
         </a>
       </div>
     </div>
@@ -183,6 +184,7 @@
 // import XmarkCircleIcon from '@/assets/icons/xmark-circle.svg?inline'
 // import XmarkCircleFillIcon from '@/assets/icons/xmark-circle-fill.svg?inline'
 // import CheckmarkCircleFillIcon from '@/assets/icons/checkmark-circle-fill.svg?inline'
+import ExclamationIcon from '@/assets/icons/exclamation.svg?inline'
 import LinkIcon from '@/assets/icons/link.svg?inline'
 // import VueIcon from '@/assets/brands/vue.svg?inline'
 import ModulesIcon from '@/assets/icons/modules.svg?inline'
@@ -195,6 +197,7 @@ export default {
     // XmarkCircleIcon,
     // XmarkCircleFillIcon,
     // CheckmarkCircleFillIcon,
+    ExclamationIcon,
     LinkIcon,
     // VueIcon,
     ModulesIcon,

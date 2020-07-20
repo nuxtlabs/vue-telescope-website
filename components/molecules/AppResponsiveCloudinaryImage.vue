@@ -9,45 +9,13 @@
     class="overflow-hidden relative bg-primary-50"
   >
     <noscript inline-template>
-      <img
-        :src="`https://res.cloudinary.com/nuxt/image/upload/w_1200,${
-          ratio ? `h_${Math.round(1200 * intristicRatio)}` : ''
-        }/vue-telemetry/${cloudinaryId}`"
-        :alt="alt"
-      />
+      <img :src="src" :alt="alt" />
     </noscript>
     <img
       v-if="show"
       ref="img"
-      :src="`https://res.cloudinary.com/nuxt/image/upload/w_1200,${
-        ratio ? `h_${Math.round(1200 * intristicRatio)}` : ''
-      }/vue-telemetry/${cloudinaryId}`"
-      :srcset="`
-          https://res.cloudinary.com/nuxt/image/upload/w_160,${
-            ratio ? `h_${Math.round(160 * intristicRatio)}` : ''
-          }/vue-telemetry/${cloudinaryId} 160w,
-          https://res.cloudinary.com/nuxt/image/upload/w_240,${
-            ratio ? `h_${Math.round(240 * intristicRatio)}` : ''
-          }/vue-telemetry/${cloudinaryId} 240w,
-          https://res.cloudinary.com/nuxt/image/upload/w_320,${
-            ratio ? `h_${Math.round(320 * intristicRatio)}` : ''
-          }/vue-telemetry/${cloudinaryId} 320w,
-          https://res.cloudinary.com/nuxt/image/upload/w_560,${
-            ratio ? `h_${Math.round(560 * intristicRatio)}` : ''
-          }/vue-telemetry/${cloudinaryId} 560w,
-          https://res.cloudinary.com/nuxt/image/upload/w_800,${
-            ratio ? `h_${Math.round(800 * intristicRatio)}` : ''
-          }/vue-telemetry/${cloudinaryId} 800w,
-          https://res.cloudinary.com/nuxt/image/upload/w_920,${
-            ratio ? `h_${Math.round(920 * intristicRatio)}` : ''
-          }/vue-telemetry/${cloudinaryId} 920w,
-          https://res.cloudinary.com/nuxt/image/upload/w_1040,${
-            ratio ? `h_${Math.round(1040 * intristicRatio)}` : ''
-          }/vue-telemetry/${cloudinaryId} 1040w,
-          https://res.cloudinary.com/nuxt/image/upload/w_1200,${
-            ratio ? `h_${Math.round(1200 * intristicRatio)}` : ''
-          }/vue-telemetry/${cloudinaryId} 1200w
-        `"
+      :src="src"
+      :srcset="srcset"
       :sizes="sizes"
       :alt="alt"
       class="w-full transition-opacity duration-500"
@@ -62,7 +30,7 @@
 <script>
 export default {
   props: {
-    src: {
+    url: {
       type: String,
       default: null
     },
@@ -77,6 +45,10 @@ export default {
     sizes: {
       type: String,
       default: '100vw'
+    },
+    pixelate: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -87,7 +59,7 @@ export default {
   },
   computed: {
     cloudinaryId() {
-      return this.src.split('/').pop()
+      return this.url.split('/').pop()
     },
     intristicRatio() {
       if (!this.ratio) {
@@ -102,9 +74,24 @@ export default {
       return {
         'padding-bottom': `${this.intristicRatio * 100}%`
       }
+    },
+    src() {
+      return this.generateSrc(1200)
+    },
+    srcset() {
+      return [160, 240, 320, 560, 800, 920, 1040, 1200]
+        .map((size) => this.generateSrc(size, true))
+        .join(',')
     }
   },
   methods: {
+    generateSrc(size, displayRatio = false) {
+      return `https://res.cloudinary.com/nuxt/image/upload/w_${size},${
+        this.ratio ? `h_${Math.round(size * this.intristicRatio)}` : ''
+      }${this.pixelate ? '/e_pixelate:10' : ''}/vue-telemetry/${
+        this.cloudinaryId
+      }${displayRatio ? ` ${size}w` : ''}`
+    },
     lazyLoadImage(isVisible, entry) {
       if (isVisible) {
         this.show = true

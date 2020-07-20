@@ -11,7 +11,7 @@
     >
       <div class="rounded-lg overflow-hidden mb-4">
         <AppResponsiveCloudinaryImage
-          :src="showcase.screenshotUrl"
+          :url="showcase.screenshotUrl"
           ratio="4:3"
           sizes="(min-width: 834px) 33vw, (min-width: 640px) 50vw, 100vw"
         />
