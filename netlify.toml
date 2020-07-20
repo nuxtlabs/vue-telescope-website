@@ -2,8 +2,8 @@
   command = "yarn dev"
   # autoLaunch = false
   functions = "functions"
-  framework = "#custom" 
-  port = 8888 
+  framework = "#custom"
+  port = 8888
   targetPort = 3000
 
 [build]
@@ -16,6 +16,12 @@
   to = "/.netlify/functions/analyze"
   status = 200
   force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 200
+  force = false
 
 [[headers]]
   for = "/*"

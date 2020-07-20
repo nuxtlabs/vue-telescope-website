@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "nuxt dev",
     "build": "nuxt build",
-    "generate": "nuxt build && nuxt export",
+    "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
   },
   "dependencies": {
@@ -20,7 +20,7 @@
     "intersection-observer": "^0.11.0",
     "node-fetch": "^2.6.0",
     "normalize-url": "^5.0.0",
-    "nuxt-edge": "latest",
+    "nuxt-edge": "^2.14.0-26582020.6ab65fbf",
     "speakingurl": "^14.0.1",
     "utf-8-validate": "^5.0.2",
     "vue-content-placeholders": "^0.2.1",
@@ -28,9 +28,9 @@
     "vue-telemetry-analyzer": "^0.6.8"
   },
   "devDependencies": {
-    "@nuxtjs/proxy": "^2.0.0",
     "@nuxtjs/eslint-config": "^3.0.0",
     "@nuxtjs/eslint-module": "^2.0.0",
+    "@nuxtjs/proxy": "^2.0.0",
     "@nuxtjs/strapi": "^0.1.2",
     "@nuxtjs/svg": "^0.1.11",
     "@nuxtjs/tailwindcss": "^2.0.0",
