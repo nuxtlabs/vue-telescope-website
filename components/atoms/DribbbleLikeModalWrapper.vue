@@ -10,13 +10,18 @@
             ref="modal-wrapper"
             class="modal-fuck h-full pointer-events-auto rounded-4xl rounded-b-none relative bg-white p-4"
           >
-            <!-- <div
-            ref="close-button"
-            class="absolute top-0 right-0 z-10 p-4 cursor-pointer pointer-events-auto"
-            @click="$router.push('/explore')"
-          >
-            <XmarkCircleIcon class="text-grey-900 w-6 h-6" />
-          </div> -->
+            <div class="relative flex justify-between items-center">
+              <div class="pl-2 text-seven leading-seven font-bold-body-weight">
+                Select filters:
+              </div>
+              <div
+                ref="close-button"
+                class="p-4 cursor-pointer pointer-events-auto"
+                @click="$emit('close')"
+              >
+                <XmarkCircleIcon class="text-grey-900 w-6 h-6" />
+              </div>
+            </div>
             <div ref="modal-content" class="">
               <slot></slot>
             </div>
@@ -28,7 +33,12 @@
 </template>
 
 <script>
+import XmarkCircleIcon from '@/assets/icons/xmark-circle.svg?inline'
+
 export default {
+  components: {
+    XmarkCircleIcon
+  },
   mounted() {
     this.animateEnter()
     const scrollBarGap =
@@ -38,6 +48,10 @@ export default {
     document.querySelector(
       '#main-header'
     ).style.paddingRight = `${scrollBarGap}px`
+
+    this.$refs[
+      'modal-wrapper'
+    ].style.paddingRight = `calc(1rem + ${scrollBarGap}px)`
   },
   beforeDestroy() {
     setTimeout(() => {
@@ -53,9 +67,11 @@ export default {
         // opacity: 0,
         duration: 1,
         ease: 'power4.inOut',
+        clearProps: true,
         onComplete: () => {
           this.$refs['hack-safari'].style.height = '100%'
           // this.$refs['modal-wrapper'].style.height = '100%'
+          this.$refs['modal-wrapper'].style.paddingRight = null
           this.$refs['modal-wrapper'].classList.add('overflow-auto') // md:overflow-hidden overflow-x-hidden
         }
       })

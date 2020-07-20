@@ -7,45 +7,7 @@
       <FilterIcon class="h-7 w-7 overflow-visible" />
     </button>
     <DribbbleLikeModalWrapper v-if="show" @close="show = false">
-      <ExploreShowcasesSearchFilters
-        @update-filters="$emit('update-filters', $event)"
-      />
-      <!-- <p class="text-two">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit nesciunt
-        quod voluptate. Voluptate sunt saepe dolor, excepturi corrupti a vitae
-        omnis suscipit illo, molestiae quam modi doloremque! Autem, commodi
-        consectetur.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit nesciunt
-        quod voluptate. Voluptate sunt saepe dolor, excepturi corrupti a vitae
-        omnis suscipit illo, molestiae quam modi doloremque! Autem, commodi
-        consectetur.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit nesciunt
-        quod voluptate. Voluptate sunt saepe dolor, excepturi corrupti a vitae
-        omnis suscipit illo, molestiae quam modi doloremque! Autem, commodi
-        consectetur.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit nesciunt
-        quod voluptate. Voluptate sunt saepe dolor, excepturi corrupti a vitae
-        omnis suscipit illo, molestiae quam modi doloremque! Autem, commodi
-        consectetur.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit nesciunt
-        quod voluptate. Voluptate sunt saepe dolor, excepturi corrupti a vitae
-        omnis suscipit illo, molestiae quam modi doloremque! Autem, commodi
-        consectetur.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit nesciunt
-        quod voluptate. Voluptate sunt saepe dolor, excepturi corrupti a vitae
-        omnis suscipit illo, molestiae quam modi doloremque! Autem, commodi
-        consectetur.
-      </p> -->
+      <ExploreShowcasesSearchFilters />
     </DribbbleLikeModalWrapper>
   </div>
 </template>

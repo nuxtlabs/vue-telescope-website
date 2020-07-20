@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 export const state = () => ({
   isReady: false,
   twitterLike: false,
@@ -6,7 +8,8 @@ export const state = () => ({
   plugins: [],
   modules: [],
   browser: '',
-  isMobile: true
+  isMobile: true,
+  selectedFilters: {}
 })
 
 export const mutations = {
@@ -33,6 +36,20 @@ export const mutations = {
   },
   SET_MOBILE(state, isMobile) {
     state.isMobile = isMobile
+  },
+  SET_FILTERS(state, filters) {
+    state.selectedFilters = filters
+  },
+  RESET_FILTERS(state) {
+    state.selectedFilters = {}
+  },
+  SET_FILTER_KEY(state, { key, value }) {
+    // console.log('SET_FILTER_KEY', this)
+    Vue.set(state.selectedFilters, key, value)
+  },
+  DELETE_FILTER_KEY(state, key) {
+    // console.log('DELETE_FILTER_KEY')
+    Vue.delete(state.selectedFilters, key)
   }
 }
 

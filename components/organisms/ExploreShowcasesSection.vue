@@ -16,22 +16,11 @@
         id="explore-showcases-controls"
         ref="filters"
         class="h-full"
-        @update-filters="
-          (query) => {
-            updateQuery(query)
-          }
-        "
       />
     </div>
 
     <div id="explore-showcases-grid" class="relative md:w-3/4 w-full mb-4">
-      <ExploreShowcasesMobileSearchFilters
-        @update-filters="
-          (query) => {
-            updateQuery(query)
-          }
-        "
-      />
+      <ExploreShowcasesMobileSearchFilters />
 
       <ExploreShowcasesSelectedFilters
         :selected-filters="filterQuery"
@@ -153,11 +142,39 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import qs from 'qs'
+
+const allowed = [
+  'framework.slug',
+  'framework_null',
+  'ui.slug',
+  'ui_null',
+  'plugins.slug',
+  'modules.slug'
+]
+
+function filterObject(raw) {
+  return Object.keys(raw)
+    .filter((key) => allowed.includes(key))
+    .reduce((obj, key) => {
+      obj[key] = raw[key]
+      return obj
+    }, {})
+}
 
 export default {
   fetchOnServer: false,
   async fetch() {
+    if (
+      Object.keys(this.filterQuery).length === 0 &&
+      Object.keys(this.$route.query).length > 0
+    ) {
+      // trigger only once on page load
+      // TODO: fired second time when no filters (but safe for now)
+      this.$store.commit('SET_FILTERS', filterObject(this.$route.query))
+    }
+    // console.log('QUERY PARAMS: ', )
     const showcases = await this.$strapi.find(
       `showcases${this.filterQueryString}`
     )
@@ -184,6 +201,9 @@ export default {
     }
   },
   computed: {
+    ...mapState({
+      selectedFilters: (state) => state.selectedFilters
+    }),
     filterQueryString() {
       return qs.stringify(
         {
@@ -203,21 +223,41 @@ export default {
       if (process.browser) {
         this.$fetch()
       }
+    },
+    selectedFilters: {
+      deep: true,
+      handler(value) {
+        window.scrollTo(0, 0)
+        this.filterQuery = value
+        // console.log('filterQuery', value)
+        this.$router.push({ query: value })
+        this.currentPage = 0
+        this.hasMoreShowcases = true
+        setTimeout(() => {
+          this.showcases = []
+          this.$fetch()
+        })
+      }
+    },
+    $route(newValue, oldValue) {
+      if (oldValue.params.website) {
+        // set query params when close showcase modal and have filters selected
+        this.$router.push({ query: this.filterQuery })
+      }
     }
   },
   methods: {
-    updateQuery(query) {
-      console.log('WTF')
-      // console.log(query)
-      // this.filterQuery = { ...this.filterQuery, ...query }
-      this.filterQuery = query
-      this.currentPage = 0
-      this.showcases = []
-      this.hasMoreShowcases = true
-      this.$fetch()
-    },
+    // updateQuery(query) {
+    //   // console.log(query)
+    //   // this.filterQuery = { ...this.filterQuery, ...query }
+    //   // this.filterQuery = query
+    //   // this.currentPage = 0
+    //   // this.showcases = []
+    //   // this.hasMoreShowcases = true
+    //   // this.$fetch()
+    // },
     lazyLoadShowcases(isVisible) {
-      // initialy for intersection observer
+      // method made initialy for intersection observer (thats why isVisible present)
       if (isVisible) {
         this.$refs['load-more-button'].$el.blur()
         this.currentPage++
