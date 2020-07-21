@@ -41,102 +41,104 @@
         />
       </div> -->
 
-      <div
-        v-if="$fetchState.pending && !showcases.length && !isModal"
-        class="flex flex-wrap mt-5"
-      >
+      <ClientOnly>
         <div
-          v-for="showcasePlaceholder in isMobile ? 3 : showcasesPerPage"
-          :key="showcasePlaceholder"
-          class="w-full sm:w-1/2 md:w-1/3 mb-16 px-5"
+          v-if="$fetchState.pending && !showcases.length && !isModal"
+          class="flex flex-wrap mt-5"
         >
-          <ContentPlaceholders rounded>
-            <ContentPlaceholdersText
-              class="custom relative h-full w-full mb-4 rounded-lg overflow-hidden"
-              :lines="1"
-              style="padding-bottom: 75%;"
-            />
-            <div class="flex justify-between">
-              <ContentPlaceholdersText class="custom h-4 w-2/3" :lines="1" />
-              <div class="flex">
-                <ContentPlaceholdersText
-                  class="custom rounded-full overflow-hidden h-4 w-4 mr-1"
-                  :lines="1"
-                />
-                <ContentPlaceholdersText
-                  class="custom rounded-full overflow-hidden h-4 w-4"
-                  :lines="1"
-                />
-              </div>
-            </div>
-          </ContentPlaceholders>
-        </div>
-      </div>
-
-      <div
-        v-else-if="!showcases.length"
-        class="flex flex-wrap min-h-full items-center justify-center"
-      >
-        <div class="text-seven leading-seven mb-12">
-          No showcases found. Please
-          <span
-            class="text-primary-500 cursor-pointer font-bold-body-weight"
-            @click="$refs.filters && $refs.filters.clearFilters()"
+          <div
+            v-for="showcasePlaceholder in isMobile ? 3 : showcasesPerPage"
+            :key="showcasePlaceholder"
+            class="w-full sm:w-1/2 md:w-1/3 mb-16 px-5"
           >
-            clear the filters
-          </span>
+            <ContentPlaceholders rounded>
+              <ContentPlaceholdersText
+                class="custom relative h-full w-full mb-4 rounded-lg overflow-hidden"
+                :lines="1"
+                style="padding-bottom: 75%;"
+              />
+              <div class="flex justify-between">
+                <ContentPlaceholdersText class="custom h-4 w-2/3" :lines="1" />
+                <div class="flex">
+                  <ContentPlaceholdersText
+                    class="custom rounded-full overflow-hidden h-4 w-4 mr-1"
+                    :lines="1"
+                  />
+                  <ContentPlaceholdersText
+                    class="custom rounded-full overflow-hidden h-4 w-4"
+                    :lines="1"
+                  />
+                </div>
+              </div>
+            </ContentPlaceholders>
+          </div>
         </div>
-      </div>
 
-      <div v-else class="flex flex-wrap">
-        <!-- 
+        <div
+          v-else-if="!showcases.length"
+          class="flex flex-wrap min-h-full items-center justify-center"
+        >
+          <div class="text-seven leading-seven mb-12">
+            No showcases found. Please
+            <span
+              class="text-primary-500 cursor-pointer font-bold-body-weight"
+              @click="$refs.filters && $refs.filters.clearFilters()"
+            >
+              clear the filters
+            </span>
+          </div>
+        </div>
+
+        <div v-else class="flex flex-wrap">
+          <!-- 
           v-observe-visibility="{
             callback: i === showcases.length - 1 ? lazyLoadShowcases : () => {},
             once: true
           }"
          -->
-        <ExploreShowcasesCard
-          v-for="showcase in showcases"
-          :key="showcase.id"
-          :showcase="showcase"
-          class="w-full sm:w-1/2 md:w-1/3 mb-4"
-        />
-        <div class="w-full flex items-center justify-center px-8">
-          <AppButton
-            v-if="hasMoreShowcases"
-            ref="load-more-button"
-            outlined
-            appearance="primary"
-            class="w-auto sm:w-1/3 flex items-center justify-center"
-            @click.native="lazyLoadShowcases"
-          >
-            <div
-              :class="[
-                !$fetchState.pending
-                  ? 'opacity-100 scale-100'
-                  : 'opacity-0 scale-0'
-              ]"
-              class="transition duration-200 transform ease-in-out"
+          <ExploreShowcasesCard
+            v-for="showcase in showcases"
+            :key="showcase.id"
+            :showcase="showcase"
+            class="w-full sm:w-1/2 md:w-1/3 mb-4"
+          />
+          <div class="w-full flex items-center justify-center px-8">
+            <AppButton
+              v-if="hasMoreShowcases"
+              ref="load-more-button"
+              outlined
+              appearance="primary"
+              class="w-auto sm:w-1/3 flex items-center justify-center"
+              @click.native="lazyLoadShowcases"
             >
-              Load More
-            </div>
-            <div
-              :class="[
-                $fetchState.pending
-                  ? 'opacity-100 scale-100'
-                  : 'opacity-0 scale-0'
-              ]"
-              class="absolute transition duration-200 transform ease-in-out"
-            >
-              <AppLoader
-                class="w-6 h-6"
-                background="text-primary-100"
-                path="text-primary-400"
-              />
-            </div>
-          </AppButton>
+              <div
+                :class="[
+                  !$fetchState.pending
+                    ? 'opacity-100 scale-100'
+                    : 'opacity-0 scale-0'
+                ]"
+                class="transition duration-200 transform ease-in-out"
+              >
+                Load More
+              </div>
+              <div
+                :class="[
+                  $fetchState.pending
+                    ? 'opacity-100 scale-100'
+                    : 'opacity-0 scale-0'
+                ]"
+                class="absolute transition duration-200 transform ease-in-out"
+              >
+                <AppLoader
+                  class="w-6 h-6"
+                  background="text-primary-100"
+                  path="text-primary-400"
+                />
+              </div>
+            </AppButton>
+          </div>
         </div>
-      </div>
+      </ClientOnly>
     </div>
   </div>
 </template>
