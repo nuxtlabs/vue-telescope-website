@@ -97,10 +97,14 @@ export default {
         scale: 0
       })
       this.$gsap.from(this.$refs['modal-wrapper'], {
+        opacity: 0,
+        duration: 0.4,
+        ease: 'none'
+      })
+      this.$gsap.from(this.$refs['modal-wrapper'], {
         scaleY: 0,
-        // opacity: 0,
-        duration: 0.5,
-        ease: 'power4.inOut',
+        duration: 0.75,
+        ease: 'expo.inOut',
         onComplete: () => {
           this.$gsap.fromTo(
             this.$refs['modal-content'],

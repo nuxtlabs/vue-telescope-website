@@ -28,7 +28,9 @@
         <NuxtLink to="/explore" class="sm:mr-4 font-display-weight">
           Explore
         </NuxtLink>
-        <InstallExtensionButton class="hidden sm:inline-flex" />
+        <div class="hidden sm:inline-flex">
+          <InstallExtensionButton />
+        </div>
       </div>
     </div>
   </header>

@@ -8,7 +8,8 @@
       sizing.padding,
       color.bg,
       color.text,
-      color.outline
+      color.outline,
+      color.hoverState
     ]"
     class="inline-flex items-center font-bold-body-weight focus:outline-none border-2 border-transparent"
   >
@@ -66,7 +67,8 @@ export default {
         return {
           bg: '',
           text: '',
-          outline: ''
+          outline: '',
+          hoverState: 'hover:bg-primary-100'
         }
       } else if (this.appearance === 'primary') {
         if (this.outlined) {

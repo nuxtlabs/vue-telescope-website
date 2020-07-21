@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-12 md:pt-8">
+  <div class="pt-12 md:pt-8 mb-8">
     <ExploreShowcasesSection
       v-if="!$route.params.website || ($route.params.website && twitterLike)"
     />
