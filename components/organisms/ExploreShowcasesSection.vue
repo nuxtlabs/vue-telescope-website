@@ -46,7 +46,7 @@
         class="flex flex-wrap mt-5"
       >
         <div
-          v-for="showcasePlaceholder in showcasesPerPage"
+          v-for="showcasePlaceholder in isMobile ? 3 : showcasesPerPage"
           :key="showcasePlaceholder"
           class="w-full sm:w-1/2 md:w-1/3 mb-16 px-5"
         >
@@ -205,7 +205,8 @@ export default {
   },
   computed: {
     ...mapState({
-      selectedFilters: (state) => state.selectedFilters
+      selectedFilters: (state) => state.selectedFilters,
+      isMobile: (state) => state.isMobile
     }),
     filterQueryString() {
       return qs.stringify(
