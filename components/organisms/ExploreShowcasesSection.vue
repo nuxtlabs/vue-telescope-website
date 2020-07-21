@@ -166,7 +166,6 @@ function filterObject(raw) {
 export default {
   fetchOnServer: false,
   async fetch() {
-    console.log('FETCH')
     // if (
     //   Object.keys(this.filterQuery).length === 0 &&
     //   Object.keys(this.$route.query).length > 0

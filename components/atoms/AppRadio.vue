@@ -13,14 +13,13 @@
       />
       <div
         ref="radiomark-wrapper"
-        class="radiomark-wrapper w-5 h-5 mr-2 p-5px pointer-events-none text-white rounded-full border transition-colors duration-500"
+        class="radiomark-wrapper w-5 h-5 mr-2 p-5px pointer-events-none text-white rounded-full border transition-colors duration-200 delay-300"
         :class="[
-          checked ? 'bg-primary-500 border-primary-500' : 'border-grey-300'
+          checked ? 'bg-primary-500 border-primary-500 ' : 'border-grey-300'
         ]"
       >
         <svg
           class="w-full h-auto overflow-visible"
-          :class="[checked && 'text-primary-500']"
           viewBox="0 0 16 16"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +28,7 @@
             ref="radiomark"
             d="M15.5 8C15.5 12.1421 12.1421 15.5 8 15.5C3.85786 15.5 0.5 12.1421 0.5 8C0.5 3.85786 3.85786 0.5 8 0.5C12.1421 0.5 15.5 3.85786 15.5 8Z"
             stroke="currentColor"
-            stroke-width="2"
+            stroke-width="3"
             fill="white"
           />
         </svg>
@@ -60,14 +59,23 @@ export default {
   watch: {
     checked(value) {
       this.animateRadiomark(value)
+      if (!value) {
+        this.$refs.radiomark.classList.remove('text-primary-500')
+      }
+    }
+  },
+  mounted() {
+    if (this.checked) {
+      this.animateRadiomark(this.checked)
     }
   },
   methods: {
     animateRadiomark(value) {
       if (value) {
+        this.$refs.radiomark.classList.add('text-primary-500')
         this.$gsap.fromTo(
           this.$refs.radiomark,
-          0.25,
+          0.3,
           {
             drawSVG: '0%'
           },
