@@ -125,26 +125,24 @@
       </div>
     </div>
 
-    <template v-if="selectedFilters['framework.slug'] === 'nuxtjs'">
-      <div class="mb-4">
-        <AppFilterLabel>Modules</AppFilterLabel>
-        <div class="flex flex-col">
-          <template v-for="module in modules" class="">
-            <AppCheckbox
-              :id="`module-${module.slug}`"
-              :key="module.id"
-              :checked="
-                selectedFilters['modules.slug'] &&
-                selectedFilters['modules.slug'].includes(module.slug)
-              "
-              class="mb-1"
-              :label="module.name"
-              @input="checkboxFilter('modules.slug', module.slug)"
-            />
-          </template>
-        </div>
+    <div v-show="selectedFilters['framework.slug'] === 'nuxtjs'" class="mb-4">
+      <AppFilterLabel>Modules</AppFilterLabel>
+      <div class="flex flex-col">
+        <template v-for="module in modules" class="">
+          <AppCheckbox
+            :id="`module-${module.slug}`"
+            :key="module.id"
+            :checked="
+              selectedFilters['modules.slug'] &&
+              selectedFilters['modules.slug'].includes(module.slug)
+            "
+            class="mb-1"
+            :label="module.name"
+            @input="checkboxFilter('modules.slug', module.slug)"
+          />
+        </template>
       </div>
-    </template>
+    </div>
 
     <!-- <pre>{{ queryFilter }}</pre> -->
     <!-- <pre>{{ selectedFilters }}</pre> -->

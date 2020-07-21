@@ -23,7 +23,7 @@
       <ExploreShowcasesMobileSearchFilters />
 
       <ExploreShowcasesSelectedFilters
-        :selected-filters="filterQuery"
+        :selected-filters="selectedFilters"
         :total-count="totalCount"
         class=""
         @clear-filters="$refs.filters && $refs.filters.clearFilters()"
@@ -166,18 +166,22 @@ function filterObject(raw) {
 export default {
   fetchOnServer: false,
   async fetch() {
-    if (
-      Object.keys(this.filterQuery).length === 0 &&
-      Object.keys(this.$route.query).length > 0
-    ) {
-      // trigger only once on page load
-      // TODO: fired second time when no filters (but safe for now)
-      this.$store.commit('SET_FILTERS', filterObject(this.$route.query))
-    }
-    // console.log('QUERY PARAMS: ', )
+    console.log('FETCH')
+    // if (
+    //   Object.keys(this.filterQuery).length === 0 &&
+    //   Object.keys(this.$route.query).length > 0
+    // ) {
+    //   // trigger only once on page load
+    //   // TODO: fired second time when no filters (but safe for now)
+    //   this.$store.commit('SET_FILTERS', filterObject(this.$route.query))
+    // }
+    // console.log('filterQueryString 1: ', this.selectedFilters)
     const showcases = await this.$strapi.find(
       `showcases${this.filterQueryString}`
     )
+    // const showcases = await this.$strapi.find('showcases', this.selectedFilters)
+    // console.log('filterQueryString 2: ', this.filterQueryString)
+
     const totalCount = await this.$strapi.find(
       `showcases/count${this.filterQueryString}`
     )
@@ -196,8 +200,8 @@ export default {
       totalCount: 0,
       currentPage: 0,
       showcasesPerPage: 24,
-      hasMoreShowcases: true,
-      filterQuery: {}
+      hasMoreShowcases: true
+      // filterQuery: {}
     }
   },
   computed: {
@@ -207,7 +211,7 @@ export default {
     filterQueryString() {
       return qs.stringify(
         {
-          ...this.filterQuery,
+          ...this.selectedFilters,
           _limit: this.showcasesPerPage,
           _start: this.currentPage * this.showcasesPerPage
         },
@@ -227,9 +231,9 @@ export default {
     selectedFilters: {
       deep: true,
       handler(value) {
+        // console.log('TRIGGERED')
         window.scrollTo(0, 0)
-        this.filterQuery = value
-        // console.log('filterQuery', value)
+        // this.filterQuery = value
         this.$router.push({ query: value })
         this.currentPage = 0
         this.hasMoreShowcases = true
@@ -242,8 +246,19 @@ export default {
     $route(newValue, oldValue) {
       if (oldValue.params.website) {
         // set query params when close showcase modal and have filters selected
-        this.$router.push({ query: this.filterQuery })
+        this.$router.push({ query: this.selectedFilters })
       }
+    }
+  },
+  created() {
+    // console.log('created', this.$route)
+    if (
+      Object.keys(this.selectedFilters).length === 0 &&
+      Object.keys(this.$route.query).length > 0
+    ) {
+      // trigger only once on page load
+      // TODO: fired second time when no filters (but safe for now)
+      this.$store.commit('SET_FILTERS', filterObject(this.$route.query))
     }
   },
   methods: {
