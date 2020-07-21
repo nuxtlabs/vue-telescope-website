@@ -10,14 +10,7 @@
             :key="showcase.id"
             ref="showcase-image-wrapper"
             class="showcase-image-wrapper absolute top-0 left-0 w-full h-full cursor-pointer overflow-hidden"
-            @click="
-              staticIndex === 2
-                ? $router.push({
-                    name: 'explore-website',
-                    params: { website: showcase.slug }
-                  })
-                : changeSlider()
-            "
+            @click="staticIndex === 2 ? clickMain(showcase) : changeSlider()"
           >
             <img
               ref="showcase"
@@ -137,6 +130,13 @@ export default {
     })
   },
   methods: {
+    clickMain(showcase) {
+      this.$store.commit('SET_MODAL', true)
+      this.$router.push({
+        name: 'explore-website',
+        params: { website: showcase.slug }
+      })
+    },
     changeSlider(e) {
       if (this.activeShowcases.length > 1) return
       this.$emit('change-slide', this.activeShowcases[0].index)

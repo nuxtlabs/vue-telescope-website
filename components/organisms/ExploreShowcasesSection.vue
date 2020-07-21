@@ -168,6 +168,7 @@ function filterObject(raw) {
 export default {
   fetchOnServer: false,
   async fetch() {
+    if (this.isModal) return
     // if (
     //   Object.keys(this.filterQuery).length === 0 &&
     //   Object.keys(this.$route.query).length > 0
@@ -226,6 +227,14 @@ export default {
     }
   },
   watch: {
+    isModal(value) {
+      // performance improvement hack
+      // do not fetch showcases when navigating from Landing slider
+      // fetch after it's modal closed
+      if (!value && !this.showcases.length) {
+        this.$fetch()
+      }
+    },
     currentPage() {
       if (process.browser) {
         this.$fetch()
