@@ -1,7 +1,7 @@
 <template>
   <div class="w-full relative">
     <!-- <pre>{{ activeShowcase }}</pre> -->
-    <BrandLogosCloud />
+    <!-- <BrandLogosCloud /> -->
     <div class="w-full relative flex items-center justify-center px-4">
       <div
         v-for="({ id, screenshotUrl }, i) in featured"
