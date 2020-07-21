@@ -4,7 +4,7 @@
       <div class="h-full pointer-events-none flex justify-end flex-col">
         <div
           ref="hack-safari"
-          class="rounded-4xl rounded-b-none overflow-hidden mt-24"
+          class="rounded-4xl rounded-b-none overflow-hidden mt-28"
         >
           <div
             ref="modal-wrapper"
@@ -40,6 +40,7 @@ export default {
     XmarkCircleIcon
   },
   mounted() {
+    this.$store.commit('SET_MODAL', true)
     this.animateEnter()
     const scrollBarGap =
       window.innerWidth - document.documentElement.clientWidth
@@ -54,6 +55,7 @@ export default {
     ].style.paddingRight = `calc(1rem + ${scrollBarGap}px)`
   },
   beforeDestroy() {
+    this.$store.commit('SET_MODAL', false)
     setTimeout(() => {
       document.body.style.overflow = null
       document.body.style.paddingRight = null

@@ -9,7 +9,8 @@ export const state = () => ({
   modules: [],
   browser: '',
   isMobile: true,
-  selectedFilters: {}
+  selectedFilters: {},
+  isModal: false
 })
 
 export const mutations = {
@@ -50,6 +51,9 @@ export const mutations = {
   DELETE_FILTER_KEY(state, key) {
     // console.log('DELETE_FILTER_KEY')
     Vue.delete(state.selectedFilters, key)
+  },
+  SET_MODAL(state, isModal) {
+    state.isModal = isModal
   }
 }
 

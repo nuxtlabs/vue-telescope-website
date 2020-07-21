@@ -58,6 +58,7 @@ export default {
     }
   },
   activated() {
+    this.$store.commit('SET_MODAL', true)
     if (this.fetched) {
       this.animateEnter()
     }
@@ -74,6 +75,7 @@ export default {
     ).style.paddingRight = `${scrollBarGap}px`
   },
   deactivated() {
+    this.$store.commit('SET_MODAL', false)
     document.querySelector('#explore-showcases-section').style.filter = null
     document.querySelector('#main-footer').style.filter = null
     document.querySelector('#main-header').style.filter = null

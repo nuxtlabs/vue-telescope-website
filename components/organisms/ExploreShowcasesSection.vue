@@ -42,7 +42,7 @@
       </div> -->
 
       <div
-        v-if="$fetchState.pending && !showcases.length"
+        v-if="$fetchState.pending && !showcases.length && !isModal"
         class="flex flex-wrap mt-5"
       >
         <div
@@ -206,7 +206,8 @@ export default {
   computed: {
     ...mapState({
       selectedFilters: (state) => state.selectedFilters,
-      isMobile: (state) => state.isMobile
+      isMobile: (state) => state.isMobile,
+      isModal: (state) => state.isModal
     }),
     filterQueryString() {
       return qs.stringify(
