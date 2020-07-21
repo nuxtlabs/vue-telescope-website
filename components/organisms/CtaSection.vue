@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-primary-50 py-12">
+  <div class="py-12">
     <div
       class="max-w-container-max-width m-auto px-4 flex flex-col items-center justify-center"
     >

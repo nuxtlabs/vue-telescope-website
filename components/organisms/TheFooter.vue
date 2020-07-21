@@ -1,5 +1,5 @@
 <template>
-  <div id="main-footer" class="py-6 bg-grey-900 text-white">
+  <div id="main-footer" class="py-6 bg-grey-50 text-grey-900">
     <div class="max-w-container-max-width mx-auto py-4 px-4">
       <div class="flex items-center justify-between mb-4">
         <div>
@@ -9,7 +9,7 @@
           <li class="mr-2">
             <a
               href="https://twitter.com/VueTelemetry"
-              class="text-white hover:text-primary-500 transition ease-in duration-150"
+              class="text-grey-900 hover:text-primary-500 transition ease-in duration-150"
               target="_blank"
               rel="noopener"
             >
@@ -20,7 +20,7 @@
           <li class="">
             <a
               href="https://github.com/nuxt-company/vue-telemetry-analyzer"
-              class="text-white hover:text-primary-500 transition ease-in duration-150"
+              class="text-grey-900 hover:text-primary-500 transition ease-in duration-150"
               target="_blank"
               rel="noopener"
             >
@@ -32,7 +32,7 @@
       </div>
       <div class="flex flex-col justify-between">
         <ul class="text-sm mb-2">
-          <li class="text-white text-sm leading-sm">
+          <li class="text-grey-900 text-sm leading-sm">
             &copy; 2020,
             <a
               href="https://nuxtjs.org"
@@ -45,7 +45,7 @@
           </li>
         </ul>
         <ul class="flex flex-col sm:flex-row text-sm leading-sm">
-          <li class="text-white">
+          <li class="text-grey-900">
             Hosted on
             <a
               href="https://www.netlify.com/"
@@ -58,7 +58,7 @@
           <span class="hidden sm:inline-block mx-2 text-grey-300"
             >&bullet;</span
           >
-          <li class="text-white">
+          <li class="text-grey-900">
             Images served by
             <a
               href="https://cloudinary.com/"

@@ -52,3 +52,18 @@ html {
   width: 100% !important;
   margin-bottom: 0 !important;
 }
+
+.vue-content-placeholders-text__line {
+  background: theme('colors.primary.50') !important;
+  overflow: hidden !important;
+}
+
+.vue-content-placeholders-is-animated
+  .vue-content-placeholders-text__line::before {
+  background: linear-gradient(
+    to right,
+    theme('colors.primary.50') 0%,
+    /* #dafdf4 15%, */ theme('colors.primary.50') 15%,
+    theme('colors.primary.50') 30%
+  ) !important;
+}

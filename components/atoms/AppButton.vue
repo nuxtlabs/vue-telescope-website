@@ -68,7 +68,7 @@ export default {
           bg: '',
           text: '',
           outline: '',
-          hoverState: 'hover:bg-primary-100'
+          hoverState: 'hover:bg-primary-50'
         }
       } else if (this.appearance === 'primary') {
         if (this.outlined) {
