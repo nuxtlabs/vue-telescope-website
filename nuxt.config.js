@@ -35,6 +35,9 @@ export default {
     '~/plugins/intersection-observer.client',
     '~/plugins/vue-observe-visibility.client'
   ],
+  router: {
+    prefetchPayloads: false
+  },
   generate: {
     cache: {
       ignore: [
