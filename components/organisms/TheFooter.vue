@@ -30,9 +30,9 @@
           </li>
         </ul>
       </div>
-      <div class="flex flex-col sm:flex-row items-center justify-between">
-        <ul class="text-sm mb-2 sm:mb-0">
-          <li class="text-grey-500">
+      <div class="flex flex-col justify-between">
+        <ul class="text-sm mb-2">
+          <li class="text-grey-500 text-sm leading-sm">
             &copy; 2020,
             <a
               href="https://nuxtjs.org"
@@ -44,7 +44,7 @@
             for the VueJS Community
           </li>
         </ul>
-        <ul class="flex items-center text-sm">
+        <ul class="flex flex-col sm:flex-row text-sm leading-sm">
           <li class="text-grey-500">
             Hosted on
             <a
@@ -55,7 +55,9 @@
               >Netlify</a
             >
           </li>
-          <span class="mx-2 text-grey-300">&bullet;</span>
+          <span class="hidden sm:inline-block mx-2 text-grey-300"
+            >&bullet;</span
+          >
           <li class="text-grey-500">
             Images served by
             <a

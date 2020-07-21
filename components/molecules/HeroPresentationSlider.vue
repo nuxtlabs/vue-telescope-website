@@ -2,18 +2,47 @@
   <div class="w-full relative">
     <!-- <pre>{{ activeShowcase }}</pre> -->
     <BrandLogosCloud />
-    <div class="w-full relative flex items-center justify-center">
+    <div class="w-full relative flex items-center justify-center px-4">
       <div
         v-for="({ id, screenshotUrl }, i) in featured"
         :key="id"
-        class="inline-flex w-full md:w-1/2"
-        :class="[`slide-${i + 1}`, i === 2 ? 'relative' : 'absolute']"
+        class="w-full md:w-1/2"
+        :class="[
+          `slide-${i + 1}`,
+          i === 2 ? 'relative' : 'absolute',
+          i !== 2 ? 'hidden md:inline-flex' : 'inline-flex'
+        ]"
       >
+        <div v-if="i === 2" class="block md:hidden">
+          <button
+            style="top: 50%; transform: translateY(-50%);"
+            class="absolute left-0 z-10 w-10 h-10 ml-4 flex items-center justify-center bg-primary-500 rounded-full overflow-hidden shadow-lg focus:outline-none"
+            @click="
+              changeSlide(
+                activeIndex === 0 ? 4 : activeIndex === 4 ? 3 : activeIndex - 1
+              )
+            "
+          >
+            <ArrowLeftIcon class="w-6 text-white" />
+          </button>
+          <button
+            style="top: 50%; transform: translateY(-50%);"
+            class="absolute top-0 right-0 z-10 w-10 h-10 mr-4 flex items-center justify-center bg-primary-500 rounded-full overflow-hidden shadow-lg focus:outline-none"
+            @click="
+              changeSlide(
+                activeIndex === 0 ? 1 : activeIndex === 4 ? 0 : activeIndex + 1
+              )
+            "
+          >
+            <ArrowRightIcon class="w-6 text-white" />
+          </button>
+        </div>
         <HeroPresentationSliderItem
           :featured="featured"
           :static-index="i"
           :active-index="activeIndex"
           @change-slide="changeSlide"
+          @active-showcases-change="activeShowcases = $event"
         />
         <!-- <div>{{ showcase }}</div> -->
         <!-- <div class="bg-red-500 w-full h-full absolute top-0 left-0"></div> -->
@@ -23,7 +52,14 @@
 </template>
 
 <script>
+import ArrowLeftIcon from '@/assets/icons/arrow-left.svg?inline'
+import ArrowRightIcon from '@/assets/icons/arrow-right.svg?inline'
+
 export default {
+  components: {
+    ArrowLeftIcon,
+    ArrowRightIcon
+  },
   props: {
     featured: {
       type: Array,
@@ -32,7 +68,8 @@ export default {
   },
   data() {
     return {
-      activeIndex: null
+      activeIndex: 2,
+      activeShowcases: []
     }
   },
   computed: {
@@ -42,7 +79,7 @@ export default {
   },
   methods: {
     changeSlide(i) {
-      // console.log('pizda', i)
+      if (this.activeShowcases.length > 1) return
       this.activeIndex = i
     }
   }

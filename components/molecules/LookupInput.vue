@@ -1,5 +1,5 @@
 <template>
-  <div class="search-input-molecule relative flex">
+  <div class="search-input-molecule relative flex mx-4">
     <div
       v-if="errorMessage"
       class="absolute bottom-0 left-0 text-orange-500 text-sm leading-sm -mb-6 ml-2 truncate font-bold-body-weight w-full"

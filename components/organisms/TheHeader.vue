@@ -25,10 +25,10 @@
         <!-- <OldLogo class="h-8" /> -->
       </NuxtLink>
       <div>
-        <NuxtLink to="/explore" class="mr-4 font-display-weight">
+        <NuxtLink to="/explore" class="sm:mr-4 font-display-weight">
           Explore
         </NuxtLink>
-        <InstallExtensionButton />
+        <InstallExtensionButton class="hidden sm:inline-flex" />
       </div>
     </div>
   </header>

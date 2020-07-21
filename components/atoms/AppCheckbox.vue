@@ -74,7 +74,7 @@ export default {
         })
         this.$gsap.fromTo(
           this.$refs.checkmark,
-          0.25,
+          0.3,
           {
             drawSVG: '0%'
           },
@@ -85,7 +85,7 @@ export default {
       } else {
         this.$gsap.fromTo(
           this.$refs.checkmark,
-          0.25,
+          0.3,
           {
             drawSVG: '0 100%'
           },

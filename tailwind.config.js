@@ -195,6 +195,9 @@ module.exports = {
         'pretty-wide': '1020px',
         'readable-line-length': '820px'
       },
+      minWidth: {
+        body: '320px'
+      },
       spacing: {
         '2px': '2px',
         '3px': '3px',

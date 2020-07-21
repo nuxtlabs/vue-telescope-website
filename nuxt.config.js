@@ -22,7 +22,7 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     bodyAttrs: {
       class: [
-        'font-body antialiased overflow-x-hidden overflow-y-scroll text-grey-900'
+        'font-body antialiased overflow-x-hidden overflow-y-scroll text-grey-900 min-w-body'
       ]
     }
   },
@@ -37,10 +37,7 @@ export default {
   ],
   generate: {
     cache: {
-      ignore: [
-        'netlify.toml',
-        'jsconfig.json'
-      ]
+      ignore: ['netlify.toml', 'jsconfig.json']
     },
     fallback: '404.html' // For Netlify
   },

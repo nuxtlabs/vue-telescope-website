@@ -107,7 +107,7 @@
             ref="load-more-button"
             outlined
             appearance="primary"
-            class="w-1/3 flex items-center justify-center"
+            class="w-auto sm:w-1/3 flex items-center justify-center"
             @click.native="lazyLoadShowcases"
           >
             <div

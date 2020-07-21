@@ -6,7 +6,7 @@
       <span class="">{{ animatedNumber }}</span>
       <span class="font-body-weight text-sm">&nbsp;websites found</span>
     </div>
-    <transition-group name="scale">
+    <transition-group name="scale" appear>
       <template v-for="(value, key) in selectedFilters">
         <div
           :key="key"

@@ -43,21 +43,21 @@ export default {
           height: 'h-8',
           fontSize: 'text-sm',
           rounded: 'rounded-md',
-          padding: 'px-2'
+          padding: 'px-4'
         }
       } else if (this.size === 'large') {
         return {
           height: 'h-12',
           fontSize: 'text-eight',
           rounded: 'rounded-lg',
-          padding: 'px-4'
+          padding: 'px-6'
         }
       } else {
         return {
           height: 'h-10',
           fontSize: 'text-base',
           rounded: 'rounded-md',
-          padding: 'px-2'
+          padding: 'px-4'
         }
       }
     },

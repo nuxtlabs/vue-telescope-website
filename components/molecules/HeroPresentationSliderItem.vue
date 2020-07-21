@@ -29,11 +29,11 @@
         </div>
 
         <template v-if="staticIndex === 2">
-          <div class="relative mt-4">
+          <div class="relative">
             <NuxtLink
               v-for="showcase in activeShowcases"
               :key="showcase.id"
-              class="absolute top-0 left-0"
+              class="absolute top-0 left-0 mt-4"
               :to="{
                 name: 'explore-website',
                 params: { website: showcase.slug }
@@ -85,6 +85,9 @@ export default {
     }
   },
   watch: {
+    activeShowcases(value) {
+      this.$emit('active-showcases-change', value)
+    },
     activeIndex() {
       this.leaveTitleAnimation()
 
