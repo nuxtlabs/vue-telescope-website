@@ -249,10 +249,15 @@ module.exports = {
       whitelist: [
         'bg-nuxtjs-light',
         'bg-nuxtjs-base',
+        'text-nuxtjs-base',
         'bg-quasar-base',
+        'text-quasar-base',
         'bg-gridsome-base',
+        'text-gridsome-base',
         'bg-vuepress-base',
+        'text-vuepress-base',
         'bg-vue-base',
+        'text-vue-base',
         'bg-tailwind-css-light'
       ]
     }

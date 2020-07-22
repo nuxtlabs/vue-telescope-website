@@ -77,6 +77,7 @@ export default {
     let el = this.brands[currentEl]
 
     this.rotationInterval = setInterval(() => {
+      if (document.hidden) return
       el.active = false
       currentEl = (currentEl + 1) % this.brands.length
 
