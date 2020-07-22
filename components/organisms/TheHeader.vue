@@ -67,11 +67,11 @@ export default {
 .install-extension-button {
   opacity: 0;
   animation: scale 150ms theme('transitionTimingFunction.ease-out-material')
-    500ms forwards;
+    1000ms forwards;
 }
 .explore-link {
   opacity: 0;
   animation: scale 150ms theme('transitionTimingFunction.ease-out-material')
-    650ms forwards;
+    1250ms forwards;
 }
 </style>

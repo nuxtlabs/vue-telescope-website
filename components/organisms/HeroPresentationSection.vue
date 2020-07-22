@@ -22,6 +22,6 @@ export default {
 #hero-presentation {
   opacity: 0;
   animation: scale 450ms theme('transitionTimingFunction.ease-out-material')
-    750ms forwards;
+    1250ms forwards;
 }
 </style>

@@ -67,6 +67,6 @@ export default {
 .install-extension-button {
   opacity: 0;
   animation: scale 450ms theme('transitionTimingFunction.ease-out-material')
-    500ms forwards;
+    1000ms forwards;
 }
 </style>

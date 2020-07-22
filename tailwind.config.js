@@ -246,7 +246,15 @@ module.exports = {
       'nuxt.config.js'
     ],
     options: {
-      whitelist: ['bg-nuxtjs-light', 'bg-tailwind-css-light']
+      whitelist: [
+        'bg-nuxtjs-light',
+        'bg-nuxtjs-base',
+        'bg-quasar-base',
+        'bg-gridsome-base',
+        'bg-vuepress-base',
+        'bg-vue-base',
+        'bg-tailwind-css-light'
+      ]
     }
   }
 }
