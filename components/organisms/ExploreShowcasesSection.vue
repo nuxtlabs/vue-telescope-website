@@ -11,7 +11,7 @@
             updateQuery(query)
           }
         "
-      /> -->
+      />-->
       <ExploreShowcasesSearchFilters
         id="explore-showcases-controls"
         ref="filters"
@@ -25,7 +25,7 @@
       <ExploreShowcasesSelectedFilters
         :selected-filters="selectedFilters"
         :total-count="totalCount"
-        class=""
+        class
         @clear-filters="$refs.filters && $refs.filters.clearFilters()"
         @clear-filter="$refs.filters && $refs.filters.clearFilter($event)"
       />
@@ -39,7 +39,7 @@
           background="text-primary-200"
           path="text-primary-500"
         />
-      </div> -->
+      </div>-->
 
       <ClientOnly>
         <div
@@ -83,19 +83,18 @@
             <span
               class="text-primary-500 cursor-pointer font-bold-body-weight"
               @click="$refs.filters && $refs.filters.clearFilters()"
+              >clear the filters</span
             >
-              clear the filters
-            </span>
           </div>
         </div>
 
         <div v-else class="flex flex-wrap">
-          <!-- 
+          <!--
           v-observe-visibility="{
             callback: i === showcases.length - 1 ? lazyLoadShowcases : () => {},
             once: true
           }"
-         -->
+          -->
           <ExploreShowcasesCard
             v-for="showcase in showcases"
             :key="showcase.id"
@@ -217,7 +216,8 @@ export default {
         {
           ...this.selectedFilters,
           _limit: this.showcasesPerPage,
-          _start: this.currentPage * this.showcasesPerPage
+          _start: this.currentPage * this.showcasesPerPage,
+          _sort: 'lastDetectedAt:desc'
         },
         {
           arrayFormat: 'repeat',
