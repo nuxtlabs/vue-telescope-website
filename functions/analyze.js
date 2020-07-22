@@ -100,19 +100,6 @@ exports.handler = async function (event, _context) {
       }
     }
 
-    if (
-      existingShowcase &&
-      existingShowcase.length &&
-      isOutdated(existingShowcase[0].lastDetectedAt, 7)
-    ) {
-      const deleteShowcase = await fetchStrapi(
-        `${process.env.STRAPI_URL}/showcases/${existingShowcase[0].id}`,
-        {
-          method: 'delete'
-        }
-      )
-    }
-
     consola.info(`Analyzing ${origin}...`)
     const infos = await analyze(origin)
 
