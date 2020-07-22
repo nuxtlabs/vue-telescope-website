@@ -67,3 +67,14 @@ html {
     theme('colors.primary.50') 30%
   ) !important;
 }
+
+@keyframes scale {
+  from {
+    transform: scale(0.75) translateY(15px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

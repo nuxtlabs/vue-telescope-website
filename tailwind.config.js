@@ -175,6 +175,10 @@ module.exports = {
         base: '#41B883',
         light: '#D6F9E9'
       },
+      vuepress: {
+        base: '#41B883',
+        light: '#D6F9E9'
+      },
       nuxtjs: {
         base: '#00C58E',
         light: '#EAFFF9'
@@ -215,6 +219,15 @@ module.exports = {
         '2xl': '1rem',
         '3xl': '1.25rem',
         '4xl': '1.5rem'
+      },
+      transitionTimingFunction: {
+        'ease-in-material': 'cubic-bezier(0.4, 0, 1, 1)',
+        'ease-out-material': 'cubic-bezier(0, 0, 0.2, 1)',
+        'ease-in-out-material': 'cubic-bezier(0.4, 0, 0.2, 1)',
+        'ease-in-out-material-sharp': 'cubic-bezier(0.4, 0, 0.6, 1)'
+      },
+      zIndex: {
+        '-1': '-1'
       }
     }
   },

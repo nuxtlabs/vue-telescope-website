@@ -18,4 +18,10 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+#hero-presentation {
+  opacity: 0;
+  animation: scale 450ms theme('transitionTimingFunction.ease-out-material')
+    750ms forwards;
+}
+</style>

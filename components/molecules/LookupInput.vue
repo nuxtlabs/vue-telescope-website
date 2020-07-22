@@ -109,6 +109,7 @@ export default {
           throw new Error(err)
         })
       if (res.statusCode === 200 && !res.body.isAdultContent) {
+        this.$store.commit('SET_MODAL', true)
         this.$router.push({
           name: 'explore-website',
           params: {

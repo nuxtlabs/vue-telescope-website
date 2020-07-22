@@ -8,7 +8,7 @@ export const state = () => ({
   plugins: [],
   modules: [],
   browser: '',
-  isMobile: true,
+  isMobile: false,
   selectedFilters: {},
   isModal: false
 })

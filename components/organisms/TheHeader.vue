@@ -17,18 +17,22 @@
     <div
       class="w-full h-full flex justify-between items-center max-w-container-max-width m-auto px-4"
     >
-      <NuxtLink to="/">
+      <NuxtLink to="/" class="logo">
         <!-- <OneLogo class="h-8" /> -->
         <!-- <TwoLogo class="h-8" /> -->
         <!-- <ThreeLogo class="h-8" /> -->
         <FourLogo class="h-8" />
         <!-- <OldLogo class="h-8" /> -->
       </NuxtLink>
-      <div>
-        <NuxtLink to="/explore" class="sm:mr-4 font-display-weight">
+      <div class="flex items-center">
+        <NuxtLink
+          to="/explore"
+          class="explore-link sm:mr-4 font-display-weight"
+        >
           Explore
         </NuxtLink>
-        <div class="hidden sm:inline-flex">
+
+        <div class="install-extension-button hidden sm:inline-flex">
           <InstallExtensionButton />
         </div>
       </div>
@@ -54,4 +58,20 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.logo {
+  opacity: 0;
+  animation: scale 450ms theme('transitionTimingFunction.ease-out-material')
+    forwards;
+}
+.install-extension-button {
+  opacity: 0;
+  animation: scale 150ms theme('transitionTimingFunction.ease-out-material')
+    500ms forwards;
+}
+.explore-link {
+  opacity: 0;
+  animation: scale 150ms theme('transitionTimingFunction.ease-out-material')
+    650ms forwards;
+}
+</style>
