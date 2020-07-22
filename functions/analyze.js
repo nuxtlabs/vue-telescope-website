@@ -29,6 +29,7 @@ exports.handler = async function (event, _context) {
 
   let origin
   let hostname
+  let force = event.queryStringParameters.force === 'true'
 
   try {
     const rawUrl = event.queryStringParameters.url
@@ -85,7 +86,8 @@ exports.handler = async function (event, _context) {
     if (
       existingShowcase &&
       existingShowcase.length &&
-      !isOutdated(existingShowcase[0].lastDetectedAt, 7)
+      !isOutdated(existingShowcase[0].lastDetectedAt, 7) &&
+      !force
     ) {
       return {
         statusCode: 200,
