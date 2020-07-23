@@ -19,8 +19,9 @@
       explore our database of 4526 websites.
     </p>
     <InstallExtensionButton
+      ref="install-extension-button"
       size="large"
-      class="install-extension-button mb-8"
+      class="opacity-0 mb-8"
     />
   </section>
 </template>
@@ -63,14 +64,32 @@ export default {
         ease: 'power4.inOut'
       }
     )
+
+    const installExtensionButton = this.$refs['install-extension-button'].$el
+    this.$gsap.fromTo(
+      installExtensionButton,
+      {
+        opacity: 0,
+        scale: 0.75,
+        y: '15px'
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 0.5,
+        delay: 0.75,
+        ease: 'power4.inOut'
+      }
+    )
   }
 }
 </script>
 
 <style scoped>
-.install-extension-button {
+/* .install-extension-button {
   opacity: 0;
   animation: scale 450ms theme('transitionTimingFunction.ease-out-material')
     1000ms forwards;
-}
+} */
 </style>
