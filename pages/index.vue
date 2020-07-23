@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="overflow-hidden">
     <HeroPropositionSection
       class="mt-56 max-w-readable-line-length px-4 mx-auto"
     />

@@ -17,7 +17,7 @@
     <div
       class="w-full h-full flex justify-between items-center max-w-container-max-width m-auto px-4"
     >
-      <NuxtLink to="/" class="logo">
+      <NuxtLink ref="logo" to="/" class="opacity-0">
         <!-- <OneLogo class="h-8" /> -->
         <!-- <TwoLogo class="h-8" /> -->
         <!-- <ThreeLogo class="h-8" /> -->
@@ -26,13 +26,17 @@
       </NuxtLink>
       <div class="flex items-center">
         <NuxtLink
+          ref="explore-link"
           to="/explore"
-          class="explore-link sm:mr-4 font-display-weight"
+          class="opacity-0 sm:mr-4 font-display-weight"
         >
           Explore
         </NuxtLink>
 
-        <div class="install-extension-button hidden sm:inline-flex">
+        <div
+          ref="install-extension-button"
+          class="opacity-0 hidden sm:inline-flex"
+        >
           <InstallExtensionButton />
         </div>
       </div>
@@ -54,6 +58,59 @@ export default {
     // ThreeLogo
     FourLogo
     // OldLogo
+  },
+  mounted() {
+    const logo = this.$refs.logo.$el
+    const exploreLink = this.$refs['explore-link'].$el
+    const installExtensionButton = this.$refs['install-extension-button']
+
+    this.$gsap.fromTo(
+      logo,
+      {
+        opacity: 0,
+        scale: 0.75,
+        y: '15px'
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 0.45,
+        ease: 'power4.inOut'
+      }
+    )
+    this.$gsap.fromTo(
+      installExtensionButton,
+      {
+        opacity: 0,
+        scale: 0.75,
+        y: '15px'
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 0.15,
+        delay: 1,
+        ease: 'power4.inOut'
+      }
+    )
+    this.$gsap.fromTo(
+      exploreLink,
+      {
+        opacity: 0,
+        scale: 0.75,
+        y: '15px'
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 0.15,
+        delay: 1.25,
+        ease: 'power4.inOut'
+      }
+    )
   }
 }
 </script>

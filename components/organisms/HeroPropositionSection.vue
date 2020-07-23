@@ -6,15 +6,17 @@
     >
       <div class="opacity-0">Discover</div>
       <div class="opacity-0">websites made with</div>
-      <div class="opacity-0 w-full -z-1"><HeroPropositionBrandsRotator /></div>
+      <div class="opacity-0 w-full -z-1">
+        <HeroPropositionBrandsRotator />
+      </div>
     </h1>
 
     <p
       ref="subheading"
       class="opacity-0 text-center text-seven leading-seven text-grey-700 mb-12 max-w-2xl"
     >
-      Reveal the Vue plugins and technology stack powering any website with Vue
-      Telemetry or explore our database of 4526 websites.
+      Reveal the Vue plugins and technology stack powering any website or
+      explore our database of 4526 websites.
     </p>
     <InstallExtensionButton
       size="large"
