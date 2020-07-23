@@ -37,9 +37,9 @@ import FeatureTabsTwo from './FeatureTabsTwo'
 import FeatureTabsThree from './FeatureTabsThree'
 
 const tabs = [
-  { id: 1, title: 'Feature One', component: 'FeatureTabsOne' },
-  { id: 2, title: 'Feature Two', component: 'FeatureTabsTwo' },
-  { id: 3, title: 'Feature Three', component: 'FeatureTabsThree' }
+  { id: 1, title: 'Detect Vue technologies', component: 'FeatureTabsOne' },
+  { id: 2, title: 'Explore & filter', component: 'FeatureTabsTwo' },
+  { id: 3, title: 'Submit your website', component: 'FeatureTabsThree' }
 ]
 
 export default {

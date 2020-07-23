@@ -26,19 +26,25 @@ export default {
       benefits: [
         {
           id: 1,
-          title: 'Free Forever',
+          title: 'Free',
           description:
             'The application and the showcase are available online and access is free for everyone.'
         },
         {
           id: 2,
-          title: 'Free Forever',
+          title: 'Browser extension',
           description:
             'The application and the showcase are available online and access is free for everyone.'
         },
         {
           id: 3,
-          title: 'Free Forever',
+          title: 'Open source',
+          description:
+            'The application and the showcase are available online and access is free for everyone.'
+        },
+        {
+          id: 4,
+          title: 'Huge database',
           description:
             'The application and the showcase are available online and access is free for everyone.'
         }
