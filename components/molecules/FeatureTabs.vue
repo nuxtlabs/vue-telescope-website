@@ -2,24 +2,30 @@
   <div class="tabs-wrapper-molecule flex flex-col md:flex-row">
     <!-- <pre>{{ activeTabs }}</pre> -->
     <div class="md:w-1/4 flex flex-col mx-2">
-      <button
-        v-for="(tab, i) in tabs"
-        :key="i"
-        :class="[
-          (activeTabs.length > 1
-            ? activeTabs[1].id === tab.id
-            : activeTabs[0].id === tab.id) && 'pointer-events-none bg-grey-300'
-        ]"
-        class="h-12 text-eight font-bold-body-weight px-4 rounded-xl focus:outline-none border-2 border-transparent select-none mb-2"
-        @click="startManualTransition(tab)"
-      >
-        {{ tab.title }}
-      </button>
+      <h2 class="text-six leading-six font-display-weight mb-4 ml-2">
+        Must-have tool for any Vue.js developer
+      </h2>
+      <div>
+        <button
+          v-for="(tab, i) in tabs"
+          :key="i"
+          :class="[
+            (activeTabs.length > 1
+              ? activeTabs[1].id === tab.id
+              : activeTabs[0].id === tab.id) &&
+              'pointer-events-none bg-grey-300'
+          ]"
+          class="h-12 text-base leading-base font-bold-body-weight px-4 rounded-xl focus:outline-none border-2 border-transparent select-none mb-2"
+          @click="startManualTransition(tab)"
+        >
+          {{ tab.title }}
+        </button>
+      </div>
     </div>
 
     <transition-group
       tag="div"
-      class="md:w-3/4 relative h-24 mx-2 rounded-xl overflow-hidden"
+      class="md:w-3/4 relative mx-2 rounded-xl overflow-visible"
     >
       <component
         :is="activeTab.component"

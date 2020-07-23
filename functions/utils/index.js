@@ -20,11 +20,18 @@ exports.fetchStrapi = async function (url, { method, body }) {
     method,
     ...(body ? { body } : {}),
     headers: {
-      authorization: `Bearer ${process.env.STRAPI_TOKEN}`,
+      // authorization: `Bearer ${process.env.STRAPI_TOKEN}`,
       'Content-Type': 'application/json'
     }
   })
     .then((response) => {
+      if (!response.ok) {
+        const error = new Error(response.statusText)
+        // error.code = response.status
+        error.statusCode = response.status
+        error.body = response.body
+        throw error
+      }
       return response.json()
     })
     .catch((err) => {

@@ -50,7 +50,7 @@ exports.handler = async function (event, _context) {
     // check if showcase has been scanned (only in production)
     if (!process.env.NETLIFY_DEV) {
       const existingScan = await fetchStrapi(
-        `${process.env.STRAPI_URL}/scans?url=${hostname}`,
+        `${process.env.STRAPI_URL}/scans?url=${hostname}&token=${process.env.STRAPI_TOKEN}`,
         {
           method: 'get'
         }
@@ -77,7 +77,7 @@ exports.handler = async function (event, _context) {
 
     // get showcase by hostname
     const existingShowcase = await fetchStrapi(
-      `${process.env.STRAPI_URL}/showcases?hostname=${hostname}`,
+      `${process.env.STRAPI_URL}/showcases?hostname=${hostname}&token=${process.env.STRAPI_TOKEN}`,
       {
         method: 'get'
       }
@@ -158,7 +158,7 @@ exports.handler = async function (event, _context) {
     }
 
     const saveShowcase = await fetchStrapi(
-      `${process.env.STRAPI_URL}/showcases`,
+      `${process.env.STRAPI_URL}/showcases?token=${process.env.STRAPI_TOKEN}`,
       {
         method: 'post',
         body: JSON.stringify(showcaseData)
@@ -185,10 +185,13 @@ exports.handler = async function (event, _context) {
         isProxyBlocked: err.statusCode === 403
       }
 
-      const insertScan = await fetchStrapi(`${process.env.STRAPI_URL}/scans`, {
-        method: 'post',
-        body: JSON.stringify(scanData)
-      })
+      const insertScan = await fetchStrapi(
+        `${process.env.STRAPI_URL}/scans?token=${process.env.STRAPI_TOKEN}`,
+        {
+          method: 'post',
+          body: JSON.stringify(scanData)
+        }
+      )
     }
 
     return {
