@@ -33,8 +33,8 @@ export default {
         opacity: 1,
         scale: 1,
         y: 0,
-        duration: 0.5,
-        delay: 1,
+        duration: 0.45,
+        delay: 0.8,
         ease: 'power4.inOut'
       }
     )
@@ -49,8 +49,8 @@ export default {
         opacity: 1,
         scale: 1,
         y: 0,
-        duration: 0.5,
-        delay: 1.25,
+        duration: 0.45,
+        delay: 0.9,
         ease: 'power4.inOut'
       }
     )

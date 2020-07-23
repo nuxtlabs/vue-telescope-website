@@ -75,7 +75,7 @@ export default {
         opacity: 1,
         scale: 1,
         y: 0,
-        duration: 0.5,
+        duration: 0.45,
         ease: 'power4.inOut'
       }
     )
@@ -90,8 +90,8 @@ export default {
         opacity: 1,
         scale: 1,
         y: 0,
-        duration: 0.25,
-        delay: 1,
+        duration: 0.45,
+        // delay: 1,
         ease: 'power4.inOut'
       }
     )
@@ -106,8 +106,8 @@ export default {
         opacity: 1,
         scale: 1,
         y: 0,
-        duration: 0.25,
-        delay: 1.25,
+        duration: 0.45,
+        // delay: 1.25,
         ease: 'power4.inOut'
       }
     )
@@ -116,7 +116,7 @@ export default {
 </script>
 
 <style scoped>
-.logo {
+/* .logo {
   opacity: 0;
   animation: scale 450ms theme('transitionTimingFunction.ease-out-material')
     forwards;
@@ -130,5 +130,5 @@ export default {
   opacity: 0;
   animation: scale 150ms theme('transitionTimingFunction.ease-out-material')
     1250ms forwards;
-}
+} */
 </style>
