@@ -4,8 +4,8 @@
       ref="heading"
       class="inline-flex flex-col items-center text-center text-two leading-two md:text-one md:leading-one font-bold-body-weight -tracking-4 mb-12"
     >
-      <div class="opacity-0">Discover</div>
-      <div class="opacity-0">websites made with</div>
+      <div class="opacity-0">Discover websites</div>
+      <div class="opacity-0">made with</div>
       <div class="opacity-0 w-full -z-1">
         <HeroPropositionBrandsRotator />
       </div>
@@ -32,13 +32,14 @@ export default {
       this.$refs.heading.children,
       {
         opacity: 0,
-        scale: 0.8
+        scale: 0.75
       },
       {
         opacity: 1,
         scale: 1,
         stagger: 0.1,
-        duration: 0.3
+        duration: 0.3,
+        ease: 'power4.inOut'
       }
     )
     const splitted = new this.$SplitText(this.$refs.subheading, {
@@ -51,14 +52,15 @@ export default {
       splitted.lines,
       {
         opacity: 0,
-        scale: 0.8
+        scale: 0.75
       },
       {
         opacity: 1,
         scale: 1,
-        stagger: 0.1,
+        stagger: 0.05,
         duration: 0.3,
-        delay: 0.5
+        delay: 0.5,
+        ease: 'power4.inOut'
       }
     )
   }

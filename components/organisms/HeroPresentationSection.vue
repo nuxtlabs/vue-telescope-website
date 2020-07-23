@@ -1,9 +1,13 @@
 <template>
   <section id="hero-presentation" class="flex flex-col items-center py-12">
     <div class="max-w-readable-line-length m-auto mb-12">
-      <LookupInput class="" />
+      <LookupInput ref="lookup-input" class="opacity-0" />
     </div>
-    <HeroPresentationSlider :featured="featured" class="my-12" />
+    <HeroPresentationSlider
+      ref="hero-presentation-slider"
+      :featured="featured"
+      class="my-12 opacity-0"
+    />
   </section>
 </template>
 
@@ -14,14 +18,50 @@ export default {
       type: Array,
       default: () => []
     }
+  },
+  mounted() {
+    const lookupInput = this.$refs['lookup-input'].$el
+    const heroPresentationSlider = this.$refs['hero-presentation-slider'].$el
+    this.$gsap.fromTo(
+      lookupInput,
+      {
+        opacity: 0,
+        scale: 0.75,
+        y: '15px'
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 0.5,
+        delay: 1,
+        ease: 'power4.inOut'
+      }
+    )
+    this.$gsap.fromTo(
+      heroPresentationSlider,
+      {
+        opacity: 0,
+        scale: 0.75,
+        y: '15px'
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 0.5,
+        delay: 1.25,
+        ease: 'power4.inOut'
+      }
+    )
   }
 }
 </script>
 
 <style scoped>
-#hero-presentation {
+/* #hero-presentation {
   opacity: 0;
   animation: scale 450ms theme('transitionTimingFunction.ease-out-material')
     1250ms forwards;
-}
+} */
 </style>

@@ -69,13 +69,13 @@ export default {
       {
         opacity: 0,
         scale: 0.75,
-        y: '15px'
+        y: '-15px'
       },
       {
         opacity: 1,
         scale: 1,
         y: 0,
-        duration: 0.45,
+        duration: 0.5,
         ease: 'power4.inOut'
       }
     )
@@ -84,13 +84,13 @@ export default {
       {
         opacity: 0,
         scale: 0.75,
-        y: '15px'
+        y: '-15px'
       },
       {
         opacity: 1,
         scale: 1,
         y: 0,
-        duration: 0.15,
+        duration: 0.25,
         delay: 1,
         ease: 'power4.inOut'
       }
@@ -100,13 +100,13 @@ export default {
       {
         opacity: 0,
         scale: 0.75,
-        y: '15px'
+        y: '-15px'
       },
       {
         opacity: 1,
         scale: 1,
         y: 0,
-        duration: 0.15,
+        duration: 0.25,
         delay: 1.25,
         ease: 'power4.inOut'
       }
