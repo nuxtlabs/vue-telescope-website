@@ -47,7 +47,6 @@
 </template>
 
 <script>
-// import { SplitText } from 'gsap/SplitText'
 const sliderMatrix = [
   [0, 1, 2, 3, 4],
   [1, 2, 3, 4, 0],
@@ -74,7 +73,6 @@ export default {
   data() {
     return {
       activeShowcases: []
-      // splitText: null
     }
   },
   watch: {
@@ -121,7 +119,6 @@ export default {
     }
   },
   created() {
-    // this.splitText = new this.$SplitText()
     this.activeShowcases.push(this.featured[this.staticIndex])
   },
   mounted() {

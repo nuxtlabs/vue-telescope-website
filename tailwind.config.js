@@ -212,7 +212,9 @@ module.exports = {
         '13': '3.25rem',
         '14': '3.5rem',
         '18': '4.5rem',
-        '28': '7rem'
+        '28': '7rem',
+        '96': '24rem',
+        '128': '32rem'
       },
       borderRadius: {
         xl: '0.875rem',
@@ -228,6 +230,9 @@ module.exports = {
       },
       zIndex: {
         '-1': '-1'
+      },
+      backgroundSize: {
+        '100': '100%'
       }
     }
   },
