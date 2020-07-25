@@ -5,7 +5,7 @@
       class="relative z-20 w-auto lg:w-1/4 flex flex-col items-center lg:items-start mx-4 mb-2"
     >
       <h2
-        class="text-center lg:text-left text-five leading-five font-display-weight my-4 lg:my-8 lg:ml-4"
+        class="text-center lg:text-left text-five leading-five font-display-weight my-4 lg:mb-8 lg:mt-24 lg:ml-4"
       >
         Must-have tool for any Vue.js developer
       </h2>
