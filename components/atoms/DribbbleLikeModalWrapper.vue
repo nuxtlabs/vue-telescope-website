@@ -68,7 +68,7 @@ export default {
         y: '100%',
         // opacity: 0,
         duration: 1,
-        ease: 'power4.inOut',
+        ease: 'expo.out',
         clearProps: true,
         onComplete: () => {
           this.$refs['hack-safari'].style.height = '100%'
