@@ -111,7 +111,7 @@ export default {
       image.src = `https://icons.vuetelemetry.com/${this.activeBrands[0].imgPath}`
 
       image.addEventListener('load', () => {
-        Array.from(el.children[1].children).map((c) => {
+        Array.from(el.children[1].children).map((c, i) => {
           this.$gsap.to(c, {
             x: `${this.$gsap.utils.random(-50, 50)}vw`,
             y: `${this.$gsap.utils.random(-50, 50)}vh`,
@@ -119,6 +119,7 @@ export default {
             rotation: this.$gsap.utils.random(-20, 20),
             opacity: this.$gsap.utils.random(0.05, 0.4),
             duration: 0.75,
+            delay: 0.01 * i,
             ease: 'power4.inOut'
           })
         })

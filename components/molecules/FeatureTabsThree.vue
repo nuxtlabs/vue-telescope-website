@@ -1,7 +1,7 @@
 <template>
   <div
     ref="background"
-    class="absolute top-0 left-0 w-full h-full flex flex-col"
+    class="absolute top-0 left-0 w-full h-full flex flex-col rounded-xl"
   >
     <div class="flex p-4 pb-0">
       <div
@@ -28,7 +28,10 @@
         </svg>
       </div>
 
-      <h3 ref="text" class="flex-1 relative p-4 sm:ml-24">
+      <h3
+        ref="text"
+        class="flex-1 relative p-4 sm:ml-24 text-eight leading-eight"
+      >
         {{ description }}
       </h3>
     </div>

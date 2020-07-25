@@ -78,7 +78,9 @@
           v-else-if="!showcases.length"
           class="flex flex-wrap min-h-full items-center justify-center"
         >
-          <div class="text-seven leading-seven mb-12">
+          <div
+            class="text-base leading-base md:text-seven md:leading-seven mb-12 text-center"
+          >
             No showcases found. Please
             <span
               class="text-primary-500 cursor-pointer font-bold-body-weight"

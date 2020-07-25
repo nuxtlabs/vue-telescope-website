@@ -1,7 +1,7 @@
 <template>
   <div class="overflow-hidden">
     <HeroPropositionSection
-      class="mt-56 max-w-readable-line-length px-4 mx-auto"
+      class="mt-32 md:mt-40 max-w-readable-line-length px-4 mx-auto"
     />
     <HeroPresentationSection :featured="featured" class="" />
     <FeaturesSection class="px-4 max-w-container-max-width m-auto" />

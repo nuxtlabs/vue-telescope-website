@@ -1,7 +1,9 @@
 <template>
   <div class="tabs-wrapper-molecule flex flex-col lg:flex-row">
     <!-- <pre>{{ activeTabs }}</pre> -->
-    <div class="w-auto lg:w-1/4 flex flex-col items-center lg:items-start mx-4">
+    <div
+      class="relative z-20 w-auto lg:w-1/4 flex flex-col items-center lg:items-start mx-4 mb-2"
+    >
       <h2
         class="text-center lg:text-left text-five leading-five font-display-weight my-4 lg:my-8 lg:ml-4"
       >
@@ -33,7 +35,7 @@
 
     <transition-group
       tag="div"
-      class="w-auto lg:w-3/4 h-128 relative mx-2 rounded-xl overflow-visible"
+      class="w-auto lg:w-3/4 h-128 relative mx-2 overflow-visible"
     >
       <component
         :is="activeTab.component"
@@ -97,7 +99,7 @@ export default {
       activeTabs: [tabs[0]],
       tabs,
       autoInterval: null,
-      timeout: 500000
+      timeout: 5000
     }
   },
   mounted() {

@@ -13,7 +13,7 @@
 
     <p
       ref="subheading"
-      class="opacity-0 text-center text-seven leading-seven text-grey-700 mb-12 max-w-2xl"
+      class="opacity-0 text-center text-eight leading-eight md:text-seven md:leading-seven text-grey-700 mb-12 max-w-2xl"
     >
       Reveal the Vue plugins and technology stack powering any website or
       explore our database of 4526 websites.
