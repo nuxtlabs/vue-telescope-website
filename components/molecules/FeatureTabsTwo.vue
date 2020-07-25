@@ -3,8 +3,10 @@
     ref="background"
     class="absolute top-0 left-0 w-full h-full flex flex-col"
   >
-    <div class="relative flex p-4 pb-0">
-      <div class="absolute top-0 left-0 w-48 p-4 -ml-16 -mt-12">
+    <div class="flex p-4 pb-0">
+      <div
+        class="absolute bottom-0 left-1/2 z-10 sm:top-0 sm:left-0 transform -translate-x-1/2 translate-y-1/2 sm:translate-x-0 sm:translate-y-0 w-48 p-4 sm:-ml-16 sm:-mt-12"
+      >
         <svg
           class="w-full overflow-visible"
           viewBox="0 0 85 85"
@@ -62,7 +64,7 @@
     <div class="relative w-full h-full overflow-hidden">
       <div
         ref="image"
-        class="absolute top-0 left-0 w-full h-full bg-100 bg-no-repeat bg-center sm:bg-top"
+        class="absolute top-0 left-0 w-full h-full bg-100 bg-no-repeat bg-top"
         style="background-image: url('/images/explore.png');"
       ></div>
     </div>

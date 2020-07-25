@@ -233,6 +233,9 @@ module.exports = {
       },
       backgroundSize: {
         '100': '100%'
+      },
+      inset: {
+        '1/2': '50%'
       }
     }
   },
