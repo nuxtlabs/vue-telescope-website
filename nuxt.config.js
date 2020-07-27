@@ -20,6 +20,9 @@ export default {
       }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    script: [
+      process.env.NODE_ENV === 'production' ? { src: 'https://cdn.usefathom.com/script.js', spa: 'auto', site: 'RLHRHRXN', defer: true } : undefined
+    ],
     bodyAttrs: {
       class: [
         'font-body antialiased overflow-x-hidden overflow-y-scroll text-grey-900 min-w-body'
@@ -54,9 +57,7 @@ export default {
     // Doc: https://strapi.nuxtjs.org
     '@nuxtjs/strapi',
     // Doc: https://github.com/nuxt-community/proxy-module
-    '@nuxtjs/proxy',
-    // Doc: https://github.com/pimlie/nuxt-matomo
-    ['nuxt-matomo', { matomoUrl: '//vuetelemetry.matomo.cloud/', siteId: 1 }]
+    '@nuxtjs/proxy'
   ],
   proxy: {
     '/api/analyze': {

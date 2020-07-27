@@ -39,7 +39,6 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-nuxt": ">=1.0.0",
     "eslint-plugin-prettier": "^3.1.3",
-    "nuxt-matomo": "^1.2.3",
     "prettier": "^2.0.5",
     "puppeteer": "^3.0.4"
   }
