@@ -1,5 +1,10 @@
 <template>
-  <AppButton :size="size" appearance="primary" :class="[isMobile && 'hidden']">
+  <AppButton
+    :size="size"
+    :class="[isMobile && 'hidden']"
+    appearance="primary"
+    @click.native="trackGoal"
+  >
     {{ buttonText }}
   </AppButton>
 </template>
@@ -27,8 +32,11 @@ export default {
         return 'Install Extension'
       }
     }
+  },
+  methods: {
+    trackGoal() {
+      window.fathom && window.fathom.trackGoal('13CDY7TC', 0)
+    }
   }
 }
 </script>
-
-<style></style>
