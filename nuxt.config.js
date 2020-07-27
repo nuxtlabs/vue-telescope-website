@@ -21,7 +21,7 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     script: [
-      process.env.NODE_ENV === 'production' ? { src: 'https://cdn.usefathom.com/script.js', spa: 'auto', site: 'RLHRHRXN', defer: true } : undefined
+      process.env.NODE_ENV === 'production' ? { src: 'https://cdn.usefathom.com/script.js', spa: 'auto', site: 'RLHRHRXN', defer: true } : {}
     ],
     bodyAttrs: {
       class: [
