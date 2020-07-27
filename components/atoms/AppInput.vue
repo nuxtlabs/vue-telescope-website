@@ -2,7 +2,7 @@
   <input
     :class="[sizing.height, sizing.fontSize, sizing.rounded, sizing.padding]"
     class="w-full border-2 bg-grey-200 border-transparent font-bold-body-weight focus:border-grey-500 focus:bg-grey-50 focus:outline-none"
-    type="text"
+    :type="type"
     :value="value"
     @input="$emit('input', $event.target.value)"
   />
@@ -14,6 +14,10 @@ export default {
     value: {
       type: String,
       default: ''
+    },
+    type: {
+      type: String,
+      default: 'text'
     },
     size: {
       type: String,

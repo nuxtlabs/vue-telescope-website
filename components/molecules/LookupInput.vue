@@ -15,6 +15,7 @@
     </span>
     <AppInput
       ref="input"
+      type="url"
       :size="size"
       class="rounded-r-none border-r-0"
       :class="[protocolPadding]"
