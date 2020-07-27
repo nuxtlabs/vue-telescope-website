@@ -5983,11 +5983,6 @@ nuxt-edge@^2.14.0-26582020.6ab65fbf:
     "@nuxt/telemetry" "^1.2.2"
     "@nuxt/webpack-edge" "2.14.0-26582020.6ab65fbf"
 
-nuxt-matomo@^1.2.3:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/nuxt-matomo/-/nuxt-matomo-1.2.3.tgz#9814b19b8898872d7d4535ac472097bf021e8edc"
-  integrity sha512-jaA8u5XjBi1KJ/MAymzMexNvJO6meoMLMRH4M7AsVpnw4F5Dm+ahsvp2xKaFqtcKtknVi6x/n2IBd8FqVWSXBw==
-
 object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
