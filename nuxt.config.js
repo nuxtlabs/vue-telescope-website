@@ -1,4 +1,5 @@
 import 'dotenv/config'
+import { favicons } from './meta-tags/icons'
 
 export default {
   mode: 'universal',
@@ -19,9 +20,16 @@ export default {
           'With Vue Telemetry, reveal the Vue technologies used on any website'
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [...favicons],
     script: [
-      process.env.NODE_ENV === 'production' ? { src: 'https://cdn.usefathom.com/script.js', spa: 'auto', site: 'RLHRHRXN', defer: true } : {}
+      process.env.NODE_ENV === 'production'
+        ? {
+            src: 'https://cdn.usefathom.com/script.js',
+            spa: 'auto',
+            site: 'RLHRHRXN',
+            defer: true
+          }
+        : {}
     ],
     bodyAttrs: {
       class: [
