@@ -55,6 +55,7 @@ export default {
     },
     fallback: '404.html' // For Netlify
   },
+  modules: ['@nuxtjs/pwa'],
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
@@ -65,8 +66,7 @@ export default {
     // Doc: https://strapi.nuxtjs.org
     '@nuxtjs/strapi',
     // Doc: https://github.com/nuxt-community/proxy-module
-    '@nuxtjs/proxy',
-    '@nuxtjs/pwa'
+    '@nuxtjs/proxy'
   ],
   pwa: {
     manifest: {
