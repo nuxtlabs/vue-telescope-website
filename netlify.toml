@@ -26,4 +26,4 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Basic-Auth = "nuxt-admin:vue-telemetry-protected-area"
+    Basic-Auth = "vue:telemetry"
