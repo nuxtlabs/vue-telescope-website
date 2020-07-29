@@ -37,7 +37,7 @@ export default {
     },
     linkToExtention() {
       if (this.browser === 'Chrome') {
-        return 'https://github.com/nuxt-company/vue-telemetry-extensions#chrome'
+        return 'https://chrome.google.com/webstore/detail/vue-telemetry/neaebjphlfplgdhedjdhcnpjkndddbpd'
       } else if (this.browser === 'Firefox') {
         return 'https://addons.mozilla.org/en-GB/firefox/addon/vue-telemetry/'
       } else {

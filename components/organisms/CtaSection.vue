@@ -12,7 +12,7 @@
         <div class="flex">
           <AppButton
             tag="a"
-            href="https://github.com/nuxt-company/vue-telemetry-extensions#chrome"
+            href="https://chrome.google.com/webstore/detail/vue-telemetry/neaebjphlfplgdhedjdhcnpjkndddbpd"
             appearance="transparent"
             outlined
             size="small"

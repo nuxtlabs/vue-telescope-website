@@ -62,7 +62,8 @@ export default ({
       //       content: 'noindex'
       //     }
       //   : {},
-      // because of SPA fallback had to use invalid content
+      // because of SPA fallback had to use 'all' directive
+      // https://developers.google.com/search/reference/robots_meta_tag
       {
         hid: 'robots',
         name: 'robots',
