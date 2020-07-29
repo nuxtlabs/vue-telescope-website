@@ -31,6 +31,12 @@ export default {
             site: 'RLHRHRXN',
             defer: true
           }
+        : {},
+      process.env.NODE_ENV === 'production'
+        ? {
+            src: 'https://feedback.fish/ff.js?pid=dd580ca404b5b7',
+            defer: true
+          }
         : {}
     ],
     bodyAttrs: {
