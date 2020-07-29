@@ -1,0 +1,23 @@
+{
+  "domain": "vuetelemetry.com",
+  "slug": "vuetelemetry-com",
+  "name": "Vue Telemetry",
+  "title": "Main title",
+  "description": "Main description",
+  "shortName": "VT",
+  "social": {
+    "facebook": null,
+    "twitter": "@vuetelemetry"
+  },
+  "appearance": {
+    "color": {
+      "primary": "#0BDCA0",
+      "secondary": "#FFFFFF"
+    }
+  },
+  "seo": {
+    "noindex": false,
+    "title": "SEO blah",
+    "description": "SEO blah blah blah"
+  }
+}

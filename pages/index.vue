@@ -11,7 +11,7 @@
 </template>
 
 <script>
-// import { fetchStrapi } from '@/functions/utils'
+import frontMatter from '@/utils/front-matter'
 
 export default {
   async fetch() {
@@ -28,10 +28,10 @@ export default {
     }
   },
   fetchOnServer: false,
-  methods: {
-    // handleClick(slug) {
-    //   this.$router.push(`/explore?preview=${slug}`)
-    // }
+  head() {
+    return frontMatter({
+      path: this.$route.path
+    })
   }
 }
 </script>

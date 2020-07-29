@@ -10,6 +10,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import frontMatter from '@/utils/front-matter'
 
 export default {
   // scrollToTop: true,
@@ -25,6 +26,11 @@ export default {
       }, 50)
     }
     next()
+  },
+  head() {
+    return frontMatter({
+      path: this.$route.path
+    })
   }
 }
 </script>

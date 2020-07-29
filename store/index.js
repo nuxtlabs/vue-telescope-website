@@ -1,6 +1,10 @@
 import Vue from 'vue'
 
 export const state = () => ({
+  baseUrl:
+    (process.env.CONTEXT === 'production'
+      ? process.env.URL
+      : process.env.DEPLOY_PRIME_URL) || 'http://localhost:3000',
   isReady: false,
   twitterLike: false,
   frameworks: [],
