@@ -10,7 +10,8 @@ export default {
   loading: false,
   head: {
     ...frontMatter({
-      path: ''
+      path: '',
+      noindex: true
     }),
     bodyAttrs: {
       class: [

@@ -30,7 +30,8 @@ export default {
   head() {
     return frontMatter({
       path: this.$route.path,
-      title: 'Explore Vue.js showcases'
+      title: 'Explore Vue.js showcases',
+      noindex: false
     })
   }
 }

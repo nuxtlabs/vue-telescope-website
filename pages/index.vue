@@ -30,7 +30,8 @@ export default {
   fetchOnServer: false,
   head() {
     return frontMatter({
-      path: this.$route.path
+      path: this.$route.path,
+      noindex: false
     })
   }
 }
