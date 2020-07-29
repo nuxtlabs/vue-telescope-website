@@ -87,7 +87,7 @@ export default {
   head() {
     return frontMatter({
       path: this.$route.path,
-      title: (this.website && this.website.title) || false,
+      title: (this.website && this.website.title) || 'Loading...',
       noindex: true
     })
   }
