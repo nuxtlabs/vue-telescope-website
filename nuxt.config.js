@@ -11,7 +11,7 @@ export default {
   head: {
     ...frontMatter({
       path: '',
-      noindex: true
+      noindex: true // fallback noindex for SPA fallback
     }),
     bodyAttrs: {
       class: [

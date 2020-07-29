@@ -108,10 +108,10 @@ export default ({
       //       defer: true
       //     }
       //   : {},
-      {
-        src: 'https://feedback.fish/ff.js?pid=dd580ca404b5b7',
-        defer: true
-      },
+      // {
+      //   src: 'https://feedback.fish/ff.js?pid=dd580ca404b5b7',
+      //   defer: true
+      // },
       {
         hid: 'website',
         type: 'application/ld+json',
