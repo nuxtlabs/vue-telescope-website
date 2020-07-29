@@ -1,5 +1,6 @@
 import 'dotenv/config'
 import { favicons } from './meta-tags/icons'
+import msApple from './meta-tags/ms-apple'
 
 export default {
   mode: 'universal',
@@ -18,7 +19,8 @@ export default {
         name: 'description',
         content:
           'Reveal the Vue plugins and technology stack powering any website'
-      }
+      },
+      ...msApple({ brand: 'Vue Telemetry' })
     ],
     link: [...favicons],
     script: [
@@ -55,7 +57,6 @@ export default {
     },
     fallback: '404.html' // For Netlify
   },
-  modules: ['@nuxtjs/pwa'],
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
@@ -67,25 +68,27 @@ export default {
     '@nuxtjs/strapi',
     // Doc: https://github.com/nuxt-community/proxy-module
     '@nuxtjs/proxy'
+    // '@nuxtjs/pwa'
   ],
-  pwa: {
-    manifest: {
-      name: 'Vue Telemetry',
-      short_name: 'VT',
-      description: 'Discover websites made with Vue.js',
-      background_color: '#ffffff',
-      theme_color: '#0BDCA0'
-    },
-    meta: {
-      ogHost: 'https://vuetelemetry.com',
-      ogImage: {
-        path: '/og-image.jpg'
-      },
-      twitterCard: 'summary_large_image',
-      twitterSite: '@vuetelemetry'
-    },
-    icon: true
-  },
+  // pwa: {
+  //   manifest: {
+  //     name: 'Vue Telemetry',
+  //     short_name: 'VT',
+  //     description: 'Discover websites made with Vue.js',
+  //     background_color: '#ffffff',
+  //     theme_color: '#0BDCA0'
+  //   },
+  //   // meta: false,
+  //   // meta: {
+  //   //   ogHost: 'https://vuetelemetry.com',
+  //   //   ogImage: {
+  //   //     path: '/og-image.jpg'
+  //   //   },
+  //   //   twitterCard: 'summary_large_image',
+  //   //   twitterSite: '@vuetelemetry'
+  //   // },
+  //   icon: true
+  // },
   proxy: {
     '/api/analyze': {
       target: 'http://localhost:8888'
