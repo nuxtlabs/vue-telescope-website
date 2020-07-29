@@ -61,7 +61,10 @@ export default {
         stagger: 0.05,
         duration: 0.45,
         delay: 0.5,
-        ease: 'power4.inOut'
+        ease: 'power4.inOut',
+        onComplete: () => {
+          splitted.revert()
+        }
       }
     )
 
