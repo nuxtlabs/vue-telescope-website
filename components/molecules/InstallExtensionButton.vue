@@ -1,7 +1,10 @@
 <template>
   <AppButton
+    tag="a"
+    :href="linkToExtention"
     :size="size"
     :class="[isMobile && 'hidden']"
+    class="cursor-pointer"
     appearance="primary"
     @click.native="trackGoal"
   >
@@ -30,6 +33,15 @@ export default {
         return 'Add to Firefox'
       } else {
         return 'Install Extension'
+      }
+    },
+    linkToExtention() {
+      if (this.browser === 'Chrome') {
+        return 'https://github.com/nuxt-company/vue-telemetry-extensions#chrome'
+      } else if (this.browser === 'Firefox') {
+        return 'https://addons.mozilla.org/en-GB/firefox/addon/vue-telemetry/'
+      } else {
+        return 'https://vuetelemetry.com/extentions'
       }
     }
   },

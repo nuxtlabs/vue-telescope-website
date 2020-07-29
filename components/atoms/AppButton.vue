@@ -1,6 +1,7 @@
 <template>
   <component
     :is="tag"
+    :href="href"
     :class="[
       sizing.height,
       sizing.fontSize,
@@ -35,6 +36,10 @@ export default {
     outlined: {
       type: Boolean,
       default: false
+    },
+    href: {
+      type: String,
+      default: null
     }
   },
   computed: {

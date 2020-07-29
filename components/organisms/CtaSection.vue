@@ -11,6 +11,8 @@
         <p class="text-center mb-1 text-base leading-base">Available on:</p>
         <div class="flex">
           <AppButton
+            tag="a"
+            href="https://github.com/nuxt-company/vue-telemetry-extensions#chrome"
             appearance="transparent"
             outlined
             size="small"
@@ -20,6 +22,8 @@
             <span>Chrome</span>
           </AppButton>
           <AppButton
+            tag="a"
+            href="https://addons.mozilla.org/en-GB/firefox/addon/vue-telemetry"
             appearance="transparent"
             outlined
             size="small"
