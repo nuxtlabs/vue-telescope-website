@@ -3,7 +3,8 @@
     <div
       class="absolute top-0 left-0 -mt-10 font-bold-body-weight h-10 flex items-center ml-4"
     >
-      <span class="">{{ animatedNumber }}</span>
+      <AnimatedNumber :to="totalCount" :from="0" />
+
       <span class="font-body-weight text-sm">&nbsp;websites found</span>
     </div>
     <transition-group name="scale" appear>
@@ -75,29 +76,11 @@ export default {
       default: 0
     }
   },
-  data() {
-    return {
-      tweenedCount: 0
-    }
-  },
   computed: {
     ...mapState({
       uis: (state) => state.uis,
       frameworks: (state) => state.frameworks
-    }),
-    animatedNumber() {
-      return this.tweenedCount.toFixed(0)
-    }
-  },
-  watch: {
-    totalCount: {
-      immediate: true,
-      handler(newValue) {
-        if (process.browser) {
-          this.$gsap.to(this.$data, { duration: 0.5, tweenedCount: newValue })
-        }
-      }
-    }
+    })
   },
   methods: {
     title(key) {

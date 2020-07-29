@@ -7,6 +7,7 @@ export const state = () => ({
       : process.env.DEPLOY_PRIME_URL) || 'http://localhost:3000',
   isReady: false,
   twitterLike: false,
+  showcasesCount: 0,
   frameworks: [],
   uis: [],
   plugins: [],
@@ -58,6 +59,9 @@ export const mutations = {
   },
   SET_MODAL(state, isModal) {
     state.isModal = isModal
+  },
+  setShowcasesCount(state, count) {
+    state.showcasesCount = count
   }
 }
 
@@ -86,6 +90,8 @@ export const actions = {
         commit(`SET_${entity.toUpperCase()}`, technologies)
       })
     )
+    const showcasesCount = await this.$strapi.find('showcases/count')
+    commit('setShowcasesCount', showcasesCount)
     commit('isReady')
   }
 }

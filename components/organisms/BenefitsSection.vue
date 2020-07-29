@@ -45,10 +45,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
-  data() {
-    return {
-      benefits: [
+  computed: {
+    ...mapState({
+      showcasesCount: (state) => state.showcasesCount
+    }),
+    benefits() {
+      return [
         {
           id: 1,
           title: 'Free To Use',
@@ -113,7 +118,7 @@ export default {
           title: 'Huge Database',
           description:
             // eslint-disable-next-line
-            "Wonder what other sites are using Vue.js and it's ecosystem? You can use our database, that already has 4000 websites and counting!",
+            `Wonder what other sites are using Vue.js and it's ecosystem? You can use our database, that already has ${this.showcasesCount} websites and counting!`,
           links: [
             {
               type: 'internal',
