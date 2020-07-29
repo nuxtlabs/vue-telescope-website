@@ -1,11 +1,11 @@
-import { favicons, appleIcons } from '@/utils/meta-tags/icons'
-import themeTags from '@/utils/meta-tags/theme'
-import msAppleTags from '@/utils/meta-tags/ms-apple'
-import baseOpenGraph from '@/utils/meta-tags/open-graph/base'
-import imageOpenGraph from '@/utils/meta-tags/open-graph/image'
-import websiteSchema from '@/utils/schema-org/website'
-import webpageSchema from '@/utils/schema-org/webpage'
-const config = require('@/config.json')
+import { favicons, appleIcons } from './meta-tags/icons'
+import themeTags from './meta-tags/theme'
+import msAppleTags from './meta-tags/ms-apple'
+import baseOpenGraph from './meta-tags/open-graph/base'
+import imageOpenGraph from './meta-tags/open-graph/image'
+import websiteSchema from './schema-org/website'
+import webpageSchema from './schema-org/webpage'
+const config = require('../config.json')
 const baseUrl =
   (process.env.CONTEXT === 'production'
     ? process.env.URL
@@ -87,6 +87,20 @@ export default ({
       ...appleIcons
     ],
     script: [
+      process.env.NODE_ENV === 'production'
+        ? {
+            src: 'https://cdn.usefathom.com/script.js',
+            spa: 'auto',
+            site: 'RLHRHRXN',
+            defer: true
+          }
+        : {},
+      process.env.NODE_ENV === 'production'
+        ? {
+            src: 'https://feedback.fish/ff.js?pid=dd580ca404b5b7',
+            defer: true
+          }
+        : {},
       {
         hid: 'website',
         type: 'application/ld+json',

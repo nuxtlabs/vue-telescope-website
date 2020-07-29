@@ -1,4 +1,5 @@
 import 'dotenv/config'
+import frontMatter from './utils/front-matter'
 
 export default {
   mode: 'universal',
@@ -8,22 +9,9 @@ export default {
   // Disable loading bar
   loading: false,
   head: {
-    script: [
-      process.env.NODE_ENV === 'production'
-        ? {
-            src: 'https://cdn.usefathom.com/script.js',
-            spa: 'auto',
-            site: 'RLHRHRXN',
-            defer: true
-          }
-        : {},
-      process.env.NODE_ENV === 'production'
-        ? {
-            src: 'https://feedback.fish/ff.js?pid=dd580ca404b5b7',
-            defer: true
-          }
-        : {}
-    ],
+    ...frontMatter({
+      path: ''
+    }),
     bodyAttrs: {
       class: [
         'font-body antialiased overflow-x-hidden overflow-y-scroll text-grey-900 min-w-body'
