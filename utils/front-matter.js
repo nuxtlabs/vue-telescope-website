@@ -102,12 +102,16 @@ export default ({
             defer: true
           }
         : {},
-      process.env.NODE_ENV === 'production'
-        ? {
-            src: 'https://feedback.fish/ff.js?pid=dd580ca404b5b7',
-            defer: true
-          }
-        : {},
+      // process.env.NODE_ENV === 'production'
+      //   ? {
+      //       src: 'https://feedback.fish/ff.js?pid=dd580ca404b5b7',
+      //       defer: true
+      //     }
+      //   : {},
+      {
+        src: 'https://feedback.fish/ff.js?pid=dd580ca404b5b7',
+        defer: true
+      },
       {
         hid: 'website',
         type: 'application/ld+json',
