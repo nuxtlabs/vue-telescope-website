@@ -2,12 +2,12 @@
   "domain": "vuetelemetry.com",
   "slug": "vuetelemetry-com",
   "name": "Vue Telemetry",
-  "title": "Main title",
-  "description": "Main description",
+  "title": "Discover websites made with Vue.js",
+  "description": "Reveal the Vue plugins and technology stack powering any website",
   "shortName": "VT",
   "social": {
     "facebook": null,
-    "twitter": "@vuetelemetry"
+    "twitter": "vuetelemetry"
   },
   "appearance": {
     "color": {
@@ -17,7 +17,7 @@
   },
   "seo": {
     "noindex": false,
-    "title": "SEO blah",
-    "description": "SEO blah blah blah"
+    "title": " Discover websites made with Vue.js",
+    "description": "Reveal the Vue plugins and technology stack powering any website"
   }
 }

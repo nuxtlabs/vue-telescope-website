@@ -1,3 +1,4 @@
+import { favicons, appleIcons } from '@/utils/meta-tags/icons'
 import themeTags from '@/utils/meta-tags/theme'
 import msAppleTags from '@/utils/meta-tags/ms-apple'
 import baseOpenGraph from '@/utils/meta-tags/open-graph/base'
@@ -41,10 +42,14 @@ export default ({
       lang,
       prefix: 'og: http://ogp.me/ns#'
     },
-    title: canonical === '' ? name : `${title} | ${name}`,
+    title: canonical === '' ? name : `${title || config.title} | ${name}`,
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { hid: 'charset', charset: 'utf-8' },
+      {
+        hid: 'viewport',
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1'
+      },
       {
         hid: 'description',
         name: 'description',
@@ -67,16 +72,20 @@ export default ({
         name,
         baseUrl,
         canonical,
-        title,
+        title: title || config.title,
         description: description || seo.description,
         social
       }),
       ...imageOpenGraph({
         image: image || `${baseUrl}/branding/og-image.jpg`,
-        alt: title
+        alt: title || config.title
       })
     ],
-    link: [{ rel: 'canonical', href: `${baseUrl + canonical}` }],
+    link: [
+      { hid: 'canonical', rel: 'canonical', href: `${baseUrl + canonical}` },
+      ...favicons,
+      ...appleIcons
+    ],
     script: [
       {
         hid: 'website',
@@ -90,13 +99,14 @@ export default ({
         )
       },
       {
+        hid: 'webpage',
         type: 'application/ld+json',
         innerHTML: JSON.stringify(
           webpageSchema({
             baseUrl,
             canonical: baseUrl + canonical,
-            name: title,
-            headline: title,
+            name: title || config.title,
+            headline: title || config.title,
             description,
             social,
             sitename: name

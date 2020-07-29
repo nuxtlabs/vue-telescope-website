@@ -32,7 +32,7 @@ export default ({
         }
       : {
           image: imageSchema({
-            url: `${baseUrl}/branding/1200x675-logo.png`,
+            url: `${baseUrl}/branding/1200x675-logo.jpg`,
             width: 1200,
             height: 675
           })

@@ -38,7 +38,7 @@
 
 <script>
 import { mapState } from 'vuex'
-// import { fetchStrapi } from '@/functions/utils'
+import frontMatter from '@/utils/front-matter'
 
 export default {
   async fetch() {
@@ -79,16 +79,17 @@ export default {
       twitterLike: (state) => state.twitterLike
     })
   },
-  mounted() {
-    // console.log('mounted', this.$route)
-  },
   activated() {
-    // console.log('ACTIVATED')
-    // console.log('ISSUE:', this.$route)
-
     if (this.$fetchState.timestamp <= Date.now() - 60000) {
       this.$fetch()
     }
+  },
+  head() {
+    return frontMatter({
+      path: this.$route.path,
+      title: (this.website && this.website.title) || false,
+      noindex: true
+    })
   }
 }
 </script>

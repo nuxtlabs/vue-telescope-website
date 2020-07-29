@@ -1,7 +1,4 @@
 import 'dotenv/config'
-import { favicons } from './utils/meta-tags/icons'
-// import msAppleMetaTags from './utils/meta-tags/ms-apple'
-// import themeMetaTags from './utils/meta-tags/theme'
 
 export default {
   mode: 'universal',
@@ -11,20 +8,6 @@ export default {
   // Disable loading bar
   loading: false,
   head: {
-    // title: 'Vue Telemetry | Discover websites made with Vue.js',
-    meta: [
-      // { charset: 'utf-8' },
-      // { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      // {
-      //   hid: 'description',
-      //   name: 'description',
-      //   content:
-      //     'Reveal the Vue plugins and technology stack powering any website'
-      // },
-      // ...msAppleMetaTags({ brand: 'Vue Telemetry' }),
-      // ...themeMetaTags({ primaryColor: '#0BDCA0', secondaryColor: '#FFFFFF' })
-    ],
-    link: [...favicons],
     script: [
       process.env.NODE_ENV === 'production'
         ? {

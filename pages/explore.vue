@@ -29,7 +29,8 @@ export default {
   },
   head() {
     return frontMatter({
-      path: this.$route.path
+      path: this.$route.path,
+      title: 'Explore Vue.js showcases'
     })
   }
 }

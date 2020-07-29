@@ -38,7 +38,7 @@ export default ({
       ? {
           hid: 'twitter:site',
           name: 'twitter:site',
-          content: `${twitter}`
+          content: `@${twitter}`
         }
       : {},
     {
