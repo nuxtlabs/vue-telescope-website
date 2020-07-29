@@ -16,7 +16,6 @@
     }
   },
   "seo": {
-    "noindex": false,
     "title": " Discover websites made with Vue.js",
     "description": "Reveal the Vue plugins and technology stack powering any website"
   }

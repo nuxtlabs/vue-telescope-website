@@ -55,13 +55,19 @@ export default ({
         name: 'description',
         content: description || seo.description
       },
-      noindex
-        ? {
-            hid: 'robots',
-            name: 'robots',
-            content: 'noindex'
-          }
-        : {},
+      // noindex
+      //   ? {
+      //       hid: 'robots',
+      //       name: 'robots',
+      //       content: 'noindex'
+      //     }
+      //   : {},
+      // because of SPA fallback had to use invalid content
+      {
+        hid: 'robots',
+        name: 'robots',
+        content: noindex ? 'noindex' : 'index'
+      },
       ...themeTags({
         primaryColor: color.primary,
         secondaryColor: color.secondary,
