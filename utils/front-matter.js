@@ -66,7 +66,7 @@ export default ({
       {
         hid: 'robots',
         name: 'robots',
-        content: noindex ? 'noindex' : 'index'
+        content: noindex ? 'noindex' : 'all'
       },
       ...themeTags({
         primaryColor: color.primary,
