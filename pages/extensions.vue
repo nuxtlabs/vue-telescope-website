@@ -9,13 +9,27 @@
           class="w-full sm:w-1/2 flex flex-col items-center justify-center mb-8"
         >
           <ChromeColorIcon class="h-32 mb-8" />
-          <InstallExtensionButton size="base" />
+          <AppButton
+            tag="a"
+            href="https://chrome.google.com/webstore/detail/vue-telemetry/neaebjphlfplgdhedjdhcnpjkndddbpd"
+            size="base"
+            appearance="primary"
+          >
+            Add to Chrome
+          </AppButton>
         </div>
         <div
           class="w-full sm:w-1/2 flex flex-col items-center justify-center mb-8"
         >
           <FirefoxColorIcon class="h-32 mb-8" />
-          <InstallExtensionButton size="base" />
+          <AppButton
+            tag="a"
+            href="https://addons.mozilla.org/en-GB/firefox/addon/vue-telemetry"
+            size="base"
+            appearance="primary"
+          >
+            Add to Firefox
+          </AppButton>
         </div>
       </div>
     </div>
