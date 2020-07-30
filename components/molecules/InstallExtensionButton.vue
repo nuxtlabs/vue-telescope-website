@@ -41,7 +41,7 @@ export default {
       } else if (this.browser === 'Firefox') {
         return 'https://addons.mozilla.org/en-GB/firefox/addon/vue-telemetry/'
       } else {
-        return 'https://vuetelemetry.com/extentions'
+        return '/extensions'
       }
     }
   },

@@ -3,7 +3,7 @@ import frontMatter from './utils/front-matter'
 
 export default {
   // BETA
-  mode: 'spa',
+  mode: 'universal',
   loadingIndicator: {
     name: 'cube-grid',
     color: '#0BDCA0',
@@ -56,7 +56,7 @@ export default {
     // Doc: https://strapi.nuxtjs.org
     '@nuxtjs/strapi',
     // Doc: https://github.com/nuxt-community/proxy-module
-    '@nuxtjs/proxy',
+    '@nuxtjs/proxy'
     // '@nuxtjs/pwa',
   ],
   // pwa: {

@@ -74,6 +74,7 @@ exports.handler = async function (event, _context) {
         }
       }
     }
+    console.log('WTF', process.env.STRAPI_TOKEN)
 
     // get showcase by hostname
     const existingShowcase = await fetchStrapi(
