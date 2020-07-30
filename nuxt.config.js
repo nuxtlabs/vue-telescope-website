@@ -2,7 +2,15 @@ import 'dotenv/config'
 import frontMatter from './utils/front-matter'
 
 export default {
-  mode: 'universal',
+  // BETA
+  mode: 'spa',
+  loadingIndicator: {
+    name: 'cube-grid',
+    color: '#0BDCA0',
+    background: 'white'
+  },
+  // END BETA
+  // mode: 'universal',
   target: 'static',
   // Activate components auto discovery
   components: true,
@@ -26,7 +34,8 @@ export default {
     '~/plugins/detect-client.client',
     '~/plugins/twitter-like',
     '~/plugins/intersection-observer.client',
-    '~/plugins/vue-observe-visibility.client'
+    '~/plugins/vue-observe-visibility.client',
+    '~/plugins/password.client'
   ],
   router: {
     prefetchPayloads: false
@@ -47,8 +56,9 @@ export default {
     // Doc: https://strapi.nuxtjs.org
     '@nuxtjs/strapi',
     // Doc: https://github.com/nuxt-community/proxy-module
-    '@nuxtjs/proxy'
-    // '@nuxtjs/pwa'
+    '@nuxtjs/proxy',
+    // '@nuxtjs/pwa',
+    'meta-preview'
   ],
   // pwa: {
   //   manifest: {
@@ -70,6 +80,11 @@ export default {
   //   icon: true
   // },
   proxy: {
+    // BETA
+    '/api/password': {
+      target: 'http://localhost:8888'
+    },
+    // END BETA
     '/api/analyze': {
       target: 'http://localhost:8888'
     }
