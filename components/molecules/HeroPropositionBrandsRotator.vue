@@ -32,6 +32,7 @@
 export default {
   data() {
     return {
+      timeout: 10000,
       rotationInterval: null,
       brands: [
         { slug: 'vue', name: 'Vue.js', active: true, imgPath: '/vue.svg' },
@@ -83,7 +84,7 @@ export default {
 
       el = this.brands[currentEl]
       el.active = true
-    }, 2500)
+    }, this.timeout)
   },
   beforeDestroy() {
     clearInterval(this.rotationInterval)
@@ -151,15 +152,6 @@ export default {
 </script>
 
 <style scoped>
-/* .fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-} */
-
 .brand {
   width: 100%;
   position: absolute;
