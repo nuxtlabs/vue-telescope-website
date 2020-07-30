@@ -58,7 +58,6 @@ export default {
     // Doc: https://github.com/nuxt-community/proxy-module
     '@nuxtjs/proxy',
     // '@nuxtjs/pwa',
-    'meta-preview'
   ],
   // pwa: {
   //   manifest: {
