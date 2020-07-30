@@ -23,12 +23,12 @@
       </div>
       <h3
         ref="headline"
-        class="flex-1 relative p-4 sm:ml-24 text-eight leading-eight"
+        class="h-auto relative p-4 sm:ml-24 text-eight leading-eight"
       >
         {{ description }}
       </h3>
     </div>
-    <div class="relative w-full h-full overflow-hidden">
+    <div class="flex-1 relative w-full h-full overflow-hidden">
       <div
         ref="image"
         class="absolute top-0 left-0 w-full h-full bg-100 bg-no-repeat bg-top"

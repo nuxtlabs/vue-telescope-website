@@ -99,7 +99,7 @@ export default {
       activeTabs: [tabs[0]],
       tabs,
       autoInterval: null,
-      timeout: 500000
+      timeout: 5000
     }
   },
   mounted() {
