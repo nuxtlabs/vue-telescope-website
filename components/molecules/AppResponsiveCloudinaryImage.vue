@@ -8,7 +8,7 @@
     :style="[intristicRatioPadding]"
     class="overflow-hidden relative bg-primary-50"
   >
-    <noscript inline-template>
+    <noscript>
       <img :src="src" :alt="alt" />
     </noscript>
     <img
@@ -88,7 +88,7 @@ export default {
     generateSrc(size, displayRatio = false) {
       return `https://res.cloudinary.com/nuxt/image/upload/w_${size},${
         this.ratio ? `h_${Math.round(size * this.intristicRatio)}` : ''
-      }${this.pixelate ? '/e_pixelate:10' : ''}/vue-telemetry/${
+      },f_auto,q_auto${this.pixelate ? '/e_pixelate:10' : ''}/vue-telemetry/${
         this.cloudinaryId
       }${displayRatio ? ` ${size}w` : ''}`
     },

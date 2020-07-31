@@ -15,7 +15,7 @@
             <img
               ref="showcase"
               class=""
-              :src="`https://res.cloudinary.com/nuxt/image/upload/w_1200,h_900/${showcase.screenshotUrl}`"
+              :src="`https://res.cloudinary.com/nuxt/image/upload/w_1200,h_900,f_auto,q_auto/${showcase.screenshotUrl}`"
               alt=""
             />
           </div>
