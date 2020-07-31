@@ -1,9 +1,10 @@
 <template>
   <div class="overflow-hidden">
     <HeroPropositionSection
-      class="mt-32 md:mt-40 max-w-readable-line-length px-4 mx-auto"
+      class="mt-24 md:mt-32 max-w-readable-line-length px-4 mx-auto"
     />
-    <HeroPresentationSection :featured="featured" class="" />
+    <!-- <HeroPresentationSection :featured="featured" class="" /> -->
+    <HeroPresentationSlider :featured="featured" class="my-24" />
     <FeaturesSection class="px-4 max-w-container-max-width m-auto" />
     <BenefitsSection class="px-4 max-w-container-max-width m-auto" />
     <CtaSection class="" />

@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full relative">
+  <div ref="hero-presentation-slider" class="w-full relative opacity-0">
     <!-- <pre>{{ activeShowcase }}</pre> -->
     <!-- <BrandLogosCloud /> -->
     <div class="w-full relative flex items-center justify-center px-4">
@@ -76,6 +76,25 @@ export default {
     activeShowcase() {
       return this.featured[this.activeIndex ? this.activeIndex : 2]
     }
+  },
+  mounted() {
+    const heroPresentationSlider = this.$refs['hero-presentation-slider']
+    this.$gsap.fromTo(
+      heroPresentationSlider,
+      {
+        opacity: 0,
+        scale: 0.75,
+        y: '15px'
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 0.45,
+        delay: 0.9,
+        ease: 'power4.inOut'
+      }
+    )
   },
   methods: {
     changeSlide(i) {

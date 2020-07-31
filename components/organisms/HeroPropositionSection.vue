@@ -11,6 +11,10 @@
       </div>
     </h1>
 
+    <div class="max-w-readable-line-length m-auto mb-12">
+      <LookupInput ref="lookup-input" class="opacity-0" />
+    </div>
+
     <p
       ref="subheading"
       class="opacity-0 text-center text-eight leading-eight md:text-seven md:leading-seven text-grey-700 mb-12 max-w-2xl"
@@ -43,6 +47,25 @@ export default {
         ease: 'power4.inOut'
       }
     )
+
+    const lookupInput = this.$refs['lookup-input'].$el
+    this.$gsap.fromTo(
+      lookupInput,
+      {
+        opacity: 0,
+        scale: 0.75,
+        y: '15px'
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 0.45,
+        delay: 0.5,
+        ease: 'power4.inOut'
+      }
+    )
+
     const splitted = new this.$SplitText(this.$refs.subheading, {
       type: 'lines'
     })
@@ -60,7 +83,7 @@ export default {
         scale: 1,
         stagger: 0.05,
         duration: 0.45,
-        delay: 0.5,
+        delay: 0.6,
         ease: 'power4.inOut',
         onComplete: () => {
           splitted.revert()
@@ -81,7 +104,7 @@ export default {
         scale: 1,
         y: 0,
         duration: 0.45,
-        delay: 0.75,
+        delay: 0.6,
         ease: 'power4.inOut'
       }
     )

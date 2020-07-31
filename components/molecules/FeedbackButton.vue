@@ -1,7 +1,7 @@
 <template>
   <button
     data-feedback-fish
-    class="fixed bottom-0 right-0 z-50 m-4 bg-primary-500 text-white font-bold-body-weight px-6 py-2 rounded-full focus:outline-none"
+    class="truncate fixed bottom-0 right-0 z-50 m-4 bg-blue-500 text-white font-bold-body-weight px-6 py-2 rounded-full focus:outline-none"
   >
     Send Feedback
   </button>
