@@ -38,3 +38,5 @@ exports.fetchStrapi = async function (url, { method, body }) {
       throw new Error(err)
     })
 }
+
+exports.normalizeUrl = require('./normalize-url')

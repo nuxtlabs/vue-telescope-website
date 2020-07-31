@@ -6,9 +6,14 @@ const ERROR_CODES = require('vue-telemetry-analyzer').ERROR_CODES
 const cloudinary = require('cloudinary').v2
 const { URL } = require('url')
 const consola = require('consola')
-const { isBlacklisted, isOutdated, fetchStrapi } = require('./utils')
+const {
+  isBlacklisted,
+  isOutdated,
+  fetchStrapi,
+  normalizeUrl
+} = require('../utils/functions')
 const slugify = require('speakingurl')
-const normalizeUrl = require('normalize-url')
+// const normalizeUrl = require('normalize-url')
 const fetch = require('node-fetch')
 
 exports.handler = async function (event, _context) {
@@ -74,7 +79,6 @@ exports.handler = async function (event, _context) {
         }
       }
     }
-    console.log('WTF', process.env.STRAPI_TOKEN)
 
     // get showcase by hostname
     const existingShowcase = await fetchStrapi(
