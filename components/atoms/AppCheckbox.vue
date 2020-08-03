@@ -1,7 +1,9 @@
 <template>
   <div
-    :class="[checked && 'checked']"
+    :class="[checked && 'checked', isHovered && 'hovered']"
     class="inline-flex items-center overflow-hidden"
+    @mouseenter="isHovered = true"
+    @mouseleave="isHovered = false"
   >
     <div class="relative">
       <input
@@ -13,7 +15,8 @@
       />
       <div
         style="border-radius: 4px;"
-        class="checkmark w-5 h-5 mr-2 p-3px pointer-events-none text-white border border-grey-300 transition-colors duration-300"
+        :class="[isHovered ? 'border-grey-500' : 'border-grey-300']"
+        class="checkmark w-5 h-5 mr-2 p-3px pointer-events-none text-white border transition-colors duration-300"
       >
         <svg
           class="w-full h-full"
@@ -54,6 +57,11 @@ export default {
     id: {
       type: String,
       default: 'Default label'
+    }
+  },
+  data() {
+    return {
+      isHovered: false
     }
   },
   watch: {

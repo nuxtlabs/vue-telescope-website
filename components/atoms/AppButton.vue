@@ -80,7 +80,8 @@ export default {
           return {
             // bg: 'bg-primary-500',
             text: 'text-primary-500',
-            outline: 'border-primary-500'
+            outline: 'border-primary-500',
+            hoverState: 'hover:bg-primary-50 hover:border-primary-300'
           }
         } else {
           return {

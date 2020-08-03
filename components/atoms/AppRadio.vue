@@ -1,7 +1,9 @@
 <template>
   <div
-    :class="[checked && 'checked']"
+    :class="[checked && 'checked', isHovered && 'hovered']"
     class="inline-flex items-center overflow-hidden cursor-pointer"
+    @mouseenter="isHovered = true"
+    @mouseleave="isHovered = false"
   >
     <div class="relative">
       <input
@@ -54,6 +56,11 @@ export default {
     id: {
       type: String,
       default: 'Default label'
+    }
+  },
+  data() {
+    return {
+      isHovered: false
     }
   },
   watch: {

@@ -5,6 +5,7 @@
   >
     <div class="relative w-full h-full pt-0">
       <div
+        :class="[tag === 'a' && 'hover:bg-grey-100']"
         class="flex flex-col items-center justify-between bg-grey-50 rounded-xl p-2 pt-0 pl-0 w-full h-full border-2 border-grey-200"
       >
         <div

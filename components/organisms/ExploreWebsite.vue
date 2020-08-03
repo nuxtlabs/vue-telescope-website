@@ -17,7 +17,7 @@
           v-if="!website.isAdultContent"
           :href="website.url"
           target="_blank"
-          class="h-6 absolute top-0 left-0 flex -mt-6 text-primary-300 font-bold-body-weight"
+          class="h-6 absolute top-0 left-0 flex -mt-6 text-primary-300 hover:opacity-50 font-bold-body-weight"
         >
           <LinkIcon class="w-3 mr-2" />
           <span class style="width: max-content;">{{ website.hostname }}</span>
@@ -146,12 +146,11 @@
           :key="plugin.id"
           :href="plugin.url"
           target="_blank"
-          class="mr-4 mb-4"
+          class="mr-4 mb-4 bg-grey-50 hover:bg-grey-100 border border-grey-200 rounded-xl"
         >
-          <span
-            class="block bg-grey-50 border border-grey-200 font-bold-body-weight px-4 py-2 rounded-xl"
-            >{{ plugin.name }}</span
-          >
+          <span class="block font-bold-body-weight px-4 py-2">
+            {{ plugin.name }}
+          </span>
         </a>
       </div>
     </div>
@@ -159,7 +158,8 @@
     <div v-if="website.modules.length" class="mb-10">
       <div class="label mb-4">
         <AppWebsiteDataLabel>
-          <ModulesIcon class="h-6 mr-2 opacity-50" />Nuxt Modules
+          <ModulesIcon class="h-6 mr-2 opacity-50" />
+          <span>Nuxt Modules</span>
         </AppWebsiteDataLabel>
       </div>
       <div class="data-wrapper flex flex-wrap">
@@ -168,12 +168,11 @@
           :key="module.id"
           :href="module.url"
           target="_blank"
-          class="mr-4 mb-4"
+          class="mr-4 mb-4 bg-grey-50 hover:bg-grey-100 border border-grey-200 rounded-xl"
         >
-          <span
-            class="block bg-grey-50 border border-grey-200 font-bold-body-weight px-4 py-2 rounded-xl"
-            >{{ module.name }}</span
-          >
+          <span class="block font-bold-body-weight px-4 py-2">
+            {{ module.name }}
+          </span>
         </a>
       </div>
     </div>
