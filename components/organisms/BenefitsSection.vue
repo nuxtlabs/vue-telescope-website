@@ -21,7 +21,7 @@
               :key="i"
               :class="[benefit.styles && benefit.styles.text]"
               :href="link.href"
-              class="font-bold-body-weight"
+              class="font-bold-body-weight hover:opacity-50"
             >
               {{ link.text }} →
             </a>
@@ -30,7 +30,7 @@
               :key="i"
               :class="[benefit.styles && benefit.styles.text]"
               :to="link.route"
-              class="font-bold-body-weight"
+              class="font-bold-body-weight hover:opacity-50"
             >
               {{ link.text }} →
             </NuxtLink>

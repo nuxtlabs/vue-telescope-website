@@ -25,7 +25,7 @@
               : activeTabs[0].id === tab.id) &&
             `background-color: ${tab.surfaceColor}`
           "
-          class="h-12 text-grey-500 text-base leading-base font-bold-body-weight px-4 rounded-xl focus:outline-none border-2 border-transparent select-none mb-2"
+          class="h-12 text-grey-500 text-base leading-base font-bold-body-weight px-4 rounded-xl focus:outline-none border-2 border-transparent select-none mb-2 hover:bg-grey-50"
           @click="startManualTransition(tab)"
         >
           {{ tab.title }}

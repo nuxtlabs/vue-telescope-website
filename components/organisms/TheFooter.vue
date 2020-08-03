@@ -9,7 +9,7 @@
               href="https://nuxtjs.org"
               target="_blank"
               rel="noopener"
-              class="text-primary-500 font-medium transition ease-linear duration-150"
+              class="text-primary-500 font-medium transition ease-linear duration-150 hover:underline"
               >NuxtJS Team</a
             >
             for the VueJS Community
@@ -22,9 +22,10 @@
               href="https://www.netlify.com/"
               target="_blank"
               rel="noopener"
-              class="text-primary-500 font-medium"
-              >Netlify</a
+              class="text-primary-500 font-medium hover:underline"
             >
+              Netlify
+            </a>
           </li>
           <span class="hidden sm:inline-block mx-2 text-grey-300"
             >&bullet;</span
@@ -35,9 +36,10 @@
               href="https://cloudinary.com/"
               target="_blank"
               rel="noopener"
-              class="text-primary-500 font-medium"
-              >Cloudinary</a
+              class="text-primary-500 font-medium hover:underline"
             >
+              Cloudinary
+            </a>
           </li>
         </ul>
       </div>

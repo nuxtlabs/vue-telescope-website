@@ -86,7 +86,8 @@ export default {
           return {
             bg: 'bg-primary-500',
             text: 'text-white',
-            outline: 'focus:border-primary-700'
+            outline: 'focus:border-primary-700',
+            hoverState: 'hover:bg-primary-400'
           }
         }
       } else if (this.appearance === 'danger') {
@@ -115,7 +116,8 @@ export default {
           return {
             bg: 'bg-blue-500',
             text: 'text-white',
-            outline: 'focus:border-blue-900'
+            outline: 'focus:border-blue-900',
+            hoverState: 'hover:bg-blue-400'
           }
         }
       } else {
