@@ -6,7 +6,7 @@
     :class="[isMobile && 'hidden']"
     class="cursor-pointer"
     appearance="primary"
-    @click.native="trackGoal"
+    @click.native="processLinkNavigation"
   >
     {{ buttonText }}
   </AppButton>
@@ -46,7 +46,22 @@ export default {
     }
   },
   methods: {
-    trackGoal() {
+    async processLinkNavigation(e) {
+      e.preventDefault()
+      const aware = await this.$store.dispatch(
+        'PROCESS_PRIVACY_AWARENESS',
+        this.linkNavigation
+      )
+      if (!aware) {
+        return
+      }
+      this.linkNavigation()
+    },
+    linkNavigation() {
+      window.location.href = this.linkToExtention
+      this.trackGoal()
+    },
+    trackGoal(e) {
       window.fathom && window.fathom.trackGoal('13CDY7TC', 0)
     }
   }

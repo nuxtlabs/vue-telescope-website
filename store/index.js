@@ -15,7 +15,9 @@ export const state = () => ({
   browser: '',
   isMobile: false,
   selectedFilters: {},
-  isModal: false
+  isModal: false,
+  showPrivacyAwareModal: false,
+  privacyAwarenessCb: null
 })
 
 export const mutations = {
@@ -62,6 +64,12 @@ export const mutations = {
   },
   setShowcasesCount(state, count) {
     state.showcasesCount = count
+  },
+  setShowPrivacyAwareModal(state, show) {
+    state.showPrivacyAwareModal = show
+  },
+  setPrivacyAwarenessCb(state, cb) {
+    state.privacyAwarenessCb = cb
   }
 }
 
@@ -93,5 +101,16 @@ export const actions = {
     const showcasesCount = await this.$strapi.find('showcases/count')
     commit('setShowcasesCount', showcasesCount)
     commit('isReady')
+  },
+  PROCESS_PRIVACY_AWARENESS({ state, commit }, cb) {
+    return new Promise((resolve, reject) => {
+      if (localStorage.getItem('privacyAware') !== 'true') {
+        commit('setPrivacyAwarenessCb', cb)
+        commit('setShowPrivacyAwareModal', true)
+        resolve(false)
+      } else {
+        resolve(true)
+      }
+    })
   }
 }

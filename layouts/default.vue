@@ -6,9 +6,17 @@
     </main>
     <TheFooter />
     <FeedbackButton />
+    <PrivacyAwareModal v-if="showPrivacyAwareModal" />
   </div>
 </template>
 
 <script>
-export default {}
+import { mapState } from 'vuex'
+export default {
+  computed: {
+    ...mapState({
+      showPrivacyAwareModal: (state) => state.showPrivacyAwareModal
+    })
+  }
+}
 </script>

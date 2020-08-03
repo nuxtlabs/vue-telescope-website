@@ -14,7 +14,6 @@
             tag="a"
             href="https://chrome.google.com/webstore/detail/vue-telemetry/neaebjphlfplgdhedjdhcnpjkndddbpd"
             appearance="transparent"
-            outlined
             size="small"
             class="mr-1"
           >
@@ -25,7 +24,6 @@
             tag="a"
             href="https://addons.mozilla.org/en-GB/firefox/addon/vue-telemetry"
             appearance="transparent"
-            outlined
             size="small"
             class="ml-1"
           >

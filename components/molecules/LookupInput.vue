@@ -21,13 +21,13 @@
       :class="[protocolPadding]"
       :value="url"
       @input="formatUrlInput"
-      @keypress.enter.native="analyzeWebsite"
+      @keypress.enter.native="processAnalyzeWebsite"
     />
     <AppButton
       :size="size"
       appearance="info"
       class="flex items-center justify-center rounded-l-none border-l-0"
-      @click.native="analyzeWebsite"
+      @click.native="processAnalyzeWebsite"
     >
       <div
         :class="[!pending ? 'opacity-100 scale-100' : 'opacity-0 scale-0']"
@@ -95,9 +95,18 @@ export default {
         this.errorMessage = `Only top-level domains are analyzed: ${parsedURL.origin}`
       }
     },
+    async processAnalyzeWebsite() {
+      const aware = await this.$store.dispatch(
+        'PROCESS_PRIVACY_AWARENESS',
+        this.analyzeWebsite
+      )
+      if (!aware) {
+        return
+      }
+      this.analyzeWebsite()
+    },
     async analyzeWebsite() {
       this.pending = true
-      // console.log('analyzeWebsite', this.url)
       const res = await fetch(`/api/analyze?url=${this.url}`, {
         method: 'GET'
       })
