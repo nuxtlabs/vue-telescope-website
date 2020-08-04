@@ -147,6 +147,9 @@ module.exports = {
         800: '#9c4221',
         900: '#7b341e'
       },
+      purple: {
+        500: '#9F7AEA'
+      },
       quasar: {
         base: '#1976D2',
         light: '#E0F0FF'

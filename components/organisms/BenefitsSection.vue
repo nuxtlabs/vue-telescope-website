@@ -117,6 +117,26 @@ export default {
         },
         {
           id: 4,
+          title: 'Respect Privacy',
+          description:
+            // eslint-disable-next-line
+            `We highly respect your privacy and we don't collect any personal data.`,
+          links: [
+            {
+              type: 'internal',
+              text: 'Check Our Terms',
+              route: {
+                name: 'terms'
+              }
+            }
+          ],
+          styles: {
+            text: 'text-purple-500'
+          },
+          image: '/images/benefits/privacy.png'
+        },
+        {
+          id: 5,
           title: 'Huge Database',
           description:
             // eslint-disable-next-line
