@@ -21,7 +21,7 @@
             <a
               href="https://www.netlify.com/"
               target="_blank"
-              rel="noopener"
+              rel="noopener nofollow noreferrer"
               class="text-primary-500 font-medium hover:underline"
             >
               Netlify
@@ -35,7 +35,7 @@
             <a
               href="https://cloudinary.com/"
               target="_blank"
-              rel="noopener"
+              rel="noopener nofollow noreferrer"
               class="text-primary-500 font-medium hover:underline"
             >
               Cloudinary
@@ -54,7 +54,7 @@
               href="https://twitter.com/VueTelemetry"
               class="text-grey-900 hover:text-primary-500 transition ease-in duration-150"
               target="_blank"
-              rel="noopener"
+              rel="noopener nofollow noreferrer"
             >
               <span class="sr-only">Twitter</span>
               <TwitterIcon class="h-5 w-5" />
@@ -65,7 +65,7 @@
               href="https://github.com/nuxt-company/vue-telemetry-analyzer"
               class="text-grey-900 hover:text-primary-500 transition ease-in duration-150"
               target="_blank"
-              rel="noopener"
+              rel="noopener nofollow noreferrer"
             >
               <span class="sr-only">GitHub</span>
               <GithubIcon class="h-5 w-5" />

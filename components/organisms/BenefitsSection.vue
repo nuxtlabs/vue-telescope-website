@@ -22,6 +22,8 @@
               :class="[benefit.styles && benefit.styles.text]"
               :href="link.href"
               class="font-bold-body-weight hover:opacity-50"
+              rel="noopener nofollow noreferrer"
+              target="_blank"
             >
               {{ link.text }} →
             </a>

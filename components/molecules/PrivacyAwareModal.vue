@@ -1,30 +1,89 @@
 <template>
   <div class="modal-wrapper">
-    <div class="w-full h-full" @click.self="makeChoice(false)">
+    <div class="w-full h-full py-8" @click.self="makeChoice(false)">
       <div
         ref="modal-wrapper"
-        class="pointer-events-auto h-full relative md:h-auto bg-white m-auto max-w-readable-line-length md:mt-12 md:rounded-xl overflow-auto md:overflow-hidden overflow-x-hidden"
+        class="flex flex-col justify-between pointer-events-auto h-full relative bg-white m-auto max-w-readable-line-length md:mt-4 md:rounded-xl overflow-auto md:overflow-hidden overflow-x-hidden"
       >
         <h2 class="text-five leading-five font-display-weight p-4 text-center">
-          Hey 👋 Vue.js developer!
+          We Respect Your Privacy 😎
         </h2>
-        <div class="p-4">
+        <div class="p-4 overflow-auto">
           <p class="mb-4">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas,
-            eum et. Libero possimus, eaque nesciunt error quaerat ipsa atque
-            aspernatur nulla asperiores! Magnam nemo laudantium quae quam et
-            temporibus itaque.
+            Hello, fellow Vue.js developer 👋
+          </p>
+          <p class="mb-4">
+            We started Vue Telemetry project with one goal in mind: provide
+            developers the best tool to explore Vue.js ecosystem for
+            inspiration, research or analysis.
+          </p>
+          <p class="mb-4">
+            To complete this we need community help and your permission 🙌
+          </p>
+          <h3 class="text-seven leading-seven font-display-weight mb-2">
+            Why we need a permission?
+          </h3>
+          <p class="mb-4">
+            When using Vue Telemetry extension or website we will save websites
+            that were analyzed in our database.
+          </p>
+          <h3 class="text-seven leading-seven font-display-weight mb-2">
+            What data is collected?
+          </h3>
+          <p class="mb-4">
+            We only collect websites you visiting.
+            <strong>
+              This data is completely anonymous, no user ID, system, IP data is
+              submited.
+            </strong>
+          </p>
+          <h3 class="text-seven leading-seven font-display-weight mb-2">
+            When data is collected?
+          </h3>
+          <p class="mb-4">
+            Websites are saved when you use Vue Telemetry extension
+            (specifically, when you click on extension button). Website will
+            also be saved into database if you use Lookup feature on Vue
+            Telemetry website.
+          </p>
+          <h3 class="text-seven leading-seven font-display-weight mb-2">
+            What will the collected data be used for?
+          </h3>
+          <p class="mb-4">
+            The only way the collected data will be used for is to showcase such
+            websites in Explore section of Vue Telemetry website.
+          </p>
+          <p class="mb-4">
+            We are greatly appreciate your support by using our website and
+            extension. Let us remind you, that
+            <a
+              href="https://github.com/nuxt-company/vue-telemetry-analyzer"
+              class="text-primary-500 hover:underline"
+              rel="noopener nofollow noreferrer"
+              target="_blank"
+              >Vue Telemetry analyzer</a
+            >
+            and
+            <a
+              href="https://github.com/nuxt-company/vue-telemetry-extensions"
+              class="text-primary-500 hover:underline"
+              rel="noopener nofollow noreferrer"
+              target="_blank"
+              >Vue Telemetry extension</a
+            >
+            is open source, so you are free to explore it and participate in
+            it's development.
           </p>
           <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci
-            quae cumque culpa, dicta harum a architecto possimus libero quod
-            natus ducimus aut quo sunt eos, reprehenderit nobis tempora,
-            delectus laborum.
+            By clicking Agree & Proceed button you agree with our
+            <NuxtLink to="/terms" class="text-primary-500 hover:underline"
+              >Terms</NuxtLink
+            >.
           </p>
         </div>
         <div class="p-4 flex justify-end">
           <AppButton appearance="transparent" @click.native="makeChoice(false)">
-            Not Agree
+            Nope
           </AppButton>
           <AppButton appearance="primary" @click.native="makeChoice(true)">
             Agree & Proceed
