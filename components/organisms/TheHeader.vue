@@ -30,7 +30,7 @@
           to="/explore"
           class="opacity-0 sm:mr-4 font-display-weight"
         >
-          <span class="hover:opacity-50">Explore</span>
+          <span class="hover-hover:hover:opacity-50">Explore</span>
         </NuxtLink>
 
         <div

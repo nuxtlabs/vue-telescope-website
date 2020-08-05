@@ -8,7 +8,8 @@ module.exports = {
       sm: '640px',
       md: '834px',
       lg: '1024px',
-      xl: '1280px'
+      xl: '1280px',
+      'hover-hover': { raw: '(hover: hover)' }
     },
     fontSize: {
       base: '16px',
@@ -245,7 +246,7 @@ module.exports = {
   variants: {
     margin: ['responsive', 'last']
   },
-  // plugins: [require('@tailwindcss/ui')],
+  // plugins: [],
   purge: {
     // Learn more on https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
     enabled: process.env.NODE_ENV === 'production',
