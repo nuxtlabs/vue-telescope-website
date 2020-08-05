@@ -1,16 +1,12 @@
 <template>
   <div>
-    <!-- <ExploreWebsite /> -->
     <div v-if="twitterLike">
-      <!-- <transition name="page"> -->
       <TwitterLikeModalWrapper :fetched="website ? true : false">
         <ExploreWebsite :website="website" class="twitter-like mb-12" />
         <CtaSection />
       </TwitterLikeModalWrapper>
-      <!-- </transition> -->
     </div>
     <div v-else class="px-4">
-      <!-- <transition name="page"> -->
       <div
         v-if="$fetchState.pending"
         class="max-w-readable-line-length m-auto mt-10"
@@ -26,12 +22,14 @@
           <ContentPlaceholdersText :lines="8" />
         </ContentPlaceholders>
       </div>
+      <template v-else-if="$fetchState.error">
+        <ErrorSection :error="$fetchState.error" />
+      </template>
       <ExploreWebsite
         v-else
         :website="website"
         class="max-w-readable-line-length m-auto"
       />
-      <!-- </transition> -->
     </div>
   </div>
 </template>
