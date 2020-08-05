@@ -40,6 +40,16 @@ export default {
     XmarkCircleIcon
   },
   mounted() {
+    const escapeHandler = (e) => {
+      if (e.key === 'Escape') {
+        this.$emit('close')
+      }
+    }
+    document.addEventListener('keydown', escapeHandler)
+    this.$once('hook:destroyed', () => {
+      document.removeEventListener('keydown', escapeHandler)
+    })
+
     this.$store.commit('SET_MODAL', true)
     this.animateEnter()
     const scrollBarGap =

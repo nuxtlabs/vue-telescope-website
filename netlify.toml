@@ -24,12 +24,6 @@
   force = true
 
 [[redirects]]
-  from = "/explore/"
-  to = "/explore"
-  status = 200
-  force = false
-
-[[redirects]]
   from = "/*"
   to = "/404.html"
   status = 200

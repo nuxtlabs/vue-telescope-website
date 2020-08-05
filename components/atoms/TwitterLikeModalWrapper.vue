@@ -58,6 +58,16 @@ export default {
     }
   },
   activated() {
+    const escapeHandler = (e) => {
+      if (e.key === 'Escape') {
+        this.$router.push('/explore')
+      }
+    }
+    document.addEventListener('keydown', escapeHandler)
+    this.$once('hook:deactivated', () => {
+      document.removeEventListener('keydown', escapeHandler)
+    })
+
     this.$store.commit('SET_MODAL', true)
     if (this.fetched) {
       this.animateEnter()

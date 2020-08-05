@@ -104,6 +104,21 @@ export default {
       isModal: (state) => state.isModal
     })
   },
+  created() {
+    const escapeHandler = (e) => {
+      if (e.key === 'Escape') {
+        this.makeChoice(false)
+      }
+    }
+    if (process.browser) {
+      // eslint-disable-next-line nuxt/no-globals-in-created
+      document.addEventListener('keydown', escapeHandler)
+      this.$once('hook:destroyed', () => {
+        // eslint-disable-next-line nuxt/no-globals-in-created
+        document.removeEventListener('keydown', escapeHandler)
+      })
+    }
+  },
   mounted() {
     if (!this.isModal) {
       document.body.style.overflow = 'hidden'
