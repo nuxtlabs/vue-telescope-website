@@ -1,5 +1,5 @@
 <template>
-  <div id="main-footer" class="py-6 text-grey-900">
+  <div id="main-footer" class="py-6 pb-2 text-grey-900">
     <div class="max-w-container-max-width mx-auto py-4 px-4">
       <div class="flex flex-col justify-between mb-4">
         <ul class="text-sm mb-1">
@@ -39,6 +39,20 @@
               class="text-primary-500 font-medium hover:underline"
             >
               Cloudinary
+            </a>
+          </li>
+          <span class="hidden sm:inline-block mx-2 text-grey-300"
+            >&bullet;</span
+          >
+          <li class="text-grey-900">
+            Illustrations from
+            <a
+              href="https://icons8.com/"
+              target="_blank"
+              rel="noopener nofollow noreferrer"
+              class="text-primary-500 font-medium hover:underline"
+            >
+              Icons8
             </a>
           </li>
         </ul>

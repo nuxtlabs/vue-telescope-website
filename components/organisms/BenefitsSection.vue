@@ -3,18 +3,18 @@
     <div
       v-for="benefit in benefits"
       :key="benefit.id"
-      class="flex flex-wrap mb-24 max-w-pretty-wide m-auto"
+      class="flex flex-wrap mb-12 md:mb-24 max-w-pretty-wide m-auto"
       :class="[!(benefit.id % 2) && 'flex-row-reverse']"
     >
       <div class="w-full md:w-1/2 px-4 flex flex-col justify-center">
         <h3
           :class="[benefit.styles && benefit.styles.text]"
-          class="text-four leading-four font-display-weight mb-2"
+          class="text-four leading-four font-display-weight mb-4 md:mb-2 text-center md:text-left"
         >
           {{ benefit.title }}
         </h3>
         <p class="text-eight leading-eight mb-4">{{ benefit.description }}</p>
-        <div class="flex flex-col mb-4">
+        <div class="flex flex-col mb-4 text-center md:text-left">
           <template v-for="(link, i) in benefit.links">
             <a
               v-if="link.type === 'external'"
@@ -40,7 +40,11 @@
         </div>
       </div>
       <div class="w-full md:w-1/2 px-4">
-        <img :src="benefit.image" alt="" />
+        <img
+          :src="benefit.image"
+          alt=""
+          class="max-w-sm md:max-w-full m-auto"
+        />
       </div>
     </div>
   </section>

@@ -11,6 +11,7 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
   },
   "dependencies": {
+    "@nuxt/content": "^1.5.3",
     "bufferutil": "^4.0.1",
     "cloudinary": "^1.21.0",
     "consola": "^2.12.1",

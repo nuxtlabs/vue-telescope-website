@@ -46,6 +46,7 @@ export default {
     },
     fallback: '404.html' // For Netlify
   },
+  modules: ['@nuxt/content'],
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',

@@ -76,7 +76,16 @@
           </p>
           <p>
             By clicking Agree & Proceed button you agree with our
-            <NuxtLink to="/terms" class="text-primary-500 hover:underline"
+            <NuxtLink
+              to="/terms"
+              class="text-primary-500 hover:underline"
+              @click.native="
+                (e) => {
+                  e.preventDefault()
+                  makeChoice(false)
+                  $router.push('terms')
+                }
+              "
               >Terms</NuxtLink
             >.
           </p>
