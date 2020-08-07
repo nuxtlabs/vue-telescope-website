@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-readable-line-length px-4 mx-auto">
+  <div class="max-w-readable-line-length px-4 mx-auto pt-12">
     <h1 class="text-four leading-four font-display-weight mb-8">
       {{ terms.title }}
     </h1>
@@ -15,7 +15,7 @@ export default {
   },
   data() {
     return {
-      terms: null
+      terms: {}
     }
   }
 }

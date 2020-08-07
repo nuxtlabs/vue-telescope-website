@@ -72,8 +72,22 @@
               >Vue Telemetry extension</a
             >
             is open source, so you are free to explore it and participate in
-            it's development.
+            it's development. You can also read our
+            <NuxtLink
+              to="/privacy"
+              class="text-primary-500 hover:underline"
+              @click.native="
+                (e) => {
+                  e.preventDefault()
+                  makeChoice(false)
+                  $router.push('privacy')
+                }
+              "
+            >
+              Privacy Policy</NuxtLink
+            >.
           </p>
+          <p></p>
           <p>
             By clicking Agree & Proceed button you agree with our
             <NuxtLink
@@ -86,7 +100,8 @@
                   $router.push('terms')
                 }
               "
-              >Terms</NuxtLink
+            >
+              Terms</NuxtLink
             >.
           </p>
         </div>

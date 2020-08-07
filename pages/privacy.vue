@@ -1,9 +1,39 @@
 <template>
-  <div>privacy</div>
+  <div class="max-w-readable-line-length px-4 mx-auto pt-12">
+    <h1 class="text-four leading-four font-display-weight mb-8">
+      {{ privacy.title }}
+    </h1>
+    <NuxtContent :document="privacy" class="prose" />
+  </div>
 </template>
 
 <script>
-export default {}
+export default {
+  async fetch() {
+    this.privacy = await this.$content('privacy').fetch()
+  },
+  data() {
+    return {
+      privacy: {}
+    }
+  }
+}
 </script>
 
-<style></style>
+<style lang="postcss" scoped>
+::v-deep .prose {
+  & h2 {
+    @apply text-five leading-five mb-4 mt-8 font-display-weight;
+  }
+  & p {
+    @apply mb-4;
+  }
+  & ul {
+    @apply list-disc list-inside mb-4;
+
+    & > li {
+      @apply mb-2;
+    }
+  }
+}
+</style>
