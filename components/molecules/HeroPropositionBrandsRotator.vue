@@ -32,7 +32,7 @@
 export default {
   data() {
     return {
-      timeout: 10000,
+      timeout: 5000,
       rotationInterval: null,
       brands: [
         { slug: 'vue', name: 'Vue.js', active: true, imgPath: '/vue.svg' },
