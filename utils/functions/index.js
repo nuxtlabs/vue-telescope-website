@@ -1,4 +1,6 @@
+const { Resolver } = require('dns').promises
 const fetch = require('node-fetch')
+const resolver = new Resolver()
 
 // eslint-disable-next-line require-await
 exports.isBlacklisted = function (hostname) {
@@ -40,3 +42,18 @@ exports.fetchStrapi = async function (url, { method, body }) {
 }
 
 exports.normalizeUrl = require('./normalize-url')
+
+exports.isAdultContent = async function (domain) {
+  // regular check
+  resolver.setServers(['8.8.8.8'])
+  const regularCheck = await resolver.resolve(domain, 'A')
+  // adult check using
+  // https://www.opendns.com/setupguide/#familyshield
+  resolver.setServers(['208.67.222.123'])
+  const adultCheck = await resolver.resolve(domain, 'A')
+  if (JSON.stringify(regularCheck) !== JSON.stringify(adultCheck)) {
+    return true
+  } else {
+    return false
+  }
+}

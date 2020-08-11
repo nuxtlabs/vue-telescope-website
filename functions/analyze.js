@@ -9,6 +9,7 @@ const consola = require('consola')
 const {
   isBlacklisted,
   isOutdated,
+  isAdultContent,
   fetchStrapi,
   normalizeUrl
 } = require('../utils/functions')
@@ -159,7 +160,10 @@ exports.handler = async function (event, _context) {
       modules: infos.frameworkModules,
       framework: infos.framework,
       ui: infos.ui,
-      isAdultContent: infos.meta.isAdultContent || infos.meta.isRtaLabel
+      isAdultContent:
+        infos.meta.isAdultContent ||
+        infos.meta.isRtaLabel ||
+        (await isAdultContent(infos.hostname))
     }
 
     const saveShowcase = await fetchStrapi(
