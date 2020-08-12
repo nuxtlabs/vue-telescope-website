@@ -41,14 +41,14 @@ export default {
         return {
           height: 'h-12',
           fontSize: 'text-eight',
-          rounded: 'rounded-lg',
+          rounded: 'rounded-3lg',
           padding: 'px-2'
         }
       } else {
         return {
           height: 'h-10',
           fontSize: 'text-base',
-          rounded: 'rounded-md',
+          rounded: 'rounded-2lg',
           padding: 'px-2'
         }
       }

@@ -221,6 +221,8 @@ module.exports = {
         '128': '32rem'
       },
       borderRadius: {
+        '2lg': '0.625rem',
+        '3lg': '0.75rem',
         xl: '0.875rem',
         '2xl': '1rem',
         '3xl': '1.25rem',

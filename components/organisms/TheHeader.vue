@@ -1,7 +1,7 @@
 <template>
   <header
     id="main-header"
-    class="bg-white h-16 fixed top-0 left-0 w-full z-50 overflow-hidden"
+    class="the-header h-16 fixed top-0 left-0 w-full z-50 overflow-hidden"
   >
     <!-- <MagicHeader
       v-for="({ appearance, trigger }, i) in [
@@ -116,19 +116,8 @@ export default {
 </script>
 
 <style scoped>
-/* .logo {
-  opacity: 0;
-  animation: scale 450ms theme('transitionTimingFunction.ease-out-material')
-    forwards;
+.the-header {
+  backdrop-filter: blur(12px);
+  background-color: rgba(255, 255, 255, 0.25);
 }
-.install-extension-button {
-  opacity: 0;
-  animation: scale 150ms theme('transitionTimingFunction.ease-out-material')
-    1000ms forwards;
-}
-.explore-link {
-  opacity: 0;
-  animation: scale 150ms theme('transitionTimingFunction.ease-out-material')
-    1250ms forwards;
-} */
 </style>
