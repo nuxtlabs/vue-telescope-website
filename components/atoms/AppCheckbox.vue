@@ -16,7 +16,7 @@
       <div
         style="border-radius: 4px;"
         :class="[isHovered ? 'border-grey-500' : 'border-grey-300']"
-        class="checkmark w-5 h-5 mr-2 p-3px pointer-events-none text-white border transition-colors duration-300"
+        class="checkmark w-5 h-5 mr-2 p-3px pointer-events-none text-white border transition-colors duration-400"
       >
         <svg
           class="w-full h-full"
@@ -82,7 +82,7 @@ export default {
         })
         this.$gsap.fromTo(
           this.$refs.checkmark,
-          0.3,
+          0.4,
           {
             drawSVG: '0%'
           },
@@ -93,7 +93,7 @@ export default {
       } else {
         this.$gsap.fromTo(
           this.$refs.checkmark,
-          0.3,
+          0.4,
           {
             drawSVG: '0 100%'
           },

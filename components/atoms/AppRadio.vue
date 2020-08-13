@@ -16,7 +16,10 @@
       <div
         ref="radiomark-wrapper"
         class="relative radiomark-wrapper w-5 h-5 mr-2 pointer-events-none text-white rounded-full overflow-hidden border transition-colors duration-200"
-        :class="[checked ? 'border-primary-500 ' : 'border-grey-300']"
+        :class="[
+          checked ? 'border-primary-500 ' : 'border-grey-300',
+          isHovered && !checked && 'border-grey-500'
+        ]"
       >
         <div
           ref="color-mark"
