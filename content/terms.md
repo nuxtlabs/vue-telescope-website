@@ -6,7 +6,7 @@ Vue Telemetry is an online service to discover websites build with Vue.js and it
 
 ## Terms
 
-By accessing the website https://vuetelemetry.com and/or using our services, you confirm that you have read, understood, and agreed to be bound by all of these Terms of Use. If you do not agree to be bound by these terms, you should leave the website immediately and refrain from using our services.
+By accessing the website [https://vuetelemetry.com](https://vuetelemetry.com) and/or using our services, you confirm that you have read, understood, and agreed to be bound by all of these Terms of Use. If you do not agree to be bound by these terms, you should leave the website immediately and refrain from using our services.
 
 Any changes to this policy will be posted on this page. By accessing our website after such changes are posted, you indicate your acceptance of the revised policy. You should check this page regularly to ensure you are always aware of our terms and conditions.
 
@@ -50,4 +50,4 @@ By using this website, you represent and warrant that:
 - you will not use this website for any illegal or unauthorized purpose;
 - your use of this website will not violate any applicable law or regulation.
 
-If you have any queries about the website or these terms, you can contact us by e-mail, telephone or post: ...
+If you have any queries about the website or these terms, you can contact us by [e-mail](mailto:vuetelemetry@nuxtjs.com)

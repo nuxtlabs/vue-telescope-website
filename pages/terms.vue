@@ -23,6 +23,12 @@ export default {
 
 <style lang="postcss" scoped>
 ::v-deep .prose {
+  & a {
+    @apply text-primary-500;
+    &:hover {
+      @apply underline;
+    }
+  }
   & h2 {
     @apply text-five leading-five mb-4 mt-8 font-display-weight;
   }

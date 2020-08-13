@@ -1,21 +1,40 @@
 <template>
   <div id="main-footer" class="py-6 pb-2 text-grey-900">
     <div class="max-w-container-max-width mx-auto py-4 px-4">
-      <div class="flex flex-col justify-between mb-4">
-        <ul class="text-sm mb-1">
-          <li class="text-grey-900 text-sm leading-sm">
-            &copy; 2020,
-            <a
-              href="https://nuxtjs.org"
-              target="_blank"
-              rel="noopener"
-              class="text-primary-500 font-medium transition ease-linear duration-150 hover:underline"
-              >NuxtJS Team</a
+      <div class="flex flex-col justify-between items-center mb-4">
+        <div class="text-sm text-grey-900 leading-sm mb-2 text-center">
+          &copy; 2020,
+          <a
+            href="https://nuxtjs.org"
+            target="_blank"
+            rel="noopener"
+            class="text-primary-500 font-medium transition ease-linear duration-150 hover:underline"
+            >NuxtJS Team</a
+          >
+          for the VueJS Community
+        </div>
+
+        <ul class="flex items-center flex-row text-sm leading-sm mb-2">
+          <li class="">
+            <NuxtLink
+              to="/terms"
+              class="text-primary-500 font-medium hover:underline"
             >
-            for the VueJS Community
+              Terms
+            </NuxtLink>
+          </li>
+          <span class="inline-block mx-2 text-grey-300">&bullet;</span>
+          <li class="">
+            <NuxtLink
+              to="/privacy"
+              class="text-primary-500 font-medium hover:underline"
+            >
+              Privacy
+            </NuxtLink>
           </li>
         </ul>
-        <ul class="flex flex-col sm:flex-row text-sm leading-sm">
+
+        <ul class="flex flex-col items-center sm:flex-row text-sm leading-sm">
           <li class="text-grey-900">
             Hosted on
             <a
@@ -60,7 +79,9 @@
 
       <div class="flex items-center justify-between">
         <div>
-          <FourLogo class="h-6" />
+          <NuxtLink to="/">
+            <FourLogo class="h-6" />
+          </NuxtLink>
         </div>
         <ul class="flex items-center">
           <li class="mr-2">
