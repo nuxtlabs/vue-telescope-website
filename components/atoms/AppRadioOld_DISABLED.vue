@@ -15,18 +15,25 @@
       />
       <div
         ref="radiomark-wrapper"
-        class="relative radiomark-wrapper w-5 h-5 mr-2 pointer-events-none text-white rounded-full overflow-hidden border transition-colors duration-200"
-        :class="[checked ? 'border-primary-500 ' : 'border-grey-300']"
+        class="radiomark-wrapper w-5 h-5 mr-2 p-5px pointer-events-none text-white rounded-full border transition-colors duration-200 delay-300"
+        :class="[
+          checked ? 'bg-primary-500 border-primary-500 ' : 'border-grey-300'
+        ]"
       >
-        <div
-          ref="color-mark"
-          class="absolute top-0 left-0 w-full h-full rounded-full"
-          :class="[checked ? 'bg-primary-500 ' : 'bg-grey-300']"
-        ></div>
-        <div
-          ref="white-mark"
-          class="absolute top-0 left-0 bg-white w-full h-full rounded-full"
-        ></div>
+        <svg
+          class="w-full h-auto overflow-visible"
+          viewBox="0 0 16 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            ref="radiomark"
+            d="M15.5 8C15.5 12.1421 12.1421 15.5 8 15.5C3.85786 15.5 0.5 12.1421 0.5 8C0.5 3.85786 3.85786 0.5 8 0.5C12.1421 0.5 15.5 3.85786 15.5 8Z"
+            stroke="currentColor"
+            stroke-width="3"
+            fill="white"
+          />
+        </svg>
       </div>
     </div>
 
@@ -59,6 +66,9 @@ export default {
   watch: {
     checked(value) {
       this.animateRadiomark(value)
+      if (!value) {
+        this.$refs.radiomark.classList.remove('text-primary-500')
+      }
     }
   },
   mounted() {
@@ -69,41 +79,17 @@ export default {
   methods: {
     animateRadiomark(value) {
       if (value) {
+        this.$refs.radiomark.classList.add('text-primary-500')
         this.$gsap.fromTo(
-          this.$refs['white-mark'],
-          0.2,
+          this.$refs.radiomark,
+          0.3,
           {
-            scale: 1
+            drawSVG: '0%'
           },
           {
-            scale: 0,
-            ease: 'none',
-            onComplete: () => {
-              this.$gsap.fromTo(
-                this.$refs['color-mark'],
-                0.2,
-                {
-                  scale: 1
-                },
-                {
-                  scale: 0.5,
-                  ease: 'none'
-                }
-              )
-            }
+            drawSVG: '100%'
           }
         )
-      } else {
-        this.$gsap.to(this.$refs['color-mark'], 0.2, {
-          scale: 1,
-          ease: 'none',
-          onComplete: () => {
-            this.$gsap.to(this.$refs['white-mark'], 0.2, {
-              scale: 1,
-              ease: 'none'
-            })
-          }
-        })
       }
     }
   }
