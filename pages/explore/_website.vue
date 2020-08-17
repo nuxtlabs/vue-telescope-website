@@ -40,9 +40,6 @@ import frontMatter from '@/utils/front-matter'
 
 export default {
   async fetch() {
-    // const website = await this.$strapi.find(
-    //   `showcases?slug=${this.$route.params.website}`
-    // )
     try {
       const website = await this.$strapi.findOne(
         'showcases',

@@ -38,8 +38,10 @@
           </li>
         </ul>
 
-        <ul class="text-right flex flex-col text-sm leading-sm mb-2">
-          <li class="">
+        <ul
+          class="text-right flex flex-col md:flex-row text-sm leading-sm mb-2"
+        >
+          <li class="md:mr-4">
             <NuxtLink
               to="/terms"
               class="text-primary-500 font-medium hover:underline"
@@ -60,8 +62,8 @@
 
       <div class="flex flex-col md:flex-row items-center justify-between">
         <div class="flex flex-col md:flex-row items-center mb-4 md:mb-0">
-          <NuxtLink to="/" class="mb-2px mr-1">
-            <FourLogo class="h-6" />
+          <NuxtLink to="/" class="mb-2 md:mb-0 md:mr-1">
+            <TheSquareLogo class="h-6" />
           </NuxtLink>
           <div
             class="leading-none text-sm text-grey-900 leading-sm text-center"
@@ -109,13 +111,13 @@
 <script>
 import TwitterIcon from '@/assets/icons/twitter.svg?inline'
 import GithubIcon from '@/assets/icons/github.svg?inline'
-import FourLogo from '@/assets/logo/four.svg?inline'
+import TheSquareLogo from '@/assets/logo/square-logo.svg?inline'
 
 export default {
   components: {
     TwitterIcon,
     GithubIcon,
-    FourLogo
+    TheSquareLogo
   }
 }
 </script>

@@ -1,12 +1,6 @@
 <template>
   <div v-if="website" class="pointer-events-auto">
     <div class="header relative pt-14 pb-8 flex justify-between items-center">
-      <!-- <div
-        class="absolute top-0 right-0 z-10 p-4 cursor-pointer pointer-events-auto"
-        @click="$router.push('/explore')"
-      >
-        <XmarkCircleIcon class="text-grey-900 w-6 h-6" />
-      </div>-->
       <div class="relative">
         <h1
           class="truncate-multiline-2 pr-4 text-five leading-five md:text-five md:leading-five font-display-weight"
@@ -23,16 +17,6 @@
           <span class style="width: max-content;">{{ website.hostname }}</span>
         </a>
       </div>
-      <!-- <AppButton
-        appearance="dd"
-        size="small"
-        tag="a"
-        :href="website.url"
-        target="_blank"
-        class="rounded-lg"
-      >
-        Visit
-      </AppButton>-->
       <div
         v-if="website.isAdultContent"
         class="flex items-center font-display-weight text-orange-500"
@@ -180,28 +164,18 @@
 </template>
 
 <script>
-// import XmarkCircleIcon from '@/assets/icons/xmark-circle.svg?inline'
-// import XmarkCircleFillIcon from '@/assets/icons/xmark-circle-fill.svg?inline'
-// import CheckmarkCircleFillIcon from '@/assets/icons/checkmark-circle-fill.svg?inline'
 import ExclamationIcon from '@/assets/icons/exclamation.svg?inline'
 import LinkIcon from '@/assets/icons/link.svg?inline'
-// import VueIcon from '@/assets/brands/vue.svg?inline'
 import ModulesIcon from '@/assets/icons/modules.svg?inline'
 import PluginsIcon from '@/assets/icons/plugins.svg?inline'
-// import ConfigIcon from '@/assets/icons/config.svg?inline'
 import InfoIcon from '@/assets/icons/info.svg?inline'
 
 export default {
   components: {
-    // XmarkCircleIcon,
-    // XmarkCircleFillIcon,
-    // CheckmarkCircleFillIcon,
     ExclamationIcon,
     LinkIcon,
-    // VueIcon,
     ModulesIcon,
     PluginsIcon,
-    // ConfigIcon,
     InfoIcon
   },
   props: {

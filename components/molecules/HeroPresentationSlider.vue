@@ -1,10 +1,9 @@
 <template>
   <div ref="hero-presentation-slider" class="w-full relative opacity-0">
     <!-- <pre>{{ activeShowcase }}</pre> -->
-    <!-- <BrandLogosCloud /> -->
     <div class="w-full relative flex items-center justify-center px-4">
       <div
-        v-for="({ id, screenshotUrl }, i) in featured"
+        v-for="({ id }, i) in featured"
         :key="id"
         class="w-full md:w-1/2"
         :class="[

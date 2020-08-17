@@ -12,11 +12,6 @@
           :src="`https://icons.vuetelemetry.com${brand.imgPath}`"
           alt=""
         />
-        <!-- <img
-          :src="require(`~/assets/brands/${logo}.svg`)"
-          alt=""
-          class="w-full h-full"
-        /> -->
       </div>
     </ClientOnly>
   </div>
@@ -28,17 +23,6 @@ import { knuthfisheryates } from '@/helpers/shuffle'
 export default {
   data() {
     return {
-      // brands: [
-      //   'quasar',
-      //   'tailwind-css',
-      //   'element-ui',
-      //   'vuetify',
-      //   'bootstrap-vue',
-      //   'buefy',
-      //   'vue',
-      //   'nuxtjs',
-      //   'gridsome'
-      // ],
       xMatrix: [-270, -250, -180, -100, 0, 100, 150, 200, 250],
       yMatrix: [-30, -170, -255, -190, -165, -180, -200, -270, -30]
     }
@@ -69,16 +53,6 @@ export default {
         })
       })
     }, 1000)
-    // this.$gsap.to(this.$refs.logo, {
-    //   // y: `${this.$gsap.utils.random(-50, -700)}%`,
-    //   y: 'random(-50, -700)%',
-    //   // x: `${this.$gsap.utils.random(-250, 250)}px`,
-    //   x: 'random(-250, 250)px',
-    //   opacity: 1,
-    //   duration: 0.5,
-    //   stagger: 0.1,
-    //   ease: 'expo.out'
-    // })
   },
   methods: {
     knuthfisheryates

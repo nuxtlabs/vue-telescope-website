@@ -1,6 +1,5 @@
 <template>
   <span class="block relative w-full h-18">
-    <!-- Vue.js -->
     <transition
       appear
       :css="false"

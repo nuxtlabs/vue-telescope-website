@@ -153,11 +153,6 @@
 import { mapState } from 'vuex'
 
 export default {
-  // data() {
-  //   return {
-  //     queryFilter: {}
-  //   }
-  // },
   computed: {
     ...mapState({
       frameworks: (state) => state.frameworks,
@@ -170,36 +165,27 @@ export default {
   methods: {
     checkboxFilter(key, value) {
       if (!this.selectedFilters[key]) {
-        // init, if no key/value set
-        // this.$set(this.queryFilter, key, [value])
         this.$store.commit('SET_FILTER_KEY', { key, value: [value] })
       } else if (this.selectedFilters[key].includes(value)) {
         const filteredArray = this.selectedFilters[key].filter(
           (i) => i !== value
         )
-        // this.$set(this.queryFilter, key, [...filteredArray])
         this.$store.commit('SET_FILTER_KEY', { key, value: [...filteredArray] })
         if (!filteredArray.length) {
           // if array is empty - delete key
-          // this.$delete(this.queryFilter, key)
           this.$store.commit('DELETE_FILTER_KEY', key)
         }
       } else {
-        // this.$set(this.queryFilter, key, [...this.queryFilter[key], value])
         this.$store.commit('SET_FILTER_KEY', {
           key,
           value: [...this.selectedFilters[key], value]
         })
       }
-
-      // this.updateFilters()
     },
     radioFilter(key, value) {
       if (this.selectedFilters[key] === value) {
-        // this.$delete(this.queryFilter, key)
         this.$store.commit('DELETE_FILTER_KEY', key)
       } else {
-        // this.$set(this.queryFilter, key, value)
         this.$store.commit('SET_FILTER_KEY', {
           key,
           value
@@ -208,56 +194,33 @@ export default {
 
       // cleanup NONE selection
       if (key === 'framework.slug') {
-        // this.$delete(this.queryFilter, 'framework_null')
         this.$store.commit('DELETE_FILTER_KEY', 'framework_null')
       }
       if (key === 'ui.slug') {
-        // this.$delete(this.queryFilter, 'ui_null')
         this.$store.commit('DELETE_FILTER_KEY', 'ui_null')
       }
-
-      // this.updateFilters()
     },
-    // updateFilters() {
-    //   // this.$emit('update-filters', this.selectedFilters)
-    //   // window.scrollTo(0, 0)
-    // },
     selectNoFramework() {
-      // this.$delete(this.queryFilter, 'framework.slug')
       this.$store.commit('DELETE_FILTER_KEY', 'framework.slug')
-      // this.$set(this.queryFilter, 'framework_null', true)
       this.$store.commit('SET_FILTER_KEY', {
         key: 'framework_null',
         value: true
       })
-      // this.$nextTick(() => {
-      //   this.updateFilters()
-      // })
     },
     selectNoUIFramework() {
-      // this.$delete(this.queryFilter, 'ui.slug')
       this.$store.commit('DELETE_FILTER_KEY', 'ui.slug')
-      // this.$set(this.queryFilter, 'ui_null', true)
       this.$store.commit('SET_FILTER_KEY', {
         key: 'ui_null',
         value: true
       })
-      // this.$nextTick(() => {
-      //   this.updateFilters()
-      // })
     },
     clearFilters() {
-      // this.queryFilter = {}
-      // this.$router.push({ query: null })
       setTimeout(() => {
         this.$store.commit('RESET_FILTERS')
       })
-      // this.updateFilters()
     },
     clearFilter(key) {
-      // this.$delete(this.queryFilter, key)
       this.$store.commit('DELETE_FILTER_KEY', key)
-      // this.updateFilters()
     }
   }
 }

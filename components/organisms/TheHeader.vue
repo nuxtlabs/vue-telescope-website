@@ -3,26 +3,11 @@
     id="main-header"
     class="the-header h-16 fixed top-0 left-0 w-full z-50 overflow-hidden"
   >
-    <!-- <MagicHeader
-      v-for="({ appearance, trigger }, i) in [
-        { appearance: 'white', trigger: '#hero' },
-        { appearance: 'emerald', trigger: '#welcome' },
-        { appearance: 'black', trigger: '#featured' }
-      ]"
-      :key="appearance + i"
-      :index="-Math.abs(i)"
-      :appearance="appearance"
-      :trigger="trigger"
-    /> -->
     <div
       class="w-full h-full flex justify-between items-center max-w-container-max-width m-auto px-4"
     >
       <NuxtLink ref="logo" to="/" class="opacity-0">
-        <!-- <OneLogo class="h-8" /> -->
-        <!-- <TwoLogo class="h-8" /> -->
-        <!-- <ThreeLogo class="h-8" /> -->
-        <FourLogo class="h-8" />
-        <!-- <OldLogo class="h-8" /> -->
+        <TheLogo class="h-8" />
       </NuxtLink>
       <div class="flex items-center">
         <NuxtLink
@@ -45,19 +30,11 @@
 </template>
 
 <script>
-// import OneLogo from '@/assets/logo/one.svg?inline'
-// import TwoLogo from '@/assets/logo/two.svg?inline'
-// import ThreeLogo from '@/assets/logo/three.svg?inline'
-import FourLogo from '@/assets/logo/four.svg?inline'
-// import OldLogo from '@/assets/logo/old.svg?inline'
+import TheLogo from '@/assets/logo/logo.svg?inline'
 
 export default {
   components: {
-    // OneLogo
-    // TwoLogo
-    // ThreeLogo
-    FourLogo
-    // OldLogo
+    TheLogo
   },
   mounted() {
     const logo = this.$refs.logo.$el
