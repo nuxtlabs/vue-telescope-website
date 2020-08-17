@@ -1,5 +1,5 @@
 <template>
-  <section class="py-12">
+  <section class="py-24">
     <div
       v-for="benefit in benefits"
       :key="benefit.id"
@@ -13,7 +13,9 @@
         >
           {{ benefit.title }}
         </h3>
-        <p class="text-eight leading-eight mb-4">{{ benefit.description }}</p>
+        <p class="text-center md:text-left text-eight leading-eight mb-4">
+          {{ benefit.description }}
+        </p>
         <div class="flex flex-col mb-4 text-center md:text-left">
           <template v-for="(link, i) in benefit.links">
             <a
@@ -43,7 +45,7 @@
         <img
           :src="benefit.image"
           alt=""
-          class="max-w-sm md:max-w-full m-auto"
+          class="w-full max-w-sm md:max-w-full m-auto"
         />
       </div>
     </div>
