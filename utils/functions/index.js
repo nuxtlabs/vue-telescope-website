@@ -46,12 +46,16 @@ exports.normalizeUrl = require('./normalize-url')
 exports.isAdultContent = async function (domain) {
   // regular check
   resolver.setServers(['8.8.8.8'])
-  const regularCheck = await resolver.resolve(domain, 'A')
+  const regularIPs = await resolver.resolve(domain, 'A')
   // adult check using
   // https://www.opendns.com/setupguide/#familyshield
   resolver.setServers(['208.67.222.123'])
-  const adultCheck = await resolver.resolve(domain, 'A')
-  if (JSON.stringify(regularCheck) !== JSON.stringify(adultCheck)) {
+  const adultIPs = await resolver.resolve(domain, 'A')
+
+  // IP's order is not guaranteed, so need to check every item
+  const regularCheck = regularIPs.every((i) => adultIPs.includes(i))
+  const adultCheck = adultIPs.every((i) => regularIPs.includes(i))
+  if (regularCheck && adultCheck) {
     console.log('DEBUG ADULT true')
     console.log('regularCheck', JSON.stringify(regularCheck))
     console.log('adultCheck', JSON.stringify(adultCheck))

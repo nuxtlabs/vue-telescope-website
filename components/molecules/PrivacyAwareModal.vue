@@ -6,7 +6,7 @@
         class="flex flex-col justify-between pointer-events-auto h-full relative bg-white m-auto max-w-readable-line-length md:mt-4 rounded-xl overflow-auto md:overflow-hidden overflow-x-hidden"
       >
         <h2 class="text-five leading-five font-display-weight p-4 text-center">
-          We Respect Your Privacy 😎
+          We Respect Your Privacy
         </h2>
         <div class="p-4 overflow-auto">
           <p class="mb-4">
