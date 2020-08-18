@@ -53,6 +53,8 @@ exports.isAdultContent = async function (domain) {
   const adultCheck = await resolver.resolve(domain, 'A')
   if (JSON.stringify(regularCheck) !== JSON.stringify(adultCheck)) {
     console.log('DEBUG ADULT true')
+    console.log('regularCheck', JSON.stringify(regularCheck))
+    console.log('adultCheck', JSON.stringify(adultCheck))
     return true
   } else {
     console.log('DEBUG ADULT false')
