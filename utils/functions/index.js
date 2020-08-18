@@ -52,8 +52,10 @@ exports.isAdultContent = async function (domain) {
   resolver.setServers(['208.67.222.123'])
   const adultCheck = await resolver.resolve(domain, 'A')
   if (JSON.stringify(regularCheck) !== JSON.stringify(adultCheck)) {
+    console.log('DEBUG ADULT true')
     return true
   } else {
+    console.log('DEBUG ADULT false')
     return false
   }
 }
