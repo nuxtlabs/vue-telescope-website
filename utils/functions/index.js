@@ -56,12 +56,12 @@ exports.isAdultContent = async function (domain) {
   const regularCheck = regularIPs.every((i) => adultIPs.includes(i))
   const adultCheck = adultIPs.every((i) => regularIPs.includes(i))
   if (regularCheck && adultCheck) {
+    console.log('DEBUG ADULT false')
+    return false
+  } else {
     console.log('DEBUG ADULT true')
     console.log('regularCheck', JSON.stringify(regularCheck))
     console.log('adultCheck', JSON.stringify(adultCheck))
     return true
-  } else {
-    console.log('DEBUG ADULT false')
-    return false
   }
 }
