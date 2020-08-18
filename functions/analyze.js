@@ -38,6 +38,7 @@ exports.handler = async function (event, _context) {
   let force = event.queryStringParameters.force === 'true'
 
   try {
+    const isPublic = event.queryStringParameters.isPublic
     const rawUrl = event.queryStringParameters.url
     const normalizedUrl = normalizeUrl(rawUrl, {
       forceHttps: true,
@@ -94,6 +95,7 @@ exports.handler = async function (event, _context) {
       existingShowcase.length &&
       !isOutdated(existingShowcase[0].lastDetectedAt, 7) &&
       !force
+      // existingShowcase[0].isPublic
     ) {
       return {
         statusCode: 200,
@@ -160,6 +162,7 @@ exports.handler = async function (event, _context) {
       modules: infos.frameworkModules,
       framework: infos.framework,
       ui: infos.ui,
+      isPublic,
       isAdultContent:
         infos.meta.isAdultContent ||
         infos.meta.isRtaLabel ||

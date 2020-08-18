@@ -99,7 +99,7 @@
 
         <ExploreDataItem label="Rendering">
           <div
-            class="flex items-center text-seven leading-seven font-bold-body-weight mr-2"
+            class="flex items-center text-seven leading-seven font-bold-body-weight"
           >
             {{ website.hasSSR ? 'Universal' : 'Client-side' }}
           </div>
@@ -110,7 +110,7 @@
           label="Deployment"
         >
           <div
-            class="flex items-center text-seven leading-seven font-bold-body-weight mr-2"
+            class="flex items-center text-seven leading-seven font-bold-body-weight"
           >
             {{ website.isStatic ? 'Static' : 'Server' }}
           </div>
