@@ -107,7 +107,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 .checked .checkmark {
   background-color: theme('colors.primary.500');
   border-color: theme('colors.primary.500');

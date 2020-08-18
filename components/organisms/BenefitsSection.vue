@@ -130,9 +130,9 @@ export default {
           links: [
             {
               type: 'internal',
-              text: 'Check Our Terms',
+              text: 'Check Our Privacy Policy',
               route: {
-                name: 'terms'
+                name: 'privacy'
               }
             }
           ],
