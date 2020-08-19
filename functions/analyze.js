@@ -38,7 +38,7 @@ exports.handler = async function (event, _context) {
   let force = event.queryStringParameters.force === 'true'
 
   try {
-    const isPublic = event.queryStringParameters.isPublic
+    const isPublic = Boolean(event.queryStringParameters.isPublic)
     const rawUrl = event.queryStringParameters.url
     const normalizedUrl = normalizeUrl(rawUrl, {
       forceHttps: true,
@@ -83,7 +83,7 @@ exports.handler = async function (event, _context) {
     }
 
     // get showcase by hostname
-    const existingShowcase = await fetchStrapi(
+    const [ existingShowcase ] = await fetchStrapi(
       `${process.env.STRAPI_URL}/showcases?hostname=${hostname}&token=${process.env.STRAPI_TOKEN}`,
       {
         method: 'get'
@@ -92,10 +92,8 @@ exports.handler = async function (event, _context) {
 
     if (
       existingShowcase &&
-      existingShowcase.length &&
-      !isOutdated(existingShowcase[0].lastDetectedAt, 7) &&
+      !isOutdated(existingShowcase.lastDetectedAt, 30) &&
       !force
-      // existingShowcase[0].isPublic
     ) {
       return {
         statusCode: 200,
@@ -105,7 +103,7 @@ exports.handler = async function (event, _context) {
         body: JSON.stringify({
           message: 'Existing showcase found',
           statusCode: 200,
-          body: existingShowcase[0]
+          body: existingShowcase
         })
       }
     }
