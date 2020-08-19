@@ -1,7 +1,7 @@
 <template>
   <component
     :is="tag"
-    class="flex flex-col items-center w-full sm:w-1/2 md:w-1/3 p-2 max-w-sm m-auto sm:m-0"
+    class="flex flex-col items-center w-full sm:w-1/2 md:w-1/3 px-2 pb-2 max-w-sm m-auto sm:m-0"
   >
     <div class="relative w-full h-full pt-0">
       <div

@@ -3,7 +3,7 @@
     <div class="w-full h-full py-8 px-4" @click.self="makeChoice(false)">
       <div
         ref="modal-wrapper"
-        class="flex flex-col justify-between pointer-events-auto h-full relative bg-white m-auto max-w-readable-line-length md:mt-4 rounded-xl overflow-auto md:overflow-hidden overflow-x-hidden"
+        class="flex flex-col pointer-events-auto h-full relative bg-white m-auto max-w-readable-line-length md:mt-4 rounded-xl overflow-auto md:overflow-hidden overflow-x-hidden"
       >
         <h2 class="text-five leading-five font-display-weight p-4 text-center">
           We Respect Your Privacy
@@ -20,14 +20,14 @@
           <p class="mb-4">
             To complete this we need community help and your permission 🙌
           </p>
-          <h3 class="text-seven leading-seven font-display-weight mb-2">
+          <h3 class="text-seven leading-seven font-display-weight mb-1">
             Why we need a permission?
           </h3>
           <p class="mb-4">
             When using Vue Telemetry extension or website we will save websites
             that were analyzed in our database.
           </p>
-          <h3 class="text-seven leading-seven font-display-weight mb-2">
+          <h3 class="text-seven leading-seven font-display-weight mb-1">
             What data is collected?
           </h3>
           <p class="mb-4">
@@ -37,7 +37,7 @@
               submited.
             </strong>
           </p>
-          <h3 class="text-seven leading-seven font-display-weight mb-2">
+          <h3 class="text-seven leading-seven font-display-weight mb-1">
             When data is collected?
           </h3>
           <p class="mb-4">
@@ -46,7 +46,7 @@
             also be saved into database if you use Lookup feature on Vue
             Telemetry website.
           </p>
-          <h3 class="text-seven leading-seven font-display-weight mb-2">
+          <h3 class="text-seven leading-seven font-display-weight mb-1">
             What will the collected data be used for?
           </h3>
           <p class="mb-4">

@@ -16,7 +16,7 @@
         <div
           v-if="fetched"
           ref="modal-wrapper"
-          class="pointer-events-auto h-full relative md:h-auto bg-white m-auto max-w-readable-line-length md:mt-12 md:rounded-xl overflow-auto md:overflow-hidden overflow-x-hidden"
+          class="pointer-events-auto h-full relative md:h-auto bg-white m-auto max-w-readable-line-length xl:max-w-container-max-width md:mt-12 md:rounded-xl overflow-auto md:overflow-hidden overflow-x-hidden"
         >
           <div
             ref="close-button"
