@@ -42,18 +42,12 @@
           class="text-right flex flex-col md:flex-row text-sm leading-sm mb-2"
         >
           <li class="md:mr-4">
-            <NuxtLink
-              to="/terms"
-              class="text-primary-500 font-medium hover:underline"
-            >
+            <NuxtLink to="/terms" class="hover:text-primary-500 font-medium">
               Terms
             </NuxtLink>
           </li>
           <li class="">
-            <NuxtLink
-              to="/privacy"
-              class="text-primary-500 font-medium hover:underline"
-            >
+            <NuxtLink to="/privacy" class="hover:text-primary-500 font-medium">
               Privacy
             </NuxtLink>
           </li>

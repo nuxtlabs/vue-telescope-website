@@ -1,7 +1,10 @@
 <template>
   <div>
     <div v-if="twitterLike">
-      <TwitterLikeModalWrapper :fetched="website ? true : false">
+      <TwitterLikeModalWrapper
+        :fetched="website ? true : false"
+        @close="$router.push('/explore')"
+      >
         <ExploreWebsite :website="website" class="twitter-like mb-12" />
         <CtaSection />
       </TwitterLikeModalWrapper>

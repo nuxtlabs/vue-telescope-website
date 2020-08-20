@@ -36,9 +36,9 @@ exports.handler = async function (event, _context) {
   let origin
   let hostname
   let force = event.queryStringParameters.force === 'true'
+  const isPublic = event.queryStringParameters.isPublic === 'true'
 
   try {
-    const isPublic = Boolean(event.queryStringParameters.isPublic)
     const rawUrl = event.queryStringParameters.url
     const normalizedUrl = normalizeUrl(rawUrl, {
       forceHttps: true,
@@ -83,7 +83,7 @@ exports.handler = async function (event, _context) {
     }
 
     // get showcase by hostname
-    const [ existingShowcase ] = await fetchStrapi(
+    const [existingShowcase] = await fetchStrapi(
       `${process.env.STRAPI_URL}/showcases?hostname=${hostname}&token=${process.env.STRAPI_TOKEN}`,
       {
         method: 'get'

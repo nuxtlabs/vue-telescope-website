@@ -46,6 +46,15 @@
         />
       </div>
     </AppButton>
+    <div v-if="website">
+      <TwitterLikeModalWrapper
+        :fetched="website ? true : false"
+        @close="closePreviewModal"
+      >
+        <ExploreWebsite :website="website" preview class="twitter-like mb-12" />
+        <CtaSection />
+      </TwitterLikeModalWrapper>
+    </div>
   </div>
 </template>
 
@@ -61,7 +70,8 @@ export default {
     return {
       url: '',
       errorMessage: '',
-      pending: false
+      pending: false,
+      website: null
     }
   },
   computed: {
@@ -107,7 +117,7 @@ export default {
     },
     async analyzeWebsite() {
       this.pending = true
-      const res = await fetch(`/api/analyze?url=${this.url}&isPublic=true`, {
+      const res = await fetch(`/api/analyze?url=${this.url}&isPublic=false`, {
         method: 'GET'
       })
         .then((response) => {
@@ -120,17 +130,24 @@ export default {
         })
       if (res.statusCode === 200 && !res.body.isAdultContent) {
         this.$store.commit('SET_MODAL', true)
-        this.$router.push({
-          name: 'explore-website',
-          params: {
-            website: res.body.slug
-          }
-        })
+        this.website = res.body
+        history.pushState({}, null, `/explore/${res.body.slug}`)
+        // this.$router.push({
+        //   name: 'explore-website',
+        //   params: {
+        //     website: res.body.slug
+        //   }
+        // })
       } else if (res.statusCode === 200 && res.body.isAdultContent) {
         this.errorMessage = 'Website has adult content ;)'
       } else {
         this.errorMessage = res.message
       }
+    },
+    closePreviewModal() {
+      this.$store.commit('SET_MODAL', false)
+      this.website = null
+      history.pushState({}, null, '/')
     }
   }
 }

@@ -1,9 +1,6 @@
 <template>
   <div class="modal-wrapper">
-    <div
-      class="w-full h-full overflow-auto"
-      @click.self="$router.push('/explore')"
-    >
+    <div class="w-full h-full overflow-auto" @click.self="$emit('close')">
       <!-- <div class="w-full flex pointer-events-none">
         <div
           class="ml-auto p-8 cursor-pointer pointer-events-auto"
@@ -21,7 +18,7 @@
           <div
             ref="close-button"
             class="absolute top-0 right-0 z-10 p-4 cursor-pointer pointer-events-auto"
-            @click="$router.push('/explore')"
+            @click="$emit('close')"
           >
             <XmarkCircleIcon class="text-grey-900 w-6 h-6" />
           </div>
@@ -51,51 +48,71 @@ export default {
     fetched(value) {
       if (value) {
         this.$nextTick(() => {
-          // console.log('ANIMATE', this.$refs['modal-wrapper'])
           this.animateEnter()
         })
       }
     }
   },
-  activated() {
-    const escapeHandler = (e) => {
-      if (e.key === 'Escape') {
-        this.$router.push('/explore')
-      }
-    }
-    document.addEventListener('keydown', escapeHandler)
-    this.$once('hook:deactivated', () => {
-      document.removeEventListener('keydown', escapeHandler)
-    })
-
+  mounted() {
+    this.activateEscapeListener()
     this.$store.commit('SET_MODAL', true)
     if (this.fetched) {
       this.animateEnter()
     }
-    const scrollBarGap =
-      window.innerWidth - document.documentElement.clientWidth
-    document.querySelector('#explore-showcases-section').style.filter =
-      'blur(18px)'
-    document.querySelector('#main-footer').style.filter = 'blur(18px)'
-    document.querySelector('#main-header').style.filter = 'blur(18px)'
-    document.body.style.overflow = 'hidden'
-    document.body.style.paddingRight = `${scrollBarGap}px`
-    document.querySelector(
-      '#main-header'
-    ).style.paddingRight = `${scrollBarGap}px`
+    this.blockBodyScroll()
+  },
+  activated() {
+    this.activateEscapeListener()
+    this.$store.commit('SET_MODAL', true)
+    if (this.fetched) {
+      this.animateEnter()
+    }
+    this.blockBodyScroll()
+  },
+  beforeDestroy() {
+    this.$store.commit('SET_MODAL', false)
+    this.unblockBodyScroll()
   },
   deactivated() {
     this.$store.commit('SET_MODAL', false)
-    document.querySelector('#explore-showcases-section').style.filter = null
-    document.querySelector('#main-footer').style.filter = null
-    document.querySelector('#main-header').style.filter = null
-    setTimeout(() => {
-      document.body.style.overflow = null
-      document.body.style.paddingRight = null
-      document.querySelector('#main-header').style.paddingRight = null
-    })
+    this.unblockBodyScroll()
   },
   methods: {
+    blockBodyScroll() {
+      const scrollBarGap =
+        window.innerWidth - document.documentElement.clientWidth
+      // document.querySelector('#explore-showcases-section').style.filter =
+      //   'blur(18px)'
+      // document.querySelector('#main-footer').style.filter = 'blur(18px)'
+      // document.querySelector('#main-header').style.filter = 'blur(18px)'
+      document.body.style.overflow = 'hidden'
+      document.body.style.paddingRight = `${scrollBarGap}px`
+      document.querySelector(
+        '#main-header'
+      ).style.paddingRight = `${scrollBarGap}px`
+    },
+    unblockBodyScroll() {
+      // document.querySelector('#explore-showcases-section').style.filter = null
+      // document.querySelector('#main-footer').style.filter = null
+      // document.querySelector('#main-header').style.filter = null
+      setTimeout(() => {
+        document.body.style.overflow = null
+        document.body.style.paddingRight = null
+        document.querySelector('#main-header').style.paddingRight = null
+      })
+    },
+    activateEscapeListener() {
+      const escapeHandler = (e) => {
+        if (e.key === 'Escape') {
+          // this.$router.push('/explore')
+          this.$emit('close')
+        }
+      }
+      document.addEventListener('keydown', escapeHandler)
+      this.$once('hook:deactivated', () => {
+        document.removeEventListener('keydown', escapeHandler)
+      })
+    },
     animateEnter() {
       this.$gsap.set(this.$refs['modal-wrapper'], {
         transformOrigin: 'top'
@@ -156,7 +173,7 @@ export default {
   /* background: rgba(255, 255, 255, 0.42); */
   background-color: rgba(0, 0, 0, 0.2);
   z-index: 1000;
-  /* backdrop-filter: blur(18px); */
+  backdrop-filter: blur(18px);
   /* display: flex;
   align-items: center;
   justify-content: center; */

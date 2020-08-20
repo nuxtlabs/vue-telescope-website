@@ -11,8 +11,11 @@
       </div>
     </h1>
 
-    <div class="max-w-readable-line-length m-auto mb-12">
-      <LookupInput ref="lookup-input" class="opacity-0" />
+    <div
+      ref="lookup-input"
+      class="opacity-0 max-w-readable-line-length m-auto mb-12"
+    >
+      <LookupInput class="" />
     </div>
 
     <p
@@ -48,7 +51,7 @@ export default {
       }
     )
 
-    const lookupInput = this.$refs['lookup-input'].$el
+    const lookupInput = this.$refs['lookup-input']
     this.$gsap.fromTo(
       lookupInput,
       {
@@ -62,7 +65,11 @@ export default {
         y: 0,
         duration: 0.45,
         delay: 0.5,
-        ease: 'power4.inOut'
+        ease: 'power4.inOut',
+        clearProps: true,
+        onComplete() {
+          lookupInput.classList.remove('opacity-0')
+        }
       }
     )
 

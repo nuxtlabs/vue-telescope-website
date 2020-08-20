@@ -37,8 +37,44 @@
             :pixelate="website.isAdultContent"
             ratio="4:3"
             sizes="100vw"
-            class="absolute top-0 left-0 w-full"
+            class=""
           />
+          <div
+            v-if="localPreview && !website.isPublic"
+            style="
+              background-color: rgba(0, 0, 0, 0.1);
+              backdrop-filter: blur(6px);
+            "
+            class="top-0 left-0 absolute w-full h-full flex items-center justify-center"
+          >
+            <AppButton
+              appearance="primary"
+              size="large"
+              class="flex items-center justify-center"
+              @click.native="submitWebsite"
+            >
+              <div
+                :class="[
+                  !pending ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
+                ]"
+                class="transition duration-200 transform ease-in-out"
+              >
+                Submit
+              </div>
+              <div
+                :class="[
+                  pending ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
+                ]"
+                class="absolute transition duration-200 transform ease-in-out"
+              >
+                <AppLoader
+                  class="w-6 h-6"
+                  background="text-primary-400"
+                  path="text-primary-300"
+                />
+              </div>
+            </AppButton>
+          </div>
         </div>
       </div>
 
@@ -62,6 +98,48 @@ export default {
     website: {
       type: Object,
       default: () => {}
+    },
+    preview: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data() {
+    return {
+      pending: false,
+      localPreview: this.preview
+    }
+  },
+  methods: {
+    async submitWebsite() {
+      this.pending = true
+      const res = await fetch(
+        `/api/analyze?url=${this.website.hostname}&isPublic=true&force=true`,
+        {
+          method: 'GET'
+        }
+      )
+        .then((response) => {
+          this.pending = false
+          return response.json()
+        })
+        .catch((err) => {
+          this.pending = false
+          throw new Error(err)
+        })
+      if (res.statusCode === 200 && !res.body.isAdultContent) {
+        this.$store.commit('SET_MODAL', true)
+        history.pushState({}, null, `/explore/${res.body.slug}`)
+        // history.replaceState({}, null, `/explore/${res.body.slug}`)
+        this.localPreview = false
+        // window.location.replace(`/explore/${res.body.slug}`)
+        // this.$router.replace({
+        //   name: 'explore-website',
+        //   params: {
+        //     website: res.body.slug
+        //   }
+        // })
+      }
     }
   }
 }
