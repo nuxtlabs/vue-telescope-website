@@ -45,7 +45,7 @@
               background-color: rgba(0, 0, 0, 0.1);
               backdrop-filter: blur(6px);
             "
-            class="top-0 left-0 absolute w-full h-full flex items-center justify-center"
+            class="xl:rounded-xl top-0 left-0 absolute w-full h-full flex items-center justify-center"
           >
             <AppButton
               appearance="primary"
