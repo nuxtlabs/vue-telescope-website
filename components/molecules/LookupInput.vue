@@ -131,7 +131,9 @@ export default {
       if (res.statusCode === 200 && !res.body.isAdultContent) {
         this.$store.commit('SET_MODAL', true)
         this.website = res.body
-        history.pushState({}, null, `/explore/${res.body.slug}`)
+        if (this.website.isPublic) {
+          history.pushState({}, null, `/explore/${res.body.slug}`)
+        }
         // this.$router.push({
         //   name: 'explore-website',
         //   params: {
