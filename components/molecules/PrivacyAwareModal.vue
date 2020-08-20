@@ -34,11 +34,11 @@
             We only collect websites you visiting.
             <strong>
               This data is completely anonymous, no user ID, system, IP data is
-              submited.
+              submitted.
             </strong>
           </p>
           <h3 class="text-seven leading-seven font-display-weight mb-1">
-            When data is collected?
+            When is data collected?
           </h3>
           <p class="mb-4">
             Websites are saved when you use Vue Telemetry extension

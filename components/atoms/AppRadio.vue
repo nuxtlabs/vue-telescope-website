@@ -80,7 +80,7 @@ export default {
           },
           {
             scale: 0,
-            ease: 'none',
+            ease: 'power2.inOut',
             onComplete: () => {
               this.$gsap.fromTo(
                 this.$refs['color-mark'],
@@ -90,7 +90,7 @@ export default {
                 },
                 {
                   scale: 0.5,
-                  ease: 'none'
+                  ease: 'power2.inOut'
                 }
               )
             }
@@ -99,11 +99,11 @@ export default {
       } else {
         this.$gsap.to(this.$refs['color-mark'], 0.2, {
           scale: 1,
-          ease: 'none',
+          ease: 'power2.inOut',
           onComplete: () => {
             this.$gsap.to(this.$refs['white-mark'], 0.2, {
               scale: 1,
-              ease: 'none'
+              ease: 'power2.inOut'
             })
           }
         })
