@@ -44,7 +44,7 @@ export default {
 
 <style scoped>
 .animate-notification {
-  animation: ping 5s cubic-bezier(0, 0, 0.2, 1) infinite;
+  animation: ping 5s cubic-bezier(0, 0, 0.2, 1) infinite 2s;
 }
 
 @keyframes ping {
