@@ -35,7 +35,7 @@
     "@nuxtjs/pwa": "^3.0.0-beta.20",
     "@nuxtjs/strapi": "^0.1.2",
     "@nuxtjs/svg": "^0.1.11",
-    "@nuxtjs/tailwindcss": "^2.0.0",
+    "@nuxtjs/tailwindcss": "latest",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.0.0",
     "eslint-config-prettier": "^6.11.0",

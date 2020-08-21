@@ -10,6 +10,7 @@
         <TheLogo class="h-8" />
       </NuxtLink>
       <div class="flex items-center">
+        <Changelog ref="changelog" class="mr-6 opacity-0" />
         <NuxtLink
           ref="explore-link"
           to="/explore"
@@ -38,6 +39,7 @@ export default {
   },
   mounted() {
     const logo = this.$refs.logo.$el
+    const changelog = this.$refs.changelog.$el
     const exploreLink = this.$refs['explore-link'].$el
     const installExtensionButton = this.$refs['install-extension-button']
 
@@ -73,7 +75,7 @@ export default {
       }
     )
     this.$gsap.fromTo(
-      exploreLink,
+      [changelog, exploreLink],
       {
         opacity: 0,
         scale: 0.75,
