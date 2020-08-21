@@ -10,7 +10,11 @@
         <TheLogo class="h-8" />
       </NuxtLink>
       <div class="flex items-center">
-        <Changelog ref="changelog" class="mr-6 opacity-0" />
+        <ChangelogLink ref="changelog" class="mr-6 opacity-0">
+          <span v-if="!changelogNotified" class="hover-hover:hover:opacity-50">
+            What's New
+          </span>
+        </ChangelogLink>
         <NuxtLink
           ref="explore-link"
           to="/explore"
@@ -31,11 +35,17 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import TheLogo from '@/assets/logo/logo.svg?inline'
 
 export default {
   components: {
     TheLogo
+  },
+  computed: {
+    ...mapState({
+      changelogNotified: (state) => state.changelogNotified
+    })
   },
   mounted() {
     const logo = this.$refs.logo.$el

@@ -46,10 +46,15 @@
               Terms
             </NuxtLink>
           </li>
-          <li class="">
+          <li class="md:mr-4">
             <NuxtLink to="/privacy" class="hover:text-primary-500 font-medium">
               Privacy
             </NuxtLink>
+          </li>
+          <li class="">
+            <ChangelogLink class="hover:text-primary-500 font-medium">
+              Changelog
+            </ChangelogLink>
           </li>
         </ul>
       </div>

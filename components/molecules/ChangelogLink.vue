@@ -1,13 +1,11 @@
 <template>
-  <div class="relative">
-    <NuxtLink to="/changelog">
-      What's New
-      <span
-        v-if="!changelogNotified"
-        class="block absolute top-0 right-0 -mr-2 animate-pulse rounded-full bg-red-500 h-2 w-2"
-      ></span>
-    </NuxtLink>
-  </div>
+  <NuxtLink to="/changelog" class="relative">
+    <slot />
+    <span
+      v-if="!changelogNotified"
+      class="block absolute top-0 right-0 -mr-3 animate-pulse rounded-full bg-red-500 h-2 w-2"
+    ></span>
+  </NuxtLink>
 </template>
 
 <script>
