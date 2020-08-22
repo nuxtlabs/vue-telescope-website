@@ -55,7 +55,7 @@ export default {
   }
   75%,
   100% {
-    transform: scale(2);
+    transform: scale(1.5);
     filter: blur(10px);
     opacity: 0;
   }
