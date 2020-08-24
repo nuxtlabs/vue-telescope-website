@@ -7,7 +7,7 @@
     <slot />
     <div
       v-if="!changelogNotified"
-      class="absolute top-0 left-0 animate-notification"
+      class="absolute top-0 left-0 animate-notification pointer-events-none"
     >
       <slot />
     </div>
@@ -55,7 +55,7 @@ export default {
   }
   75%,
   100% {
-    transform: scale(1.5);
+    transform: scale(1.35);
     filter: blur(10px);
     opacity: 0;
   }

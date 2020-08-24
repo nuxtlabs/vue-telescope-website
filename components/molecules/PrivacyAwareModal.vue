@@ -18,20 +18,22 @@
             inspiration, research or analysis.
           </p>
           <p class="mb-4">
-            To complete this we need community help and your permission 🙌
+            To complete this we need community help and your permission.
           </p>
           <h3 class="text-seven leading-seven font-display-weight mb-1">
             Why we need a permission?
           </h3>
           <p class="mb-4">
-            When using Vue Telemetry extension or website we will save websites
-            that were analyzed in our database.
+            When using Vue Telemetry extension or website we could save websites
+            that were analyzed in our database. Saved website becomes public in
+            listing only after you agree to submit it (by clicking Submit button
+            in extension or website)
           </p>
           <h3 class="text-seven leading-seven font-display-weight mb-1">
             What data is collected?
           </h3>
           <p class="mb-4">
-            We only collect websites you visiting.
+            We only collect website url's.
             <strong>
               This data is completely anonymous, no user ID, system, IP data is
               submitted.
@@ -41,10 +43,11 @@
             When is data collected?
           </h3>
           <p class="mb-4">
-            Websites are saved when you use Vue Telemetry extension
-            (specifically, when you click on extension button). Website will
-            also be saved into database if you use Lookup feature on Vue
-            Telemetry website.
+            Websites are saved when you use Vue Telemetry extension. Website
+            will also be saved into database if you use Lookup feature on Vue
+            Telemetry website. Those websites will not appear publicly in
+            Explore section listing until you click Submit button fron extension
+            or website
           </p>
           <h3 class="text-seven leading-seven font-display-weight mb-1">
             What will the collected data be used for?

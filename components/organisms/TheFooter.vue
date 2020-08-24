@@ -53,7 +53,7 @@
           </li>
           <li class="">
             <ChangelogLink class="hover:text-primary-500 font-medium">
-              Changelog
+              <span class="">Changelog</span>
             </ChangelogLink>
           </li>
         </ul>

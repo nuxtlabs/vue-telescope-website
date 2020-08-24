@@ -3,6 +3,9 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
+  future: {
+    removeDeprecatedGapUtilities: true
+  },
   theme: {
     screens: {
       sm: '640px',
