@@ -1,8 +1,13 @@
 <template>
-  <div class="max-w-readable-line-length px-4 mx-auto pt-12">
-    <h1 class="text-four leading-four font-display-weight mb-8">
-      {{ changelog.title }}
-    </h1>
+  <div class="max-w-container-max-width px-4 mx-auto pt-12">
+    <div class="flex flex-wrap">
+      <div class="w-full md:w-1/4"></div>
+      <h1
+        class="w-full md:w-3/4 text-center md:text-left text-four leading-four font-display-weight mb-8"
+      >
+        {{ changelog.title }}
+      </h1>
+    </div>
     <NuxtContent :document="changelog" class="prose" />
   </div>
 </template>

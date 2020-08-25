@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@nuxt/content": "^1.5.3",
-    "bufferutil": "^4.0.1",
     "cloudinary": "^1.21.0",
     "consola": "^2.12.1",
     "core-js": "2",
@@ -23,7 +22,6 @@
     "normalize-url": "^5.0.0",
     "nuxt-edge": "^2.14.0-26582020.6ab65fbf",
     "speakingurl": "^14.0.1",
-    "utf-8-validate": "^5.0.2",
     "vue-content-placeholders": "^0.2.1",
     "vue-observe-visibility": "^0.4.6",
     "vue-telemetry-analyzer": "^0.6.12"

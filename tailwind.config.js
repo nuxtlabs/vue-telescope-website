@@ -93,7 +93,7 @@ module.exports = {
         900: '#212121'
       },
       red: {
-        50: '#F5E5E4',
+        50: '#FFF5F4',
         100: '#F5C4C1',
         200: '#F5A49E',
         300: '#F4837B',
@@ -105,7 +105,7 @@ module.exports = {
         900: '#A6180D'
       },
       yellow: {
-        50: '#FFFBD9',
+        50: '#FFFDEA',
         100: '#FFF6AA',
         200: '#FFF38E',
         300: '#FFF073',
@@ -117,7 +117,7 @@ module.exports = {
         900: '#807200'
       },
       green: {
-        50: '#EBFCEB',
+        50: '#F7FFF7',
         100: '#C5EDC5',
         200: '#A2DDA3',
         300: '#82CE84',
@@ -129,7 +129,7 @@ module.exports = {
         900: '#05800A'
       },
       blue: {
-        50: '#E6EEFA',
+        50: '#F2F7FF',
         100: '#C1D8FA',
         200: '#9CC1FA',
         300: '#77ABF9',
