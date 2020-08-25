@@ -13,11 +13,11 @@
       :class="[projectColors.bg, projectColors.border]"
     >
       <div
-        style="
-          border-radius: 0.75rem;
-          border-bottom-left-radius: 0;
-          border-top-right-radius: 0;
-        "
+        :style="{
+          'border-radius': '0.75rem',
+          'border-bottom-left-radius': 0,
+          'border-top-right-radius': 0
+        }"
         class="inline-block py-2 px-4 mb-4 rounded-xl rounded-bl-none rounded-tr-none text-xs leading-xs uppercase font-bold-body-weight"
         :class="[projectColors.labelBg, projectColors.labelText]"
       >
