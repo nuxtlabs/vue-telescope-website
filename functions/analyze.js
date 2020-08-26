@@ -93,8 +93,7 @@ exports.handler = async function (event, _context) {
     if (
       existingShowcase &&
       !isOutdated(existingShowcase.lastDetectedAt, 30) &&
-      !force &&
-      isPublic === existingShowcase.isPublic
+      !force
     ) {
       return {
         statusCode: 200,
