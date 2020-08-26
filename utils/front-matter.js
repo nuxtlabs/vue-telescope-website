@@ -103,15 +103,6 @@ export default ({
             defer: true
           }
         : {},
-      process.env.NODE_ENV === 'production'
-        ? {
-            hid: 'umami',
-            src: 'https://analytics.nuxtjs.app/umami.js',
-            'data-website-id': 'e4a10f42-c568-4b17-b218-018710ed5c82',
-            defer: true,
-            async: true
-          }
-        : {},
       // {
       //   src: 'https://feedback.fish/ff.js?pid=dd580ca404b5b7',
       //   defer: true

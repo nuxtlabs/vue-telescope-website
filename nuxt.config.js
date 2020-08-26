@@ -57,7 +57,8 @@ export default {
     // Doc: https://strapi.nuxtjs.org
     '@nuxtjs/strapi',
     // Doc: https://github.com/nuxt-community/proxy-module
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
+    'nuxt-ackee'
     // '@nuxtjs/pwa',
   ],
   // pwa: {
@@ -88,5 +89,10 @@ export default {
     '/api/analyze': {
       target: 'http://localhost:8888'
     }
+  },
+  ackee: {
+    server: 'https://ackee.nuxtjs.com',
+    domainId: '430278ce-79ea-4ff1-a8ce-5b461e217d65',
+    detailed: true
   }
 }
