@@ -92,29 +92,38 @@
 <script>
 import { mapState } from 'vuex'
 import frontMatter from '@/utils/front-matter'
+import cache from '@/utils/cache'
 
 export default {
   async fetch() {
-    try {
-      const website = await this.$strapi.findOne(
-        'showcases',
-        this.$route.params.website
-      )
-      if (website) {
-        this.website = website
-      } else {
+    if (cache.isInvalidCache(this.$route.params.website)) {
+      try {
+        const website = await this.$strapi.findOne(
+          'showcases',
+          this.$route.params.website
+        )
+        if (website) {
+          this.website = website
+          cache.setCache(this.$route.params.website, {
+            timestamp: Date.now(),
+            body: website
+          })
+        } else {
+          // set status code on server
+          if (process.server) {
+            this.$nuxt.context.res.statusCode = 404
+          }
+          throw new Error('Website not found')
+        }
+      } catch (err) {
         // set status code on server
         if (process.server) {
           this.$nuxt.context.res.statusCode = 404
         }
         throw new Error('Website not found')
       }
-    } catch (err) {
-      // set status code on server
-      if (process.server) {
-        this.$nuxt.context.res.statusCode = 404
-      }
-      throw new Error('Website not found')
+    } else {
+      this.website = cache.getCache(this.$route.params.website)
     }
   },
   // scrollToTop: true,
