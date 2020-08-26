@@ -3,8 +3,7 @@
     <ExploreShowcasesSection
       v-if="!$route.params.website || ($route.params.website && twitterLike)"
     />
-
-    <NuxtChild :key="$route.params.website" keep-alive />
+    <NuxtChild :key="$route.params.website" />
   </div>
 </template>
 

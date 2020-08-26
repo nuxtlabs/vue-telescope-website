@@ -55,28 +55,28 @@ export default {
   },
   mounted() {
     this.activateEscapeListener()
-    this.$store.commit('SET_MODAL', true)
+    // this.$store.commit('SET_MODAL', true)
     if (this.fetched) {
       this.animateEnter()
     }
     this.blockBodyScroll()
   },
-  activated() {
-    this.activateEscapeListener()
-    this.$store.commit('SET_MODAL', true)
-    if (this.fetched) {
-      this.animateEnter()
-    }
-    this.blockBodyScroll()
-  },
+  // activated() {
+  //   this.activateEscapeListener()
+  //   // this.$store.commit('SET_MODAL', true)
+  //   if (this.fetched) {
+  //     this.animateEnter()
+  //   }
+  //   this.blockBodyScroll()
+  // },
   beforeDestroy() {
     this.$store.commit('SET_MODAL', false)
     this.unblockBodyScroll()
   },
-  deactivated() {
-    this.$store.commit('SET_MODAL', false)
-    this.unblockBodyScroll()
-  },
+  // deactivated() {
+  //   this.$store.commit('SET_MODAL', false)
+  //   this.unblockBodyScroll()
+  // },
   methods: {
     blockBodyScroll() {
       const scrollBarGap =

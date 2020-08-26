@@ -129,11 +129,11 @@ export default {
       twitterLike: (state) => state.twitterLike
     })
   },
-  activated() {
-    if (this.$fetchState.timestamp <= Date.now() - 60000) {
-      this.$fetch()
-    }
-  },
+  // activated() {
+  //   if (this.$fetchState.timestamp <= Date.now() - 60000) {
+  //     this.$fetch()
+  //   }
+  // },
   head() {
     return frontMatter({
       path: this.$route.path,

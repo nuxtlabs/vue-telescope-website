@@ -3,10 +3,13 @@
     <div
       class="hover-effect relative cursor-pointer p-3"
       @click="
-        $router.push({
-          name: 'explore-website',
-          params: { website: showcase.slug }
-        })
+        () => {
+          $store.commit('SET_MODAL', true)
+          $router.push({
+            name: 'explore-website',
+            params: { website: showcase.slug }
+          })
+        }
       "
     >
       <div class="rounded-lg overflow-hidden mb-4">
