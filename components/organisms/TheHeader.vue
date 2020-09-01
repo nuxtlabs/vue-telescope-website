@@ -11,7 +11,7 @@
       </NuxtLink>
       <div class="flex items-center">
         <ChangelogLink ref="changelog" class="mr-2 sm:mr-4 opacity-0">
-          <span v-if="!changelogNotified" class="hover-hover:hover:opacity-50">
+          <span v-if="!$changelog.hasSeen" class="hover-hover:hover:opacity-50">
             What's New
           </span>
         </ChangelogLink>
@@ -35,17 +35,11 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import TheLogo from '@/assets/logo/logo.svg?inline'
 
 export default {
   components: {
     TheLogo
-  },
-  computed: {
-    ...mapState({
-      changelogNotified: (state) => state.changelogNotified
-    })
   },
   mounted() {
     const logo = this.$refs.logo.$el

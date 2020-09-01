@@ -29,6 +29,7 @@ export default {
   },
   plugins: [
     '~/plugins/init',
+    '~/plugins/changelog',
     '~/plugins/gsap.client',
     '~/plugins/vue-placeholders',
     '~/plugins/detect-client.client',

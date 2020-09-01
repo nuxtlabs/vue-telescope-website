@@ -14,19 +14,13 @@
 
 <script>
 export default {
-  async fetch() {
-    this.changelog = await this.$content('changelog').fetch()
-  },
-  data() {
-    return {
-      changelog: {}
-    }
+  async asyncData({ $content }) {
+    const changelog = await $content('changelog').fetch()
+
+    return { changelog }
   },
   mounted() {
-    setTimeout(() => {
-      localStorage.setItem('changelog_notified', true)
-      this.$store.commit('setChangelogNotification', true)
-    }, 100)
+    this.$changelog.saw()
   }
 }
 </script>

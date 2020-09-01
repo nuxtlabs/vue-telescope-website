@@ -125,7 +125,7 @@ export default {
         })
       })
       image.addEventListener('error', () => {
-        console.log('brand image load error')
+        console.error('brand image load error')
       })
     },
     leaveTransition(el, done) {

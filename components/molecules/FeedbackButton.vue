@@ -14,6 +14,7 @@ export default {
       script: [
         {
           src: 'https://feedback.fish/ff.js?pid=dd580ca404b5b7',
+          body: true,
           defer: true
         }
       ]

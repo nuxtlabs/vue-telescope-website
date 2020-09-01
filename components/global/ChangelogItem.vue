@@ -23,18 +23,6 @@
       >
         {{ project }}
       </div>
-
-      <!-- <div class="px-4 flex flex-wrap">
-        <div
-          v-for="tag in tags.split(',')"
-          :key="tag"
-          :class="[tagColors(tag.trim()).border, tagColors(tag.trim()).text]"
-          class="border mr-2 mb-1 py-1 px-3 rounded-full text-xs leading-xs capitalize font-bold-body-weight"
-        >
-          {{ tag }}
-        </div>
-      </div> -->
-
       <div class="-mt-4 px-4">
         <slot />
       </div>
@@ -57,14 +45,6 @@ export default {
       type: String,
       default: null
     }
-    // tags: {
-    //   type: String,
-    //   default: null,
-    //   validator(values) {
-    //     const v = values.split(',').map((i) => i.trim())
-    //     return v.every((t) => ['feature', 'fix', 'improvements'].includes(t))
-    //   }
-    // }
   },
   computed: {
     projectColors() {
@@ -96,35 +76,12 @@ export default {
     formatDateByLocale(d) {
       const currentLocale = 'en'
       const options = { year: 'numeric', month: 'long', day: 'numeric' }
+
       return new Date(d).toLocaleDateString(currentLocale, options)
     },
     dateToIso(date) {
-      const d = new Date(date)
-      return d.toISOString()
+      return new Date(date).toISOString()
     }
-    // tagColors(tag) {
-    //   if (tag === 'improvements') {
-    //     return {
-    //       bg: 'bg-green-400',
-    //       border: 'border-green-300',
-    //       text: 'text-green-500'
-    //     }
-    //   } else if (tag === 'fix') {
-    //     return {
-    //       bg: 'bg-red-400',
-    //       border: 'border-red-300',
-    //       text: 'text-red-500'
-    //     }
-    //   } else {
-    //     return {
-    //       bg: 'bg-grey-800',
-    //       border: 'border-grey-500',
-    //       text: 'text-grey-800'
-    //     }
-    //   }
-    // }
   }
 }
 </script>
-
-<style></style>
