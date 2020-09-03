@@ -11,8 +11,12 @@ export default async function (
     beforeNuxtRender(({ nuxtState }) => {
       nuxtState.changelog = { updatedAt }
     })
-  } else {
+  } else if (nuxtState.changelog) {
     updatedAt = nuxtState.changelog.updatedAt
+  } else {
+    // spa fallback
+    const changelog = await $content('changelog').only('updatedAt').fetch()
+    updatedAt = changelog.updatedAt
   }
   const $changelog = new Vue({
     data() {
