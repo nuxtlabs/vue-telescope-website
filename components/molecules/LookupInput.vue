@@ -46,15 +46,6 @@
         />
       </div>
     </AppButton>
-    <div v-if="website">
-      <TwitterLikeModalWrapper
-        :fetched="website ? true : false"
-        @close="closePreviewModal"
-      >
-        <ExploreWebsite :website="website" preview class="twitter-like mb-12" />
-        <CtaSection />
-      </TwitterLikeModalWrapper>
-    </div>
   </div>
 </template>
 
@@ -70,8 +61,7 @@ export default {
     return {
       url: '',
       errorMessage: '',
-      pending: false,
-      website: null
+      pending: false
     }
   },
   computed: {
@@ -100,7 +90,6 @@ export default {
       this.url = url.includes('://') ? url.split('://')[1] : url
       this.errorMessage = ''
       const parsedURL = new URL('https://' + this.url)
-      // console.log(parsedURL)
       if (parsedURL.pathname !== '/') {
         this.errorMessage = `Only top-level domains are analyzed: ${parsedURL.origin}`
       }
@@ -117,7 +106,7 @@ export default {
     },
     async analyzeWebsite() {
       this.pending = true
-      const res = await fetch(`/api/analyze?url=${this.url}&isPublic=false`, {
+      const res = await fetch(`/api/analyze?url=${this.url}&isPublic=true`, {
         method: 'GET'
       })
         .then((response) => {
@@ -130,26 +119,17 @@ export default {
         })
       if (res.statusCode === 200 && !res.body.isAdultContent) {
         this.$store.commit('SET_MODAL', true)
-        this.website = res.body
-        if (this.website.isPublic) {
-          history.pushState({}, null, `/explore/${res.body.slug}`)
-        }
-        // this.$router.push({
-        //   name: 'explore-website',
-        //   params: {
-        //     website: res.body.slug
-        //   }
-        // })
+        this.$router.push({
+          name: 'explore-website',
+          params: {
+            website: res.body.slug
+          }
+        })
       } else if (res.statusCode === 200 && res.body.isAdultContent) {
         this.errorMessage = 'Website has adult content ;)'
       } else {
         this.errorMessage = res.message
       }
-    },
-    closePreviewModal() {
-      this.$store.commit('SET_MODAL', false)
-      this.website = null
-      history.pushState({}, null, '/')
     }
   }
 }
