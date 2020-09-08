@@ -6,7 +6,7 @@ const ERROR_CODES = require('vue-telemetry-analyzer').ERROR_CODES
 const cloudinary = require('cloudinary').v2
 const { URL } = require('url')
 const consola = require('consola')
-const pTimeout = require('p-timeout')
+// const pTimeout = require('p-timeout')
 const {
   isBlacklisted,
   isOutdated,
@@ -223,7 +223,8 @@ async function analyzeRequest(event, _context) {
 exports.handler = async function (event, _context) {
   let result
   try {
-    result = await pTimeout(analyzeRequest(event, _context), 25000)
+    // result = await pTimeout(analyzeRequest(event, _context), 25000)
+    result = await analyzeRequest(event, _context)
   } catch (err) {
     result = {
       statusCode: 408,
