@@ -96,6 +96,8 @@ export default {
         return 'Plugins'
       } else if (key === 'modules.slug') {
         return 'Nuxt Modules'
+      } else if (key === '_q') {
+        return 'Keyword'
       }
     },
     content({ key, value }) {
@@ -116,6 +118,8 @@ export default {
         } else {
           return `${value[0]} + ${value.length - 1} more`
         }
+      } else if (key === '_q') {
+        return value
       }
     }
   }

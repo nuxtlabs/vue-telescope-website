@@ -4,14 +4,6 @@
     class="flex max-w-container-max-width m-auto px-2"
   >
     <div id="explore-showcases-aside" class="w-1/4 hidden md:block">
-      <!-- <ExploreShowcasesSearchInput
-        class="mx-2 mr-0 mb-8"
-        @update-filters="
-          (query) => {
-            updateQuery(query)
-          }
-        "
-      />-->
       <ExploreShowcasesSearchFilters
         id="explore-showcases-controls"
         ref="filters"
@@ -149,6 +141,7 @@ import { mapState } from 'vuex'
 import qs from 'qs'
 
 const allowed = [
+  '_q',
   'framework.slug',
   'framework_null',
   'ui.slug',

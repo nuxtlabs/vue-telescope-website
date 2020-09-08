@@ -1,5 +1,6 @@
 <template>
   <div class="px-2">
+    <ExploreShowcasesSearchInput class="mb-4" />
     <!-- <div class="mb-4">
       <AppFilterLabel>Rendering</AppFilterLabel>
       <div class="flex flex-col">
