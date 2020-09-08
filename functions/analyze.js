@@ -6,6 +6,7 @@ const ERROR_CODES = require('vue-telemetry-analyzer').ERROR_CODES
 const cloudinary = require('cloudinary').v2
 const { URL } = require('url')
 const consola = require('consola')
+const pTimeout = require('p-timeout')
 const {
   isBlacklisted,
   isOutdated,
@@ -17,7 +18,7 @@ const slugify = require('speakingurl')
 // const normalizeUrl = require('normalize-url')
 const fetch = require('node-fetch')
 
-exports.handler = async function (event, _context) {
+async function analyzeRequest(event, _context) {
   let codeError
   if (!event.queryStringParameters.url) {
     return {
@@ -217,4 +218,23 @@ exports.handler = async function (event, _context) {
       })
     }
   }
+}
+
+exports.handler = async function (event, _context) {
+  let result
+  try {
+    result = await pTimeout(analyzeRequest(event, _context), 25000)
+  } catch (err) {
+    result = {
+      statusCode: 408,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        message: 'A timeout occured, please try again later.',
+        statusCode: 408
+      })
+    }
+  }
+  return result
 }
