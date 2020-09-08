@@ -10,6 +10,7 @@
       v-model="computedQ"
       class="pl-10"
       size="base"
+      placeholder="Search a website"
       @keypress.enter.native="searchQ"
     />
   </div>

@@ -1,7 +1,7 @@
 <template>
   <input
     :class="[sizing.height, sizing.fontSize, sizing.rounded, sizing.padding]"
-    class="w-full border-2 bg-grey-200 hover:bg-grey-100 border-transparent font-bold-body-weight focus:border-grey-500 focus:bg-grey-50 focus:outline-none"
+    class="w-full placeholder-grey-400 border-2 bg-grey-200 hover:bg-grey-100 border-transparent font-bold-body-weight focus:border-grey-500 focus:bg-grey-50 focus:outline-none"
     :type="type"
     :value="value"
     @input="$emit('input', $event.target.value)"
