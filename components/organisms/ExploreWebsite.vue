@@ -59,7 +59,7 @@
                 ]"
                 class="transition duration-200 transform ease-in-out"
               >
-                Submit
+                Save
               </div>
               <div
                 :class="[
