@@ -15,13 +15,9 @@ export default {
     ...mapState({
       showcasesCount: (state) => state.showcasesCount
     })
+  },
+  mounted() {
+    this.$store.dispatch('GET_SHOWCASES_COUNT')
   }
-  // mounted() {
-  //   setTimeout(() => {
-  //     this.totalShowcases = 10000
-  //   }, 3000)
-  // }
 }
 </script>
-
-<style></style>

@@ -74,7 +74,7 @@ export const mutations = {
 }
 
 export const actions = {
-  async INIT_APP({ state, commit }) {
+  async INIT_APP({ dispatch, commit }) {
     const entities = ['frameworks', 'modules', 'plugins', 'uis']
 
     await Promise.all(
@@ -98,9 +98,13 @@ export const actions = {
         commit(`SET_${entity.toUpperCase()}`, technologies)
       })
     )
+    await dispatch('GET_SHOWCASES_COUNT')
+
+    commit('isReady')
+  },
+  async GET_SHOWCASES_COUNT({ commit }) {
     const showcasesCount = await this.$strapi.find('showcases/count')
     commit('setShowcasesCount', showcasesCount)
-    commit('isReady')
   },
   PROCESS_PRIVACY_AWARENESS({ state, commit }, cb) {
     return new Promise((resolve, reject) => {
