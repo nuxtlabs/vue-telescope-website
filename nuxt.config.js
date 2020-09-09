@@ -58,7 +58,7 @@ export default {
     // Doc: https://github.com/nuxt-community/proxy-module
     '@nuxtjs/proxy',
     // Doc: https://pwa.nuxtjs.org
-    // '@nuxtjs/pwa',
+    '@nuxtjs/pwa',
     'nuxt-ackee'
   ],
   pwa: {
