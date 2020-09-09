@@ -9,9 +9,7 @@
           We Respect Your Privacy
         </h2>
         <div class="p-4 overflow-auto">
-          <p class="mb-4">
-            Hello, fellow Vue.js developer 👋
-          </p>
+          <p class="mb-4">Hello, fellow Vue.js developer 👋</p>
           <p class="mb-4">
             We started Vue Telemetry project with one goal in mind: provide
             developers the best tool to explore Vue.js ecosystem for

@@ -1,21 +1,19 @@
-import 'dotenv/config'
 import frontMatter from './utils/front-matter'
 
 export default {
-  // // BETA
-  // mode: 'universal',
-  // loadingIndicator: {
-  //   name: 'cube-grid',
-  //   color: '#0BDCA0',
-  //   background: 'white'
-  // },
-  // END BETA
-  // mode: 'universal',
+  ssr: true,
   target: 'static',
   // Activate components auto discovery
   components: true,
+  // SPA Fallback
+  loadingIndicator: {
+    name: 'cube-grid',
+    color: '#0BDCA0',
+    background: 'white'
+  },
   // Disable loading bar
   loading: false,
+  // Meta Tags
   head: {
     ...frontMatter({
       path: '',
@@ -59,33 +57,22 @@ export default {
     '@nuxtjs/strapi',
     // Doc: https://github.com/nuxt-community/proxy-module
     '@nuxtjs/proxy',
-    'nuxt-ackee'
+    // Doc: https://pwa.nuxtjs.org
     // '@nuxtjs/pwa',
+    'nuxt-ackee'
   ],
-  // pwa: {
-  //   manifest: {
-  //     name: 'Vue Telemetry',
-  //     short_name: 'VT',
-  //     description: 'Discover websites made with Vue.js',
-  //     background_color: '#ffffff',
-  //     theme_color: '#0BDCA0'
-  //   },
-  //   // meta: false,
-  //   // meta: {
-  //   //   ogHost: 'https://vuetelemetry.com',
-  //   //   ogImage: {
-  //   //     path: '/og-image.jpg'
-  //   //   },
-  //   //   twitterCard: 'summary_large_image',
-  //   //   twitterSite: '@vuetelemetry'
-  //   // },
-  //   icon: true
-  // },
+  pwa: {
+    manifest: {
+      name: 'Vue Telemetry',
+      short_name: 'VT',
+      description: 'Discover websites made with Vue.js',
+      background_color: '#ffffff',
+      theme_color: '#0BDCA0'
+    },
+    meta: false,
+    icon: true
+  },
   proxy: {
-    // // BETA
-    // '/api/password': {
-    //   target: 'http://localhost:8888'
-    // },
     // END BETA
     '/api/analyze': {
       target: 'http://localhost:8888'

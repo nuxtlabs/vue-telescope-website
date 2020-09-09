@@ -23,7 +23,7 @@
       >
         {{ project }}
       </div>
-      <div class="-mt-4 px-4">
+      <div class="-mt-4 px-4" :class="project">
         <slot />
       </div>
     </div>
@@ -50,10 +50,10 @@ export default {
     projectColors() {
       if (this.project === 'website') {
         return {
-          bg: 'bg-red-50',
-          border: 'border-red-100',
-          labelBg: 'bg-red-100',
-          labelText: 'text-red-900'
+          bg: 'bg-blue-50',
+          border: 'border-blue-100',
+          labelBg: 'bg-blue-100',
+          labelText: 'text-blue-900'
         }
       } else if (this.project === 'extension') {
         return {
@@ -85,3 +85,15 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.website a {
+  @apply text-blue-600;
+}
+.extension a {
+  @apply text-green-600;
+}
+.analyzer a {
+  @apply text-orange-500;
+}
+</style>

@@ -32,7 +32,7 @@
       <div
         ref="image"
         class="absolute top-0 left-0 w-full h-full bg-100 bg-no-repeat bg-top"
-        style="background-image: url('/images/detect.png');"
+        style="background-image: url('/images/detect.png')"
       ></div>
     </div>
   </div>

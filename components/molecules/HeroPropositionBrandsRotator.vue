@@ -124,9 +124,7 @@ export default {
           })
         })
       })
-      image.addEventListener('error', () => {
-        console.error('brand image load error')
-      })
+      // image.addEventListener('error', () => {})
     },
     leaveTransition(el, done) {
       this.$gsap.fromTo(

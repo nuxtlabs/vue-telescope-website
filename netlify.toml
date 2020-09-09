@@ -18,12 +18,6 @@
   force = true
 
 [[redirects]]
-  from = "/api/password"
-  to = "/.netlify/functions/password"
-  status = 200
-  force = true
-
-[[redirects]]
   from = "/*"
   to = "/404.html"
   status = 200
