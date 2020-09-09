@@ -2,13 +2,13 @@ import 'dotenv/config'
 import frontMatter from './utils/front-matter'
 
 export default {
-  // BETA
-  mode: 'universal',
-  loadingIndicator: {
-    name: 'cube-grid',
-    color: '#0BDCA0',
-    background: 'white'
-  },
+  // // BETA
+  // mode: 'universal',
+  // loadingIndicator: {
+  //   name: 'cube-grid',
+  //   color: '#0BDCA0',
+  //   background: 'white'
+  // },
   // END BETA
   // mode: 'universal',
   target: 'static',
@@ -35,8 +35,8 @@ export default {
     '~/plugins/detect-client.client',
     '~/plugins/twitter-like',
     '~/plugins/intersection-observer.client',
-    '~/plugins/vue-observe-visibility.client',
-    '~/plugins/password.client'
+    '~/plugins/vue-observe-visibility.client'
+    // '~/plugins/password.client'
   ],
   router: {
     prefetchPayloads: false
@@ -82,10 +82,10 @@ export default {
   //   icon: true
   // },
   proxy: {
-    // BETA
-    '/api/password': {
-      target: 'http://localhost:8888'
-    },
+    // // BETA
+    // '/api/password': {
+    //   target: 'http://localhost:8888'
+    // },
     // END BETA
     '/api/analyze': {
       target: 'http://localhost:8888'
