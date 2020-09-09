@@ -26,8 +26,8 @@
           <p class="mb-4">
             When using Vue Telemetry extension or website we could save websites
             that were analyzed in our database. Saved website becomes public in
-            listing only after you agree to submit it (by clicking the Save
-            button in extension or website)
+            listing only after you agree to submit it (by clicking the Lookup
+            button on website or Save button in extension)
           </p>
           <h3 class="text-seven leading-seven font-display-weight mb-1">
             What data is collected?
