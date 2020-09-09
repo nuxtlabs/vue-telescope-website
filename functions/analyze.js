@@ -53,6 +53,31 @@ async function analyzeRequest(event, _context) {
     if (isBlacklisted(hostname)) {
       throw new Error('Invalid URL')
     }
+    // get showcase by hostname
+    const [existingShowcase] = await fetchStrapi(
+      `${process.env.STRAPI_URL}/showcases?hostname=${hostname}&token=${process.env.STRAPI_TOKEN}`,
+      {
+        method: 'get'
+      }
+    )
+
+    if (
+      existingShowcase &&
+      !isOutdated(existingShowcase.lastDetectedAt, 30) &&
+      !force
+    ) {
+      return {
+        statusCode: 200,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          message: 'Existing showcase found',
+          statusCode: 200,
+          body: existingShowcase
+        })
+      }
+    }
 
     // check if showcase has been scanned (only in production)
     if (!process.env.NETLIFY_DEV) {
@@ -82,31 +107,6 @@ async function analyzeRequest(event, _context) {
       }
     }
 
-    // get showcase by hostname
-    const [existingShowcase] = await fetchStrapi(
-      `${process.env.STRAPI_URL}/showcases?hostname=${hostname}&token=${process.env.STRAPI_TOKEN}`,
-      {
-        method: 'get'
-      }
-    )
-
-    if (
-      existingShowcase &&
-      !isOutdated(existingShowcase.lastDetectedAt, 30) &&
-      !force
-    ) {
-      return {
-        statusCode: 200,
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          message: 'Existing showcase found',
-          statusCode: 200,
-          body: existingShowcase
-        })
-      }
-    }
 
     consola.info(`Analyzing ${origin}...`)
     const infos = await analyze(origin)
