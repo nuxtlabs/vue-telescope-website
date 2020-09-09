@@ -106,12 +106,9 @@ export default {
     },
     async analyzeWebsite() {
       this.pending = true
-      const res = await fetch(
-        `/api/analyze?url=${this.url}&isPublic=true&force=true`,
-        {
-          method: 'GET'
-        }
-      )
+      const res = await fetch(`/api/analyze?url=${this.url}&isPublic=true`, {
+        method: 'GET'
+      })
         .then((response) => {
           this.pending = false
           return response.json()
