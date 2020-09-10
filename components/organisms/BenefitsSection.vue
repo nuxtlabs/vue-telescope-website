@@ -43,6 +43,7 @@
       </div>
       <div class="w-full md:w-1/2 px-4">
         <img
+          loading="lazy"
           :src="benefit.image"
           alt=""
           class="w-full max-w-sm md:max-w-full m-auto"
