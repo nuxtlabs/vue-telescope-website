@@ -6,7 +6,7 @@
     <div
       class="w-full h-full flex justify-between items-center max-w-container-max-width m-auto px-4"
     >
-      <NuxtLink ref="logo" to="/" class="opacity-0">
+      <NuxtLink ref="logo" to="/" class="opacity-0" aria-label="Home Page">
         <TheLogo class="h-8" />
       </NuxtLink>
       <div class="flex items-center">

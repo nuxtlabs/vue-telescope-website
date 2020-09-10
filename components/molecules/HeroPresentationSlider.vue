@@ -14,6 +14,7 @@
       >
         <div v-if="i === 2" class="block md:hidden">
           <button
+            aria-label="Prev"
             style="top: 50%; transform: translateY(-50%);"
             class="absolute left-0 z-10 w-10 h-10 ml-4 flex items-center justify-center bg-primary-500 rounded-full overflow-hidden shadow-lg focus:outline-none"
             @click="
@@ -25,6 +26,7 @@
             <ArrowLeftIcon class="w-6 text-white" />
           </button>
           <button
+            aria-label="Next"
             style="top: 50%; transform: translateY(-50%);"
             class="absolute top-0 right-0 z-10 w-10 h-10 mr-4 flex items-center justify-center bg-primary-500 rounded-full overflow-hidden shadow-lg focus:outline-none"
             @click="

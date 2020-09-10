@@ -13,16 +13,20 @@
     >
       https://
     </span>
-    <AppInput
-      ref="input"
-      type="url"
-      :size="size"
-      class="rounded-r-none border-r-0"
-      :class="[protocolPadding]"
-      :value="url"
-      @input="formatUrlInput"
-      @keypress.enter.native="processAnalyzeWebsite"
-    />
+    <label class="">
+      <span class="absolute opacity-0 pointer-events-none">Lookup</span>
+      <AppInput
+        ref="input"
+        type="url"
+        :size="size"
+        class="rounded-r-none border-r-0"
+        :class="[protocolPadding]"
+        :value="url"
+        label="Lookup"
+        @input="formatUrlInput"
+        @keypress.enter.native="processAnalyzeWebsite"
+      />
+    </label>
     <AppButton
       :size="size"
       appearance="info"

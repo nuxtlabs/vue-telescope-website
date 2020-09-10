@@ -61,7 +61,7 @@
 
       <div class="flex flex-col md:flex-row items-center justify-between">
         <div class="flex flex-col md:flex-row items-center mb-4 md:mb-0">
-          <NuxtLink to="/" class="mb-2 md:mb-0 md:mr-1">
+          <NuxtLink to="/" class="mb-2 md:mb-0 md:mr-1" aria-label="Home Page">
             <TheSquareLogo class="h-6" />
           </NuxtLink>
           <div
