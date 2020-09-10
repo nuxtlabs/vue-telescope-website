@@ -32,7 +32,7 @@
               <ContentPlaceholdersText
                 class="custom relative h-full w-full rounded-xl overflow-hidden"
                 :lines="1"
-                style="padding-bottom: 75%"
+                style="padding-bottom: 75%;"
               />
             </div>
 

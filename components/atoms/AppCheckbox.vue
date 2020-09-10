@@ -14,7 +14,7 @@
         @change="$emit('input', checked)"
       />
       <div
-        style="border-radius: 4px"
+        style="border-radius: 4px;"
         :class="[isHovered ? 'border-grey-500' : 'border-grey-300']"
         class="checkmark w-5 h-5 mr-2 p-3px pointer-events-none text-white border transition-colors duration-400"
       >

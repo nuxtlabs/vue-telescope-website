@@ -119,7 +119,6 @@ async function analyzeRequest(event, _context) {
       }
     }
 
-
     consola.info(`Analyzing ${origin}...`)
     const infos = await analyze(origin)
 
@@ -200,7 +199,7 @@ async function analyzeRequest(event, _context) {
     }
   } catch (err) {
     // error from vue-telemetry-analyzer
-    if (err.code) {
+    if (err.code && err.message !== 'spawn ENOMEM') {
       // for ERROR_CODES, see: https://github.com/nuxt-company/vue-telemetry-analyzer/blob/master/src/index.js
       const scanData = {
         url: hostname,
@@ -232,19 +231,16 @@ async function analyzeRequest(event, _context) {
   }
 }
 
-const promiseTimeout = function (promise, ms){
+const promiseTimeout = function (promise, ms) {
   // Create a promise that rejects in <ms> milliseconds
   let timeout = new Promise((resolve, reject) => {
     let id = setTimeout(() => {
       clearTimeout(id)
-      reject('Timed out in '+ ms + 'ms.')
+      reject('Timed out in ' + ms + 'ms.')
     }, ms)
   })
   // Returns a race between our timeout and the passed in promise
-  return Promise.race([
-    promise,
-    timeout
-  ])
+  return Promise.race([promise, timeout])
 }
 
 exports.handler = async function (event, _context) {
@@ -255,7 +251,7 @@ exports.handler = async function (event, _context) {
     result = {
       statusCode: 408,
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         message: 'A timeout occured, please try again later.',

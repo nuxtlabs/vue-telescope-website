@@ -40,7 +40,7 @@
       <div
         ref="image"
         class="absolute top-0 left-0 w-full h-full bg-100 bg-no-repeat bg-top"
-        style="background-image: url('/images/submit.png')"
+        style="background-image: url('/images/submit.png');"
       ></div>
     </div>
   </div>
