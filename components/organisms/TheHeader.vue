@@ -101,6 +101,6 @@ export default {
 <style scoped>
 .the-header {
   backdrop-filter: blur(12px);
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0.75);
 }
 </style>
