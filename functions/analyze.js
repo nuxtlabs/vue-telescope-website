@@ -54,7 +54,7 @@ async function analyzeRequest(event, _context) {
       throw new Error('Invalid URL')
     }
     // get showcase by hostname
-    const [existingShowcase] = await fetchStrapi(
+    let [existingShowcase] = await fetchStrapi(
       `${process.env.STRAPI_URL}/showcases?hostname=${hostname}&token=${process.env.STRAPI_TOKEN}`,
       {
         method: 'get'
@@ -66,6 +66,18 @@ async function analyzeRequest(event, _context) {
       !isOutdated(existingShowcase.lastDetectedAt, 30) &&
       !force
     ) {
+      if (isPublic && !existingShowcase.isPublic) {
+        existingShowcase = await fetchStrapi(
+          `${process.env.STRAPI_URL}/showcases?token=${process.env.STRAPI_TOKEN}`,
+          {
+            method: 'post',
+            body: {
+              slug: existingShowcase.slug,
+              isPublic: true
+            }
+          }
+        )
+      }
       return {
         statusCode: 200,
         headers: {
@@ -171,7 +183,7 @@ async function analyzeRequest(event, _context) {
       `${process.env.STRAPI_URL}/showcases?token=${process.env.STRAPI_TOKEN}`,
       {
         method: 'post',
-        body: JSON.stringify(showcaseData)
+        body: showcaseData
       }
     )
 
@@ -199,7 +211,7 @@ async function analyzeRequest(event, _context) {
         `${process.env.STRAPI_URL}/scans?token=${process.env.STRAPI_TOKEN}`,
         {
           method: 'post',
-          body: JSON.stringify(scanData)
+          body: scanData
         }
       )
     }

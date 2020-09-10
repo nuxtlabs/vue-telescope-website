@@ -25,6 +25,9 @@ exports.isOutdated = function (date, days) {
 }
 
 exports.fetchStrapi = async function (url, { method, body }) {
+  if (typeof body === 'object') {
+    body = JSON.stringify(body)
+  }
   return await fetch(url, {
     method,
     ...(body ? { body } : {}),
