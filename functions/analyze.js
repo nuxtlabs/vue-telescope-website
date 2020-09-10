@@ -204,7 +204,8 @@ async function analyzeRequest(event, _context) {
       // for ERROR_CODES, see: https://github.com/nuxt-company/vue-telemetry-analyzer/blob/master/src/index.js
       const scanData = {
         url: hostname,
-        isProxyBlocked: err.statusCode === 403
+        isProxyBlocked: err.statusCode === 403,
+        error: err.message
       }
 
       const insertScan = await fetchStrapi(
