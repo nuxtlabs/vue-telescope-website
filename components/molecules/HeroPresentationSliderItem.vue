@@ -15,6 +15,7 @@
           >
             <img
               ref="showcase"
+              loading="lazy"
               class="h-full"
               sizes="(min-width: 834px) 50vw, 100vw"
               :srcset="srcset(showcase.screenshotUrl)"

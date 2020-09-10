@@ -68,7 +68,7 @@
       <div
         ref="image"
         class="absolute top-0 left-0 w-full h-full bg-100 bg-no-repeat bg-top"
-        style="background-image: url('/images/explore.png');"
+        :style="`background-image: url('https://res.cloudinary.com/nuxt/image/upload/f_auto,q_auto/remote/vt${image}');`"
       ></div>
     </div>
   </div>
@@ -95,6 +95,10 @@ export default {
       default: ''
     },
     description: {
+      type: String,
+      default: ''
+    },
+    image: {
       type: String,
       default: ''
     }

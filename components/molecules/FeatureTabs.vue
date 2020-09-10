@@ -45,6 +45,7 @@
         :surface-color="activeTab.surfaceColor"
         :on-surface-color="activeTab.onSurfaceColor"
         :description="activeTab.description"
+        :image="activeTab.image"
         class=""
       />
     </transition-group>
@@ -64,7 +65,8 @@ const tabs = [
       'Vue Telemetry can detect any website built with Vue.js frameworks, like Nuxt, Gridsome, Quasar or VuePress. It can also tell you which UI/CSS framework was used: TailwindCSS, Vuetify, Buefy etc. And much more!',
     component: 'FeatureTabsOne',
     surfaceColor: '#fffee1',
-    onSurfaceColor: 'rgba(247, 213, 14, 0.99)'
+    onSurfaceColor: 'rgba(247, 213, 14, 0.99)',
+    image: '/images/detect.png'
   },
   {
     id: 2,
@@ -73,7 +75,8 @@ const tabs = [
       'Explore our showcase of websites build with Vue.js and use the filter to see projects built with a particular framework and/or UI library. You can also filter by plugins as well as Nuxt.js modules.',
     component: 'FeatureTabsTwo',
     surfaceColor: 'rgba(225, 245, 255, 1)',
-    onSurfaceColor: 'rgba(79, 196, 255, 0.99)'
+    onSurfaceColor: 'rgba(79, 196, 255, 0.99)',
+    image: '/images/explore.png'
   },
   {
     id: 3,
@@ -82,7 +85,8 @@ const tabs = [
       'You can manually submit your site or any site built using any of the Vue.js frameworks by adding it to the input and clicking "Look up". If we don\'t already have the site in our database we will scan it and add it in no more than 20 seconds.',
     component: 'FeatureTabsThree',
     surfaceColor: 'rgba(245, 233, 255, 1)',
-    onSurfaceColor: 'rgb(187, 130, 255, 0.99)'
+    onSurfaceColor: 'rgb(187, 130, 255, 0.99)',
+    image: '/images/submit.png'
   }
 ]
 
