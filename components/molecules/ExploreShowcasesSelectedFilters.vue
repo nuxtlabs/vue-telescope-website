@@ -113,10 +113,11 @@ export default {
       } else if (key === 'framework_null' || key === 'ui_null') {
         return 'None'
       } else if (key === 'plugins.slug' || key === 'modules.slug') {
-        if (value.length === 1) {
-          return value[0]
+        const validatedValue = Array.isArray(value) ? value : [value]
+        if (validatedValue.length === 1) {
+          return validatedValue[0]
         } else {
-          return `${value[0]} + ${value.length - 1} more`
+          return `${validatedValue[0]} + ${validatedValue.length - 1} more`
         }
       } else if (key === '_q') {
         return value
