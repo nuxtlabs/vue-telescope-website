@@ -44,7 +44,7 @@
       <div class="w-full md:w-1/2 px-4">
         <img
           loading="lazy"
-          :src="benefit.image"
+          :src="`https://res.cloudinary.com/nuxt/image/upload/f_auto,q_auto/remote/vt${benefit.image}`"
           alt=""
           class="w-full max-w-sm md:max-w-full m-auto"
         />

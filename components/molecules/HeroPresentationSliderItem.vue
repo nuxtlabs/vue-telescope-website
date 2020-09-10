@@ -3,6 +3,7 @@
     <template v-if="activeShowcases.length">
       <div class="showcase-wrapper">
         <div
+          :style="[intristicRatioPadding]"
           class="intrinsic w-full h-full relative shadow-xl rounded-xl overflow-hidden bg-grey-200"
         >
           <div
@@ -14,8 +15,9 @@
           >
             <img
               ref="showcase"
-              loading="lazy"
-              class=""
+              class="h-full"
+              sizes="(min-width: 834px) 50vw, 100vw"
+              :srcset="srcset(showcase.screenshotUrl)"
               :src="`https://res.cloudinary.com/nuxt/image/upload/w_1200,h_900,f_auto,q_auto/${showcase.screenshotUrl}`"
               alt=""
             />
@@ -73,7 +75,24 @@ export default {
   },
   data() {
     return {
-      activeShowcases: []
+      activeShowcases: [],
+      imageRatio: '4:3'
+    }
+  },
+  computed: {
+    intristicRatio() {
+      if (!this.imageRatio) {
+        return 0
+      } else {
+        const sizes = this.imageRatio.split(':')
+        const ratio = sizes[1] / sizes[0]
+        return ratio
+      }
+    },
+    intristicRatioPadding() {
+      return {
+        'padding-bottom': `${this.intristicRatio * 100}%`
+      }
     }
   },
   watch: {
@@ -218,14 +237,27 @@ export default {
           }
         })
       }
+    },
+    src(screenshot) {
+      return this.generateSrc(screenshot, 1200)
+    },
+    srcset(screenshot) {
+      return [160, 240, 320, 560, 800, 920, 1040, 1200]
+        .map((size) => this.generateSrc(screenshot, size, true))
+        .join(',')
+    },
+    generateSrc(screenshot, size, displayRatio = false) {
+      return `https://res.cloudinary.com/nuxt/image/upload/w_${size},${
+        this.imageRatio ? `h_${Math.round(size * this.intristicRatio)}` : ''
+      },f_auto,q_auto/${screenshot}${displayRatio ? ` ${size}w` : ''}`
     }
   }
 }
 </script>
 
 <style scoped>
-.intrinsic {
+/* .intrinsic {
   padding-bottom: 56.25%;
   position: relative;
-}
+} */
 </style>
