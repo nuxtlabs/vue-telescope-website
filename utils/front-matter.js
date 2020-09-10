@@ -89,6 +89,21 @@ export default ({
       })
     ],
     link: [
+      {
+        hid: 'googleapis-preconnect',
+        rel: 'preconnect',
+        href: 'https://fonts.googleapis.com'
+      },
+      {
+        hid: 'vuetelemetry-preconnect',
+        rel: 'preconnect',
+        href: 'https://api.vuetelemetry.com'
+      },
+      {
+        hid: 'usefathom-preconnect',
+        rel: 'preconnect',
+        href: 'https://img3.usefathom.com'
+      },
       { hid: 'canonical', rel: 'canonical', href: `${baseUrl + canonical}` },
       ...favicons,
       ...appleIcons
