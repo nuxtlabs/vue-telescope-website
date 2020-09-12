@@ -1,7 +1,23 @@
 ---
 title: Changelog
-updatedAt: 2020-09-08
+updatedAt: 2020-09-12
 ---
+
+<changelog-item project="analyzer" date="2020-09-12">
+
+## New Detectors 🤖
+
+Vue Telemetry analyzer is [open source](https://github.com/nuxt-company/vue-telemetry-analyzer), allowing anyone to add new detectors for Vue frameworks, plugins, Nuxt modules and UI librairies.
+
+We received 3 pull requests, adding support for:
+
+- [Vue Tailwind](https://www.vue-tailwind.com) (PR [#17](https://github.com/nuxt-company/vue-telemetry-analyzer/pull/17) by [@alfonsobries](https://github.com/alfonsobries)) 👉 &nbsp;[Explore websites using Vue Tailwind](/explore?ui.slug=vue-tailwind)
+- [@braid/vue-formulate](https://vueformulate.com) (PR [#19](https://github.com/nuxt-company/vue-telemetry-analyzer/pull/19) by [@justin-schroeder](https://github.com/justin-schroeder)) 👉 &nbsp;[Explore websites using @braid/vue-formulate](/explore?plugins.slug=vue-formulate)
+- [Inertia.js](https://inertiajs.com) (PR [#20](https://github.com/nuxt-company/vue-telemetry-analyzer/pull/20) by [@KABBOUCHI](https://github.com/KABBOUCHI)) 👉 &nbsp;[Explore websites using Inertia.js](/explore?plugins.slug=inertia-vue)
+
+Thank you to these awesome contributors! We are looking forward seing more detectors from the Vue community 💚
+
+</changelog-item>
 
 <changelog-item project="website" date="2020-09-08">
 
