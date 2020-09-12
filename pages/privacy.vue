@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import frontMatter from '@/utils/front-matter'
+
 export default {
   async fetch() {
     this.privacy = await this.$content('privacy').fetch()
@@ -16,6 +18,12 @@ export default {
     return {
       privacy: {}
     }
+  },
+  head() {
+    return frontMatter({
+      path: this.$route.path,
+      title: 'Privacy Policy'
+    })
   }
 }
 </script>

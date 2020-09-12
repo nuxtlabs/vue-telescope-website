@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import frontMatter from '@/utils/front-matter'
+
 export default {
   async fetch() {
     this.terms = await this.$content('terms').fetch()
@@ -17,6 +19,12 @@ export default {
     return {
       terms: {}
     }
+  },
+  head() {
+    return frontMatter({
+      path: this.$route.path,
+      title: 'Terms and Conditions'
+    })
   }
 }
 </script>

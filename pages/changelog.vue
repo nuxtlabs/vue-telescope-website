@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import frontMatter from '@/utils/front-matter'
+
 export default {
   async asyncData({ $content }) {
     const changelog = await $content('changelog').fetch()
@@ -21,6 +23,13 @@ export default {
   },
   mounted() {
     this.$changelog.saw()
+  },
+  head() {
+    return frontMatter({
+      path: this.$route.path,
+      title: 'Changelog',
+      description: 'Discover the lastest news from Vue Telemetry.'
+    })
   }
 }
 </script>
