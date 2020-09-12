@@ -47,7 +47,7 @@
               <ContentPlaceholdersText
                 class="custom relative h-full w-full mb-4 rounded-lg overflow-hidden"
                 :lines="1"
-                style="padding-bottom: 75%;"
+                style="padding-bottom: 75%"
               />
               <div class="flex justify-between">
                 <ContentPlaceholdersText class="custom h-4 w-2/3" :lines="1" />

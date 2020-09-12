@@ -4,6 +4,7 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
   future: {
+    purgeLayersByDefault: true,
     removeDeprecatedGapUtilities: true
   },
   theme: {
@@ -36,14 +37,14 @@ module.exports = {
       '-3': 'calc(3 * -0.0125rem)',
       '-2': 'calc(2 * -0.0125rem)',
       '-1': '-0.0125rem',
-      '1': '0.0125rem',
-      '2': 'calc(2 * 0.0125rem)',
-      '3': 'calc(3 * 0.0125rem)',
-      '4': 'calc(4 * 0.0125rem)',
-      '5': 'calc(5 * 0.0125rem)',
-      '10': 'calc(10 * 0.0125rem)',
-      '15': 'calc(15 * 0.0125rem)',
-      '20': 'calc(20 * 0.0125rem)'
+      1: '0.0125rem',
+      2: 'calc(2 * 0.0125rem)',
+      3: 'calc(3 * 0.0125rem)',
+      4: 'calc(4 * 0.0125rem)',
+      5: 'calc(5 * 0.0125rem)',
+      10: 'calc(10 * 0.0125rem)',
+      15: 'calc(15 * 0.0125rem)',
+      20: 'calc(20 * 0.0125rem)'
     },
     lineHeight: {
       base: '24px',
@@ -216,14 +217,14 @@ module.exports = {
         '5px': '5px',
         '6px': '6px',
         '7px': '7px',
-        '7': '1.75rem',
-        '9': '2.25rem',
-        '13': '3.25rem',
-        '14': '3.5rem',
-        '18': '4.5rem',
-        '28': '7rem',
-        '96': '24rem',
-        '128': '32rem'
+        7: '1.75rem',
+        9: '2.25rem',
+        13: '3.25rem',
+        14: '3.5rem',
+        18: '4.5rem',
+        28: '7rem',
+        96: '24rem',
+        128: '32rem'
       },
       borderRadius: {
         '2lg': '0.625rem',
@@ -246,7 +247,7 @@ module.exports = {
         '-1': '-1'
       },
       backgroundSize: {
-        '100': '100%'
+        100: '100%'
       },
       inset: {
         '1/2': '50%'
