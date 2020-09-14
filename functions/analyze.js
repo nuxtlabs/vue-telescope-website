@@ -48,7 +48,7 @@ async function analyzeRequest(event, _context) {
     hostname = parsedUrl.hostname
     origin = parsedUrl.origin
 
-    // filter hostname
+    // filter hostname and IP's
     // old implementation wasn't reliable: errors local.com
     if (isBlacklisted(hostname)) {
       throw new Error('Invalid URL')

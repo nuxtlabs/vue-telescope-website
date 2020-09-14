@@ -10,12 +10,10 @@ function isOpenDNS(ip) {
   })
 }
 
-// eslint-disable-next-line require-await
 exports.isBlacklisted = function (hostname) {
-  // const hostnameBlacklist = /((local|dev(elopment)?|stag(e|ing)?|test(ing)?|demo(shop)?|admin|cache)\.|pr(eview)?-[0-9]{1,}|\/admin|\.local|localhost)/
-  // return hostnameBlacklist.test(hname)
   const blacklist = ['localhost']
-  return blacklist.includes(hostname)
+  const likelyIP = Boolean(/\d/.test(hostname.split('.').pop()))
+  return blacklist.includes(hostname) || likelyIP
 }
 
 exports.isOutdated = function (date, days) {
