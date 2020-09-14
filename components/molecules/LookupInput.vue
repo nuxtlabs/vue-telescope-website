@@ -30,6 +30,7 @@
     <AppButton
       :size="size"
       appearance="info"
+      :class="pending && 'pointer-events-none'"
       class="flex items-center justify-center rounded-l-none border-l-0"
       @click.native="processAnalyzeWebsite"
     >
