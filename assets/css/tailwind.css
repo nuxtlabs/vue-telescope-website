@@ -78,3 +78,7 @@ html {
     opacity: 1;
   }
 }
+
+.optimize-rendering {
+  content-visibility: auto;
+}
