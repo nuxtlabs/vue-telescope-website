@@ -12,4 +12,8 @@ export default ({ store }) => {
   } else {
     store.commit('SET_BROWSER', 'Other')
   }
+  store.commit(
+    'setIsExtensionInstalled',
+    Boolean(window.$vueTelemetryExtension)
+  )
 }

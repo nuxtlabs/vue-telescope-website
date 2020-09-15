@@ -17,7 +17,8 @@ export const state = () => ({
   selectedFilters: {},
   isModal: false,
   showPrivacyAwareModal: false,
-  privacyAwarenessCb: null
+  privacyAwarenessCb: null,
+  isExtensionInstalled: false
 })
 
 export const mutations = {
@@ -70,6 +71,9 @@ export const mutations = {
   },
   setPrivacyAwarenessCb(state, cb) {
     state.privacyAwarenessCb = cb
+  },
+  setIsExtensionInstalled(state, installed) {
+    state.isExtensionInstalled = installed
   }
 }
 

@@ -3,7 +3,7 @@
     tag="a"
     :href="linkToExtention"
     :size="size"
-    :class="[isMobile && 'hidden']"
+    :class="[(isMobile || isExtensionInstalled) && 'hidden']"
     class="cursor-pointer"
     appearance="primary"
     @click.native="processLinkNavigation"
@@ -14,6 +14,7 @@
 
 <script>
 import { mapState } from 'vuex'
+
 export default {
   props: {
     size: {
@@ -24,7 +25,8 @@ export default {
   computed: {
     ...mapState({
       isMobile: (state) => state.isMobile,
-      browser: (state) => state.browser
+      browser: (state) => state.browser,
+      isExtensionInstalled: (state) => state.isExtensionInstalled
     }),
     buttonText() {
       if (this.browser === 'Chrome') {
