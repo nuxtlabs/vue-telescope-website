@@ -115,27 +115,31 @@ export default {
       }
       this.pending = true
       const sse = new EventSource(
-        `http://localhost:3001?url=${this.url}&isPublic=true`
+        `https://service.vuetelemetry.com?url=${this.url}&isPublic=true`
       )
       sse.addEventListener('message', (event) => {
         this.pending = false
-        const res = JSON.parse(JSON.parse(event.data).body)
+        try {
+          const res = JSON.parse(event.data)
 
-        if (res.statusCode === 200 && !res.body.isAdultContent) {
-          this.$store.commit('SET_MODAL', true)
-          this.$router.push({
-            name: 'explore-website',
-            params: {
-              website: res.body.slug
-            }
-          })
-        } else if (res.statusCode === 200 && res.body.isAdultContent) {
-          this.errorMessage = 'Website has adult content ;)'
-        } else {
-          this.errorMessage = res.message
+          if (!res.error && !res.isAdultContent) {
+            this.$store.commit('SET_MODAL', true)
+            this.$router.push({
+              name: 'explore-website',
+              params: {
+                website: res.slug
+              }
+            })
+          } else if (!res.error && res.isAdultContent) {
+            this.errorMessage = 'Website has adult content ;)'
+          } else {
+            this.errorMessage = res.message
+          }
+          sse.close()
+        } catch (err) {
+          this.pending = false
+          sse.close()
         }
-
-        sse.close()
       })
 
       // const res = await fetch(`/api/analyze?url=${this.url}&isPublic=true`, {
