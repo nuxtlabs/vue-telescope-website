@@ -109,32 +109,64 @@ export default {
       }
       this.analyzeWebsite()
     },
-    async analyzeWebsite() {
-      this.pending = true
-      const res = await fetch(`/api/analyze?url=${this.url}&isPublic=true`, {
-        method: 'GET'
-      })
-        .then((response) => {
-          this.pending = false
-          return response.json()
-        })
-        .catch((err) => {
-          this.pending = false
-          throw new Error(err)
-        })
-      if (res.statusCode === 200 && !res.body.isAdultContent) {
-        this.$store.commit('SET_MODAL', true)
-        this.$router.push({
-          name: 'explore-website',
-          params: {
-            website: res.body.slug
-          }
-        })
-      } else if (res.statusCode === 200 && res.body.isAdultContent) {
-        this.errorMessage = 'Website has adult content ;)'
-      } else {
-        this.errorMessage = res.message
+    analyzeWebsite() {
+      if (typeof EventSource === 'undefined') {
+        console.log('EventSource is not supported in current borwser!')
+        return
       }
+      this.pending = true
+      const sse = new EventSource(
+        `https://service.vuetelemetry.com?url=${this.url}&isPublic=true`
+      )
+      sse.addEventListener('message', (event) => {
+        this.pending = false
+        try {
+          const res = JSON.parse(event.data)
+
+          if (!res.error && !res.isAdultContent) {
+            this.$store.commit('SET_MODAL', true)
+            this.$router.push({
+              name: 'explore-website',
+              params: {
+                website: res.slug
+              }
+            })
+          } else if (!res.error && res.isAdultContent) {
+            this.errorMessage = 'Website has adult content ;)'
+          } else {
+            this.errorMessage = res.message
+          }
+          sse.close()
+        } catch (err) {
+          this.pending = false
+          sse.close()
+        }
+      })
+
+      // const res = await fetch(`/api/analyze?url=${this.url}&isPublic=true`, {
+      //   method: 'GET'
+      // })
+      //   .then((response) => {
+      //     this.pending = false
+      //     return response.json()
+      //   })
+      //   .catch((err) => {
+      //     this.pending = false
+      //     throw new Error(err)
+      //   })
+      // if (res.statusCode === 200 && !res.body.isAdultContent) {
+      //   this.$store.commit('SET_MODAL', true)
+      //   this.$router.push({
+      //     name: 'explore-website',
+      //     params: {
+      //       website: res.body.slug
+      //     }
+      //   })
+      // } else if (res.statusCode === 200 && res.body.isAdultContent) {
+      //   this.errorMessage = 'Website has adult content ;)'
+      // } else {
+      //   this.errorMessage = res.message
+      // }
     }
   }
 }
