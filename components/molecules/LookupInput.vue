@@ -55,6 +55,11 @@
 </template>
 
 <script>
+const EventSourcePolyfill = () =>
+  import(
+    'event-source-polyfill' /* webpackChunkName: "event-source-polyfill" */
+  )
+
 export default {
   props: {
     size: {
@@ -109,9 +114,12 @@ export default {
       }
       this.analyzeWebsite()
     },
-    analyzeWebsite() {
-      if (typeof EventSource === 'undefined') {
-        console.log('EventSource is not supported in current borwser!')
+    async analyzeWebsite() {
+      if (!window.EventSource) {
+        window.EventSource = (await EventSourcePolyfill()).EventSourcePolyfill
+      }
+      if (!window.EventSource) {
+        this.errorMessage = 'EventSource is not supported in your browser :('
         return
       }
       this.pending = true

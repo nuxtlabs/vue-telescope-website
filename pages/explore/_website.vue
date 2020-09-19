@@ -78,7 +78,7 @@
         </ContentPlaceholders>
       </div>
       <template v-else-if="$fetchState.error">
-        <ErrorSection :error="$fetchState.error" />
+        <LazyErrorSection :error="$fetchState.error" />
       </template>
       <ExploreWebsite
         v-else

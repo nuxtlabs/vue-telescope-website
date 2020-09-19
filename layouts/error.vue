@@ -1,5 +1,5 @@
 <template>
-  <ErrorSection :error="error" />
+  <LazyErrorSection :error="error" />
 </template>
 
 <script>

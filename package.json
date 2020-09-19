@@ -15,6 +15,7 @@
     "cloudinary": "^1.21.0",
     "consola": "^2.12.1",
     "core-js": "2",
+    "event-source-polyfill": "^1.0.20",
     "gsap": "file:assets/js/gsap-bonus.tgz",
     "intersection-observer": "^0.11.0",
     "node-fetch": "^2.6.0",
