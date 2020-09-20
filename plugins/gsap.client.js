@@ -7,13 +7,13 @@
 // Vue.prototype.$gsap = gsap
 
 import { gsap } from 'gsap'
-import { MorphSVGPlugin } from 'gsap/MorphSVGPlugin'
+// import { MorphSVGPlugin } from 'gsap/MorphSVGPlugin'
 import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+// import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SplitText } from 'gsap/SplitText'
-gsap.registerPlugin(MorphSVGPlugin)
+// gsap.registerPlugin(MorphSVGPlugin)
 gsap.registerPlugin(DrawSVGPlugin)
-gsap.registerPlugin(ScrollTrigger)
+// gsap.registerPlugin(ScrollTrigger)
 gsap.registerPlugin(SplitText)
 // gsap.core.globals('ScrollTrigger', ScrollTrigger)
 
