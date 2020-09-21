@@ -3,6 +3,36 @@ title: Changelog
 updatedAt: 2020-09-12
 ---
 
+<changelog-item project="website" date="2020-09-18">
+
+## Website improvements and fixes
+
+- hide "Install extension" button if extension already installed
+- fix the ENOMEM error on lookup input
+
+</changelog-item>
+
+<changelog-item project="extension" date="2020-09-18">
+
+## Vue Telemetry extension v1.4.0 release
+
+- URL's ignore list (localhost, IP's)
+- fix SourceMap warning
+- fix the ENOMEM error
+- add `window.$vueTelemetryExtension` for extension installation detection
+
+</changelog-item>
+
+<changelog-item project="analyzer" date="2020-09-18">
+
+## Vue Telemetry Analyzer v0.7.6 release
+
+- use Puppeteer
+- update Puppeteer configuration to fix the ENOMEM error
+- add [vee-validate](https://github.com/logaretm/vee-validate) support
+
+</changelog-item>
+
 <changelog-item project="analyzer" date="2020-09-12">
 
 ## New Detectors 🤖
