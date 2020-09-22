@@ -42,11 +42,18 @@
       <div class="flex flex-col">
         <AppRadio
           :id="`framework-null`"
-          :checked="selectedFilters['framework_null']"
+          :checked="Boolean(selectedFilters['framework_null'])"
           class="mb-1"
           @input="selectNoFramework"
         >
-          <span>None</span>
+          <div class="flex items-center">
+            <img
+              class="w-4 h-4 mr-1"
+              src="https://icons.vuetelemetry.com/vue.svg"
+              alt="Vue"
+            />
+            <span>Vue</span>
+          </div>
         </AppRadio>
         <template v-for="framework in frameworks" class="">
           <AppRadio
@@ -63,7 +70,7 @@
               <img
                 class="w-4 h-4 mr-1"
                 :src="`https://icons.vuetelemetry.com${framework.imgPath}`"
-                alt=""
+                :alt="framework.name"
               />
               <span>{{ framework.name }}</span>
             </div>
@@ -77,7 +84,7 @@
       <div class="flex flex-col">
         <AppRadio
           :id="`ui-null`"
-          :checked="selectedFilters['ui_null']"
+          :checked="Boolean(selectedFilters['ui_null'])"
           class="mb-1"
           @input="selectNoUIFramework"
         >
@@ -98,7 +105,7 @@
               <img
                 class="w-4 h-4 mr-1"
                 :src="`https://icons.vuetelemetry.com${ui.imgPath}`"
-                alt=""
+                :alt="ui.name"
               />
               <span>{{ ui.name }}</span>
             </div>

@@ -111,7 +111,7 @@ export default {
           return key === 'isStatic' ? 'Server' : 'Client-side'
         }
       } else if (key === 'framework_null' || key === 'ui_null') {
-        return 'None'
+        return 'Vue'
       } else if (key === 'plugins.slug' || key === 'modules.slug') {
         const validatedValue = Array.isArray(value) ? value : [value]
         if (validatedValue.length === 1) {
