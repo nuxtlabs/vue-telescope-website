@@ -15,6 +15,8 @@ export const state = () => ({
   browser: '',
   isMobile: false,
   selectedFilters: {},
+  selectedSort: 'lastDetectedAt:desc',
+  // selectedSort: 'rank:asc',
   isModal: false,
   showPrivacyAwareModal: false,
   privacyAwarenessCb: null,

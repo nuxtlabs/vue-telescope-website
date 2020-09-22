@@ -203,6 +203,7 @@ export default {
   computed: {
     ...mapState({
       selectedFilters: (state) => state.selectedFilters,
+      selectedSort: (state) => state.selectedSort,
       isMobile: (state) => state.isMobile,
       isModal: (state) => state.isModal
     }),
@@ -212,7 +213,7 @@ export default {
           ...this.selectedFilters,
           _limit: this.showcasesPerPage,
           _start: this.currentPage * this.showcasesPerPage,
-          _sort: 'lastDetectedAt:desc'
+          _sort: this.selectedSort
         },
         {
           arrayFormat: 'repeat',
