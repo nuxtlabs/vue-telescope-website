@@ -1,6 +1,6 @@
 ---
 title: Changelog
-updatedAt: 2020-09-12
+updatedAt: 2020-09-24
 ---
 
 <changelog-item project="website" date="2020-09-24">
