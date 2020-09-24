@@ -11,8 +11,14 @@
       />
     </div>
 
-    <div id="explore-showcases-grid" class="relative md:w-3/4 w-full mb-4">
-      <ExploreShowcasesMobileSearchFilters />
+    <div
+      id="explore-showcases-grid"
+      class="relative md:w-3/4 w-full mb-4 mt-0 md:mt-4"
+    >
+      <div>
+        <ExploreShowcasesMobileSearchFilters />
+        <ExploreShowcasesSorting />
+      </div>
 
       <ExploreShowcasesSelectedFilters
         :selected-filters="selectedFilters"
@@ -140,7 +146,7 @@
 import { mapState } from 'vuex'
 import qs from 'qs'
 
-const allowed = [
+const allowedFilters = [
   '_q',
   'framework.slug',
   'framework_null',
@@ -150,9 +156,18 @@ const allowed = [
   'modules.slug'
 ]
 
-function filterObject(raw) {
+function filterFilters(raw) {
   return Object.keys(raw)
-    .filter((key) => allowed.includes(key))
+    .filter((key) => allowedFilters.includes(key))
+    .reduce((obj, key) => {
+      obj[key] = raw[key]
+      return obj
+    }, {})
+}
+
+function filterSort(raw) {
+  return Object.keys(raw)
+    .filter((key) => key === '_sort')
     .reduce((obj, key) => {
       obj[key] = raw[key]
       return obj
@@ -169,7 +184,7 @@ export default {
     // ) {
     //   // trigger only once on page load
     //   // TODO: fired second time when no filters (but safe for now)
-    //   this.$store.commit('SET_FILTERS', filterObject(this.$route.query))
+    //   this.$store.commit('SET_FILTERS', filterFilters(this.$route.query))
     // }
     // console.log('filterQueryString 1: ', this.selectedFilters)
     const showcases = await this.$strapi.find(
@@ -213,7 +228,7 @@ export default {
           ...this.selectedFilters,
           _limit: this.showcasesPerPage,
           _start: this.currentPage * this.showcasesPerPage,
-          _sort: this.selectedSort
+          ...this.selectedSort
         },
         {
           arrayFormat: 'repeat',
@@ -236,49 +251,56 @@ export default {
         this.$fetch()
       }
     },
-    selectedFilters: {
-      deep: true,
-      handler(value) {
-        // console.log('TRIGGERED')
-        window.scrollTo(0, 0)
-        // this.filterQuery = value
-        this.$router.push({ query: value })
-        this.currentPage = 0
-        this.hasMoreShowcases = true
-        setTimeout(() => {
-          this.showcases = []
-          this.$fetch()
-        })
-      }
+    // selectedFilters: {
+    //   deep: true,
+    //   handler(value) {
+    //     this.updateListing()
+    //   }
+    // },
+    filterQueryString(value) {
+      this.updateListing()
     },
     $route(newValue, oldValue) {
       if (oldValue.params.website) {
         // set query params when close showcase modal and have filters selected
-        this.$router.push({ query: this.selectedFilters })
+        this.$router.push({
+          query: { ...this.selectedFilters, ...this.selectedSort }
+        })
       }
     }
   },
   created() {
-    // console.log('created', this.$route)
     if (
       Object.keys(this.selectedFilters).length === 0 &&
       Object.keys(this.$route.query).length > 0
     ) {
       // trigger only once on page load
       // TODO: fired second time when no filters (but safe for now)
-      this.$store.commit('SET_FILTERS', filterObject(this.$route.query))
+      this.$store.commit('SET_FILTERS', filterFilters(this.$route.query))
+      this.$store.commit('setSort', filterSort(this.$route.query))
     }
   },
   methods: {
-    // updateQuery(query) {
-    //   // console.log(query)
-    //   // this.filterQuery = { ...this.filterQuery, ...query }
-    //   // this.filterQuery = query
-    //   // this.currentPage = 0
-    //   // this.showcases = []
-    //   // this.hasMoreShowcases = true
-    //   // this.$fetch()
-    // },
+    updateListing() {
+      // console.log('TRIGGERED', {
+      //   ...this.selectedFilters,
+      //   ...this.selectedSort
+      // })
+      window.scrollTo(0, 0)
+      // this.filterQuery = value
+      this.$router.push({
+        query: {
+          ...this.selectedFilters,
+          ...this.selectedSort
+        }
+      })
+      this.currentPage = 0
+      this.hasMoreShowcases = true
+      setTimeout(() => {
+        this.showcases = []
+        this.$fetch()
+      })
+    },
     lazyLoadShowcases(isVisible) {
       // method made initialy for intersection observer (thats why isVisible present)
       if (isVisible) {
