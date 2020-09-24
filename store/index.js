@@ -15,6 +15,8 @@ export const state = () => ({
   browser: '',
   isMobile: false,
   selectedFilters: {},
+  selectedSort: { _sort: 'lastDetectedAt:desc' },
+  // selectedSort: 'rank:asc',
   isModal: false,
   showPrivacyAwareModal: false,
   privacyAwarenessCb: null,
@@ -74,6 +76,9 @@ export const mutations = {
   },
   setIsExtensionInstalled(state, installed) {
     state.isExtensionInstalled = installed
+  },
+  setSort(state, sort) {
+    state.selectedSort = sort
   }
 }
 
