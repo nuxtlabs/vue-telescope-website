@@ -251,13 +251,13 @@ export default {
         this.$fetch()
       }
     },
-    // selectedFilters: {
-    //   deep: true,
-    //   handler(value) {
-    //     this.updateListing()
-    //   }
-    // },
-    filterQueryString(value) {
+    selectedFilters: {
+      deep: true,
+      handler(value) {
+        this.updateListing()
+      }
+    },
+    selectedSort(value) {
       this.updateListing()
     },
     $route(newValue, oldValue) {
