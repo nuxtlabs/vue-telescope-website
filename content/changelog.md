@@ -3,6 +3,19 @@ title: Changelog
 updatedAt: 2020-09-12
 ---
 
+<changelog-item project="website" date="2020-09-24">
+
+## Sort by popularity
+
+You can now [sort websites by popularity](/explore?_sort=rank%3Aasc), we are using the [Alexa Rank](https://blog.alexa.com/marketing-research/alexa-rank/) for ranking.
+
+
+<nuxt-link to="/explore?_sort=rank%3Aasc" class="block pb-4">
+  <img src="https://res.cloudinary.com/nuxt/image/upload/f_auto,q_auto/remote/vt/changelog/vt-sorting.gif" alt="vue telemetry sorting" class="rounded-md shadow" />
+</nuxt-link>
+
+</changelog-item>
+
 <changelog-item project="website" date="2020-09-18">
 
 ## Website improvements and fixes
