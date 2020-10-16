@@ -4,15 +4,23 @@
       <div class="flex justify-between mb-8">
         <ul class="flex flex-col text-sm leading-sm">
           <li class="text-grey-900">
-            Hosted on
+            Frontend hosted on
             <a
               href="https://www.netlify.com/"
               target="_blank"
               rel="noopener nofollow noreferrer"
-              class="text-primary-500 font-medium hover:underline"
+              class="text-primary-700 font-medium hover:underline"
             >
-              Netlify
-            </a>
+              Netlify </a
+            >, API made with
+            <a
+              href="https://strapi.io"
+              target="_blank"
+              rel="noopener nofollow noreferrer"
+              class="text-primary-700 font-medium hover:underline"
+            >
+              Strapi </a
+            >.
           </li>
           <li class="text-grey-900">
             Images served by
@@ -20,21 +28,18 @@
               href="https://cloudinary.com/"
               target="_blank"
               rel="noopener nofollow noreferrer"
-              class="text-primary-500 font-medium hover:underline"
+              class="text-primary-700 font-medium hover:underline"
             >
               Cloudinary
             </a>
-          </li>
-          <li class="text-grey-900">
-            Illustrations from
+            with illustrations from
             <a
               href="https://icons8.com/"
               target="_blank"
               rel="noopener nofollow noreferrer"
-              class="text-primary-500 font-medium hover:underline"
-            >
-              Icons8
-            </a>
+              class="text-primary-700 font-medium hover:underline"
+              >Icons8</a
+            >.
           </li>
         </ul>
 
