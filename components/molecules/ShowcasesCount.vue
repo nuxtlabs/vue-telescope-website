@@ -17,7 +17,7 @@ export default {
     })
   },
   mounted() {
-    this.$store.dispatch('GET_SHOWCASES_COUNT')
+    window.onNuxtReady(() => this.$store.dispatch('GET_SHOWCASES_COUNT'))
   }
 }
 </script>
