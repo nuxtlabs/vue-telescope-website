@@ -5,7 +5,7 @@
       <nuxt />
     </main>
     <TheFooter />
-    <FeedbackButton />
+    <!-- <FeedbackButton /> -->
     <PrivacyAwareModal v-if="showPrivacyAwareModal" />
   </div>
 </template>

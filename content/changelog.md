@@ -3,6 +3,14 @@ title: Changelog
 updatedAt: 2020-09-24
 ---
 
+<changelog-item project="extension" date="2020-10-20">
+
+## Vue Telemetry extension v1.4.1 release
+
+- fixes issues with login to phpMyAdmin, Cloudflare, Mailchimp etc
+
+</changelog-item>
+
 <changelog-item project="website" date="2020-09-24">
 
 ## Sort by popularity

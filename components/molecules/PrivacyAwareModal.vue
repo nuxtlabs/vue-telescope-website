@@ -8,7 +8,7 @@
         <h2 class="text-five leading-five font-display-weight p-4 text-center">
           We Respect Your Privacy
         </h2>
-        <div class="p-4 overflow-auto">
+        <div class="flex-1 p-4 overflow-auto">
           <p class="mb-4">Hello, fellow Vue.js developer 👋</p>
           <p class="mb-4">
             We started Vue Telemetry project with one goal in mind: provide
