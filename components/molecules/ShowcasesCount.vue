@@ -5,7 +5,10 @@
 <script>
 export default {
   mounted() {
-    window.onNuxtReady(() => this.$store.dispatch('GET_SHOWCASES_COUNT'))
+    window.onNuxtReady(async () => {
+      await this.$store.dispatch('GET_SHOWCASES_COUNT')
+      this.$forceUpdate()
+    })
   }
 }
 </script>
