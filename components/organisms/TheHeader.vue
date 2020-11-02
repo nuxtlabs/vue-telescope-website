@@ -22,12 +22,17 @@
         >
           <span class="hover-hover:hover:opacity-50">Explore</span>
         </NuxtLink>
-        <a
-          href="http://localhost:1337/connect/github"
-          class="opacity-1 sm:mr-4 font-display-weight"
-        >
-          <span class="hover-hover:hover:opacity-50">LogIn with GitHub</span>
-        </a>
+
+        <ClientOnly>
+          <a
+            v-if="!$strapi.user"
+            href="http://localhost:1337/connect/github"
+            class="opacity-1 sm:mr-4 font-display-weight"
+          >
+            <span class="hover-hover:hover:opacity-50">LogIn with GitHub</span>
+          </a>
+          <span v-else>{{ $strapi.user }}</span>
+        </ClientOnly>
 
         <div
           ref="install-extension-button"

@@ -16,12 +16,13 @@ export default {
           access_token: this.$route.query.access_token
         }
       })
+
       this.$strapi.setToken(jwt)
+
       await this.$strapi.fetchUser()
+
       this.$router.push(this.$strapi.$cookies.get('redirect') || '/explore')
-    } catch (e) {
-      console.log(e)
-    }
+    } catch (e) {}
   }
 }
 </script>
