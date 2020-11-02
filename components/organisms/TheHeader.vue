@@ -22,6 +22,12 @@
         >
           <span class="hover-hover:hover:opacity-50">Explore</span>
         </NuxtLink>
+        <a
+          href="http://localhost:1337/connect/github"
+          class="opacity-1 sm:mr-4 font-display-weight"
+        >
+          <span class="hover-hover:hover:opacity-50">LogIn with GitHub</span>
+        </a>
 
         <div
           ref="install-extension-button"
