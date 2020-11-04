@@ -24,14 +24,20 @@
         </NuxtLink>
 
         <ClientOnly>
-          <a
-            v-if="!$strapi.user"
-            href="http://localhost:1337/connect/github"
-            class="opacity-1 sm:mr-4 font-display-weight"
-          >
-            <span class="hover-hover:hover:opacity-50">LogIn with GitHub</span>
-          </a>
-          <span v-else>{{ $strapi.user }}</span>
+          <div ref="user-container" class="opacity-0 sm:mr-4">
+            <button
+              v-if="!$strapi.user"
+              class="font-display-weight focus:outline-none"
+              @click="login"
+            >
+              <span class="hover-hover:hover:opacity-50"
+                >LogIn with GitHub</span
+              >
+            </button>
+            <NuxtLink v-else to="/lists" class="font-display-weight">
+              <span class="hover-hover:hover:opacity-50">My Lists</span>
+            </NuxtLink>
+          </div>
         </ClientOnly>
 
         <div
@@ -105,6 +111,30 @@ export default {
         ease: 'power4.inOut'
       }
     )
+    this.$nextTick(() => {
+      const userContainer = this.$refs['user-container']
+      this.$gsap.fromTo(
+        userContainer,
+        {
+          opacity: 0,
+          scale: 0.75,
+          y: '-15px'
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.45,
+          ease: 'power4.inOut'
+        }
+      )
+    })
+  },
+  methods: {
+    login() {
+      this.$strapi.$cookies.set('redirect', this.$route.fullPath)
+      window.location = `${this.$config.strapiURL}/connect/github`
+    }
   }
 }
 </script>

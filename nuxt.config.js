@@ -84,5 +84,8 @@ export default {
     server: 'https://ackee.nuxtjs.com',
     domainId: '430278ce-79ea-4ff1-a8ce-5b461e217d65',
     detailed: true
+  },
+  publicRuntimeConfig: {
+    strapiURL: process.env.STRAPI_URL || 'http://localhost:1337'
   }
 }
