@@ -25,8 +25,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 export default {
   fetchOnServer: false,
   async fetch() {
