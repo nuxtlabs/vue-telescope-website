@@ -20,7 +20,8 @@ export const state = () => ({
   isModal: false,
   showPrivacyAwareModal: false,
   privacyAwarenessCb: null,
-  isExtensionInstalled: false
+  isExtensionInstalled: false,
+  lists: []
 })
 
 export const mutations = {
@@ -79,6 +80,47 @@ export const mutations = {
   },
   setSort(state, sort) {
     state.selectedSort = sort
+  },
+  setLists(state, lists) {
+    state.lists = lists
+  },
+  addList(state, list) {
+    state.lists.push(list)
+  },
+  updateList(state, list) {
+    const index = state.lists.findIndex((item) => item.id === list.id)
+    if (index >= 0) Object.assign(state.lists[index], list)
+    else state.lists.push(list)
+  },
+  deleteList(state, list) {
+    const index = state.lists.findIndex((item) => item.id === list.id)
+    if (index >= 0) state.lists.splice(index, 1)
+  },
+  addGroup(state, { group, list }) {
+    const listIndex = state.lists.findIndex((item) => item.id === list.id)
+    if (listIndex >= 0) state.lists[listIndex].groups.push(group)
+  },
+  updateGroup(state, { group, list }) {
+    const listIndex = state.lists.findIndex((item) => item.id === list.id)
+    if (listIndex >= 0) {
+      const groupIndex = state.lists[listIndex].groups.findIndex(
+        (item) => item.id === group.id
+      )
+      if (groupIndex >= 0) {
+        Object.assign(state.lists[listIndex].groups[groupIndex], group)
+      } else {
+        state.lists[listIndex].groups.push(group)
+      }
+    }
+  },
+  deleteGroup(state, { group, list }) {
+    const listIndex = state.lists.findIndex((item) => item.id === list.id)
+    if (listIndex >= 0) {
+      const groupIndex = state.lists[listIndex].groups.findIndex(
+        (item) => item.id === group.id
+      )
+      if (groupIndex >= 0) state.lists[listIndex].groups.splice(groupIndex, 1)
+    }
   }
 }
 

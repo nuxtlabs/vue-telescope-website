@@ -45,7 +45,11 @@ export default {
     },
     fallback: '404.html' // For Netlify
   },
-  modules: ['@nuxt/content'],
+  modules: [
+    '@nuxt/content',
+    // Doc: https://strapi.nuxtjs.org
+    '@nuxtjs/strapi'
+  ],
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
@@ -53,8 +57,6 @@ export default {
     '@nuxtjs/tailwindcss',
     // Doc: https://github.com/nuxt-community/svg-module
     '@nuxtjs/svg',
-    // Doc: https://strapi.nuxtjs.org
-    '@nuxtjs/strapi',
     // Doc: https://github.com/nuxt-community/proxy-module
     '@nuxtjs/proxy',
     // Doc: https://pwa.nuxtjs.org
@@ -82,5 +84,8 @@ export default {
     server: 'https://ackee.nuxtjs.com',
     domainId: '430278ce-79ea-4ff1-a8ce-5b461e217d65',
     detailed: true
+  },
+  publicRuntimeConfig: {
+    strapiURL: process.env.STRAPI_URL || 'http://localhost:1337'
   }
 }
