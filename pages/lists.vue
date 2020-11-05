@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-container-max-width px-4 mx-auto py-12">
     <div class="flex">
-      <div v-if="lists.length" class="flex-grow-0 mt-4">
+      <div v-if="lists.length" class="w-1/4 px-4 py-2">
         <List
           v-for="list in lists"
           :key="list.id"
@@ -12,7 +12,7 @@
         />
         <List />
       </div>
-      <div v-if="selectedList" class="flex flex-grow flex-wrap ml-4">
+      <div v-if="selectedList" class="w-3/4 flex flex-wrap ml-4">
         <ExploreShowcasesCard
           v-for="showcase in showcases"
           :key="showcase.id"

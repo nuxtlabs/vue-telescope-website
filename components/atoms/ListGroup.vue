@@ -4,65 +4,85 @@
       <div v-if="creatingGroup" class="flex items-center">
         <AppInput
           v-model="newName"
+          class="flex-grow"
           size="small"
           placeholder="Group name"
+          appearance="transparent"
           @keypress.enter.native="createGroup"
         />
-        <ValidateIcon
-          class="w-3 h-3 opacity-50 hover:opacity-100 ml-2"
-          @click="createGroup"
-        />
-        <CancelIcon
-          class="w-3 h-3 opacity-50 hover:opacity-100 ml-2"
-          @click="clearActions"
-        />
+        <div class="flex flex-grow-0">
+          <ValidateIcon
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            @click="createGroup"
+          />
+          <CancelIcon
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            @click="clearActions"
+          />
+        </div>
       </div>
-      <div v-else class="cursor-pointer" @click="initCreateGroup">
-        <span>+ Add group</span>
+      <div
+        v-else
+        class="flex items-center justify-between cursor-pointer py-1"
+        @click="initCreateGroup"
+      >
+        <span>Add group</span>
+        <AddIcon class="w-4 h-4 ml-2" />
       </div>
     </div>
     <div v-else>
-      <div v-if="deletingGroup" class="flex items-center">
+      <div v-if="deletingGroup" class="flex items-center justify-between py-1">
         <span>Delete ?</span>
-        <ValidateIcon
-          class="w-3 h-3 opacity-50 hover:opacity-100 ml-2"
-          @click="deleteGroup"
-        />
-        <CancelIcon
-          class="w-3 h-3 opacity-50 hover:opacity-100 ml-2"
-          @click="clearActions"
-        />
+        <div class="flex items-center">
+          <ValidateIcon
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            @click="deleteGroup"
+          />
+          <CancelIcon
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            @click="clearActions"
+          />
+        </div>
       </div>
       <div v-else-if="editingGroup" class="flex items-center">
         <AppInput
           ref="edit-input"
           v-model="newName"
+          class="flex flex-grow"
           size="small"
           placeholder="Group name"
+          appearance="transparent"
           @keypress.enter.native="editGroup"
         />
-        <ValidateIcon
-          class="w-3 h-3 opacity-50 hover:opacity-100 ml-2"
-          @click="editGroup"
-        />
-        <CancelIcon
-          class="w-3 h-3 opacity-50 hover:opacity-100 ml-2"
-          @click="clearActions"
-        />
-        <DeleteIcon
-          class="w-3 h-3 opacity-50 hover:opacity-100 ml-2"
-          @click="initDeleteGroup"
-        />
+        <div class="flex flex-grow-0 items-center">
+          <ValidateIcon
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            @click="editGroup"
+          />
+          <CancelIcon
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            @click="clearActions"
+          />
+          <DeleteIcon
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            @click="initDeleteGroup"
+          />
+        </div>
       </div>
-      <div v-else class="flex items-center cursor-pointer">
-        <span
-          :class="selected ? 'text-primary-500' : 'text-grey-800'"
-          @click="select"
-          >{{ group.name }}</span
-        >
+      <div v-else class="flex items-center justify-between cursor-pointer py-1">
+        <div class="flex flex-grow items-center" @click="select">
+          <BulletIcon
+            class="flex-grow-0 w-4 h-4 opacity-50 hover:opacity-100 mr-2"
+          />
+          <span
+            class="flex-grow"
+            :class="selected ? 'text-primary-500' : 'text-grey-800'"
+            >{{ group.name }}</span
+          >
+        </div>
         <EditIcon
           v-if="selected"
-          class="w-3 h-3 opacity-50 hover:opacity-100 ml-2"
+          class="flex-grow-0 w-4 h-4 opacity-50 hover:opacity-100 ml-2"
           @click="initEditGroup"
         />
       </div>
@@ -71,13 +91,17 @@
 </template>
 
 <script>
-import EditIcon from '@/assets/icons/config.svg?inline'
-import ValidateIcon from '@/assets/icons/checkmark-circle-fill.svg?inline'
-import CancelIcon from '@/assets/icons/arrow-left.svg?inline'
-import DeleteIcon from '@/assets/icons/xmark-circle.svg?inline'
+import BulletIcon from '@/assets/icons/bullet.svg?inline'
+import AddIcon from '@/assets/icons/plus-circle.svg?inline'
+import EditIcon from '@/assets/icons/more-vertical.svg?inline'
+import ValidateIcon from '@/assets/icons/check.svg?inline'
+import CancelIcon from '@/assets/icons/xmark-circle.svg?inline'
+import DeleteIcon from '@/assets/icons/minus-circle.svg?inline'
 
 export default {
   components: {
+    BulletIcon,
+    AddIcon,
     EditIcon,
     ValidateIcon,
     CancelIcon,
