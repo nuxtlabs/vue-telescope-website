@@ -18,31 +18,32 @@
         <NuxtLink
           ref="explore-link"
           to="/explore"
-          class="opacity-0 sm:mr-4 font-display-weight"
+          class="opacity-0 mr-2 sm:mr-4 font-display-weight"
         >
           <span class="hover-hover:hover:opacity-50">Explore</span>
         </NuxtLink>
+        <NuxtLink
+          ref="lists-link"
+          to="/lists"
+          class="opacity-0 font-display-weight"
+        >
+          <span class="hover-hover:hover:opacity-50">My Lists</span>
+        </NuxtLink>
 
         <ClientOnly>
-          <div ref="user-container" class="opacity-0 sm:mr-4">
-            <button
-              v-if="!$strapi.user"
-              class="font-display-weight focus:outline-none"
-              @click="login"
-            >
-              <span class="hover-hover:hover:opacity-50"
-                >LogIn with GitHub</span
-              >
-            </button>
-            <NuxtLink v-else to="/lists" class="font-display-weight">
-              <span class="hover-hover:hover:opacity-50">My Lists</span>
-            </NuxtLink>
-          </div>
+          <button
+            v-if="$strapi.user"
+            ref="logout-link"
+            class="ml-2 sm:ml-4 font-display-weight focus:outline-none"
+            @click="logout"
+          >
+            <span class="hover-hover:hover:opacity-50">LogOut</span>
+          </button>
         </ClientOnly>
 
         <div
           ref="install-extension-button"
-          class="opacity-0 hidden sm:inline-flex"
+          class="ml-4 opacity-0 hidden sm:inline-flex"
         >
           <InstallExtensionButton />
         </div>
@@ -62,6 +63,7 @@ export default {
     const logo = this.$refs.logo.$el
     const changelog = this.$refs.changelog.$el
     const exploreLink = this.$refs['explore-link'].$el
+    const listsLink = this.$refs['lists-link'].$el
     const installExtensionButton = this.$refs['install-extension-button']
 
     this.$gsap.fromTo(
@@ -96,7 +98,7 @@ export default {
       }
     )
     this.$gsap.fromTo(
-      [changelog, exploreLink],
+      [changelog, exploreLink, listsLink],
       {
         opacity: 0,
         scale: 0.75,
@@ -112,9 +114,9 @@ export default {
       }
     )
     this.$nextTick(() => {
-      const userContainer = this.$refs['user-container']
+      const logoutLink = this.$refs['logout-link']
       this.$gsap.fromTo(
-        userContainer,
+        logoutLink,
         {
           opacity: 0,
           scale: 0.75,
@@ -131,9 +133,10 @@ export default {
     })
   },
   methods: {
-    login() {
-      this.$strapi.$cookies.set('redirect', this.$route.fullPath)
-      window.location = `${this.$config.strapiURL}/connect/github`
+    async logout() {
+      try {
+        await this.$strapi.logout()
+      } catch (e) {}
     }
   }
 }
