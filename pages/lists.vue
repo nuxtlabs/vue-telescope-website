@@ -16,7 +16,7 @@
         <GitHubLogInButton class="mt-12 mb-4" />
       </section>
       <div v-else class="flex">
-        <section v-if="lists.length" class="w-1/4 px-4 py-2">
+        <section class="w-1/4 px-4 py-2">
           <List
             v-for="list in lists"
             :key="list.id"
