@@ -1,7 +1,15 @@
 <template>
   <input
-    :class="[sizing.height, sizing.fontSize, sizing.rounded, sizing.padding]"
-    class="w-full placeholder-grey-400 border-2 bg-grey-200 hover:bg-grey-100 border-transparent font-bold-body-weight focus:border-grey-500 focus:bg-grey-50 focus:outline-none"
+    :class="[
+      sizing.height,
+      sizing.fontSize,
+      sizing.rounded,
+      sizing.padding,
+      border.size,
+      border.color,
+      border.focusState
+    ]"
+    class="w-full placeholder-grey-400 bg-grey-200 hover:bg-grey-100 font-bold-body-weight focus:bg-grey-50 focus:outline-none"
     :type="type"
     :value="value"
     @input="$emit('input', $event.target.value)"
@@ -50,6 +58,21 @@ export default {
           fontSize: 'text-base',
           rounded: 'rounded-2lg',
           padding: 'px-2'
+        }
+      }
+    },
+    border() {
+      if (this.appearance === 'transparent') {
+        return {
+          size: 'border-0',
+          color: 'border-transparent',
+          focusState: 'focus:border-transparent'
+        }
+      } else {
+        return {
+          size: 'border-2',
+          color: 'border-transparent',
+          focusState: 'focus:border-grey-500'
         }
       }
     }
