@@ -121,6 +121,12 @@ export default {
             hoverState: 'hover:bg-blue-400'
           }
         }
+      } else if (this.appearance === 'github') {
+        return {
+          bg: 'bg-github-base',
+          text: 'text-white',
+          hoverState: 'hover:bg-github-400'
+        }
       } else {
         return {
           bg: 'bg-grey-200',

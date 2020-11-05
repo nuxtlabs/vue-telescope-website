@@ -194,6 +194,10 @@ module.exports = {
       gridsome: {
         base: '#00A672',
         light: '#D2F8EC'
+      },
+      github: {
+        base: '#24292e',
+        400: '#2d3339'
       }
     },
     extend: {
