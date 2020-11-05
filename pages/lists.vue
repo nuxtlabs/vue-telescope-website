@@ -41,6 +41,8 @@
 </template>
 
 <script>
+import frontMatter from '@/utils/front-matter'
+
 export default {
   fetchOnServer: false,
   async fetch() {
@@ -85,6 +87,12 @@ export default {
     onGroupSelected(group) {
       this.selectedGroup = group
     }
+  },
+  head() {
+    return frontMatter({
+      path: this.$route.path,
+      title: 'My Lists'
+    })
   }
 }
 </script>
