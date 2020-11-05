@@ -4,34 +4,46 @@
       <div v-if="creatingList" class="flex items-center">
         <AppInput
           v-model="newName"
+          class="flex-grow"
           size="small"
           placeholder="List name"
+          appearance="transparent"
           @keypress.enter.native="createList"
         />
-        <ValidateIcon
-          class="w-3 h-3 opacity-50 hover:opacity-100 ml-2"
-          @click="createList"
-        />
-        <CancelIcon
-          class="w-3 h-3 opacity-50 hover:opacity-100 ml-2"
-          @click="clearActions"
-        />
+        <div class="flex flex-grow-0">
+          <ValidateIcon
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            @click="createList"
+          />
+          <CancelIcon
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            @click="clearActions"
+          />
+        </div>
       </div>
-      <div v-else class="cursor-pointer" @click="initCreateList">
+      <div
+        v-else
+        class="flex items-center justify-between cursor-pointer py-1"
+        @click="initCreateList"
+      >
         <span class="text-eight leading-eight font-display-weight"
-          >+ Add list</span
+          >Add list</span
         >
+        <AddIcon class="w-4 h-4 ml-2" />
       </div>
     </div>
     <div v-else>
-      <div v-if="deletingList" class="flex items-center">
-        <span>Delete ?</span>
+      <div v-if="deletingList" class="flex items-center py-1">
+        <span
+          class="flex flex-grow text-eight leading-eight font-display-weight"
+          >Delete ?</span
+        >
         <ValidateIcon
-          class="w-3 h-3 opacity-50 hover:opacity-100 ml-2"
+          class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
           @click="deleteList"
         />
         <CancelIcon
-          class="w-3 h-3 opacity-50 hover:opacity-100 ml-2"
+          class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
           @click="clearActions"
         />
       </div>
@@ -39,37 +51,50 @@
         <AppInput
           ref="edit-input"
           v-model="newName"
+          class="flex-grow"
           size="small"
           placeholder="Group name"
+          appearance="transparent"
           @keypress.enter.native="editList"
         />
-        <ValidateIcon
-          class="w-3 h-3 opacity-50 hover:opacity-100 ml-2"
-          @click="editList"
-        />
-        <CancelIcon
-          class="w-3 h-3 opacity-50 hover:opacity-100 ml-2"
-          @click="clearActions"
-        />
-        <DeleteIcon
-          class="w-3 h-3 opacity-50 hover:opacity-100 ml-2"
-          @click="initDeleteList"
-        />
+        <div class="flex flex-grow-0">
+          <ValidateIcon
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            @click="editList"
+          />
+          <CancelIcon
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            @click="clearActions"
+          />
+          <DeleteIcon
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            @click="initDeleteList"
+          />
+        </div>
       </div>
-      <div v-else class="flex items-center cursor-pointer">
-        <span
-          class="text-eight leading-eight font-display-weight"
-          :class="selected ? 'text-primary-500' : 'text-grey-800'"
-          @click="select"
-          >{{ list.name }}</span
-        >
+      <div v-else class="flex items-center justify-between cursor-pointer py-1">
+        <div class="flex flex-grow items-center" @click="select">
+          <SectionExpandedIcon
+            v-if="selected"
+            class="w-4 h-4 opacity-50 hover:opacity-100 mr-2"
+          />
+          <SectionCollapsedIcon
+            v-else
+            class="w-4 h-4 opacity-50 hover:opacity-100 mr-2"
+          />
+          <span
+            class="text-eight leading-eight font-display-weight"
+            :class="selected ? 'text-primary-500' : 'text-grey-800'"
+            >{{ list.name }}</span
+          >
+        </div>
         <EditIcon
           v-if="selected && !selectedGroup"
-          class="w-3 h-3 opacity-50 hover:opacity-100 ml-2"
+          class="flex-grow-0 w-4 h-4 opacity-50 hover:opacity-100 ml-2"
           @click="initEditList"
         />
       </div>
-      <div v-if="selected && list.groups" class="ml-4 mt-2 mb-4">
+      <div v-if="selected && list.groups" class="ml-5">
         <div v-for="group in list.groups" :key="group.id">
           <ListGroup
             :group="group"
@@ -85,13 +110,19 @@
 </template>
 
 <script>
-import EditIcon from '@/assets/icons/config.svg?inline'
-import ValidateIcon from '@/assets/icons/checkmark-circle-fill.svg?inline'
-import CancelIcon from '@/assets/icons/arrow-left.svg?inline'
-import DeleteIcon from '@/assets/icons/xmark-circle.svg?inline'
+import SectionCollapsedIcon from '@/assets/icons/chevron-right.svg?inline'
+import SectionExpandedIcon from '@/assets/icons/chevron-down.svg?inline'
+import AddIcon from '@/assets/icons/plus-circle.svg?inline'
+import EditIcon from '@/assets/icons/more-vertical.svg?inline'
+import ValidateIcon from '@/assets/icons/check.svg?inline'
+import CancelIcon from '@/assets/icons/xmark-circle.svg?inline'
+import DeleteIcon from '@/assets/icons/minus-circle.svg?inline'
 
 export default {
   components: {
+    SectionCollapsedIcon,
+    SectionExpandedIcon,
+    AddIcon,
     EditIcon,
     ValidateIcon,
     CancelIcon,
