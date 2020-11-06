@@ -151,10 +151,13 @@ export default {
     async createGroup() {
       try {
         if (!this.newName) return
-        const newGroup = await this.$strapi.create('list-groups', {
-          name: this.newName,
-          list: this.list.id
-        })
+        const newGroup = await this.$strapi.$http.$post(
+          `lists/${this.list.id}/groups`,
+          {
+            name: this.newName,
+            list: this.list.id
+          }
+        )
         newGroup.list = this.list.id
         this.$store.commit('addGroup', { group: newGroup, list: this.list })
         this.clearActions()
@@ -171,9 +174,8 @@ export default {
     async editGroup() {
       try {
         if (!this.newName) return
-        const updatedGroup = await this.$strapi.update(
-          'list-groups',
-          this.group.id,
+        const updatedGroup = await this.$strapi.$http.$put(
+          `lists/${this.list.id}/groups/${this.group.id}`,
           {
             name: this.newName
           }
@@ -192,7 +194,9 @@ export default {
     },
     async deleteGroup() {
       try {
-        await this.$strapi.delete('list-groups', this.group.id)
+        await this.$strapi.$http.$delete(
+          `lists/${this.list.id}/groups/${this.group.id}`
+        )
         this.$store.commit('deleteGroup', {
           group: this.group,
           list: this.list
