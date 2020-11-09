@@ -103,7 +103,7 @@
           <ListGroup
             :group="group"
             :list="list"
-            :selected="selectedGroup === group"
+            :selected="selectedGroup && selectedGroup.id === group.id"
             @group-selected="onGroupSelected"
           />
         </div>
@@ -206,6 +206,7 @@ export default {
         const updatedList = await this.$strapi.update('lists', this.list.id, {
           name: this.newName
         })
+        updatedList.groups = this.list.groups
         this.$store.commit('updateList', updatedList)
         this.clearActions()
       } catch (e) {}
