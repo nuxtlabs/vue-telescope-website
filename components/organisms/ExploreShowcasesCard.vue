@@ -1,31 +1,56 @@
 <template>
   <div class="p-2">
     <div
-      class="hover-effect relative cursor-pointer p-3"
-      @click="
-        () => {
-          $store.commit('SET_MODAL', true)
-          $router.push({
-            name: 'explore-website',
-            params: { website: showcase.slug }
-          })
-        }
-      "
+      class="hover-effect relative p-3"
+      :class="!$strapi.user ? ['cursor-pointer'] : []"
+      @click="!$strapi.user ? open() : () => {}"
     >
-      <div class="rounded-lg overflow-hidden mb-4">
+      <div class="rounded-lg overflow-hidden mb-4 relative">
         <AppResponsiveCloudinaryImage
           :url="showcase.screenshotUrl"
           ratio="4:3"
           sizes="(min-width: 834px) 33vw, (min-width: 640px) 50vw, 100vw"
         />
+        <div
+          v-if="$strapi.user"
+          class="flex absolute top-0 w-full h-full cursor-pointer bg-grey-900 bg-opacity-75 opacity-0 hover:opacity-100"
+        >
+          <div v-if="!isBookmarking" class="flex w-full h-full">
+            <div
+              class="flex flex-1 items-center justify-items-center text-center h-full opacity-50 hover:opacity-100"
+              @click="open"
+            >
+              <OpenIcon class="flex-1 w-8 h-8 text-white" />
+            </div>
+            <div
+              class="flex flex-1 items-center justify-items-center text-center h-full opacity-50 hover:opacity-100"
+              @click="isBookmarking = true"
+            >
+              <BookmarkIcon
+                v-if="!isBookmarked"
+                class="flex-1 w-8 h-8 text-white"
+              />
+              <UnBookmarkIcon v-else class="flex-1 w-8 h-8 text-white" />
+            </div>
+          </div>
+          <div
+            v-else
+            class="flex flex-col items-center w-full p-2 overflow-y-auto"
+          >
+            <CancelIcon
+              class="flex-shrink-0 w-8 h-8 text-white mb-2"
+              @click="isBookmarking = false"
+            />
+            <AppBookmarksDropDown
+              :showcase="showcase"
+              class="flex-grow w-full"
+            />
+          </div>
+        </div>
       </div>
       <div class="flex flex-wrap items-center">
-        <NuxtLink
+        <div
           class="flex items-center justify-between w-full font-display-weight text-eight leading-eight"
-          :to="{
-            name: 'explore-website',
-            params: { website: showcase.slug }
-          }"
         >
           <span class="truncate">
             {{ showcase.hostname }}
@@ -50,18 +75,51 @@
               alt=""
             />
           </div>
-        </NuxtLink>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import OpenIcon from '@/assets/icons/eye.svg?inline'
+import BookmarkIcon from '@/assets/icons/bookmark.svg?inline'
+import UnBookmarkIcon from '@/assets/icons/bookmark-fill.svg?inline'
+import CancelIcon from '@/assets/icons/xmark-circle.svg?inline'
+
 export default {
+  components: {
+    OpenIcon,
+    BookmarkIcon,
+    UnBookmarkIcon,
+    CancelIcon
+  },
   props: {
     showcase: {
       type: Object,
       default: () => {}
+    }
+  },
+  data() {
+    return {
+      isBookmarking: false
+    }
+  },
+  computed: {
+    isBookmarked() {
+      const showcases = this.$store.state.lists
+        .flatMap((list) => list.groups)
+        .flatMap((group) => group.showcases)
+      return showcases?.find((it) => it && it.id === this.showcase.id)
+    }
+  },
+  methods: {
+    open() {
+      this.$store.commit('SET_MODAL', true)
+      this.$router.push({
+        name: 'explore-website',
+        params: { website: this.showcase.slug }
+      })
     }
   }
 }
