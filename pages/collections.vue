@@ -5,12 +5,13 @@
         <h1
           class="mx-auto text-two leading-two text-center md:text-one md:leading-one md:w-1/2 md:mt-16 font-bold-body-weight"
         >
-          Try out Vue&nbsp;Telemetry&nbsp;Lists and create your own collections!
+          Try out Vue&nbsp;Telemetry&nbsp;Collections and create your own
+          collections!
         </h1>
         <p
           class="mx-auto text-eight leading-eight text-center mt-8 md:text-seven md:leading-seven md:w-3/4 text-grey-700"
         >
-          Log In with GitHub, start creating your lists and bookmark any
+          Log In with GitHub, start creating your collections and bookmark any
           showcases.
         </p>
         <GitHubLogInButton class="mt-12 mb-4" />

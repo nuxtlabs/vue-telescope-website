@@ -24,7 +24,7 @@
         </NuxtLink>
         <NuxtLink
           ref="lists-link"
-          to="/lists"
+          to="/collections"
           class="opacity-0 font-display-weight"
         >
           <span class="hover-hover:hover:opacity-50">Collections</span>
