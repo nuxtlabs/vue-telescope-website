@@ -51,16 +51,6 @@
 import frontMatter from '@/utils/front-matter'
 
 export default {
-  fetchOnServer: false,
-  async fetch() {
-    try {
-      if (this.$strapi.user) {
-        const lists = await this.$strapi.find('lists')
-        this.$store.commit('setLists', lists)
-        this.selectedList = lists[0]
-      }
-    } catch (e) {}
-  },
   data() {
     return {
       selectedList: null,
