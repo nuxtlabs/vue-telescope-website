@@ -8,11 +8,7 @@
         v-for="(group, groupIndex) in list.groups"
         :key="groupIndex"
         class="flex items-center"
-        @click="
-          group.showcases.find((it) => it.id === showcase.id)
-            ? unbookmark(list, group)
-            : bookmark(list, group)
-        "
+        @click="onBookmarkClicked(list, group)"
       >
         <BulletIcon class="flex-grow-0 w-4 h-4 text-white mr-2" />
         <span class="flex-grow text-white">{{ group.name }}</span>
@@ -51,6 +47,11 @@ export default {
   methods: {
     selectGroup(group) {
       this.$emit('group-selected', group)
+    },
+    onBookmarkClicked(list, group) {
+      group.showcases?.find((it) => it.id === this.showcase.id)
+        ? this.unbookmark(list, group)
+        : this.bookmark(list, group)
     },
     async bookmark(list, group) {
       try {

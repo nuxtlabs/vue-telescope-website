@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-container-max-width px-4 mx-auto py-12">
+  <div class="max-w-container-max-width px-2 mx-auto pt-4 pb-12">
     <ClientOnly>
       <section v-if="!$strapi.user" class="text-center">
         <h1
@@ -17,7 +17,7 @@
         <GitHubLogInButton class="mt-12 mb-4" />
       </section>
       <div v-else class="flex">
-        <section class="w-1/4 px-4 py-2">
+        <section class="w-1/4 px-2 py-4">
           <List
             v-for="list in lists"
             :key="list.id"
@@ -28,8 +28,8 @@
           />
           <List />
         </section>
-        <section v-if="selectedList" class="w-3/4 mt-3 ml-4">
-          <div class="flex items-center ml-2">
+        <section class="w-3/4">
+          <div class="flex items-center ml-4 mb-1 font-bold-body-weight">
             <AnimatedNumber :to="showcases.length" :from="0" />
             <span class="font-body-weight text-sm">&nbsp;websites found</span>
           </div>
@@ -101,7 +101,7 @@ export default {
   head() {
     return frontMatter({
       path: this.$route.path,
-      title: 'My Lists'
+      title: 'Collections'
     })
   }
 }

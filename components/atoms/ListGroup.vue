@@ -3,12 +3,14 @@
     <div v-if="!group">
       <div v-if="creatingGroup" class="flex items-center">
         <AppInput
+          ref="add-input"
           v-model="newName"
           class="flex-grow"
           size="small"
           placeholder="Group name"
           appearance="transparent"
           @keypress.enter.native="createGroup"
+          @keydown.esc.native="clearActions"
         />
         <div class="flex flex-grow-0">
           <ValidateIcon
@@ -53,6 +55,7 @@
           placeholder="Group name"
           appearance="transparent"
           @keypress.enter.native="editGroup"
+          @keydown.esc.native="clearActions"
         />
         <div class="flex flex-grow-0 items-center">
           <ValidateIcon
@@ -148,6 +151,10 @@ export default {
     initCreateGroup() {
       this.select()
       this.creatingGroup = true
+      this.$nextTick(() => {
+        const addInput = this.$refs['add-input'].$el
+        addInput.select()
+      })
     },
     async createGroup() {
       try {

@@ -3,12 +3,14 @@
     <div v-if="!list">
       <div v-if="creatingList" class="flex items-center">
         <AppInput
+          ref="add-input"
           v-model="newName"
           class="flex-grow"
           size="small"
           placeholder="List name"
           appearance="transparent"
           @keypress.enter.native="createList"
+          @keydown.esc.native="clearActions"
         />
         <div class="flex flex-grow-0">
           <ValidateIcon
@@ -56,6 +58,7 @@
           placeholder="Group name"
           appearance="transparent"
           @keypress.enter.native="editList"
+          @keydown.esc.native="clearActions"
         />
         <div class="flex flex-grow-0">
           <ValidateIcon
@@ -174,6 +177,10 @@ export default {
     },
     initCreateList() {
       this.creatingList = true
+      this.$nextTick(() => {
+        const addInput = this.$refs['add-input'].$el
+        addInput.select()
+      })
     },
     async createList() {
       try {
