@@ -77,6 +77,7 @@
           <span
             class="flex-grow"
             :class="selected ? 'text-primary-500' : 'text-grey-800'"
+            @dblclick="initEditGroup"
             >{{ group.name }}</span
           >
         </div>

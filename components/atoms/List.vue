@@ -85,6 +85,7 @@
           <span
             class="text-eight leading-eight font-display-weight"
             :class="selected ? 'text-primary-500' : 'text-grey-800'"
+            @dblclick="initEditList"
             >{{ list.name }}</span
           >
         </div>

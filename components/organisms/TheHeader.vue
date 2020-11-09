@@ -27,7 +27,7 @@
           to="/lists"
           class="opacity-0 font-display-weight"
         >
-          <span class="hover-hover:hover:opacity-50">My Lists</span>
+          <span class="hover-hover:hover:opacity-50">Collections</span>
         </NuxtLink>
 
         <ClientOnly>
@@ -37,7 +37,7 @@
             class="ml-2 sm:ml-4 font-display-weight focus:outline-none"
             @click="logout"
           >
-            <span class="hover-hover:hover:opacity-50">LogOut</span>
+            <span class="hover-hover:hover:opacity-50">Logout</span>
           </button>
         </ClientOnly>
 

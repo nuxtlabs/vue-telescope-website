@@ -6,7 +6,7 @@
     class="cursor-pointer"
     @click.native="login"
   >
-    Log In with GitHub<GithubIcon class="h-5 w-5 ml-2" />
+    Login with GitHub<GithubIcon class="h-5 w-5 ml-2" />
   </AppButton>
 </template>
 

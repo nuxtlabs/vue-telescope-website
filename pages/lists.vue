@@ -27,13 +27,19 @@
           />
           <List />
         </section>
-        <section v-if="selectedList" class="w-3/4 flex flex-wrap ml-4">
-          <ExploreShowcasesCard
-            v-for="showcase in showcases"
-            :key="showcase.id"
-            :showcase="showcase"
-            class="w-full sm:w-1/2 md:w-1/3 mb-4"
-          />
+        <section v-if="selectedList" class="w-3/4 mt-3 ml-4">
+          <div class="flex items-center ml-2">
+            <AnimatedNumber :to="showcases.length" :from="0" />
+            <span class="font-body-weight text-sm">&nbsp;websites found</span>
+          </div>
+          <div class="flex flex-wrap">
+            <ExploreShowcasesCard
+              v-for="showcase in showcases"
+              :key="showcase.id"
+              :showcase="showcase"
+              class="w-full sm:w-1/2 md:w-1/3 mb-4"
+            />
+          </div>
         </section>
       </div>
     </ClientOnly>
@@ -65,18 +71,21 @@ export default {
       return this.$store.state.lists
     },
     showcases() {
-      return this.selectedGroup
-        ? this.selectedList.groups.find(
-            (group) => group.id === this.selectedGroup.id
-          )?.showcases
-        : this.selectedList.groups
-            .flatMap((group) => group.showcases)
-            .filter((showcase, index, self) => {
-              return (
-                showcase &&
-                index === self.findIndex((obj) => obj.id === showcase.id)
-              )
-            })
+      return this.lists
+        .filter(
+          (list) => !this.selectedList || list.id === this.selectedList.id
+        )
+        .flatMap((list) => list.groups)
+        .filter(
+          (group) => !this.selectedGroup || group.id === this.selectedGroup.id
+        )
+        .flatMap((group) => group.showcases)
+        .filter((showcase, index, self) => {
+          return (
+            showcase &&
+            index === self.findIndex((obj) => obj.id === showcase.id)
+          )
+        })
     }
   },
   methods: {
