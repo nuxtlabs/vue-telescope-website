@@ -167,5 +167,56 @@ export const actions = {
         resolve(true)
       }
     })
+  },
+  async createList({ commit }, { name }) {
+    const newList = await this.$strapi.create('lists', {
+      name
+    })
+    commit('addList', newList)
+    return newList
+  },
+  async updateList({ commit }, { name, list }) {
+    const updatedList = await this.$strapi.update('lists', list.id, {
+      name
+    })
+    updatedList.groups = list.groups
+    commit('updateList', updatedList)
+    return updatedList
+  },
+  async deleteList({ commit }, { list }) {
+    await this.$strapi.delete('lists', list.id)
+    commit('deleteList', list)
+    return list
+  },
+  async createGroup({ commit }, { name, list }) {
+    const newGroup = await this.$strapi.$http.$post(`lists/${list.id}/groups`, {
+      name,
+      list: list.id
+    })
+    newGroup.list = list.id
+    commit('addGroup', { group: newGroup, list })
+    return newGroup
+  },
+  async updateGroup({ commit }, { name, group, list }) {
+    const updatedGroup = await this.$strapi.$http.$put(
+      `lists/${list.id}/groups/${group.id}`,
+      {
+        name
+      }
+    )
+    updatedGroup.list = list.id
+    commit('updateGroup', {
+      group: updatedGroup,
+      list
+    })
+    return updatedGroup
+  },
+  async deleteGroup({ commit }, { group, list }) {
+    await this.$strapi.$http.$delete(`lists/${list.id}/groups/${group.id}`)
+    commit('deleteGroup', {
+      group,
+      list
+    })
+    return group
   }
 }
