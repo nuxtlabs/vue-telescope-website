@@ -23,10 +23,15 @@
             :key="list.id"
             :selected="selectedList && selectedList.id === list.id"
             :list="list"
+            :selected-group="
+              list.groups.find(
+                (group) => selectedGroup && group.id === selectedGroup.id
+              )
+            "
             @group-selected="onGroupSelected"
             @list-selected="onListSelected"
           />
-          <List />
+          <List @list-selected="onListSelected" />
         </section>
         <section class="w-3/4">
           <div class="flex items-center ml-4 mb-1 font-bold-body-weight">
