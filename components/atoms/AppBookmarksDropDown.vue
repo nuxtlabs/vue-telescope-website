@@ -1,22 +1,34 @@
 <template>
-  <div>
-    <div v-for="(list, index) in lists" :key="index">
-      <span class="text-white text-eight leading-eight font-display-weight">{{
+  <div class="flex flex-col" :class="style.lists">
+    <div
+      v-for="(list, index) in lists"
+      :key="index"
+      class="flex flex-col"
+      :class="style.groups"
+    >
+      <span class="text-white font-display-weight" :class="style.list">{{
         list.name
       }}</span>
       <div
         v-for="(group, groupIndex) in list.groups"
         :key="groupIndex"
-        class="flex items-center"
+        class="flex items-center cursor-pointer"
         @click="onBookmarkClicked(list, group)"
       >
         <BulletIcon class="flex-grow-0 w-4 h-4 text-white mr-2" />
-        <span class="flex-grow text-white">{{ group.name }}</span>
+        <span class="flex-grow text-white" :class="style.group">{{
+          group.name
+        }}</span>
         <BookmarkIcon
           v-if="!group.showcases.find((it) => it.id === showcase.id)"
-          class="flex-grow-0 w-5 h-5 text-white"
+          class="flex-grow-0 text-white"
+          :class="style.icon"
         />
-        <UnBookmarkIcon v-else class="flex-grow-0 w-5 h-5 text-white" />
+        <UnBookmarkIcon
+          v-else
+          class="flex-grow-0 text-white"
+          :class="style.icon"
+        />
       </div>
     </div>
   </div>
@@ -37,11 +49,34 @@ export default {
     showcase: {
       type: Object,
       default: null
+    },
+    size: {
+      type: String,
+      default: null
     }
   },
   computed: {
     lists() {
       return this.$store.state.lists.filter((list) => list.groups.length)
+    },
+    style() {
+      if (this.size === 'small') {
+        return {
+          icon: ['w-5', 'h-5'],
+          lists: [],
+          list: ['text-eight', 'leading-eight'],
+          groups: [],
+          group: []
+        }
+      } else {
+        return {
+          icon: ['w-8', 'h-8'],
+          lists: ['space-y-4'],
+          list: ['text-six', 'leading-six'],
+          groups: ['space-y-2'],
+          group: ['text-eight', 'leading-eight']
+        }
+      }
     }
   },
   methods: {

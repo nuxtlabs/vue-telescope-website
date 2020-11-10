@@ -13,9 +13,9 @@
         />
         <div
           v-if="$strapi.user"
-          class="flex absolute top-0 w-full h-full cursor-pointer bg-grey-900 bg-opacity-75 opacity-0 hover:opacity-100"
+          class="flex absolute top-0 w-full h-full bg-grey-900 bg-opacity-75 opacity-0 hover:opacity-100"
         >
-          <div v-if="!isBookmarking" class="flex w-full h-full">
+          <div v-if="!isBookmarking" class="flex w-full h-full cursor-pointer">
             <div
               class="flex flex-1 items-center justify-items-center text-center h-full opacity-50 hover:opacity-100"
               @click="open"
@@ -38,11 +38,12 @@
             class="flex flex-col items-center w-full p-2 overflow-y-auto"
           >
             <CancelIcon
-              class="flex-shrink-0 w-8 h-8 text-white mb-2"
+              class="flex-shrink-0 w-8 h-8 text-white mb-2 cursor-pointer"
               @click="isBookmarking = false"
             />
             <AppBookmarksDropDown
               :showcase="showcase"
+              size="small"
               class="flex-grow w-full"
             />
           </div>
