@@ -91,6 +91,16 @@ export default {
       return { listId: this.selectedList?.id, groupId: this.selectedGroup?.id }
     }
   },
+  watch: {
+    lists() {
+      if (
+        this.selectedList &&
+        !this.lists.find((list) => list && list.id === this.selectedList.id)
+      ) {
+        this.selectedList = null
+      }
+    }
+  },
   methods: {
     onListSelected(list) {
       this.selectedList =
