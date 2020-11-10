@@ -37,11 +37,11 @@
         <span>Delete ?</span>
         <div class="flex items-center">
           <ValidateIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer"
             @click="deleteGroup"
           />
           <CancelIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer"
             @click="clearActions"
           />
         </div>
@@ -59,15 +59,15 @@
         />
         <div class="flex flex-grow-0 items-center">
           <ValidateIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer"
             @click="updateGroup"
           />
           <CancelIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer"
             @click="clearActions"
           />
           <DeleteIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer"
             @click="initDeleteGroup"
           />
         </div>

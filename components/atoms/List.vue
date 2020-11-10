@@ -41,11 +41,11 @@
           >Delete ?</span
         >
         <ValidateIcon
-          class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+          class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer"
           @click="deleteList"
         />
         <CancelIcon
-          class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+          class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer"
           @click="clearActions"
         />
       </div>
@@ -62,15 +62,15 @@
         />
         <div class="flex flex-grow-0">
           <ValidateIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer"
             @click="updateList"
           />
           <CancelIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer"
             @click="clearActions"
           />
           <DeleteIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer"
             @click="initDeleteList"
           />
         </div>
@@ -101,7 +101,7 @@
           @click="initUpdateList"
         />
       </div>
-      <div v-if="selected && list.groups" class="ml-5">
+      <div v-if="selected && list.groups" class="flex flex-col ml-5">
         <div v-for="group in list.groups" :key="group.id">
           <ListGroup
             :group="group"
@@ -214,7 +214,7 @@ export default {
     async deleteList() {
       try {
         await this.$store.dispatch('deleteList', { list: this.list })
-        this.$emit('list-selected', null) // FIXME
+        this.$emit('list-selected', null)
       } catch (e) {}
     }
   }
