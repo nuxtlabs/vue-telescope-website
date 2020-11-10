@@ -39,6 +39,38 @@
             sizes="100vw"
             class=""
           />
+          <ClientOnly>
+            <div
+              v-if="$strapi.user && !isBookmarking"
+              class="absolute top-0 right-0"
+            >
+              <div
+                class="flex items-top justify-items-right p-4 cursor-pointer"
+                @click="isBookmarking = true"
+              >
+                <BookmarkIcon
+                  v-if="!isBookmarked"
+                  class="flex-1 w-8 h-8 text-white"
+                />
+                <UnBookmarkIcon v-else class="flex-1 w-8 h-8 text-white" />
+              </div>
+            </div>
+            <div
+              v-else-if="$strapi.user && isBookmarking"
+              class="flex absolute top-0 w-full h-full bg-grey-900 bg-opacity-75"
+            >
+              <div class="flex flex-col items-end w-full p-4 overflow-y-auto">
+                <CancelIcon
+                  class="flex-shrink-0 w-8 h-8 text-white mb-2 cursor-pointer"
+                  @click="isBookmarking = false"
+                />
+                <AppBookmarksDropDown
+                  :showcase="website"
+                  class="flex-grow w-full"
+                />
+              </div>
+            </div>
+          </ClientOnly>
         </div>
       </div>
 
@@ -52,11 +84,17 @@
 <script>
 import ExclamationIcon from '@/assets/icons/exclamation.svg?inline'
 import LinkIcon from '@/assets/icons/link.svg?inline'
+import BookmarkIcon from '@/assets/icons/bookmark.svg?inline'
+import UnBookmarkIcon from '@/assets/icons/bookmark-fill.svg?inline'
+import CancelIcon from '@/assets/icons/xmark-circle.svg?inline'
 
 export default {
   components: {
     ExclamationIcon,
-    LinkIcon
+    LinkIcon,
+    BookmarkIcon,
+    UnBookmarkIcon,
+    CancelIcon
   },
   props: {
     website: {
@@ -66,7 +104,16 @@ export default {
   },
   data() {
     return {
+      isBookmarking: false,
       pending: false
+    }
+  },
+  computed: {
+    isBookmarked() {
+      const showcases = this.$store.state.lists
+        .flatMap((list) => list.groups)
+        .flatMap((group) => group.showcases)
+      return showcases?.find((it) => it && it.id === this.website.id)
     }
   }
 }
