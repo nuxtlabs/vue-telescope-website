@@ -28,10 +28,14 @@
                 (group) => selectedGroup && group.id === selectedGroup.id
               )
             "
+            :lists-selection="listsSelection"
             @group-selected="onGroupSelected"
             @list-selected="onListSelected"
           />
-          <List @list-selected="onListSelected" />
+          <List
+            :lists-selection="listsSelection"
+            @list-selected="onListSelected"
+          />
         </section>
         <section class="w-3/4">
           <div class="flex items-center ml-4 mb-1 font-bold-body-weight">
@@ -82,15 +86,27 @@ export default {
             index === self.findIndex((obj) => obj.id === showcase.id)
           )
         })
+    },
+    listsSelection() {
+      return { listId: this.selectedList?.id, groupId: this.selectedGroup?.id }
     }
   },
   methods: {
     onListSelected(list) {
-      this.selectedList = list
+      this.selectedList =
+        !this.selectedGroup &&
+        list &&
+        this.selectedList &&
+        list.id === this.selectedList.id
+          ? null
+          : list
       this.selectedGroup = null
     },
     onGroupSelected(group) {
-      this.selectedGroup = group
+      this.selectedGroup =
+        group && this.selectedGroup && group.id === this.selectedGroup.id
+          ? null
+          : group
     }
   },
   head() {

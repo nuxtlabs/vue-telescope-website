@@ -107,9 +107,10 @@
             :group="group"
             :list="list"
             :selected="selectedGroup && selectedGroup.id === group.id"
+            :lists-selection="listsSelection"
           />
         </div>
-        <ListGroup :list="list" />
+        <ListGroup :list="list" :lists-selection="listsSelection" />
       </div>
     </div>
   </div>
@@ -146,6 +147,10 @@ export default {
     selectedGroup: {
       type: Object,
       default: null
+    },
+    listsSelection: {
+      type: Object,
+      default: null
     }
   },
   data() {
@@ -157,8 +162,8 @@ export default {
     }
   },
   watch: {
-    selected(value) {
-      if (!value) this.clearActions()
+    listsSelection(value) {
+      this.clearActions()
     }
   },
   methods: {

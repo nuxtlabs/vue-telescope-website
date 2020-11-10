@@ -126,6 +126,10 @@ export default {
     selected: {
       type: Boolean,
       default: false
+    },
+    listsSelection: {
+      type: Object,
+      default: null
     }
   },
   data() {
@@ -137,8 +141,8 @@ export default {
     }
   },
   watch: {
-    selected(value) {
-      if (!value) this.clearActions()
+    listsSelection(value) {
+      this.clearActions()
     }
   },
   methods: {
