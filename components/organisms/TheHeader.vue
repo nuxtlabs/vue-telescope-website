@@ -30,16 +30,14 @@
           <span class="hover-hover:hover:opacity-50">Collections</span>
         </NuxtLink>
 
-        <ClientOnly>
-          <button
-            v-if="$strapi.user"
-            ref="logout-link"
-            class="ml-2 sm:ml-4 font-display-weight focus:outline-none"
-            @click="logout"
-          >
-            <span class="hover-hover:hover:opacity-50">Logout</span>
-          </button>
-        </ClientOnly>
+        <button
+          v-if="user"
+          ref="logout-link"
+          class="ml-2 sm:ml-4 font-display-weight focus:outline-none"
+          @click="logout"
+        >
+          <span class="hover-hover:hover:opacity-50">Logout</span>
+        </button>
 
         <div
           ref="install-extension-button"
@@ -58,6 +56,11 @@ import TheLogo from '@/assets/logo/logo.svg?inline'
 export default {
   components: {
     TheLogo
+  },
+  computed: {
+    user() {
+      return this.$strapi.user
+    }
   },
   mounted() {
     const logo = this.$refs.logo.$el
