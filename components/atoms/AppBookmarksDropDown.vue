@@ -1,19 +1,19 @@
 <template>
   <div class="flex flex-col" :class="style.lists">
-    <div
+    <ul
       v-for="(list, index) in lists"
       :key="index"
       class="flex flex-col"
       :class="style.groups"
     >
-      <span class="text-white font-display-weight" :class="style.list">{{
-        list.name
-      }}</span>
-      <div
+      <p class="text-white font-display-weight" :class="style.list">
+        {{ list.name }}
+      </p>
+      <li
         v-for="(group, groupIndex) in list.groups"
         :key="groupIndex"
         class="flex items-center cursor-pointer"
-        @click="onBookmarkClicked(list, group)"
+        @click.prevent="onBookmarkClicked(list, group)"
       >
         <BulletIcon class="flex-grow-0 w-4 h-4 text-white mr-2" />
         <span class="flex-grow text-white" :class="style.group">{{
@@ -29,8 +29,8 @@
           class="flex-grow-0 text-white"
           :class="style.icon"
         />
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -80,43 +80,25 @@ export default {
     }
   },
   methods: {
-    selectGroup(group) {
-      this.$emit('group-selected', group)
-    },
     onBookmarkClicked(list, group) {
       group.showcases?.find((it) => it.id === this.showcase.id)
         ? this.unbookmark(list, group)
         : this.bookmark(list, group)
     },
-    async bookmark(list, group) {
+    bookmark(list, group) {
       try {
-        await this.$strapi.$http.$post(
-          `/lists/${list.id}/groups/${group.id}/showcases`,
-          {
-            showcase: this.showcase
-          }
-        )
-        const updatedGroup = {
-          ...group,
-          showcases: [this.showcase, ...group.showcases]
-        }
-        this.$store.commit('updateGroup', {
-          group: updatedGroup,
+        this.$store.dispatch('bookmarkShowcase', {
+          showcase: this.showcase,
+          group,
           list
         })
       } catch (e) {}
     },
-    async unbookmark(list, group) {
+    unbookmark(list, group) {
       try {
-        await this.$strapi.$http.$delete(
-          `/lists/${list.id}/groups/${group.id}/showcases/${this.showcase.id}`
-        )
-        const updatedGroup = {
-          ...group,
-          showcases: group.showcases.filter((it) => it.id !== this.showcase.id)
-        }
-        this.$store.commit('updateGroup', {
-          group: updatedGroup,
+        this.$store.dispatch('unbookmarkShowcase', {
+          showcase: this.showcase,
+          group,
           list
         })
       } catch (e) {}

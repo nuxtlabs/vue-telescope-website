@@ -1,9 +1,12 @@
 <template>
   <div class="p-2">
-    <div
-      class="hover-effect relative p-3"
-      :class="!$strapi.user ? ['cursor-pointer'] : []"
-      @click="!$strapi.user ? open() : () => {}"
+    <NuxtLink
+      class="block hover-effect relative p-3 cursor-pointer"
+      :to="{
+        name: 'explore-website',
+        params: { website: showcase.slug }
+      }"
+      @click.prevent="open()"
     >
       <div class="rounded-lg overflow-hidden mb-4 relative">
         <AppResponsiveCloudinaryImage
@@ -19,13 +22,12 @@
           <div v-if="!isBookmarking" class="flex w-full h-full cursor-pointer">
             <div
               class="flex flex-1 items-center justify-items-center text-center h-full opacity-50 hover:opacity-100"
-              @click="open"
             >
               <OpenIcon class="flex-1 w-8 h-8 text-white" />
             </div>
             <div
               class="flex flex-1 items-center justify-items-center text-center h-full opacity-50 hover:opacity-100"
-              @click="isBookmarking = true"
+              @click.prevent="isBookmarking = true"
             >
               <BookmarkIcon
                 v-if="!isBookmarked"
@@ -40,7 +42,7 @@
           >
             <CancelIcon
               class="flex-shrink-0 w-8 h-8 text-white mb-2 cursor-pointer"
-              @click="isBookmarking = false"
+              @click.prevent="isBookmarking = false"
             />
             <AppBookmarksDropDown
               :showcase="showcase"
@@ -79,7 +81,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </NuxtLink>
   </div>
 </template>
 

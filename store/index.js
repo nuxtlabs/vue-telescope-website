@@ -218,5 +218,36 @@ export const actions = {
       list
     })
     return group
+  },
+  async bookmarkShowcase({ commit }, { showcase, group, list }) {
+    await this.$strapi.$http.$post(
+      `/lists/${list.id}/groups/${group.id}/showcases`,
+      {
+        showcase
+      }
+    )
+    const updatedGroup = {
+      ...group,
+      showcases: [showcase, ...group.showcases]
+    }
+    commit('updateGroup', {
+      group: updatedGroup,
+      list
+    })
+    return updatedGroup
+  },
+  async unbookmarkShowcase({ commit }, { showcase, group, list }) {
+    await this.$strapi.$http.$delete(
+      `/lists/${list.id}/groups/${group.id}/showcases/${showcase.id}`
+    )
+    const updatedGroup = {
+      ...group,
+      showcases: group.showcases.filter((it) => it.id !== showcase.id)
+    }
+    commit('updateGroup', {
+      group: updatedGroup,
+      list
+    })
+    return updatedGroup
   }
 }
