@@ -13,6 +13,8 @@
         v-for="(group, groupIndex) in list.groups"
         :key="groupIndex"
         class="flex items-center cursor-pointer"
+        :tabindex="0"
+        @keypress.enter="onBookmarkClicked(list, group)"
         @click.prevent="onBookmarkClicked(list, group)"
       >
         <BulletIcon class="flex-grow-0 w-4 h-4 text-white mr-2" />
