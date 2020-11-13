@@ -1,7 +1,7 @@
 <template>
-  <div class="">
+  <div class="h-screen flex flex-col">
     <TheHeader />
-    <main class="mt-16">
+    <main class="pt-16 flex-1">
       <nuxt />
     </main>
     <TheFooter />

@@ -24,22 +24,11 @@
         </NuxtLink>
         <NuxtLink
           ref="lists-link"
-          to="/lists"
+          to="/collections"
           class="opacity-0 font-display-weight"
         >
-          <span class="hover-hover:hover:opacity-50">My Lists</span>
+          <span class="hover-hover:hover:opacity-50">Collections</span>
         </NuxtLink>
-
-        <ClientOnly>
-          <button
-            v-if="$strapi.user"
-            ref="logout-link"
-            class="ml-2 sm:ml-4 font-display-weight focus:outline-none"
-            @click="logout"
-          >
-            <span class="hover-hover:hover:opacity-50">LogOut</span>
-          </button>
-        </ClientOnly>
 
         <div
           ref="install-extension-button"
@@ -58,6 +47,11 @@ import TheLogo from '@/assets/logo/logo.svg?inline'
 export default {
   components: {
     TheLogo
+  },
+  computed: {
+    user() {
+      return this.$strapi.user
+    }
   },
   mounted() {
     const logo = this.$refs.logo.$el
@@ -113,31 +107,6 @@ export default {
         ease: 'power4.inOut'
       }
     )
-    this.$nextTick(() => {
-      const logoutLink = this.$refs['logout-link']
-      this.$gsap.fromTo(
-        logoutLink,
-        {
-          opacity: 0,
-          scale: 0.75,
-          y: '-15px'
-        },
-        {
-          opacity: 1,
-          scale: 1,
-          y: 0,
-          duration: 0.45,
-          ease: 'power4.inOut'
-        }
-      )
-    })
-  },
-  methods: {
-    async logout() {
-      try {
-        await this.$strapi.logout()
-      } catch (e) {}
-    }
   }
 }
 </script>

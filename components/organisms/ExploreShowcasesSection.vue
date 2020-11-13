@@ -1,13 +1,12 @@
 <template>
   <div
     id="explore-showcases-section"
-    class="flex max-w-container-max-width m-auto px-2"
+    class="flex items-start max-w-container-max-width m-auto px-2"
   >
     <div id="explore-showcases-aside" class="w-1/4 hidden md:block">
       <ExploreShowcasesSearchFilters
         id="explore-showcases-controls"
         ref="filters"
-        class="h-full"
       />
     </div>
 
@@ -316,7 +315,6 @@ export default {
 #explore-showcases-aside {
   position: sticky;
   top: calc(theme('spacing.16') + theme('spacing.8'));
-  height: calc(100vh - theme('spacing.16') - theme('spacing.8'));
 }
 #explore-showcases-controls {
   /* height: calc(100vh - theme('spacing.16') - theme('spacing.8')); */

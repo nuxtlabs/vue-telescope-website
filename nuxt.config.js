@@ -27,6 +27,7 @@ export default {
   },
   plugins: [
     '~/plugins/init',
+    '~/plugins/user-authenticated',
     '~/plugins/changelog',
     '~/plugins/gsap.client',
     '~/plugins/vue-placeholders',

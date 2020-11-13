@@ -3,20 +3,22 @@
     <div v-if="!list">
       <div v-if="creatingList" class="flex items-center">
         <AppInput
+          ref="add-input"
           v-model="newName"
           class="flex-grow"
           size="small"
           placeholder="List name"
           appearance="transparent"
           @keypress.enter.native="createList"
+          @keydown.esc.native="clearActions"
         />
         <div class="flex flex-grow-0">
           <ValidateIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer text-green-500"
             @click="createList"
           />
           <CancelIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer"
             @click="clearActions"
           />
         </div>
@@ -27,7 +29,7 @@
         @click="initCreateList"
       >
         <span class="text-eight leading-eight font-display-weight"
-          >Add list</span
+          >Add collection</span
         >
         <AddIcon class="w-4 h-4 ml-2" />
       </div>
@@ -39,41 +41,45 @@
           >Delete ?</span
         >
         <ValidateIcon
-          class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+          class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer text-green-500"
           @click="deleteList"
         />
         <CancelIcon
-          class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+          class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer"
           @click="clearActions"
         />
       </div>
-      <div v-else-if="editingList" class="flex items-center">
+      <div v-else-if="updatingList" class="flex items-center">
         <AppInput
-          ref="edit-input"
+          ref="update-input"
           v-model="newName"
           class="flex-grow"
           size="small"
           placeholder="Group name"
           appearance="transparent"
-          @keypress.enter.native="editList"
+          @keypress.enter.native="updateList"
+          @keydown.esc.native="clearActions"
         />
         <div class="flex flex-grow-0">
           <ValidateIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
-            @click="editList"
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer text-green-500"
+            @click="updateList"
           />
           <CancelIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer"
             @click="clearActions"
           />
           <DeleteIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer text-red-800"
             @click="initDeleteList"
           />
         </div>
       </div>
       <div v-else class="flex items-center justify-between cursor-pointer py-1">
-        <div class="flex flex-grow items-center" @click="select">
+        <div
+          class="flex flex-grow items-center"
+          @click="$emit('list-selected', list)"
+        >
           <SectionExpandedIcon
             v-if="selected"
             class="w-4 h-4 opacity-50 hover:opacity-100 mr-2"
@@ -85,25 +91,26 @@
           <span
             class="text-eight leading-eight font-display-weight"
             :class="selected ? 'text-primary-500' : 'text-grey-800'"
+            @dblclick="initUpdateList"
             >{{ list.name }}</span
           >
         </div>
         <EditIcon
           v-if="selected && !selectedGroup"
           class="flex-grow-0 w-4 h-4 opacity-50 hover:opacity-100 ml-2"
-          @click="initEditList"
+          @click="initUpdateList"
         />
       </div>
-      <div v-if="selected && list.groups" class="ml-5">
+      <div v-if="selected && list.groups" class="flex flex-col ml-5">
         <div v-for="group in list.groups" :key="group.id">
           <ListGroup
             :group="group"
             :list="list"
-            :selected="selectedGroup === group"
-            @group-selected="onGroupSelected"
+            :selected="selectedGroup && selectedGroup.id === group.id"
+            :lists-selection="listsSelection"
           />
         </div>
-        <ListGroup :list="list" />
+        <ListGroup :list="list" :lists-selection="listsSelection" />
       </div>
     </div>
   </div>
@@ -136,69 +143,68 @@ export default {
     selected: {
       type: Boolean,
       default: false
+    },
+    selectedGroup: {
+      type: Object,
+      default: null
+    },
+    listsSelection: {
+      type: Object,
+      default: null
     }
   },
   data() {
     return {
-      selectedGroup: null,
       newName: '',
       creatingList: false,
-      editingList: false,
+      updatingList: false,
       deletingList: false
     }
   },
   watch: {
-    selected(value) {
-      if (!value) this.clearActions()
+    listsSelection(value) {
+      this.clearActions()
     }
   },
   methods: {
-    onGroupSelected(group) {
-      this.selectGroup(group, this.list)
-    },
     clearActions() {
       this.newName = ''
       this.creatingList = false
-      this.editingList = false
+      this.updatingList = false
       this.deletingList = false
-    },
-    select() {
-      this.selectedGroup = null
-      this.$emit('list-selected', this.list)
-    },
-    selectGroup(group) {
-      this.selectedGroup = group
-      this.$emit('group-selected', group)
-      this.clearActions()
     },
     initCreateList() {
       this.creatingList = true
+      this.$nextTick(() => {
+        const addInput = this.$refs['add-input'].$el
+        addInput.select()
+      })
     },
     async createList() {
       try {
         if (!this.newName) return
-        const newList = await this.$strapi.create('lists', {
+        const newList = await this.$store.dispatch('createList', {
           name: this.newName
         })
-        this.$store.commit('addList', newList)
+        this.$emit('list-selected', newList)
         this.clearActions()
       } catch (e) {}
     },
-    initEditList() {
-      this.editingList = true
+    initUpdateList() {
+      this.updatingList = true
       this.newName = this.list.name
       this.$nextTick(() => {
-        const editInput = this.$refs['edit-input'].$el
-        editInput.select()
+        const updateInput = this.$refs['update-input'].$el
+        updateInput.select()
       })
     },
-    async editList() {
+    async updateList() {
       try {
         if (!this.newName) return
-        const updatedList = await this.$strapi.update('lists', this.list.id, {
-          name: this.newName
+        await this.$store.dispatch('updateList', {
+          name: this.newName,
+          list: this.list
         })
-        this.$store.commit('updateList', updatedList)
         this.clearActions()
       } catch (e) {}
     },
@@ -207,9 +213,8 @@ export default {
     },
     async deleteList() {
       try {
-        await this.$strapi.delete('lists', this.list.id)
-        this.$store.commit('deleteList', this.list)
-        this.clearActions()
+        await this.$store.dispatch('deleteList', { list: this.list })
+        this.$emit('list-selected', null)
       } catch (e) {}
     }
   }
