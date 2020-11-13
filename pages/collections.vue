@@ -16,41 +16,60 @@
         </p>
         <GitHubLogInButton class="mt-12 mb-4" />
       </section>
-      <div v-else class="flex">
-        <section class="w-1/4 px-2 py-4 flex flex-col space-y-2">
-          <List
-            v-for="list in lists"
-            :key="list.id"
-            :selected="selectedList && selectedList.id === list.id"
-            :list="list"
-            :selected-group="
-              list.groups.find(
-                (group) => selectedGroup && group.id === selectedGroup.id
-              )
-            "
-            :lists-selection="listsSelection"
-            @group-selected="onGroupSelected"
-            @list-selected="onListSelected"
-          />
-          <List
-            :lists-selection="listsSelection"
-            @list-selected="onListSelected"
-          />
-        </section>
-        <section class="w-3/4">
-          <div class="flex items-center ml-4 mb-1 font-bold-body-weight">
-            <AnimatedNumber :to="showcases.length" :from="0" />
-            <span class="font-body-weight text-sm">&nbsp;websites found</span>
-          </div>
-          <div class="flex flex-wrap">
-            <ExploreShowcasesCard
-              v-for="showcase in showcases"
-              :key="showcase.id"
-              :showcase="showcase"
-              class="w-full sm:w-1/2 md:w-1/3 mb-4"
+      <div v-else>
+        <LoggedInCard class="mb-4 mx-2" />
+        <div class="flex">
+          <section class="w-1/4 px-2 py-4 space-y-2">
+            <List
+              v-for="list in lists"
+              :key="list.id"
+              :selected="selectedList && selectedList.id === list.id"
+              :list="list"
+              :selected-group="
+                list.groups.find(
+                  (group) => selectedGroup && group.id === selectedGroup.id
+                )
+              "
+              :lists-selection="listsSelection"
+              @group-selected="onGroupSelected"
+              @list-selected="onListSelected"
             />
-          </div>
-        </section>
+            <List
+              :lists-selection="listsSelection"
+              @list-selected="onListSelected"
+            />
+          </section>
+          <section class="w-3/4">
+            <div class="flex items-center ml-4 mb-1 font-body-weight text-sm">
+              <AnimatedNumber
+                class="font-bold-body-weight text-md"
+                :to="showcases.length"
+                :from="0"
+              />
+              <span v-if="selectedList && selectedGroup"
+                >&nbsp;websites on
+                <span
+                  class="hover:underline cursor-pointer"
+                  @click="selectedGroup = null"
+                  >{{ selectedList.name }}</span
+                >
+                &gt; {{ selectedGroup.name }}</span
+              >
+              <span v-else-if="selectedList"
+                >&nbsp;websites found on {{ selectedList.name }}</span
+              >
+              <span v-else>&nbsp;websites on all collections</span>
+            </div>
+            <div class="flex flex-wrap">
+              <ExploreShowcasesCard
+                v-for="showcase in showcases"
+                :key="showcase.id"
+                :showcase="showcase"
+                class="w-full sm:w-1/2 md:w-1/3 mb-4"
+              />
+            </div>
+          </section>
+        </div>
       </div>
     </ClientOnly>
   </div>

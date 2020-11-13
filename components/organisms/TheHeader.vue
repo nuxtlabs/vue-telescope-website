@@ -30,15 +30,6 @@
           <span class="hover-hover:hover:opacity-50">Collections</span>
         </NuxtLink>
 
-        <button
-          v-if="user"
-          ref="logout-link"
-          class="ml-2 sm:ml-4 font-display-weight focus:outline-none"
-          @click="logout"
-        >
-          <span class="hover-hover:hover:opacity-50">Logout</span>
-        </button>
-
         <div
           ref="install-extension-button"
           class="ml-4 opacity-0 hidden sm:inline-flex"
@@ -116,31 +107,6 @@ export default {
         ease: 'power4.inOut'
       }
     )
-    this.$nextTick(() => {
-      const logoutLink = this.$refs['logout-link']
-      this.$gsap.fromTo(
-        logoutLink,
-        {
-          opacity: 0,
-          scale: 0.75,
-          y: '-15px'
-        },
-        {
-          opacity: 1,
-          scale: 1,
-          y: 0,
-          duration: 0.45,
-          ease: 'power4.inOut'
-        }
-      )
-    })
-  },
-  methods: {
-    async logout() {
-      try {
-        await this.$strapi.logout()
-      } catch (e) {}
-    }
   }
 }
 </script>

@@ -58,12 +58,9 @@
             <div
               v-else-if="$strapi.user && isBookmarking"
               class="flex absolute top-0 w-full h-full bg-grey-900 bg-opacity-75"
+              @mouseleave="isBookmarking = false"
             >
               <div class="flex flex-col items-end w-full p-4 overflow-y-auto">
-                <CancelIcon
-                  class="flex-shrink-0 w-8 h-8 text-white mb-2 cursor-pointer"
-                  @click="isBookmarking = false"
-                />
                 <AppBookmarksDropDown
                   :showcase="website"
                   class="flex-grow w-full"

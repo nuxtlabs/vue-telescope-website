@@ -41,10 +41,6 @@
             class="flex flex-col items-center w-full p-2 overflow-y-auto cursor-auto"
             @click.prevent=""
           >
-            <CancelIcon
-              class="flex-shrink-0 w-8 h-8 text-white mb-2 cursor-pointer"
-              @click.prevent="isBookmarking = false"
-            />
             <AppBookmarksDropDown
               :showcase="showcase"
               size="small"

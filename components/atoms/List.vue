@@ -29,7 +29,7 @@
         @click="initCreateList"
       >
         <span class="text-eight leading-eight font-display-weight"
-          >Add list</span
+          >Add collection</span
         >
         <AddIcon class="w-4 h-4 ml-2" />
       </div>
