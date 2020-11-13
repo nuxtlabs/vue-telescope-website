@@ -1,6 +1,6 @@
 # vue-telemetry-website
 
-> Curated list of vuejs websites
+> Curated list of Vue websites on [vuetelemetry.com](https://vuetelemetry.com)
 
 ## Installation
 
