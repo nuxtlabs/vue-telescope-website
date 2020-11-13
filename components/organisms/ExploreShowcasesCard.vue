@@ -16,7 +16,7 @@
         />
         <div
           v-if="$strapi.user"
-          class="flex absolute top-0 w-full h-full opacity-0 hover:opacity-100"
+          class="hidden sm:flex absolute top-0 w-full h-full opacity-0 hover:opacity-100"
           @mouseleave="isBookmarking = false"
         >
           <div
