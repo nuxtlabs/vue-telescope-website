@@ -14,11 +14,11 @@
         />
         <div class="flex flex-grow-0">
           <ValidateIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer text-green-500"
             @click="createList"
           />
           <CancelIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer"
             @click="clearActions"
           />
         </div>
@@ -41,7 +41,7 @@
           >Delete ?</span
         >
         <ValidateIcon
-          class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer"
+          class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer text-green-500"
           @click="deleteList"
         />
         <CancelIcon
@@ -62,7 +62,7 @@
         />
         <div class="flex flex-grow-0">
           <ValidateIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer"
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer text-green-500"
             @click="updateList"
           />
           <CancelIcon
@@ -70,7 +70,7 @@
             @click="clearActions"
           />
           <DeleteIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer"
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer text-red-800"
             @click="initDeleteList"
           />
         </div>
