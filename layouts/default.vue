@@ -2,7 +2,7 @@
   <div class="h-screen flex flex-col">
     <TheHeader />
     <main class="pt-16 flex-1">
-      <nuxt />
+      <nuxt keep-alive :keep-alive-props="{ exclude: ['ExplorePage'] }" />
     </main>
     <TheFooter />
     <!-- <FeedbackButton /> -->

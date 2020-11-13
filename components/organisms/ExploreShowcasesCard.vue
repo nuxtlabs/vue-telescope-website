@@ -16,29 +16,27 @@
         />
         <div
           v-if="$strapi.user"
-          class="flex absolute top-0 w-full h-full bg-grey-900 bg-opacity-75 opacity-0 hover:opacity-100"
+          class="flex absolute top-0 w-full h-full opacity-0 hover:opacity-100"
           @mouseleave="isBookmarking = false"
         >
-          <div v-if="!isBookmarking" class="flex w-full h-full cursor-pointer">
+          <div
+            v-if="!isBookmarking"
+            class="absolute top-0 right-0 cursor-pointer"
+          >
             <div
-              class="flex flex-1 items-center justify-items-center text-center h-full opacity-50 hover:opacity-100"
-            >
-              <OpenIcon class="flex-1 w-8 h-8 text-white" />
-            </div>
-            <div
-              class="flex flex-1 items-center justify-items-center text-center h-full opacity-50 hover:opacity-100"
+              class="flex items-top justify-items-right p-2 cursor-pointer bg-grey-900 bg-opacity-50"
               @click.prevent="isBookmarking = true"
             >
               <BookmarkIcon
                 v-if="!isBookmarked"
-                class="flex-1 w-8 h-8 text-white"
+                class="flex-1 w-6 h-6 text-white"
               />
-              <UnBookmarkIcon v-else class="flex-1 w-8 h-8 text-white" />
+              <UnBookmarkIcon v-else class="flex-1 w-6 h-6 text-white" />
             </div>
           </div>
           <div
             v-else
-            class="flex flex-col items-center w-full p-2 overflow-y-auto cursor-auto"
+            class="flex flex-col items-center w-full p-2 overflow-y-auto cursor-auto bg-grey-900 bg-opacity-75"
             @click.prevent=""
           >
             <AppBookmarksDropDown

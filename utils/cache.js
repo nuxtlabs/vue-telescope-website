@@ -1,19 +1,22 @@
 class CacheService {
-  requests = new Map()
+  store = new Map()
 
-  setCache(key, data) {
-    this.requests.set(key, data)
+  set(key, data) {
+    this.store.set(key, {
+      timestamp: Date.now(),
+      data
+    })
   }
 
-  getCache(key) {
-    return this.requests.get(key).body
-  }
+  get(key, ttl = 60000) {
+    const cached = this.store.get(key)
 
-  isInvalidCache(key, ttl = 60000) {
-    return (
-      !this.requests.get(key) ||
-      this.requests.get(key).timestamp <= Date.now() - ttl
-    )
+    if (!cached) return null
+    if (cached.timestamp <= Date.now() - ttl) {
+      this.store.delete(key)
+      return null
+    }
+    return cached.data
   }
 }
 

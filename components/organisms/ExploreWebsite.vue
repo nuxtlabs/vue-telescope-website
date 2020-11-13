@@ -45,14 +45,14 @@
               class="absolute top-0 right-0"
             >
               <div
-                class="flex items-top justify-items-right p-4 cursor-pointer"
+                class="flex items-top justify-items-right p-2 cursor-pointer bg-grey-900 bg-opacity-50"
                 @click="isBookmarking = true"
               >
                 <BookmarkIcon
                   v-if="!isBookmarked"
-                  class="flex-1 w-8 h-8 text-white"
+                  class="flex-1 w-6 h-6 text-white"
                 />
-                <UnBookmarkIcon v-else class="flex-1 w-8 h-8 text-white" />
+                <UnBookmarkIcon v-else class="flex-1 w-6 h-6 text-white" />
               </div>
             </div>
             <div

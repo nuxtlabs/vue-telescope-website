@@ -12,6 +12,7 @@ import { mapState } from 'vuex'
 import frontMatter from '@/utils/front-matter'
 
 export default {
+  name: 'ExplorePage',
   // scrollToTop: true,
   computed: {
     ...mapState({

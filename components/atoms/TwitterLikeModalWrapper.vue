@@ -9,9 +9,8 @@
           <XmarkCircleIcon class="text-white" />
         </div>
       </div> -->
-      <div class="h-full md:h-auto md:m-4 pointer-events-none">
+      <div v-if="fetched" class="h-full md:h-auto md:m-4 pointer-events-none">
         <div
-          v-if="fetched"
           ref="modal-wrapper"
           class="pointer-events-auto h-full relative md:h-auto bg-white m-auto max-w-readable-line-length xl:max-w-container-max-width md:mt-12 md:rounded-xl overflow-auto md:overflow-hidden overflow-x-hidden"
         >
@@ -27,15 +26,21 @@
           </div>
         </div>
       </div>
+      <div v-else-if="loading" class="flex h-full items-center justify-center">
+        <TheSquareLogo class="w-10 h-10 mr-2 text-grey-900" />
+        <span class="text-six font-bold-body-weight">Loading...</span>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import TheSquareLogo from '@/assets/logo/square-logo.svg?inline'
 import XmarkCircleIcon from '@/assets/icons/xmark-circle.svg?inline'
 
 export default {
   components: {
+    TheSquareLogo,
     XmarkCircleIcon
   },
   props: {
@@ -44,21 +49,29 @@ export default {
       default: false
     }
   },
+  data() {
+    return {
+      loading: false
+    }
+  },
   watch: {
     fetched(value) {
       if (value) {
         this.$nextTick(() => {
-          this.animateEnter()
+          // this.animateEnter()
         })
       }
     }
   },
   mounted() {
+    setTimeout(() => {
+      this.loading = true
+    }, 200)
     this.activateEscapeListener()
     // this.$store.commit('SET_MODAL', true)
-    if (this.fetched) {
-      this.animateEnter()
-    }
+    // if (this.fetched) {
+    //   this.animateEnter()
+    // }
     this.blockBodyScroll()
   },
   // activated() {

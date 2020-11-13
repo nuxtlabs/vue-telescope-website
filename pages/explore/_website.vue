@@ -96,34 +96,32 @@ import cache from '@/utils/cache'
 
 export default {
   async fetch() {
-    if (cache.isInvalidCache(this.$route.params.website)) {
-      try {
-        const website = await this.$strapi.findOne(
-          'showcases',
-          this.$route.params.website
-        )
-        if (website) {
-          this.website = website
-          cache.setCache(this.$route.params.website, {
-            timestamp: Date.now(),
-            body: website
-          })
-        } else {
-          // set status code on server
-          if (process.server) {
-            this.$nuxt.context.res.statusCode = 404
-          }
-          throw new Error('Website not found')
-        }
-      } catch (err) {
+    const cached = cache.get(this.$route.params.website)
+    if (cached) {
+      this.website = cached
+      return
+    }
+    try {
+      const website = await this.$strapi.findOne(
+        'showcases',
+        this.$route.params.website
+      )
+      if (website) {
+        this.website = website
+        cache.set(this.$route.params.website, website)
+      } else {
         // set status code on server
         if (process.server) {
           this.$nuxt.context.res.statusCode = 404
         }
         throw new Error('Website not found')
       }
-    } else {
-      this.website = cache.getCache(this.$route.params.website)
+    } catch (err) {
+      // set status code on server
+      if (process.server) {
+        this.$nuxt.context.res.statusCode = 404
+      }
+      throw new Error('Website not found')
     }
   },
   // scrollToTop: true,
