@@ -1,5 +1,5 @@
 <template>
-  <div class="modal-wrapper">
+  <div class="modal-wrapper" :class="blur ? ['blur'] : []">
     <div class="w-full h-full overflow-auto" @click.self="$emit('close')">
       <!-- <div class="w-full flex pointer-events-none">
         <div
@@ -42,6 +42,10 @@ export default {
     fetched: {
       type: Boolean,
       default: false
+    },
+    blur: {
+      type: Boolean,
+      default: true
     }
   },
   watch: {
@@ -173,9 +177,11 @@ export default {
   /* background: rgba(255, 255, 255, 0.42); */
   background-color: rgba(0, 0, 0, 0.2);
   z-index: 1000;
-  backdrop-filter: blur(18px);
   /* display: flex;
   align-items: center;
   justify-content: center; */
+}
+.blur {
+  backdrop-filter: blur(18px);
 }
 </style>
