@@ -95,11 +95,16 @@
             >{{ list.name }}</span
           >
         </div>
-        <EditIcon
-          v-if="selected && !selectedGroup"
-          class="flex-grow-0 w-4 h-4 opacity-50 hover:opacity-100 ml-2"
-          @click="initUpdateList"
-        />
+        <div v-if="selected && !selectedGroup" class="flex flex-grow-0">
+          <LinkIcon
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            @click="modalVisible = true"
+          />
+          <EditIcon
+            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            @click="initUpdateList"
+          />
+        </div>
       </div>
       <div v-if="selected && list.groups" class="flex flex-col ml-5">
         <div v-for="group in list.groups" :key="group.id">
@@ -112,6 +117,34 @@
         </div>
         <ListGroup :list="list" :lists-selection="listsSelection" />
       </div>
+      <TwitterLikeModalWrapper
+        v-if="modalVisible"
+        :fetched="true"
+        :blur="false"
+        @close="modalVisible = false"
+      >
+        <div class="space-y-6 p-4">
+          <h1 class="text-eight leading-eight font-display-weight">
+            {{ `Embed ${list.name}` }}
+          </h1>
+          <div>
+            <span>API url to request :</span>
+            <AppInput
+              ref="url-input"
+              v-model="listUrl"
+              class="mt-2"
+              readonly
+              @click.native="$refs['url-input'].$el.select()"
+            />
+          </div>
+          <div>
+            <span>Response :</span>
+            <pre
+              class="bg-grey-200 rounded p-2 text-sm leading-sm mt-2"
+            ><code>{{ JSON.stringify(list, undefined, 2).trim() }}</code></pre>
+          </div>
+        </div>
+      </TwitterLikeModalWrapper>
     </div>
   </div>
 </template>
@@ -124,6 +157,7 @@ import EditIcon from '@/assets/icons/more-vertical.svg?inline'
 import ValidateIcon from '@/assets/icons/check.svg?inline'
 import CancelIcon from '@/assets/icons/xmark-circle.svg?inline'
 import DeleteIcon from '@/assets/icons/minus-circle.svg?inline'
+import LinkIcon from '@/assets/icons/link.svg?inline'
 
 export default {
   components: {
@@ -133,7 +167,8 @@ export default {
     EditIcon,
     ValidateIcon,
     CancelIcon,
-    DeleteIcon
+    DeleteIcon,
+    LinkIcon
   },
   props: {
     list: {
@@ -158,7 +193,13 @@ export default {
       newName: '',
       creatingList: false,
       updatingList: false,
-      deletingList: false
+      deletingList: false,
+      modalVisible: false
+    }
+  },
+  computed: {
+    listUrl() {
+      return `${this.$config.strapiURL}/lists/${this.list.id}`
     }
   },
   watch: {
