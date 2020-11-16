@@ -123,19 +123,26 @@
         :blur="false"
         @close="modalVisible = false"
       >
-        <div class="space-y-8 p-4">
+        <div class="space-y-6 p-4">
           <h1 class="text-eight leading-eight font-display-weight">
             {{ `Embed ${list.name}` }}
           </h1>
-          <AppInput
-            ref="url-input"
-            v-model="listUrl"
-            readonly
-            @click.native="$refs['url-input'].$el.select()"
-          />
-          <pre
-            class="bg-grey-200 rounded p-2 text-sm leading-sm"
-          ><code>{{ JSON.stringify(list, undefined, 2).trim() }}</code></pre>
+          <div>
+            <span>API url to request :</span>
+            <AppInput
+              ref="url-input"
+              v-model="listUrl"
+              class="mt-2"
+              readonly
+              @click.native="$refs['url-input'].$el.select()"
+            />
+          </div>
+          <div>
+            <span>Response :</span>
+            <pre
+              class="bg-grey-200 rounded p-2 text-sm leading-sm mt-2"
+            ><code>{{ JSON.stringify(list, undefined, 2).trim() }}</code></pre>
+          </div>
         </div>
       </TwitterLikeModalWrapper>
     </div>
