@@ -18,8 +18,8 @@
       </section>
       <div v-else>
         <LoggedInCard class="mb-4 mx-2" />
-        <div class="flex">
-          <section class="w-1/4 px-2 py-4 space-y-2">
+        <div class="flex flex-wrap sm:flex-no-wrap space-y-4 sm:space-y-0">
+          <section class="w-full sm:w-1/4 px-2 py-2 sm:py-4 space-y-2">
             <List
               v-for="list in lists"
               :key="list.id"
@@ -39,7 +39,7 @@
               @list-selected="onListSelected"
             />
           </section>
-          <section class="w-3/4">
+          <section class="w-full sm:w-3/4">
             <div class="flex items-center ml-4 mb-1 font-body-weight text-sm">
               <AnimatedNumber
                 class="font-bold-body-weight text-md"
