@@ -1,11 +1,6 @@
 <template>
   <div class="flex flex-col" :class="style.lists">
-    <ul
-      v-for="(list, index) in lists"
-      :key="index"
-      class="flex flex-col"
-      :class="style.groups"
-    >
+    <ul v-for="(list, index) in lists" :key="index" :class="style.groups">
       <p class="text-white font-display-weight" :class="style.list">
         {{ list.name }}
       </p>

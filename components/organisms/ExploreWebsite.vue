@@ -63,6 +63,7 @@
               <div class="flex flex-col items-end w-full p-4 overflow-y-auto">
                 <AppBookmarksDropDown
                   :showcase="website"
+                  :size="bookmarksDropDownSize"
                   class="flex-grow w-full"
                 />
               </div>
@@ -111,6 +112,9 @@ export default {
         .flatMap((list) => list.groups)
         .flatMap((group) => group.showcases)
       return showcases?.find((it) => it && it.id === this.website.id)
+    },
+    bookmarksDropDownSize() {
+      return this.$mq === 'sm' ? 'small' : ''
     }
   }
 }

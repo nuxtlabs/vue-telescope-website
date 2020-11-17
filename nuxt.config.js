@@ -49,7 +49,8 @@ export default {
   modules: [
     '@nuxt/content',
     // Doc: https://strapi.nuxtjs.org
-    '@nuxtjs/strapi'
+    '@nuxtjs/strapi',
+    'nuxt-mq'
   ],
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
