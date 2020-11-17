@@ -10,7 +10,10 @@
         <TheLogo class="h-8" />
       </NuxtLink>
       <div class="flex items-center">
-        <ChangelogLink ref="changelog" class="mr-2 sm:mr-4 opacity-0">
+        <ChangelogLink
+          ref="changelog"
+          class="mr-2 sm:mr-4 opacity-0 hidden sm:inline-flex"
+        >
           <span v-if="!$changelog.hasSeen" class="hover-hover:hover:opacity-50">
             What's New
           </span>
