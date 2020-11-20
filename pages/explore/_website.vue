@@ -77,9 +77,11 @@
           </div>
         </ContentPlaceholders>
       </div>
+
       <template v-else-if="$fetchState.error">
         <LazyErrorSection :error="$fetchState.error" />
       </template>
+
       <ExploreWebsite
         v-else
         :website="website"

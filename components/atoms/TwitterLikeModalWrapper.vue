@@ -134,45 +134,47 @@ export default {
       this.$gsap.set(this.$refs['modal-wrapper'], {
         transformOrigin: 'top'
       })
-      this.$gsap.set(this.$refs['modal-content'], {
-        opacity: 0
-      })
-      this.$gsap.set(this.$refs['close-button'], {
-        scale: 0
-      })
+      // this.$gsap.set(this.$refs['modal-content'], {
+      //   opacity: 0
+      // })
+      // this.$gsap.set(this.$refs['close-button'], {
+      //   scale: 0
+      // })
+      // this.$gsap.from(this.$refs['modal-wrapper'], {
+      //   opacity: 0,
+      //   duration: 0.4,
+      //   ease: 'none'
+      // })
       this.$gsap.from(this.$refs['modal-wrapper'], {
+        // scaleY: 0.5,
         opacity: 0,
-        duration: 0.4,
-        ease: 'none'
-      })
-      this.$gsap.from(this.$refs['modal-wrapper'], {
-        scaleY: 0,
+        y: -10,
         duration: 0.75,
         ease: 'expo.inOut',
         onComplete: () => {
-          this.$gsap.fromTo(
-            this.$refs['modal-content'],
-            {
-              opacity: 0
-            },
-            {
-              opacity: 1,
-              duration: 0.3,
-              clearProps: true
-            }
-          )
-          this.$gsap.fromTo(
-            this.$refs['close-button'],
-            {
-              scale: 0
-            },
-            {
-              scale: 1,
-              duration: 0.5,
-              clearProps: true,
-              ease: 'elastic.inOut(1.5, 0.5)'
-            }
-          )
+          // this.$gsap.fromTo(
+          //   this.$refs['modal-content'],
+          //   {
+          //     opacity: 0
+          //   },
+          //   {
+          //     opacity: 1,
+          //     duration: 0.3,
+          //     clearProps: true
+          //   }
+          // )
+          // this.$gsap.fromTo(
+          //   this.$refs['close-button'],
+          //   {
+          //     scale: 0
+          //   },
+          //   {
+          //     scale: 1,
+          //     duration: 0.5,
+          //     clearProps: true,
+          //     ease: 'elastic.inOut(1.5, 0.5)'
+          //   }
+          // )
         }
       })
     }
