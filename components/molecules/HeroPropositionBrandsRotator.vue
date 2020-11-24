@@ -73,22 +73,25 @@ export default {
     //     (new Image().src = `https://icons.vuetelemetry.com${brand.imgPath}`)
     // )
 
-    let currentEl = 0
-    let el = this.brands[currentEl]
-
-    this.rotationInterval = setInterval(() => {
-      if (document.hidden) return
-      el.active = false
-      currentEl = (currentEl + 1) % this.brands.length
-
-      el = this.brands[currentEl]
-      el.active = true
-    }, this.timeout)
+    this.rotateBrands()
   },
   beforeDestroy() {
     clearInterval(this.rotationInterval)
   },
   methods: {
+    rotateBrands() {
+      let currentEl = 0
+      let el = this.brands[currentEl]
+
+      this.rotationInterval = setInterval(() => {
+        if (document.hidden) return
+        el.active = false
+        currentEl = (currentEl + 1) % this.brands.length
+
+        el = this.brands[currentEl]
+        el.active = true
+      }, this.timeout)
+    },
     enterTransition(el, done) {
       this.$gsap.fromTo(
         el,
@@ -99,7 +102,7 @@ export default {
         {
           opacity: 1,
           scale: 1,
-          duration: 0.75,
+          duration: 0.5,
           ease: 'power4.inOut',
           onComplete: () => {
             done()
@@ -118,9 +121,9 @@ export default {
             scale: this.$gsap.utils.random(1, 3),
             rotation: this.$gsap.utils.random(-20, 20),
             opacity: this.$gsap.utils.random(0.05, 0.4),
-            duration: 0.75,
-            delay: 0.01 * i,
-            ease: 'power4.inOut'
+            duration: 0.5,
+            delay: 0.005 * i,
+            ease: 'power2.inOut'
           })
         })
       })
@@ -136,7 +139,7 @@ export default {
         {
           opacity: 0,
           scale: 0.5,
-          duration: 0.75,
+          duration: 0.5,
           ease: 'power4.inOut',
           onComplete: () => {
             done()

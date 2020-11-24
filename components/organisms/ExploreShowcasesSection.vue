@@ -7,6 +7,7 @@
       <ExploreShowcasesSearchFilters
         id="explore-showcases-controls"
         ref="filters"
+        class="h-full"
       />
     </div>
 
@@ -48,7 +49,7 @@
             :key="showcasePlaceholder"
             class="w-full sm:w-1/2 md:w-1/3 mb-16 px-5"
           >
-            <ContentPlaceholders rounded>
+            <ContentPlaceholders rounded :animated="false">
               <ContentPlaceholdersText
                 class="custom relative h-full w-full mb-4 rounded-lg overflow-hidden"
                 :lines="1"
@@ -315,6 +316,9 @@ export default {
 #explore-showcases-aside {
   position: sticky;
   top: calc(theme('spacing.16') + theme('spacing.8'));
+  /* position: sticky; */
+  /* top: 6rem; */
+  height: calc(100vh - 6rem);
 }
 #explore-showcases-controls {
   /* height: calc(100vh - theme('spacing.16') - theme('spacing.8')); */

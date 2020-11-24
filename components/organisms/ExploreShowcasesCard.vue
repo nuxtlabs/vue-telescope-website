@@ -8,8 +8,8 @@
       }"
       @click.prevent="open()"
     >
-      <div class="rounded-lg overflow-hidden mb-4 relative">
-        <AppResponsiveCloudinaryImage
+      <div class="rounded-lg overflow-hidden mb-4 relative shadow">
+        <ResponsiveCloudinaryImage
           :url="showcase.screenshotUrl"
           ratio="4:3"
           sizes="(min-width: 834px) 33vw, (min-width: 640px) 50vw, 100vw"

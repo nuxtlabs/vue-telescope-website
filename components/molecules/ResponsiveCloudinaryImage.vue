@@ -6,7 +6,7 @@
       once: true
     }"
     :style="[intristicRatioPadding]"
-    class="overflow-hidden relative bg-primary-50"
+    class="overflow-hidden relative bg-grey-50"
   >
     <noscript>
       <img :src="src" :alt="alt" />
@@ -18,11 +18,9 @@
       :srcset="srcset"
       :sizes="sizes"
       :alt="alt"
-      class="w-full transition-opacity duration-500"
-      :class="[
-        ratio && 'absolute top-0 left-0',
-        loaded ? 'opacity-1' : 'opacity-0'
-      ]"
+      class="w-full"
+      :class="[ratio && 'absolute top-0 left-0']"
+      style="opacity: 0"
     />
   </div>
 </template>
@@ -100,6 +98,19 @@ export default {
           lazyImage.addEventListener('load', () => {
             // lazyImage.classList.add('lazy-loaded')
             this.loaded = true
+            this.$gsap.fromTo(
+              lazyImage,
+              {
+                opacity: 0,
+                scale: 1.025
+              },
+              {
+                opacity: 1,
+                scale: 1,
+                duration: 0.3,
+                ease: 'power4.easeOut'
+              }
+            )
           })
           // lazyImage.addEventListener('error', () => {
           //   lazyImage.classList.add('lazy-load-error')
@@ -111,4 +122,12 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+/* .lazy {
+  opacity: 0;
+  transition: opacity 3000ms;
+}
+.lazy.lazy-loaded {
+  opacity: 1;
+} */
+</style>

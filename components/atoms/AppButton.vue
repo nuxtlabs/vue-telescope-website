@@ -12,7 +12,7 @@
       color.outline,
       color.hoverState
     ]"
-    class="inline-flex items-center font-bold-body-weight focus:outline-none border-2 border-transparent"
+    class="inline-flex items-center font-bold-body-weight focus:outline-none border-2 border-transparent transition-colors duration-200"
   >
     <slot></slot>
   </component>
@@ -117,7 +117,7 @@ export default {
           return {
             bg: 'bg-blue-500',
             text: 'text-white',
-            outline: 'focus:border-blue-900',
+            outline: 'focus:border-blue-800',
             hoverState: 'hover:bg-blue-400'
           }
         }

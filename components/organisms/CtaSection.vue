@@ -3,7 +3,9 @@
     <div
       class="max-w-container-max-width m-auto px-4 flex flex-col items-center justify-center"
     >
-      <h1 class="text-five leading-five font-display-weight mb-4 text-center">
+      <h1
+        class="text-five leading-five font-display-weight text-primary-900 mb-4 text-center"
+      >
         Join other Vue.js devs
       </h1>
       <InstallExtensionButton size="large" class="mb-4" />

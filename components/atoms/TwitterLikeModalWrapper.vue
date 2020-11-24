@@ -1,5 +1,5 @@
 <template>
-  <div class="modal-wrapper" :class="blur ? ['blur'] : []">
+  <div class="modal-wrapper">
     <div class="w-full h-full overflow-auto" @click.self="$emit('close')">
       <!-- <div class="w-full flex pointer-events-none">
         <div
@@ -9,10 +9,11 @@
           <XmarkCircleIcon class="text-white" />
         </div>
       </div> -->
-      <div v-if="fetched" class="h-full md:h-auto md:m-4 pointer-events-none">
+
+      <div class="h-full md:h-auto md:m-4 pointer-events-none">
         <div
           ref="modal-wrapper"
-          class="pointer-events-auto h-full relative md:h-auto bg-white m-auto max-w-readable-line-length xl:max-w-container-max-width md:mt-12 md:rounded-xl overflow-auto md:overflow-hidden overflow-x-hidden"
+          class="pointer-events-auto h-full min-h-screen relative md:h-auto bg-white m-auto max-w-readable-line-length xl:max-w-container-max-width md:mt-12 md:rounded-xl overflow-auto md:overflow-hidden overflow-x-hidden shadow-lg"
         >
           <div
             ref="close-button"
@@ -26,56 +27,60 @@
           </div>
         </div>
       </div>
-      <div v-else-if="loading" class="flex h-full items-center justify-center">
+
+      <!-- <div v-else-if="loading" class="flex h-full items-center justify-center">
         <TheSquareLogo class="w-10 h-10 mr-2 text-grey-900" />
         <span class="text-six font-bold-body-weight">Loading...</span>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script>
-import TheSquareLogo from '@/assets/logo/square-logo.svg?inline'
+// import TheSquareLogo from '@/assets/logo/square-logo.svg?inline'
 import XmarkCircleIcon from '@/assets/icons/xmark-circle.svg?inline'
 
 export default {
   components: {
-    TheSquareLogo,
+    // TheSquareLogo,
     XmarkCircleIcon
   },
   props: {
     fetched: {
       type: Boolean,
       default: false
-    },
-    blur: {
-      type: Boolean,
-      default: true
     }
+    // blur: {
+    //   type: Boolean,
+    //   default: true
+    // }
   },
-  data() {
-    return {
-      loading: false
-    }
-  },
-  watch: {
-    fetched(value) {
-      if (value) {
-        this.$nextTick(() => {
-          // this.animateEnter()
-        })
-      }
-    }
-  },
+  // data() {
+  //   return {
+  //     loading: false
+  //   }
+  // },
+  // watch: {
+  //   fetched(value) {
+  //     if (value) {
+  //       this.$nextTick(() => {
+  //         this.animateEnter()
+  //       })
+  //     }
+  //   }
+  // },
   mounted() {
-    setTimeout(() => {
-      this.loading = true
-    }, 200)
+    // setTimeout(() => {
+    //   this.loading = true
+    // }, 200)
     this.activateEscapeListener()
     // this.$store.commit('SET_MODAL', true)
+
     // if (this.fetched) {
     //   this.animateEnter()
     // }
+    this.animateEnter()
+
     this.blockBodyScroll()
   },
   // activated() {
@@ -132,7 +137,7 @@ export default {
     },
     animateEnter() {
       this.$gsap.set(this.$refs['modal-wrapper'], {
-        transformOrigin: 'top'
+        transformOrigin: 'center'
       })
       // this.$gsap.set(this.$refs['modal-content'], {
       //   opacity: 0
@@ -146,11 +151,13 @@ export default {
       //   ease: 'none'
       // })
       this.$gsap.from(this.$refs['modal-wrapper'], {
-        // scaleY: 0.5,
+        // scaleY: 0.99,
         opacity: 0,
         y: -10,
-        duration: 0.75,
-        ease: 'expo.inOut',
+        scale: 0.95,
+        // x: 10,
+        duration: 0.5,
+        ease: 'expo.out',
         onComplete: () => {
           // this.$gsap.fromTo(
           //   this.$refs['modal-content'],
@@ -192,11 +199,12 @@ export default {
   /* background: rgba(255, 255, 255, 0.42); */
   background-color: rgba(0, 0, 0, 0.2);
   z-index: 1000;
+  backdrop-filter: blur(18px);
   /* display: flex;
   align-items: center;
   justify-content: center; */
 }
-.blur {
+/* .blur {
   backdrop-filter: blur(18px);
-}
+} */
 </style>

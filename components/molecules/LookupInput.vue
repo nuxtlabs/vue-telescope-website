@@ -47,7 +47,7 @@
         <AppLoader
           class="w-6 h-6"
           background="text-blue-400"
-          path="text-blue-300"
+          path="text-blue-200"
         />
       </div>
     </AppButton>

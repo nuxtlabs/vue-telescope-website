@@ -14,7 +14,10 @@
           ref="changelog"
           class="mr-2 sm:mr-4 opacity-0 hidden sm:inline-flex"
         >
-          <span v-if="!$changelog.hasSeen" class="hover-hover:hover:opacity-50">
+          <span
+            v-if="!$changelog.hasSeen"
+            class="has-hover:hover:opacity-50 transition-opacity duration-200"
+          >
             What's New
           </span>
         </ChangelogLink>
@@ -23,14 +26,18 @@
           to="/explore"
           class="opacity-0 mr-2 sm:mr-4 font-display-weight"
         >
-          <span class="hover-hover:hover:opacity-50">Explore</span>
+          <span
+            class="has-hover:hover:opacity-50 transition-opacity duration-200"
+            >Explore</span
+          >
         </NuxtLink>
         <NuxtLink
           ref="lists-link"
           to="/collections"
           class="opacity-0 font-display-weight"
         >
-          <span class="hover-hover:hover:opacity-50">Collections</span>
+          <!-- <span class="has-hover:hover:opacity-50">Collections</span> -->
+          <BookmarksIcon />
         </NuxtLink>
 
         <div
@@ -46,10 +53,12 @@
 
 <script>
 import TheLogo from '@/assets/logo/logo.svg?inline'
+import BookmarksIcon from '@/assets/icons/bookmarks.svg?inline'
 
 export default {
   components: {
-    TheLogo
+    TheLogo,
+    BookmarksIcon
   },
   computed: {
     user() {

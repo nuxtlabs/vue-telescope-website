@@ -5,6 +5,8 @@
     :size="size"
     :class="[(isMobile || isExtensionInstalled) && 'hidden']"
     class="cursor-pointer"
+    target="_blank"
+    rel="noopener noreferrer nofollow"
     appearance="primary"
     @click.native="processLinkNavigation"
   >

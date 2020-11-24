@@ -2,13 +2,13 @@
   <div
     ref="wrapper"
     v-click-outside="() => isOpened && closeDropdown()"
-    class="opacity-0 absolute top-0 right-0 z-10 overflow-hidden -mt-9 mr-12 md:mr-6 border border-grey-300 rounded-md bg-white"
+    class="opacity-0 absolute top-0 right-0 z-10 overflow-hidden -mt-9 mr-12 md:mr-6 rounded-md bg-grey-50 text-grey-900 shadow hover:shadow-md"
   >
     <div
       v-for="option in options"
       :key="option._sort"
       :class="[option._sort === selectedSort._sort && 'font-bold-body-weight']"
-      class="flex justify-between items-center p-1 px-2 hover:bg-grey-50 hover:font-bold-body-weight cursor-pointer select-none"
+      class="flex justify-between items-center p-1 px-2 hover:bg-grey-100 hover:font-bold-body-weight cursor-pointer select-none"
       @click="selectSorting(option)"
     >
       <div class="text-sm leading-sm mr-2">{{ option.name }}</div>
@@ -33,7 +33,7 @@ export default {
     return {
       isOpened: false,
       optionHeight: 28,
-      borderWidth: 1,
+      borderWidth: 0,
       options: [
         {
           name: 'Popularity',
@@ -108,8 +108,8 @@ export default {
         },
         {
           height: 2 * this.optionHeight + 2 * this.borderWidth, // 58px
-          duration: 0.5,
-          ease: 'elastic.out(1, 0.5)'
+          duration: 0.15,
+          ease: 'power4.easeOut'
         }
       )
     },
@@ -117,8 +117,8 @@ export default {
       this.isOpened = false
       this.$gsap.to(this.$refs.wrapper, {
         height: this.optionHeight + 2 * this.borderWidth, // 30px
-        duration: 0.25,
-        ease: 'back.in(1.7)'
+        duration: 0.15,
+        ease: 'power4.easeOut'
       })
     }
   }
