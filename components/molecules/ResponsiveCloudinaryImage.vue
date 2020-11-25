@@ -107,7 +107,7 @@ export default {
               {
                 opacity: 1,
                 scale: 1,
-                duration: 0.3,
+                duration: 0.25,
                 ease: 'power4.easeOut'
               }
             )

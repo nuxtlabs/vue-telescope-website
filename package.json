@@ -13,7 +13,6 @@
   "dependencies": {
     "@nuxt/content": "^1.10.0",
     "@nuxtjs/strapi": "^0.1.8",
-    "cloudinary": "^1.23.0",
     "consola": "^2.15.0",
     "core-js": "3",
     "event-source-polyfill": "^1.0.21",

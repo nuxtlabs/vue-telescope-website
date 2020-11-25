@@ -3,18 +3,17 @@
     <ClientOnly>
       <section v-if="!$strapi.user" class="text-center">
         <h1
-          class="mx-auto text-two leading-two text-center md:text-one md:leading-one md:w-1/2 md:mt-16 font-bold-body-weight"
+          class="mx-auto text-three leading-three max-w-readable-line-length md:text-two md:leading-two text-center mt-8 md:mt-16 px-12 font-bold-body-weight mb-6"
         >
-          Try out Vue&nbsp;Telemetry&nbsp;Collections and create your own
-          collections!
+          Create <br />
+          your own Collections <br />and bookmark <br />any website!
         </h1>
         <p
-          class="mx-auto text-eight leading-eight text-center mt-8 md:text-seven md:leading-seven md:w-3/4 text-grey-700"
+          class="mx-auto text-eight leading-eight text-center mb-10 md:w-3/4 text-grey-700 px-8"
         >
-          Log In with GitHub, start creating your collections and bookmark any
-          showcases.
+          Login with GitHub to start using Vue Telemetry Collections.
         </p>
-        <GitHubLogInButton class="mt-12 mb-4" />
+        <GitHubLogInButton />
       </section>
       <div v-else>
         <LoggedInCard class="mb-4 mx-2" />

@@ -23,20 +23,6 @@ export default {
       required: true
     }
   }
-  // mounted() {
-  //   this.$gsap.fromTo(
-  //     document.getElementById('floating-items').children,
-  //     {
-  //       opacity: 0,
-  //       x: 0
-  //     },
-  //     {
-  //       opacity: 1,
-  //       x: 100,
-  //       repeat: -1
-  //     }
-  //   )
-  // }
 }
 </script>
 

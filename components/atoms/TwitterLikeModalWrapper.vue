@@ -154,10 +154,10 @@ export default {
         // scaleY: 0.99,
         opacity: 0,
         y: -10,
-        scale: 0.95,
+        scale: 0.9,
         // x: 10,
-        duration: 0.5,
-        ease: 'expo.out',
+        duration: 0.4,
+        ease: 'expo.inOut',
         onComplete: () => {
           // this.$gsap.fromTo(
           //   this.$refs['modal-content'],
