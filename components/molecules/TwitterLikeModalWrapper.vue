@@ -13,6 +13,7 @@
       <div class="h-full md:h-auto md:m-4 pointer-events-none">
         <div
           ref="modal-wrapper"
+          style="opacity: 0"
           class="pointer-events-auto h-full min-h-screen relative md:h-auto bg-white m-auto max-w-readable-line-length xl:max-w-container-max-width md:mt-12 md:rounded-xl overflow-auto md:overflow-hidden overflow-x-hidden shadow-lg"
         >
           <div
@@ -37,6 +38,7 @@
 </template>
 
 <script>
+import breakpoints from '@/utils/styles/breakpoints'
 // import TheSquareLogo from '@/assets/logo/square-logo.svg?inline'
 import XmarkCircleIcon from '@/assets/icons/xmark-circle.svg?inline'
 
@@ -79,7 +81,9 @@ export default {
     // if (this.fetched) {
     //   this.animateEnter()
     // }
-    this.animateEnter()
+    setTimeout(() => {
+      this.animateEnter()
+    }, 32)
 
     this.blockBodyScroll()
   },
@@ -121,7 +125,7 @@ export default {
         document.body.style.overflow = null
         document.body.style.paddingRight = null
         document.querySelector('#main-header').style.paddingRight = null
-      })
+      }, 16)
     },
     activateEscapeListener() {
       const escapeHandler = (e) => {
@@ -136,8 +140,10 @@ export default {
       })
     },
     animateEnter() {
+      const biggerThanMd = window.innerWidth >= parseInt(breakpoints.md) // if bigger than "md" than use non-elastic animation, because it looks bad on mobile
       this.$gsap.set(this.$refs['modal-wrapper'], {
-        transformOrigin: 'center'
+        transformOrigin: 'center',
+        opacity: 1
       })
       // this.$gsap.set(this.$refs['modal-content'], {
       //   opacity: 0
@@ -154,10 +160,11 @@ export default {
         // scaleY: 0.99,
         opacity: 0,
         y: -10,
-        scale: 0.9,
+        scale: 0.95,
         // x: 10,
-        duration: 0.4,
-        ease: 'expo.inOut',
+        duration: 0.2,
+        // ease: biggerThanMd ? 'back.out(1.7)' : 'expo.outIn',
+        ease: 'none',
         onComplete: () => {
           // this.$gsap.fromTo(
           //   this.$refs['modal-content'],

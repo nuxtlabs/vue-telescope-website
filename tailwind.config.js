@@ -1,6 +1,7 @@
 // Docs: https://tailwindcss.com/docs/configuration
 // Default: https://github.com/tailwindcss/tailwindcss/blob/master/stubs/defaultConfig.stub.js
 const defaultTheme = require('tailwindcss/defaultTheme')
+const breakpoints = require('./utils/styles/breakpoints')
 
 module.exports = {
   future: {
@@ -9,10 +10,7 @@ module.exports = {
   },
   theme: {
     screens: {
-      sm: '640px',
-      md: '834px',
-      lg: '1024px',
-      xl: '1280px',
+      ...breakpoints,
       'has-hover': { raw: '(hover: hover)' }
     },
     fontSize: {

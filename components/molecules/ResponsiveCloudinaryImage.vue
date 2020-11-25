@@ -8,6 +8,11 @@
     :style="[intristicRatioPadding]"
     class="overflow-hidden relative bg-grey-50"
   >
+    <div
+      ref="scrim"
+      style="backdrop-filter: blur(18px)"
+      class="absolute top-0 left-0 w-full h-full z-10 rounded-xl overflow-hidden"
+    ></div>
     <noscript>
       <img :src="src" :alt="alt" />
     </noscript>
@@ -20,7 +25,6 @@
       :alt="alt"
       class="w-full"
       :class="[ratio && 'absolute top-0 left-0']"
-      style="opacity: 0"
     />
   </div>
 </template>
@@ -98,19 +102,24 @@ export default {
           lazyImage.addEventListener('load', () => {
             // lazyImage.classList.add('lazy-loaded')
             this.loaded = true
-            this.$gsap.fromTo(
-              lazyImage,
-              {
-                opacity: 0,
-                scale: 1.025
-              },
-              {
-                opacity: 1,
-                scale: 1,
-                duration: 0.25,
-                ease: 'power4.easeOut'
-              }
-            )
+            this.$gsap.to(this.$refs.scrim, {
+              opacity: 0,
+              duration: 0.3,
+              ease: 'none'
+            })
+            // this.$gsap.fromTo(
+            //   lazyImage,
+            //   {
+            //     opacity: 0
+            //     // scale: 1.05
+            //   },
+            //   {
+            //     opacity: 1,
+            //     // scale: 1,
+            //     duration: 0.2,
+            //     ease: 'power4.easeOut'
+            //   }
+            // )
           })
           // lazyImage.addEventListener('error', () => {
           //   lazyImage.classList.add('lazy-load-error')

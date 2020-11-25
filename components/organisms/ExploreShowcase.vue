@@ -1,12 +1,12 @@
 <template>
   <div class="pointer-events-auto min-h-screen">
-    <div
+    <!-- <div
       v-if="!website"
       class="w-full h-full flex items-center justify-center pt-12 text-seven font-display-weight"
     >
       LOADING!!!
-    </div>
-    <template v-else>
+    </div> -->
+    <template v-if="website">
       <header class="relative pt-14 pb-6 flex justify-between items-center">
         <div class="relative">
           <h1
