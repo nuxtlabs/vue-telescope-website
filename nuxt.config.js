@@ -88,6 +88,7 @@ export default {
     detailed: true
   },
   publicRuntimeConfig: {
-    strapiURL: process.env.STRAPI_URL || 'http://localhost:1337'
+    strapiURL: process.env.STRAPI_URL || 'http://localhost:1337',
+    serviceURL: process.env.SERVICE_URL || 'http://localhost:3001'
   }
 }

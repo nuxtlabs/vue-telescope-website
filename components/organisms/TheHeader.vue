@@ -32,7 +32,7 @@
           >
         </NuxtLink>
         <NuxtLink
-          ref="lists-link"
+          ref="collections-link"
           to="/collections"
           class="opacity-0 font-display-weight"
         >
@@ -69,7 +69,7 @@ export default {
     const logo = this.$refs.logo.$el
     const changelog = this.$refs.changelog.$el
     const exploreLink = this.$refs['explore-link'].$el
-    const listsLink = this.$refs['lists-link'].$el
+    const collectionsLink = this.$refs['collections-link'].$el
     const installExtensionButton = this.$refs['install-extension-button']
 
     this.$gsap.fromTo(
@@ -104,7 +104,7 @@ export default {
       }
     )
     this.$gsap.fromTo(
-      [changelog, exploreLink, listsLink],
+      [changelog, exploreLink, collectionsLink],
       {
         opacity: 0,
         scale: 0.75,

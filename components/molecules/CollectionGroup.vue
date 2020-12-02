@@ -119,7 +119,7 @@ export default {
       type: Object,
       default: null
     },
-    list: {
+    collection: {
       type: Object,
       default: null
     },
@@ -127,7 +127,7 @@ export default {
       type: Boolean,
       default: false
     },
-    listsSelection: {
+    collectionsSelection: {
       type: Object,
       default: null
     }
@@ -141,7 +141,7 @@ export default {
     }
   },
   watch: {
-    listsSelection(value) {
+    collectionsSelection(value) {
       this.clearActions()
     }
   },
@@ -162,9 +162,9 @@ export default {
     async createGroup() {
       try {
         if (!this.newName) return
-        const newGroup = await this.$store.dispatch('createGroup', {
+        const newGroup = await this.$store.dispatch('collections/createGroup', {
           name: this.newName,
-          list: this.list
+          collection: this.collection
         })
         this.$parent.$emit('group-selected', newGroup)
         this.clearActions()
@@ -181,10 +181,10 @@ export default {
     async updateGroup() {
       try {
         if (!this.newName) return
-        await this.$store.dispatch('updateGroup', {
+        await this.$store.dispatch('collections/updateGroup', {
           name: this.newName,
           group: this.group,
-          list: this.list
+          collection: this.collection
         })
         this.clearActions()
       } catch (e) {}
@@ -193,9 +193,9 @@ export default {
       this.deletingGroup = true
     },
     async deleteGroup() {
-      await this.$store.dispatch('deleteGroup', {
+      await this.$store.dispatch('collections/deleteGroup', {
         group: this.group,
-        list: this.list
+        collection: this.collection
       })
       this.$parent.$emit('group-selected', null)
     }

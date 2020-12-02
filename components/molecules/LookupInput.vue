@@ -124,7 +124,7 @@ export default {
       }
       this.pending = true
       const sse = new EventSource(
-        `https://service.vuetelemetry.com?url=${this.url}&isPublic=true`
+        `${this.$config.serviceURL}?url=${this.url}&isPublic=true`
       )
       sse.addEventListener('message', (event) => {
         this.pending = false

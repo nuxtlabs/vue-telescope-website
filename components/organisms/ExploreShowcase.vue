@@ -68,7 +68,7 @@
                 @mouseleave="isBookmarking = false"
               >
                 <div class="flex flex-col items-end w-full p-4 overflow-y-auto">
-                  <AppBookmarksDropDown
+                  <AppBookmarksDropdown
                     :showcase="website"
                     :size="bookmarksDropDownSize"
                     class="flex-grow w-full"
@@ -116,8 +116,8 @@ export default {
   },
   computed: {
     isBookmarked() {
-      const showcases = this.$store.state.lists
-        .flatMap((list) => list.groups)
+      const showcases = this.$store.state.collections.collections
+        .flatMap((collection) => collection.groups)
         .flatMap((group) => group.showcases)
       return showcases?.find((it) => it && it.id === this.website.id)
     },

@@ -18,7 +18,7 @@ export default {
       this.$strapi.setToken(jwt)
 
       await this.$strapi.fetchUser()
-      this.$store.commit('setLists', this.$strapi.user.lists)
+      this.$store.commit('collections/setCollections', this.$strapi.user.lists)
 
       this.$router.push(this.$strapi.$cookies.get('redirect') || '/explore')
     } catch (e) {}

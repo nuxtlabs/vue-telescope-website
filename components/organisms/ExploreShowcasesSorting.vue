@@ -2,13 +2,13 @@
   <div
     ref="wrapper"
     v-click-outside="() => isOpened && closeDropdown()"
-    class="opacity-0 absolute top-0 right-0 z-10 overflow-hidden -mt-9 mr-12 md:mr-6 rounded-md bg-grey-50 text-grey-900 shadow hover:shadow-md"
+    class="opacity-0 absolute top-0 right-0 z-10 overflow-hidden -mt-9 mr-12 md:mr-6 rounded-md bg-grey-50 text-grey-900 shadow-2dp hover:shadow-3dp"
   >
     <div
       v-for="option in options"
       :key="option._sort"
       :class="[option._sort === selectedSort._sort && 'font-bold-body-weight']"
-      class="flex justify-between items-center p-1 px-2 hover:bg-grey-100 hover:font-bold-body-weight cursor-pointer select-none"
+      class="flex justify-between items-center p-1 px-2 hover:font-bold-body-weight cursor-pointer select-none"
       @click="selectSorting(option)"
     >
       <div class="text-sm leading-sm mr-2">{{ option.name }}</div>
@@ -66,27 +66,30 @@ export default {
     }
   },
   mounted() {
-    const wrapper = this.$refs.wrapper
-    this.$gsap.set(wrapper, {
-      height: this.optionHeight + 2 * this.borderWidth
-    })
-    this.$gsap.fromTo(
-      wrapper,
-      {
-        opacity: 0,
-        scale: 0.75,
-        y: '10px'
-      },
-      {
-        opacity: 1,
-        scale: 1,
-        y: 0,
-        duration: 0.45,
-        ease: 'power4.inOut'
-      }
-    )
+    this.enterAnimation()
   },
   methods: {
+    enterAnimation() {
+      const wrapper = this.$refs.wrapper
+      this.$gsap.set(wrapper, {
+        height: this.optionHeight + 2 * this.borderWidth
+      })
+      this.$gsap.fromTo(
+        wrapper,
+        {
+          opacity: 0,
+          scale: 0.95,
+          y: '10px'
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.45,
+          ease: 'power4.inOut'
+        }
+      )
+    },
     selectSorting(sort) {
       if (sort._sort === this.selectedSort._sort) {
         if (!this.isOpened) {

@@ -1,21 +1,21 @@
 <template>
   <div>
-    <div v-if="!list">
-      <div v-if="creatingList" class="flex items-center">
+    <div v-if="!collection">
+      <div v-if="creatingCollection" class="flex items-center">
         <AppInput
           ref="add-input"
           v-model="newName"
           class="flex-grow"
           size="small"
-          placeholder="List name"
+          placeholder="Collection name"
           appearance="transparent"
-          @keypress.enter.native="createList"
+          @keypress.enter.native="createCollection"
           @keydown.esc.native="clearActions"
         />
         <div class="flex flex-grow-0">
           <ValidateIcon
             class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer text-green-500"
-            @click="createList"
+            @click="createCollection"
           />
           <CancelIcon
             class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer"
@@ -26,30 +26,31 @@
       <div
         v-else
         class="flex items-center justify-between cursor-pointer py-1"
-        @click="initCreateList"
+        @click="initCreateCollection"
       >
-        <span class="text-eight leading-eight font-display-weight"
-          >Add collection</span
-        >
+        <span class="text-eight leading-eight font-display-weight">
+          Add collection
+        </span>
         <AddIcon class="w-4 h-4 ml-2" />
       </div>
     </div>
     <div v-else>
-      <div v-if="deletingList" class="flex items-center py-1">
+      <div v-if="deletingCollection" class="flex items-center py-1">
         <span
           class="flex flex-grow text-eight leading-eight font-display-weight"
-          >Delete ?</span
         >
+          Delete ?
+        </span>
         <ValidateIcon
           class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer text-green-500"
-          @click="deleteList"
+          @click="deleteCollection"
         />
         <CancelIcon
           class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer"
           @click="clearActions"
         />
       </div>
-      <div v-else-if="updatingList" class="flex items-center">
+      <div v-else-if="updatingCollection" class="flex items-center">
         <AppInput
           ref="update-input"
           v-model="newName"
@@ -57,13 +58,13 @@
           size="small"
           placeholder="Group name"
           appearance="transparent"
-          @keypress.enter.native="updateList"
+          @keypress.enter.native="updateCollection"
           @keydown.esc.native="clearActions"
         />
         <div class="flex flex-grow-0">
           <ValidateIcon
             class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer text-green-500"
-            @click="updateList"
+            @click="updateCollection"
           />
           <CancelIcon
             class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer"
@@ -71,30 +72,17 @@
           />
           <DeleteIcon
             class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer text-red-800"
-            @click="initDeleteList"
+            @click="initDeleteCollection"
           />
         </div>
       </div>
       <div v-else class="flex items-center justify-between cursor-pointer py-1">
-        <div
-          class="flex flex-grow items-center"
-          @click="$emit('list-selected', list)"
-        >
-          <SectionExpandedIcon
-            v-if="selected"
-            class="w-4 h-4 opacity-50 hover:opacity-100 mr-2"
-          />
-          <SectionCollapsedIcon
-            v-else
-            class="w-4 h-4 opacity-50 hover:opacity-100 mr-2"
-          />
-          <span
-            class="text-eight leading-eight font-display-weight"
-            :class="selected ? 'text-primary-500' : 'text-grey-800'"
-            @dblclick="initUpdateList"
-            >{{ list.name }}</span
-          >
-        </div>
+        <CollectionListItem
+          :name="collection.name"
+          :selected="selected"
+          @click.native="$emit('collection-selected', collection)"
+          @update="initUpdateCollection"
+        />
         <div v-if="selected && !selectedGroup" class="flex flex-grow-0">
           <LinkIcon
             class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
@@ -102,20 +90,23 @@
           />
           <EditIcon
             class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
-            @click="initUpdateList"
+            @click="initUpdateCollection"
           />
         </div>
       </div>
-      <div v-if="selected && list.groups" class="flex flex-col ml-5">
-        <div v-for="group in list.groups" :key="group.id">
-          <ListGroup
+      <div v-if="selected && collection.groups" class="flex flex-col ml-5">
+        <div v-for="group in collection.groups" :key="group.id">
+          <CollectionGroup
             :group="group"
-            :list="list"
+            :collection="collection"
             :selected="selectedGroup && selectedGroup.id === group.id"
-            :lists-selection="listsSelection"
+            :collections-selection="collectionsSelection"
           />
         </div>
-        <ListGroup :list="list" :lists-selection="listsSelection" />
+        <CollectionGroup
+          :collection="collection"
+          :collections-selection="collectionsSelection"
+        />
       </div>
       <TwitterLikeModalWrapper
         v-if="modalVisible"
@@ -125,13 +116,13 @@
       >
         <div class="space-y-6 p-4">
           <h1 class="text-eight leading-eight font-display-weight">
-            {{ `Embed ${list.name}` }}
+            {{ `Embed ${collection.name}` }}
           </h1>
           <div>
             <span>API url to request :</span>
             <AppInput
               ref="url-input"
-              v-model="listUrl"
+              v-model="collectionUrl"
               class="mt-2"
               readonly
               @click.native="$refs['url-input'].$el.select()"
@@ -141,7 +132,7 @@
             <span>Response :</span>
             <pre
               class="bg-grey-200 rounded p-2 text-sm leading-sm mt-2"
-            ><code>{{ JSON.stringify(list, undefined, 2).trim() }}</code></pre>
+            ><code>{{ JSON.stringify(collection, undefined, 2).trim() }}</code></pre>
           </div>
         </div>
       </TwitterLikeModalWrapper>
@@ -150,8 +141,6 @@
 </template>
 
 <script>
-import SectionCollapsedIcon from '@/assets/icons/chevron-right.svg?inline'
-import SectionExpandedIcon from '@/assets/icons/chevron-down.svg?inline'
 import AddIcon from '@/assets/icons/plus-circle.svg?inline'
 import EditIcon from '@/assets/icons/more-vertical.svg?inline'
 import ValidateIcon from '@/assets/icons/check.svg?inline'
@@ -161,8 +150,6 @@ import LinkIcon from '@/assets/icons/link.svg?inline'
 
 export default {
   components: {
-    SectionCollapsedIcon,
-    SectionExpandedIcon,
     AddIcon,
     EditIcon,
     ValidateIcon,
@@ -171,7 +158,7 @@ export default {
     LinkIcon
   },
   props: {
-    list: {
+    collection: {
       type: Object,
       default: null
     },
@@ -183,7 +170,7 @@ export default {
       type: Object,
       default: null
     },
-    listsSelection: {
+    collectionsSelection: {
       type: Object,
       default: null
     }
@@ -191,71 +178,76 @@ export default {
   data() {
     return {
       newName: '',
-      creatingList: false,
-      updatingList: false,
-      deletingList: false,
+      creatingCollection: false,
+      updatingCollection: false,
+      deletingCollection: false,
       modalVisible: false
     }
   },
   computed: {
-    listUrl() {
-      return `${this.$config.strapiURL}/lists/${this.list.id}`
+    collectionUrl() {
+      return `${this.$config.strapiURL}/lists/${this.collection.id}`
     }
   },
   watch: {
-    listsSelection(value) {
+    collectionsSelection(value) {
       this.clearActions()
     }
   },
   methods: {
     clearActions() {
       this.newName = ''
-      this.creatingList = false
-      this.updatingList = false
-      this.deletingList = false
+      this.creatingCollection = false
+      this.updatingCollection = false
+      this.deletingCollection = false
     },
-    initCreateList() {
-      this.creatingList = true
+    initCreateCollection() {
+      this.creatingCollection = true
       this.$nextTick(() => {
         const addInput = this.$refs['add-input'].$el
         addInput.select()
       })
     },
-    async createList() {
+    async createCollection() {
       try {
         if (!this.newName) return
-        const newList = await this.$store.dispatch('createList', {
-          name: this.newName
-        })
-        this.$emit('list-selected', newList)
+        const newCollection = await this.$store.dispatch(
+          'collections/createCollection',
+          {
+            name: this.newName
+          }
+        )
+        this.$emit('collection-selected', newCollection)
         this.clearActions()
       } catch (e) {}
     },
-    initUpdateList() {
-      this.updatingList = true
-      this.newName = this.list.name
+    initUpdateCollection() {
+      this.updatingCollection = true
+      this.newName = this.collection.name
       this.$nextTick(() => {
         const updateInput = this.$refs['update-input'].$el
         updateInput.select()
       })
     },
-    async updateList() {
+    async updateCollection() {
       try {
         if (!this.newName) return
-        await this.$store.dispatch('updateList', {
+        await this.$store.dispatch('collections/updateCollection', {
           name: this.newName,
-          list: this.list
+          collection: this.collection
         })
         this.clearActions()
       } catch (e) {}
     },
-    initDeleteList() {
-      this.deletingList = true
+    initDeleteCollection() {
+      this.deletingCollection = true
     },
-    async deleteList() {
+    async deleteCollection() {
       try {
-        await this.$store.dispatch('deleteList', { list: this.list })
-        this.$emit('list-selected', null)
+        await this.$store.dispatch('collections/deleteCollection', {
+          collection: this.collection
+        })
+        this.$emit('collection-selected', null)
       } catch (e) {}
     }
   }

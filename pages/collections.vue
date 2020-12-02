@@ -1,74 +1,10 @@
 <template>
   <div class="max-w-container-max-width px-2 mx-auto pt-4 pb-12">
     <ClientOnly>
-      <section v-if="!$strapi.user" class="text-center">
-        <h1
-          class="mx-auto text-three leading-three max-w-readable-line-length md:text-two md:leading-two text-center mt-8 md:mt-16 px-12 font-bold-body-weight mb-6"
-        >
-          Create <br />
-          your own Collections <br />and bookmark <br />any website!
-        </h1>
-        <p
-          class="mx-auto text-eight leading-eight text-center mb-10 md:w-3/4 text-grey-700 px-8"
-        >
-          Login with GitHub to start using Vue Telemetry Collections.
-        </p>
-        <GitHubLogInButton />
-      </section>
+      <CollectionsGreeting v-if="!$strapi.user" />
       <div v-else>
         <LoggedInCard class="mb-4 mx-2" />
-        <div class="flex flex-wrap sm:flex-no-wrap space-y-4 sm:space-y-0">
-          <section class="w-full sm:w-1/4 px-2 py-2 sm:py-4 space-y-2">
-            <List
-              v-for="list in lists"
-              :key="list.id"
-              :selected="selectedList && selectedList.id === list.id"
-              :list="list"
-              :selected-group="
-                list.groups.find(
-                  (group) => selectedGroup && group.id === selectedGroup.id
-                )
-              "
-              :lists-selection="listsSelection"
-              @group-selected="onGroupSelected"
-              @list-selected="onListSelected"
-            />
-            <List
-              :lists-selection="listsSelection"
-              @list-selected="onListSelected"
-            />
-          </section>
-          <section class="w-full sm:w-3/4">
-            <div class="flex items-center ml-4 mb-1 font-body-weight text-sm">
-              <AnimatedNumber
-                class="font-bold-body-weight text-md"
-                :to="showcases.length"
-                :from="0"
-              />
-              <span v-if="selectedList && selectedGroup"
-                >&nbsp;websites on
-                <span
-                  class="hover:underline cursor-pointer"
-                  @click="selectedGroup = null"
-                  >{{ selectedList.name }}</span
-                >
-                &gt; {{ selectedGroup.name }}</span
-              >
-              <span v-else-if="selectedList"
-                >&nbsp;websites found on {{ selectedList.name }}</span
-              >
-              <span v-else>&nbsp;websites on all collections</span>
-            </div>
-            <div class="flex flex-wrap">
-              <ExploreShowcasesCard
-                v-for="showcase in showcases"
-                :key="showcase.id"
-                :showcase="showcase"
-                class="w-full sm:w-1/2 md:w-1/3 mb-4"
-              />
-            </div>
-          </section>
-        </div>
+        <Collections />
       </div>
     </ClientOnly>
   </div>
@@ -78,65 +14,6 @@
 import frontMatter from '@/utils/front-matter'
 
 export default {
-  data() {
-    return {
-      selectedList: null,
-      selectedGroup: null
-    }
-  },
-  computed: {
-    lists() {
-      return this.$store.state.lists
-    },
-    showcases() {
-      return this.lists
-        .filter(
-          (list) => !this.selectedList || list.id === this.selectedList.id
-        )
-        .flatMap((list) => list.groups)
-        .filter(
-          (group) => !this.selectedGroup || group.id === this.selectedGroup.id
-        )
-        .flatMap((group) => group.showcases)
-        .filter((showcase, index, self) => {
-          return (
-            showcase &&
-            index === self.findIndex((obj) => obj.id === showcase.id)
-          )
-        })
-    },
-    listsSelection() {
-      return { listId: this.selectedList?.id, groupId: this.selectedGroup?.id }
-    }
-  },
-  watch: {
-    lists() {
-      if (
-        this.selectedList &&
-        !this.lists.find((list) => list && list.id === this.selectedList.id)
-      ) {
-        this.selectedList = null
-      }
-    }
-  },
-  methods: {
-    onListSelected(list) {
-      this.selectedList =
-        !this.selectedGroup &&
-        list &&
-        this.selectedList &&
-        list.id === this.selectedList.id
-          ? null
-          : list
-      this.selectedGroup = null
-    },
-    onGroupSelected(group) {
-      this.selectedGroup =
-        group && this.selectedGroup && group.id === this.selectedGroup.id
-          ? null
-          : group
-    }
-  },
   head() {
     return frontMatter({
       path: this.$route.path,

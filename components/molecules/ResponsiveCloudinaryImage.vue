@@ -11,7 +11,7 @@
     <div
       ref="scrim"
       style="backdrop-filter: blur(18px)"
-      class="absolute top-0 left-0 w-full h-full z-10 rounded-xl overflow-hidden"
+      class="absolute top-0 left-0 w-full h-full z-10 rounded-xl overflow-hidden pointer-events-none"
     ></div>
     <noscript>
       <img :src="src" :alt="alt" />

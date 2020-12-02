@@ -20,8 +20,7 @@ export const state = () => ({
   isModal: false,
   showPrivacyAwareModal: false,
   privacyAwarenessCb: null,
-  isExtensionInstalled: false,
-  lists: []
+  isExtensionInstalled: false
 })
 
 export const mutations = {
@@ -80,47 +79,6 @@ export const mutations = {
   },
   setSort(state, sort) {
     state.selectedSort = sort
-  },
-  setLists(state, lists) {
-    state.lists = lists
-  },
-  addList(state, list) {
-    state.lists.push(list)
-  },
-  updateList(state, list) {
-    const index = state.lists.findIndex((item) => item.id === list.id)
-    if (index >= 0) Object.assign(state.lists[index], list)
-    else state.lists.push(list)
-  },
-  deleteList(state, list) {
-    const index = state.lists.findIndex((item) => item.id === list.id)
-    if (index >= 0) state.lists.splice(index, 1)
-  },
-  addGroup(state, { group, list }) {
-    const listIndex = state.lists.findIndex((item) => item.id === list.id)
-    if (listIndex >= 0) state.lists[listIndex].groups.push(group)
-  },
-  updateGroup(state, { group, list }) {
-    const listIndex = state.lists.findIndex((item) => item.id === list.id)
-    if (listIndex >= 0) {
-      const groupIndex = state.lists[listIndex].groups.findIndex(
-        (item) => item.id === group.id
-      )
-      if (groupIndex >= 0) {
-        Object.assign(state.lists[listIndex].groups[groupIndex], group)
-      } else {
-        state.lists[listIndex].groups.push(group)
-      }
-    }
-  },
-  deleteGroup(state, { group, list }) {
-    const listIndex = state.lists.findIndex((item) => item.id === list.id)
-    if (listIndex >= 0) {
-      const groupIndex = state.lists[listIndex].groups.findIndex(
-        (item) => item.id === group.id
-      )
-      if (groupIndex >= 0) state.lists[listIndex].groups.splice(groupIndex, 1)
-    }
   }
 }
 
@@ -167,87 +125,5 @@ export const actions = {
         resolve(true)
       }
     })
-  },
-  async createList({ commit }, { name }) {
-    const newList = await this.$strapi.create('lists', {
-      name
-    })
-    commit('addList', newList)
-    return newList
-  },
-  async updateList({ commit }, { name, list }) {
-    const updatedList = await this.$strapi.update('lists', list.id, {
-      name
-    })
-    updatedList.groups = list.groups
-    commit('updateList', updatedList)
-    return updatedList
-  },
-  async deleteList({ commit }, { list }) {
-    await this.$strapi.delete('lists', list.id)
-    commit('deleteList', list)
-    return list
-  },
-  async createGroup({ commit }, { name, list }) {
-    const newGroup = await this.$strapi.$http.$post(`lists/${list.id}/groups`, {
-      name,
-      list: list.id
-    })
-    newGroup.list = list.id
-    commit('addGroup', { group: newGroup, list })
-    return newGroup
-  },
-  async updateGroup({ commit }, { name, group, list }) {
-    const updatedGroup = await this.$strapi.$http.$put(
-      `lists/${list.id}/groups/${group.id}`,
-      {
-        name
-      }
-    )
-    updatedGroup.list = list.id
-    commit('updateGroup', {
-      group: updatedGroup,
-      list
-    })
-    return updatedGroup
-  },
-  async deleteGroup({ commit }, { group, list }) {
-    await this.$strapi.$http.$delete(`lists/${list.id}/groups/${group.id}`)
-    commit('deleteGroup', {
-      group,
-      list
-    })
-    return group
-  },
-  async bookmarkShowcase({ commit }, { showcase, group, list }) {
-    await this.$strapi.$http.$post(
-      `/lists/${list.id}/groups/${group.id}/showcases`,
-      {
-        showcase
-      }
-    )
-    const updatedGroup = {
-      ...group,
-      showcases: [showcase, ...group.showcases]
-    }
-    commit('updateGroup', {
-      group: updatedGroup,
-      list
-    })
-    return updatedGroup
-  },
-  async unbookmarkShowcase({ commit }, { showcase, group, list }) {
-    await this.$strapi.$http.$delete(
-      `/lists/${list.id}/groups/${group.id}/showcases/${showcase.id}`
-    )
-    const updatedGroup = {
-      ...group,
-      showcases: group.showcases.filter((it) => it.id !== showcase.id)
-    }
-    commit('updateGroup', {
-      group: updatedGroup,
-      list
-    })
-    return updatedGroup
   }
 }

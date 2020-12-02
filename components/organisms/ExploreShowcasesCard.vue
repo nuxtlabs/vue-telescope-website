@@ -8,7 +8,7 @@
       }"
       @click.prevent="open()"
     >
-      <div class="rounded-lg overflow-hidden mb-4 relative shadow">
+      <div class="rounded-lg overflow-hidden mb-4 relative shadow-2dp">
         <ResponsiveCloudinaryImage
           :url="showcase.screenshotUrl"
           ratio="4:3"
@@ -39,7 +39,7 @@
             class="flex flex-col items-center w-full p-2 overflow-y-auto cursor-auto bg-grey-900 bg-opacity-75"
             @click.prevent=""
           >
-            <AppBookmarksDropDown
+            <AppBookmarksDropdown
               :showcase="showcase"
               size="small"
               class="flex-grow w-full"
@@ -81,17 +81,17 @@
 </template>
 
 <script>
-import OpenIcon from '@/assets/icons/eye.svg?inline'
+// import OpenIcon from '@/assets/icons/eye.svg?inline'
 import BookmarkIcon from '@/assets/icons/bookmark.svg?inline'
 import UnBookmarkIcon from '@/assets/icons/bookmark-fill.svg?inline'
-import CancelIcon from '@/assets/icons/xmark-circle.svg?inline'
+// import CancelIcon from '@/assets/icons/xmark-circle.svg?inline'
 
 export default {
   components: {
-    OpenIcon,
+    // OpenIcon,
     BookmarkIcon,
-    UnBookmarkIcon,
-    CancelIcon
+    UnBookmarkIcon
+    // CancelIcon
   },
   props: {
     showcase: {
@@ -106,8 +106,8 @@ export default {
   },
   computed: {
     isBookmarked() {
-      const showcases = this.$store.state.lists
-        .flatMap((list) => list.groups)
+      const showcases = this.$store.state.collections.collections
+        .flatMap((collection) => collection.groups)
         .flatMap((group) => group.showcases)
       return showcases?.find((it) => it && it.id === this.showcase.id)
     }
