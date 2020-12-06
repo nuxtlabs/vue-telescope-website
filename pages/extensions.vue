@@ -1,6 +1,6 @@
 <template>
   <div class="page-wrapper">
-    <div class="px-4 max-w-container-max-width m-auto pt-12">
+    <div class="px-4 max-w-container m-auto pt-12">
       <h1 class="text-four leading-four font-display-weight text-center mb-12">
         Check out Vue Telemetry browser integrations
       </h1>

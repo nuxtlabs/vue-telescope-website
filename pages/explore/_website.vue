@@ -1,19 +1,8 @@
 <template>
   <div>
-    <div v-if="twitterLike">
-      <TwitterLikeModalWrapper
-        :fetched="website ? true : false"
-        @close="$router.push('/explore')"
-      >
-        <!-- <ExploreShowcasePlaceholders v-if="$fetchState.pending" class="p-4" /> -->
-        <ExploreShowcase :website="website" class="twitter-like mb-12" />
-        <CtaSection />
-      </TwitterLikeModalWrapper>
-    </div>
-
-    <div v-else class="px-4 xl:px-8">
+    <div v-if="directHit" class="px-4 xl:px-8">
       <!-- Direct hit view placeholders -->
-      <ExploreShowcasePlaceholders v-if="$fetchState.pending" />
+      <ShowcasePlaceholder v-if="$fetchState.pending" />
 
       <template v-else-if="$fetchState.error">
         <LazyErrorSection :error="$fetchState.error" />
@@ -23,8 +12,19 @@
       <ExploreShowcase
         v-else
         :website="website"
-        class="max-w-readable-line-length xl:max-w-container-max-width m-auto"
+        class="max-w-readable-line-length xl:max-w-container m-auto"
       />
+    </div>
+
+    <div v-else>
+      <TwitterLikeModalWrapper
+        :fetched="website ? true : false"
+        @close="$router.push('/explore')"
+      >
+        <!-- <ExploreShowcasePlaceholders v-if="$fetchState.pending" class="p-4" /> -->
+        <ExploreShowcase :website="website" class="twitter-like mb-12" />
+        <CtaSection />
+      </TwitterLikeModalWrapper>
     </div>
   </div>
 </template>
@@ -73,7 +73,7 @@ export default {
   fetchOnServer: false,
   computed: {
     ...mapState({
-      twitterLike: (state) => state.twitterLike
+      directHit: (state) => state.directHit
     })
   },
   // activated() {
@@ -90,5 +90,3 @@ export default {
   }
 }
 </script>
-
-<style></style>

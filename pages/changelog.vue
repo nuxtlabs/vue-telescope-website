@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-container-max-width px-4 mx-auto pt-12">
+  <div class="max-w-container px-4 mx-auto pt-12">
     <div class="flex flex-wrap">
       <div class="w-full md:w-1/4"></div>
       <h1

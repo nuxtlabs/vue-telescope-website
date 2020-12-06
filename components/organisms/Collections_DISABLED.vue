@@ -44,7 +44,7 @@
         <span v-else>&nbsp;websites on all collections</span>
       </div>
       <div class="flex flex-wrap">
-        <ExploreShowcasesCard
+        <ShowcaseCard
           v-for="showcase in showcases"
           :key="showcase.id"
           :showcase="showcase"

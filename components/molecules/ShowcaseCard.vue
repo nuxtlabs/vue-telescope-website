@@ -4,7 +4,9 @@
       class="block hover-effect relative p-3 cursor-pointer"
       :to="{
         name: 'explore-website',
-        params: { website: showcase.slug }
+        params: {
+          website: showcase.slug
+        }
       }"
       @click.prevent="open()"
     >
@@ -115,10 +117,7 @@ export default {
   methods: {
     open() {
       this.$store.commit('SET_MODAL', true)
-      this.$router.push({
-        name: 'explore-website',
-        params: { website: this.showcase.slug }
-      })
+      this.$router.push(`/exxxplore/${this.showcase.slug}`)
     }
   }
 }

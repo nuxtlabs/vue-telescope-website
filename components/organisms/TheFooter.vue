@@ -1,6 +1,6 @@
 <template>
   <div id="main-footer" class="py-6 pb-2 text-grey-900">
-    <div class="max-w-container-max-width mx-auto py-4 px-4">
+    <div class="max-w-container mx-auto py-4 px-4">
       <div class="flex flex-col md:flex-row justify-between mb-8">
         <ul
           class="flex flex-col items-center md:items-start text-sm text-center leading-sm mb-8 md:mb-0"

@@ -1,6 +1,6 @@
 <template>
-  <div class="flex justify-between bg-grey-50 p-4 text-sm rounded">
-    <div class="flex flex-wrap items-center">
+  <div class="flex justify-between bg-grey-50 p-2 text-sm rounded-lg">
+    <div class="flex flex-wrap items-center px-2">
       <span class="mr-1">You are connected as</span>
       <a
         :href="`https://github.com/${$strapi.user.username}`"
@@ -15,6 +15,26 @@
         {{ $strapi.user.username }}</a
       >
     </div>
-    <LogOutButton />
+    <AppButton
+      tag="a"
+      size="small"
+      appearance="github"
+      class="cursor-pointer"
+      @click.native="logout"
+    >
+      Logout
+    </AppButton>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    async logout() {
+      try {
+        await this.$strapi.logout()
+      } catch (e) {}
+    }
+  }
+}
+</script>

@@ -4,7 +4,7 @@
     class="the-header h-16 fixed top-0 left-0 w-full z-50 overflow-hidden"
   >
     <div
-      class="w-full h-full flex justify-between items-center max-w-container-max-width m-auto px-4"
+      class="w-full h-full flex justify-between items-center max-w-container m-auto px-4"
     >
       <NuxtLink ref="logo" to="/" class="opacity-0" aria-label="Home Page">
         <TheLogo class="h-8" />
@@ -37,7 +37,7 @@
           class="opacity-0 font-display-weight"
         >
           <!-- <span class="has-hover:hover:opacity-50">Collections</span> -->
-          <BookmarksIcon />
+          <SaveIcon />
         </NuxtLink>
 
         <div
@@ -54,11 +54,13 @@
 <script>
 import TheLogo from '@/assets/logo/logo.svg?inline'
 import BookmarksIcon from '@/assets/icons/bookmarks.svg?inline'
+import SaveIcon from '@/assets/icons/save.svg?inline'
 
 export default {
   components: {
     TheLogo,
-    BookmarksIcon
+    BookmarksIcon,
+    SaveIcon
   },
   computed: {
     user() {

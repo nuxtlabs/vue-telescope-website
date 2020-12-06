@@ -14,7 +14,7 @@
         <div
           ref="modal-wrapper"
           style="opacity: 0"
-          class="pointer-events-auto h-full min-h-screen relative md:h-auto bg-white m-auto max-w-readable-line-length xl:max-w-container-max-width md:mt-12 md:rounded-xl overflow-auto md:overflow-hidden overflow-x-hidden shadow-lg"
+          class="pointer-events-auto h-full min-h-screen relative md:h-auto bg-white m-auto max-w-readable-line-length xl:max-w-container md:mt-12 md:rounded-xl overflow-auto md:overflow-hidden overflow-x-hidden shadow-lg"
         >
           <div
             ref="close-button"

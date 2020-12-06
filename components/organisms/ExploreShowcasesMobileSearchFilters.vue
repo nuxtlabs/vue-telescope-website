@@ -7,7 +7,7 @@
       <FilterIcon class="h-7 w-7 overflow-visible" />
     </button>
     <DribbbleLikeModalWrapper v-if="show" @close="show = false">
-      <ExploreShowcasesSearchFilters />
+      <ShowcasesSearchFilters />
     </DribbbleLikeModalWrapper>
   </div>
 </template>

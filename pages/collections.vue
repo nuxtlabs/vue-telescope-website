@@ -1,12 +1,6 @@
 <template>
-  <div class="max-w-container-max-width px-2 mx-auto pt-4 pb-12">
-    <ClientOnly>
-      <CollectionsGreeting v-if="!$strapi.user" />
-      <div v-else>
-        <LoggedInCard class="mb-4 mx-2" />
-        <Collections />
-      </div>
-    </ClientOnly>
+  <div class="pt-12 md:pt-8 mb-8">
+    <CollectionsPage />
   </div>
 </template>
 

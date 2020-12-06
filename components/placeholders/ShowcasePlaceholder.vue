@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="max-w-readable-line-length xl:max-w-container-max-width m-auto mt-10"
-  >
+  <div class="max-w-readable-line-length xl:max-w-container m-auto mt-10">
     <ContentPlaceholders rounded :animated="false">
       <div class="flex flex-col">
         <ContentPlaceholdersText class="custom h-3 w-32 mb-2" :lines="1" />
@@ -60,5 +58,3 @@
 <script>
 export default {}
 </script>
-
-<style></style>

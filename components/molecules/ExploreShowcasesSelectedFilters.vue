@@ -101,7 +101,6 @@ export default {
       }
     },
     content({ key, value }) {
-      // console.log('suka', this.uis.find((ui) => ui.slug === value).imgPath)
       if (key === 'isStatic' || key === 'hasSSR') {
         if (value.length > 1) {
           return 'Any'

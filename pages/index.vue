@@ -4,8 +4,8 @@
       class="mt-24 md:mt-32 max-w-readable-line-length px-4 mx-auto"
     />
     <HeroPresentationSlider :featured="featured" class="my-24" />
-    <FeaturesSection class="px-4 max-w-container-max-width m-auto" />
-    <BenefitsSection class="px-4 max-w-container-max-width m-auto" />
+    <FeaturesSection class="px-4 max-w-container m-auto" />
+    <BenefitsSection class="px-4 max-w-container m-auto" />
     <CtaSection class="" />
   </div>
 </template>

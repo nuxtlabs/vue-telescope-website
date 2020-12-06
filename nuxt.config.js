@@ -27,12 +27,13 @@ export default {
   },
   plugins: [
     '~/plugins/init',
-    '~/plugins/user-authenticated',
+    '~/plugins/fetch-collections',
     '~/plugins/changelog',
     '~/plugins/gsap.client',
     '~/plugins/vue-placeholders',
     '~/plugins/detect-client.client',
-    '~/plugins/twitter-like',
+    '~/plugins/direct-hit',
+    // '~/plugins/set-wildcard',
     '~/plugins/intersection-observer.client',
     '~/plugins/vue-observe-visibility.client'
     // '~/plugins/password.client'

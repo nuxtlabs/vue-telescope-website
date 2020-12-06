@@ -1,18 +1,20 @@
 <template>
   <div
     ref="wrapper"
-    v-click-outside="() => isOpened && closeDropdown()"
+    v-click-outside="clickOutsideHandler"
     class="opacity-0 absolute top-0 right-0 z-10 overflow-hidden -mt-9 mr-12 md:mr-6 rounded-md bg-grey-50 text-grey-900 shadow-2dp hover:shadow-3dp"
   >
     <div
       v-for="option in options"
       :key="option._sort"
       :class="[option._sort === selectedSort._sort && 'font-bold-body-weight']"
-      class="flex justify-between items-center p-1 px-2 hover:font-bold-body-weight cursor-pointer select-none"
+      class="p-1 px-2 hover:font-bold-body-weight cursor-pointer select-none overflow-hidden"
       @click="selectSorting(option)"
     >
-      <div class="text-sm leading-sm mr-2">{{ option.name }}</div>
-      <component :is="option.icon" class="w-2" />
+      <div :ref="option._sort" class="flex justify-between items-center">
+        <div class="text-sm leading-sm mr-2">{{ option.name }}</div>
+        <component :is="option.icon" class="w-2" />
+      </div>
     </div>
   </div>
 </template>
@@ -102,26 +104,61 @@ export default {
         this.closeDropdown()
       }
     },
+    clickOutsideHandler() {
+      // this.closeDropdown()
+      // console.log('clickOutsideHandler', this.isOpened)
+      if (this.isOpened) this.closeDropdown()
+    },
     openDropdown() {
       this.isOpened = true
-      this.$gsap.fromTo(
-        this.$refs.wrapper,
+      const wrapperNode = this.$refs.wrapper
+      const nameNode = this.$refs[this.options[1]._sort]
+      // animate height of the wrapper (old-school fx)
+      this.wrapperAnimation = this.$gsap.fromTo(
+        wrapperNode,
         {
           height: this.optionHeight + 2 * this.borderWidth // 30px
         },
         {
           height: 2 * this.optionHeight + 2 * this.borderWidth, // 58px
-          duration: 0.15,
-          ease: 'power4.easeOut'
+          duration: 0.3,
+          ease: 'expo.outIn'
+        }
+      )
+      this.$gsap.set(nameNode, {
+        transformOrigin: 'bottom'
+      })
+      this.nodeAnimation = this.$gsap.fromTo(
+        nameNode,
+        {
+          y: -10,
+          scale: 0.9,
+          opacity: 0
+        },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          delay: 0.025,
+          duration: 0.275,
+          ease: 'expo.outIn'
         }
       )
     },
     closeDropdown() {
+      console.log('CLOSE!!!!!!!')
       this.isOpened = false
-      this.$gsap.to(this.$refs.wrapper, {
-        height: this.optionHeight + 2 * this.borderWidth, // 30px
-        duration: 0.15,
-        ease: 'power4.easeOut'
+      this.wrapperAnimation.kill()
+      this.nodeAnimation.kill()
+      const wrapperNode = this.$refs.wrapper
+      const nameNode = this.$refs[this.options[1]._sort]
+      this.$gsap.set(wrapperNode, {
+        height: this.optionHeight + 2 * this.borderWidth // 30px
+      })
+      this.$gsap.set(nameNode, {
+        y: 0,
+        opacity: 1,
+        scale: 1
       })
     }
   }

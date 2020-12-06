@@ -8,7 +8,7 @@
         >
           <div
             ref="modal-wrapper"
-            class="modal-fuck h-full pointer-events-auto rounded-4xl rounded-b-none relative bg-white p-4"
+            class="h-full pointer-events-auto rounded-4xl rounded-b-none relative bg-white p-4"
           >
             <div class="relative flex justify-between items-center">
               <div class="pl-2 text-seven leading-seven font-bold-body-weight">

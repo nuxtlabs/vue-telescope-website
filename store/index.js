@@ -6,7 +6,9 @@ export const state = () => ({
       ? process.env.URL
       : process.env.DEPLOY_PRIME_URL) || 'http://localhost:3000',
   isReady: false,
-  twitterLike: false,
+  directHit: true,
+  wildcardName: null,
+  wildcardParams: null,
   showcasesCount: 0,
   frameworks: [],
   uis: [],
@@ -27,8 +29,14 @@ export const mutations = {
   isReady(state) {
     state.isReady = true
   },
-  SET_TWITTER_LIKE(state) {
-    state.twitterLike = true
+  setDirectHit(state) {
+    state.directHit = false
+  },
+  setWildcardName(state, name) {
+    state.wildcardName = name
+  },
+  setWildcardParams(state, params) {
+    state.wildcardParams = params
   },
   SET_FRAMEWORKS(state, frameworks) {
     state.frameworks = frameworks

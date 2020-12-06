@@ -1,7 +1,7 @@
 <template>
   <div class="py-12 bg-primary-50">
     <div
-      class="max-w-container-max-width m-auto px-4 flex flex-col items-center justify-center"
+      class="max-w-container m-auto px-4 flex flex-col items-center justify-center"
     >
       <h1
         class="text-five leading-five font-display-weight text-primary-900 mb-4 text-center"
