@@ -12,8 +12,9 @@
       class="text-eight leading-eight font-display-weight"
       :class="selected ? 'text-primary-500' : 'text-grey-800'"
       @dblclick="$emit('update')"
-      >{{ name }}</span
     >
+      {{ name }}
+    </span>
   </div>
 </template>
 

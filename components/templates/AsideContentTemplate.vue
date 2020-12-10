@@ -34,5 +34,6 @@ export default {}
   /* position: sticky; */
   /* top: 6rem; */
   height: calc(100vh - 6rem);
+  z-index: 10;
 }
 </style>

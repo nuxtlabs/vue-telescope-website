@@ -7,6 +7,7 @@
 
       <span class="font-body-weight text-sm">&nbsp;websites found</span>
     </div>
+
     <transition-group name="scale" appear>
       <template v-for="(value, key) in selectedFilters">
         <div
@@ -128,7 +129,7 @@ export default {
 
 <style scoped>
 .scale-item {
-  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 100ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .scale-enter,
 .scale-leave-to {

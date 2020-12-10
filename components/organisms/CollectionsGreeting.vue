@@ -11,7 +11,7 @@
     >
       Login with GitHub to start using Vue Telemetry Collections.
     </p>
-    <GitHubLogInButton />
+    <GithubLoginButton />
   </section>
 </template>
 

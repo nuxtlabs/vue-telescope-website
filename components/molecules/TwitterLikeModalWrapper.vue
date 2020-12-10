@@ -142,7 +142,7 @@ export default {
     animateEnter() {
       const biggerThanMd = window.innerWidth >= parseInt(breakpoints.md) // if bigger than "md" than use non-elastic animation, because it looks bad on mobile
       this.$gsap.set(this.$refs['modal-wrapper'], {
-        transformOrigin: 'center',
+        transformOrigin: 'bottom',
         opacity: 1
       })
       // this.$gsap.set(this.$refs['modal-content'], {
@@ -160,7 +160,7 @@ export default {
         // scaleY: 0.99,
         opacity: 0,
         y: -10,
-        scale: 0.95,
+        scale: 0.98,
         // x: 10,
         duration: 0.2,
         // ease: biggerThanMd ? 'back.out(1.7)' : 'expo.outIn',

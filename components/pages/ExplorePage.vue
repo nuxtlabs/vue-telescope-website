@@ -8,9 +8,9 @@
     />
 
     <template slot="aside-content-header">
-      <ExploreShowcasesMobileSearchFilters />
-      <ExploreShowcasesSorting />
-      <ExploreShowcasesSelectedFilters
+      <ShowcasesMobileSearchFilters />
+      <ShowcasesSorting />
+      <ShowcasesSelectedFilters
         :selected-filters="selectedFilters"
         :total-count="totalCount"
         @clear-filters="$refs.filters && $refs.filters.clearFilters()"

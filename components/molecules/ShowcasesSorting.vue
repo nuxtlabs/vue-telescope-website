@@ -2,7 +2,7 @@
   <div
     ref="wrapper"
     v-click-outside="clickOutsideHandler"
-    class="opacity-0 absolute top-0 right-0 z-10 overflow-hidden -mt-9 mr-12 md:mr-6 rounded-md bg-grey-50 text-grey-900 shadow-2dp hover:shadow-3dp"
+    class="opacity-0 absolute top-0 right-0 z-10 overflow-hidden -mt-9 mr-12 md:mr-6 rounded-md bg-grey-50 text-grey-900"
   >
     <div
       v-for="option in options"
@@ -22,7 +22,7 @@
 <script>
 import { mapState } from 'vuex'
 import ArrowDownIcon from '@/assets/icons/arrow-down.svg?inline'
-import ClickOutside from '../../directives/click-outside'
+import ClickOutside from '@/directives/click-outside'
 
 export default {
   components: {
@@ -121,8 +121,8 @@ export default {
         },
         {
           height: 2 * this.optionHeight + 2 * this.borderWidth, // 58px
-          duration: 0.3,
-          ease: 'expo.outIn'
+          duration: 0.25,
+          ease: 'expo.out'
         }
       )
       this.$gsap.set(nameNode, {
@@ -132,21 +132,20 @@ export default {
         nameNode,
         {
           y: -10,
-          scale: 0.9,
+          // scale: 0.95,
           opacity: 0
         },
         {
           y: 0,
           opacity: 1,
           scale: 1,
-          delay: 0.025,
-          duration: 0.275,
-          ease: 'expo.outIn'
+          delay: 0.05,
+          duration: 0.25,
+          ease: 'expo.out'
         }
       )
     },
     closeDropdown() {
-      console.log('CLOSE!!!!!!!')
       this.isOpened = false
       this.wrapperAnimation.kill()
       this.nodeAnimation.kill()

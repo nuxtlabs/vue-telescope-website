@@ -74,23 +74,24 @@ export default {
       if (value) {
         this.$gsap.fromTo(
           this.$refs['white-mark'],
-          0.2,
           {
             scale: 1
           },
           {
             scale: 0,
+            duration: 0.2,
             ease: 'power2.inOut',
             onComplete: () => {
               this.$gsap.fromTo(
                 this.$refs['color-mark'],
-                0.2,
                 {
                   scale: 1
                 },
                 {
                   scale: 0.5,
-                  ease: 'power2.inOut'
+                  // delay: 0.1,
+                  duration: 0.2,
+                  ease: 'expo.inOut'
                 }
               )
             }

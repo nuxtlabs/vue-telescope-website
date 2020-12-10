@@ -6,11 +6,11 @@ export default {
   // Activate components auto discovery
   components: true,
   // SPA Fallback
-  loadingIndicator: {
-    name: 'cube-grid',
-    color: '#0BDCA0',
-    background: 'white'
-  },
+  // loadingIndicator: {
+  //   name: 'cube-grid',
+  //   color: '#0BDCA0',
+  //   background: 'white'
+  // },
   // Disable loading bar
   loading: false,
   // Meta Tags
@@ -33,9 +33,10 @@ export default {
     '~/plugins/vue-placeholders',
     '~/plugins/detect-client.client',
     '~/plugins/direct-hit',
-    // '~/plugins/set-wildcard',
+    '~/plugins/vue-portal',
     '~/plugins/intersection-observer.client',
-    '~/plugins/vue-observe-visibility.client'
+    '~/plugins/vue-observe-visibility.client',
+    '~/plugins/tour'
     // '~/plugins/password.client'
   ],
   router: {

@@ -100,7 +100,7 @@
 <script>
 import BulletIcon from '@/assets/icons/bullet.svg?inline'
 import AddIcon from '@/assets/icons/plus-circle.svg?inline'
-import EditIcon from '@/assets/icons/more-vertical.svg?inline'
+import EditIcon from '@/assets/icons/dots-vertical.svg?inline'
 import ValidateIcon from '@/assets/icons/check.svg?inline'
 import CancelIcon from '@/assets/icons/xmark-circle.svg?inline'
 import DeleteIcon from '@/assets/icons/minus-circle.svg?inline'

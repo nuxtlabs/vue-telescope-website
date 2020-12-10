@@ -1,7 +1,6 @@
 <template>
   <div class="flex justify-between bg-grey-50 p-2 text-sm rounded-lg">
     <div class="flex flex-wrap items-center px-2">
-      <span class="mr-1">You are connected as</span>
       <a
         :href="`https://github.com/${$strapi.user.username}`"
         target="_blank"

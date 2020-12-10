@@ -220,6 +220,8 @@ module.exports = {
         '5px': '5px',
         '6px': '6px',
         '7px': '7px',
+        '12px': '12px',
+        '18px': '18px',
         7: '1.75rem',
         9: '2.25rem',
         13: '3.25rem',
@@ -257,23 +259,23 @@ module.exports = {
       },
       boxShadow: {
         '1dp':
-          '0 1px 1px 0 rgba(0,0,0,0.14), 0 2px 1px -1px rgba(0,0,0,0.12), 0 1px 3px 0 rgba(0,0,0,0.20)',
+          '0 1px 1px 0 rgba(0,0,0,0.13), 0 2px 1px -1px rgba(0,0,0,0.11), 0 1px 3px 0 rgba(0,0,0,0.10)',
         '2dp':
-          '0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.20)',
+          '0 2px 2px 0 rgba(0,0,0,0.13), 0 3px 1px -2px rgba(0,0,0,0.11), 0 1px 5px 0 rgba(0,0,0,0.10)',
         '3dp':
-          '0 3px 4px 0 rgba(0,0,0,0.14), 0 3px 3px -2px rgba(0,0,0,0.12), 0 1px 8px 0 rgba(0,0,0,0.20)',
+          '0 3px 4px 0 rgba(0,0,0,0.13), 0 3px 3px -2px rgba(0,0,0,0.11), 0 1px 8px 0 rgba(0,0,0,0.10)',
         '4dp':
-          '0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.20)',
+          '0 4px 5px 0 rgba(0,0,0,0.13), 0 1px 10px 0 rgba(0,0,0,0.11), 0 2px 4px -1px rgba(0,0,0,0.10)',
         '6dp':
-          '0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.20)',
+          '0 6px 10px 0 rgba(0,0,0,0.13), 0 1px 18px 0 rgba(0,0,0,0.11), 0 3px 5px -1px rgba(0,0,0,0.10)',
         '8dp':
-          '0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.20)',
+          '0 8px 10px 1px rgba(0,0,0,0.13), 0 3px 14px 2px rgba(0,0,0,0.11), 0 5px 5px -3px rgba(0,0,0,0.10)',
         '12dp':
-          '0 12px 17px 2px rgba(0,0,0,0.14), 0 5px 22px 4px rgba(0,0,0,0.12), 0 7px 8px -4px rgba(0,0,0,0.20)',
+          '0 12px 17px 2px rgba(0,0,0,0.13), 0 5px 22px 4px rgba(0,0,0,0.11), 0 7px 8px -4px rgba(0,0,0,0.10)',
         '16dp':
-          '0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.20)',
+          '0 16px 24px 2px rgba(0,0,0,0.13), 0 6px 30px 5px rgba(0,0,0,0.11), 0 8px 10px -5px rgba(0,0,0,0.10)',
         '24dp':
-          '0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.20)'
+          '0 24px 38px 3px rgba(0,0,0,0.13), 0 9px 46px 8px rgba(0,0,0,0.11), 0 11px 15px -7px rgba(0,0,0,0.10)'
       }
     }
   },

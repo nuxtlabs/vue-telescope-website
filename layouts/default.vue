@@ -7,11 +7,13 @@
     <TheFooter />
     <!-- <FeedbackButton /> -->
     <PrivacyAwareModal v-if="showPrivacyAwareModal" />
+    <PortalTarget name="tour" />
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+
 export default {
   computed: {
     ...mapState({
