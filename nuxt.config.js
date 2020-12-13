@@ -36,7 +36,9 @@ export default {
     '~/plugins/vue-portal',
     '~/plugins/intersection-observer.client',
     '~/plugins/vue-observe-visibility.client',
-    '~/plugins/tour'
+    '~/plugins/tour',
+    '~/plugins/inject',
+    '~/plugins/directives'
     // '~/plugins/password.client'
   ],
   router: {

@@ -6,7 +6,7 @@
     <div
       id="aside-content-aside"
       ref="aside-content-aside"
-      class="w-1/4 hidden md:block"
+      class="w-1/4 hidden md:block overflow-auto"
     >
       <slot name="aside-content-aside" />
     </div>
@@ -32,8 +32,8 @@ export default {}
   position: sticky;
   top: calc(theme('spacing.16') + theme('spacing.8'));
   /* position: sticky; */
-  /* top: 6rem; */
-  height: calc(100vh - 6rem);
+  /*top: 6rem; */
+  height: calc(100vh - calc(theme('spacing.16') + theme('spacing.8')));
   z-index: 10;
 }
 </style>

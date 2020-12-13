@@ -35,7 +35,6 @@ export default {
   },
   methods: {
     calculateInputHeight(el) {
-      console.log('CALCULATE')
       if (!el) return
       const styles = window.getComputedStyle(el)
       // const fontSize = toPx(styles.fontSize)
@@ -48,7 +47,7 @@ export default {
       el.style.height = '0'
       const height = el.scrollHeight
       const minHeight =
-        this.rows * parseFloat(lineHeight) * (paddingTop + paddingBottom)
+        this.rows * parseFloat(lineHeight) + (paddingTop + paddingBottom)
       el.style.height =
         Math.max(minHeight, height) +
         (borderTopWidth + borderBottomWidth) +

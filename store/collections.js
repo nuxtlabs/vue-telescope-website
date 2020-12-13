@@ -1,5 +1,7 @@
 export const state = () => ({
-  collections: []
+  collections: [],
+  selectedCollection: null,
+  selectedGroup: null
 })
 
 export const mutations = {
@@ -58,6 +60,12 @@ export const mutations = {
       if (groupIndex >= 0)
         state.collections[collectionIndex].groups.splice(groupIndex, 1)
     }
+  },
+  setSelectedCollection(state, collection) {
+    state.selectedCollection = collection
+  },
+  setSelectedGroup(state, group) {
+    state.selectedGroup = group
   }
 }
 
@@ -67,6 +75,8 @@ export const actions = {
       name
     })
     commit('addCollection', newCollection)
+    commit('setSelectedCollection', newCollection)
+    commit('setSelectedGroup', null)
     return newCollection
   },
   async updateCollection({ commit }, { name, collection }) {
@@ -81,38 +91,48 @@ export const actions = {
     commit('updateCollection', updatedCollection)
     return updatedCollection
   },
-  async deleteCollection({ commit }, { collection }) {
+  async deleteCollection({ commit, state }, { collection }) {
     await this.$strapi.delete('lists', collection.id)
     commit('deleteCollection', collection)
+    commit('setSelectedCollection', state.collections[0])
     return collection
   },
   async createGroup({ commit }, { name, collection }) {
-    const newGroup = await this.$strapi.$http.$post(
-      `lists/${collection.id}/groups`,
-      {
-        name,
-        list: collection.id
-      }
-    )
-    // what is this? why newGroup.list
-    newGroup.collection = collection.id
-    commit('addGroup', { group: newGroup, collection })
-    return newGroup
+    try {
+      const newGroup = await this.$strapi.$http.$post(
+        `lists/${collection.id}/groups`,
+        {
+          name,
+          list: collection.id
+        }
+      )
+      // what is this? why newGroup.list
+      newGroup.list = collection.id
+      commit('addGroup', { group: newGroup, collection })
+      commit('setSelectedGroup', newGroup)
+      return newGroup
+    } catch (err) {
+      console.log(err)
+    }
   },
   async updateGroup({ commit }, { name, group, collection }) {
-    const updatedGroup = await this.$strapi.$http.$put(
-      `lists/${collection.id}/groups/${group.id}`,
-      {
-        name
-      }
-    )
-    // why updatedGroup.list?
-    updatedGroup.collection = collection.id
-    commit('updateGroup', {
-      group: updatedGroup,
-      collection
-    })
-    return updatedGroup
+    try {
+      const updatedGroup = await this.$strapi.$http.$put(
+        `lists/${collection.id}/groups/${group.id}`,
+        {
+          name
+        }
+      )
+      // why updatedGroup.list?
+      updatedGroup.list = collection.id
+      commit('updateGroup', {
+        group: updatedGroup,
+        collection
+      })
+      return updatedGroup
+    } catch (err) {
+      console.log(err)
+    }
   },
   async deleteGroup({ commit }, { group, collection }) {
     await this.$strapi.$http.$delete(
@@ -122,6 +142,7 @@ export const actions = {
       group,
       collection
     })
+    commit('setSelectedGroup', null)
     return group
   },
   async bookmarkShowcase({ commit }, { showcase, group, collection }) {

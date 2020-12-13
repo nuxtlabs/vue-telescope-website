@@ -1,14 +1,14 @@
 <template>
   <div class="flex flex-col items-start">
     <ul ref="menu">
-      <li class="p-2px">
+      <!-- <li class="p-2px">
         <button
           title="Share"
           class="bg-grey-50 border border-grey-200 rounded-md p-1"
         >
           <ShareIcon class="w-4 h-4" />
         </button>
-      </li>
+      </li> -->
       <li class="p-2px">
         <button
           @click="$emit('rename')"

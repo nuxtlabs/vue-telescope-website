@@ -213,6 +213,9 @@ module.exports = {
       minWidth: {
         body: '320px'
       },
+      opacity: {
+        10: '0.1'
+      },
       spacing: {
         '2px': '2px',
         '3px': '3px',
@@ -280,7 +283,9 @@ module.exports = {
     }
   },
   variants: {
-    margin: ['responsive', 'last']
+    margin: ['responsive', 'last'],
+    display: ['responsive', 'group-hover'],
+    opacity: ['responsive', 'hover', 'focus', 'group-hover']
   },
   // plugins: [],
   purge: {

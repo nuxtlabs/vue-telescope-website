@@ -11,7 +11,7 @@
               href="https://www.netlify.com/"
               target="_blank"
               rel="noopener nofollow noreferrer"
-              class="text-primary-700 font-medium hover:underline"
+              class="text-primary-500 font-medium hover:underline"
             >
               Netlify </a
             >, API made with
@@ -19,7 +19,7 @@
               href="https://strapi.io"
               target="_blank"
               rel="noopener nofollow noreferrer"
-              class="text-primary-700 font-medium hover:underline"
+              class="text-primary-500 font-medium hover:underline"
             >
               Strapi </a
             >.
@@ -30,7 +30,7 @@
               href="https://cloudinary.com/"
               target="_blank"
               rel="noopener nofollow noreferrer"
-              class="text-primary-700 font-medium hover:underline"
+              class="text-primary-500 font-medium hover:underline"
             >
               Cloudinary
             </a>
@@ -39,7 +39,7 @@
               href="https://icons8.com/"
               target="_blank"
               rel="noopener nofollow noreferrer"
-              class="text-primary-700 font-medium hover:underline"
+              class="text-primary-500 font-medium hover:underline"
               >Icons8</a
             >.
           </li>

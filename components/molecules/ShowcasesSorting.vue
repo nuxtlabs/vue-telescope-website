@@ -22,14 +22,10 @@
 <script>
 import { mapState } from 'vuex'
 import ArrowDownIcon from '@/assets/icons/arrow-down.svg?inline'
-import ClickOutside from '@/directives/click-outside'
 
 export default {
   components: {
     ArrowDownIcon
-  },
-  directives: {
-    'click-outside': ClickOutside
   },
   data() {
     return {
