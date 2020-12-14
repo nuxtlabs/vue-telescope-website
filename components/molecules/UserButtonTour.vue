@@ -83,7 +83,7 @@
               >
                 Not interested
               </button>
-              <GithubLoginButton size="small" redirect="/collections" />
+              <WtfGithubLoginButton size="small" redirect="/collections" />
             </div>
           </div>
         </Popper>
@@ -93,12 +93,7 @@
 </template>
 
 <script>
-import GithubLoginButton from '@/components/molecules/GithubLoginButton'
-
 export default {
-  components: {
-    GithubLoginButton
-  },
   name: 'UserButtonTour',
   data() {
     return {

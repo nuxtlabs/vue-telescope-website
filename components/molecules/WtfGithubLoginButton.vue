@@ -14,6 +14,7 @@
 import GithubIcon from '@/assets/icons/github.svg?inline'
 
 export default {
+  name: 'WtfGithubLoginButton',
   props: {
     size: {
       type: String,
