@@ -1,5 +1,6 @@
 <template>
   <div class="flex flex-col" :class="style.collections">
+    <pre class="text-white text-sm">{{ collections }}</pre>
     <ul
       v-for="(collection, index) in collections"
       :key="index"
