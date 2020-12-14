@@ -74,7 +74,7 @@
         >
           <div class="p-4" @click="closeTour">
             <div class="mb-4 font-bold-body-weight">
-              Now you can safe websites to own Collections!
+              Save websites to your own Collections.
             </div>
             <div class="flex items-center justify-end">
               <button
@@ -93,7 +93,12 @@
 </template>
 
 <script>
+import GithubLoginButton from '@/components/molecules/GithubLoginButton'
+
 export default {
+  components: {
+    GithubLoginButton
+  },
   name: 'UserButtonTour',
   data() {
     return {
