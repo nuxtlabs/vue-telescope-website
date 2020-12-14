@@ -33,6 +33,11 @@ export default {
       this.$nextTick(this.calculateInputHeight(this.$refs.textarea))
     )
   },
+  mounted() {
+    setTimeout(() => {
+      this.$refs.textarea.focus()
+    }, 16)
+  },
   methods: {
     calculateInputHeight(el) {
       if (!el) return

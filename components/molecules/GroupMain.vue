@@ -1,6 +1,11 @@
 <template>
   <div>
-    <h1 class="text-three font-bold-body-weight text-center">WIP</h1>
+    <h1
+      class="text-three font-bold-body-weight text-center"
+      v-if="groups.length"
+    >
+      WIP
+    </h1>
     <GroupPreviewItem
       v-for="group in groups"
       :key="group.id"
@@ -8,7 +13,7 @@
       :collection="collection"
     />
     <CreateGroupTour
-      class="mt-8"
+      class="mt-0 -mt-4"
       v-if="!groups || !groups.length"
       :collection="collection"
     />

@@ -20,7 +20,7 @@
       </div>
 
       <div slot="aside-content-main">
-        <CreateCollectionTour v-if="!collections.length" class="mt-8" />
+        <CreateCollectionTour v-if="!collections.length" class="mt-0 -mt-4" />
 
         <!-- navigate between grousp -->
         <div v-else-if="selectedGroup">
@@ -33,7 +33,7 @@
             <div
               v-else
               :key="selectedGroup.id"
-              class="p-4 mt-8 flex items-center justify-center"
+              class="px-4 mt-0 -mt-4 flex items-center justify-center"
             >
               <h2 class="text-seven">
                 Visit
