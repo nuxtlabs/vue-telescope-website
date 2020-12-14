@@ -44,20 +44,19 @@
         <ClientOnly>
           <UserButton
             ref="user-button"
-            @click.native="showMenu = !showMenu"
             v-click-outside="() => (showMenu = false)"
+            @click.native="showMenu = !showMenu"
           />
         </ClientOnly>
 
         <ClientOnly>
           <Portal to="default-layout">
             <Popper
+              v-if="showMenu"
               :offset-x="4"
               :offset-y="-2"
               placement="bottom-end"
-              v-if="showMenu"
               :anchor="$refs['user-button'].$el"
-              v-slot:default="{ popperInstance }"
             >
               <UserButtonMenu />
             </Popper>

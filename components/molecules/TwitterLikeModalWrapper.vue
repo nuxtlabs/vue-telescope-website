@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import breakpoints from '@/utils/styles/breakpoints'
+// import breakpoints from '@/utils/styles/breakpoints'
 // import TheSquareLogo from '@/assets/logo/square-logo.svg?inline'
 import XmarkCircleIcon from '@/assets/icons/xmark-circle.svg?inline'
 
@@ -140,7 +140,7 @@ export default {
       })
     },
     animateEnter() {
-      const biggerThanMd = window.innerWidth >= parseInt(breakpoints.md) // if bigger than "md" than use non-elastic animation, because it looks bad on mobile
+      // const biggerThanMd = window.innerWidth >= parseInt(breakpoints.md) // if bigger than "md" than use non-elastic animation, because it looks bad on mobile
       this.$gsap.set(this.$refs['modal-wrapper'], {
         transformOrigin: 'bottom',
         opacity: 1

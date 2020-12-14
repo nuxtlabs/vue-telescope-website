@@ -2,9 +2,9 @@
   <div class="relative flex flex-col" :class="[openCollapse && 'mb-2']">
     <div v-click-outside="clickOutsideHandler" class="relative flex group">
       <div
+        ref="name-handler"
         class="flex flex-1 cursor-pointer py-2"
         tabindex="0"
-        ref="name-handler"
         @click="clickOnNameHandler"
         @keypress.enter="clickOnNameHandler"
       >
@@ -15,9 +15,9 @@
             v-if="updatingCollection"
             ref="update-collection-input"
             v-model="newCollectionName"
+            class="font-bold-body-weight p-1"
             @submit="updateCollection"
             @keydown.esc.native="clearActions"
-            class="font-bold-body-weight p-1"
             @click.stop.native
             @keypress.enter.stop.native
           />
@@ -36,9 +36,9 @@
 
           <div v-if="updatingCollection" class="absolute top-0 right-0 p-3px">
             <button
-              @click.stop="updateCollection"
               title="Save"
               class="bg-grey-50 border border-grey-200 rounded-md p-1"
+              @click.stop="updateCollection"
             >
               <SaveIcon class="w-4 h-4" />
             </button>
@@ -50,21 +50,20 @@
         <button
           v-if="!updatingCollection"
           ref="anchor"
-          @click="openDropdown"
           class="group-hover:block hover:bg-grey-50 rounded-md"
           :class="[openCollapse || showDropdown ? 'block' : 'hidden']"
+          @click="openDropdown"
         >
           <DotsVerticalIcon />
         </button>
       </div>
 
       <Popper
+        v-if="showDropdown"
         :offset-x="4"
         :offset-y="-2"
         placement="right-start"
-        v-if="showDropdown"
         :anchor="$refs.anchor"
-        v-slot:default="{ popperInstance }"
       >
         <CollectionsListItemMenu
           v-if="!updatingCollection"
@@ -75,7 +74,7 @@
     </div>
 
     <!-- Group Collapsible -->
-    <transition @enter="enter" @leave="leave" :css="false">
+    <transition :css="false" @enter="enter" @leave="leave">
       <div v-if="openCollapse">
         <div>
           <!-- <pre v-if="selectedGroup && collection.id === selectedGroup.list">
@@ -87,12 +86,12 @@
             :key="group.id"
             :group="group"
             :collection="collection"
-            @group-selected="groupSelectionHandler($event, group)"
             tabindex="0"
             class="pl-6"
+            @group-selected="groupSelectionHandler($event, group)"
           />
 
-          <CreateGroup @cleanup="clearActions" :collection="collection" />
+          <CreateGroup :collection="collection" @cleanup="clearActions" />
         </div>
       </div>
     </transition>

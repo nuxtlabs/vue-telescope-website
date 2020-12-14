@@ -21,15 +21,15 @@ export default {
 
     return { changelog }
   },
-  mounted() {
-    this.$changelog.saw()
-  },
   head() {
     return frontMatter({
       path: this.$route.path,
       title: 'Changelog',
       description: 'Discover the lastest news from Vue Telemetry.'
     })
+  },
+  mounted() {
+    this.$changelog.saw()
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="group flex" v-click-outside="clickOutsideHandler">
+  <div v-click-outside="clickOutsideHandler" class="group flex">
     <span
       class="flex-1 relative"
       @click="clickOnNameHandler"
@@ -9,9 +9,9 @@
         v-if="updatingGroup"
         ref="update-group-input"
         v-model="newGroupName"
+        class="p-1"
         @submit="updateGroup"
         @keydown.esc.native="clearActions"
-        class="p-1"
         @click.stop.native
       />
       <span
@@ -27,9 +27,9 @@
 
       <div v-if="updatingGroup" class="absolute top-0 right-0 p-3px">
         <button
-          @click.stop="updateGroup"
           title="Save"
           class="bg-grey-50 border border-grey-200 rounded-md p-1"
+          @click.stop="updateGroup"
         >
           <SaveIcon class="w-4 h-4" />
         </button>
@@ -40,21 +40,20 @@
       <button
         v-if="!updatingGroup"
         ref="anchor"
-        @click="openPopup"
         class="group-hover:block"
         :class="[openCollapse || showPopup ? 'block' : 'hidden']"
+        @click="openPopup"
       >
         <DotsVerticalIcon class="w-5 h-5" />
       </button>
     </div>
 
     <Popper
+      v-if="showPopup"
       :offset-x="4"
       :offset-y="-4"
       placement="right-start"
-      v-if="showPopup"
       :anchor="$refs.anchor"
-      v-slot:default="{ popperInstance }"
     >
       <GroupListItemMenu
         v-if="!updatingGroup"

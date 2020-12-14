@@ -114,7 +114,7 @@ export default {
       image.src = `https://icons.vuetelemetry.com/${this.activeBrands[0].imgPath}`
 
       image.addEventListener('load', () => {
-        Array.from(el.children[1].children).map((c, i) => {
+        Array.from(el.children[1].children).forEach((c, i) => {
           this.$gsap.to(c, {
             x: `${this.$gsap.utils.random(-50, 50)}vw`,
             y: `${this.$gsap.utils.random(-50, 50)}vh`,

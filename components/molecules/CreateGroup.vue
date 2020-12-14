@@ -12,9 +12,9 @@
     <div class="mr-6 ml-5">
       <AppAutosizeTextarea
         v-if="creatingGroup"
+        ref="create-group-tour"
         v-model="newGroupName"
         v-click-outside="() => (creatingGroup = false)"
-        ref="create-group-tour"
         class="py-1 px-2"
         @submit="createGroup"
         @keydown.esc.native="clearActions"
@@ -58,7 +58,7 @@ export default {
     async createGroup() {
       try {
         if (!this.newGroupName) return
-        const newGroup = await this.$store.dispatch('collections/createGroup', {
+        await this.$store.dispatch('collections/createGroup', {
           name: this.newGroupName,
           collection: this.collection
         })

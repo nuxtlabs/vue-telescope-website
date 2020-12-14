@@ -35,6 +35,12 @@ import frontMatter from '@/utils/front-matter'
 import cache from '@/utils/cache'
 
 export default {
+  // scrollToTop: true,
+  data() {
+    return {
+      website: null
+    }
+  },
   async fetch() {
     const cached = cache.get(this.$route.params.website)
     if (cached) {
@@ -64,29 +70,23 @@ export default {
       throw new Error('Website not found')
     }
   },
-  // scrollToTop: true,
-  data() {
-    return {
-      website: null
-    }
-  },
   fetchOnServer: false,
-  computed: {
-    ...mapState({
-      directHit: (state) => state.directHit
-    })
-  },
-  // activated() {
-  //   if (this.$fetchState.timestamp <= Date.now() - 60000) {
-  //     this.$fetch()
-  //   }
-  // },
   head() {
     return frontMatter({
       path: this.$route.path,
       title: (this.website && this.website.title) || 'Loading...',
       noindex: true
     })
+  },
+  computed: {
+    ...mapState({
+      directHit: (state) => state.directHit
+    })
   }
+  // activated() {
+  //   if (this.$fetchState.timestamp <= Date.now() - 60000) {
+  //     this.$fetch()
+  //   }
+  // },
 }
 </script>

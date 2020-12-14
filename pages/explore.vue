@@ -14,16 +14,6 @@ import frontMatter from '@/utils/front-matter'
 export default {
   name: 'Explore',
   // scrollToTop: true,
-  data() {
-    return {
-      newTwitterLike: false
-    }
-  },
-  computed: {
-    ...mapState({
-      directHit: (state) => state.directHit
-    })
-  },
   beforeRouteEnter(to, from, next) {
     if (process.browser) {
       setTimeout(() => {
@@ -32,11 +22,21 @@ export default {
     }
     next()
   },
+  data() {
+    return {
+      newTwitterLike: false
+    }
+  },
   head() {
     return frontMatter({
       path: this.$route.path,
       title: 'Explore Vue.js showcases',
       noindex: false
+    })
+  },
+  computed: {
+    ...mapState({
+      directHit: (state) => state.directHit
     })
   }
 }

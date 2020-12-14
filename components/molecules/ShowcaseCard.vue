@@ -92,15 +92,15 @@
 <script>
 import { mapState } from 'vuex'
 // import OpenIcon from '@/assets/icons/eye.svg?inline'
-import BookmarkIcon from '@/assets/icons/bookmark.svg?inline'
-import UnBookmarkIcon from '@/assets/icons/bookmark-fill.svg?inline'
+// import BookmarkIcon from '@/assets/icons/bookmark.svg?inline'
+// import UnBookmarkIcon from '@/assets/icons/bookmark-fill.svg?inline'
 // import CancelIcon from '@/assets/icons/xmark-circle.svg?inline'
 
 export default {
   components: {
     // OpenIcon,
-    BookmarkIcon,
-    UnBookmarkIcon
+    // BookmarkIcon,
+    // UnBookmarkIcon
     // CancelIcon
   },
   props: {

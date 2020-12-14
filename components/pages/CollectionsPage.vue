@@ -7,9 +7,9 @@
         <div>
           <transition-group name="list">
             <CollectionListItem
-              class="px-2"
               v-for="collection in sortedCollections"
               :key="collection.id"
+              class="px-2"
               :collection="collection"
             />
           </transition-group>

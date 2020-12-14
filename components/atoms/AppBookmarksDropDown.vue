@@ -59,7 +59,6 @@ export default {
   },
   computed: {
     collections() {
-      console.log('!!! collections', this.$store.state.collections.collections)
       return this.$store.state.collections.collections.filter(
         (collection) => collection.groups.length
       )

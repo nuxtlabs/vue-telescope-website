@@ -11,13 +11,13 @@
 import frontMatter from '@/utils/front-matter'
 
 export default {
-  async fetch() {
-    this.privacy = await this.$content('privacy').fetch()
-  },
   data() {
     return {
       privacy: {}
     }
+  },
+  async fetch() {
+    this.privacy = await this.$content('privacy').fetch()
   },
   head() {
     return frontMatter({

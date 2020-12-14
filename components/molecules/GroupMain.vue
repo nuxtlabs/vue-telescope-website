@@ -1,8 +1,8 @@
 <template>
   <div>
     <h1
-      class="text-three font-bold-body-weight text-center"
       v-if="groups.length"
+      class="text-three font-bold-body-weight text-center"
     >
       WIP
     </h1>
@@ -13,8 +13,8 @@
       :collection="collection"
     />
     <CreateGroupTour
-      class="mt-0 -mt-4"
       v-if="!groups || !groups.length"
+      class="-mt-4"
       :collection="collection"
     />
     <!--  <GroupPreviewItemTour
@@ -40,7 +40,7 @@ export default {
     async createGroup() {
       try {
         // if (!this.newName) return
-        const newGroup = await this.$store.dispatch('collections/createGroup', {
+        await this.$store.dispatch('collections/createGroup', {
           name: 'SUPER',
           collection: this.collection
         })

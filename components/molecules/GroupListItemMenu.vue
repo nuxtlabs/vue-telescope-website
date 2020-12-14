@@ -11,18 +11,18 @@
       </li> -->
       <li class="p-2px">
         <button
-          @click="$emit('rename')"
           title="Rename"
           class="bg-grey-50 border border-grey-100 rounded-md p-1 hover:scale-110 transform"
+          @click="$emit('rename')"
         >
           <EditIcon class="w-4 h-4" />
         </button>
       </li>
       <li class="p-2px">
         <button
-          @click="$emit('delete')"
           title="Delete"
           class="bg-grey-50 border border-grey-100 rounded-md p-1 hover:scale-110 transform"
+          @click="$emit('delete')"
         >
           <DeleteIcon class="w-4 h-4" />
         </button>
@@ -32,13 +32,13 @@
 </template>
 
 <script>
-import ShareIcon from '@/assets/icons/share.svg?inline'
+// import ShareIcon from '@/assets/icons/share.svg?inline'
 import EditIcon from '@/assets/icons/edit.svg?inline'
 import DeleteIcon from '@/assets/icons/trash.svg?inline'
 
 export default {
   components: {
-    ShareIcon,
+    // ShareIcon,
     EditIcon,
     DeleteIcon
   },

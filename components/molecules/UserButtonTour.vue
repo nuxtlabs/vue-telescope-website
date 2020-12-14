@@ -65,12 +65,11 @@
         </button>
 
         <Popper
+          v-if="showTooltip"
           arrow
           :offset-y="12"
-          v-if="showTooltip"
           placement="bottom-end"
           :anchor="$refs.anchor"
-          v-slot:default="{ popperInstance }"
         >
           <div class="p-4" @click="closeTour">
             <div class="mb-4 font-bold-body-weight">

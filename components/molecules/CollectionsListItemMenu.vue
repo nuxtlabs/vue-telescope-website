@@ -11,18 +11,18 @@
       </li>
       <li class="p-2px">
         <button
-          @click="$emit('rename')"
           title="Rename"
           class="bg-grey-50 border border-grey-100 rounded-md p-1 hover:scale-110 transform transition-transform duration-150"
+          @click="$emit('rename')"
         >
           <EditIcon class="w-4 h-4" />
         </button>
       </li>
       <li class="p-2px">
         <button
-          @click="$emit('delete')"
           title="Delete"
           class="bg-grey-50 border border-grey-100 rounded-md p-1 hover:scale-110 transform transition-transform duration-150"
+          @click="$emit('delete')"
         >
           <DeleteIcon class="w-4 h-4" />
         </button>

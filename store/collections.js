@@ -125,7 +125,7 @@ export const actions = {
       commit('setSelectedGroup', newGroup)
       return newGroup
     } catch (err) {
-      console.log(err)
+      // console.log(err)
     }
   },
   async updateGroup({ commit }, { name, group, collection }) {
@@ -144,7 +144,7 @@ export const actions = {
       })
       return updatedGroup
     } catch (err) {
-      console.log(err)
+      // console.log(err)
     }
   },
   async deleteGroup({ commit }, { group, collection }) {

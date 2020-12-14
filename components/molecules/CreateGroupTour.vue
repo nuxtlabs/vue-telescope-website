@@ -1,6 +1,6 @@
 <template>
   <div class="relative flex items-center justify-center">
-    <transition @enter="enter" @leave="leave" :css="false">
+    <transition :css="false" @enter="enter" @leave="leave">
       <!--  <button
       class="text-seven flex py-4 px-8 rounded-xl border border-grey-100 hover:border-grey-50 hover:bg-grey-50 text-grey-500 hover:text-grey-700"
       @click="addCollection"
@@ -23,12 +23,12 @@
         </div>
       </button>
 
-      <div class="max-w-24rem" v-else>
+      <div v-else class="max-w-24rem">
         <AppAutosizeTextarea
           v-if="creatingGroup"
+          ref="create-group-tour"
           v-model="newGroupName"
           v-click-outside="() => (creatingGroup = false)"
-          ref="create-group-tour"
           class="w-full text-seven flex py-4 px-8 rounded-xl border border-grey-100 hover:border-grey-50 hover:bg-grey-50 text-grey-500 hover:text-grey-700 transition-colors duration-200"
           @submit="createGroup"
           @keydown.esc.native="clearActions"
@@ -39,9 +39,9 @@
           class="absolute top-0 right-0 p-3"
         >
           <button
-            @click.stop="createGroup"
             title="Save"
             class="bg-grey-50 border border-grey-200 rounded-xl p-3 hover:bg-grey-200 hover:text-grey-700"
+            @click.stop="createGroup"
           >
             <SaveIcon class="w-4 h-4" />
           </button>
@@ -87,7 +87,7 @@ export default {
     async createGroup() {
       try {
         if (!this.newGroupName) return
-        const newGroup = await this.$store.dispatch('collections/createGroup', {
+        await this.$store.dispatch('collections/createGroup', {
           name: this.newGroupName,
           collection: this.collection
         })

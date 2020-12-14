@@ -85,6 +85,17 @@ function filterSort(raw) {
 
 export default {
   fetchOnServer: false,
+  data() {
+    return {
+      showcases: [],
+      totalCount: 0,
+      currentPage: 0,
+      showcasesPerPage: 6,
+      hasMoreShowcases: true,
+      filtersTouched: false
+      // filterQuery: {}
+    }
+  },
   async fetch() {
     if (this.isModal) return
     // if (
@@ -112,17 +123,6 @@ export default {
       this.showcases.length >= 96
     ) {
       this.hasMoreShowcases = false
-    }
-  },
-  data() {
-    return {
-      showcases: [],
-      totalCount: 0,
-      currentPage: 0,
-      showcasesPerPage: 6,
-      hasMoreShowcases: true,
-      filtersTouched: false
-      // filterQuery: {}
     }
   },
   computed: {

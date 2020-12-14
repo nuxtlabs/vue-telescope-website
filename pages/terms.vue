@@ -11,14 +11,14 @@
 import frontMatter from '@/utils/front-matter'
 
 export default {
-  async fetch() {
-    this.terms = await this.$content('terms').fetch()
-    // console.log(this.terms)
-  },
   data() {
     return {
       terms: {}
     }
+  },
+  async fetch() {
+    this.terms = await this.$content('terms').fetch()
+    // console.log(this.terms)
   },
   head() {
     return frontMatter({

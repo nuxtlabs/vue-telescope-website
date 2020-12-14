@@ -14,6 +14,11 @@
 import frontMatter from '@/utils/front-matter'
 
 export default {
+  data() {
+    return {
+      featured: []
+    }
+  },
   async fetch() {
     const featured = await this.$strapi.find(
       'showcases?isFeatured=true&_limit=5'
@@ -21,11 +26,6 @@ export default {
     this.featured = featured.map((item, index) => {
       return { ...item, index }
     })
-  },
-  data() {
-    return {
-      featured: []
-    }
   },
   fetchOnServer: false,
   head() {

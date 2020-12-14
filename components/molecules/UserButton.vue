@@ -1,7 +1,7 @@
 <template>
   <button
-    class="rounded-full overflow-hidden focus:outline-none"
     ref="user-button"
+    class="rounded-full overflow-hidden focus:outline-none"
   >
     <Portal to="tour">
       <UserButtonTour v-if="showTour" @close="showLocal = false" />

@@ -15,6 +15,9 @@ import GithubIcon from '@/assets/icons/github.svg?inline'
 
 export default {
   name: 'WtfGithubLoginButton',
+  components: {
+    GithubIcon
+  },
   props: {
     size: {
       type: String,
@@ -24,9 +27,6 @@ export default {
       type: String,
       default: null
     }
-  },
-  components: {
-    GithubIcon
   },
   methods: {
     login() {

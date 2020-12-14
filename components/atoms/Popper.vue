@@ -73,7 +73,6 @@ export default {
     }
   },
   mounted() {
-    console.log('this.offsetY', this.offsetY)
     this.popperInstance = createPopper(this.anchor, this.$el, {
       placement: this.placement,
       strategy: 'fixed',

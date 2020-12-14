@@ -1,6 +1,6 @@
 <template>
   <div ref="menu" class="bg-grey-50 p-4">
-    <div class="mb-2" v-if="$strapi.user">
+    <div v-if="$strapi.user" class="mb-2">
       Hello, <span>{{ $strapi.user.username }}</span>
     </div>
     <ul class="text-sm">
@@ -15,15 +15,15 @@
       <li>
         <button
           v-if="$strapi.user"
-          @click="logout"
           class="font-bold-body-weight hover:text-primary-500"
+          @click="logout"
         >
           Logout
         </button>
         <button
           v-else
-          @click="login"
           class="font-bold-body-weight hover:text-primary-500"
+          @click="login"
         >
           Login
         </button>

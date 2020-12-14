@@ -1,4 +1,4 @@
-export default async function ({ store }, inject) {
+export default function ({ store }, inject) {
   const $tour = {}
   inject('tour', $tour)
   if (process.browser) {

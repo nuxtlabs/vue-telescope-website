@@ -1,6 +1,6 @@
 <template>
   <div class="flex ml-2 h-10 mr-2 relative">
-    <transition @enter="enter" @leave="leave" :css="false">
+    <transition :css="false" @enter="enter" @leave="leave">
       <button
         v-if="!creatingCollection"
         class="group w-full h-full flex items-center py-1 px-6 pr-4 text-base leading-base bg-primary-500 rounded-lg text-white"
@@ -15,11 +15,11 @@
         </span>
       </button>
 
-      <div class="w-full h-full absolute" v-if="creatingCollection">
+      <div v-if="creatingCollection" class="w-full h-full absolute">
         <AppAutosizeTextarea
+          ref="create-collection-tour"
           v-model="newCollectionName"
           v-click-outside="() => (creatingCollection = false)"
-          ref="create-collection-tour"
           class="py-2 px-2 text-base leading-base"
           @submit="createCollection"
           @keydown.esc.native="clearActions"
@@ -64,12 +64,9 @@ export default {
     async createCollection() {
       try {
         if (!this.newCollectionName) return
-        const newCollection = await this.$store.dispatch(
-          'collections/createCollection',
-          {
-            name: this.newCollectionName
-          }
-        )
+        await this.$store.dispatch('collections/createCollection', {
+          name: this.newCollectionName
+        })
         this.clearActions()
         this.creatingCollection = false
       } catch (e) {}

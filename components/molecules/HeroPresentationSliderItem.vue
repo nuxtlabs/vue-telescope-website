@@ -165,8 +165,9 @@ export default {
           if (m[2] === this.activeIndex) {
             return m[this.staticIndex]
           }
+          return null
         })
-        .filter((i) => i !== undefined)[0]
+        .filter(Boolean)[0]
     },
     getDirection() {
       const activeMatrix = sliderMatrix
@@ -175,8 +176,9 @@ export default {
           if (m[this.staticIndex] === this.activeShowcases[0].index) {
             return m
           }
+          return null
         })
-        .filter((i) => i !== undefined)[0]
+        .filter(Boolean)[0]
       return activeMatrix.findIndex((i) => i === this.activeIndex) >= 2
         ? 'left'
         : 'right'
