@@ -8,6 +8,7 @@
 import frontMatter from '@/utils/front-matter'
 
 export default {
+  name: 'PagesCollections',
   head() {
     return frontMatter({
       path: this.$route.path,

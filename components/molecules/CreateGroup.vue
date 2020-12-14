@@ -2,14 +2,14 @@
   <div>
     <button
       v-if="!creatingGroup"
-      class="group w-full flex items-center py-1"
+      class="group w-full flex items-center py-1 pl-6"
       @click="initGroupCreation"
     >
       <PlusIcon class="w-4 h-4 mr-2 opacity-50 group-hover:opacity-100" />
       <span class="opacity-25 group-hover:opacity-100"> Create Group </span>
     </button>
 
-    <div class="mr-6 ml-4">
+    <div class="mr-6 ml-5">
       <AppAutosizeTextarea
         v-if="creatingGroup"
         v-model="newGroupName"

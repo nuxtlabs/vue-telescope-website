@@ -4,6 +4,19 @@ export const state = () => ({
   selectedGroup: null
 })
 
+export const getters = {
+  sortedCollections(state) {
+    const c = [...state.collections]
+    return c.sort(function (a, b) {
+      const keyA = new Date(a.created_at)
+      const keyB = new Date(b.created_at)
+      if (keyA > keyB) return -1
+      if (keyA < keyB) return 1
+      return 0
+    })
+  }
+}
+
 export const mutations = {
   setCollections(state, collections) {
     state.collections = collections
@@ -91,10 +104,10 @@ export const actions = {
     commit('updateCollection', updatedCollection)
     return updatedCollection
   },
-  async deleteCollection({ commit, state }, { collection }) {
+  async deleteCollection({ commit, state, getters }, { collection }) {
     await this.$strapi.delete('lists', collection.id)
     commit('deleteCollection', collection)
-    commit('setSelectedCollection', state.collections[0])
+    commit('setSelectedCollection', getters.sortedCollections)
     return collection
   },
   async createGroup({ commit }, { name, collection }) {

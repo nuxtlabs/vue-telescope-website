@@ -38,7 +38,7 @@ export default {
     '~/plugins/vue-observe-visibility.client',
     '~/plugins/tour',
     '~/plugins/inject',
-    '~/plugins/directives'
+    '~/plugins/directives.js'
     // '~/plugins/password.client'
   ],
   router: {

@@ -13,7 +13,7 @@
         <button
           @click="$emit('rename')"
           title="Rename"
-          class="bg-grey-50 border border-grey-100 rounded-md p-1"
+          class="bg-grey-50 border border-grey-100 rounded-md p-1 hover:scale-110 transform"
         >
           <EditIcon class="w-4 h-4" />
         </button>
@@ -22,7 +22,7 @@
         <button
           @click="$emit('delete')"
           title="Delete"
-          class="bg-grey-50 border border-grey-100 rounded-md p-1"
+          class="bg-grey-50 border border-grey-100 rounded-md p-1 hover:scale-110 transform"
         >
           <DeleteIcon class="w-4 h-4" />
         </button>
@@ -47,13 +47,15 @@ export default {
       this.$refs.menu.children,
       {
         opacity: 0,
+        scale: 0.8,
         x: -5
       },
       {
         opacity: 1,
+        scale: 1,
         x: 0,
-        stagger: 0.05,
-        duration: 0.6,
+        stagger: 0.075,
+        duration: 0.5,
         ease: 'elastic.out(1.5, 0.5)'
       }
     )

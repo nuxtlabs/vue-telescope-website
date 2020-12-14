@@ -17,7 +17,7 @@
 export default {
   props: {
     collection: {
-      type: Object,
+      type: [Object, Array],
       default: null
     },
     groups: {

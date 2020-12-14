@@ -2,18 +2,20 @@
   <ClientOnly>
     <AsideContentTemplate v-if="$strapi.user">
       <div slot="aside-content-aside">
-        <CreateCollection class="mb-2" />
+        <CreateCollection class="mb-12" />
 
         <div>
-          <CollectionListItem
-            class="px-2"
-            v-for="collection in collections"
-            :key="collection.id"
-            :collection="collection"
-            @collection-selected="
-              collectionSelectionHandler($event, collection)
-            "
-          />
+          <transition-group name="list">
+            <CollectionListItem
+              class="px-2 mb-4"
+              v-for="collection in sortedCollections"
+              :key="collection.id"
+              :collection="collection"
+              @collection-selected="
+                collectionSelectionHandler($event, collection)
+              "
+            />
+          </transition-group>
         </div>
 
         <!-- <button @click="addCollection">Add Collection</button> -->
@@ -49,7 +51,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   computed: {
@@ -57,11 +59,26 @@ export default {
       collections: (state) => state.collections.collections,
       selectedCollection: (state) => state.collections.selectedCollection,
       selectedGroup: (state) => state.collections.selectedGroup
-    })
+    }),
+    ...mapGetters({ sortedCollections: 'collections/sortedCollections' })
+    //   reversedCollections() {
+    //     // TODO: sort by created
+    //     const c = [...this.collections]
+    //     return c.sort(function (a, b) {
+    //       const keyA = new Date(a.created_at)
+    //       const keyB = new Date(b.created_at)
+    //       if (keyA > keyB) return -1
+    //       if (keyA < keyB) return 1
+    //       return 0
+    //     })
+    //   }
   },
   created() {
     // this.selectedCollection = this.collections[0]
-    this.$store.commit('collections/setSelectedCollection', this.collections[0])
+    this.$store.commit(
+      'collections/setSelectedCollection',
+      this.sortedCollections[0]
+    )
   },
   // mounted() {
   //   console.log(this.$store.state.collections.collections)
@@ -101,5 +118,22 @@ export default {
 .fade-enter,
 .fade-leave-active {
   opacity: 0;
+}
+
+.list-enter-active,
+.list-leave-active {
+  transition-duration: 250ms;
+  transition-property: opacity, transform;
+  transition-timing-function: ease;
+}
+
+.list-enter {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.list-leave-active {
+  opacity: 0;
+  transform: translateX(-10px);
 }
 </style>
