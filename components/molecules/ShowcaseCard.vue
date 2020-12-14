@@ -21,6 +21,13 @@
           class="hidden sm:flex absolute top-0 w-full h-full opacity-0 hover:opacity-100"
           @mouseleave="isBookmarking = false"
         >
+          {{ collections }}
+        </div>
+        <!-- <div
+          v-if="$strapi.user"
+          class="hidden sm:flex absolute top-0 w-full h-full opacity-0 hover:opacity-100"
+          @mouseleave="isBookmarking = false"
+        >
           <div
             v-if="!isBookmarking"
             class="absolute top-0 right-0 cursor-pointer"
@@ -47,7 +54,7 @@
               class="flex-grow w-full"
             />
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="flex flex-wrap items-center">
         <div
@@ -83,6 +90,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 // import OpenIcon from '@/assets/icons/eye.svg?inline'
 import BookmarkIcon from '@/assets/icons/bookmark.svg?inline'
 import UnBookmarkIcon from '@/assets/icons/bookmark-fill.svg?inline'
@@ -107,6 +115,9 @@ export default {
     }
   },
   computed: {
+    ...mapState({
+      collections: (state) => state.collections.collections
+    }),
     isBookmarked() {
       const showcases = this.$store.state.collections.collections
         .flatMap((collection) => collection.groups)

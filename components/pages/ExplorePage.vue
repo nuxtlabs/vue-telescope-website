@@ -130,8 +130,7 @@ export default {
       selectedFilters: (state) => state.selectedFilters,
       selectedSort: (state) => state.selectedSort,
       isMobile: (state) => state.isMobile,
-      isModal: (state) => state.isModal,
-      collections: (state) => state.collections.collections
+      isModal: (state) => state.isModal
     }),
     filterQueryString() {
       return qs.stringify(
@@ -191,15 +190,8 @@ export default {
       this.$store.commit('setSort', filterSort(this.$route.query))
     }
   },
-  mounted() {
-    console.log('collections', this.collections)
-  },
   methods: {
     updateListing() {
-      // console.log('TRIGGERED', {
-      //   ...this.selectedFilters,
-      //   ...this.selectedSort
-      // })
       window.scrollTo(0, 0)
       // this.filterQuery = value
       this.$router.push({
