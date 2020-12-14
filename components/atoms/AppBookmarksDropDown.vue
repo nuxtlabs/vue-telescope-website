@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col" :class="style.collections">
-    <pre class="text-white text-sm">{{ collections }}</pre>
+    <!-- <pre class="text-white text-sm">{{ collections }}</pre> -->
     <ul
       v-for="(collection, index) in collections"
       :key="index"
@@ -59,6 +59,7 @@ export default {
   },
   computed: {
     collections() {
+      console.log('!!! collections', this.$store.state.collections.collections)
       return this.$store.state.collections.collections.filter(
         (collection) => collection.groups.length
       )
