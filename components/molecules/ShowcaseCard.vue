@@ -1,7 +1,7 @@
 <template>
-  <div class="p-2">
+  <div class="p-2" @mouseleave="isBookmarking = false">
     <NuxtLink
-      class="block hover-effect relative p-3 cursor-pointer"
+      class="group block hover-effect relative p-3 cursor-pointer"
       :to="{
         name: 'explore-website',
         params: {
@@ -16,45 +16,21 @@
           ratio="4:3"
           sizes="(min-width: 834px) 33vw, (min-width: 640px) 50vw, 100vw"
         />
-        <div
-          v-if="$strapi.user"
-          class="hidden sm:flex absolute top-0 w-full h-full opacity-0 hover:opacity-100"
-          @mouseleave="isBookmarking = false"
+        <button
+          @click.prevent="isBookmarking = !isBookmarking"
+          :class="[isBookmarkedAtLeastOnce ? 'bg-primary-500' : 'bg-grey-200']"
+          class="m-2 p-2 rounded-lg absolute top-0 right-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-400"
         >
-          {{ collections }}
-        </div>
-        <!-- <div
-          v-if="$strapi.user"
-          class="hidden sm:flex absolute top-0 w-full h-full opacity-0 hover:opacity-100"
-          @mouseleave="isBookmarking = false"
-        >
-          <div
-            v-if="!isBookmarking"
-            class="absolute top-0 right-0 cursor-pointer"
-          >
-            <div
-              class="flex items-top justify-items-right p-2 cursor-pointer bg-grey-900 bg-opacity-50"
-              @click.prevent="isBookmarking = true"
-            >
-              <BookmarkIcon
-                v-if="!isBookmarked"
-                class="flex-1 w-6 h-6 text-white"
-              />
-              <UnBookmarkIcon v-else class="flex-1 w-6 h-6 text-white" />
-            </div>
-          </div>
-          <div
-            v-else
-            class="flex flex-col items-center w-full p-2 overflow-y-auto cursor-auto bg-grey-900 bg-opacity-75"
-            @click.prevent=""
-          >
-            <AppBookmarksDropdown
-              :showcase="showcase"
-              size="small"
-              class="flex-grow w-full"
-            />
-          </div>
-        </div> -->
+          <SaveIcon
+            class="w-5 h-5"
+            :class="[
+              isBookmarkedAtLeastOnce ? 'text-primary-900' : 'text-grey-800'
+            ]"
+          />
+        </button>
+        <transition name="fade">
+          <ShowcaseBookmark v-if="isBookmarking" :showcase="showcase" />
+        </transition>
       </div>
       <div class="flex flex-wrap items-center">
         <div
@@ -91,17 +67,11 @@
 
 <script>
 import { mapState } from 'vuex'
-// import OpenIcon from '@/assets/icons/eye.svg?inline'
-// import BookmarkIcon from '@/assets/icons/bookmark.svg?inline'
-// import UnBookmarkIcon from '@/assets/icons/bookmark-fill.svg?inline'
-// import CancelIcon from '@/assets/icons/xmark-circle.svg?inline'
+import SaveIcon from '@/assets/icons/save.svg?inline'
 
 export default {
   components: {
-    // OpenIcon,
-    // BookmarkIcon,
-    // UnBookmarkIcon
-    // CancelIcon
+    SaveIcon
   },
   props: {
     showcase: {
@@ -118,17 +88,17 @@ export default {
     ...mapState({
       collections: (state) => state.collections.collections
     }),
-    isBookmarked() {
-      const showcases = this.$store.state.collections.collections
+    isBookmarkedAtLeastOnce() {
+      const showcases = this.collections
         .flatMap((collection) => collection.groups)
         .flatMap((group) => group.showcases)
-      return showcases?.find((it) => it && it.id === this.showcase.id)
+      return showcases?.find((s) => s && s.id === this.showcase.id)
     }
   },
   methods: {
     open() {
       this.$store.commit('SET_MODAL', true)
-      this.$router.push(`/exxxplore/${this.showcase.slug}`)
+      this.$router.push(`/explore/${this.showcase.slug}`)
     }
   }
 }
@@ -154,5 +124,22 @@ export default {
 .hover-effect:hover:before {
   opacity: 1;
   transform: scale(1);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: 250ms;
+  transition-property: opacity, transform;
+  transition-timing-function: ease;
+}
+
+.fade-enter {
+  opacity: 0;
+  transform: scale(1.05);
+}
+
+.fade-leave-active {
+  opacity: 0;
+  transform: scale(0.95);
 }
 </style>

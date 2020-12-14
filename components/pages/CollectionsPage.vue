@@ -136,12 +136,12 @@ export default {
 
 .fade-enter {
   opacity: 0;
-  transform: translateX(-10px);
+  transform: translateX(-5px);
 }
 
 .fade-leave-active {
   opacity: 0;
-  transform: translateX(10px);
+  transform: translateX(5px);
 }
 
 .list-enter-active,

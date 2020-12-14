@@ -3,7 +3,7 @@
     <div v-if="$strapi.user" class="mb-2">
       Hello, <span>{{ $strapi.user.username }}</span>
     </div>
-    <ul class="text-sm">
+    <ul class="text-base">
       <li class="">
         <NuxtLink
           to="/collections"
