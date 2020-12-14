@@ -13,11 +13,11 @@
     </button> -->
 
       <button
-        v-if="!creatingCollection"
+        v-if="!creatingGroup"
         class="text-seven flex py-4 px-8 rounded-xl border border-grey-100 hover:border-grey-50 hover:bg-grey-50 text-grey-500 hover:text-grey-700 transition-colors duration-200"
-        @click="initCollectionCreation"
+        @click="initGroupCreation"
       >
-        <span class="mr-2">Create Your First Collection</span>
+        <span class="mr-2">Create Group</span>
         <div class="pt-2">
           <PlusIcon class="w-4 h-4" style="stroke-width: 1.5px" />
         </div>
@@ -25,21 +25,21 @@
 
       <div class="max-w-24rem" v-else>
         <AppAutosizeTextarea
-          v-if="creatingCollection"
-          v-model="newCollectionName"
-          v-click-outside="() => (creatingCollection = false)"
-          ref="create-collection-tour"
+          v-if="creatingGroup"
+          v-model="newGroupName"
+          v-click-outside="() => (creatingGroup = false)"
+          ref="create-group-tour"
           class="w-full text-seven flex py-4 px-8 rounded-xl border border-grey-100 hover:border-grey-50 hover:bg-grey-50 text-grey-500 hover:text-grey-700 transition-colors duration-200"
-          @submit="createCollection"
+          @submit="createGroup"
           @keydown.esc.native="clearActions"
           @click.stop.native
         />
         <div
-          v-if="creatingCollection && newCollectionName"
+          v-if="creatingGroup && newGroupName"
           class="absolute top-0 right-0 p-3"
         >
           <button
-            @click.stop="createCollection"
+            @click.stop="createGroup"
             title="Save"
             class="bg-grey-50 border border-grey-200 rounded-xl p-3 hover:bg-grey-200 hover:text-grey-700"
           >
@@ -60,35 +60,39 @@ export default {
     PlusIcon,
     SaveIcon
   },
+  props: {
+    collection: {
+      type: Object,
+      default: null
+    }
+  },
   data() {
     return {
-      newCollectionName: '',
-      creatingCollection: false
+      newGroupName: '',
+      creatingGroup: false
     }
   },
   methods: {
     clearActions() {
-      this.newCollectionName = ''
+      this.newGroupName = ''
       this.$emit('cleanup')
     },
-    initCollectionCreation() {
-      // this.$store.commit('collections/setSelectedCollection', this.collection)
-      this.creatingCollection = true
+    initGroupCreation() {
+      this.$store.commit('collections/setSelectedCollection', this.collection)
+      this.creatingGroup = true
       this.$nextTick(() => {
-        this.$refs['create-collection-tour'].$el.focus()
+        this.$refs['create-group-tour'].$el.focus()
       })
     },
-    async createCollection() {
+    async createGroup() {
       try {
-        if (!this.newCollectionName) return
-        const newCollection = await this.$store.dispatch(
-          'collections/createCollection',
-          {
-            name: this.newCollectionName
-          }
-        )
+        if (!this.newGroupName) return
+        const newGroup = await this.$store.dispatch('collections/createGroup', {
+          name: this.newGroupName,
+          collection: this.collection
+        })
         this.clearActions()
-        this.creatingCollection = false
+        this.creatingGroup = false
       } catch (e) {}
     },
     enter(el, done) {

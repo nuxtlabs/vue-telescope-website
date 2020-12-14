@@ -8,6 +8,7 @@
     <!-- <FeedbackButton /> -->
     <PrivacyAwareModal v-if="showPrivacyAwareModal" />
     <PortalTarget name="tour" />
+    <PortalTarget name="default-layout" />
   </div>
 </template>
 

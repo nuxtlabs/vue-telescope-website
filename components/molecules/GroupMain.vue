@@ -1,15 +1,21 @@
 <template>
   <div>
+    <h1 class="text-three font-bold-body-weight text-center">WIP</h1>
     <GroupPreviewItem
       v-for="group in groups"
       :key="group.id"
       :group="group"
       :collection="collection"
     />
-    <GroupPreviewItemTour
+    <CreateGroupTour
+      class="mt-8"
+      v-if="!groups || !groups.length"
+      :collection="collection"
+    />
+    <!--  <GroupPreviewItemTour
       v-if="!groups || !groups.length"
       @create-group="createGroup"
-    />
+    /> -->
   </div>
 </template>
 

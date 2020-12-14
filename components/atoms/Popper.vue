@@ -1,7 +1,7 @@
 <template>
   <div
     class="relative z-50"
-    :class="[arrow && 'bg-white rounded border border-grey-400']"
+    :class="[arrow && 'bg-white rounded-md border border-grey-400']"
   >
     <slot :popper-instance="popperInstance"></slot>
 

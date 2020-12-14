@@ -41,7 +41,28 @@
           <SaveIcon />
         </NuxtLink> -->
 
-        <UserButton ref="user-button" @click.native="showMenu = true" />
+        <ClientOnly>
+          <UserButton
+            ref="user-button"
+            @click.native="showMenu = !showMenu"
+            v-click-outside="() => (showMenu = false)"
+          />
+        </ClientOnly>
+
+        <ClientOnly>
+          <Portal to="default-layout">
+            <Popper
+              :offset-x="4"
+              :offset-y="-2"
+              placement="bottom-end"
+              v-if="showMenu"
+              :anchor="$refs['user-button'].$el"
+              v-slot:default="{ popperInstance }"
+            >
+              <UserButtonMenu />
+            </Popper>
+          </Portal>
+        </ClientOnly>
 
         <!-- <div
           ref="install-extension-button"

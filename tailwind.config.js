@@ -206,6 +206,7 @@ module.exports = {
         monospace: [...defaultTheme.fontFamily.mono]
       },
       maxWidth: {
+        '24rem': '24rem',
         container: '1264px',
         'pretty-wide': '1020px',
         'readable-line-length': '820px'

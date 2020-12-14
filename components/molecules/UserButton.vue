@@ -7,7 +7,14 @@
       <UserButtonTour v-if="showTour" @close="showLocal = false" />
     </Portal>
 
+    <img
+      v-if="$strapi.user"
+      :src="`https://github.com/${$strapi.user.username}.png?size=24`"
+      class="w-8 h-8 rounded-full mr-1"
+    />
+
     <svg
+      v-else
       class="w-8 h-8"
       width="24"
       height="24"
@@ -15,7 +22,7 @@
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect width="24" height="24" fill="#F0F0F0" />
+      <rect width="24" height="24" fill="#F5F7F6" />
       <rect x="2" y="11" width="2" height="6" fill="#0BDCA0" />
       <rect x="4" y="9" width="2" height="4" fill="#0BDCA0" />
       <rect x="6" y="9" width="2" height="8" fill="#0BDCA0" />

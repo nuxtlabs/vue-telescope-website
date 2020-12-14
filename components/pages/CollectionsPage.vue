@@ -7,13 +7,10 @@
         <div>
           <transition-group name="list">
             <CollectionListItem
-              class="px-2 mb-4"
+              class="px-2"
               v-for="collection in sortedCollections"
               :key="collection.id"
               :collection="collection"
-              @collection-selected="
-                collectionSelectionHandler($event, collection)
-              "
             />
           </transition-group>
         </div>
@@ -23,18 +20,39 @@
       </div>
 
       <div slot="aside-content-main">
-        <CreateCollectionTour v-if="!collections.length" />
+        <CreateCollectionTour v-if="!collections.length" class="mt-8" />
 
+        <!-- navigate between grousp -->
         <div v-else-if="selectedGroup">
           <transition name="fade" mode="out-in">
-            <pre :key="selectedGroup.id">{{ selectedGroup }}</pre>
+            <ShowcasesListing
+              v-if="selectedGroup.showcases.length"
+              :key="selectedGroup.id"
+              :showcases="selectedGroup.showcases"
+            />
+            <div
+              v-else
+              :key="selectedGroup.id"
+              class="p-4 mt-8 flex items-center justify-center"
+            >
+              <h2 class="text-seven">
+                Visit
+                <NuxtLink
+                  to="/explore"
+                  class="text-primary-500 hover:underline"
+                >
+                  Explore
+                </NuxtLink>
+                page to save showcases.
+              </h2>
+            </div>
           </transition>
         </div>
 
         <div v-else>
           <!-- <pre>{{ selectedCollection }}</pre> -->
           <transition name="fade" mode="out-in">
-            <GroupPreview
+            <GroupMain
               v-if="selectedCollection"
               :key="selectedCollection.id"
               :groups="selectedCollection.groups"
@@ -44,6 +62,7 @@
         </div>
       </div>
     </AsideContentTemplate>
+
     <div v-else>
       <CollectionsGreeting />
     </div>
@@ -96,13 +115,13 @@ export default {
     //     )
     //   } catch (e) {}
     // },
-    collectionSelectionHandler($event, collection) {
-      this.$store.commit(
-        'collections/setSelectedCollection',
-        $event ? collection : null
-      )
-      this.$store.commit('collections/setSelectedGroup', null)
-    }
+    // collectionSelectionHandler($event, collection) {
+    //   this.$store.commit(
+    //     'collections/setSelectedCollection',
+    //     $event ? collection : null
+    //   )
+    //   this.$store.commit('collections/setSelectedGroup', null)
+    // }
   }
 }
 </script>
@@ -111,13 +130,18 @@ export default {
 .fade-enter-active,
 .fade-leave-active {
   transition-duration: 250ms;
-  transition-property: opacity;
+  transition-property: opacity, transform;
   transition-timing-function: ease;
 }
 
-.fade-enter,
+.fade-enter {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
 .fade-leave-active {
   opacity: 0;
+  transform: translateX(10px);
 }
 
 .list-enter-active,

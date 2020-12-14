@@ -2,7 +2,7 @@
   <div class="relative flex flex-col" :class="[openCollapse && 'mb-2']">
     <div v-click-outside="clickOutsideHandler" class="relative flex group">
       <div
-        class="flex flex-1"
+        class="flex flex-1 cursor-pointer py-2"
         tabindex="0"
         ref="name-handler"
         @click="clickOnNameHandler"
@@ -46,7 +46,7 @@
         </span>
       </div>
 
-      <div class="w-6 h-auto ml-auto my-1">
+      <div class="w-6 h-auto ml-auto my-3">
         <button
           v-if="!updatingCollection"
           ref="anchor"
@@ -157,7 +157,8 @@ export default {
   },
   methods: {
     openDropdown() {
-      this.$emit('collection-selected', this.collection.id)
+      // this.$emit('collection-selected', this.collection.id)
+      this.$store.commit('collections/setSelectedCollection', this.collection)
       this.showDropdown = !this.showDropdown
     },
     clickOutsideHandler() {
@@ -165,7 +166,12 @@ export default {
       this.clearActions()
     },
     clickOnNameHandler() {
-      this.$emit('collection-selected', this.collection.id)
+      // this.$emit('collection-selected', this.collection.id)
+      this.$store.commit('collections/setSelectedCollection', this.collection)
+      this.$store.commit(
+        'collections/setSelectedGroup',
+        this.collection.groups[0]
+      )
       this.openCollapse = !this.openCollapse
       this.clearActions()
       // this.creatingGroup = false
