@@ -42,23 +42,19 @@
         </NuxtLink> -->
 
         <ClientOnly>
-          <UserButton
-            ref="user-button"
-            v-click-outside="() => (showMenu = false)"
-            @click.native="showMenu = !showMenu"
-          />
+          <UserButton ref="user-button" @click.native="showMenu = true" />
         </ClientOnly>
 
         <ClientOnly>
           <Portal to="default-layout">
             <Popper
               v-if="showMenu"
-              :offset-x="4"
+              :offset-x="12"
               :offset-y="-2"
               placement="bottom-end"
               :anchor="$refs['user-button'].$el"
             >
-              <UserButtonMenu />
+              <UserButtonMenu @close-menu="showMenu = false" />
             </Popper>
           </Portal>
         </ClientOnly>

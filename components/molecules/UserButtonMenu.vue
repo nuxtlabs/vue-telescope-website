@@ -1,13 +1,24 @@
 <template>
-  <div ref="menu" class="bg-grey-50 p-4">
-    <div v-if="$strapi.user" class="mb-2">
-      Hello, <span>{{ $strapi.user.username }}</span>
+  <div
+    ref="menu"
+    class="bg-grey-50 p-4 pb-2 rounded-lg"
+    v-click-outside="closeMenu"
+  >
+    <div class="mb-2 text-sm">
+      <span v-if="$strapi.user">
+        Hello,
+        <span class="font-bold-body-weight">{{ $strapi.user.username }}</span>
+        👋
+      </span>
+      <span v-else>Hello, stranger 👀</span>
     </div>
+    <hr class="text-grey-100 mb-2" />
     <ul class="text-base">
       <li class="">
         <NuxtLink
           to="/collections"
-          class="font-bold-body-weight hover:text-primary-500"
+          class="font-bold-body-weight hover:text-primary-500 py-1"
+          @click.native="closeMenu"
         >
           Collections
         </NuxtLink>
@@ -15,14 +26,14 @@
       <li>
         <button
           v-if="$strapi.user"
-          class="font-bold-body-weight hover:text-primary-500"
+          class="font-bold-body-weight hover:text-primary-500 py-1"
           @click="logout"
         >
           Logout
         </button>
         <button
           v-else
-          class="font-bold-body-weight hover:text-primary-500"
+          class="font-bold-body-weight hover:text-primary-500 py-1"
           @click="login"
         >
           Login
@@ -35,29 +46,11 @@
 <script>
 export default {
   mounted() {
-    this.$gsap.set(this.$refs.menu, {
-      transformOrigin: 'top right'
-    })
-    this.$gsap.fromTo(
-      this.$refs.menu,
-      {
-        borderRadius: '100%',
-        opacity: 0,
-        scale: 0.5,
-        y: -5
-      },
-      {
-        borderRadius: '8px',
-        opacity: 1,
-        scale: 1,
-        y: 0,
-        duration: 0.25,
-        ease: 'expo.out'
-      }
-    )
+    this.openMenuAnimation()
   },
   methods: {
     login() {
+      this.closeMenu()
       this.$strapi.$cookies.set(
         'redirect',
         this.redirect || this.$route.fullPath
@@ -67,7 +60,43 @@ export default {
     async logout() {
       try {
         await this.$strapi.logout()
+        this.closeMenu()
       } catch (e) {}
+    },
+    openMenuAnimation() {
+      this.$gsap.set(this.$refs.menu, {
+        transformOrigin: 'top right'
+      })
+      this.$gsap.fromTo(
+        this.$refs.menu,
+        {
+          // borderRadius: '20px',
+          opacity: 0,
+          scale: 0.75,
+          y: -5
+        },
+        {
+          // borderRadius: '8px',
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.2,
+          ease: 'power4.outIn'
+        }
+      )
+    },
+    closeMenu() {
+      this.$gsap.to(this.$refs.menu, {
+        // borderRadius: '20px',
+        opacity: 0,
+        scale: 0.75,
+        y: -5,
+        duration: 0.15,
+        ease: 'power4.outIn',
+        onComplete: () => {
+          this.$emit('close-menu')
+        }
+      })
     }
   }
 }
