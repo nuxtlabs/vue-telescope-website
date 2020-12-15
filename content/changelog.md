@@ -1,7 +1,24 @@
 ---
 title: Changelog
-updatedAt: 2020-09-24
+updatedAt: 2020-12-14
 ---
+
+<changelog-item project="website" date="2020-12-14">
+
+## Vue 3 detection ✨
+
+We now support Vue 3 in the [vue-telemetry-analyzer](https://github.com/nuxt-company/vue-telemetry-analyzer), making it available today in the [Chrome](https://chrome.google.com/webstore/detail/vue-telemetry/neaebjphlfplgdhedjdhcnpjkndddbpd) and [Firefox](https://addons.mozilla.org/en-US/firefox/addon/vue-telemetry/) extensions.
+
+<nuxt-link to="/explore/vitepress-vuejs-org" class="block pb-4">
+  <img src="https://res.cloudinary.com/nuxt/image/upload/remote/vt/changelog/vue3-detection.svg" alt="vue telemetry vue 3 support" class="rounded-md shadow" />
+</nuxt-link>
+
+On top of it, we also added support for [PrimeVue](https://www.primefaces.org/primevue/showcase/#/) and [Vuesax](https://vuesax.com) UI frameworks.
+
+Thank you to [@cagataycivici](https://github.com/cagataycivici), [@alfonsobries](https://github.com/alfonsobries), [@antfu](https://github.com/antfu) and our [contributors](https://github.com/nuxt-company/vue-telemetry-analyzer/graphs/contributors) for their help 🙌
+
+</changelog-item>
+
 
 <changelog-item project="extension" date="2020-10-20">
 
