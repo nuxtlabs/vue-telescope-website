@@ -81,7 +81,7 @@ export default {
           scale: 1,
           y: 0,
           duration: 0.2,
-          ease: 'power4.outIn'
+          ease: 'back.out(2)'
         }
       )
     },
@@ -92,7 +92,7 @@ export default {
         scale: 0.75,
         y: -5,
         duration: 0.15,
-        ease: 'power4.outIn',
+        ease: 'expo.outIn',
         onComplete: () => {
           this.$emit('close-menu')
         }

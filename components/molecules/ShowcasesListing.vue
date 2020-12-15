@@ -5,6 +5,7 @@
       :key="showcase.id"
       :data-index="index"
       :showcase="showcase"
+      @open-link="openLinkHandler(showcase)"
       class="w-full sm:w-1/2 md:w-1/3 mb-4"
     />
   </div>
@@ -16,6 +17,12 @@ export default {
     showcases: {
       type: Array,
       default: null
+    }
+  },
+  methods: {
+    openLinkHandler(showcase) {
+      this.$store.commit('SET_MODAL', true)
+      this.$router.push(`/explore/${showcase.slug}`)
     }
   }
 }

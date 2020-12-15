@@ -19,14 +19,16 @@
       <div slot="aside-content-main">
         <CreateCollectionTour v-if="!collections.length" class="mt-0 -mt-4" />
 
-        <!-- navigate between grousp -->
+        <!-- navigate between groups -->
         <div v-else-if="selectedGroup">
           <transition name="slide" mode="out-in">
-            <ShowcasesListing
+            <CollectionShowcaseCardsListing
               v-if="selectedGroup.showcases.length"
               :key="selectedGroup.id"
               :showcases="selectedGroup.showcases"
             />
+
+            <!-- if no showcases, then show tour -->
             <div
               v-else
               :key="selectedGroup.id"

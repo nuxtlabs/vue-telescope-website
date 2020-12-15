@@ -26,13 +26,14 @@
         <NuxtLink
           ref="explore-link"
           to="/explore"
-          class="opacity-0 mr-2 sm:mr-4 font-display-weight"
+          class="opacity-0 mr-4 sm:mr-6 font-display-weight"
         >
           <span
             class="has-hover:hover:opacity-50 transition-opacity duration-200"
             >Explore</span
           >
         </NuxtLink>
+
         <!-- <NuxtLink
           ref="collections-link"
           to="/collections"

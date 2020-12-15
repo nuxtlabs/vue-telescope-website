@@ -1,6 +1,7 @@
 <template>
   <div class="p-2" @mouseleave="isBookmarking = false">
     <NuxtLink
+      event
       class="group block hover-effect relative p-3 cursor-pointer"
       :to="{
         name: 'explore-website',
@@ -8,7 +9,7 @@
           website: showcase.slug
         }
       }"
-      @click.prevent="open()"
+      @click.native.prevent="open"
     >
       <div class="rounded-lg overflow-hidden mb-4 relative">
         <ResponsiveCloudinaryImage
@@ -96,9 +97,8 @@ export default {
     }
   },
   methods: {
-    open() {
-      this.$store.commit('SET_MODAL', true)
-      this.$router.push(`/explore/${this.showcase.slug}`)
+    open(e) {
+      this.$emit('open-link')
     }
   }
 }
