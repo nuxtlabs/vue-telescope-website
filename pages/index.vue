@@ -14,6 +14,7 @@
 import frontMatter from '@/utils/front-matter'
 
 export default {
+  name: 'IndexPage',
   data() {
     return {
       featured: []

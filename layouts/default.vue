@@ -2,7 +2,7 @@
   <div class="h-screen flex flex-col">
     <TheHeader />
     <main class="pt-16 flex-1">
-      <nuxt keep-alive :keep-alive-props="{ exclude: ['ExplorePage'] }" />
+      <nuxt keep-alive :keep-alive-props="{ exclude: ['ExploreP'] }" />
     </main>
     <TheFooter />
     <!-- <FeedbackButton /> -->
@@ -16,6 +16,7 @@
 import { mapState } from 'vuex'
 
 export default {
+  name: 'DefaultLayout',
   computed: {
     ...mapState({
       showPrivacyAwareModal: (state) => state.showPrivacyAwareModal

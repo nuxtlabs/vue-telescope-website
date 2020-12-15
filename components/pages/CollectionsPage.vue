@@ -14,9 +14,6 @@
             />
           </transition-group>
         </div>
-
-        <!-- <button @click="addCollection">Add Collection</button> -->
-        <!-- @cleanup="clearActions" -->
       </div>
 
       <div slot="aside-content-main">
@@ -24,7 +21,7 @@
 
         <!-- navigate between grousp -->
         <div v-else-if="selectedGroup">
-          <transition name="fade" mode="out-in">
+          <transition name="slide" mode="out-in">
             <ShowcasesListing
               v-if="selectedGroup.showcases.length"
               :key="selectedGroup.id"
@@ -49,9 +46,10 @@
           </transition>
         </div>
 
+        <!-- direct hit, collection overview; create group tour -->
         <div v-else>
           <!-- <pre>{{ selectedCollection }}</pre> -->
-          <transition name="fade" mode="out-in">
+          <transition name="slide-y" mode="out-in">
             <GroupMain
               v-if="selectedCollection"
               :key="selectedCollection.id"
@@ -127,21 +125,38 @@ export default {
 </script>
 
 <style>
-.fade-enter-active,
-.fade-leave-active {
+.slide-enter-active,
+.slide-leave-active {
   transition-duration: 250ms;
   transition-property: opacity, transform;
   transition-timing-function: ease;
 }
 
-.fade-enter {
+.slide-enter {
   opacity: 0;
-  transform: translateX(-5px);
+  transform: translateX(-2px);
 }
 
-.fade-leave-active {
+.slide-leave-active {
   opacity: 0;
-  transform: translateX(5px);
+  transform: translateX(2px);
+}
+
+.slide-y-enter-active,
+.slide-y-leave-active {
+  transition-duration: 250ms;
+  transition-property: opacity, transform;
+  transition-timing-function: ease;
+}
+
+.slide-y-enter {
+  opacity: 0;
+  transform: translateY(-2px);
+}
+
+.slide-y-leave-active {
+  opacity: 0;
+  transform: translateY(2px);
 }
 
 .list-enter-active,

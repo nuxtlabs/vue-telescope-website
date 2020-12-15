@@ -4,6 +4,7 @@
 
 <script>
 export default {
+  name: 'ExploreIndexPage'
   // scrollToTop: true
 }
 </script>

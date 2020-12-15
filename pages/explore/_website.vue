@@ -35,6 +35,7 @@ import frontMatter from '@/utils/front-matter'
 import cache from '@/utils/cache'
 
 export default {
+  name: 'ExploreWebsitePage',
   // scrollToTop: true,
   data() {
     return {

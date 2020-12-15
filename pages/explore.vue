@@ -12,7 +12,7 @@ import { mapState } from 'vuex'
 import frontMatter from '@/utils/front-matter'
 
 export default {
-  name: 'Explore',
+  name: 'ExploreP',
   // scrollToTop: true,
   beforeRouteEnter(to, from, next) {
     if (process.browser) {
