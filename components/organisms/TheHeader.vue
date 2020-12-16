@@ -7,14 +7,14 @@
     <div
       class="w-full h-full flex justify-between items-center max-w-container m-auto px-4"
     >
-      <NuxtLink ref="logo" to="/" class="opacity-0" aria-label="Home Page">
+      <NuxtLink ref="logo" to="/" aria-label="Home Page">
         <TheLogo class="h-8 hidden sm:block" />
         <TheLogoMobile class="h-8 sm:hidden" />
       </NuxtLink>
       <div class="flex items-center">
         <ChangelogLink
           ref="changelog"
-          class="mr-2 sm:mr-4 opacity-0 hidden sm:inline-flex"
+          class="mr-2 sm:mr-4 hidden sm:inline-flex"
         >
           <span
             v-if="!$changelog.hasSeen"
@@ -23,10 +23,11 @@
             What's New
           </span>
         </ChangelogLink>
+
         <NuxtLink
           ref="explore-link"
           to="/explore"
-          class="opacity-0 mr-4 sm:mr-6 font-display-weight"
+          class="mr-4 sm:mr-6 font-display-weight"
         >
           <span
             class="has-hover:hover:opacity-50 transition-opacity duration-200"
@@ -37,14 +38,14 @@
         <!-- <NuxtLink
           ref="collections-link"
           to="/collections"
-          class="opacity-0 font-display-weight"
+          class=" font-display-weight"
         >
           <SaveIcon />
         </NuxtLink> -->
 
-        <ClientOnly>
-          <UserButton ref="user-button" @click.native="showMenu = true" />
-        </ClientOnly>
+        <!-- <ClientOnly> -->
+        <UserButton ref="user-button" @click.native="showMenu = true" />
+        <!-- </ClientOnly> -->
 
         <ClientOnly>
           <Portal to="default-layout">
@@ -67,7 +68,7 @@
               ? 'hidden'
               : 'hidden sm:inline-flex'
           ]"
-          class="ml-4 opacity-0"
+          class="ml-4 "
         >
           <InstallExtensionButton />
         </div> -->
@@ -105,59 +106,61 @@ export default {
     })
   },
   mounted() {
-    const logo = this.$refs.logo.$el
-    const changelog = this.$refs.changelog.$el
-    const exploreLink = this.$refs['explore-link'].$el
-    // const collectionsLink = this.$refs['collections-link'].$el
-    const installExtensionButton = this.$refs['install-extension-button']
+    // this.revealAnimation()
+  },
+  methods: {
+    revealAnimation() {
+      const logo = this.$refs.logo.$el
+      const changelog = this.$refs.changelog.$el
+      const exploreLink = this.$refs['explore-link'].$el
+      const installExtensionButton = this.$refs['install-extension-button']
 
-    this.$gsap.fromTo(
-      logo,
-      {
-        opacity: 0,
-        scale: 0.75,
-        y: '-15px'
-      },
-      {
-        opacity: 1,
-        scale: 1,
-        y: 0,
-        duration: 0.45,
-        ease: 'power4.inOut'
-      }
-    )
-    this.$gsap.fromTo(
-      installExtensionButton,
-      {
-        opacity: 0,
-        scale: 0.75,
-        y: '-15px'
-      },
-      {
-        opacity: 1,
-        scale: 1,
-        y: 0,
-        duration: 0.45,
-        // delay: 1,
-        ease: 'power4.inOut'
-      }
-    )
-    this.$gsap.fromTo(
-      [changelog, exploreLink],
-      {
-        opacity: 0,
-        scale: 0.75,
-        y: '-15px'
-      },
-      {
-        opacity: 1,
-        scale: 1,
-        y: 0,
-        duration: 0.45,
-        // delay: 1.25,
-        ease: 'power4.inOut'
-      }
-    )
+      this.$gsap.fromTo(
+        logo,
+        {
+          opacity: 0,
+          scale: 0.75,
+          y: '-15px'
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.45,
+          ease: 'power4.inOut'
+        }
+      )
+      this.$gsap.fromTo(
+        installExtensionButton,
+        {
+          opacity: 0,
+          scale: 0.75,
+          y: '-15px'
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.45,
+          ease: 'power4.inOut'
+        }
+      )
+      this.$gsap.fromTo(
+        [changelog, exploreLink],
+        {
+          opacity: 0,
+          scale: 0.75,
+          y: '-15px'
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.45,
+          ease: 'power4.inOut'
+        }
+      )
+    }
   }
 }
 </script>

@@ -18,7 +18,7 @@
           sizes="(min-width: 834px) 33vw, (min-width: 640px) 50vw, 100vw"
         />
         <button
-          @click.prevent="isBookmarking = !isBookmarking"
+          @click.stop.prevent="isBookmarking = !isBookmarking"
           :class="[isBookmarkedAtLeastOnce ? 'bg-primary-500' : 'bg-grey-200']"
           class="m-2 p-2 rounded-lg absolute top-0 right-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-400"
         >

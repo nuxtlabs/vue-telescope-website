@@ -1,14 +1,14 @@
 <template>
   <div
     class="relative z-50"
-    :class="[arrow && 'bg-white rounded-md border border-grey-400']"
+    :class="[arrow && 'bg-white rounded-md border border-grey-300']"
   >
     <slot :popper-instance="popperInstance"></slot>
 
     <div v-if="arrow" ref="arrow" class="arrow w-4 h-4 relative">
       <div class="arrow-icon w-full h-full relative">
         <svg
-          class="w-full absolute top-0 left-0 text-grey-400"
+          class="w-full absolute top-0 left-0 text-grey-300"
           viewBox="0 0 18 12"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

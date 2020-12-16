@@ -64,10 +64,10 @@ export default {
     }
   },
   mounted() {
-    this.enterAnimation()
+    this.revealAnimation()
   },
   methods: {
-    enterAnimation() {
+    revealAnimation() {
       const wrapper = this.$refs.wrapper
       this.$gsap.set(wrapper, {
         height: this.optionHeight + 2 * this.borderWidth
@@ -76,13 +76,13 @@ export default {
         wrapper,
         {
           opacity: 0,
-          scale: 0.95,
-          y: '10px'
+          scale: 0.9
+          // y: '10px'
         },
         {
           opacity: 1,
           scale: 1,
-          y: 0,
+          // y: 0,
           duration: 0.45,
           ease: 'power4.inOut'
         }

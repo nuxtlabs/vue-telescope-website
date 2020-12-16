@@ -2,7 +2,7 @@
   <div class="fixed top-0 left-0 z-50 w-full h-full">
     <div
       class="absolute top-0 left-0 w-full h-full"
-      style="background-color: rgba(0, 0, 0, 0.5)"
+      style="background-color: rgba(0, 0, 0, 0.2); backdrop-filter: blur(12px)"
     />
     <div
       id="tour-main-header"
@@ -123,7 +123,7 @@ export default {
         document.body.style.overflow = null
         document.body.style.paddingRight = null
         document.querySelector('#main-header').style.paddingRight = null
-        document.querySelector('#tour-main-header').style.paddingRight = null
+        // document.querySelector('#tour-main-header').style.paddingRight = null
       }, 16)
     },
     closeTour() {
@@ -139,5 +139,3 @@ export default {
   }
 }
 </script>
-
-<style></style>

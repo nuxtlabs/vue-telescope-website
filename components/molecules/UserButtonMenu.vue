@@ -73,15 +73,15 @@ export default {
           // borderRadius: '20px',
           opacity: 0,
           scale: 0.75,
-          y: -5
+          y: -15
         },
         {
           // borderRadius: '8px',
           opacity: 1,
           scale: 1,
           y: 0,
-          duration: 0.2,
-          ease: 'back.out(2)'
+          duration: 0.4,
+          ease: 'elastic.out(1.2, 0.75)'
         }
       )
     },
@@ -90,7 +90,7 @@ export default {
         // borderRadius: '20px',
         opacity: 0,
         scale: 0.75,
-        y: -5,
+        y: -15,
         duration: 0.15,
         ease: 'expo.outIn',
         onComplete: () => {

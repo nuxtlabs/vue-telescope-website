@@ -1,20 +1,21 @@
 <template>
   <button
     ref="user-button"
-    class="rounded-full overflow-hidden focus:outline-none"
+    class="relative rounded-full overflow-hidden focus:outline-none"
   >
     <Portal to="tour">
       <UserButtonTour v-if="showTour" @close="showLocal = false" />
     </Portal>
 
-    <img
-      v-if="$strapi.user"
-      :src="`https://github.com/${$strapi.user.username}.png?size=24`"
-      class="w-8 h-8 rounded-full mr-1"
-    />
+    <ClientOnly>
+      <img
+        v-if="$strapi.user"
+        :src="`https://github.com/${$strapi.user.username}.png?size=24`"
+        class="absolute top-0 left-0 w-8 h-8 rounded-full mr-1"
+      />
+    </ClientOnly>
 
     <svg
-      v-else
       class="w-8 h-8"
       width="24"
       height="24"
@@ -83,5 +84,3 @@ export default {
   }
 }
 </script>
-
-<style></style>
