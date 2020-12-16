@@ -1,7 +1,7 @@
 <template>
   <div
     ref="menu"
-    class="bg-grey-50 p-4 pb-2 rounded-lg"
+    class="bg-grey-50 p-4 pb-2 rounded-lg opacity-0"
     v-click-outside="closeMenu"
   >
     <div class="mb-2 text-sm">
@@ -46,7 +46,9 @@
 <script>
 export default {
   mounted() {
-    this.openMenuAnimation()
+    setTimeout(() => {
+      this.openMenuAnimation()
+    }, 16)
   },
   methods: {
     login() {
@@ -82,6 +84,7 @@ export default {
           y: 0,
           duration: 0.3,
           ease: 'elastic.out(1.2, 1)'
+          // ease: 'expo.outIn'
         }
       )
     },

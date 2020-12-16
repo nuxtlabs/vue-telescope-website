@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="$strapi.user"
-    class="absolute top-0 left-0 w-full h-full bg-white overflow-auto"
+    class="absolute top-0 left-0 w-full h-full bg-white overflow-auto cursor-default"
     :class="compact ? 'p-2' : 'p-8'"
   >
     <ul>
@@ -19,14 +19,18 @@
           </span>
         </div>
         <ul>
-          <li
-            v-for="group in collection.groups"
-            class="flex items-center"
-            @click.stop.prevent="onBookmarkClicked(collection, group)"
-            :class="[isBookmarked(group) && 'text-primary-500']"
-          >
-            <!-- <UnorderedListIcon class="w-4 h-4 mr-2" /> -->
-            <span>{{ group.name }}</span>
+          <li v-for="group in collection.groups">
+            <button
+              class="focus:outline-none w-full text-left"
+              @click.stop.prevent="onBookmarkClicked(collection, group)"
+              :class="[
+                isBookmarked(group)
+                  ? 'text-primary-500 hover:text-primary-200'
+                  : 'hover:text-grey-400'
+              ]"
+            >
+              <span>{{ group.name }}</span>
+            </button>
           </li>
         </ul>
       </li>

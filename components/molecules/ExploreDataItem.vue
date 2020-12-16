@@ -2,7 +2,7 @@
   <component
     :is="tag"
     v-if="!label"
-    class="mr-4 mb-4 bg-grey-50 hover:shadow border border-grey-100 rounded-xl transition-shadow duration-200"
+    class="mr-4 mb-4 bg-grey-50 hover:bg-grey-100 border border-grey-100 rounded-xl"
   >
     <slot>
       <span class="block font-bold-body-weight px-4 py-2">
@@ -17,17 +17,17 @@
   >
     <div class="relative w-full h-full pt-0">
       <div
-        :class="[tag === 'a' && 'hover:shadow']"
-        class="flex flex-col items-center justify-between bg-grey-50 rounded-xl pb-2 w-full h-full border border-grey-100 transition-shadow duration-200"
+        :class="[tag === 'a' && 'hover:bg-grey-100']"
+        class="flex flex-col items-center justify-between bg-grey-50 rounded-lg pb-2 w-full h-full border border-grey-100"
       >
         <div
           style="
-            border-radius: 0.75rem;
+            border-radius: 0.5rem;
             border-bottom-left-radius: 0;
             border-top-right-radius: 0;
             border-bottom-right-radius: 0.5rem;
           "
-          class="self-start bg-grey-100 px-3 rounded-xl rounded-bl-none rounded-tr-none text-xs tracking-3 uppercase leading-sm font-bold-body-weight mb-2"
+          class="self-start bg-grey-100 opacity-50 px-3 text-xs tracking-3 uppercase leading-sm font-bold-body-weight mb-2"
         >
           {{ label }}
         </div>
