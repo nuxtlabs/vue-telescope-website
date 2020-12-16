@@ -80,8 +80,8 @@ export default {
           opacity: 1,
           scale: 1,
           y: 0,
-          duration: 0.4,
-          ease: 'elastic.out(1.2, 0.75)'
+          duration: 0.3,
+          ease: 'elastic.out(1.2, 1)'
         }
       )
     },

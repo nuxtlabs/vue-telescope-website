@@ -280,7 +280,13 @@ module.exports = {
           '0 16px 24px 2px rgba(0,0,0,0.13), 0 6px 30px 5px rgba(0,0,0,0.11), 0 8px 10px -5px rgba(0,0,0,0.10)',
         '24dp':
           '0 24px 38px 3px rgba(0,0,0,0.13), 0 9px 46px 8px rgba(0,0,0,0.11), 0 11px 15px -7px rgba(0,0,0,0.10)'
-      }
+      },
+      stroke: (theme) => ({
+        primary: theme('colors.primary.500')
+      }),
+      fill: (theme) => ({
+        primary: theme('colors.primary.500')
+      })
     }
   },
   variants: {

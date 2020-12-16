@@ -1,8 +1,6 @@
 <template>
   <AppButton
     ref="load-more-button"
-    outlined
-    appearance="primary"
     class="w-auto sm:w-1/3 flex items-center justify-center"
     @click.native="lazyLoadShowcases"
   >
@@ -18,8 +16,8 @@
     >
       <AppLoader
         class="w-6 h-6"
-        background="text-primary-100"
-        path="text-primary-400"
+        background="text-grey-100"
+        path="text-grey-400"
       />
     </div>
   </AppButton>

@@ -129,8 +129,8 @@ export default {
         }
       } else {
         return {
-          bg: 'bg-grey-200',
-          text: 'text-grey-900',
+          bg: 'bg-grey-50 hover:bg-grey-200',
+          text: 'text-grey-800',
           outline: 'focus:border-grey-700'
         }
       }
