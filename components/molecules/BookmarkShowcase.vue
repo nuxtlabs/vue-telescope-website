@@ -3,7 +3,7 @@
     <button
       @click.stop.prevent="isBookmarking = !isBookmarking"
       :class="[isBookmarkedAtLeastOnce ? 'bg-primary-50' : 'bg-grey-100']"
-      class="focus:outline-none m-2 p-2 rounded-lg absolute top-0 right-0 z-10 opacity-0 group-hover:opacity-100 transition duration-400"
+      class="focus:outline-none m-2 p-2 rounded-lg absolute top-0 right-0 z-10 transition-colors duration-400"
     >
       <StarIcon
         class="w-5 h-5 transition-colors duration-400"
@@ -15,7 +15,11 @@
       />
     </button>
     <transition name="fade">
-      <ShowcaseBookmarkMenu v-if="isBookmarking" :showcase="showcase" />
+      <ShowcaseBookmarkMenu
+        v-if="isBookmarking"
+        :showcase="showcase"
+        :compact="compact"
+      />
     </transition>
   </div>
 </template>
@@ -32,6 +36,10 @@ export default {
     showcase: {
       type: Object,
       default: () => {}
+    },
+    compact: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -63,11 +71,11 @@ export default {
 
 .fade-enter {
   opacity: 0;
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 .fade-leave-active {
   opacity: 0;
-  transform: scale(0.95);
+  transform: scale(0.98);
 }
 </style>

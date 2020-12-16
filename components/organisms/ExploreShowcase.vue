@@ -38,7 +38,9 @@
 
       <div class="flex flex-wrap">
         <div class="w-full xl:w-1/2 mb-8">
-          <div class="image relative rounded-xl overflow-hidden shadow">
+          <div
+            class="image relative rounded-xl overflow-hidden border-2 border-grey-100"
+          >
             <ResponsiveCloudinaryImage
               :url="website.screenshotUrl"
               :pixelate="website.isAdultContent"
@@ -47,6 +49,7 @@
               class=""
             />
             <ClientOnly>
+              <BookmarkShowcase :showcase="website" class="" />
               <!-- <BookmarkExploreShowcase :website="website" /> -->
             </ClientOnly>
           </div>

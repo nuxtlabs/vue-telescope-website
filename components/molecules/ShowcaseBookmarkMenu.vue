@@ -1,14 +1,15 @@
 <template>
   <div
     v-if="$strapi.user"
-    class="hidden sm:block absolute top-0 left-0 w-full h-full p-2 bg-white overflow-auto"
+    class="absolute top-0 left-0 w-full h-full bg-white overflow-auto"
+    :class="compact ? 'p-2' : 'p-8'"
   >
     <ul>
       <li
         v-for="collection in collectionsWithGroups"
         class="root w-full flex flex-col mb-2"
       >
-        <div class="flex items-center mb-2">
+        <div class="flex items-center mb-1">
           <OpenedFolderIcon class="w-4 h-4 mr-2" />
           <span
             class="font-bold-body-weight"
@@ -47,6 +48,10 @@ export default {
     showcase: {
       type: Object,
       default: null
+    },
+    compact: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -94,18 +99,45 @@ export default {
 }
 </script>
 
-<style scoped>
-ul ul {
-  margin: 0px 0px 0px 1.5rem;
-  list-style: none;
-  /*line-height: 2em;*/
-  /*font-family: Arial;*/
+<style lang="postcss" scoped>
+.root {
+  & ul {
+    margin-left: 1.5rem;
+    & li {
+      position: relative;
+    }
+    & li:before {
+      position: absolute;
+      left: -1rem;
+      top: 0%;
+      content: '';
+      display: block;
+      border-left: 1px solid #ddd;
+      height: 50%;
+      border-bottom: 1px solid #ddd;
+      width: 10px;
+    }
+    & li:after {
+      position: absolute;
+      left: -1rem;
+      bottom: -7px;
+      content: '';
+      display: block;
+      border-left: 1px solid #ddd;
+      height: 100%;
+    }
+    & li:last-child:after {
+      display: none;
+    }
+  }
 }
-ul li {
-  /*font-size: 16px;*/
+/* ul ul {
+  margin-left: 1.5rem;
+} */
+/* ul li {
   position: relative;
-}
-ul li:before {
+} */
+/* ul li:before {
   position: absolute;
   left: -1rem;
   top: 0%;
@@ -115,8 +147,8 @@ ul li:before {
   height: 50%;
   border-bottom: 1px solid #ddd;
   width: 10px;
-}
-ul li:after {
+} */
+/* ul li:after {
   position: absolute;
   left: -1rem;
   bottom: -7px;
@@ -124,17 +156,15 @@ ul li:after {
   display: block;
   border-left: 1px solid #ddd;
   height: 100%;
-}
-/*ul li.root {
-  margin: 0px 0px 0px -1rem;
-}*/
-ul li.root:before {
+} */
+
+/* ul li.root:before {
   display: none;
 }
 ul li.root:after {
   display: none;
-}
-ul li:last-child:after {
+} */
+/* ul li:last-child:after {
   display: none;
-}
+} */
 </style>

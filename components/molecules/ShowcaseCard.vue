@@ -17,7 +17,11 @@
           ratio="4:3"
           sizes="(min-width: 834px) 33vw, (min-width: 640px) 50vw, 100vw"
         />
-        <BookmarkShowcaseCard :showcase="showcase" />
+        <BookmarkShowcase
+          :showcase="showcase"
+          compact
+          class="hidden sm:block opacity-0 group-hover:opacity-100 transition-opacity duration-400"
+        />
       </div>
       <div class="flex flex-wrap items-center">
         <div
