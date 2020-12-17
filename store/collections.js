@@ -108,6 +108,7 @@ export const actions = {
     await this.$strapi.delete('lists', collection.id)
     commit('deleteCollection', collection)
     commit('setSelectedCollection', getters.sortedCollections[0])
+    commit('setSelectedGroup', state.selectedCollection.groups[0])
     return collection
   },
   async createGroup({ commit }, { name, collection }) {

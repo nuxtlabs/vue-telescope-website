@@ -10,6 +10,7 @@
       </span>
     </slot>
   </component>
+
   <component
     :is="tag"
     v-else
@@ -18,7 +19,7 @@
     <div class="relative w-full h-full pt-0">
       <div
         :class="[tag === 'a' && 'hover:bg-grey-100']"
-        class="flex flex-col items-center justify-between bg-grey-50 rounded-lg pb-2 w-full h-full border border-grey-100"
+        class="group flex flex-col items-center justify-between bg-grey-50 rounded-lg pb-2 w-full h-full border border-grey-100 hover:border-grey-200 transition-colors duration-200"
       >
         <div
           style="
@@ -27,7 +28,8 @@
             border-top-right-radius: 0;
             border-bottom-right-radius: 0.5rem;
           "
-          class="self-start bg-grey-100 opacity-50 px-3 text-xs tracking-3 uppercase leading-sm font-bold-body-weight mb-2"
+          :class="[tag === 'a' && 'group-hover:bg-grey-300']"
+          class="self-start bg-grey-100 opacity-50 px-3 text-xs tracking-3 uppercase leading-sm font-bold-body-weight mb-2 transition-colors duration-200"
         >
           {{ label }}
         </div>

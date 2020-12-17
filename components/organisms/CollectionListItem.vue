@@ -167,6 +167,10 @@ export default {
     openDropdown() {
       // this.$emit('collection-selected', this.collection.id)
       this.$store.commit('collections/setSelectedCollection', this.collection)
+      this.$store.commit(
+        'collections/setSelectedGroup',
+        this.collection.groups[0]
+      )
       this.showDropdown = !this.showDropdown
     },
     clickOutsideHandler() {
