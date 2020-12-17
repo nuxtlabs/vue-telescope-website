@@ -1,10 +1,10 @@
 <template>
   <div
     ref="menu"
-    class="bg-grey-50 p-4 pb-2 rounded-lg opacity-0"
+    class="bg-grey-50 rounded-lg opacity-0"
     v-click-outside="closeMenu"
   >
-    <div class="mb-2 text-sm">
+    <div class="text-sm p-4">
       <span v-if="$strapi.user">
         Hello,
         <span class="font-bold-body-weight">{{ $strapi.user.username }}</span>
@@ -12,28 +12,28 @@
       </span>
       <span v-else>Hello, stranger 👀</span>
     </div>
-    <hr class="text-grey-100 mb-2" />
-    <ul class="text-base">
-      <li class="">
+    <hr class="text-grey-100" />
+    <ul class="text-base p-2">
+      <li class="flex">
         <NuxtLink
           to="/collections"
-          class="font-bold-body-weight hover:text-primary-500 py-1"
+          class="text-left font-bold-body-weight w-full hover:text-grey-500 px-2 py-1 hover:bg-grey-100 rounded"
           @click.native="closeMenu"
         >
           Collections
         </NuxtLink>
       </li>
-      <li>
+      <li class="flex">
         <button
           v-if="$strapi.user"
-          class="font-bold-body-weight hover:text-primary-500 py-1"
+          class="text-left font-bold-body-weight w-full hover:text-grey-500 px-2 py-1 hover:bg-grey-100 rounded"
           @click="logout"
         >
           Logout
         </button>
         <button
           v-else
-          class="font-bold-body-weight hover:text-primary-500 py-1"
+          class="text-left font-bold-body-weight w-full hover:text-grey-500 px-2 py-1 hover:bg-grey-100 rounded"
           @click="login"
         >
           Login

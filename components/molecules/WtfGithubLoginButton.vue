@@ -6,7 +6,7 @@
     class="cursor-pointer"
     @click.native="login"
   >
-    <GithubIcon class="h-4 w-4 mr-2" />Login with GitHub
+    <GithubIcon class="h-4 w-4 mr-2" />{{ text }}
   </AppButton>
 </template>
 
@@ -26,6 +26,10 @@ export default {
     redirect: {
       type: String,
       default: null
+    },
+    text: {
+      type: String,
+      default: 'Login with GitHub'
     }
   },
   methods: {

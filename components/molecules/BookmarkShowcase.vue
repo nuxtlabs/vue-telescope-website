@@ -1,22 +1,26 @@
 <template>
-  <div @mouseleave="isBookmarking = false" class="bg-red-500">
+  <div @mouseleave="isBookmarking = false" class="">
     <button
       @click.stop.prevent="isBookmarking = !isBookmarking"
       :class="[
-        isBookmarkedAtLeastOnce ? 'bg-primary-50' : 'bg-grey-100',
-        compact ? 'm-2' : 'm-8'
+        isBookmarkedAtLeastOnce
+          ? 'bg-primary-50'
+          : 'bg-grey-100 hover:bg-grey-50',
+        compact ? 'm-2' : 'm-2 xs:m-4 sm:m-8'
       ]"
       class="focus:outline-none p-2 rounded-lg absolute top-0 right-0 z-10 transition-colors duration-400"
     >
       <StarIcon
-        class="w-5 h-5 transition-colors duration-400"
+        class="transition-colors duration-400"
         :class="[
+          compact ? 'w-5 h-5' : 'w-5 h-5 sm:w-6 sm:h-6',
           isBookmarkedAtLeastOnce
             ? 'text-primary-500 fill-primary'
             : 'text-grey-800'
         ]"
       />
     </button>
+
     <transition name="fade">
       <ShowcaseBookmarkMenu
         v-if="isBookmarking"
@@ -74,11 +78,11 @@ export default {
 
 .fade-enter {
   opacity: 0;
-  /*transform: scale(0.98);*/
+  transform: scale(0.98);
 }
 
 .fade-leave-active {
   opacity: 0;
-  /*transform: scale(0.98);*/
+  transform: scale(0.98);
 }
 </style>

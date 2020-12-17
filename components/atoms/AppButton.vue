@@ -125,7 +125,7 @@ export default {
         return {
           bg: 'bg-github-base',
           text: 'text-white',
-          hoverState: 'hover:bg-github-400'
+          hoverState: 'hover:bg-grey-800'
         }
       } else {
         return {

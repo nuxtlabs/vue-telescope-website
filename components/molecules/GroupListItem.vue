@@ -149,6 +149,10 @@ export default {
           group: this.group,
           collection: this.collection
         })
+        this.$store.commit(
+          'collections/setSelectedGroup',
+          this.collection.groups[0]
+        )
       } catch (e) {}
     },
     initUpdateGroup() {

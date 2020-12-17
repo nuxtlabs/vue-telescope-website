@@ -292,7 +292,8 @@ module.exports = {
   variants: {
     margin: ['responsive', 'last'],
     display: ['responsive', 'group-hover'],
-    opacity: ['responsive', 'hover', 'focus', 'group-hover']
+    opacity: ['responsive', 'hover', 'focus', 'group-hover'],
+    textColor: ['responsive', 'hover', 'focus', 'group-hover']
   },
   // plugins: [],
   purge: {
