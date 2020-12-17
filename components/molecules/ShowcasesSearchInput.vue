@@ -4,7 +4,7 @@
       class="absolute top-0 left-0 focus:outline-none h-10 w-10 flex items-center justify-center"
       @click="searchQ"
     >
-      <SearchIcon class="w-6 h-6 text-grey-600" />
+      <SearchIcon class="w-5 h-5 text-grey-400" />
     </button>
     <AppInput
       v-model="computedQ"

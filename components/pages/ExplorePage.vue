@@ -62,7 +62,8 @@ const allowedFilters = [
   'ui.slug',
   'ui_null',
   'plugins.slug',
-  'modules.slug'
+  'modules.slug',
+  'vueVersion_gte'
 ]
 
 function filterFilters(raw) {

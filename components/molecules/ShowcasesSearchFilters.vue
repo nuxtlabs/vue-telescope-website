@@ -1,6 +1,13 @@
 <template>
   <div class="px-2">
     <ShowcasesSearchInput class="mb-4" />
+    <div class="mb-4 flex items-center">
+      <div class="mr-2 font-bold-body-weight">Vue 3 only</div>
+      <AppSwitch
+        @input="setVueThreeOnly($event)"
+        :value="selectedFilters.vueVersion_gte ? true : false"
+      />
+    </div>
     <!-- <div class="mb-4">
       <AppFilterLabel>Rendering</AppFilterLabel>
       <div class="flex flex-col">
@@ -171,6 +178,17 @@ export default {
     })
   },
   methods: {
+    setVueThreeOnly(value) {
+      console.log('setVueThreeOnly', value)
+      if (value) {
+        this.$store.commit('SET_FILTER_KEY', {
+          key: 'vueVersion_gte',
+          value: 3
+        })
+      } else {
+        this.$store.commit('DELETE_FILTER_KEY', 'vueVersion_gte')
+      }
+    },
     checkboxFilter(key, value) {
       if (!this.selectedFilters[key]) {
         this.$store.commit('SET_FILTER_KEY', { key, value: [value] })

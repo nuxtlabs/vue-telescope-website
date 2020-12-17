@@ -17,7 +17,7 @@
           <div
             class="font-bold-body-weight text-sm leading-sm px-2 flex items-center"
           >
-            <span class="mr-1">{{ title(key) }}:</span>
+            <span class="mr-1">{{ title(key) }}</span>
             <img
               v-if="key === 'framework.slug'"
               class="w-4 h-4 inline-block"
@@ -85,7 +85,10 @@ export default {
   },
   methods: {
     title(key) {
-      if (key === 'isStatic') {
+      console.log(key)
+      if (key === 'vueVersion_gte') {
+        return 'Vue 3 only'
+      } else if (key === 'isStatic') {
         return 'Deployment'
       } else if (key === 'hasSSR') {
         return 'Rendering'
