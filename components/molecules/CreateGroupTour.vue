@@ -1,53 +1,53 @@
 <template>
-  <div class="relative flex items-center justify-center">
-    <transition :css="false" @enter="enter" @leave="leave">
-      <!--  <button
-      class="text-seven flex py-4 px-8 rounded-xl border border-grey-100 hover:border-grey-50 hover:bg-grey-50 text-grey-500 hover:text-grey-700"
-      @click="addCollection"
-      title="Create collection"
-    >
-      <span class="mr-2">Create Your First Collection</span>
-      <div class="pt-2">
-        <PlusIcon class="w-4 h-4" style="stroke-width: 1.5px" />
-      </div>
-    </button> -->
+  <div class="el relative flex flex-col items-center justify-center px-4">
+    <h2 class="text-center text-four leading-four font-bold-body-weight mb-2">
+      There's no Lists in {{ collection.name }} Collection yet.
+    </h2>
+    <p class="text-center text-seven leading-seven mb-4">
+      Create a List to start saving websites 👇
+    </p>
 
-      <button
-        v-if="!creatingGroup"
-        class="text-seven flex py-4 px-8 rounded-xl border border-grey-100 hover:border-grey-50 hover:bg-grey-50 text-grey-500 hover:text-grey-700 transition-colors duration-200"
-        @click="initGroupCreation"
-      >
-        <span class="mr-2">Create Group</span>
-        <div class="pt-2">
-          <PlusIcon class="w-4 h-4" style="stroke-width: 1.5px" />
-        </div>
-      </button>
-
-      <div v-else class="max-w-24rem">
-        <AppAutosizeTextarea
-          v-if="creatingGroup"
-          ref="create-group-tour"
-          v-model="newGroupName"
-          v-click-outside="() => (creatingGroup = false)"
-          class="w-full text-seven flex py-4 px-8 rounded-xl border border-grey-100 hover:border-grey-50 hover:bg-grey-50 text-grey-500 hover:text-grey-700 transition-colors duration-200"
-          @submit="createGroup"
-          @keydown.esc.native="clearActions"
-          @click.stop.native
-        />
-        <div
-          v-if="creatingGroup && newGroupName"
-          class="absolute top-0 right-0 p-3"
+    <div class="h-16 w-full mb-24 flex items-center justify-center">
+      <transition :css="false" @enter="enter" @leave="leave">
+        <button
+          v-if="!creatingList"
+          ref="create-button"
+          class="focus:outline-none text-seven flex items-center py-4 px-8 rounded-xl border border-grey-100 hover:border-grey-50 hover:bg-grey-50 text-grey-500 hover:text-grey-700 transition-colors duration-200 truncate"
+          @click="initGroupCreation"
         >
-          <button
-            title="Save"
-            class="bg-grey-50 border border-grey-200 rounded-xl p-3 hover:bg-grey-200 hover:text-grey-700"
-            @click.stop="createGroup"
+          <div class="mr-2">
+            <PlusIcon class="w-4 h-4" style="stroke-width: 1.5px" />
+          </div>
+          <span>Create List</span>
+        </button>
+
+        <div v-else class="max-w-24rem">
+          <AppAutosizeTextarea
+            v-if="creatingList"
+            placeholder="Type List name ..."
+            ref="create-list-tour"
+            v-model="newListName"
+            v-click-outside="() => (creatingList = false)"
+            class="w-full text-seven flex py-4 px-8 rounded-xl border border-grey-100 hover:border-grey-50 hover:bg-grey-50 text-grey-500 hover:text-grey-700 transition-colors duration-200 placeholder-grey-400"
+            @submit="createGroup"
+            @keydown.esc.native="clearActions"
+            @click.stop.native
+          />
+          <div
+            v-if="creatingList && newListName"
+            class="absolute top-0 right-0 p-3"
           >
-            <SaveIcon class="w-4 h-4" />
-          </button>
+            <button
+              title="Save"
+              class="bg-grey-50 border border-grey-200 rounded-xl p-3 hover:bg-grey-200 hover:text-grey-700"
+              @click.stop="createGroup"
+            >
+              <SaveIcon class="w-4 h-4" />
+            </button>
+          </div>
         </div>
-      </div>
-    </transition>
+      </transition>
+    </div>
   </div>
 </template>
 
@@ -68,31 +68,31 @@ export default {
   },
   data() {
     return {
-      newGroupName: '',
-      creatingGroup: false
+      newListName: '',
+      creatingList: false
     }
   },
   methods: {
     clearActions() {
-      this.newGroupName = ''
+      this.newListName = ''
       this.$emit('cleanup')
     },
     initGroupCreation() {
       this.$store.commit('collections/setSelectedCollection', this.collection)
-      this.creatingGroup = true
+      this.creatingList = true
       this.$nextTick(() => {
-        this.$refs['create-group-tour'].$el.focus()
+        this.$refs['create-list-tour'].$el.focus()
       })
     },
     async createGroup() {
       try {
-        if (!this.newGroupName) return
+        if (!this.newListName) return
         await this.$store.dispatch('collections/createGroup', {
-          name: this.newGroupName,
+          name: this.newListName,
           collection: this.collection
         })
         this.clearActions()
-        this.creatingGroup = false
+        this.creatingList = false
       } catch (e) {}
     },
     enter(el, done) {
@@ -131,3 +131,9 @@ export default {
   }
 }
 </script>
+
+<style lang="postcss" scoped>
+.el {
+  height: calc(100vh - calc(theme('spacing.16') + theme('spacing.8')));
+}
+</style>

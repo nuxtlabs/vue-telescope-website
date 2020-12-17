@@ -11,7 +11,7 @@
       <slot name="aside-content-aside" />
     </div>
 
-    <div class="relative md:w-3/4 w-full mb-4 mt-0 md:mt-4">
+    <div class="relative md:w-3/4 w-full mb-4">
       <div id="aside-content-header">
         <slot name="aside-content-header" />
       </div>

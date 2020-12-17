@@ -4,16 +4,14 @@
       <div slot="aside-content-aside">
         <CreateCollection class="mb-12" />
 
-        <div>
-          <transition-group name="list">
-            <CollectionListItem
-              v-for="collection in sortedCollections"
-              :key="collection.id"
-              class="px-2"
-              :collection="collection"
-            />
-          </transition-group>
-        </div>
+        <transition-group name="list">
+          <CollectionListItem
+            v-for="collection in sortedCollections"
+            :key="collection.id"
+            class="px-2"
+            :collection="collection"
+          />
+        </transition-group>
       </div>
 
       <div slot="aside-content-main">
@@ -50,7 +48,6 @@
 
         <!-- direct hit, collection overview; create group tour -->
         <div v-else>
-          <!-- <pre>{{ selectedCollection }}</pre> -->
           <transition name="slide-y" mode="out-in">
             <GroupMain
               v-if="selectedCollection"

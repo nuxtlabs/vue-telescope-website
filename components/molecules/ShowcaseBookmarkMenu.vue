@@ -9,11 +9,17 @@
         v-for="collection in collectionsWithGroups"
         class="root w-full flex flex-col mb-2"
       >
-        <div class="flex items-center mb-1">
-          <OpenedFolderIcon class="w-4 h-4 mr-2" />
+        <div class="flex items-end mb-1">
+          <OpenedFolderIcon
+            class="mr-2"
+            :class="[compact ? 'w-4 h-4' : 'w-6 h-6']"
+          />
           <span
             class="font-bold-body-weight"
-            :class="[isBookmarkedCollection(collection) && 'text-primary-500']"
+            :class="[
+              isBookmarkedCollection(collection) && 'text-primary-500',
+              compact ? '' : 'text-five'
+            ]"
           >
             {{ collection.name }}
           </span>

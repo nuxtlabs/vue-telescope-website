@@ -2,7 +2,7 @@
   <div
     ref="wrapper"
     v-click-outside="clickOutsideHandler"
-    class="opacity-0 absolute top-0 right-0 z-10 overflow-hidden -mt-9 mr-12 md:mr-6 rounded-md bg-grey-50 text-grey-900"
+    class="opacity-0 absolute top-0 right-0 z-10 overflow-hidden rounded-md bg-grey-50 text-grey-900"
   >
     <div
       v-for="option in options"

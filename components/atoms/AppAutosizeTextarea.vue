@@ -1,11 +1,12 @@
 <template>
   <textarea
     ref="textarea"
-    class="block resize-none overflow-hidden w-full bg-grey-100 rounded-md focus:outline-none"
+    class="block resize-none overflow-hidden w-full bg-grey-100 rounded-2lg focus:outline-none"
     :rows="rows"
     :value="value"
     @input="$emit('input', $event.target.value)"
     @keypress.enter.prevent="$emit('submit')"
+    :placeholder="placeholder"
   ></textarea>
 </template>
 
@@ -21,6 +22,10 @@ export default {
     rows: {
       type: Number,
       default: 1
+    },
+    placeholder: {
+      type: String,
+      default: null
     }
   },
   created() {
@@ -62,4 +67,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+textarea[placeholder] {
+  text-overflow: ellipsis;
+}
+</style>

@@ -6,7 +6,7 @@
       <h1
         class="text-five leading-five font-display-weight text-grey-900 mb-4 text-center"
       >
-        Join other Vue.js developers
+        Join 2000+ Vue.js developers!
       </h1>
       <InstallExtensionButton size="large" class="mb-4" />
       <div>

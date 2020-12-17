@@ -1,53 +1,58 @@
 <template>
-  <div class="relative flex items-center justify-center">
-    <transition :css="false" @enter="enter" @leave="leave">
-      <!--  <button
-      class="text-seven flex py-4 px-8 rounded-xl border border-grey-100 hover:border-grey-50 hover:bg-grey-50 text-grey-500 hover:text-grey-700"
-      @click="addCollection"
-      title="Create collection"
-    >
-      <span class="mr-2">Create Your First Collection</span>
-      <div class="pt-2">
-        <PlusIcon class="w-4 h-4" style="stroke-width: 1.5px" />
-      </div>
-    </button> -->
+  <div class="el relative flex flex-col items-center justify-center px-4">
+    <h2 class="text-center text-four leading-four font-bold-body-weight mb-2">
+      You don't have any Collections yet 🤓
+    </h2>
+    <p class="text-center text-seven leading-seven mb-4">
+      Create a Collection to start saving and organizing websites into Lists 👇
+    </p>
 
-      <button
-        v-if="!creatingCollection"
-        class="text-seven flex py-4 px-8 rounded-xl border border-grey-100 hover:border-grey-50 hover:bg-grey-50 text-grey-500 hover:text-grey-700 transition-colors duration-200"
-        @click="initCollectionCreation"
-      >
-        <span class="mr-2">Create Your First Collection</span>
-        <div class="pt-2">
-          <PlusIcon class="w-4 h-4" style="stroke-width: 1.5px" />
-        </div>
-      </button>
-
-      <div v-else class="max-w-24rem">
-        <AppAutosizeTextarea
-          v-if="creatingCollection"
-          ref="create-collection-tour"
-          v-model="newCollectionName"
-          v-click-outside="() => (creatingCollection = false)"
-          class="w-full text-seven flex py-4 px-8 rounded-xl border border-grey-100 hover:border-grey-50 hover:bg-grey-50 text-grey-500 hover:text-grey-700 transition-colors duration-200"
-          @submit="createCollection"
-          @keydown.esc.native="clearActions"
-          @click.stop.native
-        />
-        <div
-          v-if="creatingCollection && newCollectionName"
-          class="absolute top-0 right-0 p-3"
+    <div class="h-16 w-full mb-24 flex items-center justify-center">
+      <transition :css="false" @enter="enter" @leave="leave">
+        <button
+          v-if="!creatingCollection"
+          ref="create-button"
+          class="focus:outline-none text-seven flex items-center py-4 px-8 rounded-xl border border-grey-100 hover:border-grey-50 hover:bg-grey-50 text-grey-500 hover:text-grey-700 transition-colors duration-200 truncate"
+          @click="initCollectionCreation"
         >
-          <button
-            title="Save"
-            class="bg-grey-50 border border-grey-200 rounded-xl p-3 hover:bg-grey-200 hover:text-grey-700"
-            @click.stop="createCollection"
+          <div class="mr-2">
+            <PlusIcon class="w-4 h-4" style="stroke-width: 2px" />
+          </div>
+          <span>Create Your First Collection</span>
+        </button>
+
+        <div v-else class="w-full">
+          <div
+            :style="{ maxWidth: maxWidthStyles + 'px' }"
+            class="relative m-auto"
           >
-            <SaveIcon class="w-4 h-4" />
-          </button>
+            <AppAutosizeTextarea
+              placeholder="Type Collection name ..."
+              v-if="creatingCollection"
+              ref="create-collection-tour"
+              v-model="newCollectionName"
+              v-click-outside="() => (creatingCollection = false)"
+              class="w-full text-seven flex py-4 px-8 rounded-xl border border-grey-100 hover:border-grey-50 hover:bg-grey-50 text-grey-500 hover:text-grey-700 transition-colors duration-200 placeholder-grey-400"
+              @submit="createCollection"
+              @keydown.esc.native="clearActions"
+              @click.stop.native
+            />
+            <div
+              v-if="creatingCollection && newCollectionName"
+              class="absolute top-0 right-0 p-3"
+            >
+              <button
+                title="Save"
+                class="bg-grey-50 border border-grey-200 rounded-xl p-3 hover:bg-grey-200 hover:text-grey-700"
+                @click.stop="createCollection"
+              >
+                <SaveIcon class="w-4 h-4" />
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-    </transition>
+      </transition>
+    </div>
   </div>
 </template>
 
@@ -63,7 +68,8 @@ export default {
   data() {
     return {
       newCollectionName: '',
-      creatingCollection: false
+      creatingCollection: false,
+      maxWidthStyles: ''
     }
   },
   methods: {
@@ -72,6 +78,9 @@ export default {
       this.$emit('cleanup')
     },
     initCollectionCreation() {
+      this.maxWidthStyles = this.$refs[
+        'create-button'
+      ].getBoundingClientRect().width
       // this.$store.commit('collections/setSelectedCollection', this.collection)
       this.creatingCollection = true
       this.$nextTick(() => {
@@ -109,7 +118,7 @@ export default {
       })
     },
     leave(el, done) {
-      this.$gsap.set(el, { transformOrigin: 'center' })
+      this.$gsap.set(el, { position: 'absolute', transformOrigin: 'center' })
       this.$gsap.to(el, {
         // position: 'absolute',
         scale: 0.9,
@@ -124,3 +133,9 @@ export default {
   }
 }
 </script>
+
+<style lang="postcss" scoped>
+.el {
+  height: calc(100vh - calc(theme('spacing.16') + theme('spacing.8')));
+}
+</style>

@@ -15,6 +15,7 @@ import frontMatter from '@/utils/front-matter'
 
 export default {
   name: 'IndexPage',
+  transition: 'fade',
   data() {
     return {
       featured: []

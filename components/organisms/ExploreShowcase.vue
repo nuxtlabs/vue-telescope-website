@@ -39,7 +39,7 @@
       <div class="flex flex-wrap">
         <div class="w-full xl:w-1/2 mb-8">
           <div
-            class="image relative rounded-xl overflow-hidden border-2 border-grey-100"
+            class="image relative rounded-xl overflow-hidden xl:border-2 xl:border-grey-100"
           >
             <ResponsiveCloudinaryImage
               :url="website.screenshotUrl"
@@ -49,7 +49,7 @@
               class=""
             />
             <ClientOnly>
-              <BookmarkShowcase :showcase="website" class="" />
+              <BookmarkShowcase :showcase="website" />
               <!-- <BookmarkExploreShowcase :website="website" /> -->
             </ClientOnly>
           </div>

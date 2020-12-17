@@ -83,7 +83,7 @@ export default {
           scale: 1,
           y: 0,
           duration: 0.3,
-          ease: 'elastic.out(1.2, 1)'
+          ease: 'elastic.out(1.9, 1.7)'
           // ease: 'expo.outIn'
         }
       )
@@ -94,8 +94,8 @@ export default {
         opacity: 0,
         scale: 0.75,
         y: -15,
-        duration: 0.15,
-        ease: 'expo.outIn',
+        duration: 0.3,
+        ease: 'none',
         onComplete: () => {
           this.$emit('close-menu')
         }

@@ -1,9 +1,12 @@
 <template>
-  <div @mouseleave="isBookmarking = false">
+  <div @mouseleave="isBookmarking = false" class="bg-red-500">
     <button
       @click.stop.prevent="isBookmarking = !isBookmarking"
-      :class="[isBookmarkedAtLeastOnce ? 'bg-primary-50' : 'bg-grey-100']"
-      class="focus:outline-none m-2 p-2 rounded-lg absolute top-0 right-0 z-10 transition-colors duration-400"
+      :class="[
+        isBookmarkedAtLeastOnce ? 'bg-primary-50' : 'bg-grey-100',
+        compact ? 'm-2' : 'm-8'
+      ]"
+      class="focus:outline-none p-2 rounded-lg absolute top-0 right-0 z-10 transition-colors duration-400"
     >
       <StarIcon
         class="w-5 h-5 transition-colors duration-400"
@@ -71,11 +74,11 @@ export default {
 
 .fade-enter {
   opacity: 0;
-  transform: scale(1.02);
+  /*transform: scale(0.98);*/
 }
 
 .fade-leave-active {
   opacity: 0;
-  transform: scale(0.98);
+  /*transform: scale(0.98);*/
 }
 </style>

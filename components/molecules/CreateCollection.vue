@@ -1,26 +1,28 @@
 <template>
-  <div class="flex ml-2 h-10 mr-2 relative">
+  <div class="flex ml-2 h-10 mr-4 relative">
     <transition :css="false" @enter="enter" @leave="leave">
       <button
+        ref="create-button"
         v-if="!creatingCollection"
-        class="group w-full h-full flex items-center py-1 px-6 pr-4 text-base leading-base bg-primary-500 rounded-lg text-white"
+        class="group focus:outline-none w-full h-full flex items-center py-1 px-4 text-base leading-base font-bold-body-weight bg-primary-50 border border-transparent hover:border-primary-500 rounded-2lg text-primary-500 transition-colors duration-200"
         @click="initCollectionCreation"
       >
         <PlusIcon
           class="w-4 h-4 mr-2 opacity-100 group-hover:opacity-100"
-          style="stroke-width: 1.5px"
+          style="stroke-width: 2px"
         />
-        <span class="tracking-2 opacity-100 group-hover:opacity-100">
+        <span class="tracking-1 opacity-100 group-hover:opacity-100 truncate">
           Add Collection
         </span>
       </button>
 
       <div v-if="creatingCollection" class="w-full h-full absolute">
         <AppAutosizeTextarea
+          placeholder="Type Collection name..."
           ref="create-collection-tour"
           v-model="newCollectionName"
           v-click-outside="() => (creatingCollection = false)"
-          class="py-2 px-2 text-base leading-base"
+          class="py-2 px-4 text-base leading-base font-bold-body-weight placeholder-grey-500"
           @submit="createCollection"
           @keydown.esc.native="clearActions"
           @click.stop.native

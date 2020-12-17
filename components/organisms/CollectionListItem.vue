@@ -46,7 +46,7 @@
         </span>
       </div>
 
-      <div class="w-6 h-auto ml-auto my-3">
+      <div class="w-12 h-12 ml-auto my-3">
         <button
           v-if="!updatingCollection"
           ref="anchor"
@@ -188,6 +188,7 @@ export default {
     // },
     async deleteCollection() {
       try {
+        this.showDropdown = false
         await this.$store.dispatch('collections/deleteCollection', {
           collection: this.collection
         })
