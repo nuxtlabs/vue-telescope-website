@@ -2,11 +2,16 @@
   <div>
     <button
       v-if="!creatingGroup"
-      class="group w-full flex items-center py-1 pl-6"
+      class="focus:outline-none group w-full flex items-center py-1 pl-6"
       @click="initGroupCreation"
     >
-      <PlusIcon class="w-4 h-4 mr-2 opacity-50 group-hover:opacity-100" />
-      <span class="opacity-25 group-hover:opacity-100"> Create Group </span>
+      <PlusIcon
+        class="w-4 h-4 mr-2 opacity-50 group-hover:opacity-100 transition-opacity duration-200"
+      />
+      <span
+        class="opacity-25 group-hover:opacity-100 transition-opacity duration-200"
+        >Create List</span
+      >
     </button>
 
     <div class="mr-6 ml-5">
@@ -15,7 +20,7 @@
         ref="create-group-tour"
         v-model="newGroupName"
         v-click-outside="() => (creatingGroup = false)"
-        class="py-1 px-2"
+        class="py-1 px-2 rounded-md"
         @submit="createGroup"
         @keydown.esc.native="clearActions"
         @click.stop.native

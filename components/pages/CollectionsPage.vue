@@ -15,48 +15,39 @@
       </div>
 
       <div slot="aside-content-main">
-        <CreateCollectionTour v-if="!collections.length" class="mt-0 -mt-4" />
+        <transition name="slide" mode="out-in">
+          <CreateCollectionTour v-if="!collections.length" class="mt-0 -mt-4" />
 
-        <!-- navigate between groups -->
-        <div v-else-if="selectedGroup">
-          <transition name="slide" mode="out-in">
-            <CollectionShowcaseCardsListing
-              v-if="selectedGroup.showcases.length"
-              :key="selectedGroup.id"
-              :showcases="selectedGroup.showcases"
-            />
+          <!-- navigate between groups -->
+          <div v-else-if="selectedGroup">
+            <transition name="slide" mode="out-in">
+              <CollectionShowcaseCardsListing
+                v-if="selectedGroup.showcases.length"
+                :key="selectedGroup.id"
+                :showcases="selectedGroup.showcases"
+              />
 
-            <!-- if no showcases, then show tour -->
-            <div
-              v-else
-              :key="selectedGroup.id"
-              class="px-4 mt-0 -mt-4 flex items-center justify-center"
-            >
-              <h2 class="text-seven">
-                Visit
-                <NuxtLink
-                  to="/explore"
-                  class="text-primary-500 hover:underline"
-                >
-                  Explore
-                </NuxtLink>
-                page to save showcases.
-              </h2>
-            </div>
-          </transition>
-        </div>
+              <!-- if no showcases, then show tour -->
+              <SaveShowcasesTour
+                v-else
+                :key="selectedGroup.id"
+                :list="selectedGroup"
+              />
+            </transition>
+          </div>
 
-        <!-- direct hit, collection overview; create group tour -->
-        <div v-else>
-          <transition name="slide-y" mode="out-in">
-            <GroupMain
-              v-if="selectedCollection"
-              :key="selectedCollection.id"
-              :groups="selectedCollection.groups"
-              :collection="selectedCollection"
-            />
-          </transition>
-        </div>
+          <!-- direct hit, collection overview; create group tour -->
+          <div v-else>
+            <transition name="slide" mode="out-in">
+              <GroupMain
+                v-if="selectedCollection"
+                :key="selectedCollection.id"
+                :groups="selectedCollection.groups"
+                :collection="selectedCollection"
+              />
+            </transition>
+          </div>
+        </transition>
       </div>
     </AsideContentTemplate>
 
@@ -95,6 +86,12 @@ export default {
       'collections/setSelectedCollection',
       this.sortedCollections[0]
     )
+    if (this.sortedCollections[0] && this.sortedCollections[0].groups.length) {
+      this.$store.commit(
+        'collections/setSelectedGroup',
+        this.sortedCollections[0].groups[0]
+      )
+    }
   },
   // mounted() {
   //   console.log(this.$store.state.collections.collections)
@@ -133,29 +130,12 @@ export default {
 
 .slide-enter {
   opacity: 0;
-  transform: translateX(-2px);
+  transform: translateY(-4px);
 }
 
 .slide-leave-active {
   opacity: 0;
-  transform: translateX(2px);
-}
-
-.slide-y-enter-active,
-.slide-y-leave-active {
-  transition-duration: 250ms;
-  transition-property: opacity, transform;
-  transition-timing-function: ease;
-}
-
-.slide-y-enter {
-  opacity: 0;
-  transform: translateY(-2px);
-}
-
-.slide-y-leave-active {
-  opacity: 0;
-  transform: translateY(2px);
+  transform: translateY(4px);
 }
 
 .list-enter-active,

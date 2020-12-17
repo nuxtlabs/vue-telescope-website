@@ -6,6 +6,7 @@
     >
       WIP
     </h1>
+
     <GroupPreviewItem
       v-for="group in groups"
       :key="group.id"

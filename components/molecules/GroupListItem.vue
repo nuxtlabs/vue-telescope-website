@@ -1,7 +1,10 @@
 <template>
-  <div v-click-outside="clickOutsideHandler" class="group flex">
+  <div
+    v-click-outside="clickOutsideHandler"
+    class="focus:outline-none group flex"
+  >
     <span
-      class="flex-1 relative"
+      class="cursor-pointer flex-1 relative"
       @click="clickOnNameHandler"
       @keypress.enter="clickOnNameHandler"
     >
@@ -9,7 +12,7 @@
         v-if="updatingGroup"
         ref="update-group-input"
         v-model="newGroupName"
-        class="p-1"
+        class="p-1 rounded-md"
         @submit="updateGroup"
         @keydown.esc.native="clearActions"
         @click.stop.native
@@ -25,10 +28,13 @@
         {{ group.name }}
       </span>
 
-      <div v-if="updatingGroup" class="absolute top-0 right-0 p-3px">
+      <div
+        v-if="updatingGroup"
+        class="absolute top-0 right-0 pl-3px transform translate-x-full"
+      >
         <button
           title="Save"
-          class="bg-grey-50 border border-grey-200 rounded-md p-1"
+          class="focus:outline-none bg-grey-50 rounded-md p-2"
           @click.stop="updateGroup"
         >
           <SaveIcon class="w-4 h-4" />
@@ -36,12 +42,12 @@
       </div>
     </span>
 
-    <div class="w-5 h-auto ml-auto py-6px">
+    <div class="w-8 h-8 ml-auto">
       <button
         v-if="!updatingGroup"
         ref="anchor"
-        class="group-hover:block"
-        :class="[openCollapse || showPopup ? 'block' : 'hidden']"
+        class="focus:outline-none group-hover:flex hover:bg-grey-50 rounded-lg w-full h-full items-center justify-center"
+        :class="[openCollapse || showPopup ? 'flex' : 'hidden']"
         @click="openPopup"
       >
         <DotsVerticalIcon class="w-5 h-5" />
@@ -51,7 +57,7 @@
     <Popper
       v-if="showPopup"
       :offset-x="4"
-      :offset-y="-4"
+      :offset-y="-2"
       placement="right-start"
       :anchor="$refs.anchor"
     >

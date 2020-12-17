@@ -18,11 +18,11 @@
 
       <div v-if="creatingCollection" class="w-full h-full absolute">
         <AppAutosizeTextarea
-          placeholder="Type Collection name..."
+          placeholder="Type Collection"
           ref="create-collection-tour"
           v-model="newCollectionName"
           v-click-outside="() => (creatingCollection = false)"
-          class="py-2 px-4 text-base leading-base font-bold-body-weight placeholder-grey-500"
+          class="rounded-2lg py-2 px-4 text-base leading-base font-bold-body-weight placeholder-grey-500"
           @submit="createCollection"
           @keydown.esc.native="clearActions"
           @click.stop.native

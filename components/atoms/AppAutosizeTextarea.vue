@@ -1,7 +1,7 @@
 <template>
   <textarea
     ref="textarea"
-    class="block resize-none overflow-hidden w-full bg-grey-100 rounded-2lg focus:outline-none"
+    class="block resize-none overflow-hidden w-full bg-grey-100 focus:outline-none"
     :rows="rows"
     :value="value"
     @input="$emit('input', $event.target.value)"
@@ -66,9 +66,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-textarea[placeholder] {
-  text-overflow: ellipsis;
-}
-</style>

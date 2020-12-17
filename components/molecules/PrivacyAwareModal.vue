@@ -3,7 +3,7 @@
     <div class="w-full h-full py-8 px-4" @click.self="makeChoice(false)">
       <div
         ref="modal-wrapper"
-        class="flex flex-col pointer-events-auto h-full relative bg-white m-auto max-w-readable-line-length md:mt-4 rounded-xl overflow-auto md:overflow-hidden overflow-x-hidden"
+        class="flex flex-col pointer-events-auto h-full relative bg-white m-auto max-w-readable md:mt-4 rounded-xl overflow-auto md:overflow-hidden overflow-x-hidden"
       >
         <h2 class="text-five leading-five font-display-weight p-4 text-center">
           We Respect Your Privacy

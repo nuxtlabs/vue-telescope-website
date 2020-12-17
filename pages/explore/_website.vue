@@ -12,7 +12,7 @@
       <ExploreShowcase
         v-else
         :website="website"
-        class="max-w-readable-line-length xl:max-w-container m-auto"
+        class="max-w-readable xl:max-w-container m-auto"
       />
     </div>
 

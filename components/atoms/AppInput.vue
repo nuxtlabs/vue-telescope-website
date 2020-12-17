@@ -72,7 +72,7 @@ export default {
         return {
           size: 'border-2',
           color: 'border-transparent',
-          focusState: 'focus:border-grey-500'
+          focusState: 'focus:border-grey-300'
         }
       }
     }

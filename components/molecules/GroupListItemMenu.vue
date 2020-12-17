@@ -12,7 +12,7 @@
       <li class="p-2px">
         <button
           title="Rename"
-          class="bg-grey-50 border border-grey-100 rounded-md p-1 hover:scale-110 transform"
+          class="focus:outline-none w-8 h-8 flex items-center justify-center bg-grey-50 rounded-md p-1 hover:scale-110 transform"
           @click="$emit('rename')"
         >
           <EditIcon class="w-4 h-4" />
@@ -21,7 +21,7 @@
       <li class="p-2px">
         <button
           title="Delete"
-          class="bg-grey-50 border border-grey-100 rounded-md p-1 hover:scale-110 transform"
+          class="focus:outline-none w-8 h-8 flex items-center justify-center bg-grey-50 rounded-md p-1 hover:scale-110 transform"
           @click="$emit('delete')"
         >
           <DeleteIcon class="w-4 h-4" />

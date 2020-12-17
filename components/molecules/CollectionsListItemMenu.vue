@@ -4,7 +4,8 @@
       <li class="p-2px">
         <button
           title="Share"
-          class="bg-grey-50 border border-grey-200 rounded-md p-1 hover:scale-110 transform transition-transform duration-150"
+          class="focus:outline-none w-8 h-8 flex items-center justify-center bg-grey-50 rounded-md p-1 hover:scale-110 transform transition-transform duration-150"
+          @click="$emit('share')"
         >
           <ShareIcon class="w-4 h-4" />
         </button>
@@ -12,7 +13,7 @@
       <li class="p-2px">
         <button
           title="Rename"
-          class="bg-grey-50 border border-grey-100 rounded-md p-1 hover:scale-110 transform transition-transform duration-150"
+          class="focus:outline-none w-8 h-8 flex items-center justify-center bg-grey-50 rounded-md p-1 hover:scale-110 transform transition-transform duration-150"
           @click="$emit('rename')"
         >
           <EditIcon class="w-4 h-4" />
@@ -21,7 +22,7 @@
       <li class="p-2px">
         <button
           title="Delete"
-          class="bg-grey-50 border border-grey-100 rounded-md p-1 hover:scale-110 transform transition-transform duration-150"
+          class="focus:outline-none w-8 h-8 flex items-center justify-center bg-grey-50 rounded-md p-1 hover:scale-110 transform transition-transform duration-150"
           @click="$emit('delete')"
         >
           <DeleteIcon class="w-4 h-4" />

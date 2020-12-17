@@ -7,6 +7,7 @@
     <ul>
       <li
         v-for="collection in collectionsWithGroups"
+        :key="collection.id"
         class="root w-full flex flex-col mb-2"
       >
         <div class="flex items-end mb-1">
@@ -25,15 +26,15 @@
           </span>
         </div>
         <ul>
-          <li v-for="group in collection.groups">
+          <li v-for="group in collection.groups" :key="group.id">
             <button
               class="focus:outline-none w-full text-left"
-              @click.stop.prevent="onBookmarkClicked(collection, group)"
               :class="[
                 isBookmarked(group)
                   ? 'text-primary-500 hover:text-primary-200'
                   : 'hover:text-grey-400'
               ]"
+              @click.stop.prevent="onBookmarkClicked(collection, group)"
             >
               <span>{{ group.name }}</span>
             </button>
@@ -47,12 +48,12 @@
 <script>
 import { mapState } from 'vuex'
 import OpenedFolderIcon from '@/assets/icons/opened-folder.svg?inline'
-import UnorderedListIcon from '@/assets/icons/unordered-list.svg?inline'
+// import UnorderedListIcon from '@/assets/icons/unordered-list.svg?inline'
 
 export default {
   components: {
-    OpenedFolderIcon,
-    UnorderedListIcon
+    OpenedFolderIcon
+    // UnorderedListIcon
   },
   props: {
     showcase: {

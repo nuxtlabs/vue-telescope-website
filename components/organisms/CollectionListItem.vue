@@ -3,19 +3,19 @@
     <div v-click-outside="clickOutsideHandler" class="relative flex group">
       <div
         ref="name-handler"
-        class="flex flex-1 cursor-pointer py-2"
+        class="focus:outline-none flex flex-1 cursor-pointer py-2"
         tabindex="0"
         @click="clickOnNameHandler"
         @keypress.enter="clickOnNameHandler"
       >
-        <FolderIcon v-if="!openCollapse" class="w-4 mr-1 my-1" />
-        <OpenedFolderIcon v-else class="w-4 mr-1 my-1" />
-        <span class="relative flex-1">
+        <FolderIcon v-if="!openCollapse" class="w-5 mr-1 my-1" />
+        <OpenedFolderIcon v-else class="w-5 mr-1 my-1" />
+        <span class="relative flex-1 text-eight leading-eight">
           <AppAutosizeTextarea
             v-if="updatingCollection"
             ref="update-collection-input"
             v-model="newCollectionName"
-            class="font-bold-body-weight p-1"
+            class="font-bold-body-weight p-1 rounded-md"
             @submit="updateCollection"
             @keydown.esc.native="clearActions"
             @click.stop.native
@@ -34,10 +34,13 @@
             {{ collection.name }}
           </span>
 
-          <div v-if="updatingCollection" class="absolute top-0 right-0 p-3px">
+          <div
+            v-if="updatingCollection"
+            class="absolute top-0 right-0 transform translate-x-full pl-3px"
+          >
             <button
               title="Save"
-              class="bg-grey-50 border border-grey-200 rounded-md p-1"
+              class="focus:outline-none bg-grey-50 rounded-md p-2"
               @click.stop="updateCollection"
             >
               <SaveIcon class="w-4 h-4" />
@@ -46,12 +49,12 @@
         </span>
       </div>
 
-      <div class="w-12 h-12 ml-auto my-3">
+      <div class="w-8 h-8 ml-auto my-2">
         <button
           v-if="!updatingCollection"
           ref="anchor"
-          class="group-hover:block hover:bg-grey-50 rounded-md"
-          :class="[openCollapse || showDropdown ? 'block' : 'hidden']"
+          class="focus:outline-none group-hover:flex items-center justify-center hover:bg-grey-50 rounded-lg w-full h-full"
+          :class="[openCollapse || showDropdown ? 'flex' : 'hidden']"
           @click="openDropdown"
         >
           <DotsVerticalIcon />
@@ -69,18 +72,23 @@
           v-if="!updatingCollection"
           @delete="deleteCollection"
           @rename="initUpdateCollection"
+          @share="shareCollection = true"
         />
       </Popper>
     </div>
+
+    <Portal to="default-layout">
+      <ShareCollectionModal
+        v-if="shareCollection"
+        @close="shareCollection = false"
+        :collection="collection"
+      />
+    </Portal>
 
     <!-- Group Collapsible -->
     <transition :css="false" @enter="enter" @leave="leave">
       <div v-if="openCollapse">
         <div>
-          <!-- <pre v-if="selectedGroup && collection.id === selectedGroup.list">
-            {{ selectedGroup }}
-          </pre> -->
-
           <GroupListItem
             v-for="group in reversedGroups"
             :key="group.id"
@@ -120,15 +128,16 @@ export default {
   },
   data() {
     return {
+      clicked: 0,
       openCollapse: false,
       showDropdown: false,
       newCollectionName: '',
       // newGroupName: '',
       // creatingCollection: false,
-      updatingCollection: false
+      updatingCollection: false,
       // deletingCollection: false,
       // creatingGroup: false
-      // modalVisible: false
+      shareCollection: false
     }
   },
   computed: {
@@ -172,7 +181,22 @@ export default {
         this.collection.groups[0]
       )
       this.openCollapse = !this.openCollapse
+
+      // // more nice behaviour
+      // if (!this.openCollapse) {
+      //   this.openCollapse = true
+      // } else {
+      //   if (this.clicked === 0) {
+      //     this.clicked++
+      //   } else if (this.clicked === 1) {
+      //     this.openCollapse = !this.openCollapse
+      //     this.clicked = 0
+      //   } else {
+      //     this.clicked = 0
+      //   }
+      // }
       this.clearActions()
+      // this.clicked = 0
       // this.creatingGroup = false
     },
     clearActions() {

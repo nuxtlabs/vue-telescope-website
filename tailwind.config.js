@@ -209,7 +209,7 @@ module.exports = {
         '24rem': '24rem',
         container: '1264px',
         'pretty-wide': '1020px',
-        'readable-line-length': '820px'
+        readable: '820px'
       },
       minWidth: {
         body: '320px'
