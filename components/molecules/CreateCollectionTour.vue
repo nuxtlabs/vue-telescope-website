@@ -1,10 +1,10 @@
 <template>
   <div class="el relative flex flex-col items-center justify-center px-4">
-    <h2 class="text-center text-four leading-four font-bold-body-weight mb-2">
+    <h2 class="text-center text-four leading-four font-bold-body-weight mb-4">
       You don't have any Collections yet 🤓
     </h2>
-    <p class="text-center text-seven leading-seven mb-4">
-      Create a Collection to start saving and organizing websites into Lists 👇
+    <p class="text-center text-seven leading-seven mb-8">
+      Create a Collection to start saving websites into Lists
     </p>
 
     <div class="h-16 w-full mb-24 flex items-center justify-center">

@@ -1,9 +1,9 @@
 <template>
   <div class="el relative flex flex-col items-center justify-center px-4">
-    <h2 class="text-center text-four leading-four font-bold-body-weight mb-2">
-      There's no Lists in {{ collection.name }} Collection yet.
+    <h2 class="text-center text-four leading-four font-bold-body-weight mb-4">
+      There's no Lists in "{{ collection.name }}" yet
     </h2>
-    <p class="text-center text-seven leading-seven mb-4">
+    <p class="text-center text-seven leading-seven mb-8">
       Create a List to start saving websites 👇
     </p>
 
