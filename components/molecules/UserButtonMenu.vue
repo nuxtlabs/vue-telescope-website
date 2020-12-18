@@ -26,14 +26,14 @@
       <li class="flex">
         <button
           v-if="$strapi.user"
-          class="text-left font-bold-body-weight w-full px-2 py-1 hover:bg-grey-100 rounded"
+          class="focus:outline-none text-left font-bold-body-weight w-full px-2 py-1 hover:bg-grey-100 rounded"
           @click="logout"
         >
           Logout
         </button>
         <button
           v-else
-          class="text-left font-bold-body-weight w-full px-2 py-1 hover:bg-grey-100 rounded"
+          class="focus:outline-none text-left font-bold-body-weight w-full px-2 py-1 hover:bg-grey-100 rounded"
           @click="login"
         >
           Login

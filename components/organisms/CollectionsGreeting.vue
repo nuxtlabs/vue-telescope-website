@@ -14,7 +14,13 @@
     >
       Login with GitHub to start using Vue Telemetry Collections.
     </p>
-    <WtfGithubLoginButton />
+    <WtfGithubLoginButton class="mb-8" />
+    <div class="text-sm leading-sm">
+      By signing up, you agree to the
+      <a target="_blank" href="/terms" class="underline">Terms of Service</a>
+      and
+      <a target="_blank" href="/privacy" class="underline">Privacy Policy</a>.
+    </div>
   </section>
 </template>
 

@@ -1,5 +1,6 @@
 <template>
-  <div @mouseleave="isBookmarking = false" class="">
+  <!-- @mouseleave="isBookmarking = false" -->
+  <div class="">
     <button
       @click.stop.prevent="isBookmarking = !isBookmarking"
       :class="[
@@ -22,7 +23,7 @@
     </button>
 
     <transition name="fade">
-      <ShowcaseBookmarkMenu
+      <BookmarkShowcaseMenu
         v-if="isBookmarking"
         :showcase="showcase"
         :compact="compact"
@@ -78,11 +79,11 @@ export default {
 
 .fade-enter {
   opacity: 0;
-  transform: scale(0.98);
+  /*transform: scale(0.98);*/
 }
 
 .fade-leave-active {
   opacity: 0;
-  transform: scale(0.98);
+  /*transform: scale(0.98);*/
 }
 </style>

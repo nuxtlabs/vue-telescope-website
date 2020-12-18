@@ -1,6 +1,7 @@
 <template>
   <div
     v-if="$strapi.user"
+    @click.stop.prevent
     class="absolute top-0 left-0 w-full h-full bg-white overflow-auto cursor-default"
     :class="compact ? 'p-3' : 'p-8'"
   >
@@ -67,6 +68,7 @@
 
   <div
     v-else
+    @click.stop.prevent
     class="absolute top-0 left-0 w-full h-full bg-white overflow-auto cursor-default p-3 flex flex-col items-center justify-center"
   >
     <div
