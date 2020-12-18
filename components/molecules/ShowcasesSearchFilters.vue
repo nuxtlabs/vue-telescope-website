@@ -2,7 +2,7 @@
   <div class="px-2">
     <ShowcasesSearchInput class="mb-4" />
     <div class="mb-4 flex items-center">
-      <div class="mr-2 font-bold-body-weight">Vue 3 only</div>
+      <div class="mr-2 text-grey-700">Vue 3 only</div>
       <AppSwitch
         @input="setVueThreeOnly($event)"
         :value="selectedFilters.vueVersion_gte ? true : false"
@@ -179,7 +179,6 @@ export default {
   },
   methods: {
     setVueThreeOnly(value) {
-      console.log('setVueThreeOnly', value)
       if (value) {
         this.$store.commit('SET_FILTER_KEY', {
           key: 'vueVersion_gte',

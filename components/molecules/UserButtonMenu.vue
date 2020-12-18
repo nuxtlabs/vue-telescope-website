@@ -17,7 +17,7 @@
       <li class="flex">
         <NuxtLink
           to="/collections"
-          class="text-left font-bold-body-weight w-full hover:text-grey-500 px-2 py-1 hover:bg-grey-100 rounded"
+          class="text-left font-bold-body-weight w-full px-2 py-1 hover:bg-grey-100 rounded"
           @click.native="closeMenu"
         >
           Collections
@@ -26,14 +26,14 @@
       <li class="flex">
         <button
           v-if="$strapi.user"
-          class="text-left font-bold-body-weight w-full hover:text-grey-500 px-2 py-1 hover:bg-grey-100 rounded"
+          class="text-left font-bold-body-weight w-full px-2 py-1 hover:bg-grey-100 rounded"
           @click="logout"
         >
           Logout
         </button>
         <button
           v-else
-          class="text-left font-bold-body-weight w-full hover:text-grey-500 px-2 py-1 hover:bg-grey-100 rounded"
+          class="text-left font-bold-body-weight w-full px-2 py-1 hover:bg-grey-100 rounded"
           @click="login"
         >
           Login

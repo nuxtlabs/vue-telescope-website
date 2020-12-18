@@ -85,7 +85,6 @@ export default {
   },
   methods: {
     title(key) {
-      console.log(key)
       if (key === 'vueVersion_gte') {
         return 'Vue 3 only'
       } else if (key === 'isStatic') {

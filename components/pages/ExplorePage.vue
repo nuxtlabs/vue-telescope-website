@@ -9,7 +9,7 @@
 
     <template slot="aside-content-header">
       <ShowcasesMobileSearchFilters />
-      <ShowcasesSorting class="-mt-8 mr-12 md:mr-6" />
+      <ShowcasesSorting class="-mt-9 md:-mt-8 mr-12 md:mr-6" />
       <ShowcasesSelectedFilters
         :selected-filters="selectedFilters"
         :total-count="totalCount"

@@ -1,18 +1,18 @@
 <template>
   <div class="modal-wrapper">
     <div class="w-full h-full overflow-auto" @click.self="$emit('close')">
-      <div class="h-full pointer-events-none flex justify-end flex-col">
+      <div class="h-full pointer-events-none flex justify-end flex-col pt-28">
         <div
           ref="hack-safari"
-          class="rounded-4xl rounded-b-none overflow-hidden mt-28"
+          class="rounded-4xl rounded-b-none overflow-hidden"
         >
           <div
             ref="modal-wrapper"
-            class="h-full pointer-events-auto rounded-4xl rounded-b-none relative bg-white p-4"
+            class="wtf h-full pointer-events-auto rounded-4xl rounded-b-none relative bg-white p-4"
           >
-            <div class="relative flex justify-between items-center">
+            <div class="relative flex justify-between items-center mb-4">
               <div class="pl-2 text-seven leading-seven font-bold-body-weight">
-                Select filters:
+                {{ label }}
               </div>
               <div
                 ref="close-button"
@@ -33,11 +33,23 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import XmarkCircleIcon from '@/assets/icons/xmark-circle.svg?inline'
 
 export default {
+  props: {
+    label: {
+      type: String,
+      default: null
+    }
+  },
   components: {
     XmarkCircleIcon
+  },
+  computed: {
+    ...mapState({
+      browser: (state) => state.browser
+    })
   },
   mounted() {
     const escapeHandler = (e) => {
@@ -74,14 +86,17 @@ export default {
   },
   methods: {
     animateEnter() {
+      if (this.browser === 'Safari') {
+        this.$refs['modal-wrapper'].style.height = 'calc(100vh - 7rem)'
+      }
       this.$gsap.from(this.$refs['modal-wrapper'], {
         y: '100%',
         // opacity: 0,
         duration: 1,
         ease: 'expo.out',
-        clearProps: true,
+        // clearProps: true,
         onComplete: () => {
-          this.$refs['hack-safari'].style.height = '100%'
+          // this.$refs['hack-safari'].style.height = '100%'
           // this.$refs['modal-wrapper'].style.height = '100%'
           this.$refs['modal-wrapper'].style.paddingRight = null
           this.$refs['modal-wrapper'].classList.add('overflow-auto') // md:overflow-hidden overflow-x-hidden

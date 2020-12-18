@@ -8,8 +8,16 @@
         @click="clickOnNameHandler"
         @keypress.enter="clickOnNameHandler"
       >
-        <FolderIcon v-if="!openCollapse" class="w-5 mr-1 my-1" />
-        <OpenedFolderIcon v-else class="w-5 mr-1 my-1" />
+        <FolderIcon
+          v-if="!openCollapse"
+          class="w-5 mr-1 my-1"
+          :class="[isSelected && 'text-primary-500']"
+        />
+        <OpenedFolderIcon
+          v-else
+          class="w-5 mr-1 my-1"
+          :class="[isSelected && 'text-primary-500']"
+        />
         <span class="relative flex-1 text-eight leading-eight">
           <AppAutosizeTextarea
             v-if="updatingCollection"
@@ -25,11 +33,7 @@
             v-else
             style="word-break: break-word"
             class="font-bold-body-weight p-1 inline-flex select-none"
-            :class="[
-              selectedCollection &&
-                selectedCollection.id === collection.id &&
-                'text-primary-500'
-            ]"
+            :class="[isSelected && 'text-primary-500']"
           >
             {{ collection.name }}
           </span>
@@ -145,6 +149,12 @@ export default {
       selectedCollection: (state) => state.collections.selectedCollection,
       selectedGroup: (state) => state.collections.selectedGroup
     }),
+    isSelected() {
+      return (
+        this.selectedCollection &&
+        this.selectedCollection.id === this.collection.id
+      )
+    },
     reversedGroups() {
       // TODO: sort by created
       const r = [...this.collection.groups]

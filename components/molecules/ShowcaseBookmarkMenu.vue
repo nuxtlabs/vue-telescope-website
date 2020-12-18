@@ -20,7 +20,10 @@
           <div class="flex items-center mb-1">
             <OpenedFolderIcon
               class="mr-2 mt-1"
-              :class="[compact ? 'w-4 h-4' : 'w-6 h-6']"
+              :class="[
+                compact ? 'w-4 h-4' : 'w-6 h-6',
+                isBookmarkedCollection(collection) && 'text-primary-500'
+              ]"
             />
             <span
               class="font-bold-body-weight"

@@ -2,7 +2,7 @@
   <ClientOnly>
     <AsideContentTemplate v-if="$strapi.user">
       <div slot="aside-content-aside">
-        <CreateCollection class="mb-12" />
+        <CreateCollection class="mb-8" />
 
         <transition-group name="list">
           <CollectionListItem
@@ -13,6 +13,10 @@
           />
         </transition-group>
       </div>
+
+      <template slot="aside-content-header">
+        <MobileCollectionsMenu />
+      </template>
 
       <div slot="aside-content-main">
         <transition name="slide" mode="out-in">
