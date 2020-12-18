@@ -91,7 +91,7 @@ export default {
       showcases: [],
       totalCount: 0,
       currentPage: 0,
-      showcasesPerPage: 6,
+      showcasesPerPage: 24,
       hasMoreShowcases: true,
       filtersTouched: false
       // filterQuery: {}
