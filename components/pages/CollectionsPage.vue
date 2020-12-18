@@ -55,9 +55,7 @@
       </div>
     </AsideContentTemplate>
 
-    <div v-else>
-      <CollectionsGreeting />
-    </div>
+    <CollectionsGreeting v-else />
   </ClientOnly>
 </template>
 

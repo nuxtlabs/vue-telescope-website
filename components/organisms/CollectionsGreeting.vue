@@ -1,5 +1,8 @@
 <template>
-  <section class="text-center">
+  <section
+    style="min-height: 50vh"
+    class="w-full text-center flex flex-col items-center justify-center"
+  >
     <h1
       class="mx-auto text-four leading-four max-w-readable md:text-three md:leading-three text-center mt-8 md:mt-16 px-12 font-bold-body-weight mb-6"
     >
