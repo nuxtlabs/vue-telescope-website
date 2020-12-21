@@ -1,9 +1,23 @@
 <template>
   <div class="flex ml-2 h-10 mr-4 relative">
     <transition :css="false" @enter="enter" @leave="leave">
+      <div v-if="creating" class="w-full h-full absolute">
+        <AppAutosizeTextarea
+          ref="create-collection-tour"
+          v-model="name"
+          v-click-outside="() => (creating = false)"
+          placeholder="Type Collection"
+          class="rounded-2lg py-2 px-4 text-base leading-base font-bold-body-weight placeholder-grey-500"
+          @submit="createCollection"
+          @keydown.esc.native="clearActions"
+          @click.stop.native
+        />
+        <!-- Todo: loading state -->
+        <!-- Save button -->
+      </div>
       <button
+        v-else
         ref="create-button"
-        v-if="!creatingCollection"
         class="group focus:outline-none w-full h-full flex items-center py-1 px-4 text-base leading-base font-bold-body-weight bg-primary-50 border border-transparent hover:border-primary-500 rounded-2lg text-primary-500 transition-colors duration-200"
         @click="initCollectionCreation"
       >
@@ -15,19 +29,6 @@
           Add Collection
         </span>
       </button>
-
-      <div v-if="creatingCollection" class="w-full h-full absolute">
-        <AppAutosizeTextarea
-          placeholder="Type Collection"
-          ref="create-collection-tour"
-          v-model="newCollectionName"
-          v-click-outside="() => (creatingCollection = false)"
-          class="rounded-2lg py-2 px-4 text-base leading-base font-bold-body-weight placeholder-grey-500"
-          @submit="createCollection"
-          @keydown.esc.native="clearActions"
-          @click.stop.native
-        />
-      </div>
     </transition>
   </div>
 </template>
@@ -47,31 +48,38 @@ export default {
   },
   data() {
     return {
-      newCollectionName: '',
-      creatingCollection: false
+      name: '',
+      loading: false,
+      creating: false
     }
   },
   methods: {
     clearActions() {
-      this.newCollectionName = ''
+      this.name = ''
       this.$emit('cleanup')
     },
     initCollectionCreation() {
       // this.$store.commit('collections/setSelectedCollection', this.collection)
-      this.creatingCollection = true
+      this.creating = true
       this.$nextTick(() => {
         this.$refs['create-collection-tour'].$el.focus()
       })
     },
     async createCollection() {
+      if (!this.loading) return
       try {
-        if (!this.newCollectionName) return
+        this.loading = true
         await this.$store.dispatch('collections/createCollection', {
-          name: this.newCollectionName
+          name: this.name
         })
+        this.name = ''
         this.clearActions()
-        this.creatingCollection = false
-      } catch (e) {}
+        this.loading = false
+        this.creating = false
+      } catch (e) {
+        this.loading = false
+        // TODO: display toast with error
+      }
     },
     enter(el, done) {
       this.$refs['create-collection-tour'] &&
