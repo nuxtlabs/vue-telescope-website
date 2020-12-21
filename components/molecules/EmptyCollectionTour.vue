@@ -1,10 +1,10 @@
 <template>
   <div class="el relative flex flex-col items-center justify-center px-4">
     <h2 class="text-center text-four leading-four font-bold-body-weight mb-4">
-      There's no Lists in "{{ collection.name }}" yet
+      There's no Lists in "{{ collection.name }}"
     </h2>
-    <p class="text-center text-seven leading-seven mb-8">
-      Create a List to start saving websites 👇
+    <p class="text-center text-seven leading-seven mb-4">
+      Create a List to start saving websites.
     </p>
 
     <div class="h-16 w-full mb-24 flex items-center justify-center">
@@ -12,7 +12,7 @@
         <button
           v-if="!creatingList"
           ref="create-button"
-          class="focus:outline-none text-seven flex items-center py-4 px-8 rounded-xl border border-grey-100 hover:border-grey-50 hover:bg-grey-50 text-grey-500 hover:text-grey-700 transition-colors duration-200 truncate"
+          class="focus:outline-none text-seven leading-seven flex items-center py-4 px-8 rounded-xl border border-transparent hover:border-primary-500 bg-primary-50 text-primary-500 font-bold-body-weight transition-colors duration-200 truncate"
           @click="initGroupCreation"
         >
           <div class="mr-2">
@@ -28,7 +28,7 @@
             ref="create-list-tour"
             v-model="newListName"
             v-click-outside="() => (creatingList = false)"
-            class="w-full text-seven flex py-4 px-8 rounded-xl border border-grey-100 hover:border-grey-50 hover:bg-grey-50 text-grey-500 hover:text-grey-700 transition-colors duration-200 placeholder-grey-400"
+            class="w-full text-seven leading-seven font-bold-body-weight flex py-4 px-8 rounded-xl border border-grey-100 hover:border-grey-50 hover:bg-grey-50 text-grey-500 hover:text-grey-700 transition-colors duration-200 placeholder-grey-400"
             @submit="createGroup"
             @keydown.esc.native="clearActions"
             @click.stop.native

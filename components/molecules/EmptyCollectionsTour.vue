@@ -1,9 +1,9 @@
 <template>
   <div class="el relative flex flex-col items-center justify-center px-4">
     <h2 class="text-center text-four leading-four font-bold-body-weight mb-4">
-      You don't have any Collections yet 🤓
+      You don't have any Collections
     </h2>
-    <p class="text-center text-seven leading-seven mb-8">
+    <p class="text-center text-seven leading-seven mb-4">
       Create a Collection to start saving websites into Lists
     </p>
 
@@ -12,11 +12,11 @@
         <button
           v-if="!creatingCollection"
           ref="create-button"
-          class="focus:outline-none text-seven flex items-center py-4 px-8 rounded-xl border border-grey-100 hover:border-grey-50 hover:bg-grey-50 text-grey-500 hover:text-grey-700 transition-colors duration-200 truncate"
+          class="focus:outline-none text-seven leading-seven flex items-center py-4 px-8 rounded-xl border border-transparent hover:border-primary-500 bg-primary-50 text-primary-500 font-bold-body-weight transition-colors duration-200 truncate"
           @click="initCollectionCreation"
         >
           <div class="mr-2">
-            <PlusIcon class="w-4 h-4" style="stroke-width: 2px" />
+            <PlusIcon class="w-5 h-5" style="stroke-width: 2px" />
           </div>
           <span>Create Your First Collection</span>
         </button>
@@ -32,7 +32,7 @@
               ref="create-collection-tour"
               v-model="newCollectionName"
               v-click-outside="() => (creatingCollection = false)"
-              class="w-full text-seven flex py-4 px-8 rounded-xl border border-grey-100 hover:border-grey-50 hover:bg-grey-50 text-grey-500 hover:text-grey-700 transition-colors duration-200 placeholder-grey-400"
+              class="w-full text-seven leading-seven font-bold-body-weight flex py-4 px-8 rounded-xl border border-grey-100 hover:border-grey-50 hover:bg-grey-50 text-grey-500 hover:text-grey-700 transition-colors duration-200 placeholder-grey-400"
               @submit="createCollection"
               @keydown.esc.native="clearActions"
               @click.stop.native
