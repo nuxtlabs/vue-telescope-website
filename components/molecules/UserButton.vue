@@ -10,7 +10,7 @@
     <ClientOnly>
       <img
         v-if="$strapi.user"
-        :src="`https://github.com/${$strapi.user.username}.png?size=24`"
+        :src="`https://github.com/${$strapi.user.username}.png?size=64`"
         class="absolute top-0 left-0 w-8 h-8 rounded-full mr-1"
       />
     </ClientOnly>

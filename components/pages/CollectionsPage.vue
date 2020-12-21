@@ -20,7 +20,7 @@
 
       <div slot="aside-content-main">
         <transition name="slide" mode="out-in">
-          <CreateCollectionTour v-if="!collections.length" class="mt-0 -mt-4" />
+          <EmptyCollectionsTour v-if="!collections.length" class="mt-0 -mt-4" />
 
           <!-- navigate between groups -->
           <div v-else-if="selectedGroup">
@@ -32,7 +32,7 @@
               />
 
               <!-- if no showcases, then show tour -->
-              <SaveShowcasesTour
+              <EmptyListTour
                 v-else
                 :key="selectedGroup.id"
                 :list="selectedGroup"

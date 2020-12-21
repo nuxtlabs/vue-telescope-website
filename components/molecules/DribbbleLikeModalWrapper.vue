@@ -8,18 +8,18 @@
         >
           <div
             ref="modal-wrapper"
-            class="wtf h-full pointer-events-auto rounded-4xl rounded-b-none relative bg-white p-4"
+            class="surface h-full pointer-events-auto rounded-4xl rounded-b-none relative px-4"
           >
-            <div class="relative flex justify-between items-center mb-4">
-              <div class="pl-2 text-seven leading-seven font-bold-body-weight">
+            <div
+              ref="close-button"
+              class="absolute top-0 right-0 z-10 p-8 cursor-pointer pointer-events-auto"
+              @click="$emit('close')"
+            >
+              <XmarkCircleIcon class="text-grey-900 w-6 h-6" />
+            </div>
+            <div class="relative flex justify-between items-center mb-8">
+              <div class="pl-2 text-five leading-five font-bold-body-weight">
                 {{ label }}
-              </div>
-              <div
-                ref="close-button"
-                class="p-4 cursor-pointer pointer-events-auto"
-                @click="$emit('close')"
-              >
-                <XmarkCircleIcon class="text-grey-900 w-6 h-6" />
               </div>
             </div>
             <div ref="modal-content" class="">
@@ -107,7 +107,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="postcss" scoped>
 .modal-wrapper {
   position: fixed;
   top: 0;
@@ -121,5 +121,28 @@ export default {
   /* display: flex;
   align-items: center;
   justify-content: center; */
+}
+
+.surface {
+  position: relative;
+  background: white;
+  &:before {
+    content: '';
+    position: sticky;
+    display: block;
+    width: 100%;
+    height: 2rem;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(255, 255, 255, 1) 100%
+    );
+  }
 }
 </style>

@@ -1,6 +1,8 @@
 <template>
   <div class="el relative flex flex-col items-center justify-center px-4">
-    <h2 class="text-center text-four leading-four font-bold-body-weight mb-4">
+    <h2
+      class="text-center text-four leading-four font-bold-body-weight mb-4 break-all"
+    >
       There's no websites saved in "{{ list.name }}"
     </h2>
     <p class="text-center text-seven leading-seven mb-48">

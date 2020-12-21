@@ -14,7 +14,7 @@
       :group="group"
       :collection="collection"
     />
-    <CreateGroupTour
+    <EmptyCollectionTour
       v-if="!groups || !groups.length"
       class="-mt-4"
       :collection="collection"

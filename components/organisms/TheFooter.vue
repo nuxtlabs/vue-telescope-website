@@ -1,9 +1,9 @@
 <template>
   <div id="main-footer" class="py-6 pb-2 text-grey-900">
     <div class="max-w-container mx-auto py-4 px-4">
-      <div class="flex flex-col md:flex-row justify-between mb-8">
+      <div class="flex flex-col md:flex-row justify-between mb-4">
         <ul
-          class="flex flex-col items-center md:items-start text-sm text-center leading-sm mb-8 md:mb-0"
+          class="flex flex-col items-center md:items-start text-sm text-center leading-sm mb-4 md:mb-0"
         >
           <li class="text-grey-900">
             Frontend hosted on
@@ -46,14 +46,14 @@
         </ul>
 
         <ul
-          class="text-right flex flex-col md:flex-row items-center md:items-start text-sm leading-sm mb-2"
+          class="text-right flex items-start md:mr-0 text-sm leading-sm mx-auto"
         >
-          <li class="md:mr-4">
+          <li class="mr-4">
             <NuxtLink to="/terms" class="hover:text-primary-500 font-medium">
               Terms
             </NuxtLink>
           </li>
-          <li class="md:mr-4">
+          <li class="mr-4">
             <NuxtLink to="/privacy" class="hover:text-primary-500 font-medium">
               Privacy
             </NuxtLink>
