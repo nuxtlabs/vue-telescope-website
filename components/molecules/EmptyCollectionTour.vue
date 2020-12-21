@@ -1,34 +1,34 @@
 <template>
   <div class="el relative flex flex-col items-center justify-center px-4">
-    <h2 class="text-center text-four leading-four font-bold-body-weight mb-4">
+    <h2 class="text-center text-four leading-four font-bold-body-weight mb-2">
       There's no Lists in "{{ collection.name }}"
     </h2>
-    <p class="text-center text-seven leading-seven mb-4">
+    <p class="text-center text-seven leading-seven mb-8">
       Create a List to start saving websites.
     </p>
 
-    <div class="h-16 w-full mb-24 flex items-center justify-center">
+    <div class="relative w-full h-16 mb-24 flex items-center justify-center">
       <transition :css="false" @enter="enter" @leave="leave">
         <button
           v-if="!creatingList"
           ref="create-button"
-          class="focus:outline-none text-seven leading-seven flex items-center py-4 px-8 rounded-xl border border-transparent hover:border-primary-500 bg-primary-50 text-primary-500 font-bold-body-weight transition-colors duration-200 truncate"
+          class="absolute top-0 focus:outline-none text-seven leading-seven flex items-center py-4 px-8 rounded-xl border-2 border-transparent hover:border-primary-500 bg-primary-50 text-primary-500 font-bold-body-weight transition-colors duration-200 truncate"
           @click="initGroupCreation"
         >
           <div class="mr-2">
-            <PlusIcon class="w-4 h-4" style="stroke-width: 1.5px" />
+            <PlusIcon class="w-5 h-5" style="stroke-width: 2.5px" />
           </div>
           <span>Create List</span>
         </button>
 
-        <div v-else class="max-w-24rem">
+        <div v-else class="max-w-24rem absolute top-0 w-full">
           <AppAutosizeTextarea
             v-if="creatingList"
-            placeholder="Type List name ..."
+            placeholder="Type List name"
             ref="create-list-tour"
             v-model="newListName"
             v-click-outside="() => (creatingList = false)"
-            class="w-full text-seven leading-seven font-bold-body-weight flex py-4 px-8 rounded-xl border border-grey-100 hover:border-grey-50 hover:bg-grey-50 text-grey-500 hover:text-grey-700 transition-colors duration-200 placeholder-grey-400"
+            class="w-full text-seven leading-seven font-bold-body-weight flex py-4 px-8 rounded-xl border-2 border-transparent text-grey-900 transition-colors duration-200 placeholder-grey-400"
             @submit="createGroup"
             @keydown.esc.native="clearActions"
             @click.stop.native
@@ -108,7 +108,7 @@ export default {
           duration: 0.25,
           ease: 'power1.out',
           onComplete: () => {
-            this.$gsap.set(el, { position: 'relative' })
+            this.$gsap.set(el, { position: 'absolute' })
             this.$refs['create-collection-tour'] &&
               this.$refs['create-collection-tour'].$el.focus()
           }

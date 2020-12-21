@@ -1,11 +1,11 @@
 <template>
-  <div class="flex ml-2 h-10 mr-4 relative">
+  <div class="flex ml-2 mr-4 relative">
     <transition :css="false" @enter="enter" @leave="leave">
-      <div v-if="creating" class="w-full h-full absolute">
+      <div v-if="creatingCollection" class="w-full h-full absolute">
         <AppAutosizeTextarea
           ref="create-collection-tour"
           v-model="name"
-          v-click-outside="() => (creating = false)"
+          v-click-outside="() => (creatingCollection = false)"
           placeholder="Type Collection"
           class="rounded-2lg py-2 px-4 text-base leading-base font-bold-body-weight placeholder-grey-500"
           @submit="createCollection"
@@ -18,7 +18,7 @@
       <button
         v-else
         ref="create-button"
-        class="group focus:outline-none w-full h-full flex items-center py-1 px-4 text-base leading-base font-bold-body-weight bg-primary-50 border border-transparent hover:border-primary-500 rounded-2lg text-primary-500 transition-colors duration-200"
+        class="group focus:outline-none w-full h-10 flex items-center py-1 px-4 text-base leading-base font-bold-body-weight bg-primary-50 border-2 border-transparent hover:border-primary-500 rounded-2lg text-primary-500 transition-colors duration-200"
         @click="initCollectionCreation"
       >
         <PlusIcon
@@ -49,8 +49,8 @@ export default {
   data() {
     return {
       name: '',
-      loading: false,
-      creating: false
+      // loading: false,
+      creatingCollection: false
     }
   },
   methods: {
@@ -60,24 +60,24 @@ export default {
     },
     initCollectionCreation() {
       // this.$store.commit('collections/setSelectedCollection', this.collection)
-      this.creating = true
+      this.creatingCollection = true
       this.$nextTick(() => {
         this.$refs['create-collection-tour'].$el.focus()
       })
     },
     async createCollection() {
-      if (!this.loading) return
+      if (!this.name) return
       try {
-        this.loading = true
+        // this.loading = true
         await this.$store.dispatch('collections/createCollection', {
           name: this.name
         })
         this.name = ''
         this.clearActions()
-        this.loading = false
-        this.creating = false
+        // this.loading = false
+        this.creatingCollection = false
       } catch (e) {
-        this.loading = false
+        // this.loading = false
         // TODO: display toast with error
       }
     },

@@ -19,11 +19,11 @@
     >
       <CreateCollection class="mb-6" />
 
-      <transition-group name="list">
+      <transition-group name="list" class="relative block overflow-hidden">
         <CollectionListItem
           v-for="collection in sortedCollections"
           :key="collection.id"
-          class="px-2"
+          class="list-item px-2"
           :collection="collection"
         />
       </transition-group>
@@ -49,3 +49,25 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.list-item {
+  transition-duration: 250ms;
+  transition-property: all;
+  transition-timing-function: ease;
+}
+
+.list-enter {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(-10px) scale(0.5);
+}
+
+.list-leave-active {
+  position: absolute;
+}
+</style>
