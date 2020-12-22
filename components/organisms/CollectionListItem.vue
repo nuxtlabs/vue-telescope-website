@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex flex-col" :class="[openCollapse && 'mb-2']">
+  <div class="relative flex flex-col">
     <div v-click-outside="clickOutsideHandler" class="relative flex group">
       <div
         ref="name-handler"

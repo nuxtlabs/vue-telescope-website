@@ -19,11 +19,16 @@
     >
       <CreateCollection class="mb-6" />
 
-      <transition-group name="list" class="relative block overflow-hidden">
+      <transition-group
+        :css="false"
+        @enter="enterAnimation"
+        @leave="leaveAnimation"
+        class="relative block overflow-hidden p-2 py-4"
+      >
         <CollectionListItem
           v-for="collection in sortedCollections"
           :key="collection.id"
-          class="list-item px-2"
+          class="px-2 overflow-hidden"
           :collection="collection"
         />
       </transition-group>
@@ -46,28 +51,35 @@ export default {
   },
   computed: {
     ...mapGetters({ sortedCollections: 'collections/sortedCollections' })
+  },
+  methods: {
+    enterAnimation(el, done) {
+      this.$gsap.fromTo(
+        el,
+        {
+          opacity: 0
+        },
+        {
+          opacity: 1,
+          duration: 0.25,
+          onComplete: done
+        }
+      )
+    },
+    leaveAnimation(el, done) {
+      this.$gsap.set(el, {
+        transformOrigin: 'left'
+      })
+      this.$gsap.to(el, {
+        height: 0,
+        scale: 0.9,
+        opacity: 0,
+        duration: 0.25,
+        onComplete: done
+      })
+    }
   }
 }
 </script>
 
-<style scoped>
-.list-item {
-  transition-duration: 250ms;
-  transition-property: all;
-  transition-timing-function: ease;
-}
-
-.list-enter {
-  opacity: 0;
-  transform: translateY(-10px);
-}
-
-.list-leave-to {
-  opacity: 0;
-  transform: translateY(-10px) scale(0.5);
-}
-
-.list-leave-active {
-  position: absolute;
-}
-</style>
+<style scoped></style>
