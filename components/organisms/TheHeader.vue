@@ -9,7 +9,7 @@
     >
       <NuxtLink ref="logo" to="/" aria-label="Home Page">
         <TheLogo class="h-8 hidden sm:block" />
-        <TheLogoMobile class="h-8 sm:hidden" />
+        <TheLogoMobile class="h-10 sm:hidden" />
       </NuxtLink>
       <div class="flex items-center">
         <ChangelogLink

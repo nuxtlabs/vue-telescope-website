@@ -16,6 +16,7 @@
 
       <template slot="aside-content-header">
         <MobileCollectionsMenu />
+        <CollectionsBreadcrumbs class="ml-4" />
       </template>
 
       <div slot="aside-content-main">
@@ -142,7 +143,7 @@ export default {
 
 .list-enter-active,
 .list-leave-active {
-  transition-duration: 5000ms;
+  transition-duration: 250ms;
   transition-property: opacity, transform;
   transition-timing-function: ease;
 }
