@@ -43,10 +43,10 @@
           >
             <button
               title="Save"
-              class="bg-grey-50 border border-grey-200 rounded-xl p-3 hover:bg-grey-200 hover:text-grey-700"
+              class="focus:outline-none bg-grey-50 border-2 border-grey-200 rounded-3lg p-2 hover:text-grey-700"
               @click.stop="createCollection"
             >
-              <SaveIcon class="w-4 h-4" />
+              <SaveIcon class="w-5 h-5" />
             </button>
           </div>
         </div>

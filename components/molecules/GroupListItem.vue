@@ -4,7 +4,7 @@
     class="focus:outline-none group flex"
   >
     <span
-      class="cursor-pointer flex-1 relative"
+      class="cursor-pointer flex-1 relative mr-1"
       @click="clickOnNameHandler"
       @keypress.enter="clickOnNameHandler"
     >
@@ -27,24 +27,25 @@
       >
         {{ group.name }}
       </span>
-
-      <div
-        v-if="updatingGroup"
-        class="absolute top-0 right-0 pl-3px transform translate-x-full"
-      >
-        <button
-          title="Save"
-          class="focus:outline-none bg-grey-50 rounded-md p-2"
-          @click.stop="updateGroup"
-        >
-          <SaveIcon class="w-4 h-4" />
-        </button>
-      </div>
     </span>
 
     <div class="w-8 h-8 ml-auto">
       <button
-        v-if="!updatingGroup"
+        v-if="updatingGroup"
+        title="Save"
+        class="focus:outline-none bg-grey-50 rounded-md p-2"
+        @click.stop="updateGroup"
+      >
+        <AppLoader
+          v-if="loading"
+          class="w-4 h-4"
+          background="text-grey-400"
+          path="text-grey-200"
+        />
+        <SaveIcon v-else class="w-4 h-4" />
+      </button>
+      <button
+        v-else
         ref="anchor"
         class="focus:outline-none group-hover:flex hover:bg-grey-50 rounded-lg w-full h-full items-center justify-center"
         :class="[openCollapse || showPopup ? 'flex' : 'hidden']"
@@ -92,6 +93,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       openCollapse: false,
       showPopup: false,
       newGroupName: '',
@@ -134,14 +136,18 @@ export default {
     },
     async updateGroup() {
       try {
-        if (!this.newGroupName) return
+        if (!this.newGroupName || this.loading) return
+        this.loading = true
         await this.$store.dispatch('collections/updateGroup', {
           name: this.newGroupName,
           group: this.group,
           collection: this.collection
         })
+        this.loading = false
         this.clearActions()
-      } catch (e) {}
+      } catch (e) {
+        this.loading = false
+      }
     },
     async deleteGroup() {
       try {

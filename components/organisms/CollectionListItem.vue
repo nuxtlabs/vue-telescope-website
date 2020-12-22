@@ -18,12 +18,12 @@
           class="w-5 mr-1 my-1"
           :class="[isSelected && 'text-primary-500']"
         />
-        <span class="relative flex-1 text-eight leading-eight">
+        <span class="relative flex flex-1 text-eight leading-eight">
           <AppAutosizeTextarea
             v-if="updatingCollection"
             ref="update-collection-input"
             v-model="newCollectionName"
-            class="font-bold-body-weight p-1 rounded-md"
+            class="font-bold-body-weight p-1 rounded-md mr-1"
             @submit="updateCollection"
             @keydown.esc.native="clearActions"
             @click.stop.native
@@ -32,24 +32,11 @@
           <span
             v-else
             style="word-break: break-word"
-            class="font-bold-body-weight p-1 inline-flex select-none"
+            class="font-bold-body-weight p-1 inline-flex select-none mr-1"
             :class="[isSelected && 'text-primary-500']"
           >
             {{ collection.name }}
           </span>
-
-          <div
-            v-if="updatingCollection"
-            class="absolute top-0 right-0 transform translate-x-full pl-3px"
-          >
-            <button
-              title="Save"
-              class="focus:outline-none bg-grey-50 rounded-md p-2"
-              @click.stop="updateCollection"
-            >
-              <SaveIcon class="w-4 h-4" />
-            </button>
-          </div>
         </span>
       </div>
 
@@ -57,11 +44,29 @@
         <button
           v-if="!updatingCollection"
           ref="anchor"
-          class="focus:outline-none group-hover:flex items-center justify-center hover:bg-grey-50 rounded-lg w-full h-full"
-          :class="[openCollapse || showDropdown ? 'flex' : 'hidden']"
+          class="focus:outline-none group-hover:flex items-center justify-center rounded-lg w-full h-full"
+          :class="[
+            openCollapse || showDropdown ? 'flex' : 'hidden',
+            showDropdown ? 'bg-grey-50' : 'hover:bg-grey-50'
+          ]"
           @click="openDropdown"
         >
           <DotsVerticalIcon />
+        </button>
+
+        <button
+          v-else
+          title="Save"
+          class="focus:outline-none bg-grey-50 rounded-md p-2"
+          @click.stop="updateCollection"
+        >
+          <AppLoader
+            v-if="loading"
+            class="w-4 h-4"
+            background="text-grey-400"
+            path="text-grey-200"
+          />
+          <SaveIcon v-else class="w-4 h-4" />
         </button>
       </div>
 
@@ -132,6 +137,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       clicked: 0,
       openCollapse: false,
       showDropdown: false,
@@ -244,14 +250,18 @@ export default {
     },
     async updateCollection() {
       try {
-        if (!this.newCollectionName) return
+        if (!this.newCollectionName || this.loading) return
+        this.loading = true
         await this.$store.dispatch('collections/updateCollection', {
           name: this.newCollectionName,
           collection: this.collection
         })
+        this.loading = false
         this.clearActions()
         this.$refs['name-handler'].focus()
-      } catch (e) {}
+      } catch (e) {
+        this.loading = false
+      }
     },
     groupSelectionHandler($event, group) {
       this.$store.commit('collections/setSelectedGroup', $event ? group : null)

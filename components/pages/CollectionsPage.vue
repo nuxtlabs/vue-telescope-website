@@ -142,7 +142,7 @@ export default {
 
 .list-enter-active,
 .list-leave-active {
-  transition-duration: 250ms;
+  transition-duration: 5000ms;
   transition-property: opacity, transform;
   transition-timing-function: ease;
 }

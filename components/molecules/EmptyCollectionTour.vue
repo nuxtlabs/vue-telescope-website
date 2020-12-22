@@ -1,6 +1,8 @@
 <template>
   <div class="el relative flex flex-col items-center justify-center px-4">
-    <h2 class="text-center text-four leading-four font-bold-body-weight mb-2">
+    <h2
+      class="text-center text-four leading-four font-bold-body-weight mb-2 break-all"
+    >
       There's no Lists in "{{ collection.name }}"
     </h2>
     <p class="text-center text-seven leading-seven mb-8">
@@ -39,10 +41,10 @@
           >
             <button
               title="Save"
-              class="bg-grey-50 border border-grey-200 rounded-xl p-3 hover:bg-grey-200 hover:text-grey-700"
+              class="focus:outline-none bg-grey-50 border-2 border-grey-200 rounded-3lg p-2 hover:text-grey-700"
               @click.stop="createGroup"
             >
-              <SaveIcon class="w-4 h-4" />
+              <SaveIcon class="w-5 h-5" />
             </button>
           </div>
         </div>

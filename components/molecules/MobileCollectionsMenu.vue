@@ -17,7 +17,7 @@
       @close="show = false"
       label="Your Collections:"
     >
-      <CreateCollection class="mb-6" />
+      <CreateCollection class="mb-4" />
 
       <transition-group
         :css="false"
@@ -28,7 +28,7 @@
         <CollectionListItem
           v-for="collection in sortedCollections"
           :key="collection.id"
-          class="px-2 overflow-hidden"
+          class="px-1 overflow-hidden"
           :collection="collection"
         />
       </transition-group>

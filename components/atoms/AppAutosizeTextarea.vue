@@ -35,7 +35,11 @@ export default {
       })
     })
     this.$watch('value', () =>
-      this.$nextTick(this.calculateInputHeight(this.$refs.textarea))
+      this.$nextTick(() => {
+        this.$nextTick(() => {
+          this.calculateInputHeight(this.$refs.textarea)
+        })
+      })
     )
   },
   mounted() {
