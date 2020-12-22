@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col items-start">
     <ul ref="menu">
-      <!-- <li class="p-2px">
+      <!-- <li class="py-2px">
         <button
           title="Share"
           class="bg-grey-50 border border-grey-200 rounded-md p-1"
@@ -9,7 +9,7 @@
           <ShareIcon class="w-4 h-4" />
         </button>
       </li> -->
-      <li class="p-2px">
+      <li class="py-2px">
         <button
           title="Rename"
           class="focus:outline-none w-8 h-8 flex items-center justify-center bg-grey-50 rounded-md p-1 hover:scale-110 transform"
@@ -18,11 +18,20 @@
           <EditIcon class="w-4 h-4" />
         </button>
       </li>
-      <li class="p-2px">
+      <li class="py-2px">
         <button
+          v-if="deleting"
           title="Delete"
-          class="focus:outline-none w-8 h-8 flex items-center justify-center bg-grey-50 rounded-md p-1 hover:scale-110 transform"
+          class="focus:outline-none w-8 h-8 flex items-center justify-center bg-grey-50 rounded-md p-1 hover:scale-110 transform text-red-500"
           @click="$emit('delete')"
+        >
+          <DeleteIcon class="w-4 h-4" />
+        </button>
+        <button
+          v-else
+          title="Confirm Delete"
+          class="focus:outline-none w-8 h-8 flex items-center justify-center bg-grey-50 rounded-md p-1 hover:scale-110 transform"
+          @click="deleting = true"
         >
           <DeleteIcon class="w-4 h-4" />
         </button>
@@ -41,6 +50,12 @@ export default {
     // ShareIcon,
     EditIcon,
     DeleteIcon
+  },
+  data() {
+    return {
+      confirmedDeletion: false,
+      deleting: false
+    }
   },
   mounted() {
     this.$gsap.fromTo(
