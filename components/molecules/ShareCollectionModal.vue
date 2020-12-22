@@ -2,7 +2,7 @@
   <TwitterLikeModalWrapper :fetched="true" compact @close="$emit('close')">
     <div class="space-y-6 p-8">
       <h1 class="text-seven leading-seven font-display-weight">
-        {{ `Embed ${collection.name} Collection data anywhere` }}
+        {{ `Share "${collection.name}" Collection` }}
       </h1>
       <div>
         <span>Endpoint to request:</span>
@@ -15,18 +15,20 @@
         />
       </div>
       <div>
-        <span>Response:</span>
+        <span>Usage:</span>
         <pre
-          @click="selectResponse"
-          tabindex="0"
-          class="cursor-pointer bg-grey-200 rounded-2lg p-4 text-sm leading-sm mt-2 hover:bg-grey-50 focus:outline-none focus:border-grey-300 border-2 border-transparent transition-colors duration-200"
-        ><code ref="response-data">{{ JSON.stringify(collection, undefined, 2).trim() }}</code></pre>
+          class="language-js cursor-pointer bg-grey-200 rounded-2lg p-4 text-sm leading-sm mt-2 focus:outline-none focus:border-grey-300 border-2 border-transparent"
+        ><code>{{ `await fetch('${collectionUrl}').then(response => response.json())` }}</code></pre>
       </div>
+
+      <p>Feel free to use Vue Telemetry data anywhere in your own app.</p>
     </div>
   </TwitterLikeModalWrapper>
 </template>
 
 <script>
+import Prism from 'prismjs'
+
 export default {
   props: {
     collection: {
@@ -45,10 +47,10 @@ export default {
       const el = this.$refs['request-data'].$el
       this.selectText(el)
     },
-    selectResponse() {
-      const el = this.$refs['response-data']
-      this.selectText(el)
-    },
+    // selectResponse() {
+    //   const el = this.$refs['response-data']
+    //   this.selectText(el)
+    // },
     selectText(el) {
       const range = document.createRange()
       range.selectNode(el)

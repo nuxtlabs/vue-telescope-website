@@ -87,7 +87,7 @@
     </div>
 
     <Portal to="default-layout">
-      <ShareCollectionModal
+      <LazyShareCollectionModal
         v-if="shareCollection"
         @close="shareCollection = false"
         :collection="collection"

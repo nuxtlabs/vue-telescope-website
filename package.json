@@ -25,6 +25,7 @@
     "nuxt-edge": "^2.15.0-26798437.dd7f767d",
     "nuxt-mq": "^2.0.2",
     "portal-vue": "^2.1.7",
+    "prismjs": "^1.22.0",
     "speakingurl": "^14.0.1",
     "to-px": "^1.1.0",
     "vue-content-placeholders": "^0.2.1",
