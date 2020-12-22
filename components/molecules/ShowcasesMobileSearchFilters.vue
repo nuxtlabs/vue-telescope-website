@@ -11,7 +11,7 @@
       @close="show = false"
       label="Select filters:"
     >
-      <ShowcasesSearchFilters />
+      <ShowcasesSearchFilters @searching="show = false" />
     </DribbbleLikeModalWrapper>
   </div>
 </template>

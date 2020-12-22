@@ -1,6 +1,6 @@
 <template>
   <div class="px-2">
-    <ShowcasesSearchInput class="mb-4" />
+    <ShowcasesSearchInput class="mb-4" @searching="$emit('searching')" />
     <div class="mb-4 flex items-center">
       <div class="mr-2 text-grey-700">Vue 3 only</div>
       <AppSwitch

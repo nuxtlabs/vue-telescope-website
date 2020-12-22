@@ -44,6 +44,7 @@ export default {
   },
   methods: {
     searchQ(v) {
+      this.$emit('searching')
       if (!this.q) {
         this.$store.commit('DELETE_FILTER_KEY', '_q')
       } else {
