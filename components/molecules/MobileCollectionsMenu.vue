@@ -57,22 +57,25 @@ export default {
       this.$gsap.fromTo(
         el,
         {
-          opacity: 0
+          opacity: 0,
+          y: -10
         },
         {
           opacity: 1,
+          y: 0,
+          clearProps: true,
           duration: 0.25,
           onComplete: done
         }
       )
     },
     leaveAnimation(el, done) {
-      this.$gsap.set(el, {
-        transformOrigin: 'left'
-      })
+      // this.$gsap.set(el, {
+      //   transformOrigin: 'left'
+      // })
       this.$gsap.to(el, {
         height: 0,
-        scale: 0.9,
+        // scale: 0.9,
         opacity: 0,
         duration: 0.25,
         onComplete: done

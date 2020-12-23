@@ -4,7 +4,11 @@
       <div slot="aside-content-aside">
         <CreateCollection class="mb-8" />
 
-        <transition-group name="list">
+        <transition-group
+          :css="false"
+          @enter="enterAnimation"
+          @leave="leaveAnimation"
+        >
           <CollectionListItem
             v-for="collection in sortedCollections"
             :key="collection.id"
@@ -71,17 +75,6 @@ export default {
       selectedGroup: (state) => state.collections.selectedGroup
     }),
     ...mapGetters({ sortedCollections: 'collections/sortedCollections' })
-    //   reversedCollections() {
-    //     // TODO: sort by created
-    //     const c = [...this.collections]
-    //     return c.sort(function (a, b) {
-    //       const keyA = new Date(a.created_at)
-    //       const keyB = new Date(b.created_at)
-    //       if (keyA > keyB) return -1
-    //       if (keyA < keyB) return 1
-    //       return 0
-    //     })
-    //   }
   },
   created() {
     // this.selectedCollection = this.collections[0]
@@ -96,29 +89,35 @@ export default {
       )
     }
   },
-  // mounted() {
-  //   console.log(this.$store.state.collections.collections)
-  // },
   methods: {
-    // async deleteCollection(collection) {
-    //   try {
-    //     await this.$store.dispatch('collections/deleteCollection', {
-    //       collection
-    //     })
-    //     // this.selectedCollection = null
-    //     this.$store.commit(
-    //       'collections/setSelectedCollection',
-    //       this.collections[0]
-    //     )
-    //   } catch (e) {}
-    // },
-    // collectionSelectionHandler($event, collection) {
-    //   this.$store.commit(
-    //     'collections/setSelectedCollection',
-    //     $event ? collection : null
-    //   )
-    //   this.$store.commit('collections/setSelectedGroup', null)
-    // }
+    enterAnimation(el, done) {
+      this.$gsap.fromTo(
+        el,
+        {
+          opacity: 0,
+          y: -10
+        },
+        {
+          opacity: 1,
+          y: 0,
+          clearProps: true,
+          duration: 0.25,
+          onComplete: done
+        }
+      )
+    },
+    leaveAnimation(el, done) {
+      // this.$gsap.set(el, {
+      //   transformOrigin: 'left'
+      // })
+      this.$gsap.to(el, {
+        height: 0,
+        // y: 10,
+        opacity: 0,
+        duration: 0.25,
+        onComplete: done
+      })
+    }
   }
 }
 </script>
@@ -141,7 +140,7 @@ export default {
   transform: translateY(4px);
 }
 
-.list-enter-active,
+/*.list-enter-active,
 .list-leave-active {
   transition-duration: 250ms;
   transition-property: opacity, transform;
@@ -156,5 +155,5 @@ export default {
 .list-leave-active {
   opacity: 0;
   transform: translateX(-10px);
-}
+}*/
 </style>
