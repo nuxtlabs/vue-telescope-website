@@ -3,13 +3,13 @@
     <ShowcasesSearchFilters
       slot="aside-content-aside"
       ref="filters"
-      class="h-full overflow-y-auto overflow-x-hidden"
+      class="h-full overflow-x-hidden overflow-y-auto"
       @click.native="filtersTouched = true"
     />
 
     <template slot="aside-content-header">
       <ShowcasesMobileSearchFilters />
-      <ShowcasesSorting class="-mt-9 md:-mt-8 mr-12 md:mr-6" />
+      <ShowcasesSorting class="mr-12 -mt-9 md:-mt-8 md:mr-6" />
       <ShowcasesSelectedFilters
         :selected-filters="selectedFilters"
         :total-count="totalCount"
@@ -39,7 +39,7 @@
           :showcases="showcases"
           :showcases-per-page="showcasesPerPage"
         />
-        <div class="w-full flex items-center justify-center px-8">
+        <div class="flex items-center justify-center w-full px-8">
           <LoadMoreShowcasesButton
             v-if="hasMoreShowcases && showcases.length"
             :pending="$fetchState.pending"
@@ -108,21 +108,26 @@ export default {
     //   this.$store.commit('SET_FILTERS', filterFilters(this.$route.query))
     // }
     // console.log('filterQueryString 1: ', this.selectedFilters)
-    const showcases = await this.$strapi.find(
-      `showcases${this.filterQueryString}`
-    )
-    // const showcases = await this.$strapi.find('showcases', this.selectedFilters)
-    // console.log('filterQueryString 2: ', this.filterQueryString)
+    try {
+      const showcases = await this.$strapi.find(
+        `showcases${this.filterQueryString}`
+      )
+      // const showcases = await this.$strapi.find('showcases', this.selectedFilters)
+      // console.log('filterQueryString 2: ', this.filterQueryString)
 
-    const totalCount = await this.$strapi.find(
-      `showcases/count${this.filterQueryString}`
-    )
-    this.totalCount = totalCount
-    this.showcases = [...this.showcases, ...showcases]
-    if (
-      showcases.length < this.showcasesPerPage ||
-      this.showcases.length >= 96
-    ) {
+      const totalCount = await this.$strapi.find(
+        `showcases/count${this.filterQueryString}`
+      )
+      this.totalCount = totalCount
+      this.showcases = [...this.showcases, ...showcases]
+      if (
+        showcases.length < this.showcasesPerPage ||
+        (this.showcases.length >= 96 && !this.$strapi.user)
+      ) {
+        this.hasMoreShowcases = false
+      }
+    } catch (err) {
+      // Rate limit applied
       this.hasMoreShowcases = false
     }
   },
