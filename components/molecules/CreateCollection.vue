@@ -1,6 +1,6 @@
 <template>
   <div class="h-10 flex items-center mx-2 relative">
-    <div class="h-full flex flex-1 items-center relative mr-1">
+    <div class="h-full flex flex-1 items-center relative mr-1 truncate">
       <transition :css="false" @enter="enter" @leave="leave">
         <div v-if="creatingCollection" class="w-full h-full absolute z-10">
           <AppAutosizeTextarea

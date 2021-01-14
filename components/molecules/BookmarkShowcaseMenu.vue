@@ -8,9 +8,11 @@
     <div v-if="collectionsWithGroups.length">
       <div
         class="font-bold-body-weight"
-        :class="[compact ? 'mb-1' : 'text-six leading-six mb-4']"
+        :class="[
+          compact ? 'text-base leading-base mb-1' : 'text-six leading-six mb-4'
+        ]"
       >
-        Your Lists:
+        Save to:
       </div>
       <ul>
         <li
@@ -37,13 +39,54 @@
             </span>
           </div>
           <ul>
-            <li v-for="group in collection.groups" :key="group.id">
+            <li
+              v-for="(group, i) in collection.groups"
+              :key="group.id"
+              class="flex items-center"
+            >
+              <!-- <span>
+                {{ collection.groups.length === i + 1 ? 'last' : 'regular' }}
+              </span> -->
+              <span
+                class="inline-flex text-grey-200 mr-2"
+                :class="[compact ? 'w-4 h-5' : 'w-6 h-6']"
+              >
+                <svg
+                  v-if="collection.groups.length === i + 1"
+                  preserveAspectRatio="none"
+                  class="w-full h-full"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 0V12H24"
+                    stroke="currentColor"
+                    vector-effect="non-scaling-stroke"
+                  />
+                </svg>
+                <svg
+                  v-else
+                  preserveAspectRatio="none"
+                  class="w-full h-full"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 0V12M12 12H24M12 12V24"
+                    stroke="currentColor"
+                    vector-effect="non-scaling-stroke"
+                  />
+                </svg>
+              </span>
               <button
-                class="focus:outline-none w-full text-left"
+                class="focus:outline-none text-left text-base"
                 :class="[
                   isBookmarked(group)
                     ? 'text-primary-500 hover:text-primary-200'
-                    : 'hover:text-grey-400'
+                    : 'hover:text-grey-400',
+                  compact ? 'text-sm leading-sm' : 'text-base leading-base'
                 ]"
                 @click.stop.prevent="onBookmarkClicked(collection, group)"
               >
@@ -151,7 +194,7 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-.root {
+/* .root {
   & ul {
     margin-left: 1.5rem;
     & li {
@@ -181,41 +224,5 @@ export default {
       display: none;
     }
   }
-}
-/* ul ul {
-  margin-left: 1.5rem;
-} */
-/* ul li {
-  position: relative;
-} */
-/* ul li:before {
-  position: absolute;
-  left: -1rem;
-  top: 0%;
-  content: '';
-  display: block;
-  border-left: 1px solid theme('colors.grey.100');
-  height: 50%;
-  border-bottom: 1px solid theme('colors.grey.100');
-  width: 10px;
-} */
-/* ul li:after {
-  position: absolute;
-  left: -1rem;
-  bottom: -7px;
-  content: '';
-  display: block;
-  border-left: 1px solid theme('colors.grey.100');
-  height: 100%;
-} */
-
-/* ul li.root:before {
-  display: none;
-}
-ul li.root:after {
-  display: none;
-} */
-/* ul li:last-child:after {
-  display: none;
 } */
 </style>

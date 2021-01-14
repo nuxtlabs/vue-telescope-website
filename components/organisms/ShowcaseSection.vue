@@ -38,9 +38,7 @@
 
       <div class="flex flex-wrap">
         <div class="w-full xl:w-1/2 mb-8">
-          <div
-            class="image relative rounded-xl overflow-hidden border-2 border-grey-100"
-          >
+          <div class="image relative rounded-xl overflow-hidden">
             <ResponsiveCloudinaryImage
               :url="website.screenshotUrl"
               :pixelate="website.isAdultContent"
@@ -119,9 +117,9 @@ export default {
 } */
 
 .twitter-like .image {
-  @apply rounded-none border-0 border-t-2 border-b-2 border-grey-100;
+  @apply rounded-none;
   @screen xl {
-    @apply rounded-xl ml-8 border-2 border-grey-100;
+    @apply rounded-xl ml-8;
   }
 }
 </style>

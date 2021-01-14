@@ -1,5 +1,5 @@
 <template>
-  <div @mouseleave="isBookmarking = false" class="">
+  <div class="">
     <button
       @click.stop.prevent="isBookmarking = !isBookmarking"
       :class="[

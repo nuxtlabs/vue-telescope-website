@@ -8,11 +8,11 @@
     :style="[intristicRatioPadding]"
     class="overflow-hidden relative bg-grey-50"
   >
-    <div
+    <!-- <div
       ref="scrim"
       style="backdrop-filter: blur(18px)"
       class="absolute top-0 left-0 w-full h-full z-10 rounded-xl overflow-hidden pointer-events-none"
-    ></div>
+    ></div> -->
     <noscript>
       <img :src="src" :alt="alt" />
     </noscript>
@@ -102,11 +102,11 @@ export default {
           lazyImage.addEventListener('load', () => {
             // lazyImage.classList.add('lazy-loaded')
             this.loaded = true
-            this.$gsap.to(this.$refs.scrim, {
-              opacity: 0,
-              duration: 0.3,
-              ease: 'none'
-            })
+            // this.$gsap.to(this.$refs.scrim, {
+            //   opacity: 0,
+            //   duration: 0.3,
+            //   ease: 'none'
+            // })
             // this.$gsap.fromTo(
             //   lazyImage,
             //   {

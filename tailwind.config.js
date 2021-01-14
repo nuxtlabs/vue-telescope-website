@@ -294,7 +294,8 @@ module.exports = {
     display: ['responsive', 'group-hover'],
     opacity: ['responsive', 'hover', 'focus', 'group-hover'],
     textColor: ['responsive', 'hover', 'focus', 'group-hover'],
-    backgroundColor: ['responsive', 'hover', 'focus', 'group-hover']
+    backgroundColor: ['responsive', 'hover', 'focus', 'group-hover'],
+    borderColor: ['responsive', 'hover', 'focus', 'group-hover']
   },
   // plugins: [],
   purge: {

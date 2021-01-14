@@ -9,7 +9,7 @@
       </template>
 
       <!-- Direct hit view -->
-      <ExploreShowcase
+      <ShowcaseSection
         v-else
         :website="website"
         class="max-w-readable xl:max-w-container m-auto"
@@ -22,7 +22,7 @@
         @close="$router.push('/explore')"
       >
         <!-- <ExploreShowcasePlaceholders v-if="$fetchState.pending" class="p-4" /> -->
-        <ExploreShowcase :website="website" class="twitter-like mb-12" />
+        <ShowcaseSection :website="website" class="twitter-like mb-12" />
         <CtaSection />
       </TwitterLikeModalWrapper>
     </div>

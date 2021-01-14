@@ -1,13 +1,17 @@
 <template>
   <button
-    class="flex items-center focus:outline-none w-10 shadow rounded-full transition-colors duration-200 h-4"
+    class="group flex items-center focus:outline-none w-10 shadow rounded-full transition-colors duration-200 h-4"
     aria-label=""
-    :class="[value ? 'bg-primary-500' : 'bg-grey-50']"
+    :class="[value ? 'bg-primary-500' : 'bg-grey-50 ']"
     @click="processSelection"
   >
     <span
-      class="flex w-5 h-5 bg-white border border-grey-200 rounded-full shadow transition-transform duration-200"
-      :class="[value && ' transform translate-x-full']"
+      class="flex w-5 h-5 bg-white rounded-full shadow border transition duration-200"
+      :class="[
+        value
+          ? ' transform translate-x-full border-primary-500'
+          : 'border-grey-200 group-hover:border-grey-600'
+      ]"
     ></span>
   </button>
 </template>

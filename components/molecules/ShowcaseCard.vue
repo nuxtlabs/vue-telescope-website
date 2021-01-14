@@ -20,7 +20,7 @@
         <BookmarkShowcase
           :showcase="showcase"
           compact
-          class="hidden sm:block opacity-0 group-hover:opacity-100 transition-opacity duration-400"
+          class="hidden sm:block transition-opacity duration-400"
         />
       </div>
       <div class="flex flex-wrap items-center">

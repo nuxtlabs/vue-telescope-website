@@ -8,7 +8,7 @@
       <!-- <pre v-if="activeShowcase">
               {{ activeShowcase }}
             </pre> -->
-      <ExploreShowcase :website="activeShowcase" class="twitter-like mb-12" />
+      <ShowcaseSection :website="activeShowcase" class="twitter-like mb-12" />
       <CtaSection />
     </TwitterLikeModalWrapper>
 

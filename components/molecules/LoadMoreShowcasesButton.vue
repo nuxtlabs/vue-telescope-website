@@ -1,7 +1,7 @@
 <template>
   <AppButton
     ref="load-more-button"
-    class="w-auto sm:w-1/3 flex items-center justify-center"
+    class="group w-auto sm:w-1/3 flex items-center justify-center"
     @click.native="lazyLoadShowcases"
   >
     <div
@@ -16,7 +16,7 @@
     >
       <AppLoader
         class="w-6 h-6"
-        background="text-grey-100"
+        background="text-grey-100 group-hover:text-grey-300 transition-colors duration-200"
         path="text-grey-400"
       />
     </div>
