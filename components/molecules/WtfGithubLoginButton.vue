@@ -6,7 +6,7 @@
     class="cursor-pointer"
     @click.native="login"
   >
-    <GithubIcon class="h-4 w-4 mr-2" />{{ text }}
+    <GithubIcon class="h-5 w-5 mr-2" />{{ text }}
   </AppButton>
 </template>
 

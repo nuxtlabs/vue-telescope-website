@@ -94,7 +94,7 @@
               rel="noopener nofollow noreferrer"
             >
               <span class="sr-only">Twitter</span>
-              <TwitterIcon class="h-5 w-5" />
+              <TwitterIcon class="h-6 w-6" />
             </a>
           </li>
           <li class="">
@@ -105,7 +105,7 @@
               rel="noopener nofollow noreferrer"
             >
               <span class="sr-only">GitHub</span>
-              <GithubIcon class="h-5 w-5" />
+              <GithubIcon class="h-6 w-6" />
             </a>
           </li>
         </ul>

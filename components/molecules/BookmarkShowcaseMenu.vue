@@ -1,6 +1,12 @@
 <template>
   <div>
     <div ref="scrim" class="bg-white absolute top-0 left-0 w-full h-full"></div>
+    <div
+      v-if="!compact"
+      ref="bg"
+      style="opacity: 0"
+      class="shadow-inner absolute top-0 left-0 w-full h-full xl:rounded-xl"
+    ></div>
 
     <transition name="fade">
       <div
@@ -126,7 +132,7 @@
         <div
           v-else
           @click.stop.prevent
-          class="p-3 flex flex-col items-center justify-center"
+          class="w-full h-full p-3 flex flex-col items-center justify-center"
         >
           <div
             class="text-center"
@@ -139,7 +145,7 @@
             Register with one click <br />to save websites into Collections
           </div>
           <WtfGithubLoginButton
-            size="small"
+            :size="compact ? 'small' : 'base'"
             redirect="/collections"
             text="Login"
           />
@@ -185,7 +191,27 @@ export default {
   mounted() {
     setTimeout(() => {
       this.showCollections = true
-    }, 250)
+    }, 200)
+
+    if (!this.compact) {
+      const bg = this.$refs.bg
+      this.$gsap.fromTo(
+        bg,
+        {
+          scale: 0.95,
+          opacity: 0
+        },
+        {
+          scale: 1,
+          opacity: 1,
+          delay: 0.2,
+          duration: 0.3,
+          clearProps: true
+          // ease: 'power4.inOut'
+        }
+      )
+    }
+
     const scrim = this.$refs.scrim
     this.$gsap.set(scrim, {
       transformOrigin: 'top'
@@ -197,11 +223,11 @@ export default {
       },
       {
         scaleY: 1,
-        duration: 0.5,
+        duration: 0.4,
         clearProps: true,
         ease: 'power4.inOut'
         // onComplete: () => {
-        //   this.showCollections = true
+
         // }
       }
     )
@@ -280,9 +306,9 @@ export default {
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.25s
+  transition: opacity 200ms
       theme('transitionTimingFunction.ease-in-out-material-sharp'),
-    transform 0.25s theme('transitionTimingFunction.ease-in-out-material-sharp');
+    transform 200ms theme('transitionTimingFunction.ease-in-out-material-sharp');
 }
 .fade-enter,
 .fade-leave-to {

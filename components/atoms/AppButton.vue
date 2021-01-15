@@ -49,7 +49,7 @@ export default {
           height: 'h-8',
           fontSize: 'text-sm',
           rounded: 'rounded-md',
-          padding: 'px-4'
+          padding: 'px-2'
         }
       } else if (this.size === 'large') {
         return {
