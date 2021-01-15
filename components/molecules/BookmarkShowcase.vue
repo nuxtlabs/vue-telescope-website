@@ -1,5 +1,12 @@
 <template>
-  <div class="">
+  <div
+    @mouseleave="
+      () => {
+        if (compact) isBookmarking = false
+      }
+    "
+    class=""
+  >
     <button
       @click.stop.prevent="isBookmarking = !isBookmarking"
       :class="[
@@ -21,13 +28,13 @@
       />
     </button>
 
-    <transition name="fade">
-      <BookmarkShowcaseMenu
-        v-if="isBookmarking"
-        :showcase="showcase"
-        :compact="compact"
-      />
-    </transition>
+    <!-- <transition name="fade"> -->
+    <BookmarkShowcaseMenu
+      v-if="isBookmarking"
+      :showcase="showcase"
+      :compact="compact"
+    />
+    <!-- </transition> -->
   </div>
 </template>
 

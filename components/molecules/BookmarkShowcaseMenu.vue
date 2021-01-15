@@ -1,130 +1,151 @@
 <template>
-  <div
-    v-if="$strapi.user"
-    @click.stop.prevent
-    class="absolute top-0 left-0 w-full h-full bg-white overflow-auto cursor-default"
-    :class="compact ? 'p-3' : 'p-8'"
-  >
-    <div v-if="collectionsWithGroups.length">
+  <div>
+    <div ref="scrim" class="bg-white absolute top-0 left-0 w-full h-full"></div>
+
+    <transition name="fade">
       <div
-        class="font-bold-body-weight"
-        :class="[
-          compact ? 'text-base leading-base mb-1' : 'text-six leading-six mb-4'
-        ]"
+        v-if="showCollections"
+        class="suka absolute top-0 left-0 w-full h-full overflow-auto cursor-default"
       >
-        Save to:
-      </div>
-      <ul>
-        <li
-          v-for="collection in collectionsWithGroups"
-          :key="collection.id"
-          class="root w-full flex flex-col mb-2"
+        <div
+          v-if="$strapi.user"
+          @click.stop.prevent
+          :class="compact ? 'p-3' : 'p-8'"
         >
-          <div class="flex items-center mb-1">
-            <OpenedFolderIcon
-              class="mr-2 mt-1"
-              :class="[
-                compact ? 'w-4 h-4' : 'w-6 h-6',
-                isBookmarkedCollection(collection) && 'text-primary-500'
-              ]"
-            />
-            <span
+          <div v-if="collectionsWithGroups.length">
+            <div
               class="font-bold-body-weight"
               :class="[
-                isBookmarkedCollection(collection) && 'text-primary-500',
-                compact ? '' : 'text-six leading-six'
+                compact
+                  ? 'text-base leading-base mb-1'
+                  : 'text-six leading-six mb-4'
               ]"
             >
-              {{ collection.name }}
-            </span>
-          </div>
-          <ul>
-            <li
-              v-for="(group, i) in collection.groups"
-              :key="group.id"
-              class="flex items-center"
-            >
-              <!-- <span>
+              Save to:
+            </div>
+            <ul>
+              <li
+                v-for="collection in collectionsWithGroups"
+                :key="collection.id"
+                class="root w-full flex flex-col mb-2"
+              >
+                <div class="flex items-center mb-1">
+                  <OpenedFolderIcon
+                    class="mr-2 mt-1"
+                    :class="[
+                      compact ? 'w-4 h-4' : 'w-6 h-6',
+                      isBookmarkedCollection(collection) && 'text-primary-500'
+                    ]"
+                  />
+                  <span
+                    class="font-bold-body-weight"
+                    :class="[
+                      isBookmarkedCollection(collection) && 'text-primary-500',
+                      compact ? '' : 'text-six leading-six'
+                    ]"
+                  >
+                    {{ collection.name }}
+                  </span>
+                </div>
+                <ul>
+                  <li
+                    v-for="(group, i) in collection.groups"
+                    :key="group.id"
+                    class="flex items-center"
+                  >
+                    <!-- <span>
                 {{ collection.groups.length === i + 1 ? 'last' : 'regular' }}
               </span> -->
-              <span
-                class="inline-flex text-grey-200 mr-2"
-                :class="[compact ? 'w-4 h-5' : 'w-6 h-6']"
-              >
-                <svg
-                  v-if="collection.groups.length === i + 1"
-                  preserveAspectRatio="none"
-                  class="w-full h-full"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M12 0V12H24"
-                    stroke="currentColor"
-                    vector-effect="non-scaling-stroke"
-                  />
-                </svg>
-                <svg
-                  v-else
-                  preserveAspectRatio="none"
-                  class="w-full h-full"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M12 0V12M12 12H24M12 12V24"
-                    stroke="currentColor"
-                    vector-effect="non-scaling-stroke"
-                  />
-                </svg>
-              </span>
-              <button
-                class="focus:outline-none text-left text-base"
-                :class="[
-                  isBookmarked(group)
-                    ? 'text-primary-500 hover:text-primary-200'
-                    : 'hover:text-grey-400',
-                  compact ? 'text-sm leading-sm' : 'text-base leading-base'
-                ]"
-                @click.stop.prevent="onBookmarkClicked(collection, group)"
-              >
-                <span>{{ group.name }}</span>
-              </button>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
+                    <span
+                      class="inline-flex text-grey-200 mr-2"
+                      :class="[compact ? 'w-4 h-5' : 'w-6 h-6']"
+                    >
+                      <svg
+                        v-if="collection.groups.length === i + 1"
+                        preserveAspectRatio="none"
+                        class="w-full h-full"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M12 0V12H24"
+                          stroke="currentColor"
+                          vector-effect="non-scaling-stroke"
+                        />
+                      </svg>
+                      <svg
+                        v-else
+                        preserveAspectRatio="none"
+                        class="w-full h-full"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M12 0V12M12 12H24M12 12V24"
+                          stroke="currentColor"
+                          vector-effect="non-scaling-stroke"
+                        />
+                      </svg>
+                    </span>
+                    <button
+                      class="focus:outline-none text-left text-base"
+                      :class="[
+                        isBookmarked(group)
+                          ? 'text-primary-500 hover:text-primary-200'
+                          : 'hover:text-grey-400',
+                        compact
+                          ? 'text-sm leading-sm'
+                          : 'text-base leading-base'
+                      ]"
+                      @click.stop.prevent="onBookmarkClicked(collection, group)"
+                    >
+                      <span>{{ group.name }}</span>
+                    </button>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
 
-    <div v-else class="w-full h-full p-4 flex items-center justify-center">
-      <div class="text-seven leading-seven text-center">
-        To save website into Collection you need to
-        <NuxtLink to="/collections" class="text-primary-500"
-          >create Lists</NuxtLink
+          <div
+            v-else
+            class="w-full h-full p-4 flex items-center justify-center"
+          >
+            <div class="text-seven leading-seven text-center">
+              To save website into Collection you need to
+              <NuxtLink to="/collections" class="text-primary-500"
+                >create Lists</NuxtLink
+              >
+              first
+            </div>
+          </div>
+        </div>
+
+        <div
+          v-else
+          @click.stop.prevent
+          class="p-3 flex flex-col items-center justify-center"
         >
-        first
+          <div
+            class="text-center"
+            :class="[
+              compact
+                ? 'text-sm leading-sm mb-2'
+                : 'text-seven leading-seven sm:text-five sm:leading-five mb-4'
+            ]"
+          >
+            Register with one click <br />to save websites into Collections
+          </div>
+          <WtfGithubLoginButton
+            size="small"
+            redirect="/collections"
+            text="Login"
+          />
+        </div>
       </div>
-    </div>
-  </div>
-
-  <div
-    v-else
-    @click.stop.prevent
-    class="absolute top-0 left-0 w-full h-full bg-white overflow-auto cursor-default p-3 flex flex-col items-center justify-center"
-  >
-    <div
-      class="text-center"
-      :class="[
-        compact
-          ? 'text-sm leading-sm mb-2'
-          : 'text-seven leading-seven sm:text-five sm:leading-five mb-4'
-      ]"
-    >
-      Register with one click <br />to save websites into Collections
-    </div>
-    <WtfGithubLoginButton size="small" redirect="/collections" text="Login" />
+    </transition>
   </div>
 </template>
 
@@ -148,6 +169,11 @@ export default {
       default: false
     }
   },
+  data() {
+    return {
+      showCollections: false
+    }
+  },
   computed: {
     ...mapState({
       collections: (state) => state.collections.collections
@@ -155,6 +181,30 @@ export default {
     collectionsWithGroups() {
       return this.collections.filter((collection) => collection.groups.length)
     }
+  },
+  mounted() {
+    setTimeout(() => {
+      this.showCollections = true
+    }, 250)
+    const scrim = this.$refs.scrim
+    this.$gsap.set(scrim, {
+      transformOrigin: 'top'
+    })
+    this.$gsap.fromTo(
+      scrim,
+      {
+        scaleY: 0
+      },
+      {
+        scaleY: 1,
+        duration: 0.5,
+        clearProps: true,
+        ease: 'power4.inOut'
+        // onComplete: () => {
+        //   this.showCollections = true
+        // }
+      }
+    )
   },
   methods: {
     isBookmarkedCollection(collection) {
@@ -225,4 +275,18 @@ export default {
     }
   }
 } */
+</style>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.25s
+      theme('transitionTimingFunction.ease-in-out-material-sharp'),
+    transform 0.25s theme('transitionTimingFunction.ease-in-out-material-sharp');
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(-5px);
+}
 </style>
