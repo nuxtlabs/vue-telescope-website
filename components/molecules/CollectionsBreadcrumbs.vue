@@ -1,13 +1,24 @@
 <template>
   <div class="flex items-center">
-    <div v-if="selectedCollection" class="flex items-center">
+    <button
+      v-if="selectedCollection"
+      class="flex items-center focus:outline-none"
+      @click="isMobile ? $emit('open-menu') : null"
+    >
       <FolderIcon class="w-5 h-5 mr-2" />
       <span class="font-bold-body-weight">{{ selectedCollection.name }}</span>
-    </div>
+    </button>
     <div v-if="selectedGroup">
       <ChevronRightIcon class="w-4 h-4 mx-1" />
     </div>
-    <div v-if="selectedGroup">{{ selectedGroup.name }}</div>
+    <button
+      v-if="selectedGroup"
+      :disabled="isMobile ? false : true"
+      @click="isMobile ? $emit('open-menu') : null"
+      class="focus:outline-none"
+    >
+      {{ selectedGroup.name }}
+    </button>
   </div>
 </template>
 
@@ -24,7 +35,8 @@ export default {
   computed: {
     ...mapState({
       selectedCollection: (state) => state.collections.selectedCollection,
-      selectedGroup: (state) => state.collections.selectedGroup
+      selectedGroup: (state) => state.collections.selectedGroup,
+      isMobile: (state) => state.isMobile
     })
   }
 }

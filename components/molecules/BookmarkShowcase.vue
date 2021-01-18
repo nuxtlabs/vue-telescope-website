@@ -4,7 +4,7 @@
       @click.stop.prevent="isBookmarking = !isBookmarking"
       :class="[
         isBookmarkedAtLeastOnce
-          ? 'bg-primary-50'
+          ? 'bg-primary-50 hover:bg-primary-100'
           : 'bg-grey-100 hover:bg-grey-50',
         compact ? 'm-2' : 'm-2 xs:m-4 sm:m-8'
       ]"

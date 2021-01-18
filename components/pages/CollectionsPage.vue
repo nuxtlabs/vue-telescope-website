@@ -19,8 +19,11 @@
       </div>
 
       <template slot="aside-content-header">
-        <MobileCollectionsMenu />
-        <CollectionsBreadcrumbs class="ml-4 absolute top-0 -mt-6" />
+        <MobileCollectionsMenu ref="mobile-menu" />
+        <CollectionsBreadcrumbs
+          @open-menu="$refs['mobile-menu'].show = true"
+          class="ml-4 absolute top-0 -mt-6"
+        />
       </template>
 
       <div slot="aside-content-main">
