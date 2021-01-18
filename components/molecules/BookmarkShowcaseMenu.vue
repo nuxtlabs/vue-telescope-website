@@ -1,17 +1,17 @@
 <template>
-  <div>
+  <div v-click-outside="() => $emit('close')">
     <div ref="scrim" class="bg-white absolute top-0 left-0 w-full h-full"></div>
-    <div
+    <!-- <div
       v-if="!compact"
       ref="bg"
       style="opacity: 0"
-      class="shadow-inner absolute top-0 left-0 w-full h-full xl:rounded-xl"
-    ></div>
+      class="absolute top-0 left-0 w-full h-full xl:rounded-xl"
+    ></div> -->
 
     <transition name="fade">
       <div
         v-if="showCollections"
-        class="suka absolute top-0 left-0 w-full h-full overflow-auto cursor-default"
+        class="absolute top-0 left-0 w-full h-full overflow-auto cursor-default"
       >
         <div
           v-if="$strapi.user"
@@ -193,24 +193,24 @@ export default {
       this.showCollections = true
     }, 200)
 
-    if (!this.compact) {
-      const bg = this.$refs.bg
-      this.$gsap.fromTo(
-        bg,
-        {
-          scale: 0.95,
-          opacity: 0
-        },
-        {
-          scale: 1,
-          opacity: 1,
-          delay: 0.2,
-          duration: 0.3,
-          clearProps: true
-          // ease: 'power4.inOut'
-        }
-      )
-    }
+    // if (!this.compact) {
+    //   const bg = this.$refs.bg
+    //   this.$gsap.fromTo(
+    //     bg,
+    //     {
+    //       scale: 0.95,
+    //       opacity: 0
+    //     },
+    //     {
+    //       scale: 1,
+    //       opacity: 1,
+    //       delay: 0.2,
+    //       duration: 0.3,
+    //       clearProps: true
+    //       // ease: 'power4.inOut'
+    //     }
+    //   )
+    // }
 
     const scrim = this.$refs.scrim
     this.$gsap.set(scrim, {

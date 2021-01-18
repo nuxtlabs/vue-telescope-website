@@ -1,12 +1,5 @@
 <template>
-  <div
-    @mouseleave="
-      () => {
-        if (compact) isBookmarking = false
-      }
-    "
-    class=""
-  >
+  <div @mouseleave="mouseLeaveHandler" @mouseenter="mouseEnterHandler">
     <button
       @click.stop.prevent="isBookmarking = !isBookmarking"
       :class="[
@@ -33,6 +26,7 @@
       v-if="isBookmarking"
       :showcase="showcase"
       :compact="compact"
+      @close="isBookmarking = false"
     />
     <!-- </transition> -->
   </div>
@@ -58,7 +52,8 @@ export default {
   },
   data() {
     return {
-      isBookmarking: false
+      isBookmarking: false,
+      hovered: false
     }
   },
   computed: {
@@ -70,6 +65,19 @@ export default {
         .flatMap((collection) => collection.groups)
         .flatMap((group) => group.showcases)
       return showcases?.find((s) => s && s.id === this.showcase.id)
+    }
+  },
+  methods: {
+    mouseEnterHandler() {
+      this.hovered = true
+      clearTimeout(this.timer)
+    },
+    mouseLeaveHandler() {
+      this.hovered = false
+      this.timer = setTimeout(this.closeMenu, 1000)
+    },
+    closeMenu() {
+      if (this.compact) this.isBookmarking = false
     }
   }
 }
