@@ -14,6 +14,7 @@
             :key="collection.id"
             class="px-2"
             :collection="collection"
+            @close-menu="notWorking"
           />
         </transition-group>
       </div>
@@ -93,6 +94,9 @@ export default {
     }
   },
   methods: {
+    notWorking() {
+      console.log('NOT WORKING')
+    },
     enterAnimation(el, done) {
       this.$gsap.fromTo(
         el,

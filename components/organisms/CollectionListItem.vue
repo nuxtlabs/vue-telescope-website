@@ -98,14 +98,14 @@
     <transition :css="false" @enter="enter" @leave="leave">
       <div v-if="openCollapse">
         <div>
-          <GroupListItem
-            v-for="group in reversedGroups"
-            :key="group.id"
-            :group="group"
+          <ListItem
+            v-for="list in reversedLists"
+            :key="list.id"
+            :group="list"
             :collection="collection"
             tabindex="0"
             class="pl-6"
-            @group-selected="groupSelectionHandler($event, group)"
+            @group-selected="groupSelectionHandler($event, list)"
           />
 
           <CreateGroup :collection="collection" @cleanup="clearActions" />
@@ -153,7 +153,8 @@ export default {
   computed: {
     ...mapState({
       selectedCollection: (state) => state.collections.selectedCollection,
-      selectedGroup: (state) => state.collections.selectedGroup
+      selectedGroup: (state) => state.collections.selectedGroup,
+      isMobile: (state) => state.isMobile
     }),
     isSelected() {
       return (
@@ -161,7 +162,7 @@ export default {
         this.selectedCollection.id === this.collection.id
       )
     },
-    reversedGroups() {
+    reversedLists() {
       // TODO: sort by created
       const r = [...this.collection.groups]
       return r.sort(function (a, b) {
@@ -171,6 +172,17 @@ export default {
         if (keyA > keyB) return 1
         return 0
       })
+    }
+  },
+  watch: {
+    selectedCollection(newValue) {
+      if (
+        this.isMobile &&
+        newValue.id !== this.collection.id &&
+        this.openCollapse
+      ) {
+        this.openCollapse = false
+      }
     }
   },
   mounted() {
@@ -269,6 +281,10 @@ export default {
         'collections/setSelectedCollection',
         $event ? this.collection : null
       )
+      if (this.isMobile) {
+        console.log('NOT WORKING')
+        this.$emit('close-menu')
+      }
     },
     enter(el, done) {
       this.$nextTick(() => {
