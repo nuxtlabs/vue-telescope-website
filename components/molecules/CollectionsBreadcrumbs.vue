@@ -18,6 +18,13 @@
       class="focus:outline-none"
     >
       {{ selectedGroup.name }}
+      ({{
+        selectedGroup.showcases.length
+          ? selectedGroup.showcases.length > 1
+            ? `${selectedGroup.showcases.length} showcases`
+            : '1 showcase'
+          : 'empty'
+      }})
     </button>
   </div>
 </template>
