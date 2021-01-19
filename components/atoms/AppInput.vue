@@ -80,4 +80,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+input {
+  -webkit-appearance: none;
+}
+</style>

@@ -1,25 +1,31 @@
 <template>
   <div class="modal-wrapper">
-    <div class="fixed top-0 bg-white">{{ test }}</div>
-    <div class="w-full h-full overflow-auto" @click.self="$emit('close')">
+    <div ref="scrim" class="scrim" style="opacity: 0"></div>
+    <!-- <div class="fixed top-0 bg-white">{{ test }}</div> -->
+    <div class="w-full h-full overflow-auto" @click.self="animateLeave">
       <div class="h-full pointer-events-none flex justify-end flex-col pt-16">
         <div
           ref="hack-safari"
-          class="rounded-4xl rounded-b-none overflow-hidden"
+          class="rounded-4xl rounded-b-none overflow-hidden h-full"
         >
           <div
-            ref="modal-wrapper"
-            class="relative bg-white h-full pointer-events-auto rounded-4xl rounded-b-none relative px-4"
+            ref="modal-container"
+            style="transform: translateY(100%)"
+            class="modal-container relative bg-white h-full pointer-events-auto rounded-4xl rounded-b-none relative px-4"
           >
             <div
+              @click="isMobile ? null : animateLeave()"
+              @touchmove="touchMoveHandler"
+              @touchstart="touchStartHandler"
               ref="close-button"
-              class="sticky-edge sticky bg-white top-0 left-0 z-10 w-full py-4 cursor-pointer pointer-events-auto flex items-center justify-center"
-              @click="$emit('close')"
+              class="sticky-edge sticky bg-white rounded-md top-0 left-0 z-10 w-full py-4 cursor-pointer pointer-events-auto flex items-center justify-center"
             >
               <!-- <XmarkCircleIcon class="text-grey-900 w-6 h-6" /> -->
               <div class="w-24 h-1 bg-grey-300 rounded"></div>
             </div>
-            <div class="relative flex justify-between items-center mb-4 mt-2">
+            <div
+              class="relative flex justify-between items-center mb-4 mt-2 pointer-events-none"
+            >
               <div class="pl-2 text-six leading-six font-bold-body-weight">
                 {{ label }}
               </div>
@@ -50,20 +56,24 @@ export default {
   },
   computed: {
     ...mapState({
-      browser: (state) => state.browser
+      browser: (state) => state.browser,
+      isModal: (state) => state.isModal,
+      isMobile: (state) => state.isMobile
     })
   },
   data() {
     return {
-      test: 0
+      // test: 0,
+      yStart: null,
+      xStart: null
     }
   },
   mounted() {
-    document.addEventListener('touchmove', this.touchMoveHandler, false)
+    // document.addEventListener('touchmove', this.touchMoveHandler, false)
 
     const escapeHandler = (e) => {
       if (e.key === 'Escape') {
-        this.$emit('close')
+        this.animateLeave
       }
     }
     document.addEventListener('keydown', escapeHandler)
@@ -73,6 +83,7 @@ export default {
 
     this.$store.commit('SET_MODAL', true)
     this.animateEnter()
+
     const scrollBarGap =
       window.innerWidth - document.documentElement.clientWidth
     document.body.style.overflow = 'hidden'
@@ -82,7 +93,7 @@ export default {
     ).style.paddingRight = `${scrollBarGap}px`
 
     this.$refs[
-      'modal-wrapper'
+      'modal-container'
     ].style.paddingRight = `calc(1rem + ${scrollBarGap}px)`
   },
   beforeDestroy() {
@@ -94,25 +105,85 @@ export default {
     })
   },
   methods: {
-    touchMoveHandler() {
-      this.test++
-      console.log('touchMoveHandler')
+    touchStartHandler(e) {
+      this.yStart = e.touches[0].clientY
+      this.xStart = e.touches[0].clientX
+    },
+    touchMoveHandler(e) {
+      if (!this.yStart || !this.xStart) {
+        return
+      }
+
+      var xCurrent = e.touches[0].clientX
+      var yCurrent = e.touches[0].clientY
+
+      var xDiff = this.xStart - xCurrent
+      var yDiff = this.yStart - yCurrent
+
+      if (Math.abs(xDiff) > Math.abs(yDiff)) {
+        if (xDiff > 0) {
+          // left swipe
+        } else {
+          // right swipe
+        }
+      } else {
+        if (yDiff > 0) {
+          // up swipe
+        } else {
+          // down swipe
+          // this.$emit('close')
+          this.animateLeave()
+        }
+      }
+      // reset
+      this.xStart = null
+      this.yStart = null
     },
     animateEnter() {
-      if (this.browser === 'Safari') {
-        this.$refs['modal-wrapper'].style.height = 'calc(100vh - 7rem)'
-      }
-      this.$gsap.from(this.$refs['modal-wrapper'], {
+      const scrim = this.$refs.scrim
+      this.$gsap.fromTo(
+        scrim,
+        {
+          opacity: 0
+        },
+        {
+          opacity: 1,
+          duration: 0.2,
+          ease: 'none',
+          onComplete: () => {
+            if (this.browser === 'Safari') {
+              this.$refs['modal-container'].style.height = 'calc(100vh - 7rem)'
+            }
+            this.$gsap.to(this.$refs['modal-container'], {
+              y: 0,
+              // opacity: 0,
+              duration: 1,
+              ease: 'expo.out',
+              clearProps: true,
+              onComplete: () => {
+                // this.$refs['hack-safari'].style.height = '100%'
+                // this.$refs['modal-container'].style.height = '100%'
+                this.$refs['modal-container'].style.paddingRight = null
+                this.$refs['modal-container'].classList.add('overflow-auto') // md:overflow-hidden overflow-x-hidden
+              }
+            })
+          }
+        }
+      )
+    },
+    animateLeave() {
+      const scrim = this.$refs.scrim
+      this.$gsap.to(scrim, {
+        opacity: 0,
+        duration: 0.25
+      })
+
+      this.$gsap.to(this.$refs['modal-container'], {
         y: '100%',
-        // opacity: 0,
-        duration: 1,
+        duration: 0.25,
         ease: 'expo.out',
-        clearProps: true,
         onComplete: () => {
-          // this.$refs['hack-safari'].style.height = '100%'
-          // this.$refs['modal-wrapper'].style.height = '100%'
-          this.$refs['modal-wrapper'].style.paddingRight = null
-          this.$refs['modal-wrapper'].classList.add('overflow-auto') // md:overflow-hidden overflow-x-hidden
+          this.$emit('close')
         }
       })
     }
@@ -128,12 +199,24 @@ export default {
   width: 100%;
   height: 100%;
   /* background: rgba(255, 255, 255, 0.42); */
-  background-color: rgba(0, 0, 0, 0.4);
+  /* background-color: rgba(0, 0, 0, 0.4); */
   z-index: 1000;
   /* backdrop-filter: blur(18px); */
   /* display: flex;
   align-items: center;
   justify-content: center; */
+}
+
+.scrim {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  /* z-index: 1000; */
+  backdrop-filter: blur(18px);
+  pointer-events: none;
 }
 
 .sticky-edge {
