@@ -12,7 +12,7 @@
       </AppButton>
     </div>
 
-    <DribbbleLikeModalWrapper
+    <MobileModalWrapper
       v-if="show"
       @close="show = false"
       label="Your Collections:"
@@ -32,18 +32,18 @@
           :collection="collection"
         />
       </transition-group>
-    </DribbbleLikeModalWrapper>
+    </MobileModalWrapper>
   </div>
 </template>
 
 <script>
-import UnorderedListIcon from '@/assets/icons/unordered-list.svg?inline'
+// import UnorderedListIcon from '@/assets/icons/unordered-list.svg?inline'
 import { mapState, mapGetters } from 'vuex'
 
 export default {
-  components: {
-    UnorderedListIcon
-  },
+  // components: {
+  //   UnorderedListIcon
+  // },
   data() {
     return {
       show: false

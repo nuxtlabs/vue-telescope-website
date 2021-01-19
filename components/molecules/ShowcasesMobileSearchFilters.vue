@@ -6,13 +6,13 @@
     >
       <FilterIcon class="h-7 w-7 overflow-visible" />
     </button>
-    <DribbbleLikeModalWrapper
+    <MobileModalWrapper
       v-if="show"
       @close="show = false"
       label="Select filters:"
     >
       <ShowcasesSearchFilters @searching="show = false" />
-    </DribbbleLikeModalWrapper>
+    </MobileModalWrapper>
   </div>
 </template>
 

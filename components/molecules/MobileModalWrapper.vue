@@ -1,24 +1,26 @@
 <template>
   <div class="modal-wrapper">
+    <div class="fixed top-0 bg-white">{{ test }}</div>
     <div class="w-full h-full overflow-auto" @click.self="$emit('close')">
-      <div class="h-full pointer-events-none flex justify-end flex-col pt-28">
+      <div class="h-full pointer-events-none flex justify-end flex-col pt-16">
         <div
           ref="hack-safari"
           class="rounded-4xl rounded-b-none overflow-hidden"
         >
           <div
             ref="modal-wrapper"
-            class="surface h-full pointer-events-auto rounded-4xl rounded-b-none relative px-4"
+            class="relative bg-white h-full pointer-events-auto rounded-4xl rounded-b-none relative px-4"
           >
             <div
               ref="close-button"
-              class="absolute top-0 right-0 z-10 p-8 cursor-pointer pointer-events-auto"
+              class="sticky-edge sticky bg-white top-0 left-0 z-10 w-full py-4 cursor-pointer pointer-events-auto flex items-center justify-center"
               @click="$emit('close')"
             >
-              <XmarkCircleIcon class="text-grey-900 w-6 h-6" />
+              <!-- <XmarkCircleIcon class="text-grey-900 w-6 h-6" /> -->
+              <div class="w-24 h-1 bg-grey-300 rounded"></div>
             </div>
-            <div class="relative flex justify-between items-center mb-8">
-              <div class="pl-2 text-five leading-five font-bold-body-weight">
+            <div class="relative flex justify-between items-center mb-4 mt-2">
+              <div class="pl-2 text-six leading-six font-bold-body-weight">
                 {{ label }}
               </div>
             </div>
@@ -51,7 +53,14 @@ export default {
       browser: (state) => state.browser
     })
   },
+  data() {
+    return {
+      test: 0
+    }
+  },
   mounted() {
+    document.addEventListener('touchmove', this.touchMoveHandler, false)
+
     const escapeHandler = (e) => {
       if (e.key === 'Escape') {
         this.$emit('close')
@@ -85,6 +94,10 @@ export default {
     })
   },
   methods: {
+    touchMoveHandler() {
+      this.test++
+      console.log('touchMoveHandler')
+    },
     animateEnter() {
       if (this.browser === 'Safari') {
         this.$refs['modal-wrapper'].style.height = 'calc(100vh - 7rem)'
@@ -94,7 +107,7 @@ export default {
         // opacity: 0,
         duration: 1,
         ease: 'expo.out',
-        // clearProps: true,
+        clearProps: true,
         onComplete: () => {
           // this.$refs['hack-safari'].style.height = '100%'
           // this.$refs['modal-wrapper'].style.height = '100%'
@@ -123,25 +136,26 @@ export default {
   justify-content: center; */
 }
 
-.surface {
-  position: relative;
-  background: white;
+.sticky-edge {
+  /* position: relative; */
+  /* background: white; */
   &:before {
     content: '';
-    position: sticky;
+    position: absolute;
     display: block;
     width: 100%;
-    height: 2rem;
-    top: 0;
+    height: 1rem;
+    bottom: 0;
     left: 0;
     right: 0;
     z-index: 10;
+    transform: translateY(100%);
+    /* border-radius: 8px; */
     background: rgb(255, 255, 255);
     background: linear-gradient(
       0deg,
       rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 1) 50%,
-      rgba(255, 255, 255, 1) 100%
+      /* rgba(255, 255, 255, 1) 50%, */ rgba(255, 255, 255, 1) 100%
     );
   }
 }
