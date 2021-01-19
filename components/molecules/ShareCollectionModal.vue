@@ -17,8 +17,10 @@
       <div>
         <span>Usage:</span>
         <pre
-          class="language-js cursor-pointer bg-grey-200 rounded-2lg p-4 text-sm leading-sm mt-2 focus:outline-none focus:border-grey-300 border-2 border-transparent"
-        ><code>{{ `await fetch('${collectionUrl}').then(response => response.json())` }}</code></pre>
+          class="flex overflow-auto cursor-pointer bg-grey-200 rounded-2lg p-4 text-sm leading-sm mt-2 focus:outline-none focus:border-grey-300 border-2 border-transparent"
+        >
+          <code v-html="codeHtml"></code>
+        </pre>
       </div>
 
       <p>Feel free to use Vue Telemetry data anywhere in your own app.</p>
@@ -36,10 +38,25 @@ export default {
       default: null
     }
   },
+  data() {
+    return {
+      codeHtml: ''
+    }
+  },
   computed: {
     collectionUrl() {
       return `${this.$config.strapiURL}/lists/${this.collection.id}`
+    },
+    code() {
+      return `await fetch('${this.collectionUrl}').then(response => response.json())`
     }
+  },
+  mounted() {
+    this.codeHtml = Prism.highlight(
+      this.code,
+      Prism.languages.javascript,
+      'javascript'
+    )
   },
   methods: {
     selectRequest() {

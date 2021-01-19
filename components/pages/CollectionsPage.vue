@@ -2,7 +2,7 @@
   <ClientOnly>
     <AsideContentTemplate v-if="$strapi.user">
       <div slot="aside-content-aside">
-        <CreateCollection class="mb-8" />
+        <CreateCollection class="mb-2" />
 
         <transition-group
           :css="false"

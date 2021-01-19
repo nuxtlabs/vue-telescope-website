@@ -17,13 +17,13 @@
       @close="show = false"
       label="Your Collections:"
     >
-      <CreateCollection class="mb-4" />
+      <CreateCollection class="mb-2" />
 
       <transition-group
         :css="false"
         @enter="enterAnimation"
         @leave="leaveAnimation"
-        class="relative block overflow-hidden p-2 py-4"
+        class="relative block overflow-hidden px-2 pb-4"
       >
         <CollectionListItem
           v-for="collection in sortedCollections"

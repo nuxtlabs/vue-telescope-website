@@ -15,9 +15,11 @@
           ref="modal-wrapper"
           style="opacity: 0"
           :class="[
-            compact ? 'max-w-readable' : 'max-w-readable xl:max-w-container'
+            compact
+              ? 'max-w-readable'
+              : 'max-w-readable xl:max-w-container min-h-screen'
           ]"
-          class="pointer-events-auto h-full min-h-screen relative md:h-auto bg-white m-auto md:mt-12 md:rounded-xl overflow-auto md:overflow-hidden overflow-x-hidden shadow-lg"
+          class="pointer-events-auto h-full relative md:h-auto bg-white m-auto md:mt-12 md:rounded-xl overflow-auto md:overflow-hidden overflow-x-hidden shadow-lg"
         >
           <div
             ref="close-button"
