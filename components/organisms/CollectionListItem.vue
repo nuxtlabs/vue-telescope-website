@@ -176,11 +176,7 @@ export default {
   },
   watch: {
     selectedCollection(newValue) {
-      if (
-        this.isMobile &&
-        newValue.id !== this.collection.id &&
-        this.openCollapse
-      ) {
+      if (newValue.id !== this.collection.id && this.openCollapse) {
         this.openCollapse = false
       }
     }
@@ -212,7 +208,9 @@ export default {
         'collections/setSelectedGroup',
         this.collection.groups[0]
       )
-      this.openCollapse = !this.openCollapse
+      if (!this.openCollapse) {
+        this.openCollapse = true
+      }
 
       // // more nice behaviour
       // if (!this.openCollapse) {
