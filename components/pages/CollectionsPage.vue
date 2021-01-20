@@ -86,6 +86,7 @@ export default {
       'collections/setSelectedCollection',
       this.sortedCollections[0]
     )
+    console.log('BREADCRUMBS ISSUE', this.sortedCollections[0])
     if (this.sortedCollections[0] && this.sortedCollections[0].groups.length) {
       this.$store.commit(
         'collections/setSelectedGroup',

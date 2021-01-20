@@ -12,7 +12,6 @@
       label="Select filters:"
     >
       <ShowcasesSearchFilters @searching="show = false" />
-      <ShowcasesSearchFilters @searching="show = false" />
     </MobileModalWrapper>
   </div>
 </template>
