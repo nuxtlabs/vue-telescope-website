@@ -74,12 +74,11 @@ export const mutations = {
         state.collections[collectionIndex].groups.splice(groupIndex, 1)
     }
   },
-  setSelectedCollection(state, { collection, from }) {
-    console.log('VUEX setSelectedCollection from: ', from)
-
-    if (typeof collection !== 'undefined') {
-      state.selectedCollection = collection
-    }
+  setSelectedCollection(state, collection) {
+    state.selectedCollection = collection
+    // if (typeof collection !== 'undefined') {
+    //   state.selectedCollection = collection
+    // }
   },
   setSelectedGroup(state, group) {
     state.selectedGroup = group
