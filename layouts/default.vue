@@ -10,7 +10,7 @@
     <PortalTarget name="tour" />
     <PortalTarget name="default-layout" />
     <div class="fixed bottom-0 left-0 bg-white p-2">
-      {{ sortedCollections }}
+      {{ selectedCollection }}
     </div>
   </div>
 </template>
@@ -23,9 +23,8 @@ export default {
   computed: {
     ...mapState({
       showPrivacyAwareModal: (state) => state.showPrivacyAwareModal,
-      collections: (state) => state.collections.collections
-    }),
-    ...mapGetters({ sortedCollections: 'collections/sortedCollections' })
+      selectedCollection: (state) => state.collections.selectedCollection
+    })
   }
 }
 </script>
