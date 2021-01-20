@@ -82,11 +82,11 @@ export default {
   },
   created() {
     // this.selectedCollection = this.collections[0]
-    this.$store.commit(
-      'collections/setSelectedCollection',
-      this.sortedCollections[0]
-    )
-    console.log('BREADCRUMBS ISSUE', this.sortedCollections[0])
+    this.$store.commit('collections/setSelectedCollection', {
+      collection: this.sortedCollections[0],
+      from: 'CollectionsPage'
+    })
+    // console.log('BREADCRUMBS ISSUE', this.sortedCollections[0])
     if (this.sortedCollections[0] && this.sortedCollections[0].groups.length) {
       this.$store.commit(
         'collections/setSelectedGroup',
