@@ -86,7 +86,7 @@
         <ul class="flex items-center">
           <li class="mr-2">
             <a
-              href="https://twitter.com/VueTelemetry"
+              href="https://twitter.com/VueTelescope"
               class="text-grey-900 hover:text-primary-500 transition ease-in duration-150"
               target="_blank"
               rel="noopener nofollow noreferrer"
