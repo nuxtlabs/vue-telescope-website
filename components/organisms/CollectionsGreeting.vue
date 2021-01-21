@@ -12,7 +12,7 @@
     <p
       class="mx-auto text-eight leading-eight text-center mb-10 md:w-3/4 text-grey-700 px-8"
     >
-      Login with GitHub to start using Vue Telemetry Collections.
+      Login with GitHub to start using Vue Telescope Collections.
     </p>
     <WtfGithubLoginButton class="mb-8" />
     <div class="text-sm leading-sm">

@@ -1,6 +1,6 @@
-# vue-telemetry-website
+# vue-telescope-website
 
-> Curated list of Vue websites on [vuetelemetry.com](https://vuetelemetry.com)
+> Curated list of Vue websites on [vuetelescope.com](https://vuetelescope.com)
 
 ## Installation
 
@@ -25,7 +25,6 @@ netlify dev
 ```
 
 Then go to [http://localhost:8888](http://localhost:8888).
-
 
 ## Build Setup
 

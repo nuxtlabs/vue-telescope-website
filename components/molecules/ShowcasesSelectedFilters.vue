@@ -21,7 +21,7 @@
             <img
               v-if="key === 'framework.slug'"
               class="w-4 h-4 inline-block"
-              :src="`https://icons.vuetelemetry.com${
+              :src="`${$config.iconsURL}${
                 frameworks.find((framework) => framework.slug === value).imgPath
               }`"
               alt=""
@@ -29,7 +29,7 @@
             <img
               v-else-if="key === 'ui.slug'"
               class="w-4 h-4 inline-block"
-              :src="`https://icons.vuetelemetry.com${
+              :src="`${$config.iconsURL}${
                 uis.find((ui) => ui.slug === value).imgPath
               }`"
               alt=""

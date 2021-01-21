@@ -62,7 +62,7 @@ const tabs = [
     id: 1,
     title: 'Detect Vue technologies',
     description:
-      'Vue Telemetry can detect any website built with Vue.js frameworks, like Nuxt, Gridsome, Quasar or VuePress. It can also tell you which UI/CSS framework was used: TailwindCSS, Vuetify, Buefy etc. And much more!',
+      'Vue Telescope can detect any website built with Vue.js frameworks, like Nuxt, Gridsome, Quasar or VuePress. It can also tell you which UI/CSS framework was used: TailwindCSS, Vuetify, Buefy etc. And much more!',
     component: 'FeatureTabsOne',
     surfaceColor: '#fffee1',
     onSurfaceColor: 'rgba(247, 213, 14, 0.99)',

@@ -19,7 +19,7 @@
             :key="num"
             class="brand-icon"
             :class="[num % 2 && 'hidden md:block']"
-            :style="`background-image: url(https://icons.vuetelemetry.com/${brand.imgPath})`"
+            :style="`background-image: url(${$config.iconsURL}/${brand.imgPath})`"
           ></div>
         </div>
       </div>
@@ -111,7 +111,7 @@ export default {
       )
 
       const image = new Image()
-      image.src = `https://icons.vuetelemetry.com/${this.activeBrands[0].imgPath}`
+      image.src = `${this.$config.iconsURL}/${this.activeBrands[0].imgPath}`
 
       image.addEventListener('load', () => {
         Array.from(el.children[1].children).forEach((c, i) => {

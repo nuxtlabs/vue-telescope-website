@@ -56,7 +56,7 @@
           <div class="flex items-center">
             <img
               class="w-4 h-4 mr-1"
-              src="https://icons.vuetelemetry.com/vue.svg"
+              src="${$config.iconsURL}/vue.svg"
               alt="Vue"
             />
             <span>Vue</span>
@@ -76,7 +76,7 @@
             <div class="flex items-center">
               <img
                 class="w-4 h-4 mr-1"
-                :src="`https://icons.vuetelemetry.com${framework.imgPath}`"
+                :src="`${$config.iconsURL}${framework.imgPath}`"
                 :alt="framework.name"
               />
               <span>{{ framework.name }}</span>
@@ -111,7 +111,7 @@
             <div class="flex items-center">
               <img
                 class="w-4 h-4 mr-1"
-                :src="`https://icons.vuetelemetry.com${ui.imgPath}`"
+                :src="`${$config.iconsURL}${ui.imgPath}`"
                 :alt="ui.name"
               />
               <span>{{ ui.name }}</span>

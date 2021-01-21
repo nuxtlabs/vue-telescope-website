@@ -71,7 +71,7 @@ export default {
   ],
   pwa: {
     manifest: {
-      name: 'Vue Telemetry',
+      name: 'Vue Telescope',
       short_name: 'VT',
       description: 'Discover websites made with Vue.js',
       background_color: '#ffffff',
@@ -93,6 +93,7 @@ export default {
   },
   publicRuntimeConfig: {
     strapiURL: process.env.STRAPI_URL || 'http://localhost:1337',
-    serviceURL: process.env.SERVICE_URL || 'http://localhost:3001'
+    serviceURL: process.env.SERVICE_URL || 'http://localhost:3001',
+    iconsURL: process.env.ICONS_URL
   }
 }
