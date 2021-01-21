@@ -73,7 +73,7 @@ export default {
           bg: '',
           text: '',
           outline: '',
-          hoverState: 'hover:text-primary-500'
+          hoverState: 'has-hover:hover:text-primary-500'
         }
       } else if (this.appearance === 'primary') {
         if (this.outlined) {
@@ -81,14 +81,15 @@ export default {
             // bg: 'bg-primary-500',
             text: 'text-primary-500',
             outline: 'border-primary-500',
-            hoverState: 'hover:bg-primary-50 hover:border-primary-300'
+            hoverState:
+              'has-hover:hover:bg-primary-50 has-hover:hover:border-primary-300'
           }
         } else {
           return {
             bg: 'bg-primary-500',
             text: 'text-white',
             outline: 'focus:border-primary-700',
-            hoverState: 'hover:bg-primary-400'
+            hoverState: 'has-hover:hover:bg-primary-400'
           }
         }
       } else if (this.appearance === 'danger') {
@@ -118,18 +119,18 @@ export default {
             bg: 'bg-blue-500',
             text: 'text-white',
             outline: 'focus:border-blue-800',
-            hoverState: 'hover:bg-blue-400'
+            hoverState: 'has-hover:hover:bg-blue-400'
           }
         }
       } else if (this.appearance === 'github') {
         return {
           bg: 'bg-github-base',
           text: 'text-white',
-          hoverState: 'hover:bg-grey-800'
+          hoverState: 'has-hover:hover:bg-grey-800'
         }
       } else {
         return {
-          bg: 'bg-grey-50 hover:bg-grey-200',
+          bg: 'bg-grey-50 has-hover:hover:bg-grey-200',
           text: 'text-grey-800',
           outline: 'focus:border-grey-700'
         }

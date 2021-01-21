@@ -99,8 +99,8 @@
                       class="focus:outline-none text-left text-base"
                       :class="[
                         isBookmarked(group)
-                          ? 'text-primary-500 hover:text-primary-200'
-                          : 'hover:text-grey-400',
+                          ? 'text-primary-500 has-hover:hover:text-primary-200'
+                          : 'has-hover:hover:text-grey-400',
                         compact
                           ? 'text-sm leading-sm'
                           : 'text-base leading-base'

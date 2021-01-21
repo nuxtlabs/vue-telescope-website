@@ -11,7 +11,7 @@
               href="https://www.netlify.com/"
               target="_blank"
               rel="noopener nofollow noreferrer"
-              class="text-primary-500 font-medium hover:underline"
+              class="text-primary-500 font-medium has-hover:hover:underline"
             >
               Netlify </a
             >, API made with
@@ -19,7 +19,7 @@
               href="https://strapi.io"
               target="_blank"
               rel="noopener nofollow noreferrer"
-              class="text-primary-500 font-medium hover:underline"
+              class="text-primary-500 font-medium has-hover:hover:underline"
             >
               Strapi </a
             >.
@@ -30,7 +30,7 @@
               href="https://cloudinary.com/"
               target="_blank"
               rel="noopener nofollow noreferrer"
-              class="text-primary-500 font-medium hover:underline"
+              class="text-primary-500 font-medium has-hover:hover:underline"
             >
               Cloudinary
             </a>
@@ -39,7 +39,7 @@
               href="https://icons8.com/"
               target="_blank"
               rel="noopener nofollow noreferrer"
-              class="text-primary-500 font-medium hover:underline"
+              class="text-primary-500 font-medium has-hover:hover:underline"
               >Icons8</a
             >.
           </li>
@@ -49,17 +49,23 @@
           class="text-right flex items-start md:mr-0 text-sm leading-sm mx-auto"
         >
           <li class="mr-4">
-            <NuxtLink to="/terms" class="hover:text-primary-500 font-medium">
+            <NuxtLink
+              to="/terms"
+              class="has-hover:hover:text-primary-500 font-medium"
+            >
               Terms
             </NuxtLink>
           </li>
           <li class="mr-4">
-            <NuxtLink to="/privacy" class="hover:text-primary-500 font-medium">
+            <NuxtLink
+              to="/privacy"
+              class="has-hover:hover:text-primary-500 font-medium"
+            >
               Privacy
             </NuxtLink>
           </li>
           <li class="">
-            <ChangelogLink class="hover:text-primary-500 font-medium">
+            <ChangelogLink class="has-hover:hover:text-primary-500 font-medium">
               <span class="">Changelog</span>
             </ChangelogLink>
           </li>
@@ -79,7 +85,7 @@
               href="https://nuxtjs.org"
               target="_blank"
               rel="noopener"
-              class="text-primary-500 font-medium transition ease-linear duration-150 hover:underline"
+              class="text-primary-500 font-medium transition ease-linear duration-150 has-hover:hover:underline"
               >NuxtJS Team</a
             >
             for the VueJS Community
@@ -89,7 +95,7 @@
           <li class="mr-2">
             <a
               href="https://twitter.com/VueTelemetry"
-              class="text-grey-900 hover:text-primary-500 transition ease-in duration-150"
+              class="text-grey-900 has-hover:hover:text-primary-500 transition ease-in duration-150"
               target="_blank"
               rel="noopener nofollow noreferrer"
             >
@@ -100,7 +106,7 @@
           <li class="">
             <a
               href="https://github.com/nuxt-company/vue-telemetry-analyzer"
-              class="text-grey-900 hover:text-primary-500 transition ease-in duration-150"
+              class="text-grey-900 has-hover:hover:text-primary-500 transition ease-in duration-150"
               target="_blank"
               rel="noopener nofollow noreferrer"
             >

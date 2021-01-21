@@ -21,10 +21,12 @@
           @click="initCollectionCreation"
         >
           <PlusIcon
-            class="w-4 h-4 mr-2 opacity-100 group-hover:opacity-100"
+            class="w-4 h-4 mr-2 opacity-100 has-hover:group-hover:opacity-100"
             style="stroke-width: 2.5px"
           />
-          <span class="tracking-1 opacity-100 group-hover:opacity-100 truncate">
+          <span
+            class="tracking-1 opacity-100 has-hover:group-hover:opacity-100 truncate"
+          >
             Add Collection
           </span>
         </button>

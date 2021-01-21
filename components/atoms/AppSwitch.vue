@@ -10,7 +10,7 @@
       :class="[
         value
           ? ' transform translate-x-full border-primary-500'
-          : 'border-grey-200 group-hover:border-grey-600'
+          : 'border-grey-200 has-hover:group-hover:border-grey-600'
       ]"
     ></span>
   </button>

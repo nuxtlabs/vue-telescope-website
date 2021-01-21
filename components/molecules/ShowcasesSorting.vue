@@ -8,7 +8,7 @@
       v-for="option in options"
       :key="option._sort"
       :class="[option._sort === selectedSort._sort && 'font-bold-body-weight']"
-      class="p-1 px-2 hover:font-bold-body-weight cursor-pointer select-none overflow-hidden"
+      class="p-1 px-2 has-hover:hover:font-bold-body-weight cursor-pointer select-none overflow-hidden"
       @click="selectSorting(option)"
     >
       <div :ref="option._sort" class="flex justify-between items-center">

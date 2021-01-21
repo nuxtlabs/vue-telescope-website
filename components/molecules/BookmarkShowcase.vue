@@ -4,8 +4,8 @@
       @click.stop.prevent="isBookmarking = !isBookmarking"
       :class="[
         isBookmarkedAtLeastOnce
-          ? 'bg-primary-50 hover:bg-primary-100'
-          : 'bg-grey-100 hover:bg-grey-50',
+          ? 'bg-primary-50 has-hover:hover:bg-primary-100'
+          : 'bg-grey-100 has-hover:hover:bg-grey-50',
         compact ? 'm-2' : 'm-2 xs:m-4 sm:m-8'
       ]"
       class="focus:outline-none p-2 rounded-lg absolute top-0 right-0 z-10 transition-colors duration-400"

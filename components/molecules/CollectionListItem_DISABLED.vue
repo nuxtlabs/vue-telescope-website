@@ -2,11 +2,11 @@
   <div class="flex flex-grow items-center">
     <SectionExpandedIcon
       v-if="selected"
-      class="w-4 h-4 opacity-50 hover:opacity-100 mr-2"
+      class="w-4 h-4 opacity-50 has-hover:hover:opacity-100 mr-2"
     />
     <SectionCollapsedIcon
       v-else
-      class="w-4 h-4 opacity-50 hover:opacity-100 mr-2"
+      class="w-4 h-4 opacity-50 has-hover:hover:opacity-100 mr-2"
     />
     <span
       class="text-eight leading-eight font-display-weight"

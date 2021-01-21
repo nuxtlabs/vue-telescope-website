@@ -5,7 +5,7 @@
         :href="`https://github.com/${$strapi.user.username}`"
         target="_blank"
         rel="noopener"
-        class="flex items-center hover:underline"
+        class="flex items-center has-hover:hover:underline"
       >
         <img
           :src="`https://github.com/${$strapi.user.username}.png?size=24`"

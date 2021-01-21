@@ -47,7 +47,7 @@
       <button
         v-else
         ref="anchor"
-        class="focus:outline-none group-hover:flex hover:bg-grey-50 rounded-lg w-full h-full items-center justify-center"
+        class="focus:outline-none has-hover:group-hover:flex has-hover:hover:bg-grey-50 rounded-lg w-full h-full items-center justify-center"
         :class="[openCollapse || showPopup ? 'flex' : 'hidden']"
         @click="openPopup"
       >

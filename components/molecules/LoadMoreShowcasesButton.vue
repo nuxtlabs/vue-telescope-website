@@ -16,7 +16,7 @@
     >
       <AppLoader
         class="w-6 h-6"
-        background="text-grey-100 group-hover:text-grey-300 transition-colors duration-200"
+        background="text-grey-100 has-hover:group-hover:text-grey-300 transition-colors duration-200"
         path="text-grey-400"
       />
     </div>

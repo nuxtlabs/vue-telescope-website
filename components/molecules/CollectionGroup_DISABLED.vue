@@ -14,11 +14,11 @@
         />
         <div class="flex flex-grow-0">
           <ValidateIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer text-green-500"
+            class="w-4 h-4 opacity-50 has-hover:hover:opacity-100 ml-2 cursor-pointer text-green-500"
             @click="createGroup"
           />
           <CancelIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer"
+            class="w-4 h-4 opacity-50 has-hover:hover:opacity-100 ml-2 cursor-pointer"
             @click="clearActions"
           />
         </div>
@@ -37,11 +37,11 @@
         <span>Delete ?</span>
         <div class="flex items-center">
           <ValidateIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer text-green-500"
+            class="w-4 h-4 opacity-50 has-hover:hover:opacity-100 ml-2 cursor-pointer text-green-500"
             @click="deleteGroup"
           />
           <CancelIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer"
+            class="w-4 h-4 opacity-50 has-hover:hover:opacity-100 ml-2 cursor-pointer"
             @click="clearActions"
           />
         </div>
@@ -59,15 +59,15 @@
         />
         <div class="flex flex-grow-0 items-center">
           <ValidateIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer text-green-500"
+            class="w-4 h-4 opacity-50 has-hover:hover:opacity-100 ml-2 cursor-pointer text-green-500"
             @click="updateGroup"
           />
           <CancelIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer"
+            class="w-4 h-4 opacity-50 has-hover:hover:opacity-100 ml-2 cursor-pointer"
             @click="clearActions"
           />
           <DeleteIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer text-red-800"
+            class="w-4 h-4 opacity-50 has-hover:hover:opacity-100 ml-2 cursor-pointer text-red-800"
             @click="initDeleteGroup"
           />
         </div>
@@ -78,7 +78,7 @@
           @click="$parent.$emit('group-selected', group)"
         >
           <BulletIcon
-            class="flex-grow-0 w-4 h-4 opacity-50 hover:opacity-100 mr-2"
+            class="flex-grow-0 w-4 h-4 opacity-50 has-hover:hover:opacity-100 mr-2"
           />
           <span
             class="flex-grow"
@@ -89,7 +89,7 @@
         </div>
         <EditIcon
           v-if="selected"
-          class="flex-grow-0 w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+          class="flex-grow-0 w-4 h-4 opacity-50 has-hover:hover:opacity-100 ml-2"
           @click="initUpdateGroup"
         />
       </div>

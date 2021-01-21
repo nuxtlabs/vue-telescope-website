@@ -14,11 +14,11 @@
         />
         <div class="flex flex-grow-0">
           <ValidateIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer text-green-500"
+            class="w-4 h-4 opacity-50 has-hover:hover:opacity-100 ml-2 cursor-pointer text-green-500"
             @click="createCollection"
           />
           <CancelIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer"
+            class="w-4 h-4 opacity-50 has-hover:hover:opacity-100 ml-2 cursor-pointer"
             @click="clearActions"
           />
         </div>
@@ -42,11 +42,11 @@
           Delete ?
         </span>
         <ValidateIcon
-          class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer text-green-500"
+          class="w-4 h-4 opacity-50 has-hover:hover:opacity-100 ml-2 cursor-pointer text-green-500"
           @click="deleteCollection"
         />
         <CancelIcon
-          class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer"
+          class="w-4 h-4 opacity-50 has-hover:hover:opacity-100 ml-2 cursor-pointer"
           @click="clearActions"
         />
       </div>
@@ -63,15 +63,15 @@
         />
         <div class="flex flex-grow-0">
           <ValidateIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer text-green-500"
+            class="w-4 h-4 opacity-50 has-hover:hover:opacity-100 ml-2 cursor-pointer text-green-500"
             @click="updateCollection"
           />
           <CancelIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer"
+            class="w-4 h-4 opacity-50 has-hover:hover:opacity-100 ml-2 cursor-pointer"
             @click="clearActions"
           />
           <DeleteIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2 cursor-pointer text-red-800"
+            class="w-4 h-4 opacity-50 has-hover:hover:opacity-100 ml-2 cursor-pointer text-red-800"
             @click="initDeleteCollection"
           />
         </div>
@@ -85,11 +85,11 @@
         />
         <div v-if="selected && !selectedGroup" class="flex flex-grow-0">
           <LinkIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            class="w-4 h-4 opacity-50 has-hover:hover:opacity-100 ml-2"
             @click="modalVisible = true"
           />
           <EditIcon
-            class="w-4 h-4 opacity-50 hover:opacity-100 ml-2"
+            class="w-4 h-4 opacity-50 has-hover:hover:opacity-100 ml-2"
             @click="initUpdateCollection"
           />
         </div>

@@ -37,7 +37,7 @@
             <span>{{ content({ key, value }) }}</span>
           </div>
           <button
-            class="focus:outline-none hover:opacity-75"
+            class="focus:outline-none has-hover:hover:opacity-75"
             @click="$emit('clear-filter', key)"
           >
             <XmarkCircleFill class="w-4 h-4 text-primary-500" />
@@ -47,13 +47,13 @@
       <button
         v-if="Object.entries(selectedFilters).length > 1"
         key="clear-button"
-        class="scale-item focus:outline-none rounded-lg mx-1 mb-2 mr-2 mt-0 px-2 py-1 inline-flex items-center bg-grey-50 hover:bg-grey-100 text-grey-500 border border-grey-300"
+        class="scale-item focus:outline-none rounded-lg mx-1 mb-2 mr-2 mt-0 px-2 py-1 inline-flex items-center bg-grey-50 has-hover:hover:bg-grey-100 text-grey-500 border border-grey-300"
         @click="$emit('clear-filters')"
       >
         <div class="font-bold-body-weight text-sm leading-sm px-2">
           Clear all
         </div>
-        <XmarkCircleFill class="w-4 h-4 hover:opacity-75" />
+        <XmarkCircleFill class="w-4 h-4 has-hover:hover:opacity-75" />
       </button>
     </transition-group>
   </div>

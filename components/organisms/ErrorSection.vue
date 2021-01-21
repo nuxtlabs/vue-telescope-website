@@ -8,7 +8,7 @@
 
     <NuxtLink
       :to="{ name: 'index' }"
-      class="block text-primary-500 hover:underline hover:opacity-75 font-bold-body-weight"
+      class="block text-primary-500 has-hover:hover:underline has-hover:hover:opacity-75 font-bold-body-weight"
     >
       Back to the home page
     </NuxtLink>

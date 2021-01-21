@@ -89,8 +89,10 @@ export default {
   transition: opacity 300ms, transform 300ms;
 }
 
-.hover-effect:hover:before {
-  opacity: 1;
-  transform: scale(1);
+@media (hover: hover) {
+  .hover-effect:hover:before {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 </style>

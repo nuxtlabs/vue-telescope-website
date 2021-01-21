@@ -9,7 +9,7 @@
       border.color,
       border.focusState
     ]"
-    class="w-full placeholder-grey-400 bg-grey-100 hover:bg-grey-50 font-bold-body-weight focus:bg-grey-50 focus:outline-none transition-colors duration-200"
+    class="w-full placeholder-grey-400 bg-grey-100 has-hover:hover:bg-grey-50 font-bold-body-weight focus:bg-grey-50 focus:outline-none transition-colors duration-200"
     :type="type"
     :value="value"
     @input="$emit('input', $event.target.value)"

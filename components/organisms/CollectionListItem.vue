@@ -44,10 +44,10 @@
         <button
           v-if="!updatingCollection"
           ref="anchor"
-          class="focus:outline-none group-hover:flex items-center justify-center rounded-lg w-full h-full"
+          class="focus:outline-none has-hover:group-hover:flex items-center justify-center rounded-lg w-full h-full"
           :class="[
             openCollapse || showDropdown ? 'flex' : 'hidden',
-            showDropdown ? 'bg-grey-50' : 'hover:bg-grey-50'
+            showDropdown ? 'bg-grey-50' : 'has-hover:hover:bg-grey-50'
           ]"
           @click="openDropdown"
         >

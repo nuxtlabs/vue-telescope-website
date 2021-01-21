@@ -59,7 +59,7 @@
             extension. Let us remind you, that
             <a
               href="https://github.com/nuxt-company/vue-telemetry-analyzer"
-              class="text-primary-500 hover:underline"
+              class="text-primary-500 has-hover:hover:underline"
               rel="noopener nofollow noreferrer"
               target="_blank"
               >Vue Telemetry analyzer</a
@@ -67,7 +67,7 @@
             and
             <a
               href="https://github.com/nuxt-company/vue-telemetry-extensions"
-              class="text-primary-500 hover:underline"
+              class="text-primary-500 has-hover:hover:underline"
               rel="noopener nofollow noreferrer"
               target="_blank"
               >Vue Telemetry extension</a
@@ -76,7 +76,7 @@
             it's development. You can also read our
             <NuxtLink
               to="/privacy"
-              class="text-primary-500 hover:underline"
+              class="text-primary-500 has-hover:hover:underline"
               @click.native="
                 (e) => {
                   e.preventDefault()
@@ -93,7 +93,7 @@
             By clicking Agree & Proceed button you agree with our
             <NuxtLink
               to="/terms"
-              class="text-primary-500 hover:underline"
+              class="text-primary-500 has-hover:hover:underline"
               @click.native="
                 (e) => {
                   e.preventDefault()

@@ -12,7 +12,7 @@
         <button
           v-if="!creatingCollection"
           ref="create-button"
-          class="absolute top-0 focus:outline-none text-seven leading-seven flex items-center py-4 px-8 rounded-xl border-2 border-transparent hover:border-primary-500 bg-primary-50 text-primary-500 font-bold-body-weight transition-colors duration-200 truncate"
+          class="absolute top-0 focus:outline-none text-seven leading-seven flex items-center py-4 px-8 rounded-xl border-2 border-transparent has-hover:hover:border-primary-500 bg-primary-50 text-primary-500 font-bold-body-weight transition-colors duration-200 truncate"
           @click="initCollectionCreation"
         >
           <div class="mr-2">
@@ -43,7 +43,7 @@
           >
             <button
               title="Save"
-              class="focus:outline-none bg-grey-50 border-2 border-grey-200 rounded-3lg p-2 hover:text-grey-700"
+              class="focus:outline-none bg-grey-50 border-2 border-grey-200 rounded-3lg p-2 has-hover:hover:text-grey-700"
               @click.stop="createCollection"
             >
               <SaveIcon class="w-5 h-5" />

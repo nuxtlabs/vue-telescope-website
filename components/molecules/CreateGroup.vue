@@ -6,10 +6,10 @@
       @click="initGroupCreation"
     >
       <PlusIcon
-        class="w-4 h-4 mr-2 opacity-50 group-hover:opacity-100 transition-opacity duration-200"
+        class="w-4 h-4 mr-2 opacity-50 has-hover:group-hover:opacity-100 transition-opacity duration-200"
       />
       <span
-        class="opacity-25 group-hover:opacity-100 transition-opacity duration-200"
+        class="opacity-25 has-hover:group-hover:opacity-100 transition-opacity duration-200"
       >
         Create List
       </span>

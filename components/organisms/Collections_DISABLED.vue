@@ -32,7 +32,7 @@
         <span v-if="selectedCollection && selectedGroup"
           >&nbsp;websites on
           <span
-            class="hover:underline cursor-pointer"
+            class="has-hover:hover:underline cursor-pointer"
             @click="selectedGroup = null"
             >{{ selectedCollection.name }}</span
           >

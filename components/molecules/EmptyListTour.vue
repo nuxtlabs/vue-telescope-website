@@ -5,7 +5,10 @@
     </h2>
     <p class="text-center text-seven leading-seven mb-48">
       Visit
-      <NuxtLink to="/explore" class="text-primary-500 hover:underline">
+      <NuxtLink
+        to="/explore"
+        class="text-primary-500 has-hover:hover:underline"
+      >
         Explore
       </NuxtLink>
       page to save websites.

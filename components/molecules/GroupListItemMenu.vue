@@ -12,7 +12,7 @@
       <li class="py-2px">
         <button
           title="Rename"
-          class="focus:outline-none w-8 h-8 flex items-center justify-center bg-grey-50 rounded-md p-1 hover:scale-110 transform"
+          class="focus:outline-none w-8 h-8 flex items-center justify-center bg-grey-50 rounded-md p-1 has-hover:hover:scale-110 transform"
           @click="$emit('rename')"
         >
           <EditIcon class="w-4 h-4" />
@@ -22,7 +22,7 @@
         <button
           v-if="deleting"
           title="Delete"
-          class="focus:outline-none w-8 h-8 flex items-center justify-center bg-grey-50 rounded-md p-1 hover:scale-110 transform text-red-500"
+          class="focus:outline-none w-8 h-8 flex items-center justify-center bg-grey-50 rounded-md p-1 has-hover:hover:scale-110 transform text-red-500"
           @click="$emit('delete')"
         >
           <DeleteIcon class="w-4 h-4" />
@@ -30,7 +30,7 @@
         <button
           v-else
           title="Confirm Delete"
-          class="focus:outline-none w-8 h-8 flex items-center justify-center bg-grey-50 rounded-md p-1 hover:scale-110 transform"
+          class="focus:outline-none w-8 h-8 flex items-center justify-center bg-grey-50 rounded-md p-1 has-hover:hover:scale-110 transform"
           @click="deleting = true"
         >
           <DeleteIcon class="w-4 h-4" />
