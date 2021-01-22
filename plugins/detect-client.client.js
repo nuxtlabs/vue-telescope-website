@@ -18,7 +18,8 @@ export default ({ store }) => {
   window.onNuxtReady(() => {
     store.commit(
       'setIsExtensionInstalled',
-      Boolean(window.$vueTelemetryExtension)
+      Boolean(window.$vueTelemetryExtension) ||
+        Boolean(window.$vueTelescopeExtension)
     )
   })
 }

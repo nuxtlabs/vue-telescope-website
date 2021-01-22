@@ -23,7 +23,7 @@
         </pre>
       </div>
 
-      <p>Feel free to use Vue Telemetry data anywhere in your own app.</p>
+      <p>Feel free to use Vue Telescope data anywhere in your own app.</p>
     </div>
   </TwitterLikeModalWrapper>
 </template>

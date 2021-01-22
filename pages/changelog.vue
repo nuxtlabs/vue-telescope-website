@@ -25,7 +25,7 @@ export default {
     return frontMatter({
       path: this.$route.path,
       title: 'Changelog',
-      description: 'Discover the lastest news from Vue Telemetry.'
+      description: 'Discover the lastest news from Vue Telescope.'
     })
   },
   mounted() {

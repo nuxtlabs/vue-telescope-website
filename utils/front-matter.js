@@ -95,7 +95,7 @@ export default ({
         href: 'https://fonts.googleapis.com'
       },
       {
-        hid: 'vuetelemetry-preconnect',
+        hid: 'vuetelescope-preconnect',
         rel: 'preconnect',
         href: 'https://api.vuetelemetry.com'
       },

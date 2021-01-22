@@ -13,7 +13,7 @@
           href="https://vuejs.org"
           target="_blank"
           rel="noreferrer noopener"
-          image="https://icons.vuetelemetry.com/vue.svg"
+          :image="`${$config.iconsURL}/vue.svg`"
           :text="website.vueVersion"
         />
 
@@ -24,7 +24,7 @@
           :href="website.framework.url"
           target="_blank"
           rel="noreferrer noopener"
-          :image="`https://icons.vuetelemetry.com${website.framework.imgPath}`"
+          :image="`${$config.iconsURL}${website.framework.imgPath}`"
           :text="website.framework.name"
         />
 
@@ -35,7 +35,7 @@
           :href="website.ui.url"
           target="_blank"
           rel="noreferrer noopener"
-          :image="`https://icons.vuetelemetry.com${website.ui.imgPath}`"
+          :image="`${$config.iconsURL}${website.ui.imgPath}`"
           :text="website.ui.name"
         />
 
