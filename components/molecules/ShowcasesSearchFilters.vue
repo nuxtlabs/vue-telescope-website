@@ -56,7 +56,7 @@
           <div class="flex items-center">
             <img
               class="w-4 h-4 mr-1"
-              src="${$config.iconsURL}/vue.svg"
+              :src="`${$config.iconsURL}/vue.svg`"
               alt="Vue"
             />
             <span>Vue</span>

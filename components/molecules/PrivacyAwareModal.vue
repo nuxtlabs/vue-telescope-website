@@ -58,7 +58,7 @@
             We are greatly appreciate your support by using our website and
             extension. Let us remind you, that
             <a
-              href="https://github.com/nuxt-company/vue-telemetry-analyzer"
+              href="https://github.com/nuxt-company/vue-telescope-analyzer"
               class="text-primary-500 has-hover:hover:underline"
               rel="noopener nofollow noreferrer"
               target="_blank"
@@ -66,7 +66,7 @@
             >
             and
             <a
-              href="https://github.com/nuxt-company/vue-telemetry-extensions"
+              href="https://github.com/nuxt-company/vue-telescope-extensions"
               class="text-primary-500 has-hover:hover:underline"
               rel="noopener nofollow noreferrer"
               target="_blank"
