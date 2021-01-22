@@ -3,6 +3,14 @@ title: Changelog
 updatedAt: 2020-09-24
 ---
 
+<changelog-item project="website" date="2020-01-22">
+
+## Collections feature
+
+With Collections feature you can organize showcases into Collections and Lists, and share with community.
+
+</changelog-item>
+
 <changelog-item project="extension" date="2020-10-20">
 
 ## Vue Telemetry extension v1.4.1 release
@@ -16,7 +24,6 @@ updatedAt: 2020-09-24
 ## Sort by popularity
 
 You can now [sort websites by popularity](/explore?_sort=rank%3Aasc), we are using the [Alexa Rank](https://blog.alexa.com/marketing-research/alexa-rank/) for ranking.
-
 
 <nuxt-link to="/explore?_sort=rank%3Aasc" class="block pb-4">
   <img src="https://res.cloudinary.com/nuxt/image/upload/remote/vt/changelog/vt-sorting.gif" alt="vue telemetry sorting" class="rounded-md shadow" />
@@ -94,7 +101,7 @@ We would like to thank [Netlify](https://www.netlify.com) and [Cloudinary](https
 
 ## Vue Telemetry extension v1.2 release
 
-The extension now analyze locally, making it as fast as Vue Devtools to detect Vue and its ecosystem ⚡️ 
+The extension now analyze locally, making it as fast as Vue Devtools to detect Vue and its ecosystem ⚡️
 
 </changelog-item>
 
