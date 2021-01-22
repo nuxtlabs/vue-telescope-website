@@ -15,7 +15,7 @@
       Login with GitHub to start using Vue Telescope Collections.
     </p>
     <WtfGithubLoginButton class="mb-8" />
-    <div class="text-sm leading-sm">
+    <div class="text-sm leading-sm px-4">
       By signing up, you agree to the
       <a target="_blank" href="/terms" class="underline">Terms of Service</a>
       and

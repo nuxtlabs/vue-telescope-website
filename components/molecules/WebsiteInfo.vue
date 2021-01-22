@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mb-10">
+    <div class="mb-10 mt-8">
       <div class="label mb-4 xl:px-8">
         <AppWebsiteDataLabel>
           <InfoIcon class="h-5 mr-2 opacity-50" />Info

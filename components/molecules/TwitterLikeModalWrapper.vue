@@ -1,5 +1,6 @@
 <template>
   <div class="modal-wrapper">
+    <div ref="scrim" class="scrim" style="opacity: 0"></div>
     <div class="w-full h-full overflow-auto" @click.self="$emit('close')">
       <!-- <div class="w-full flex pointer-events-none">
         <div
@@ -12,7 +13,7 @@
 
       <div class="h-full md:h-auto md:m-4 pointer-events-none">
         <div
-          ref="modal-wrapper"
+          ref="modal-container"
           style="opacity: 0"
           :class="[
             compact
@@ -43,6 +44,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 // import breakpoints from '@/utils/styles/breakpoints'
 // import TheSquareLogo from '@/assets/logo/square-logo.svg?inline'
 import XmarkCircleIcon from '@/assets/icons/xmark-circle.svg?inline'
@@ -66,11 +68,11 @@ export default {
     //   default: true
     // }
   },
-  // data() {
-  //   return {
-  //     loading: false
-  //   }
-  // },
+  computed: {
+    ...mapState({
+      isMobile: (state) => state.isMobile
+    })
+  },
   // watch: {
   //   fetched(value) {
   //     if (value) {
@@ -149,56 +151,36 @@ export default {
       })
     },
     animateEnter() {
-      // const biggerThanMd = window.innerWidth >= parseInt(breakpoints.md) // if bigger than "md" than use non-elastic animation, because it looks bad on mobile
-      this.$gsap.set(this.$refs['modal-wrapper'], {
+      if (!this.isMobile) {
+        const scrim = this.$refs.scrim
+        this.$gsap.fromTo(
+          scrim,
+          {
+            opacity: 0
+          },
+          {
+            opacity: 1,
+            duration: 0.2,
+            ease: 'none',
+            onComplete: () => {}
+          }
+        )
+      }
+
+      // old
+      this.$gsap.set(this.$refs['modal-container'], {
         transformOrigin: 'bottom',
         opacity: 1
       })
-      // this.$gsap.set(this.$refs['modal-content'], {
-      //   opacity: 0
-      // })
-      // this.$gsap.set(this.$refs['close-button'], {
-      //   scale: 0
-      // })
-      // this.$gsap.from(this.$refs['modal-wrapper'], {
-      //   opacity: 0,
-      //   duration: 0.4,
-      //   ease: 'none'
-      // })
-      this.$gsap.from(this.$refs['modal-wrapper'], {
+      this.$gsap.from(this.$refs['modal-container'], {
         // scaleY: 0.99,
         opacity: 0,
         y: -10,
-        scale: 0.98,
+        scale: 0.97,
         // x: 10,
         duration: 0.2,
         // ease: biggerThanMd ? 'back.out(1.7)' : 'expo.outIn',
-        ease: 'none',
-        onComplete: () => {
-          // this.$gsap.fromTo(
-          //   this.$refs['modal-content'],
-          //   {
-          //     opacity: 0
-          //   },
-          //   {
-          //     opacity: 1,
-          //     duration: 0.3,
-          //     clearProps: true
-          //   }
-          // )
-          // this.$gsap.fromTo(
-          //   this.$refs['close-button'],
-          //   {
-          //     scale: 0
-          //   },
-          //   {
-          //     scale: 1,
-          //     duration: 0.5,
-          //     clearProps: true,
-          //     ease: 'elastic.inOut(1.5, 0.5)'
-          //   }
-          // )
-        }
+        ease: 'none'
       })
     }
   }
@@ -213,14 +195,23 @@ export default {
   width: 100%;
   height: 100%;
   /* background: rgba(255, 255, 255, 0.42); */
-  background-color: rgba(0, 0, 0, 0.2);
+  /*background-color: rgba(0, 0, 0, 0.2);*/
   z-index: 1000;
-  backdrop-filter: blur(18px);
+  /*backdrop-filter: blur(18px);*/
   /* display: flex;
   align-items: center;
   justify-content: center; */
 }
-/* .blur {
+
+.scrim {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  /* z-index: 1000; */
   backdrop-filter: blur(18px);
-} */
+  pointer-events: none;
+}
 </style>

@@ -2,11 +2,17 @@
   <div class="modal-wrapper">
     <div ref="scrim" class="scrim" style="opacity: 0"></div>
     <!-- <div class="fixed top-0 bg-white">{{ test }}</div> -->
-    <div class="w-full h-full overflow-auto" @click.self="animateLeave">
+    <div
+      class="w-full h-full overflow-auto"
+      @click.self="animateLeave"
+      @touchmove.self="touchMoveHandler"
+      @touchstart.self="touchStartHandler"
+    >
       <div class="h-full pointer-events-none flex justify-end flex-col pt-16">
         <div
           ref="hack-safari"
-          class="rounded-4xl rounded-b-none overflow-hidden h-full"
+          class="rounded-4xl rounded-b-none overflow-hidden"
+          :class="browser === 'Safari' && 'h-full'"
         >
           <div
             ref="modal-container"
@@ -69,32 +75,12 @@ export default {
     }
   },
   mounted() {
-    // document.addEventListener('touchmove', this.touchMoveHandler, false)
-
-    const escapeHandler = (e) => {
-      if (e.key === 'Escape') {
-        this.animateLeave
-      }
-    }
-    document.addEventListener('keydown', escapeHandler)
-    this.$once('hook:destroyed', () => {
-      document.removeEventListener('keydown', escapeHandler)
-    })
+    this.activateEscapeListener()
 
     this.$store.commit('SET_MODAL', true)
     this.animateEnter()
 
-    const scrollBarGap =
-      window.innerWidth - document.documentElement.clientWidth
-    document.body.style.overflow = 'hidden'
-    document.body.style.paddingRight = `${scrollBarGap}px`
-    document.querySelector(
-      '#main-header'
-    ).style.paddingRight = `${scrollBarGap}px`
-
-    this.$refs[
-      'modal-container'
-    ].style.paddingRight = `calc(1rem + ${scrollBarGap}px)`
+    this.blockBodyScroll()
   },
   beforeDestroy() {
     this.$store.commit('SET_MODAL', false)
@@ -105,6 +91,30 @@ export default {
     })
   },
   methods: {
+    activateEscapeListener() {
+      const escapeHandler = (e) => {
+        if (e.key === 'Escape') {
+          this.animateLeave
+        }
+      }
+      document.addEventListener('keydown', escapeHandler)
+      this.$once('hook:destroyed', () => {
+        document.removeEventListener('keydown', escapeHandler)
+      })
+    },
+    blockBodyScroll() {
+      const scrollBarGap =
+        window.innerWidth - document.documentElement.clientWidth
+      document.body.style.overflow = 'hidden'
+      document.body.style.paddingRight = `${scrollBarGap}px`
+      document.querySelector(
+        '#main-header'
+      ).style.paddingRight = `${scrollBarGap}px`
+
+      this.$refs[
+        'modal-container'
+      ].style.paddingRight = `calc(1rem + ${scrollBarGap}px)`
+    },
     touchStartHandler(e) {
       this.yStart = e.touches[0].clientY
       this.xStart = e.touches[0].clientX

@@ -16,10 +16,11 @@
         <div
           v-if="$strapi.user"
           @click.stop.prevent
+          class="w-full h-full"
           :class="compact ? 'p-3' : 'p-8'"
         >
           <div v-if="collectionsWithGroups.length">
-            <div
+            <!-- <div
               class="font-bold-body-weight"
               :class="[
                 compact
@@ -28,8 +29,22 @@
               ]"
             >
               Save to:
+            </div> -->
+
+            <div class="label" :class="">
+              <div
+                :class="[
+                  compact
+                    ? 'text-sm leading-sm mb-1'
+                    : 'text-eight leading-eight mb-2'
+                ]"
+                class="flex items-center font-display-weight text-primary-500 uppercase"
+              >
+                <SaveIcon class="h-5 mr-2 opacity-50" />Save
+              </div>
             </div>
-            <ul>
+
+            <ul class="ml-1">
               <li
                 v-for="collection in collectionsWithGroups"
                 :key="collection.id"
@@ -39,7 +54,7 @@
                   <OpenedFolderIcon
                     class="mr-2 mt-1"
                     :class="[
-                      compact ? 'w-4 h-4' : 'w-6 h-6',
+                      compact ? 'w-4 h-4' : 'w-5 h-5',
                       isBookmarkedCollection(collection) && 'text-primary-500'
                     ]"
                   />
@@ -47,7 +62,7 @@
                     class="font-bold-body-weight"
                     :class="[
                       isBookmarkedCollection(collection) && 'text-primary-500',
-                      compact ? '' : 'text-six leading-six'
+                      compact ? '' : 'text-seven leading-seven'
                     ]"
                   >
                     {{ collection.name }}
@@ -64,7 +79,7 @@
               </span> -->
                     <span
                       class="inline-flex text-grey-200 mr-2"
-                      :class="[compact ? 'w-4 h-5' : 'w-6 h-6']"
+                      :class="[compact ? 'w-4 h-5' : 'w-5 h-5']"
                     >
                       <svg
                         v-if="collection.groups.length === i + 1"
@@ -119,12 +134,18 @@
             v-else
             class="w-full h-full p-4 flex items-center justify-center"
           >
-            <div class="text-seven leading-seven text-center">
+            <div
+              :class="[
+                compact
+                  ? 'text-eight leading-eight'
+                  : 'text-seven leading-seven md:text-six md:leading-six'
+              ]"
+              class="text-center"
+            >
               To save website into Collection you need to
               <NuxtLink to="/collections" class="text-primary-500"
-                >create Lists</NuxtLink
+                >create a List</NuxtLink
               >
-              first
             </div>
           </div>
         </div>
@@ -158,11 +179,13 @@
 <script>
 import { mapState } from 'vuex'
 import OpenedFolderIcon from '@/assets/icons/opened-folder.svg?inline'
+import SaveIcon from '@/assets/icons/save.svg?inline'
 // import UnorderedListIcon from '@/assets/icons/unordered-list.svg?inline'
 
 export default {
   components: {
-    OpenedFolderIcon
+    OpenedFolderIcon,
+    SaveIcon
     // UnorderedListIcon
   },
   props: {

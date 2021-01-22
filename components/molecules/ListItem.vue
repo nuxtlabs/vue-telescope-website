@@ -23,6 +23,11 @@
         class="p-1 inline-flex select-none"
         :class="[isSelected && 'text-primary-500']"
       >
+        <span
+          ref="deleting-scrim"
+          class="deleting-scrim absolute top-0 left-0 w-full h-full pointer-events-none"
+          style="opacity: 0"
+        ></span>
         {{ group.name }}
       </span>
     </span>
@@ -96,7 +101,8 @@ export default {
       showPopup: false,
       newGroupName: '',
       creatingGroup: false,
-      updatingGroup: false
+      updatingGroup: false,
+      deletingGroup: false
     }
   },
   computed: {
@@ -152,10 +158,17 @@ export default {
     },
     async deleteGroup() {
       try {
+        this.deletingGroup = true
+        this.$gsap.to(this.$refs['deleting-scrim'], {
+          opacity: 1,
+          duration: 0.5,
+          ease: 'none'
+        })
         await this.$store.dispatch('collections/deleteGroup', {
           group: this.group,
           collection: this.collection
         })
+        this.deletingGroup = false
         this.$store.commit(
           'collections/setSelectedGroup',
           this.collection.groups[0]
@@ -173,3 +186,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.deleting-scrim {
+  backdrop-filter: blur(3px);
+}
+</style>
