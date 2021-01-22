@@ -21,9 +21,7 @@
         v-else
         style="word-break: break-word"
         class="p-1 inline-flex select-none"
-        :class="[
-          selectedGroup && selectedGroup.id === group.id && 'text-primary-500'
-        ]"
+        :class="[isSelected && 'text-primary-500']"
       >
         {{ group.name }}
       </span>
@@ -48,7 +46,7 @@
         v-else
         ref="anchor"
         class="focus:outline-none has-hover:group-hover:flex has-hover:hover:bg-grey-50 rounded-lg w-full h-full items-center justify-center"
-        :class="[openCollapse || showPopup ? 'flex' : 'hidden']"
+        :class="[openCollapse || showPopup || isSelected ? 'flex' : 'hidden']"
         @click="openPopup"
       >
         <DotsVerticalIcon class="w-5 h-5" />
@@ -105,7 +103,10 @@ export default {
     ...mapState({
       // selectedCollection: (state) => state.collections.selectedCollection,
       selectedGroup: (state) => state.collections.selectedGroup
-    })
+    }),
+    isSelected() {
+      return this.selectedGroup && this.selectedGroup.id === this.group.id
+    }
   },
   // created() {
   //   if (process.browser) {
