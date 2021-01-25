@@ -48,6 +48,8 @@ We are looking forward your feedback and thank you again for everyone using our 
 
 See more [on GitHub](https://github.com/nuxt-company/vue-telescope-extensions).
 
+</changelog-item>
+
 <changelog-item project="website" date="2020-12-14">
 
 ## Vue 3 detection ✨
