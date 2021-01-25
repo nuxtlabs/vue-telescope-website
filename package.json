@@ -14,6 +14,7 @@
     "@nuxt/content": "^1.11.1",
     "@nuxtjs/strapi": "^0.1.8",
     "@popperjs/core": "^2.5.4",
+    "cloudinary": "^1.21.0",
     "consola": "^2.15.0",
     "core-js": "3",
     "event-source-polyfill": "^1.0.22",
