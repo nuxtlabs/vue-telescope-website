@@ -29,7 +29,7 @@ After communicating with Vue.js community we decided to rename Vue Telemetry to 
 We also added a Collections feature, so now you can organize showcases into Collections and Lists. You can also share your Collections with community and use provided data in own apps.
 
 <nuxt-link to="/changelog/collections" class="block pb-4">
-  <img src="collections.gif" alt="vue telemetry collections" class="rounded-md shadow m-auto max-h-72" />
+  <img src="/changelog/collections.gif" alt="vue telemetry collections" class="rounded-md shadow m-auto max-h-72" />
 </nuxt-link>
 
 </changelog-item>
