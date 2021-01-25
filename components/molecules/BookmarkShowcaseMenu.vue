@@ -79,7 +79,7 @@
               </span> -->
                     <span
                       class="inline-flex text-grey-200 mr-2"
-                      :class="[compact ? 'w-4 h-5' : 'w-5 h-5']"
+                      :class="[compact ? 'w-4 h-5' : 'w-6 h-6']"
                     >
                       <svg
                         v-if="collection.groups.length === i + 1"

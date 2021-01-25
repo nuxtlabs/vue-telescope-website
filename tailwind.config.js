@@ -211,6 +211,9 @@ module.exports = {
         'pretty-wide': '1020px',
         readable: '820px'
       },
+      maxHeight: {
+        72: '18rem'
+      },
       minWidth: {
         body: '320px'
       },
