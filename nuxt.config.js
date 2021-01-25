@@ -67,7 +67,8 @@ export default {
     '@nuxtjs/proxy',
     // Doc: https://pwa.nuxtjs.org
     '@nuxtjs/pwa',
-    'nuxt-ackee'
+    'nuxt-ackee',
+    'vue-plausible'
   ],
   pwa: {
     manifest: {
@@ -90,6 +91,10 @@ export default {
     server: 'https://ackee.nuxtjs.com',
     domainId: '430278ce-79ea-4ff1-a8ce-5b461e217d65',
     detailed: true
+  },
+  plausible: {
+    // https://github.com/moritzsternemann/vue-plausible#configuration
+    domain: 'vuetelescope.com'
   },
   publicRuntimeConfig: {
     strapiURL: process.env.STRAPI_URL || 'http://localhost:1337',
