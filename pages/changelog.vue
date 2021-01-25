@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-container-max-width px-4 mx-auto pt-12">
+  <div class="max-w-container px-4 mx-auto pt-12">
     <div class="flex flex-wrap">
       <div class="w-full md:w-1/4"></div>
       <h1
@@ -21,15 +21,15 @@ export default {
 
     return { changelog }
   },
-  mounted() {
-    this.$changelog.saw()
-  },
   head() {
     return frontMatter({
       path: this.$route.path,
       title: 'Changelog',
-      description: 'Discover the lastest news from Vue Telemetry.'
+      description: 'Discover the lastest news from Vue Telescope.'
     })
+  },
+  mounted() {
+    this.$changelog.saw()
   }
 }
 </script>

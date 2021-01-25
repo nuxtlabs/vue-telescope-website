@@ -15,7 +15,7 @@
       />
       <div
         ref="radiomark-wrapper"
-        class="relative radiomark-wrapper w-5 h-5 mr-2 pointer-events-none text-white rounded-full overflow-hidden border transition-colors duration-200"
+        class="relative shadow radiomark-wrapper w-4 h-4 mr-2 pointer-events-none text-white rounded-full overflow-hidden border transition-colors duration-200"
         :class="[
           checked ? 'border-primary-500 ' : 'border-grey-300',
           isHovered && !checked && 'border-grey-500'
@@ -74,23 +74,24 @@ export default {
       if (value) {
         this.$gsap.fromTo(
           this.$refs['white-mark'],
-          0.2,
           {
             scale: 1
           },
           {
             scale: 0,
+            duration: 0.2,
             ease: 'power2.inOut',
             onComplete: () => {
               this.$gsap.fromTo(
                 this.$refs['color-mark'],
-                0.2,
                 {
                   scale: 1
                 },
                 {
                   scale: 0.5,
-                  ease: 'power2.inOut'
+                  // delay: 0.1,
+                  duration: 0.2,
+                  ease: 'expo.inOut'
                 }
               )
             }

@@ -45,7 +45,6 @@
           @change-slide="changeSlide"
           @active-showcases-change="activeShowcases = $event"
         />
-        <!-- <div>{{ showcase }}</div> -->
         <!-- <div class="bg-red-500 w-full h-full absolute top-0 left-0"></div> -->
       </div>
     </div>

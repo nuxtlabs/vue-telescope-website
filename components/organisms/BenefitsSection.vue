@@ -23,7 +23,7 @@
               :key="i"
               :class="[benefit.styles && benefit.styles.text]"
               :href="link.href"
-              class="font-bold-body-weight hover:opacity-50"
+              class="font-bold-body-weight has-hover:hover:opacity-50"
               rel="noopener nofollow noreferrer"
               target="_blank"
             >
@@ -34,7 +34,7 @@
               :key="i"
               :class="[benefit.styles && benefit.styles.text]"
               :to="link.route"
-              class="font-bold-body-weight hover:opacity-50"
+              class="font-bold-body-weight has-hover:hover:opacity-50"
             >
               {{ link.text }} →
             </NuxtLink>
@@ -86,7 +86,7 @@ export default {
           id: 2,
           title: 'Browser Extension',
           description:
-            'With the Vue Telemetry Browser extension available for both Firefox and Chrome you can see information about the website without leaving the page! Just by clicking on the extention icon and you will see what framework the page is using, what UI/CSS library and so much more.',
+            'With the Vue Telescope Browser extension available for both Firefox and Chrome you can see information about the website without leaving the page! Just by clicking on the extention icon and you will see what framework the page is using, what UI/CSS library and so much more.',
           links: [
             {
               type: 'external',
@@ -104,12 +104,12 @@ export default {
           id: 3,
           title: 'Open Source',
           description:
-            'Vue Telemetry is open source which means anyone can contribute as well as add new plugins.',
+            'Vue Telescope is open source which means anyone can contribute as well as add new plugins.',
           links: [
             {
               type: 'external',
               href: 'https://github.com/nuxt-company/vue-telemetry-analyzer',
-              text: 'Vue Telemetry Analyzer on Github'
+              text: 'Vue Telescope Analyzer on Github'
             },
             {
               type: 'external',

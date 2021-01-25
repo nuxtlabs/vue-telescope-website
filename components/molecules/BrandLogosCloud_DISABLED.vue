@@ -9,7 +9,7 @@
       >
         <img
           class="w-full h-full"
-          :src="`https://icons.vuetelemetry.com${brand.imgPath}`"
+          :src="`${$config.iconsURL}${brand.imgPath}`"
           alt=""
         />
       </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="pt-12 md:pt-8 mb-8">
-    <ExploreShowcasesSection
-      v-if="!$route.params.website || ($route.params.website && twitterLike)"
+    <ExplorePage
+      v-if="!$route.params.website || ($route.params.website && !directHit)"
     />
     <NuxtChild :key="$route.params.website" />
   </div>
@@ -12,12 +12,8 @@ import { mapState } from 'vuex'
 import frontMatter from '@/utils/front-matter'
 
 export default {
+  name: 'ExploreP',
   // scrollToTop: true,
-  computed: {
-    ...mapState({
-      twitterLike: (state) => state.twitterLike
-    })
-  },
   beforeRouteEnter(to, from, next) {
     if (process.browser) {
       setTimeout(() => {
@@ -26,11 +22,21 @@ export default {
     }
     next()
   },
+  data() {
+    return {
+      newTwitterLike: false
+    }
+  },
   head() {
     return frontMatter({
       path: this.$route.path,
       title: 'Explore Vue.js showcases',
       noindex: false
+    })
+  },
+  computed: {
+    ...mapState({
+      directHit: (state) => state.directHit
     })
   }
 }

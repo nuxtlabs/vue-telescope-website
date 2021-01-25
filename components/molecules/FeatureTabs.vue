@@ -25,7 +25,7 @@
               : activeTabs[0].id === tab.id) &&
             `background-color: ${tab.surfaceColor}`
           "
-          class="h-12 text-grey-500 text-base leading-base font-bold-body-weight px-4 rounded-xl focus:outline-none border-2 border-transparent select-none mb-2 hover:bg-grey-50"
+          class="h-12 text-grey-500 text-base leading-base font-bold-body-weight px-4 rounded-xl focus:outline-none border-2 border-transparent select-none mb-2 has-hover:hover:bg-grey-50 transition-colors duration-200"
           @click="startManualTransition(tab)"
         >
           {{ tab.title }}
@@ -62,7 +62,7 @@ const tabs = [
     id: 1,
     title: 'Detect Vue technologies',
     description:
-      'Vue Telemetry can detect any website built with Vue.js frameworks, like Nuxt, Gridsome, Quasar or VuePress. It can also tell you which UI/CSS framework was used: TailwindCSS, Vuetify, Buefy etc. And much more!',
+      'Vue Telescope can detect any website built with Vue.js frameworks, like Nuxt, Gridsome, Quasar or VuePress. It can also tell you which UI/CSS framework was used: TailwindCSS, Vuetify, Buefy etc. And much more!',
     component: 'FeatureTabsOne',
     surfaceColor: '#fffee1',
     onSurfaceColor: 'rgba(247, 213, 14, 0.99)',

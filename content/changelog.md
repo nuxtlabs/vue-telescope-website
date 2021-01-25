@@ -1,7 +1,52 @@
 ---
 title: Changelog
-updatedAt: 2020-12-14
+updatedAt: 2021-01-25
 ---
+
+<changelog-item project="website" date="2020-01-25">
+
+## Vue Telemetry is now Vue Telescope 🔭
+
+After discussions with the Vue.js community, we decided to rename Vue Telemetry to Vue telescope to avoid unnecessary associations and concerns about privacy.
+
+## Introducting Collections 📚
+
+You can now bookmark websites and organize them into collections and lists!
+
+We built this feature to gather beautiful showcase that we will list on nuxtjs.org very soon.
+
+<nuxt-link to="/collections" class="block pb-4">
+  <img src="/changelog/collections.jpg" alt="vue telescope collections" class="m-auto rounded-md shadow" />
+</nuxt-link>
+
+You can also share your Collections with community and use provided data in own apps.
+
+<nuxt-link to="/collections" class="block pb-4">
+  <img src="/changelog/collections-sharing.jpg" alt="vue telescope sharing" class="m-auto rounded-md shadow" />
+</nuxt-link>
+
+We are looking forward your feedback and thank you again for everyone using our [browser extensions 🧩](/extensions).
+
+[📚&nbsp; Start gathering websites with collections](/collections).
+
+</changelog-item>
+
+<changelog-item project="analyzer" date="2020-01-25">
+
+## Analyzer v0.9.0 released
+
+- Renamed Vue Telemetry to Vue Telescope, see [on GitHub](https://github.com/nuxt-company/vue-telescope-analyzer)
+
+</changelog-item>
+
+<changelog-item project="extension" date="2020-01-25">
+
+## Browser extensions v1.5.2 released
+
+- `insafe-eval` directive was removed from Content Security Policy to improve security and performance
+- Renamed Vue Telemetry to Vue Telescope to avoid a confusion from community 🙌
+
+See more [on GitHub](https://github.com/nuxt-company/vue-telescope-extensions).
 
 <changelog-item project="website" date="2020-12-14">
 
@@ -33,7 +78,6 @@ Thank you to [@cagataycivici](https://github.com/cagataycivici), [@alfonsobries]
 ## Sort by popularity
 
 You can now [sort websites by popularity](/explore?_sort=rank%3Aasc), we are using the [Alexa Rank](https://blog.alexa.com/marketing-research/alexa-rank/) for ranking.
-
 
 <nuxt-link to="/explore?_sort=rank%3Aasc" class="block pb-4">
   <img src="https://res.cloudinary.com/nuxt/image/upload/remote/vt/changelog/vt-sorting.gif" alt="vue telemetry sorting" class="rounded-md shadow" />
@@ -111,7 +155,7 @@ We would like to thank [Netlify](https://www.netlify.com) and [Cloudinary](https
 
 ## Vue Telemetry extension v1.2 release
 
-The extension now analyze locally, making it as fast as Vue Devtools to detect Vue and its ecosystem ⚡️ 
+The extension now analyze locally, making it as fast as Vue Devtools to detect Vue and its ecosystem ⚡️
 
 </changelog-item>
 

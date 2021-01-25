@@ -1,24 +1,24 @@
 <template>
   <div class="flex flex-wrap mb-8">
-    <div class="w-full md:w-1/4 pr-8">
+    <div class="w-full md:w-1/4 md:pr-8">
       <time
         :datetime="dateToIso(date)"
-        class="block w-full text-right mt-4 mb-4 font-bold-body-weight"
+        class="block w-full text-center md:text-right text-grey-400 mb-4 font-bold-body-weight"
       >
         {{ formatDateByLocale(date) }}</time
       >
     </div>
     <div
-      class="w-full md:w-3/4 rounded-xl border-2"
+      class="w-full md:w-3/4 rounded-lg border-2"
       :class="[projectColors.bg, projectColors.border]"
     >
       <div
         :style="{
-          'border-radius': '0.75rem',
+          'border-radius': '0.375rem',
           'border-bottom-left-radius': 0,
           'border-top-right-radius': 0
         }"
-        class="inline-block py-2 px-4 mb-4 rounded-xl rounded-bl-none rounded-tr-none text-xs leading-xs uppercase font-bold-body-weight"
+        class="inline-block py-2 px-4 mb-4 rounded-lg rounded-bl-none rounded-tr-none text-xs leading-xs uppercase font-bold-body-weight"
         :class="[projectColors.labelBg, projectColors.labelText]"
       >
         {{ project }}
@@ -58,15 +58,15 @@ export default {
       } else if (this.project === 'extension') {
         return {
           bg: 'bg-green-50',
-          border: 'border-green-100',
-          labelBg: 'bg-green-100',
+          border: 'border-green-200',
+          labelBg: 'bg-green-200',
           labelText: 'text-green-900'
         }
       } else {
         return {
           bg: 'bg-yellow-50',
-          border: 'border-yellow-100',
-          labelBg: 'bg-yellow-100',
+          border: 'border-yellow-200',
+          labelBg: 'bg-yellow-200',
           labelText: 'text-yellow-900'
         }
       }

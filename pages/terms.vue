@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-readable-line-length px-4 mx-auto pt-12">
+  <div class="max-w-readable px-4 mx-auto pt-12">
     <h1 class="text-four leading-four font-display-weight mb-8">
       {{ terms.title }}
     </h1>
@@ -11,14 +11,14 @@
 import frontMatter from '@/utils/front-matter'
 
 export default {
-  async fetch() {
-    this.terms = await this.$content('terms').fetch()
-    // console.log(this.terms)
-  },
   data() {
     return {
       terms: {}
     }
+  },
+  async fetch() {
+    this.terms = await this.$content('terms').fetch()
+    // console.log(this.terms)
   },
   head() {
     return frontMatter({

@@ -21,6 +21,7 @@ const normalizeDataURL = (urlString, { stripHash }) => {
     throw new Error(`Invalid URL: ${urlString}`)
   }
 
+  // eslint-disable-next-line prefer-const
   let { type, data, hash } = match.groups
   const mediaType = type.split(';')
   hash = stripHash ? '' : hash
@@ -35,6 +36,7 @@ const normalizeDataURL = (urlString, { stripHash }) => {
   const mimeType = (mediaType.shift() || '').toLowerCase()
   const attributes = mediaType
     .map((attribute) => {
+      // eslint-disable-next-line prefer-const
       let [key, value = ''] = attribute
         .split('=')
         .map((string) => string.trim())

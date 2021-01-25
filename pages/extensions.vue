@@ -1,10 +1,10 @@
 <template>
   <div class="page-wrapper">
-    <div class="px-4 max-w-container-max-width m-auto pt-12">
+    <div class="px-4 max-w-container m-auto pt-12">
       <h1 class="text-four leading-four font-display-weight text-center mb-12">
-        Check out Vue Telemetry browser integrations
+        Check out Vue Telescope browser integrations
       </h1>
-      <div class="flex flex-wrap max-w-readable-line-length m-auto">
+      <div class="flex flex-wrap max-w-readable m-auto">
         <div
           class="w-full sm:w-1/2 flex flex-col items-center justify-center mb-8"
         >

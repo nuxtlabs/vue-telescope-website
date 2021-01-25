@@ -1,10 +1,12 @@
 <template>
   <div class="py-12 bg-primary-50">
     <div
-      class="max-w-container-max-width m-auto px-4 flex flex-col items-center justify-center"
+      class="max-w-container m-auto px-4 flex flex-col items-center justify-center"
     >
-      <h1 class="text-five leading-five font-display-weight mb-4 text-center">
-        Join other Vue.js devs
+      <h1
+        class="text-five leading-five font-display-weight text-grey-900 mb-4 text-center"
+      >
+        Join 2000+ Vue.js developers!
       </h1>
       <InstallExtensionButton size="large" class="mb-4" />
       <div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-readable-line-length px-4 mx-auto pt-12">
+  <div class="max-w-readable px-4 mx-auto pt-12">
     <h1 class="text-four leading-four font-display-weight mb-8">
       {{ privacy.title }}
     </h1>
@@ -11,13 +11,13 @@
 import frontMatter from '@/utils/front-matter'
 
 export default {
-  async fetch() {
-    this.privacy = await this.$content('privacy').fetch()
-  },
   data() {
     return {
       privacy: {}
     }
+  },
+  async fetch() {
+    this.privacy = await this.$content('privacy').fetch()
   },
   head() {
     return frontMatter({

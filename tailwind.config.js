@@ -1,6 +1,7 @@
 // Docs: https://tailwindcss.com/docs/configuration
 // Default: https://github.com/tailwindcss/tailwindcss/blob/master/stubs/defaultConfig.stub.js
 const defaultTheme = require('tailwindcss/defaultTheme')
+const breakpoints = require('./utils/styles/breakpoints')
 
 module.exports = {
   future: {
@@ -9,11 +10,8 @@ module.exports = {
   },
   theme: {
     screens: {
-      sm: '640px',
-      md: '834px',
-      lg: '1024px',
-      xl: '1280px',
-      'hover-hover': { raw: '(hover: hover)' }
+      ...breakpoints,
+      'has-hover': { raw: '(hover: hover)' }
     },
     fontSize: {
       base: '16px',
@@ -47,6 +45,7 @@ module.exports = {
       20: 'calc(20 * 0.0125rem)'
     },
     lineHeight: {
+      none: '1',
       base: '24px',
       one: '72px',
       two: '56px',
@@ -70,76 +69,76 @@ module.exports = {
       current: 'currentColor',
       white: 'white',
       primary: {
-        50: '#E8FFF9',
-        100: '#B7F8E7',
-        200: '#88F1D5',
-        300: '#5CEAC3',
-        400: '#32E3B2',
+        50: '#E6FCF6',
+        100: '#C5FBEC',
+        200: '#72F4CF',
+        300: '#4FEEC1',
+        400: '#29E4AF',
         500: '#0BDCA0',
-        600: '#09C38D',
-        700: '#07A97B',
-        800: '#058F68',
-        900: '#047555'
+        600: '#06C58E',
+        700: '#08A678',
+        800: '#058B65',
+        900: '#056D50'
       },
       grey: {
-        50: '#FAFAFA',
-        100: '#F5F5F5',
-        200: '#EEEEEE',
-        300: '#E0E0E0',
-        400: '#BDBDBD',
-        500: '#9E9E9E',
-        600: '#757575',
-        700: '#616161',
-        800: '#424242',
-        900: '#212121'
+        50: '#F5F7F6',
+        100: '#E7E9E8',
+        200: '#DADEDD',
+        300: '#C4C9C8',
+        400: '#9CA4A2',
+        500: '#7B8482',
+        600: '#636D6A',
+        700: '#4F5956',
+        800: '#36403D',
+        900: '#1E2422'
       },
       red: {
-        50: '#FFF5F4',
-        100: '#F5C4C1',
-        200: '#F5A49E',
-        300: '#F4837B',
-        400: '#F46359',
-        500: '#F44336',
-        600: '#E1362A',
-        700: '#CD2B1F',
-        800: '#B92115',
-        900: '#A6180D'
+        50: '#FCF1ED',
+        100: '#F2CDC0',
+        200: '#F1A184',
+        300: '#F37B4F',
+        400: '#E85C29',
+        500: '#DC430B',
+        600: '#C23C0B',
+        700: '#AA370D',
+        800: '#922C07',
+        900: '#6D2004'
       },
       yellow: {
-        50: '#FFFDEA',
-        100: '#FFF6AA',
-        200: '#FFF38E',
-        300: '#FFF073',
-        400: '#FFEE57',
-        500: '#FFEB3B',
-        600: '#E5D227',
-        700: '#C0AE16',
-        800: '#A09009',
-        900: '#807200'
+        50: '#FCFBDC',
+        100: '#FBF7AA',
+        200: '#F4EF82',
+        300: '#F4EC57',
+        400: '#F0E846',
+        500: '#EADF0E',
+        600: '#D8CE0D',
+        700: '#B7AE0D',
+        800: '#8E8807',
+        900: '#6F6A05'
       },
       green: {
-        50: '#F7FFF7',
-        100: '#C5EDC5',
-        200: '#A2DDA3',
-        300: '#82CE84',
-        400: '#66BE69',
-        500: '#4CAF50',
-        600: '#37A33B',
-        700: '#249728',
-        800: '#138B18',
-        900: '#05800A'
+        50: '#F3FBE9',
+        100: '#D0F5A2',
+        200: '#B8F26F',
+        300: '#AAEE54',
+        400: '#9AE73A',
+        500: '#80DC0B',
+        600: '#72C805',
+        700: '#64AF04',
+        800: '#508D02',
+        900: '#386400'
       },
       blue: {
-        50: '#F2F7FF',
-        100: '#C1D8FA',
-        200: '#9CC1FA',
-        300: '#77ABF9',
-        400: '#5295F9',
-        500: '#2D7FF9',
-        600: '#2475EE',
-        700: '#1B6BE3',
-        800: '#1362D7',
-        900: '#0C59CC'
+        50: '#EBF6FC',
+        100: '#ACDBF7',
+        200: '#74C4F3',
+        300: '#4EB1EB',
+        400: '#2DA1E3',
+        500: '#0B8FDC',
+        600: '#0D85CA',
+        700: '#0774B2',
+        800: '#086093',
+        900: '#02446A'
       },
       orange: {
         100: '#fffaf0',
@@ -194,6 +193,10 @@ module.exports = {
       gridsome: {
         base: '#00A672',
         light: '#D2F8EC'
+      },
+      github: {
+        base: '#24292e',
+        400: '#2d3339'
       }
     },
     extend: {
@@ -203,12 +206,19 @@ module.exports = {
         monospace: [...defaultTheme.fontFamily.mono]
       },
       maxWidth: {
-        'container-max-width': '1264px',
+        '24rem': '24rem',
+        container: '1264px',
         'pretty-wide': '1020px',
-        'readable-line-length': '820px'
+        readable: '820px'
+      },
+      maxHeight: {
+        72: '18rem'
       },
       minWidth: {
         body: '320px'
+      },
+      opacity: {
+        10: '0.1'
       },
       spacing: {
         '2px': '2px',
@@ -217,6 +227,8 @@ module.exports = {
         '5px': '5px',
         '6px': '6px',
         '7px': '7px',
+        '12px': '12px',
+        '18px': '18px',
         7: '1.75rem',
         9: '2.25rem',
         13: '3.25rem',
@@ -251,11 +263,43 @@ module.exports = {
       },
       inset: {
         '1/2': '50%'
-      }
+      },
+      boxShadow: {
+        inner: 'inset 0px 0px 5px rgba(0, 0, 0, 0.2)',
+        '1dp':
+          '0 1px 1px 0 rgba(0,0,0,0.13), 0 2px 1px -1px rgba(0,0,0,0.11), 0 1px 3px 0 rgba(0,0,0,0.10)',
+        '2dp':
+          '0 2px 2px 0 rgba(0,0,0,0.13), 0 3px 1px -2px rgba(0,0,0,0.11), 0 1px 5px 0 rgba(0,0,0,0.10)',
+        '3dp':
+          '0 3px 4px 0 rgba(0,0,0,0.13), 0 3px 3px -2px rgba(0,0,0,0.11), 0 1px 8px 0 rgba(0,0,0,0.10)',
+        '4dp':
+          '0 4px 5px 0 rgba(0,0,0,0.13), 0 1px 10px 0 rgba(0,0,0,0.11), 0 2px 4px -1px rgba(0,0,0,0.10)',
+        '6dp':
+          '0 6px 10px 0 rgba(0,0,0,0.13), 0 1px 18px 0 rgba(0,0,0,0.11), 0 3px 5px -1px rgba(0,0,0,0.10)',
+        '8dp':
+          '0 8px 10px 1px rgba(0,0,0,0.13), 0 3px 14px 2px rgba(0,0,0,0.11), 0 5px 5px -3px rgba(0,0,0,0.10)',
+        '12dp':
+          '0 12px 17px 2px rgba(0,0,0,0.13), 0 5px 22px 4px rgba(0,0,0,0.11), 0 7px 8px -4px rgba(0,0,0,0.10)',
+        '16dp':
+          '0 16px 24px 2px rgba(0,0,0,0.13), 0 6px 30px 5px rgba(0,0,0,0.11), 0 8px 10px -5px rgba(0,0,0,0.10)',
+        '24dp':
+          '0 24px 38px 3px rgba(0,0,0,0.13), 0 9px 46px 8px rgba(0,0,0,0.11), 0 11px 15px -7px rgba(0,0,0,0.10)'
+      },
+      stroke: (theme) => ({
+        primary: theme('colors.primary.500')
+      }),
+      fill: (theme) => ({
+        primary: theme('colors.primary.500')
+      })
     }
   },
   variants: {
-    margin: ['responsive', 'last']
+    margin: ['responsive', 'last'],
+    display: ['responsive', 'group-hover'],
+    opacity: ['responsive', 'hover', 'focus', 'group-hover'],
+    textColor: ['responsive', 'hover', 'focus', 'group-hover'],
+    backgroundColor: ['responsive', 'hover', 'focus', 'group-hover'],
+    borderColor: ['responsive', 'hover', 'focus', 'group-hover']
   },
   // plugins: [],
   purge: {

@@ -3,7 +3,7 @@
     <div class="w-full h-full py-8 px-4" @click.self="makeChoice(false)">
       <div
         ref="modal-wrapper"
-        class="flex flex-col pointer-events-auto h-full relative bg-white m-auto max-w-readable-line-length md:mt-4 rounded-xl overflow-auto md:overflow-hidden overflow-x-hidden"
+        class="flex flex-col pointer-events-auto h-full relative bg-white m-auto max-w-readable md:mt-4 rounded-xl overflow-auto md:overflow-hidden overflow-x-hidden"
       >
         <h2 class="text-five leading-five font-display-weight p-4 text-center">
           We Respect Your Privacy
@@ -11,7 +11,7 @@
         <div class="flex-1 p-4 overflow-auto">
           <p class="mb-4">Hello, fellow Vue.js developer 👋</p>
           <p class="mb-4">
-            We started Vue Telemetry project with one goal in mind: provide
+            We started Vue Telescope project with one goal in mind: provide
             developers the best tool to explore Vue.js ecosystem for
             inspiration, research or analysis.
           </p>
@@ -22,7 +22,7 @@
             Why we need a permission?
           </h3>
           <p class="mb-4">
-            When using Vue Telemetry extension or website we could save websites
+            When using Vue Telescope extension or website we could save websites
             that were analyzed in our database. Saved website becomes public in
             listing only after you agree to submit it (by clicking the Lookup
             button on website or Save button in extension)
@@ -41,9 +41,9 @@
             When is data collected?
           </h3>
           <p class="mb-4">
-            Websites are saved when you use Vue Telemetry extension. Website
+            Websites are saved when you use Vue Telescope extension. Website
             will also be saved into database if you use Lookup feature on Vue
-            Telemetry website. Those websites will not appear publicly in
+            Telescope website. Those websites will not appear publicly in
             Explore section listing until you click Submit button fron extension
             or website
           </p>
@@ -52,31 +52,31 @@
           </h3>
           <p class="mb-4">
             The only way the collected data will be used for is to showcase such
-            websites in Explore section of Vue Telemetry website.
+            websites in Explore section of Vue Telescope website.
           </p>
           <p class="mb-4">
             We are greatly appreciate your support by using our website and
             extension. Let us remind you, that
             <a
-              href="https://github.com/nuxt-company/vue-telemetry-analyzer"
-              class="text-primary-500 hover:underline"
+              href="https://github.com/nuxt-company/vue-telescope-analyzer"
+              class="text-primary-500 has-hover:hover:underline"
               rel="noopener nofollow noreferrer"
               target="_blank"
-              >Vue Telemetry analyzer</a
+              >Vue Telescope analyzer</a
             >
             and
             <a
-              href="https://github.com/nuxt-company/vue-telemetry-extensions"
-              class="text-primary-500 hover:underline"
+              href="https://github.com/nuxt-company/vue-telescope-extensions"
+              class="text-primary-500 has-hover:hover:underline"
               rel="noopener nofollow noreferrer"
               target="_blank"
-              >Vue Telemetry extension</a
+              >Vue Telescope extension</a
             >
             is open source, so you are free to explore it and participate in
             it's development. You can also read our
             <NuxtLink
               to="/privacy"
-              class="text-primary-500 hover:underline"
+              class="text-primary-500 has-hover:hover:underline"
               @click.native="
                 (e) => {
                   e.preventDefault()
@@ -93,7 +93,7 @@
             By clicking Agree & Proceed button you agree with our
             <NuxtLink
               to="/terms"
-              class="text-primary-500 hover:underline"
+              class="text-primary-500 has-hover:hover:underline"
               @click.native="
                 (e) => {
                   e.preventDefault()

@@ -1,15 +1,17 @@
 <template>
-  <div id="main-footer" class="py-6 pb-2 text-grey-900 bg-grey-50">
-    <div class="max-w-container-max-width mx-auto py-4 px-4">
-      <div class="flex justify-between mb-8">
-        <ul class="flex flex-col text-sm leading-sm">
+  <div id="main-footer" class="py-6 pb-2 text-grey-900">
+    <div class="max-w-container mx-auto py-4 px-4">
+      <div class="flex flex-col md:flex-row justify-between mb-4">
+        <ul
+          class="flex flex-col items-center md:items-start text-sm text-center leading-sm mb-4 md:mb-0"
+        >
           <li class="text-grey-900">
             Frontend hosted on
             <a
               href="https://www.netlify.com/"
               target="_blank"
               rel="noopener nofollow noreferrer"
-              class="text-primary-700 font-medium hover:underline"
+              class="text-primary-500 font-medium has-hover:hover:underline"
             >
               Netlify </a
             >, API made with
@@ -17,7 +19,7 @@
               href="https://strapi.io"
               target="_blank"
               rel="noopener nofollow noreferrer"
-              class="text-primary-700 font-medium hover:underline"
+              class="text-primary-500 font-medium has-hover:hover:underline"
             >
               Strapi </a
             >.
@@ -28,7 +30,7 @@
               href="https://cloudinary.com/"
               target="_blank"
               rel="noopener nofollow noreferrer"
-              class="text-primary-700 font-medium hover:underline"
+              class="text-primary-500 font-medium has-hover:hover:underline"
             >
               Cloudinary
             </a>
@@ -37,27 +39,33 @@
               href="https://icons8.com/"
               target="_blank"
               rel="noopener nofollow noreferrer"
-              class="text-primary-700 font-medium hover:underline"
+              class="text-primary-500 font-medium has-hover:hover:underline"
               >Icons8</a
             >.
           </li>
         </ul>
 
         <ul
-          class="text-right flex flex-col md:flex-row text-sm leading-sm mb-2"
+          class="text-right flex items-start md:mr-0 text-sm leading-sm mx-auto"
         >
-          <li class="md:mr-4">
-            <NuxtLink to="/terms" class="hover:text-primary-500 font-medium">
+          <li class="mr-4">
+            <NuxtLink
+              to="/terms"
+              class="has-hover:hover:text-primary-500 font-medium"
+            >
               Terms
             </NuxtLink>
           </li>
-          <li class="md:mr-4">
-            <NuxtLink to="/privacy" class="hover:text-primary-500 font-medium">
+          <li class="mr-4">
+            <NuxtLink
+              to="/privacy"
+              class="has-hover:hover:text-primary-500 font-medium"
+            >
               Privacy
             </NuxtLink>
           </li>
           <li class="">
-            <ChangelogLink class="hover:text-primary-500 font-medium">
+            <ChangelogLink class="has-hover:hover:text-primary-500 font-medium">
               <span class="">Changelog</span>
             </ChangelogLink>
           </li>
@@ -67,7 +75,7 @@
       <div class="flex flex-col md:flex-row items-center justify-between">
         <div class="flex flex-col md:flex-row items-center mb-4 md:mb-0">
           <NuxtLink to="/" class="mb-2 md:mb-0 md:mr-1" aria-label="Home Page">
-            <TheSquareLogo class="h-6" />
+            <TheSquareLogo class="h-6 w-6 text-primary-500" />
           </NuxtLink>
           <div
             class="leading-none text-sm text-grey-900 leading-sm text-center"
@@ -77,7 +85,7 @@
               href="https://nuxtjs.org"
               target="_blank"
               rel="noopener"
-              class="text-primary-500 font-medium transition ease-linear duration-150 hover:underline"
+              class="text-primary-500 font-medium transition ease-linear duration-150 has-hover:hover:underline"
               >NuxtJS Team</a
             >
             for the VueJS Community
@@ -92,18 +100,18 @@
               rel="noopener nofollow noreferrer"
             >
               <span class="sr-only">Twitter</span>
-              <TwitterIcon class="h-5 w-5" />
+              <TwitterIcon class="h-6 w-6" />
             </a>
           </li>
           <li class="">
             <a
               href="https://github.com/nuxt-company/vue-telemetry-analyzer"
-              class="text-grey-900 hover:text-primary-500 transition ease-in duration-150"
+              class="text-grey-900 has-hover:hover:text-primary-500 transition ease-in duration-150"
               target="_blank"
               rel="noopener nofollow noreferrer"
             >
               <span class="sr-only">GitHub</span>
-              <GithubIcon class="h-5 w-5" />
+              <GithubIcon class="h-6 w-6" />
             </a>
           </li>
         </ul>
