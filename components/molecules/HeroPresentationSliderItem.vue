@@ -160,7 +160,7 @@ export default {
       this.$emit('change-slide', this.activeShowcases[0].index)
     },
     getNextSlide() {
-      return sliderMatrix
+      const i = sliderMatrix
         .map((m) => {
           if (m[2] === this.activeIndex) {
             return m[this.staticIndex]
@@ -168,6 +168,7 @@ export default {
           return null
         })
         .filter(Boolean)[0]
+      return i || 0
     },
     getDirection() {
       const activeMatrix = sliderMatrix

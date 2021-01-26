@@ -1,6 +1,6 @@
 <template>
   <div ref="hero-presentation-slider" class="w-full relative opacity-0">
-    <!-- <pre>{{ activeShowcase }}</pre> -->
+    <!-- <pre>{{ featured.length }}</pre> -->
     <div class="w-full relative flex items-center justify-center px-4">
       <div
         v-for="({ id }, i) in featured"
