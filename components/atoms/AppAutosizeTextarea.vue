@@ -4,9 +4,9 @@
     class="block resize-none overflow-hidden w-full bg-grey-100 focus:outline-none"
     :rows="rows"
     :value="value"
+    :placeholder="placeholder"
     @input="$emit('input', $event.target.value)"
     @keypress.enter.prevent="$emit('submit')"
-    :placeholder="placeholder"
   ></textarea>
 </template>
 

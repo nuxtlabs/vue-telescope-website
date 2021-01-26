@@ -27,11 +27,11 @@
           :style="{ maxWidth: maxWidthStyles + 'px' }"
         >
           <AppAutosizeTextarea
-            placeholder="Type Collection name"
             v-if="creatingCollection"
             ref="create-collection-tour"
             v-model="newCollectionName"
             v-click-outside="() => (creatingCollection = false)"
+            placeholder="Type Collection name"
             class="w-full text-seven leading-seven font-bold-body-weight flex py-4 px-8 rounded-xl border-2 border-transparent text-grey-900 transition-colors duration-200 placeholder-grey-400"
             @submit="createCollection"
             @keydown.esc.native="clearActions"

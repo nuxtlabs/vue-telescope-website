@@ -8,8 +8,8 @@
     </button>
     <MobileModalWrapper
       v-if="show"
-      @close="show = false"
       label="Select filters:"
+      @close="show = false"
     >
       <ShowcasesSearchFilters @searching="show = false" />
     </MobileModalWrapper>

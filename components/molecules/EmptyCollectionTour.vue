@@ -24,10 +24,10 @@
         <div v-else class="max-w-24rem absolute top-0 w-full">
           <AppAutosizeTextarea
             v-if="creatingList"
-            placeholder="Type List name"
             ref="create-list-tour"
             v-model="newListName"
             v-click-outside="() => (creatingList = false)"
+            placeholder="Type List name"
             class="w-full text-seven leading-seven font-bold-body-weight flex py-4 px-8 rounded-xl border-2 border-transparent text-grey-900 transition-colors duration-200 placeholder-grey-400"
             @submit="createGroup"
             @keydown.esc.native="clearActions"

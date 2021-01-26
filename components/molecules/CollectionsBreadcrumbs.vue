@@ -14,8 +14,8 @@
     <button
       v-if="selectedGroup"
       :disabled="isMobile ? false : true"
-      @click="isMobile ? $emit('open-menu') : null"
       class="focus:outline-none"
+      @click="isMobile ? $emit('open-menu') : null"
     >
       {{ selectedGroup.name }}
       ({{
