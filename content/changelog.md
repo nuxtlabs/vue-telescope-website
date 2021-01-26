@@ -3,36 +3,67 @@ title: Changelog
 updatedAt: 2021-01-25
 ---
 
+<changelog-item project="website" date="2020-01-25">
+
+## Vue Telemetry is now Vue Telescope 🔭
+
+After discussions with the Vue.js community, we decided to rename Vue Telemetry to Vue telescope to avoid unnecessary associations and concerns about privacy.
+
+## Introducting Collections 📚
+
+You can now bookmark websites and organize them into collections and lists!
+
+We built this feature to gather beautiful showcase that we will list on nuxtjs.org very soon.
+
+<nuxt-link to="/collections" class="block pb-4">
+  <img src="/changelog/collections.jpg" alt="vue telescope collections" class="m-auto rounded-md shadow" />
+</nuxt-link>
+
+You can also share your Collections with community and use provided data in own apps.
+
+<nuxt-link to="/collections" class="block pb-4">
+  <img src="/changelog/collections-sharing.jpg" alt="vue telescope sharing" class="m-auto rounded-md shadow" />
+</nuxt-link>
+
+We are looking forward your feedback and thank you again for everyone using our [browser extensions 🧩](/extensions).
+
+[📚&nbsp; Start gathering websites with collections](/collections).
+
+</changelog-item>
+
 <changelog-item project="analyzer" date="2020-01-25">
 
-## Vue Telemetry Analyzer v0.9.0 release
+## Analyzer v0.9.0 released
 
-- rename Vue Telemetry to Vue Telescope
+- Renamed Vue Telemetry to Vue Telescope, see [on GitHub](https://github.com/nuxt-company/vue-telescope-analyzer)
 
 </changelog-item>
 
 <changelog-item project="extension" date="2020-01-25">
 
-## Vue Telemetry extension 1.5.2 release
+## Browser extensions v1.5.2 released
 
 - `insafe-eval` directive was removed from Content Security Policy to improve security and performance
-- rename Vue Telemetry to Vue Telescope to avoid a confusion from community 🙌
+- Renamed Vue Telemetry to Vue Telescope to avoid a confusion from community 🙌
 
-</changelog-item>
+See more [on GitHub](https://github.com/nuxt-company/vue-telescope-extensions).
 
-<changelog-item project="website" date="2020-01-25">
+<changelog-item project="website" date="2020-12-14">
 
-## Renaming Vue Telemetry to Vue Telescope and new Collections feature
+## Vue 3 detection ✨
 
-After communicating with Vue.js community we decided to rename Vue Telemetry to Vue telescope to avoid unnecessary associations and concerns about privacy.
+We now support Vue 3 in the [vue-telemetry-analyzer](https://github.com/nuxt-company/vue-telemetry-analyzer), making it available today in the [Chrome](https://chrome.google.com/webstore/detail/vue-telemetry/neaebjphlfplgdhedjdhcnpjkndddbpd) and [Firefox](https://addons.mozilla.org/en-US/firefox/addon/vue-telemetry/) extensions.
 
-We also added a Collections feature, so now you can organize showcases into Collections and Lists. You can also share your Collections with community and use provided data in own apps.
-
-<nuxt-link to="/changelog/collections" class="block pb-4">
-  <img src="/changelog/collections.gif" alt="vue telemetry collections" class="rounded-md shadow m-auto max-h-72" />
+<nuxt-link to="/explore/vitepress-vuejs-org" class="block pb-4">
+  <img src="https://res.cloudinary.com/nuxt/image/upload/v1608057034/vue-telemetry/vue-telemetry-vue3_mzilty.svg" alt="vue telemetry vue 3 support" class="rounded-md shadow" />
 </nuxt-link>
 
+On top of it, we also added support for [PrimeVue](https://www.primefaces.org/primevue/showcase/#/) and [Vuesax](https://vuesax.com) UI frameworks.
+
+Thank you to [@cagataycivici](https://github.com/cagataycivici), [@alfonsobries](https://github.com/alfonsobries), [@antfu](https://github.com/antfu) and our [contributors](https://github.com/nuxt-company/vue-telemetry-analyzer/graphs/contributors) for their help 🙌
+
 </changelog-item>
+
 
 <changelog-item project="extension" date="2020-10-20">
 
