@@ -1,8 +1,8 @@
 <template>
   <div
     ref="menu"
-    class="bg-grey-50 rounded-lg opacity-0"
     v-click-outside="closeMenu"
+    class="bg-grey-50 rounded-lg opacity-0"
   >
     <div class="text-sm p-4">
       <span v-if="$strapi.user">

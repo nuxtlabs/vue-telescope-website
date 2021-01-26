@@ -89,8 +89,8 @@
     <Portal to="default-layout">
       <LazyShareCollectionModal
         v-if="shareCollection"
-        @close="shareCollection = false"
         :collection="collection"
+        @close="shareCollection = false"
       />
     </Portal>
 

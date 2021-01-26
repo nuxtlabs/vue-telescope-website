@@ -48,6 +48,8 @@ We are looking forward your feedback and thank you again for everyone using our 
 
 See more [on GitHub](https://github.com/nuxt-company/vue-telescope-extensions).
 
+</changelog-item>
+
 <changelog-item project="website" date="2020-12-14">
 
 ## Vue 3 detection ✨
@@ -63,7 +65,6 @@ On top of it, we also added support for [PrimeVue](https://www.primefaces.org/pr
 Thank you to [@cagataycivici](https://github.com/cagataycivici), [@alfonsobries](https://github.com/alfonsobries), [@antfu](https://github.com/antfu) and our [contributors](https://github.com/nuxt-company/vue-telemetry-analyzer/graphs/contributors) for their help 🙌
 
 </changelog-item>
-
 
 <changelog-item project="extension" date="2020-10-20">
 

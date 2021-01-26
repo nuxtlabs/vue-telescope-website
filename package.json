@@ -46,6 +46,7 @@
     "eslint-plugin-nuxt": ">=2.0.0",
     "eslint-plugin-prettier": "^3.3.0",
     "nuxt-ackee": "^2.0.0",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "vue-plausible": "^1.1.2"
   }
 }

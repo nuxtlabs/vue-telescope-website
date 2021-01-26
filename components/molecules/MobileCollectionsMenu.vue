@@ -7,23 +7,23 @@
       <UnorderedListIcon class="h-7 w-7 overflow-visible" />
     </button> -->
     <div class="fixed bottom-0 left-1/2 z-10 transform -translate-x-1/2 pb-4">
-      <AppButton @click.native="show = true" appearance="primary" class="">
+      <AppButton appearance="primary" class="" @click.native="show = true">
         My Collections
       </AppButton>
     </div>
 
     <MobileModalWrapper
       v-if="show"
-      @close="show = false"
       label="Your Collections:"
+      @close="show = false"
     >
       <CreateCollection class="mb-2" />
 
       <transition-group
         :css="false"
+        class="relative block overflow-hidden px-2 pb-4"
         @enter="enterAnimation"
         @leave="leaveAnimation"
-        class="relative block overflow-hidden px-2 pb-4"
       >
         <CollectionListItem
           v-for="collection in sortedCollections"

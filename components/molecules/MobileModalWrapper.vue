@@ -8,29 +8,29 @@
       @touchmove.self="touchMoveHandler"
       @touchstart.self="touchStartHandler"
     >
-      <div class="h-full pointer-events-none flex justify-end flex-col pt-16">
+      <div class="flex flex-col justify-end h-full pt-16 pointer-events-none">
         <div
           ref="hack-safari"
-          class="rounded-4xl rounded-b-none overflow-hidden"
+          class="overflow-hidden rounded-b-none rounded-4xl"
           :class="browser === 'Safari' && 'h-full'"
         >
           <div
             ref="modal-container"
             style="transform: translateY(100%)"
-            class="modal-container relative bg-white h-full pointer-events-auto rounded-4xl rounded-b-none relative px-4"
+            class="relative h-full px-4 bg-white rounded-b-none pointer-events-auto modal-container rounded-4xl"
           >
             <div
+              ref="close-button"
+              class="sticky top-0 left-0 z-10 flex items-center justify-center w-full py-4 bg-white rounded-md cursor-pointer pointer-events-auto sticky-edge"
               @click="isMobile ? null : animateLeave()"
               @touchmove="touchMoveHandler"
               @touchstart="touchStartHandler"
-              ref="close-button"
-              class="sticky-edge sticky bg-white rounded-md top-0 left-0 z-10 w-full py-4 cursor-pointer pointer-events-auto flex items-center justify-center"
             >
-              <!-- <XmarkCircleIcon class="text-grey-900 w-6 h-6" /> -->
-              <div class="w-24 h-1 bg-grey-300 rounded"></div>
+              <!-- <XmarkCircleIcon class="w-6 h-6 text-grey-900" /> -->
+              <div class="w-24 h-1 rounded bg-grey-300"></div>
             </div>
             <div
-              class="relative flex justify-between items-center mb-4 mt-2 pointer-events-none"
+              class="relative flex items-center justify-between mt-2 mb-4 pointer-events-none"
             >
               <div class="pl-2 text-six leading-six font-bold-body-weight">
                 {{ label }}
@@ -51,21 +51,14 @@ import { mapState } from 'vuex'
 import XmarkCircleIcon from '@/assets/icons/xmark-circle.svg?inline'
 
 export default {
+  components: {
+    XmarkCircleIcon
+  },
   props: {
     label: {
       type: String,
       default: null
     }
-  },
-  components: {
-    XmarkCircleIcon
-  },
-  computed: {
-    ...mapState({
-      browser: (state) => state.browser,
-      isModal: (state) => state.isModal,
-      isMobile: (state) => state.isMobile
-    })
   },
   data() {
     return {
@@ -73,6 +66,13 @@ export default {
       yStart: null,
       xStart: null
     }
+  },
+  computed: {
+    ...mapState({
+      browser: (state) => state.browser,
+      isModal: (state) => state.isModal,
+      isMobile: (state) => state.isMobile
+    })
   },
   mounted() {
     this.activateEscapeListener()
@@ -94,6 +94,7 @@ export default {
     activateEscapeListener() {
       const escapeHandler = (e) => {
         if (e.key === 'Escape') {
+          // eslint-disable-next-line no-unused-expressions
           this.animateLeave
         }
       }
@@ -124,11 +125,11 @@ export default {
         return
       }
 
-      var xCurrent = e.touches[0].clientX
-      var yCurrent = e.touches[0].clientY
+      const xCurrent = e.touches[0].clientX
+      const yCurrent = e.touches[0].clientY
 
-      var xDiff = this.xStart - xCurrent
-      var yDiff = this.yStart - yCurrent
+      const xDiff = this.xStart - xCurrent
+      const yDiff = this.yStart - yCurrent
 
       if (Math.abs(xDiff) > Math.abs(yDiff)) {
         if (xDiff > 0) {
@@ -136,14 +137,12 @@ export default {
         } else {
           // right swipe
         }
+      } else if (yDiff > 0) {
+        // up swipe
       } else {
-        if (yDiff > 0) {
-          // up swipe
-        } else {
-          // down swipe
-          // this.$emit('close')
-          this.animateLeave()
-        }
+        // down swipe
+        // this.$emit('close')
+        this.animateLeave()
       }
       // reset
       this.xStart = null

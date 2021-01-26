@@ -15,9 +15,9 @@
       >
         <div
           v-if="$strapi.user"
-          @click.stop.prevent
           class="w-full h-full"
           :class="compact ? 'p-3' : 'p-8'"
+          @click.stop.prevent
         >
           <div v-if="collectionsWithGroups.length">
             <!-- <div
@@ -152,8 +152,8 @@
 
         <div
           v-else
-          @click.stop.prevent
           class="w-full h-full p-3 flex flex-col items-center justify-center"
+          @click.stop.prevent
         >
           <div
             class="text-center"
