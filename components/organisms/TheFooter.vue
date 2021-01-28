@@ -105,7 +105,7 @@
           </li>
           <li class="">
             <a
-              href="https://github.com/nuxt-company/vue-telemetry-analyzer"
+              href="https://github.com/nuxt-company/vue-telescope-analyzer"
               class="text-grey-900 has-hover:hover:text-primary-500 transition ease-in duration-150"
               target="_blank"
               rel="noopener nofollow noreferrer"

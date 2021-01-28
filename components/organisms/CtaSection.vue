@@ -14,7 +14,7 @@
         <div class="flex">
           <AppButton
             tag="a"
-            href="https://chrome.google.com/webstore/detail/vue-telemetry/neaebjphlfplgdhedjdhcnpjkndddbpd"
+            :href="$config.googleStoreUrl"
             appearance="transparent"
             size="small"
             class="mr-1"
@@ -24,7 +24,7 @@
           </AppButton>
           <AppButton
             tag="a"
-            href="https://addons.mozilla.org/en-GB/firefox/addon/vue-telemetry"
+            :href="$config.firefoxStoreUrl"
             appearance="transparent"
             size="small"
             class="ml-1"

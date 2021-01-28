@@ -91,7 +91,7 @@ export default {
             {
               type: 'external',
               href:
-                'https://github.com/nuxt-company/vue-telemetry-extensions/blob/master/README.md#chrome',
+                'https://github.com/nuxt-company/vue-telescope-extensions/blob/master/README.md#chrome',
               text: 'Check on Chrome Web Store'
             }
           ],
@@ -108,12 +108,12 @@ export default {
           links: [
             {
               type: 'external',
-              href: 'https://github.com/nuxt-company/vue-telemetry-analyzer',
+              href: 'https://github.com/nuxt-company/vue-telescope-analyzer',
               text: 'Vue Telescope Analyzer on Github'
             },
             {
               type: 'external',
-              href: 'https://github.com/nuxt-company/vue-telemetry-extensions',
+              href: 'https://github.com/nuxt-company/vue-telescope-extensions',
               text: 'Browser extension on Github'
             }
           ],

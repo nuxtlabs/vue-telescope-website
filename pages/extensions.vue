@@ -11,7 +11,7 @@
           <ChromeColorIcon class="h-32 mb-8" />
           <AppButton
             tag="a"
-            href="https://chrome.google.com/webstore/detail/vue-telemetry/neaebjphlfplgdhedjdhcnpjkndddbpd"
+            :href="$config.googleStoreUrl"
             size="base"
             appearance="primary"
           >
@@ -24,7 +24,7 @@
           <FirefoxColorIcon class="h-32 mb-8" />
           <AppButton
             tag="a"
-            href="https://addons.mozilla.org/en-GB/firefox/addon/vue-telemetry"
+            :href="$config.firefoxStoreUrl"
             size="base"
             appearance="primary"
           >
