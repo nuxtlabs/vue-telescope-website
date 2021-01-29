@@ -41,9 +41,9 @@ export default {
     },
     linkToExtention() {
       if (this.browser === 'Chrome') {
-        return 'https://chrome.google.com/webstore/detail/vue-telemetry/neaebjphlfplgdhedjdhcnpjkndddbpd'
+        return 'https://chrome.google.com/webstore/detail/vue-telescope/neaebjphlfplgdhedjdhcnpjkndddbpd'
       } else if (this.browser === 'Firefox') {
-        return 'https://addons.mozilla.org/en-GB/firefox/addon/vue-telemetry/'
+        return 'https://addons.mozilla.org/en-GB/firefox/addon/vue-telescope/'
       } else {
         return '/extensions'
       }
