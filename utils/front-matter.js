@@ -97,7 +97,7 @@ export default ({
       {
         hid: 'vuetelescope-preconnect',
         rel: 'preconnect',
-        href: 'https://api.vuetelemetry.com'
+        href: 'https://api.vuetelescope.com'
       },
       {
         hid: 'usefathom-preconnect',

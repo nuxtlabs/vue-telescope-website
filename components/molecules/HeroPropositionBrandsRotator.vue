@@ -70,7 +70,7 @@ export default {
   mounted() {
     // this.brands.map(
     //   (brand) =>
-    //     (new Image().src = `https://icons.vuetelemetry.com${brand.imgPath}`)
+    //     (new Image().src = `https://icons.vuetelescope.com${brand.imgPath}`)
     // )
 
     this.rotateBrands()
