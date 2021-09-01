@@ -18,7 +18,8 @@
         :key="showcase.id"
         :data-index="index"
         :showcase="showcase"
-        class="w-full sm:w-1/2 md:w-1/3 mb-4"
+        sortable
+        class="w-full mb-4 sm:w-1/2 md:w-1/3"
         @open-link="openLinkHandler(showcase)"
       />
     </div>

@@ -36,6 +36,24 @@
           <DeleteIcon class="w-4 h-4" />
         </button>
       </li>
+      <li v-if="up" class="py-2px">
+        <button
+          title="Move up"
+          class="flex items-center justify-center w-8 h-8 p-1 transform rotate-180 rounded-lg focus:outline-none bg-grey-50 has-hover:hover:scale-110"
+          @click="$emit('up')"
+        >
+          <DownIcon class="w-4 h-4" />
+        </button>
+      </li>
+      <li v-if="down" class="py-2px">
+        <button
+          title="Move down"
+          class="flex items-center justify-center w-8 h-8 p-1 transform rounded-lg focus:outline-none bg-grey-50 has-hover:hover:scale-110"
+          @click="$emit('down')"
+        >
+          <DownIcon class="w-4 h-4" />
+        </button>
+      </li>
     </ul>
   </div>
 </template>
@@ -44,12 +62,24 @@
 // import ShareIcon from '@/assets/icons/share.svg?inline'
 import EditIcon from '@/assets/icons/edit.svg?inline'
 import DeleteIcon from '@/assets/icons/trash.svg?inline'
+import DownIcon from '@/assets/icons/arrow-down.svg?inline'
 
 export default {
   components: {
     // ShareIcon,
     EditIcon,
-    DeleteIcon
+    DeleteIcon,
+    DownIcon
+  },
+  props: {
+    up: {
+      type: Boolean,
+      default: false
+    },
+    down: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {

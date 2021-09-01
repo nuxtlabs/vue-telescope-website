@@ -163,15 +163,12 @@ export default {
       )
     },
     reversedLists() {
-      // TODO: sort by created
       const r = [...this.collection.groups]
-      return r.sort(function (a, b) {
-        const keyA = new Date(a.created_at)
-        const keyB = new Date(b.created_at)
-        if (keyA < keyB) return -1
-        if (keyA > keyB) return 1
-        return 0
-      })
+      return r.sort(
+        (a, b) =>
+          a.position - b.position ||
+          new Date(a.created_at) - new Date(b.created_at)
+      )
     }
   },
   watch: {

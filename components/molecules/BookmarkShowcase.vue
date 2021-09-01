@@ -20,6 +20,32 @@
         ]"
       />
     </button>
+    <div v-if="sortable" class="absolute top-0 left-0 z-10 flex gap-2 p-2">
+      <button
+        class="flex items-center justify-center w-8 h-8 p-1 transform rotate-180 rounded-lg focus:outline-none bg-grey-50 hover:bg-grey-200"
+        @click.stop.prevent="
+          $store.dispatch('collections/moveUpShowcase', {
+            showcase,
+            group: selectedGroup,
+            collection: selectedCollection
+          })
+        "
+      >
+        <DownIcon class="w-4 h-4" />
+      </button>
+      <button
+        class="flex items-center justify-center w-8 h-8 p-1 transform rounded-lg focus:outline-none bg-grey-50 hover:bg-grey-200"
+        @click.stop.prevent="
+          $store.dispatch('collections/moveDownShowcase', {
+            showcase,
+            group: selectedGroup,
+            collection: selectedCollection
+          })
+        "
+      >
+        <DownIcon class="w-4 h-4" />
+      </button>
+    </div>
 
     <!-- <transition name="fade"> -->
     <BookmarkShowcaseMenu
@@ -35,10 +61,12 @@
 <script>
 import { mapState } from 'vuex'
 import StarIcon from '@/assets/icons/star.svg?inline'
+import DownIcon from '@/assets/icons/arrow-down.svg?inline'
 
 export default {
   components: {
-    StarIcon
+    StarIcon,
+    DownIcon
   },
   props: {
     showcase: {
@@ -46,6 +74,10 @@ export default {
       default: () => {}
     },
     compact: {
+      type: Boolean,
+      default: false
+    },
+    sortable: {
       type: Boolean,
       default: false
     }
@@ -58,7 +90,9 @@ export default {
   },
   computed: {
     ...mapState({
-      collections: (state) => state.collections.collections
+      collections: (state) => state.collections.collections,
+      selectedCollection: (state) => state.collections.selectedCollection,
+      selectedGroup: (state) => state.collections.selectedGroup
     }),
     isBookmarkedAtLeastOnce() {
       const showcases = this.collections

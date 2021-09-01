@@ -67,8 +67,12 @@
     >
       <GroupListItemMenu
         v-if="!updatingGroup"
+        :up="canMoveUp"
+        :down="canMoveDown"
         @delete="deleteGroup"
         @rename="initUpdateGroup"
+        @up="moveUpGroup"
+        @down="moveDownGroup"
       />
     </Popper>
   </div>
@@ -112,6 +116,16 @@ export default {
     }),
     isSelected() {
       return this.selectedGroup && this.selectedGroup.id === this.group.id
+    },
+    canMoveUp() {
+      return this.isSelected && this.collection.groups[0].id !== this.group.id
+    },
+    canMoveDown() {
+      return (
+        this.isSelected &&
+        this.collection.groups[this.collection.groups.length - 1].id !==
+          this.group.id
+      )
     }
   },
   // created() {
@@ -182,6 +196,28 @@ export default {
         const updateInput = this.$refs['update-group-input'].$el
         updateInput.focus()
       })
+    },
+    async moveUpGroup() {
+      try {
+        this.loading = true
+        await this.$store.dispatch('collections/moveUpGroup', {
+          group: this.group,
+          collection: this.collection
+        })
+        this.clearActions()
+      } catch (e) {}
+      this.loading = false
+    },
+    async moveDownGroup() {
+      try {
+        this.loading = true
+        await this.$store.dispatch('collections/moveDownGroup', {
+          group: this.group,
+          collection: this.collection
+        })
+        this.clearActions()
+      } catch (e) {}
+      this.loading = false
     }
   }
 }
