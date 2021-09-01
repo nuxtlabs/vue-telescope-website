@@ -20,7 +20,7 @@
         <BookmarkShowcase
           :showcase="showcase"
           compact
-          sortable
+          :sortable="sortable"
           class="hidden transition-opacity sm:block duration-400"
         />
       </div>
