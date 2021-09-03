@@ -35,9 +35,9 @@
           <div v-else-if="selectedGroup">
             <transition name="slide" mode="out-in">
               <CollectionShowcaseCardsListing
-                v-if="selectedGroup.showcases.length"
+                v-if="selectedShowcases.length"
                 :key="selectedGroup.id"
-                :showcases="selectedGroup.showcases"
+                :showcases="selectedShowcases"
               />
 
               <!-- if no showcases, then show tour -->
@@ -76,7 +76,12 @@ export default {
     ...mapState({
       collections: (state) => state.collections.collections,
       selectedCollection: (state) => state.collections.selectedCollection,
-      selectedGroup: (state) => state.collections.selectedGroup
+      selectedGroup: (state) => state.collections.selectedGroup,
+      selectedShowcases: (state) => {
+        return [...state.collections.selectedGroup.showcases].sort(
+          (a, b) => a.position - b.position
+        )
+      }
     }),
     ...mapGetters({ sortedCollections: 'collections/sortedCollections' })
   },

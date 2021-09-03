@@ -20,7 +20,8 @@
         <BookmarkShowcase
           :showcase="showcase"
           compact
-          class="hidden sm:block transition-opacity duration-400"
+          :sortable="sortable"
+          class="hidden transition-opacity sm:block duration-400"
         />
       </div>
       <div class="flex flex-wrap items-center">
@@ -62,6 +63,10 @@ export default {
     showcase: {
       type: Object,
       default: () => {}
+    },
+    sortable: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
