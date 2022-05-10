@@ -1,5 +1,8 @@
 <template>
-  <div class="text-primary-500">hello, Vue Telescope</div>
+  <div class="text-primary-500">
+    <h1>hello, Vue Telescope</h1>
+    <HeroPropositionBrandsRotator />
+  </div>
 </template>
 
 <script setup lang="ts">
