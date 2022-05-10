@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useNuxtApp, computed } from '#imports'
+import { useNuxtApp, computed, ref, onMounted } from '#imports'
 
 const { $gsap, $config } = useNuxtApp()
 
 const timeout = 5000
-const rotationInterval = null
-const brands = [
+const rotationInterval = ref(null)
+const brands = ref([
   { slug: 'vue', name: 'Vue.js', active: true, imgPath: '/vue.svg' },
   {
     slug: 'nuxtjs',
@@ -31,10 +31,10 @@ const brands = [
     active: false,
     imgPath: '/framework/vuepress.svg'
   }
-]
+])
 
 const activeBrands = computed(() => {
-  return brands.filter((b) => b.active)
+  return brands.value.filter((b) => b.active)
 })
 
 function enterTransition(el, done) {
@@ -93,6 +93,24 @@ function leaveTransition(el, done) {
     }
   )
 }
+
+function rotateBrands() {
+  let currentEl = 0
+  let el = brands.value[currentEl]
+
+  rotationInterval.value = setInterval(() => {
+    if (document.hidden) return
+    el.active = false
+    currentEl = (currentEl + 1) % brands.value.length
+
+    el = brands.value[currentEl]
+    el.active = true
+  }, timeout)
+}
+
+onMounted(() => {
+  rotateBrands()
+})
 </script>
 
 <template>
@@ -104,19 +122,18 @@ function leaveTransition(el, done) {
       @leave="leaveTransition"
     >
       <div
-        v-for="brand in activeBrands"
-        :key="brand.slug"
         class="brand"
-        :class="`text-${brand.slug}-base`"
+        :key="activeBrands[0].slug"
+        :class="`text-${activeBrands[0].slug}-base`"
       >
-        <span>{{ brand.name }}</span>
+        <span>{{ activeBrands[0].name }}</span>
         <div class="brand-icon-wrapper">
           <div
             v-for="num in 20"
             :key="num"
             class="brand-icon"
             :class="[num % 2 && 'hidden md:block']"
-            :style="`background-image: url(${$config.iconsURL}/${brand.imgPath})`"
+            :style="`background-image: url(${$config.iconsURL}/${activeBrands[0].imgPath})`"
           ></div>
         </div>
       </div>
