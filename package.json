@@ -10,6 +10,9 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview"
   },
+  "dependencies": {
+    "gsap": "file:assets/js/gsap-bonus.tgz"
+  },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^5.0.4",
     "nuxt": "npm:nuxt3@latest"
