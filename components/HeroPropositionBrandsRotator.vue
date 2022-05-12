@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useNuxtApp, computed, ref, onMounted } from '#imports'
 
+const brand = ref()
+
 const { $gsap, $config } = useNuxtApp()
 
 const timeout = 5000
@@ -37,7 +39,7 @@ const activeBrands = computed(() => {
   return brands.value.filter((b) => b.active)
 })
 
-function enterTransition(el, done) {
+function enterTransition(el, done = () => {}) {
   $gsap.fromTo(
     el,
     {
@@ -110,6 +112,8 @@ function rotateBrands() {
 
 onMounted(() => {
   rotateBrands()
+  // TODO: temp fix, since `appear` is broken
+  enterTransition(brand.value)
 })
 </script>
 
@@ -122,6 +126,7 @@ onMounted(() => {
       @leave="leaveTransition"
     >
       <div
+        ref="brand"
         class="brand"
         :key="activeBrands[0].slug"
         :class="`text-${activeBrands[0].slug}-base`"
