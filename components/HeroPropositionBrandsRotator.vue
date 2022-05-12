@@ -1,37 +1,41 @@
 <script setup lang="ts">
 import { useNuxtApp, useRuntimeConfig, computed, ref, onMounted } from '#imports'
 
-const $config = useRuntimeConfig()
 const { $gsap } = useNuxtApp()
 
+const $config = useRuntimeConfig()
+
 const timeout = 5000
+
 const rotationInterval = ref(null)
 
+const brand = ref()
+
 const brands = ref([
-  { slug: 'vue', name: 'Vue.js', active: true, imgPath: '/brands/vue.svg' },
+  { slug: 'vue', name: 'Vue.js', active: true, imgPath: '/vue.svg' },
   {
     slug: 'nuxtjs',
     name: 'Nuxt.js',
     active: false,
-    imgPath: '/brands/nuxtjs.svg'
+    imgPath: '/framework/nuxt.svg'
   },
   {
     slug: 'gridsome',
     name: 'Gridsome',
     active: false,
-    imgPath: '/brands/gridsome.svg'
+    imgPath: '/framework/gridsome.svg'
   },
   {
     slug: 'quasar',
     name: 'Quasar',
     active: false,
-    imgPath: '/brands/quasar.svg'
+    imgPath: '/framework/quasar.svg'
   },
   {
     slug: 'vuepress',
     name: 'Vuepress',
     active: false,
-    imgPath: '/brands/vuepress.svg'
+    imgPath: '/framework/vuepress.svg'
   }
 ])
 
@@ -39,7 +43,7 @@ const activeBrands = computed(() => {
   return brands.value.filter((b) => b.active)
 })
 
-function enterTransition(el, done) {
+function enterTransition(el, onComplete = () => {}) {
   $gsap.fromTo(
     el,
     {
@@ -51,9 +55,7 @@ function enterTransition(el, done) {
       scale: 1,
       duration: 0.5,
       ease: 'power4.inOut',
-      onComplete: () => {
-        done()
-      }
+      onComplete
     }
   )
 
@@ -110,20 +112,23 @@ function rotateBrands() {
   }, timeout)
 }
 
-onMounted(() => {
-  rotateBrands()
-})
+onMounted(
+  () => {
+    rotateBrands()
+    enterTransition(brand.value)
+  }
+)
 </script>
 
 <template>
   <span class="block relative w-full h-18">
     <Transition
-      appear
       :css="false"
       @enter="enterTransition"
       @leave="leaveTransition"
     >
       <div
+        ref="brand"
         class="brand"
         :key="activeBrands[0].slug"
         :class="`text-${activeBrands[0].slug}-base`"
@@ -135,7 +140,7 @@ onMounted(() => {
             :key="num"
             class="brand-icon"
             :class="[num % 2 && 'hidden md:block']"
-            :style="`background-image: url(${$config.iconsURL}${activeBrands[0].imgPath})`"
+            :style="`background-image: url(${$config.iconsURL}/${activeBrands[0].imgPath})`"
           ></div>
         </div>
       </div>

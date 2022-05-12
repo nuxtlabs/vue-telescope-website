@@ -1,5 +1,5 @@
 <template>
-  <div class="text-primary-500">
+  <div class="h-full w-full relative text-primary-500">
     <h1>hello, Vue Telescope</h1>
     <HeroPropositionBrandsRotator />
   </div>
@@ -12,7 +12,7 @@ const { $gsap } = useNuxtApp()
 
 useHead({
   bodyAttrs: {
-    class: ['font-body antialiased overflow-x-hidden overflow-y-scroll text-grey-900 min-w-body']
+    class: ['font-body antialiased overflow-x-hidden overflow-y-scroll text-grey-900 min-w-body min-h-screen']
   }
 })
 </script>
