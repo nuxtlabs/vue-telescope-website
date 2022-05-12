@@ -1,7 +1,8 @@
 <template>
-  <div class="text-primary-500">
-    <h1>hello, Vue Telescope</h1>
-    <HeroPropositionBrandsRotator />
+  <div class="overflow-hidden">
+    <HeroPropositionSection
+      class="mt-24 md:mt-32 max-w-readable px-4 mx-auto"
+    />
   </div>
 </template>
 
