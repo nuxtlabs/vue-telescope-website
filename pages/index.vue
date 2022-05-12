@@ -6,6 +6,13 @@
 </template>
 
 <script setup lang="ts">
-import { useNuxtApp } from '#imports'
+import { useNuxtApp, useHead } from '#imports'
+
 const { $gsap } = useNuxtApp()
+
+useHead({
+  bodyAttrs: {
+    class: ['font-body antialiased overflow-x-hidden overflow-y-scroll text-grey-900 min-w-body']
+  }
+})
 </script>

@@ -1,35 +1,37 @@
 <script setup lang="ts">
-import { useNuxtApp, computed, ref, onMounted } from '#imports'
+import { useNuxtApp, useRuntimeConfig, computed, ref, onMounted } from '#imports'
 
-const { $gsap, $config } = useNuxtApp()
+const $config = useRuntimeConfig()
+const { $gsap } = useNuxtApp()
 
 const timeout = 5000
 const rotationInterval = ref(null)
+
 const brands = ref([
-  { slug: 'vue', name: 'Vue.js', active: true, imgPath: '/vue.svg' },
+  { slug: 'vue', name: 'Vue.js', active: true, imgPath: '/brands/vue.svg' },
   {
     slug: 'nuxtjs',
     name: 'Nuxt.js',
     active: false,
-    imgPath: '/framework/nuxt.svg'
+    imgPath: '/brands/nuxtjs.svg'
   },
   {
     slug: 'gridsome',
     name: 'Gridsome',
     active: false,
-    imgPath: '/framework/gridsome.svg'
+    imgPath: '/brands/gridsome.svg'
   },
   {
     slug: 'quasar',
     name: 'Quasar',
     active: false,
-    imgPath: '/framework/quasar.svg'
+    imgPath: '/brands/quasar.svg'
   },
   {
     slug: 'vuepress',
     name: 'Vuepress',
     active: false,
-    imgPath: '/framework/vuepress.svg'
+    imgPath: '/brands/vuepress.svg'
   }
 ])
 
@@ -133,7 +135,7 @@ onMounted(() => {
             :key="num"
             class="brand-icon"
             :class="[num % 2 && 'hidden md:block']"
-            :style="`background-image: url(${$config.iconsURL}/${activeBrands[0].imgPath})`"
+            :style="`background-image: url(${$config.iconsURL}${activeBrands[0].imgPath})`"
           ></div>
         </div>
       </div>
@@ -158,6 +160,7 @@ onMounted(() => {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 .brand-icon {
   position: absolute;
   width: 2rem;
