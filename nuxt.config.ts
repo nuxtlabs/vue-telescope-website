@@ -11,7 +11,10 @@ export default defineNuxtConfig({
       }
     }
   },
-  buildModules: ['@nuxtjs/tailwindcss'],
+  buildModules: ['@nuxtjs/tailwindcss', '@nuxtjs/strapi'],
+  strapi: {
+    prefix: ''
+  },
   tailwindcss: {
     configPath: 'tailwind.config.ts'
   },

@@ -14,6 +14,14 @@
     <div ref="lookupInput" class="opacity-0 max-w-readable m-auto mb-12">
       <LookupInput class="" />
     </div>
+
+    <p
+      ref="subheading"
+      class="opacity-0 text-center text-eight leading-eight md:text-seven md:leading-seven text-grey-700 mb-12 max-w-2xl"
+    >
+      Reveal the Vue plugins and technology stack powering any website or
+      explore our database of {{ showcasesCount }} websites.
+    </p>
   </section>
 </template>
 
@@ -22,8 +30,10 @@ import { onMounted, useNuxtApp, ref } from '#imports'
 
 const heading = ref()
 const lookupInput = ref()
+const subheading = ref()
 
-const { $gsap } = useNuxtApp()
+const { $gsap, $SplitText } = useNuxtApp()
+const { showcasesCount } = await useShowcasesCount()
 
 onMounted(() => {
   $gsap.fromTo(
@@ -58,6 +68,31 @@ onMounted(() => {
       clearProps: true,
       onComplete() {
         lookupInput.value.classList.remove('opacity-0')
+      }
+    }
+  )
+
+  const splitted = new $SplitText(subheading.value, {
+    type: 'lines'
+  })
+  $gsap.set(subheading.value, {
+    opacity: 1
+  })
+  $gsap.fromTo(
+    splitted.lines,
+    {
+      opacity: 0,
+      scale: 0.75
+    },
+    {
+      opacity: 1,
+      scale: 1,
+      stagger: 0.05,
+      duration: 0.45,
+      delay: 0.6,
+      ease: 'power4.inOut',
+      onComplete: () => {
+        splitted.revert()
       }
     }
   )
