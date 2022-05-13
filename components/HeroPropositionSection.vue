@@ -10,6 +10,10 @@
         <HeroPropositionBrandsRotator />
       </div>
     </h1>
+
+    <div ref="lookupInput" class="opacity-0 max-w-readable m-auto mb-12">
+      <LookupInput class="" />
+    </div>
   </section>
 </template>
 
@@ -17,6 +21,7 @@
 import { onMounted, useNuxtApp, ref } from '#imports'
 
 const heading = ref()
+const lookupInput = ref()
 
 const { $gsap } = useNuxtApp()
 
@@ -33,6 +38,27 @@ onMounted(() => {
       stagger: 0.05,
       duration: 0.45,
       ease: 'power4.inOut'
+    }
+  )
+
+  $gsap.fromTo(
+    lookupInput.value,
+    {
+      opacity: 0,
+      scale: 0.75,
+      y: '15px'
+    },
+    {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      duration: 0.45,
+      delay: 0.5,
+      ease: 'power4.inOut',
+      clearProps: true,
+      onComplete() {
+        lookupInput.value.classList.remove('opacity-0')
+      }
     }
   )
 })
