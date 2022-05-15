@@ -22,6 +22,11 @@
       Reveal the Vue plugins and technology stack powering any website or
       explore our database of {{ showcasesCount }} websites.
     </p>
+    <InstallExtensionButton
+      ref="installExtensionButton"
+      size="large"
+      class="opacity-0 mb-8"
+    />
   </section>
 </template>
 
@@ -31,6 +36,7 @@ import { onMounted, useNuxtApp, ref } from '#imports'
 const heading = ref()
 const lookupInput = ref()
 const subheading = ref()
+const installExtensionButton = ref()
 
 const { $gsap, $SplitText } = useNuxtApp()
 const { showcasesCount } = await useShowcasesCount()
@@ -94,6 +100,23 @@ onMounted(() => {
       onComplete: () => {
         splitted.revert()
       }
+    }
+  )
+
+  $gsap.fromTo(
+    installExtensionButton.value.el.el,
+    {
+      opacity: 0,
+      scale: 0.75,
+      y: '15px'
+    },
+    {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      duration: 0.45,
+      delay: 0.6,
+      ease: 'power4.inOut'
     }
   )
 })
