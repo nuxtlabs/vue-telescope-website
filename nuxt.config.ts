@@ -1,4 +1,5 @@
 import { defineNuxtConfig } from 'nuxt'
+import svgLoader from 'vite-svg-loader'
 
 export default defineNuxtConfig({
   app: {
@@ -26,5 +27,12 @@ export default defineNuxtConfig({
       'https://addons.mozilla.org/en-GB/firefox/addon/vue-telescope/',
     googleStoreUrl:
       'https://chrome.google.com/webstore/detail/vue-telescope/neaebjphlfplgdhedjdhcnpjkndddbpd'
+  },
+  vite: {
+    plugins: [
+      svgLoader({
+        svgo: false
+      })
+    ]
   }
 })
