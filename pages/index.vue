@@ -3,10 +3,6 @@
     <HeroPropositionSection
       class="mt-24 md:mt-32 max-w-readable px-4 mx-auto"
     />
+    <HeroPresentationSlider class="my-24" />
   </div>
 </template>
-
-<script setup lang="ts">
-import { useNuxtApp } from '#imports'
-const { $gsap } = useNuxtApp()
-</script>
