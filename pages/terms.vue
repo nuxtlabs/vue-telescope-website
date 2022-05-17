@@ -3,7 +3,7 @@
     <h1 class="text-four leading-four font-display-weight mb-8">
       Title
       <!-- TODO -->
-      <!-- {{ privacy.title }} -->
+      <!-- {{ terms.title }} -->
     </h1>
     <Content class="prose" />
   </div>
@@ -19,6 +19,9 @@
   }
   & h2 {
     @apply text-five leading-five mb-4 mt-8 font-display-weight;
+    a {
+      @apply text-grey-900 pointer-events-none;
+    }
   }
   & p {
     @apply mb-4;

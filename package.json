@@ -11,6 +11,7 @@
     "preview": "nuxt preview"
   },
   "dependencies": {
+    "@nuxt/content": "npm:@nuxt/content-edge@latest",
     "event-source-polyfill": "^1.0.26",
     "gsap": "file:assets/js/gsap-bonus.tgz"
   },

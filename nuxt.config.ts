@@ -12,6 +12,7 @@ export default defineNuxtConfig({
       }
     }
   },
+  modules: ['@nuxt/content'],
   buildModules: ['@nuxtjs/tailwindcss', '@nuxtjs/strapi'],
   strapi: {
     prefix: ''
