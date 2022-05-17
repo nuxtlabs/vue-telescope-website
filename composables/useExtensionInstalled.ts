@@ -1,7 +1,7 @@
-import { ref, onMounted } from '#imports'
+import { useState, onMounted } from '#imports'
 
 export const useExtensionInstalled = () => {
-  const isExtensionInstalled = ref(false)
+  const isExtensionInstalled = useState('isExtensionInstalled', () => false)
 
   onMounted(() => {
     isExtensionInstalled.value =

@@ -1,7 +1,7 @@
-import { ref, useAsyncData } from '#imports'
+import { useState, useAsyncData } from '#imports'
 
 export const useShowcasesCount = async () => {
-  const showcasesCount = ref()
+  const showcasesCount = useState('showcasesCount')
   const { find } = useStrapi4()
 
   const { data } = await useAsyncData('showcases/count', () =>
