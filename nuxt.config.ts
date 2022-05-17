@@ -34,5 +34,11 @@ export default defineNuxtConfig({
         svgo: false
       })
     ]
-  }
+  },
+  components: [
+    {
+      path: '~/components',
+      global: true
+    }
+  ]
 })
