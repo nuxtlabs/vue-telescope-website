@@ -81,7 +81,7 @@
           <div
             class="leading-none text-sm text-grey-900 leading-sm text-center"
           >
-            &copy; 2021
+            &copy; {{ new Date().getFullYear() }}
             <a
               href="https://nuxtjs.org"
               target="_blank"

@@ -38,32 +38,34 @@
 
         <!-- TODO -->
         <!-- <ClientOnly> -->
-        <!-- <UserButton ref="user-button" @click.native="showMenu = true" /> -->
+        <UserButton ref="userButtonEl" @click.native="showMenu = true" />
         <!-- </ClientOnly> -->
 
         <!-- TODO -->
-        <!-- <ClientOnly>
-          <Portal to="default-layout">
-            <Popper
-              v-if="showMenu"
-              :offset-x="12"
-              :offset-y="-2"
-              placement="bottom-end"
-              :anchor="$refs['user-button'].$el"
-            >
-              <UserButtonMenu @close-menu="showMenu = false" />
-            </Popper>
-          </Portal>
-        </ClientOnly> -->
+        <!-- <ClientOnly> -->
+        <teleport to="body">
+          <Popper
+            v-if="showMenu"
+            :offset-x="12"
+            :offset-y="-2"
+            placement="bottom-end"
+            :anchor="userButtonEl.el"
+          >
+            <UserButtonMenu @close-menu="showMenu = false" />
+          </Popper>
+        </teleport>
+        <!-- </ClientOnly> -->
       </div>
     </div>
   </header>
 </template>
 
 <script setup lang="ts">
-import { ref } from '#imports'
+import { ref, onMounted } from '#imports'
 import TheLogo from '@/assets/logo/logo.svg'
 import TheLogoMobile from '@/assets/logo/square-logo.svg'
+
+const userButtonEl = ref(null)
 
 const showMenu = ref(false)
 </script>

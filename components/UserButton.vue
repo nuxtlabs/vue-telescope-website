@@ -1,19 +1,21 @@
 <template>
   <button
-    ref="user-button"
+    ref="el"
     class="relative rounded-full overflow-hidden focus:outline-none"
   >
-    <Portal to="tour">
+    <!-- TODO -->
+    <!-- <Portal to="tour">
       <UserButtonTour v-if="showTour" @close="showLocal = false" />
-    </Portal>
+    </Portal> -->
 
-    <ClientOnly>
+    <!-- TODO -->
+    <!-- <ClientOnly>
       <img
         v-if="$strapi.user"
         :src="`https://github.com/${$strapi.user.username}.png?size=64`"
         class="absolute top-0 left-0 w-8 h-8 rounded-full mr-1"
       />
-    </ClientOnly>
+    </ClientOnly> -->
 
     <svg
       class="w-8 h-8"
@@ -65,22 +67,33 @@
   </button>
 </template>
 
-<script>
-export default {
-  name: 'UserButton',
-  data() {
-    return {
-      showLocal: true
-    }
-  },
-  computed: {
-    showTour() {
-      return (
-        !this.$strapi.user &&
-        this.showLocal &&
-        !this.$tour['collections-feature']
-      )
-    }
-  }
-}
+<script setup lang="ts">
+import { defineExpose, ref } from '#imports'
+const user = useStrapiUser()
+
+const el = ref(null)
+
+defineExpose({
+  el
+})
+
+console.log(user)
+
+// export default {
+//   name: 'UserButton',
+//   data() {
+//     return {
+//       showLocal: true
+//     }
+//   },
+//   computed: {
+//     showTour() {
+//       return (
+//         !this.$strapi.user &&
+//         this.showLocal &&
+//         !this.$tour['collections-feature']
+//       )
+//     }
+//   }
+// }
 </script>
