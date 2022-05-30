@@ -1,13 +1,15 @@
 <template>
   <div>
-    <div class="px-4 xl:px-8">
-      explore-website
-
+    explore-website {{ $directHit }}
+    <div v-if="$directHit" class="px-4 xl:px-8">
+      wtf {{ $directHit }}
       <ShowcaseSection
         :website="website"
         class="max-w-readable xl:max-w-container m-auto"
       />
     </div>
+
+    <div v-else>another stuff</div>
   </div>
 </template>
 
