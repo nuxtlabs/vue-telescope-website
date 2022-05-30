@@ -1,3 +1,7 @@
 <template>
-  <div>explore</div>
+  <div>
+    explore
+
+    <NuxtPage />
+  </div>
 </template>

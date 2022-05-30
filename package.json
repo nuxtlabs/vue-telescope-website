@@ -13,6 +13,7 @@
   "dependencies": {
     "@nuxt/content": "npm:@nuxt/content-edge@latest",
     "@popperjs/core": "^2.5.4",
+    "@vueuse/core": "^8.5.0",
     "event-source-polyfill": "^1.0.26",
     "gsap": "file:assets/js/gsap-bonus.tgz"
   },
