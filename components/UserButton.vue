@@ -4,9 +4,9 @@
     class="relative rounded-full overflow-hidden focus:outline-none"
   >
     <!-- TODO -->
-    <!-- <Portal to="tour">
+    <teleport to="body">
       <UserButtonTour v-if="showTour" @close="showLocal = false" />
-    </Portal> -->
+    </teleport>
 
     <!-- TODO -->
     <!-- <ClientOnly>
@@ -68,16 +68,27 @@
 </template>
 
 <script setup lang="ts">
-import { defineExpose, ref } from '#imports'
+import { defineExpose, ref, useNuxtApp, computed } from '#imports'
 const user = useStrapiUser()
 
+const { $tour } = useNuxtApp()
+
 const el = ref(null)
+const showLocal = ref(true)
 
 defineExpose({
   el
 })
 
-console.log(user)
+const showTour = computed(() => {
+  // return (
+  //   // !this.$strapi.user &&
+  //   showLocal.value && !$tour['collections-feature']
+  // )
+})
+
+// TODO
+console.log('why???', $tour.collectionsFeature)
 
 // export default {
 //   name: 'UserButton',
