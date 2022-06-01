@@ -1,17 +1,21 @@
 <template>
   <div>
-    explore-website {{ directHit }}
-
     <div v-if="directHit" class="px-4 xl:px-8">
-      wtf {{ directHit }}
-
       <ShowcaseSection
         :website="website"
         class="max-w-readable xl:max-w-container m-auto"
       />
     </div>
 
-    <div v-else>another stuff</div>
+    <div v-else>
+      <FloatingViewModal
+        :fetched="website ? true : false"
+        @close="$router.push('/explore')"
+      >
+        <ShowcaseSection :website="website" class="twitter-like mb-12" />
+        <CtaSection />
+      </FloatingViewModal>
+    </div>
   </div>
 </template>
 
