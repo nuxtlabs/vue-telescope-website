@@ -6,6 +6,8 @@
 
     <NuxtLink to="/explore/phdsolutions-org">test</NuxtLink>
 
+    <ExplorePage />
+
     <NuxtPage :key="$route.params.website" />
   </div>
 </template>

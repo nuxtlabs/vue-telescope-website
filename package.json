@@ -15,7 +15,8 @@
     "@popperjs/core": "^2.5.4",
     "@vueuse/core": "^8.5.0",
     "event-source-polyfill": "^1.0.26",
-    "gsap": "file:assets/js/gsap-bonus.tgz"
+    "gsap": "file:assets/js/gsap-bonus.tgz",
+    "qs": "^6.10.5"
   },
   "devDependencies": {
     "@nuxtjs/strapi": "^1.3.2",
