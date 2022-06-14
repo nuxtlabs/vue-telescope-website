@@ -1,18 +1,15 @@
 <template>
   <div>
-    explore
+    <NuxtLink to="/explore/phdsolutions-org" class="block">test</NuxtLink>
 
-    {{ $directHit }}
-
-    <NuxtLink to="/explore/phdsolutions-org">test</NuxtLink>
-
-    <ExplorePage />
+    <ExplorePage
+      v-if="!$route.params.website || ($route.params.website && !directHit)"
+    />
 
     <NuxtPage :key="$route.params.website" />
   </div>
 </template>
 
 <script setup lang="ts">
-// const { $directHit } = useNuxtApp()
-// console.log('runnung', $directHit.value)
+const { $directHit: directHit } = useNuxtApp()
 </script>
