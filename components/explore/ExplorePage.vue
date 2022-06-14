@@ -7,7 +7,26 @@
     </template>
 
     <template #aside-content-main>
-      <div v-for="{ domain } in showcases">{{ domain }}</div>
+      <!-- <div v-for="{ domain } in showcases">{{ domain }}</div> -->
+      <div class="flex flex-wrap">
+        <!--
+          v-observe-visibility="{
+            callback: i === showcases.length - 1 ? lazyLoadShowcases : () => {},
+            once: true
+          }"
+          -->
+        <ShowcasesListing
+          :showcases="showcases"
+          :showcases-per-page="showcasesPerPage"
+        />
+        <!-- <div class="flex items-center justify-center w-full px-8">
+          <LoadMoreShowcasesButton
+            v-if="hasMoreShowcases && showcases.length"
+            :pending="$fetchState.pending"
+            @update="currentPage++"
+          />
+        </div> -->
+      </div>
     </template>
   </AsideContentTemplate>
 </template>
