@@ -1,13 +1,24 @@
 <template>
   <div class="max-w-readable px-4 mx-auto pt-12">
     <h1 class="text-four leading-four font-display-weight mb-8">
-      Title
-      <!-- TODO -->
-      <!-- {{ terms.title }} -->
+      {{ title }}
     </h1>
-    <Content class="prose" />
+    <div class="prose">
+      <ContentDoc />
+    </div>
   </div>
 </template>
+
+<script setup>
+const { name } = useRoute()
+const {
+  data: {
+    value: { title }
+  }
+} = await useAsyncData(name, () => {
+  return queryContent(name).only(['title']).findOne()
+})
+</script>
 
 <style lang="postcss" scoped>
 ::v-deep(.prose) {
