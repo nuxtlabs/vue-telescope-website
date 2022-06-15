@@ -1,10 +1,17 @@
 <template>
   <AsideContentTemplate>
     <template #aside-content-aside>
-      <div>{{ selectedSort }}</div>
+      <ShowcasesSearchFilters
+        ref="filtersEl"
+        class="h-full overflow-x-hidden overflow-y-auto"
+        @click.native="filtersTouched = true"
+      />
+      <!-- <div>{{ selectedSort }}</div> -->
       <div>currentPage: {{ currentPage }}</div>
-      <div>showcases: {{ showcases.length }}</div>
-      <div>totalCount: {{ totalCount }}</div>
+      <div>showcases: {{ filterQueryString }}</div>
+      <div>hasMoreShowcases {{ hasMoreShowcases }}</div>
+      <div>showcases.length {{ showcases.length }}</div>
+      <!-- <div>totalCount: {{ totalCount }}</div> -->
     </template>
 
     <template #aside-content-main>
@@ -63,14 +70,32 @@ function setShowcases() {
   showcases.value = [...showcases.value, ...showcasesData.value]
 
   if (
-    showcases.value.length < showcasesPerPage ||
+    showcasesData.value.length < showcasesPerPage ||
     (showcases.value.length >= maxShowCount && !user.value)
   ) {
     hasMoreShowcases.value = false
   }
 }
 
+function updateListing() {
+  window.scrollTo(0, 0)
+  router.push({
+    query: {
+      ...selectedFilters.value,
+      ...selectedSort.value
+    }
+  })
+  currentPage.value = 0
+  hasMoreShowcases.value = true
+  setTimeout(() => {
+    showcases.value = []
+    // TODO: count
+    showcasesRefresh()
+  })
+}
+
 const route = useRoute()
+const router = useRouter()
 const { frameworks, modules, plugins, uis } = await useTechnologies()
 const { selectedFilters, setFilters } = useFilters()
 const { selectedSort } = useSort()
@@ -81,6 +106,7 @@ const currentPage = ref(0)
 const showcasesPerPage = 24
 const maxShowCount = 96
 const hasMoreShowcases = ref(true)
+const filtersTouched = ref(false)
 
 // console.log('frameworks', frameworks)
 // console.log('modules', modules)
@@ -132,14 +158,29 @@ totalCount.value = totalCountData.value
 
 setShowcases()
 
-watch(filterQueryString, () => {
-  console.log('filterQueryString')
-  showcasesRefresh()
-})
-
 watch(showcasesData, () => {
   console.log('showcasesData')
   setShowcases()
+})
+
+onMounted(() => {
+  // watch(filterQueryString, () => {
+  //   console.log('filterQueryString')
+  //   showcasesRefresh()
+  // })
+
+  watch(currentPage, () => {
+    console.log('currentPage watch')
+    showcasesRefresh()
+  })
+
+  watch(
+    selectedFilters,
+    () => {
+      updateListing()
+    },
+    { deep: true }
+  )
 })
 
 onServerPrefetch(() => {

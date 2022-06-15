@@ -10,12 +10,12 @@
     </div>
     <div class="w-full md:w-3/4 rounded-lg" :class="[projectColors.bg]">
       <div
-        class="inline-block py-1 px-2 m-3 rounded-md text-xs uppercase font-bold-body-weight"
+        class="inline-block py-1 px-2 m-5 rounded-md text-xs uppercase font-bold-body-weight"
         :class="[projectColors.labelBg, projectColors.labelText]"
       >
         {{ project }}
       </div>
-      <div class="-mt-4 px-4" :class="project">
+      <div class="-mt-4 px-6" :class="project">
         <slot />
       </div>
     </div>
