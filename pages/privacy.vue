@@ -30,6 +30,9 @@ const {
   }
   & h2 {
     @apply text-five leading-five mb-4 mt-8 font-display-weight;
+    a {
+      @apply text-grey-900 pointer-events-none;
+    }
   }
   & p {
     @apply mb-4;
@@ -40,6 +43,9 @@ const {
     & > li {
       @apply mb-2;
     }
+  }
+  & img {
+    @apply mb-4;
   }
 }
 </style>

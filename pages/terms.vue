@@ -44,5 +44,8 @@ const {
       @apply mb-2;
     }
   }
+  & img {
+    @apply mb-4;
+  }
 }
 </style>
