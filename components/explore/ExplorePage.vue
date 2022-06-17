@@ -14,6 +14,13 @@
       <!-- <div>totalCount: {{ totalCount }}</div> -->
     </template>
 
+    <template #aside-content-header>
+      <ShowcasesSelectedFilters
+        :selected-filters="selectedFilters"
+        :total-count="totalCount"
+      />
+    </template>
+
     <template #aside-content-main>
       <!-- <div v-for="{ domain } in showcases">{{ domain }}</div> -->
       <div class="flex flex-wrap">
@@ -69,12 +76,12 @@ function filterSort(raw) {
 function setShowcases() {
   showcases.value = [...showcases.value, ...showcasesData.value]
 
-  if (
-    showcasesData.value.length < showcasesPerPage ||
-    (showcases.value.length >= maxShowCount && !user.value)
-  ) {
-    hasMoreShowcases.value = false
-  }
+  // if (
+  //   showcasesData.value.length < showcasesPerPage ||
+  //   (showcases.value.length >= maxShowCount && !user.value)
+  // ) {
+  //   hasMoreShowcases.value = false
+  // }
 }
 
 function updateListing() {
@@ -86,7 +93,7 @@ function updateListing() {
     }
   })
   currentPage.value = 0
-  hasMoreShowcases.value = true
+  // hasMoreShowcases.value = true
   setTimeout(() => {
     showcases.value = []
     // TODO: count
@@ -101,12 +108,33 @@ const { selectedFilters, setFilters } = useFilters()
 const { selectedSort } = useSort()
 
 const showcases = ref([])
-const totalCount = ref(0)
+// const totalCount = ref(0)
 const currentPage = ref(0)
 const showcasesPerPage = 24
 const maxShowCount = 96
-const hasMoreShowcases = ref(true)
+// const hasMoreShowcases = ref(true)
 const filtersTouched = ref(false)
+
+// const showcases = computed(() => {
+//   return showcases.value
+//     ? [...showcases.value, ...showcasesData.value]
+//     : [...showcasesData.value]
+// })
+
+const totalCount = computed(() => {
+  return totalCountData.value
+})
+
+const hasMoreShowcases = computed(() => {
+  if (
+    showcasesData.value.length < showcasesPerPage ||
+    (showcases.value.length >= maxShowCount && !user.value)
+  ) {
+    return false
+  } else {
+    return true
+  }
+})
 
 // console.log('frameworks', frameworks)
 // console.log('modules', modules)
@@ -154,12 +182,12 @@ const {
 // const totalCount = await this.$strapi.find(
 //         `showcases/count${this.filterQueryString}`
 //       )
-totalCount.value = totalCountData.value
+// totalCount.value = totalCountData.value
 
 setShowcases()
 
 watch(showcasesData, () => {
-  console.log('showcasesData')
+  console.log('watch showcasesData')
   setShowcases()
 })
 
@@ -170,14 +198,16 @@ onMounted(() => {
   // })
 
   watch(currentPage, () => {
-    console.log('currentPage watch')
+    console.log('watch currentPage')
     showcasesRefresh()
   })
 
   watch(
     selectedFilters,
     () => {
+      console.log('watch selectedFilters')
       updateListing()
+      totalCountRefresh()
     },
     { deep: true }
   )

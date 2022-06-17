@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pt-12 md:pt-8 mb-8">
     <ExplorePage
       v-if="!$route.params.website || ($route.params.website && !directHit)"
     />
