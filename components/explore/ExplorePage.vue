@@ -104,9 +104,10 @@ function updateListing() {
 
 const route = useRoute()
 const router = useRouter()
+// TODO: weird stuff, if I remove next line it breaks
 const { frameworks, modules, plugins, uis } = await useTechnologies()
 const { selectedFilters, setFilters } = useFilters()
-const { selectedSort } = useSort()
+const { selectedSort, setSort } = useSort()
 
 const showcases = ref([])
 // const totalCount = ref(0)
@@ -216,10 +217,19 @@ onMounted(() => {
   watch(selectedSort, () => {
     updateListing()
   })
+
+  watch(route, (newValue, oldValue) => {
+    if (!newValue.params.website) {
+      // set query params when close showcase modal and have filters selected
+      router.push({
+        query: { ...selectedFilters.value, ...selectedSort.value }
+      })
+    }
+  })
 })
 
 onServerPrefetch(() => {
   setFilters(filterFilters(route.query))
-  // this.$store.commit('setSort', filterSort(this.$route.query))
+  setSort(filterSort(route.query))
 })
 </script>
