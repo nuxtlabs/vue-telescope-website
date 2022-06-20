@@ -15,6 +15,7 @@
     </template>
 
     <template #aside-content-header>
+      <ShowcasesSorting class="mr-12 -mt-9 md:-mt-8 md:mr-6" />
       <ShowcasesSelectedFilters
         :selected-filters="selectedFilters"
         :total-count="totalCount"
@@ -211,6 +212,10 @@ onMounted(() => {
     },
     { deep: true }
   )
+
+  watch(selectedSort, () => {
+    updateListing()
+  })
 })
 
 onServerPrefetch(() => {
