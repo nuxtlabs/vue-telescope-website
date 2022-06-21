@@ -13,3 +13,4 @@
 - blocked by CORS issues
 
 - ShowcaseSelectedFilters appear animation and second filter animation is broken
+- duplication of `setFilterKey`

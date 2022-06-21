@@ -12,6 +12,7 @@ export const useFilters = () => {
   }
 
   function setFilterKey({ key, value }) {
+    console.log('setFilterKey', key, value)
     selectedFilters.value = { ...selectedFilters.value, [key]: value }
   }
 

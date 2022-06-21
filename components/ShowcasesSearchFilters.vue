@@ -85,6 +85,24 @@
       </div>
     </div>
 
+    <div class="mb-4">
+      <AppFilterLabel>Plugins</AppFilterLabel>
+      <div class="flex flex-col">
+        <template v-for="plugin in plugins" :key="plugin.id">
+          <AppCheckbox
+            :id="`plugin-${plugin.slug}`"
+            :checked="
+              selectedFilters['plugins.slug'] &&
+              selectedFilters['plugins.slug'].includes(plugin.slug)
+            "
+            class="mb-1"
+            :label="plugin.name"
+            @input="checkboxFilter('plugins.slug', plugin.slug)"
+          />
+        </template>
+      </div>
+    </div>
+
     {{ selectedFilters }}
   </div>
 </template>
@@ -142,6 +160,35 @@ function radioFilter(key, value) {
   }
   if (key === 'ui.slug') {
     deleteFilterKey('ui_null')
+  }
+}
+
+function checkboxFilter(key, value) {
+  console.log('DUPLICATE', selectedFilters.value)
+  if (!selectedFilters.value[key]) {
+    console.log('111')
+    setFilterKey({
+      key,
+      value: [value]
+    })
+  } else if (selectedFilters.value[key].includes(value)) {
+    const filteredArray = selectedFilters.value[key].filter((i) => i !== value)
+    console.log('222')
+    setFilterKey({
+      key,
+      value: [...filteredArray]
+    })
+    if (!filteredArray.length) {
+      // if array is empty - delete key
+      deleteFilterKey(key)
+    }
+  } else {
+    console.log('333')
+
+    setFilterKey({
+      key,
+      value: [...selectedFilters.value[key], value]
+    })
   }
 }
 
