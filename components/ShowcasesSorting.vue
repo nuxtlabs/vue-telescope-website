@@ -1,4 +1,3 @@
-``
 <template>
   <div
     ref="wrapper"
@@ -55,10 +54,12 @@ export default {
       immediate: true,
       handler(value) {
         // handle on on page load
-        this.options = [
-          this.options.find((option) => option._sort === value._sort),
-          ...this.options.filter((option) => option._sort !== value._sort)
-        ]
+        if (value._sort) {
+          this.options = [
+            this.options.find((option) => option._sort === value._sort),
+            ...this.options.filter((option) => option._sort !== value._sort)
+          ]
+        }
       }
     }
   },
