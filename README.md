@@ -11,3 +11,5 @@
 - blocked by Content module
 - blocked by broken auth
 - blocked by CORS issues
+
+- ShowcaseSelectedFilters appear animation and second filter animation is broken

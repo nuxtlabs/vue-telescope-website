@@ -6,12 +6,6 @@
         class="h-full overflow-x-hidden overflow-y-auto"
         @click.native="filtersTouched = true"
       />
-      <!-- <div>{{ selectedSort }}</div> -->
-      <div>currentPage: {{ currentPage }}</div>
-      <div>showcases: {{ filterQueryString }}</div>
-      <div>hasMoreShowcases {{ hasMoreShowcases }}</div>
-      <div>showcases.length {{ showcases.length }}</div>
-      <!-- <div>totalCount: {{ totalCount }}</div> -->
     </template>
 
     <template #aside-content-header>
@@ -20,11 +14,11 @@
         :selected-filters="selectedFilters"
         :total-count="totalCount"
         @clear-filter="clearFilter"
+        @clear-filters="clearFilters"
       />
     </template>
 
     <template #aside-content-main>
-      <!-- <div v-for="{ domain } in showcases">{{ domain }}</div> -->
       <div class="flex flex-wrap">
         <ShowcasesListing
           :showcases="showcases"
@@ -166,6 +160,10 @@ const user = useStrapiUser()
 
 function clearFilter($event) {
   filtersEl.value && filtersEl.value.clearFilter($event)
+}
+
+function clearFilters() {
+  filtersEl.value && filtersEl.value.clearFilters()
 }
 
 // showcases.value = await find(`showcases${filterQueryString.value}`)

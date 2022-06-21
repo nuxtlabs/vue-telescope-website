@@ -127,10 +127,16 @@ export default {
 </script>
 
 <style scoped>
-.scale-item {
+/* .scale-item {
+  transition: all 10000ms cubic-bezier(0.4, 0, 0.2, 1);
+} */
+
+.scale-move,
+.scale-enter-active,
+.scale-leave-active {
   transition: all 100ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-.scale-enter,
+.scale-enter-from,
 .scale-leave-to {
   opacity: 0;
   transform: scale(0.8);

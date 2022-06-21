@@ -51,16 +51,52 @@
       </div>
     </div>
 
+    <div class="mb-4">
+      <AppFilterLabel>UI Framework</AppFilterLabel>
+      <div class="flex flex-col">
+        <AppRadio
+          :id="`ui-null`"
+          :checked="Boolean(selectedFilters['ui_null'])"
+          class="mb-1"
+          @input="selectNoUIFramework"
+        >
+          <span>None</span>
+        </AppRadio>
+        <template v-for="ui in uis" :key="ui.id" class="">
+          <AppRadio
+            :id="`ui-${ui.slug}`"
+            :checked="
+              selectedFilters['ui.slug'] &&
+              selectedFilters['ui.slug'].includes(ui.slug)
+            "
+            class="mb-1"
+            @input="radioFilter('ui.slug', ui.slug)"
+          >
+            <div class="flex items-center">
+              <img
+                class="w-4 h-4 mr-1"
+                :src="`${$config.iconsURL}${ui.imgPath}`"
+                :alt="ui.name"
+              />
+              <span>{{ ui.name }}</span>
+            </div>
+          </AppRadio>
+        </template>
+      </div>
+    </div>
+
     {{ selectedFilters }}
   </div>
 </template>
 
 <script setup lang="ts">
-const { selectedFilters, setFilterKey, deleteFilterKey } = useFilters()
+const { selectedFilters, setFilterKey, deleteFilterKey, resetFilters } =
+  useFilters()
 const { frameworks, modules, plugins, uis } = await useTechnologies()
 
 defineExpose({
-  clearFilter
+  clearFilter,
+  clearFilters
 })
 
 function setVueThreeOnly(value) {
@@ -78,6 +114,14 @@ function selectNoFramework() {
   deleteFilterKey('framework.slug')
   setFilterKey({
     key: 'framework_null',
+    value: true
+  })
+}
+
+function selectNoUIFramework() {
+  deleteFilterKey('ui.slug')
+  setFilterKey({
+    key: 'ui_null',
     value: true
   })
 }
@@ -105,12 +149,7 @@ function clearFilter(key) {
   deleteFilterKey(key)
 }
 
-// clearFilters() {
-//   setTimeout(() => {
-//     this.$store.commit('RESET_FILTERS')
-//   })
-// },
-// clearFilter(key) {
-//   this.$store.commit('DELETE_FILTER_KEY', key)
-// }
+function clearFilters(key) {
+  resetFilters()
+}
 </script>
