@@ -19,6 +19,7 @@
       <ShowcasesSelectedFilters
         :selected-filters="selectedFilters"
         :total-count="totalCount"
+        @clear-filter="clearFilter"
       />
     </template>
 
@@ -109,6 +110,8 @@ const { frameworks, modules, plugins, uis } = await useTechnologies()
 const { selectedFilters, setFilters } = useFilters()
 const { selectedSort, setSort } = useSort()
 
+const filtersEl = ref(null)
+
 const showcases = ref([])
 // const totalCount = ref(0)
 const currentPage = ref(0)
@@ -160,6 +163,10 @@ const filterQueryString = computed(() => {
 
 const { find } = useStrapi4()
 const user = useStrapiUser()
+
+function clearFilter($event) {
+  filtersEl.value && filtersEl.value.clearFilter($event)
+}
 
 // showcases.value = await find(`showcases${filterQueryString.value}`)
 

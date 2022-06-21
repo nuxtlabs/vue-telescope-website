@@ -59,6 +59,10 @@
 const { selectedFilters, setFilterKey, deleteFilterKey } = useFilters()
 const { frameworks, modules, plugins, uis } = await useTechnologies()
 
+defineExpose({
+  clearFilter
+})
+
 function setVueThreeOnly(value) {
   if (value) {
     setFilterKey({
@@ -96,4 +100,17 @@ function radioFilter(key, value) {
     deleteFilterKey('ui_null')
   }
 }
+
+function clearFilter(key) {
+  deleteFilterKey(key)
+}
+
+// clearFilters() {
+//   setTimeout(() => {
+//     this.$store.commit('RESET_FILTERS')
+//   })
+// },
+// clearFilter(key) {
+//   this.$store.commit('DELETE_FILTER_KEY', key)
+// }
 </script>

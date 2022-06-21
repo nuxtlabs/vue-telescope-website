@@ -8,10 +8,9 @@
       <span class="font-body-weight text-sm">&nbsp;websites found</span>
     </div>
 
-    <!-- <transition-group name="scale" appear>
-      <template v-for="(value, key) in selectedFilters">
+    <transition-group name="scale" appear>
+      <template v-for="(value, key) in selectedFilters" :key="key">
         <div
-          :key="key"
           class="scale-item rounded-lg mx-1 mb-2 mt-0 px-2 py-1 inline-flex items-center bg-primary-50 text-primary-500 border border-primary-100"
         >
           <div
@@ -55,7 +54,7 @@
         </div>
         <XmarkCircleFill class="w-4 h-4 has-hover:hover:opacity-75" />
       </button>
-    </transition-group> -->
+    </transition-group>
   </div>
 </template>
 
@@ -64,6 +63,10 @@
 import XmarkCircleFill from '@/assets/icons/xmark-circle-fill.svg'
 
 export default {
+  async setup() {
+    const { frameworks, uis } = await useTechnologies()
+    return { frameworks, uis }
+  },
   components: {
     XmarkCircleFill
   },
@@ -76,56 +79,50 @@ export default {
       type: Number,
       default: 0
     }
+  },
+  methods: {
+    title(key) {
+      if (key === 'vueVersion_gte') {
+        return 'Vue 3 only'
+      } else if (key === 'isStatic') {
+        return 'Deployment'
+      } else if (key === 'hasSSR') {
+        return 'Rendering'
+      } else if (key === 'framework.slug' || key === 'framework_null') {
+        return 'Framework'
+      } else if (key === 'ui.slug' || key === 'ui_null') {
+        return 'UI Framework'
+      } else if (key === 'plugins.slug') {
+        return 'Plugins'
+      } else if (key === 'modules.slug') {
+        return 'Nuxt Modules'
+      } else if (key === '_q') {
+        return 'Keyword'
+      }
+    },
+    content({ key, value }) {
+      if (key === 'isStatic' || key === 'hasSSR') {
+        if (value.length > 1) {
+          return 'Any'
+        } else if (value.length === 1 && value[0] === true) {
+          return key === 'isStatic' ? 'Static' : 'Server-side'
+        } else if (value.length === 1 && value[0] === false) {
+          return key === 'isStatic' ? 'Server' : 'Client-side'
+        }
+      } else if (key === 'framework_null' || key === 'ui_null') {
+        return 'Vue'
+      } else if (key === 'plugins.slug' || key === 'modules.slug') {
+        const validatedValue = Array.isArray(value) ? value : [value]
+        if (validatedValue.length === 1) {
+          return validatedValue[0]
+        } else {
+          return `${validatedValue[0]} + ${validatedValue.length - 1} more`
+        }
+      } else if (key === '_q') {
+        return value
+      }
+    }
   }
-  // computed: {
-  //   ...mapState({
-  //     uis: (state) => state.uis,
-  //     frameworks: (state) => state.frameworks
-  //   })
-  // },
-  // methods: {
-  //   title(key) {
-  //     if (key === 'vueVersion_gte') {
-  //       return 'Vue 3 only'
-  //     } else if (key === 'isStatic') {
-  //       return 'Deployment'
-  //     } else if (key === 'hasSSR') {
-  //       return 'Rendering'
-  //     } else if (key === 'framework.slug' || key === 'framework_null') {
-  //       return 'Framework'
-  //     } else if (key === 'ui.slug' || key === 'ui_null') {
-  //       return 'UI Framework'
-  //     } else if (key === 'plugins.slug') {
-  //       return 'Plugins'
-  //     } else if (key === 'modules.slug') {
-  //       return 'Nuxt Modules'
-  //     } else if (key === '_q') {
-  //       return 'Keyword'
-  //     }
-  //   },
-  //   content({ key, value }) {
-  //     if (key === 'isStatic' || key === 'hasSSR') {
-  //       if (value.length > 1) {
-  //         return 'Any'
-  //       } else if (value.length === 1 && value[0] === true) {
-  //         return key === 'isStatic' ? 'Static' : 'Server-side'
-  //       } else if (value.length === 1 && value[0] === false) {
-  //         return key === 'isStatic' ? 'Server' : 'Client-side'
-  //       }
-  //     } else if (key === 'framework_null' || key === 'ui_null') {
-  //       return 'Vue'
-  //     } else if (key === 'plugins.slug' || key === 'modules.slug') {
-  //       const validatedValue = Array.isArray(value) ? value : [value]
-  //       if (validatedValue.length === 1) {
-  //         return validatedValue[0]
-  //       } else {
-  //         return `${validatedValue[0]} + ${validatedValue.length - 1} more`
-  //       }
-  //     } else if (key === '_q') {
-  //       return value
-  //     }
-  //   }
-  // }
 }
 </script>
 
