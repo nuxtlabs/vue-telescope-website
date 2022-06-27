@@ -91,7 +91,6 @@ const emit = defineEmits(['change-slide'])
 
 const activeShowcases = ref([])
 
-// refs
 const showcaseImageWrapper = ref([])
 const showcaseImg = ref([])
 const showcaseTitle = ref([])
