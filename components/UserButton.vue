@@ -87,9 +87,6 @@ const showTour = computed(() => {
   // )
 })
 
-// TODO
-// console.log('why???', $tour.collectionsFeature)
-
 // export default {
 //   name: 'UserButton',
 //   data() {

@@ -99,15 +99,23 @@ function updateListing() {
 
 const route = useRoute()
 const router = useRouter()
-// TODO: weird stuff, if I remove next line it breaks
+
+// TODO: weird stuff, if I remove next line it breaks,
+// while it isn't used in this component
 const { frameworks, modules, plugins, uis } = await useTechnologies()
+// console.log('frameworks', frameworks)
+// console.log('modules', modules)
+// console.log('plugins', plugins)
+// console.log('uis', uis)
+
 const { selectedFilters, setFilters } = useFilters()
+const { isModal, setModal } = useModal()
+
 const { selectedSort, setSort } = useSort()
 
 const filtersEl = ref(null)
 
 const showcases = ref([])
-// const totalCount = ref(0)
 const currentPage = ref(0)
 const showcasesPerPage = 24
 const maxShowCount = 96
@@ -135,11 +143,6 @@ const hasMoreShowcases = computed(() => {
   }
 })
 
-// console.log('frameworks', frameworks)
-// console.log('modules', modules)
-// console.log('plugins', plugins)
-// console.log('uis', uis)
-
 const filterQueryString = computed(() => {
   return qs.stringify(
     {
@@ -165,8 +168,6 @@ function clearFilter($event) {
 function clearFilters() {
   filtersEl.value && filtersEl.value.clearFilters()
 }
-
-// showcases.value = await find(`showcases${filterQueryString.value}`)
 
 const {
   data: showcasesData,

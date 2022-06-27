@@ -95,6 +95,10 @@ const showcaseImageWrapper = ref([])
 const showcaseImg = ref([])
 const showcaseTitle = ref([])
 
+const router = useRouter()
+
+const { setModal } = useModal()
+
 const intristicRatio = computed(() => {
   if (!imageRatio) {
     return 0
@@ -153,13 +157,11 @@ watch(
 )
 
 function clickMain(showcase) {
-  // TODO
-  // this.$store.commit('SET_MODAL', true)
-  // this.$router.push({
-  //   name: 'explore-website',
-  //   params: { website: showcase.slug }
-  // })
-  console.log('TODO: clickMain')
+  setModal(true)
+  router.push({
+    name: 'explore-website',
+    params: { website: showcase.slug }
+  })
 }
 
 function changeSlider() {

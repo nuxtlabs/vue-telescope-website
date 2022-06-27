@@ -103,7 +103,6 @@ export default {
     },
     clickOutsideHandler() {
       // this.closeDropdown()
-      // console.log('clickOutsideHandler', this.isOpened)
       if (this.isOpened) this.closeDropdown()
     },
     openDropdown() {
