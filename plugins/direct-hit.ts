@@ -1,5 +1,3 @@
-import { defineNuxtPlugin, useState } from '#imports'
-
 export default defineNuxtPlugin((ctx: any) => {
   const directHit = useState('direct-hit-status', () => true)
 

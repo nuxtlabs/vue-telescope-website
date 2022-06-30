@@ -64,8 +64,16 @@
               Privacy
             </NuxtLink>
           </li>
-          <!-- TODO -->
-          <!-- <li class="">
+          <li>
+            <NuxtLink
+              to="/changelog"
+              class="has-hover:hover:text-primary-500 font-medium"
+            >
+              Changelog
+            </NuxtLink>
+          </li>
+          <!-- TODO: once we setup the plugins/changelog.ts -->
+          <!-- <li>
             <ChangelogLink class="has-hover:hover:text-primary-500 font-medium">
               <span class="">Changelog</span>
             </ChangelogLink>
@@ -83,11 +91,11 @@
           >
             &copy; {{ new Date().getFullYear() }}
             <a
-              href="https://nuxtjs.org"
+              href="https://nuxtlabs.com"
               target="_blank"
               rel="noopener"
               class="text-primary-500 font-medium transition ease-linear duration-150 has-hover:hover:underline"
-              >NuxtJS Team</a
+              >NuxtLabs Team</a
             >
             for the VueJS Community
           </div>

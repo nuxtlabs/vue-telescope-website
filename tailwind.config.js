@@ -1,4 +1,4 @@
-import defaultTheme from 'tailwindcss/defaultTheme'
+const defaultTheme = require('tailwindcss/defaultTheme')
 // const breakpoints = require('./utils/styles/breakpoints')
 
 const breakpoints = {
@@ -306,14 +306,5 @@ module.exports = {
     textColor: ['responsive', 'hover', 'focus', 'group-hover'],
     backgroundColor: ['responsive', 'hover', 'focus', 'group-hover'],
     borderColor: ['responsive', 'hover', 'focus', 'group-hover']
-  },
-  content: [
-    // 'content/**/*.md',
-    // 'components/**/*.vue',
-    // 'layouts/**/*.vue',
-    'assets/*',
-    'pages/**/*.vue',
-    // 'plugins/**/*.js',
-    'nuxt.config.ts'
-  ]
+  }
 }
