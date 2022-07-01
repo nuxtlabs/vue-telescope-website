@@ -54,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-const { showcasesCount } = await useShowcasesCount()
+const { showcasesCount } = useShowcasesCount()
 
 const benefits = [
   {

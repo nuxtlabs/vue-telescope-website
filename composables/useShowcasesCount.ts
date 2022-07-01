@@ -1,13 +1,22 @@
 import { useState, useAsyncData } from '#imports'
 
-export const useShowcasesCount = async () => {
-  const showcasesCount = useState('showcasesCount')
+export const useShowcasesCount = () => {
+  const showcasesCount = useState('showcasesCount', () => null)
   const { find } = useStrapi4()
 
-  const { data } = await useAsyncData('showcases/count', () =>
-    find('showcases/count')
-  )
-  showcasesCount.value = data
+  async function fetch() {
+    if (showcasesCount.value) {
+      return
+    }
 
-  return { showcasesCount }
+    const { data } = await useAsyncData('showcases/count', () =>
+      find('showcases/count')
+    )
+    showcasesCount.value = data.value
+  }
+
+  return {
+    showcasesCount,
+    fetch
+  }
 }

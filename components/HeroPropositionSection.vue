@@ -39,7 +39,7 @@ const subheading = ref()
 const installExtensionButton = ref()
 
 const { $gsap, $SplitText } = useNuxtApp()
-const { showcasesCount } = await useShowcasesCount()
+const { showcasesCount } = useShowcasesCount()
 
 onMounted(() => {
   $gsap.fromTo(

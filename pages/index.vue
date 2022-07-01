@@ -9,3 +9,8 @@
     <CtaSection />
   </div>
 </template>
+
+<script setup lang="ts">
+const { fetch: fetchShowcasesCount } = useShowcasesCount()
+await fetchShowcasesCount()
+</script>
