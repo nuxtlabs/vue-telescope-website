@@ -11,12 +11,8 @@
     appearance="primary"
     @click.native="processLinkNavigation"
   >
-    {{ buttonText }}
+    <ClientOnly>{{ buttonText }}</ClientOnly>
   </AppButton>
-
-  <!-- <div ref="el">
-    {{ buttonText }}
-  </div> -->
 </template>
 
 <script setup lang="ts">
