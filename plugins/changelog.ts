@@ -1,4 +1,5 @@
 // TODO: refactor to Nuxt 3 using useState() and useCookie()
+export default defineNuxtPlugin(() => {})
 // export default defineNuxtPlugin(() => {
 //   let updatedAt
 
