@@ -12,7 +12,7 @@
 - ~~different data fetched on server and client side on http://localhost:3000/explore page load~~
 - `ShowcaseSelectedFilters` appear animation and adding second filter animation is broken
 - components not working with Composition API script setup:
-  - `AnimatedNumber`: issue with `watch` and `this.$gsap.to(this.$data, { duration: 0.5, tweenedCount: newValue })`
+  - ~~`AnimatedNumber`: issue with `watch` and `this.$gsap.to(this.$data, { duration: 0.5, tweenedCount: newValue })`~~
   - `ShowcasesSorting`: issue with `:ref="option._sort"`, can't use as ref name?
 - not sure how to implement properly in Nuxt 3 `ExplorePage` fetching depending on `isModal`. This is how it worked before, with new API it's seems impossible
 
