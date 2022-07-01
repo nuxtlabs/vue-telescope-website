@@ -44,6 +44,8 @@
 </template>
 
 <script setup lang="ts">
+const { $gsap } = useNuxtApp()
+
 const props = defineProps({
   checked: {
     type: Boolean,
@@ -63,13 +65,15 @@ defineEmits(['input'])
 
 const isHovered = ref(false)
 
+const checkmark = ref(null)
+
 function animateCheckmark(value) {
   if (value) {
-    this.$gsap.set(this.$refs.checkmark, {
+    $gsap.set(checkmark.value, {
       opacity: 1
     })
-    this.$gsap.fromTo(
-      this.$refs.checkmark,
+    $gsap.fromTo(
+      checkmark.value,
       0.4,
       {
         drawSVG: '0%'
@@ -79,8 +83,8 @@ function animateCheckmark(value) {
       }
     )
   } else {
-    this.$gsap.fromTo(
-      this.$refs.checkmark,
+    $gsap.fromTo(
+      checkmark.value,
       0.4,
       {
         drawSVG: '0 100%'
