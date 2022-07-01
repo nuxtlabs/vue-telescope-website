@@ -169,6 +169,10 @@ function clearFilters() {
   filtersEl.value && filtersEl.value.clearFilters()
 }
 
+// init filters
+setFilters(filterFilters({ ...selectedFilters.value, ...route.query }))
+setSort(filterSort({ ...selectedSort.value, ...route.query }))
+
 const {
   data: showcasesData,
   pending: showcasesPending,
@@ -232,10 +236,5 @@ onMounted(() => {
       })
     }
   })
-})
-
-onServerPrefetch(() => {
-  setFilters(filterFilters({ ...selectedFilters, ...route.query }))
-  setSort(filterSort({ ...selectedSort.value, ...route.query }))
 })
 </script>
