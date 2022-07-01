@@ -235,7 +235,7 @@ onMounted(() => {
 })
 
 onServerPrefetch(() => {
-  setFilters(filterFilters(route.query))
-  setSort(filterSort(route.query))
+  setFilters(filterFilters({ ...selectedFilters, ...route.query }))
+  setSort(filterSort({ ...selectedSort.value, ...route.query }))
 })
 </script>
