@@ -56,6 +56,8 @@ const props = defineProps({
   }
 })
 
+defineEmits(['input'])
+
 const isHovered = ref(false)
 
 const radiomarkWrapperEl = ref(null)

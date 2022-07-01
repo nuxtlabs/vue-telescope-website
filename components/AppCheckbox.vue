@@ -43,68 +43,67 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    checked: {
-      type: Boolean,
-      default: false
-    },
-    label: {
-      type: String,
-      default: 'Default label'
-    },
-    id: {
-      type: String,
-      default: 'Default label'
-    }
+<script setup lang="ts">
+const props = defineProps({
+  checked: {
+    type: Boolean,
+    default: false
   },
-  data() {
-    return {
-      isHovered: false
-    }
+  label: {
+    type: String,
+    default: 'Default label'
   },
-  watch: {
-    checked(value) {
-      this.animateCheckmark(value)
-    }
-  },
-  mounted() {
-    if (this.checked) {
-      this.animateCheckmark(this.checked)
-    }
-  },
-  methods: {
-    animateCheckmark(value) {
-      if (value) {
-        this.$gsap.set(this.$refs.checkmark, {
-          opacity: 1
-        })
-        this.$gsap.fromTo(
-          this.$refs.checkmark,
-          0.4,
-          {
-            drawSVG: '0%'
-          },
-          {
-            drawSVG: '100%'
-          }
-        )
-      } else {
-        this.$gsap.fromTo(
-          this.$refs.checkmark,
-          0.4,
-          {
-            drawSVG: '0 100%'
-          },
-          {
-            drawSVG: '100% 100%'
-          }
-        )
+  id: {
+    type: String,
+    default: 'Default label'
+  }
+})
+
+defineEmits(['input'])
+
+const isHovered = ref(false)
+
+function animateCheckmark(value) {
+  if (value) {
+    this.$gsap.set(this.$refs.checkmark, {
+      opacity: 1
+    })
+    this.$gsap.fromTo(
+      this.$refs.checkmark,
+      0.4,
+      {
+        drawSVG: '0%'
+      },
+      {
+        drawSVG: '100%'
       }
-    }
+    )
+  } else {
+    this.$gsap.fromTo(
+      this.$refs.checkmark,
+      0.4,
+      {
+        drawSVG: '0 100%'
+      },
+      {
+        drawSVG: '100% 100%'
+      }
+    )
   }
 }
+
+watch(
+  () => props.checked,
+  (value) => {
+    animateCheckmark(value)
+  }
+)
+
+onMounted(() => {
+  if (props.checked) {
+    animateCheckmark(props.checked)
+  }
+})
 </script>
 
 <style scoped lang="postcss">

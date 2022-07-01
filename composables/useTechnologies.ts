@@ -1,10 +1,10 @@
 import { useState, useAsyncData } from '#imports'
 
 export const useTechnologies = async () => {
-  const frameworks = useState('frameworks', () => 'wtf')
-  const modules = useState('modules')
-  const plugins = useState('plugins')
-  const uis = useState('uis')
+  const frameworks = useState('frameworks', () => [])
+  const modules = useState('modules', () => [])
+  const plugins = useState('plugins', () => [])
+  const uis = useState('uis', () => [])
   const { find } = useStrapi4()
 
   const entities = ['frameworks', 'modules', 'plugins', 'uis']
