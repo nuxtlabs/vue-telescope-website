@@ -10,8 +10,16 @@ const router = useRouter()
 onMounted(async () => {
   try {
     await authenticateProvider('github', route.query.access_token)
-  } catch (e) {}
 
-  router.push('/')
+    const redirect = useCookie('redirect')
+    if (redirect.value) {
+      router.push(redirect.value)
+      redirect.value = null
+    } else {
+      router.push('/')
+    }
+  } catch (e) {
+    router.push('/')
+  }
 })
 </script>

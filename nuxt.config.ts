@@ -9,7 +9,10 @@ export default defineNuxtConfig({
   ],
   strapi: {
     prefix: '',
-    version: 'v3'
+    version: 'v3',
+    cookie: {
+      path: '/'
+    }
   },
   publicRuntimeConfig: {
     strapiURL: process.env.STRAPI_URL || 'http://localhost:1337',
