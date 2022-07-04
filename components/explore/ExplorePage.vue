@@ -229,7 +229,7 @@ onMounted(() => {
   })
 
   watch(route, (newValue, oldValue) => {
-    if (!newValue.params.website) {
+    if (newValue.name === 'explore') {
       // set query params when close showcase modal and have filters selected
       router.push({
         query: { ...selectedFilters.value, ...selectedSort.value }
