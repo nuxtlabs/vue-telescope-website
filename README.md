@@ -6,11 +6,10 @@
   - select Tailwind in UI (same)
   - now select Pinia in Plugins and it completely fails to work properly because of double call: in devtools it says `setFilterKey plugins.slug ['pinia']` first and `setFilterKey plugins.slug []` second, so filters are broken. Check working vuetelescope.com for example of working filters.
 - lot's of SSR hydration issues in console:
-  - on `/explore`
+  - ~~on `/explore`~~
   - ~~in `InstallExtensionButton`~~
-  - ...
+  - `ShowcasesSelectedFilters`
 - ~~different data fetched on server and client side on http://localhost:3000/explore page load~~
-- `ShowcaseSelectedFilters` appear animation and adding second filter animation is broken
 - components not working with Composition API script setup:
   - ~~`AnimatedNumber`: issue with `watch` and `this.$gsap.to(this.$data, { duration: 0.5, tweenedCount: newValue })`~~
   - `ShowcasesSorting`: issue with `:ref="option._sort"`, can't use as ref name?
