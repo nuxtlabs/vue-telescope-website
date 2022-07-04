@@ -102,8 +102,6 @@
         </template>
       </div>
     </div>
-
-    {{ selectedFilters }}
   </div>
 </template>
 
