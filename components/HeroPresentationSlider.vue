@@ -35,7 +35,7 @@ const heroPresentationSlider = ref(null)
 //   return this.featured[this.activeIndex ? this.activeIndex : 2]
 // })
 
-const { find } = useStrapi4()
+const { find } = useStrapi3()
 
 // TODO: fetchOnServer: false
 const { data: featuredData } = await useAsyncData('showcases/featured', () =>

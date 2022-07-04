@@ -158,7 +158,7 @@ const filterQueryString = computed(() => {
   )
 })
 
-const { find } = useStrapi4()
+const { find } = useStrapi3()
 const user = useStrapiUser()
 
 function clearFilter($event) {

@@ -5,7 +5,7 @@ export const useTechnologies = async () => {
   const modules = useState('modules', () => [])
   const plugins = useState('plugins', () => [])
   const uis = useState('uis', () => [])
-  const { find } = useStrapi4()
+  const { find } = useStrapi3()
 
   const entities = ['frameworks', 'modules', 'plugins', 'uis']
 

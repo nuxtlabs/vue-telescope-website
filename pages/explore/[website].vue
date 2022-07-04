@@ -23,7 +23,7 @@
 const route = useRoute()
 const router = useRouter()
 const { $directHit: directHit } = useNuxtApp()
-const { findOne } = useStrapi4()
+const { findOne } = useStrapi3()
 const { setModal } = useModal()
 
 const { data: website } = await useAsyncData(

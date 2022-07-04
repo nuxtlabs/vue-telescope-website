@@ -8,7 +8,8 @@ export default defineNuxtConfig({
     'nuxt-svgo'
   ],
   strapi: {
-    prefix: ''
+    prefix: '',
+    version: 'v3'
   },
   publicRuntimeConfig: {
     strapiURL: process.env.STRAPI_URL || 'http://localhost:1337',
