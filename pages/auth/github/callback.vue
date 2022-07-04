@@ -3,29 +3,15 @@
 </template>
 
 <script setup lang="ts">
-console.log('CALLBACK')
+const { authenticateProvider } = useStrapiAuth()
+const route = useRoute()
+const router = useRouter()
+
+onMounted(async () => {
+  try {
+    await authenticateProvider('github', route.query.access_token)
+  } catch (e) {}
+
+  router.push('/')
+})
 </script>
-
-<!-- <script>
-export default {
-  layout: 'empty',
-  middleware: 'guest',
-  fetchOnServer: false,
-  async fetch() {
-    try {
-      const { jwt } = await this.$strapi.$http.$get('/auth/github/callback', {
-        searchParams: {
-          access_token: this.$route.query.access_token
-        }
-      })
-
-      this.$strapi.setToken(jwt)
-
-      await this.$strapi.fetchUser()
-      this.$store.commit('collections/setCollections', this.$strapi.user.lists)
-
-      this.$router.push(this.$strapi.$cookies.get('redirect') || '/explore')
-    } catch (e) {}
-  }
-}
-</script> -->

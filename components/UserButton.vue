@@ -8,14 +8,13 @@
       <UserButtonTour v-if="showTour" @close="showLocal = false" />
     </teleport>
 
-    <!-- TODO -->
-    <!-- <ClientOnly>
+    <ClientOnly>
       <img
-        v-if="$strapi.user"
-        :src="`https://github.com/${$strapi.user.username}.png?size=64`"
-        class="absolute top-0 left-0 w-8 h-8 rounded-full mr-1"
+        v-if="user"
+        :src="`https://github.com/${user.username}.png?size=64`"
+        class="absolute top-0 left-0 w-8 h-8 mr-1 rounded-full"
       />
-    </ClientOnly> -->
+    </ClientOnly>
 
     <svg
       class="w-8 h-8"

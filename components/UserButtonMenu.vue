@@ -5,13 +5,12 @@
     class="bg-grey-50 rounded-lg opacity-0"
   >
     <div class="text-sm p-4">
-      <!-- <span v-if="$strapi.user">
+      <span v-if="user">
         Hello,
-        <span class="font-bold-body-weight">{{ $strapi.user.username }}</span>
+        <span class="font-bold-body-weight">{{ user.username }}</span>
         👋
       </span>
-      <span v-else>Hello, stranger 👀</span> -->
-      <span>Hello, stranger 👀</span>
+      <span v-else>Hello, stranger 👀</span>
     </div>
     <hr class="text-grey-100" />
     <ul class="text-base p-2">
@@ -25,15 +24,16 @@
         </NuxtLink>
       </li>
       <li class="flex">
-        <!-- <button
-          v-if="$strapi.user"
-          class="focus:outline-none text-left font-bold-body-weight w-full px-2 py-1 has-hover:hover:bg-grey-100 rounded"
-          @click="logout"
+        <button
+          v-if="user"
+          class="w-full px-2 py-1 text-left rounded focus:outline-none font-bold-body-weight has-hover:hover:bg-grey-100"
+          @click="onLogout"
         >
           Logout
-        </button> -->
+        </button>
         <button
-          class="focus:outline-none text-left font-bold-body-weight w-full px-2 py-1 has-hover:hover:bg-grey-100 rounded"
+          v-else
+          class="w-full px-2 py-1 text-left rounded focus:outline-none font-bold-body-weight has-hover:hover:bg-grey-100"
           @click="login"
         >
           Login
@@ -45,8 +45,11 @@
 
 <script setup lang="ts">
 import { onMounted, ref, defineEmits, useNuxtApp, useCookie } from '#imports'
-const { getProviderAuthenticationUrl } = useStrapiAuth()
+
+const { getProviderAuthenticationUrl, logout } = useStrapiAuth()
+const user = useStrapiUser()
 const { $gsap } = useNuxtApp()
+const route = useRoute()
 
 const el = ref(null)
 
@@ -54,18 +57,15 @@ const emit = defineEmits(['close-menu'])
 
 function login() {
   closeMenu()
-  // TODO
-  // this.$strapi.$cookies.set(
-  //   'redirect',
-  //   this.redirect || this.$route.fullPath
-  // )
-  // window.location = `${this.$config.strapiURL}/connect/github`
+  const redirect = useCookie('redirect')
+  redirect.value = redirect.value || route.fullPath
 
-  window.location = getProviderAuthenticationUrl('github')
+  const location = getProviderAuthenticationUrl('github')
+  window.location = location
 }
-async function logout() {
+async function onLogout() {
   try {
-    await this.$strapi.logout()
+    logout()
     closeMenu()
   } catch (e) {}
 }
