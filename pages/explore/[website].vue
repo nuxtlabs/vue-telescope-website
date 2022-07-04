@@ -10,7 +10,7 @@
     <div v-else>
       <FloatingViewModal
         :fetched="website ? true : false"
-        @close="$router.push('/explore')"
+        @close="onCloseModal"
       >
         <ShowcaseSection :website="website" class="twitter-like mb-12" />
         <CtaSection />
@@ -21,11 +21,18 @@
 
 <script setup lang="ts">
 const route = useRoute()
+const router = useRouter()
 const { $directHit: directHit } = useNuxtApp()
 const { findOne } = useStrapi4()
+const { setModal } = useModal()
 
 const { data: website } = await useAsyncData(
   `showcases:${route.params.website}`,
   () => findOne('showcases', route.params.website)
 )
+
+function onCloseModal() {
+  setModal(false)
+  router.push('/explore')
+}
 </script>

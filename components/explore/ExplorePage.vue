@@ -178,18 +178,26 @@ const {
   pending: showcasesPending,
   error,
   refresh: showcasesRefresh
-} = await useAsyncData(`showcases${filterQueryString.value}`, () =>
-  find(`showcases${filterQueryString.value}`)
-)
+} = await useAsyncData(`showcases${filterQueryString.value}`, () => {
+  // do not fetch showcases if modal open
+  if (isModal.value) {
+    return []
+  }
+  return find(`showcases${filterQueryString.value}`)
+})
 
 const {
   data: totalCountData,
   pending: totalCountPending,
   error: totalCountError,
   refresh: totalCountRefresh
-} = await useAsyncData(`showcases/count${filterQueryString.value}`, () =>
-  find(`showcases/count${filterQueryString.value}`)
-)
+} = await useAsyncData(`showcases/count${filterQueryString.value}`, () => {
+  // do not fetch showcases count if modal open
+  if (isModal.value) {
+    return 0
+  }
+  return find(`showcases/count${filterQueryString.value}`)
+})
 
 // const totalCount = await this.$strapi.find(
 //         `showcases/count${this.filterQueryString}`
@@ -234,6 +242,14 @@ onMounted(() => {
       router.push({
         query: { ...selectedFilters.value, ...selectedSort.value }
       })
+    }
+  })
+
+  watch(isModal, (value) => {
+    // fetch showcases when modal closed
+    if (!value && !showcasesData.value.length) {
+      showcasesRefresh()
+      totalCountRefresh()
     }
   })
 })
