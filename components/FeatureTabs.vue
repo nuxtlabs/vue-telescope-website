@@ -60,7 +60,6 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from '#imports'
-import FeatureTabsOne from './FeatureTabsOne.vue'
 
 const tabs = [
   {
