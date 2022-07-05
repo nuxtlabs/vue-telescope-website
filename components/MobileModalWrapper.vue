@@ -1,6 +1,6 @@
 <template>
   <div class="modal-wrapper">
-    <div ref="scrim" class="scrim" style="opacity: 0"></div>
+    <div ref="scrimEl" class="scrim" style="opacity: 0"></div>
     <!-- <div class="fixed top-0 bg-white">{{ test }}</div> -->
     <div
       class="w-full h-full overflow-auto"
@@ -15,7 +15,7 @@
           :class="isSafari && 'h-full'"
         >
           <div
-            ref="modal-container"
+            ref="modalContainerEl"
             style="transform: translateY(100%)"
             class="modal-container relative h-full px-4 bg-white rounded-b-none pointer-events-auto modal-container rounded-4xl"
           >
@@ -46,164 +46,153 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import XmarkCircleIcon from '@/assets/icons/xmark-circle.svg'
 
-export default {
-  setup() {
-    const { isModal } = useModal()
-    const { isMobile, isSafari } = useUserAgent()
-    const { setModal } = useModal()
-    return {
-      isModal,
-      isMobile,
-      isSafari,
-      setModal
-    }
-  },
-  components: {
-    XmarkCircleIcon
-  },
-  props: {
-    label: {
-      type: String,
-      default: null
-    }
-  },
-  data() {
-    return {
-      // test: 0,
-      yStart: null,
-      xStart: null
-    }
-  },
-  mounted() {
-    this.activateEscapeListener()
+const { isModal } = useModal()
+const { isMobile, isSafari } = useUserAgent()
+const { setModal } = useModal()
+const { $gsap } = useNuxtApp()
 
-    // this.$store.commit('SET_MODAL', true)
-    this.setModal(true)
-    this.animateEnter()
+defineProps({
+  label: {
+    type: String,
+    default: null
+  }
+})
 
-    this.blockBodyScroll()
-  },
-  unmounted() {
-    // this.$store.commit('SET_MODAL', false)
-    this.setModal(false)
+const emit = defineEmits(['close'])
 
-    setTimeout(() => {
-      document.body.style.overflow = null
-      document.body.style.paddingRight = null
-      document.querySelector('#main-header').style.paddingRight = null
-    })
-  },
-  methods: {
-    activateEscapeListener() {
-      const escapeHandler = (e) => {
-        if (e.key === 'Escape') {
-          // eslint-disable-next-line no-unused-expressions
-          this.animateLeave
-        }
-      }
-      document.addEventListener('keydown', escapeHandler)
-      // TODO
-      // this.$once('hook:destroyed', () => {
-      //   document.removeEventListener('keydown', escapeHandler)
-      // })
-    },
-    blockBodyScroll() {
-      const scrollBarGap =
-        window.innerWidth - document.documentElement.clientWidth
-      document.body.style.overflow = 'hidden'
-      document.body.style.paddingRight = `${scrollBarGap}px`
-      document.querySelector(
-        '#main-header'
-      ).style.paddingRight = `${scrollBarGap}px`
+const modalContainerEl = ref(null)
+const scrimEl = ref(null)
 
-      this.$refs[
-        'modal-container'
-      ].style.paddingRight = `calc(1rem + ${scrollBarGap}px)`
-    },
-    touchStartHandler(e) {
-      this.yStart = e.touches[0].clientY
-      this.xStart = e.touches[0].clientX
-    },
-    touchMoveHandler(e) {
-      if (!this.yStart || !this.xStart) {
-        return
-      }
+const yStart = ref(null)
+const xStart = ref(null)
 
-      const xCurrent = e.touches[0].clientX
-      const yCurrent = e.touches[0].clientY
+onMounted(() => {
+  activateEscapeListener()
 
-      const xDiff = this.xStart - xCurrent
-      const yDiff = this.yStart - yCurrent
+  setModal(true)
+  animateEnter()
 
-      if (Math.abs(xDiff) > Math.abs(yDiff)) {
-        if (xDiff > 0) {
-          // left swipe
-        } else {
-          // right swipe
-        }
-      } else if (yDiff > 0) {
-        // up swipe
-      } else {
-        // down swipe
-        // this.$emit('close')
-        this.animateLeave()
-      }
-      // reset
-      this.xStart = null
-      this.yStart = null
-    },
-    animateEnter() {
-      const scrim = this.$refs.scrim
-      this.$gsap.fromTo(
-        scrim,
-        {
-          opacity: 0
-        },
-        {
-          opacity: 1,
-          duration: 0.2,
-          ease: 'none',
-          onComplete: () => {
-            if (this.isSafari) {
-              this.$refs['modal-container'].style.height = 'calc(100vh - 4rem)'
-            }
-            this.$gsap.to(this.$refs['modal-container'], {
-              y: 0,
-              // opacity: 0,
-              duration: 1,
-              ease: 'expo.out',
-              clearProps: true,
-              onComplete: () => {
-                // this.$refs['hack-safari'].style.height = '100%'
-                // this.$refs['modal-container'].style.height = '100%'
-                this.$refs['modal-container'].style.paddingRight = null
-                this.$refs['modal-container'].classList.add('overflow-auto') // md:overflow-hidden overflow-x-hidden
-              }
-            })
-          }
-        }
-      )
-    },
-    animateLeave() {
-      const scrim = this.$refs.scrim
-      this.$gsap.to(scrim, {
-        opacity: 0,
-        duration: 0.25
-      })
+  blockBodyScroll()
+})
 
-      this.$gsap.to(this.$refs['modal-container'], {
-        y: '100%',
-        duration: 0.25,
-        ease: 'expo.out',
-        onComplete: () => {
-          this.$emit('close')
-        }
-      })
+onUnmounted(() => {
+  setModal(false)
+
+  setTimeout(() => {
+    document.body.style.overflow = null
+    document.body.style.paddingRight = null
+    document.querySelector('#main-header').style.paddingRight = null
+  })
+})
+
+function activateEscapeListener() {
+  const escapeHandler = (e) => {
+    if (e.key === 'Escape') {
+      // eslint-disable-next-line no-unused-expressions
+      animateLeave
     }
   }
+  document.addEventListener('keydown', escapeHandler)
+  // TODO
+  // this.$once('hook:destroyed', () => {
+  //   document.removeEventListener('keydown', escapeHandler)
+  // })
+}
+
+function blockBodyScroll() {
+  const scrollBarGap = window.innerWidth - document.documentElement.clientWidth
+  document.body.style.overflow = 'hidden'
+  document.body.style.paddingRight = `${scrollBarGap}px`
+  document.querySelector(
+    '#main-header'
+  ).style.paddingRight = `${scrollBarGap}px`
+
+  modalContainerEl.value.style.paddingRight = `calc(1rem + ${scrollBarGap}px)`
+}
+
+function touchStartHandler(e) {
+  yStart.value = e.touches[0].clientY
+  xStart.value = e.touches[0].clientX
+}
+
+function touchMoveHandler(e) {
+  if (!yStart.value || !xStart.value) {
+    return
+  }
+
+  const xCurrent = e.touches[0].clientX
+  const yCurrent = e.touches[0].clientY
+
+  const xDiff = xStart.value - xCurrent
+  const yDiff = yStart.value - yCurrent
+
+  if (Math.abs(xDiff) > Math.abs(yDiff)) {
+    if (xDiff > 0) {
+      // left swipe
+    } else {
+      // right swipe
+    }
+  } else if (yDiff > 0) {
+    // up swipe
+  } else {
+    // down swipe
+    // this.$emit('close')
+    animateLeave()
+  }
+  // reset
+  xStart.value = null
+  yStart.value = null
+}
+
+function animateEnter() {
+  $gsap.fromTo(
+    scrimEl.value,
+    {
+      opacity: 0
+    },
+    {
+      opacity: 1,
+      duration: 0.2,
+      ease: 'none',
+      onComplete: () => {
+        if (isSafari.value) {
+          modalContainerEl.value.style.height = 'calc(100vh - 4rem)'
+        }
+        $gsap.to(modalContainerEl.value, {
+          y: 0,
+          // opacity: 0,
+          duration: 1,
+          ease: 'expo.out',
+          clearProps: true,
+          onComplete: () => {
+            // this.$refs['hack-safari'].style.height = '100%'
+            // modalContainerEl.value.style.height = '100%'
+            modalContainerEl.value.style.paddingRight = null
+            modalContainerEl.value.classList.add('overflow-auto') // md:overflow-hidden overflow-x-hidden
+          }
+        })
+      }
+    }
+  )
+}
+
+function animateLeave() {
+  $gsap.to(scrimEl.value, {
+    opacity: 0,
+    duration: 0.25
+  })
+
+  $gsap.to(modalContainerEl.value, {
+    y: '100%',
+    duration: 0.25,
+    ease: 'expo.out',
+    onComplete: () => {
+      emit('close')
+    }
+  })
 }
 </script>
 

@@ -58,70 +58,61 @@
   </div>
 </template>
 
-<script>
-// import { mapState } from 'vuex'
+<script setup lang="ts">
 import XmarkCircleFill from '@/assets/icons/xmark-circle-fill.svg'
 
-export default {
-  async setup() {
-    const { frameworks, uis } = await useTechnologies()
-    return { frameworks, uis }
+const { frameworks, uis } = await useTechnologies()
+
+defineProps({
+  selectedFilters: {
+    type: Object,
+    default: () => {}
   },
-  components: {
-    XmarkCircleFill
-  },
-  props: {
-    selectedFilters: {
-      type: Object,
-      default: () => {}
-    },
-    totalCount: {
-      type: Number,
-      default: 0
+  totalCount: {
+    type: Number,
+    default: 0
+  }
+})
+
+function title(key) {
+  if (key === 'vueVersion_gte') {
+    return 'Vue 3 only'
+  } else if (key === 'isStatic') {
+    return 'Deployment'
+  } else if (key === 'hasSSR') {
+    return 'Rendering'
+  } else if (key === 'framework.slug' || key === 'framework_null') {
+    return 'Framework'
+  } else if (key === 'ui.slug' || key === 'ui_null') {
+    return 'UI Framework'
+  } else if (key === 'plugins.slug') {
+    return 'Plugins'
+  } else if (key === 'modules.slug') {
+    return 'Nuxt Modules'
+  } else if (key === '_q') {
+    return 'Keyword'
+  }
+}
+function content({ key, value }) {
+  if (key === 'isStatic' || key === 'hasSSR') {
+    if (value.length > 1) {
+      return 'Any'
+    } else if (value.length === 1 && value[0] === true) {
+      return key === 'isStatic' ? 'Static' : 'Server-side'
+    } else if (value.length === 1 && value[0] === false) {
+      return key === 'isStatic' ? 'Server' : 'Client-side'
     }
-  },
-  methods: {
-    title(key) {
-      if (key === 'vueVersion_gte') {
-        return 'Vue 3 only'
-      } else if (key === 'isStatic') {
-        return 'Deployment'
-      } else if (key === 'hasSSR') {
-        return 'Rendering'
-      } else if (key === 'framework.slug' || key === 'framework_null') {
-        return 'Framework'
-      } else if (key === 'ui.slug' || key === 'ui_null') {
-        return 'UI Framework'
-      } else if (key === 'plugins.slug') {
-        return 'Plugins'
-      } else if (key === 'modules.slug') {
-        return 'Nuxt Modules'
-      } else if (key === '_q') {
-        return 'Keyword'
-      }
-    },
-    content({ key, value }) {
-      if (key === 'isStatic' || key === 'hasSSR') {
-        if (value.length > 1) {
-          return 'Any'
-        } else if (value.length === 1 && value[0] === true) {
-          return key === 'isStatic' ? 'Static' : 'Server-side'
-        } else if (value.length === 1 && value[0] === false) {
-          return key === 'isStatic' ? 'Server' : 'Client-side'
-        }
-      } else if (key === 'framework_null' || key === 'ui_null') {
-        return 'Vue'
-      } else if (key === 'plugins.slug' || key === 'modules.slug') {
-        const validatedValue = Array.isArray(value) ? value : [value]
-        if (validatedValue.length === 1) {
-          return validatedValue[0]
-        } else {
-          return `${validatedValue[0]} + ${validatedValue.length - 1} more`
-        }
-      } else if (key === '_q') {
-        return value
-      }
+  } else if (key === 'framework_null' || key === 'ui_null') {
+    return 'Vue'
+  } else if (key === 'plugins.slug' || key === 'modules.slug') {
+    const validatedValue = Array.isArray(value) ? value : [value]
+    if (validatedValue.length === 1) {
+      return validatedValue[0]
+    } else {
+      return `${validatedValue[0]} + ${validatedValue.length - 1} more`
     }
+  } else if (key === '_q') {
+    return value
   }
 }
 </script>

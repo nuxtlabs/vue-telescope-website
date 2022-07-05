@@ -149,7 +149,6 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
-  // this.$store.commit('SET_MODAL', false)
   unblockBodyScroll()
 })
 </script>

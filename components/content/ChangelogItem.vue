@@ -10,8 +10,8 @@
     </div>
     <div class="w-full md:w-3/4 rounded-lg" :class="[projectColors.bg]">
       <div
-        class="inline-block py-1 px-2 m-5 rounded-md text-xs uppercase font-bold-body-weight"
-        :class="[projectColors.labelBg, projectColors.labelText]"
+        class="inline-block py-1 px-2 m-5 rounded-md text-xs uppercase font-bold-body-weight border"
+        :class="[projectColors.border, projectColors.labelText]"
       >
         {{ project }}
       </div>
@@ -22,59 +22,55 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'ChangelogItem',
-  props: {
-    project: {
-      type: String,
-      default: null,
-      validator(value) {
-        return ['website', 'extension', 'analyzer'].includes(value)
-      }
-    },
-    date: {
-      type: String,
-      default: null
+<script setup>
+const props = defineProps({
+  project: {
+    type: String,
+    default: null,
+    validator(value) {
+      return ['website', 'extension', 'analyzer'].includes(value)
     }
   },
-  computed: {
-    projectColors() {
-      if (this.project === 'website') {
-        return {
-          bg: 'bg-blue-50',
-          // border: 'border-blue-100',
-          labelBg: 'bg-blue-100',
-          labelText: 'text-blue-800'
-        }
-      } else if (this.project === 'extension') {
-        return {
-          bg: 'bg-green-50',
-          // border: 'border-green-200',
-          labelBg: 'bg-green-200',
-          labelText: 'text-green-800'
-        }
-      } else {
-        return {
-          bg: 'bg-yellow-50',
-          // border: 'border-yellow-200',
-          labelBg: 'bg-yellow-200',
-          labelText: 'text-yellow-800'
-        }
-      }
-    }
-  },
-  methods: {
-    formatDateByLocale(d) {
-      const currentLocale = 'en'
-      const options = { year: 'numeric', month: 'long', day: 'numeric' }
+  date: {
+    type: String,
+    default: null
+  }
+})
 
-      return new Date(d).toLocaleDateString(currentLocale, options)
-    },
-    dateToIso(date) {
-      return new Date(date).toISOString()
+const projectColors = computed(() => {
+  if (props.project === 'website') {
+    return {
+      bg: 'bg-blue-50',
+      border: 'border-blue-100',
+      // labelBg: 'bg-blue-100',
+      labelText: 'text-blue-500'
+    }
+  } else if (props.project === 'extension') {
+    return {
+      bg: 'bg-green-50',
+      border: 'border-green-200',
+      // labelBg: 'bg-green-200',
+      labelText: 'text-green-700'
+    }
+  } else {
+    return {
+      bg: 'bg-yellow-50',
+      border: 'border-yellow-200',
+      // labelBg: 'bg-yellow-200',
+      labelText: 'text-yellow-700'
     }
   }
+})
+
+function formatDateByLocale(d) {
+  const currentLocale = 'en'
+  const options = { year: 'numeric', month: 'long', day: 'numeric' }
+
+  return new Date(d).toLocaleDateString(currentLocale, options)
+}
+
+function dateToIso(date) {
+  return new Date(date).toISOString()
 }
 </script>
 
