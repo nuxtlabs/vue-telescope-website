@@ -44,8 +44,15 @@
 
 <script setup lang="ts">
 import XmarkCircleIcon from '@/assets/icons/xmark-circle.svg'
+const { setModal } = useModal()
 
 const emit = defineEmits(['close'])
+
+setModal(true)
+
+onUnmounted(() => {
+  setModal(false)
+})
 
 defineProps({
   fetched: {

@@ -24,7 +24,7 @@ const route = useRoute()
 const router = useRouter()
 const { $directHit: directHit } = useNuxtApp()
 const { findOne } = useStrapi3()
-const { setModal } = useModal()
+// const { setModal } = useModal()
 
 const { data: website } = await useAsyncData(
   `showcases:${route.params.website}`,
@@ -32,7 +32,7 @@ const { data: website } = await useAsyncData(
 )
 
 function onCloseModal() {
-  setModal(false)
+  // setModal(false)
   router.push('/explore')
 }
 </script>

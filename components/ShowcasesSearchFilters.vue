@@ -102,6 +102,24 @@
         </template>
       </div>
     </div>
+
+    <div v-show="selectedFilters['framework.slug'] === 'nuxtjs'" class="mb-4">
+      <AppFilterLabel>Modules</AppFilterLabel>
+      <div class="flex flex-col">
+        <template v-for="module in modules" :key="module.id">
+          <AppCheckbox
+            :id="`module-${module.slug}`"
+            :checked="
+              selectedFilters['modules.slug'] &&
+              selectedFilters['modules.slug'].includes(module.slug)
+            "
+            class="mb-1"
+            :label="module.name"
+            @input="checkboxFilter('modules.slug', module.slug)"
+          />
+        </template>
+      </div>
+    </div>
   </div>
 </template>
 

@@ -12,7 +12,7 @@ export default defineNuxtPlugin(() => {
     isMobile.value = /iPhone|iPad|iPod|Android/i.test(ua)
     isFirefox.value = /Firefox/i.test(ua)
     isChrome.value = /Chrome/i.test(ua)
-    isSafari.value = /Safari/i.test(ua)
+    isSafari.value = /Safari/i.test(ua) && !/Chrome/i.test(ua)
   }
 
   if (process.client) refresh()

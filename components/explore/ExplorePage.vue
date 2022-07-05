@@ -9,6 +9,7 @@
     </template>
 
     <template #aside-content-header>
+      <ShowcasesMobileSearchFilters />
       <ShowcasesSorting class="mr-12 -mt-9 md:-mt-8 md:mr-6" />
       <ShowcasesSelectedFilters
         :selected-filters="selectedFilters"
@@ -109,7 +110,7 @@ const { frameworks, modules, plugins, uis } = await useTechnologies()
 // console.log('uis', uis)
 
 const { selectedFilters, setFilters } = useFilters()
-const { isModal, setModal } = useModal()
+const { isModal } = useModal()
 
 const { selectedSort, setSort } = useSort()
 
