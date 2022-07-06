@@ -31,6 +31,9 @@
             :pending="showcasesPending"
             @update="currentPage++"
           />
+          <AppButton v-else @click="login">
+            Login with <GithubIcon class="h-6 w-6 mx-1" /> to see all
+          </AppButton>
         </div>
       </div>
     </template>
@@ -40,6 +43,7 @@
 <script setup lang="ts">
 import AsideContentTemplate from '../templates/AsideContentTemplate.vue'
 import qs from 'qs'
+import GithubIcon from '@/assets/icons/github.svg'
 
 const allowedFilters = [
   '_q',
@@ -111,6 +115,7 @@ const { frameworks, modules, plugins, uis } = await useTechnologies()
 
 const { selectedFilters, setFilters } = useFilters()
 const { isModal } = useModal()
+const { getProviderAuthenticationUrl } = useStrapiAuth()
 
 const { selectedSort, setSort } = useSort()
 
@@ -168,6 +173,14 @@ function clearFilter($event) {
 
 function clearFilters() {
   filtersEl.value && filtersEl.value.clearFilters()
+}
+
+function login() {
+  const redirect = useCookie('redirect')
+  redirect.value = redirect.value || route.fullPath
+
+  const location = getProviderAuthenticationUrl('github')
+  window.location = location
 }
 
 // init filters
