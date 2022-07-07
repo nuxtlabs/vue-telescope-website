@@ -2,7 +2,7 @@
   <div class="modal-wrapper">
     <div class="w-full h-full py-8 px-4" @click.self="makeChoice(false)">
       <div
-        ref="modal-wrapper"
+        ref="modalWrapperEl"
         class="flex flex-col pointer-events-auto h-full relative bg-white m-auto max-w-readable md:mt-4 rounded-xl overflow-auto md:overflow-hidden overflow-x-hidden"
       >
         <h2 class="text-five leading-five font-display-weight p-4 text-center">
@@ -119,64 +119,55 @@
   </div>
 </template>
 
-<script>
-export default {
-  setup() {
-    const { privacyAwarenessCb, setPrivacyAwarenessCb } = usePrivacyAwareness()
-    const { isModal } = useModal()
-    return { privacyAwarenessCb, isModal, setPrivacyAwarenessCb }
-  },
-  created() {
-    const escapeHandler = (e) => {
-      if (e.key === 'Escape') {
-        this.makeChoice(false)
-      }
+<script setup lang="ts">
+const { privacyAwarenessCb, setPrivacyAwarenessCb } = usePrivacyAwareness()
+const { isModal, setModal } = useModal()
+const { $gsap } = useNuxtApp()
+
+const modalWrapperEl = ref(null)
+
+useEsc(() => makeChoice(false))
+
+onMounted(() => {
+  if (!isModal.value) {
+    document.body.style.overflow = 'hidden'
+    // TODO: bug
+    // setModal(true)
+  }
+  $gsap.fromTo(
+    modalWrapperEl.value,
+    {
+      scale: 1.2,
+      opacity: 0
+    },
+    {
+      scale: 1,
+      opacity: 1,
+      duration: 0.5,
+      ease: 'power3.inOut'
     }
-    if (process.browser) {
-      // eslint-disable-next-line nuxt/no-globals-in-created
-      document.addEventListener('keydown', escapeHandler)
-      // TODO
-      // this.$once('hook:destroyed', () => {
-      //   // eslint-disable-next-line nuxt/no-globals-in-created
-      //   document.removeEventListener('keydown', escapeHandler)
-      // })
-    }
-  },
-  mounted() {
-    if (!this.isModal) {
-      document.body.style.overflow = 'hidden'
-    }
-    this.$gsap.fromTo(
-      this.$refs['modal-wrapper'],
-      {
-        scale: 1.2,
-        opacity: 0
-      },
-      {
-        scale: 1,
-        opacity: 1,
-        duration: 0.5,
-        ease: 'power3.inOut'
-      }
-    )
-  },
-  beforeUnmount() {
-    if (!this.isModal) {
-      document.body.style.overflow = null
-    }
-  },
-  methods: {
-    async makeChoice(choice) {
-      if (choice) {
-        // if user agrees on Terms
-        localStorage.setItem('privacyAware', true)
-        await this.privacyAwarenessCb()
-        this.setPrivacyAwarenessCb(null)
-      } else {
-        // if not
-        localStorage.setItem('privacyAware', false)
-      }
-    }
+  )
+})
+
+onBeforeUnmount(() => {
+  if (!isModal.value) {
+    document.body.style.overflow = null
+    // TODO: bug
+    // setModal(false)
+  }
+})
+
+async function makeChoice(choice) {
+  if (choice) {
+    // if user agrees on Terms
+    localStorage.setItem('privacyAware', 'true')
+    console.log('sukaaaa', privacyAwarenessCb)
+    await privacyAwarenessCb.value()
+    setPrivacyAwarenessCb(null)
+  } else {
+    // if not
+    localStorage.setItem('privacyAware', 'false')
+    setPrivacyAwarenessCb(null)
   }
 }
 </script>

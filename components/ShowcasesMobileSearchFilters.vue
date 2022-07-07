@@ -16,19 +16,8 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import FilterIcon from '@/assets/icons/filter.svg'
 
-export default {
-  components: {
-    FilterIcon
-  },
-  data() {
-    return {
-      show: false
-    }
-  }
-}
+const show = ref(false)
 </script>
-
-<style></style>
