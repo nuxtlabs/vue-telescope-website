@@ -42,3 +42,5 @@ watch: {
 - blocked by Content module
 - blocked by broken Strapi auth
 - blocked by CORS issues
+
+- add fathom

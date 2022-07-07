@@ -33,8 +33,8 @@ defineProps({
 
 const { isMobile, isChrome, isFirefox } = useUserAgent()
 const { isExtensionInstalled } = useExtensionInstalled()
+const { processPrivacyAwareness } = usePrivacyAwareness()
 
-// TODO: hydration error
 const buttonText = computed(() => {
   if (isChrome.value) {
     return 'Add to Chrome'
@@ -57,15 +57,7 @@ const linkToExtention = computed(() => {
 
 async function processLinkNavigation(e) {
   e.preventDefault()
-  // TODO
-  // const aware = await this.$store.dispatch(
-  //   'PROCESS_PRIVACY_AWARENESS',
-  //   this.linkNavigation
-  // )
-  // if (!aware) {
-  //   return
-  // }
-  linkNavigation()
+  await processPrivacyAwareness(linkNavigation)
 }
 function linkNavigation() {
   window.open(linkToExtention.value, '_blank').focus()

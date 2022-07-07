@@ -41,14 +41,14 @@ const props = defineProps({
 })
 
 const sizing = computed(() => {
-  if (props.size.value === 'small') {
+  if (props.size === 'small') {
     return {
       height: 'h-8',
       fontSize: 'text-sm',
       rounded: 'rounded-md',
       padding: 'px-2'
     }
-  } else if (props.size.value === 'large') {
+  } else if (props.size === 'large') {
     return {
       height: 'h-12',
       fontSize: 'text-eight',

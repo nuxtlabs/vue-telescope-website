@@ -3,11 +3,13 @@
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
+    <PrivacyAwareModal v-if="privacyAwarenessCb" />
   </div>
 </template>
 
 <script setup lang="ts">
 await useTechnologies()
+const { privacyAwarenessCb } = usePrivacyAwareness()
 </script>
 
 <style lang="postcss">

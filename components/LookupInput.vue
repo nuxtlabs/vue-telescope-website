@@ -27,7 +27,7 @@
         @keypress.enter.native="processAnalyzeWebsite"
       />
     </label>
-    <!-- <AppButton
+    <AppButton
       :size="size"
       appearance="info"
       :class="pending && 'pointer-events-none'"
@@ -50,7 +50,7 @@
           path="text-blue-200"
         />
       </div>
-    </AppButton> -->
+    </AppButton>
   </div>
 </template>
 
@@ -59,6 +59,9 @@ import { ref, computed, defineProps, useNuxtApp } from '#imports'
 const EventSourcePolyfill = () => import('event-source-polyfill')
 
 const { $config } = useNuxtApp()
+const { processPrivacyAwareness } = usePrivacyAwareness()
+const router = useRouter()
+const { setModal } = useModal()
 
 const props = defineProps({
   size: {
@@ -103,14 +106,7 @@ function formatUrlInput(u) {
 }
 
 const processAnalyzeWebsite = async () => {
-  // const aware = await this.$store.dispatch(
-  //   'PROCESS_PRIVACY_AWARENESS',
-  //   analyzeWebsite
-  // )
-  // if (!aware) {
-  //   return
-  // }
-  analyzeWebsite()
+  await processPrivacyAwareness(analyzeWebsite)
 }
 const analyzeWebsite = async () => {
   if (!window.EventSource) {
@@ -130,13 +126,13 @@ const analyzeWebsite = async () => {
       const res = JSON.parse(event.data)
 
       if (!res.error && !res.isAdultContent) {
-        // this.$store.commit('SET_MODAL', true)
-        // this.$router.push({
-        //   name: 'explore-website',
-        //   params: {
-        //     website: res.slug
-        //   }
-        // })
+        setModal(true)
+        router.push({
+          name: 'explore-website',
+          params: {
+            website: res.slug
+          }
+        })
       } else if (!res.error && res.isAdultContent) {
         errorMessage.value = 'Website has adult content ;)'
       } else {
