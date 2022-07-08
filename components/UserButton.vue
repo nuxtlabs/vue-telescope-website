@@ -3,10 +3,11 @@
     ref="el"
     class="relative rounded-full overflow-hidden focus:outline-none"
   >
-    <!-- TODO -->
-    <teleport to="body">
-      <UserButtonTour v-if="showTour" @close="showLocal = false" />
-    </teleport>
+    <ClientOnly>
+      <teleport to="body">
+        <UserButtonTour v-if="showTour" @close="showLocal = false" />
+      </teleport>
+    </ClientOnly>
 
     <ClientOnly>
       <img
@@ -80,27 +81,8 @@ defineExpose({
 })
 
 const showTour = computed(() => {
-  // return (
-  //   // !this.$strapi.user &&
-  //   showLocal.value && !$tour['collections-feature']
-  // )
+  return process.client
+    ? !user.value && showLocal.value && !$tour.collectionsFeature.value
+    : false
 })
-
-// export default {
-//   name: 'UserButton',
-//   data() {
-//     return {
-//       showLocal: true
-//     }
-//   },
-//   computed: {
-//     showTour() {
-//       return (
-//         !this.$strapi.user &&
-//         this.showLocal &&
-//         !this.$tour['collections-feature']
-//       )
-//     }
-//   }
-// }
 </script>

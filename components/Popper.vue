@@ -6,7 +6,7 @@
   >
     <slot :popper-instance="popperInstance"></slot>
 
-    <!-- <div v-if="arrowEl" ref="arrow" class="arrow w-4 h-4 relative">
+    <div ref="arrowEl" class="arrow w-4 h-4 relative">
       <div class="arrow-icon w-full h-full relative">
         <svg
           class="w-full absolute top-0 left-0 text-grey-300"
@@ -17,7 +17,7 @@
           <path d="M1 1L9 11L17 1" stroke="currentColor" fill="white" />
         </svg>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 

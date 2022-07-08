@@ -1,9 +1,9 @@
 import { defineNuxtPlugin, ref, useState } from '#imports'
 
 export default defineNuxtPlugin(() => {
-  const collectionsFeature = useState('collectionsFeature', () => 'boom')
+  const collectionsFeature = useState('collectionsFeature', () => false)
   collectionsFeature.value = Boolean(
-    window.localStorage.getItem('collections-feature-seen')
+    window.localStorage.getItem('collectionsFeatureSeen')
   )
 
   return {

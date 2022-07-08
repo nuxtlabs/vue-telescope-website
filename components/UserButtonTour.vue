@@ -71,7 +71,7 @@
           placement="bottom-end"
           :anchor="$refs.anchor"
         >
-          <div class="p-4" @click="closeTour">
+          <div class="p-4">
             <div class="mb-4 font-bold-body-weight">
               Save websites to your own Collections.
             </div>
@@ -82,7 +82,7 @@
               >
                 Not interested
               </button>
-              <!-- <WtfGithubLoginButton size="small" redirect="/collections" /> -->
+              <GithubLoginButton size="small" redirect="/collections" />
             </div>
           </div>
         </Popper>
@@ -137,7 +137,7 @@ export default {
       }, 16)
     },
     featureSeenHandler() {
-      window.localStorage.setItem('collections-feature-seen', true)
+      window.localStorage.setItem('collectionsFeatureSeen', true)
       this.closeTour()
     }
   }
