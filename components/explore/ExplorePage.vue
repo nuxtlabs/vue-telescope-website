@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import AsideContentTemplate from '../templates/AsideContentTemplate.vue'
+import AsideContentTemplate from '@/components/templates/AsideContentTemplate.vue'
 import qs from 'qs'
 import GithubIcon from '@/assets/icons/github.svg'
 

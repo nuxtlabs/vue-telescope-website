@@ -38,6 +38,7 @@ watch: {
 
 - update `.twitter-like` to `.floating-view`
 - rename `MobileModalWrapper` to `MobileSlideModalWrapper`
+- `collections` to `lists` (as on Strapi)
 
 - blocked by Content module
 - blocked by broken Strapi auth
