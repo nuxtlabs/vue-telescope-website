@@ -17,13 +17,13 @@
           ratio="4:3"
           sizes="(min-width: 834px) 33vw, (min-width: 640px) 50vw, 100vw"
         />
-        <!-- TODO -->
-        <!-- <BookmarkShowcase
+
+        <ShowcaseBookmark
           :showcase="showcase"
           compact
           :sortable="sortable"
           class="hidden transition-opacity sm:block duration-400"
-        /> -->
+        />
       </div>
       <div class="flex flex-wrap items-center">
         <div
@@ -72,7 +72,9 @@ defineProps({
 
 const emit = defineEmits(['open-link'])
 
-function open() {
+function open(e) {
+  // TODO: not working
+  e.preventDefault()
   // TODO: seems to work without it
   emit('open-link')
 }

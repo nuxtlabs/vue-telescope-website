@@ -4688,6 +4688,11 @@ parse-path@^4.0.4:
     qs "^6.9.4"
     query-string "^6.13.8"
 
+parse-unit@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/parse-unit/-/parse-unit-1.0.1.tgz#7e1bb6d5bef3874c28e392526a2541170291eecf"
+  integrity sha512-hrqldJHokR3Qj88EIlV/kAyAi/G5R2+R56TBANxNMy0uPlYcttx0jnMW6Yx5KsKPSbC3KddM/7qQm3+0wEXKxg==
+
 parse-url@^6.0.0:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/parse-url/-/parse-url-6.0.2.tgz#4a30b057bfc452af64512dfb1a7755c103db3ea1"
@@ -6022,6 +6027,13 @@ to-fast-properties@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/to-fast-properties/-/to-fast-properties-2.0.0.tgz#dc5e698cbd079265bc73e0377681a4e4e83f616e"
   integrity sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==
+
+to-px@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/to-px/-/to-px-1.1.0.tgz#b6b269ed5db0cc9aefc15272a4c8bcb2ca1e99ca"
+  integrity sha512-bfg3GLYrGoEzrGoE05TAL/Uw+H/qrf2ptr9V3W7U0lkjjyYnIfgxmVLUfhQ1hZpIQwin81uxhDjvUkDYsC0xWw==
+  dependencies:
+    parse-unit "^1.0.1"
 
 to-regex-range@^5.0.1:
   version "5.0.1"

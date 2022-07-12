@@ -36,6 +36,10 @@ watch: {
 
 ---
 
+- `ListShowcaseCardsListing` not working Showcase modal open without URL change because e.preventDefault on NuxtLink does not work
+
+---
+
 - update `.twitter-like` to `.floating-view`
 - rename `MobileModalWrapper` to `MobileSlideModalWrapper`
 - `collections` to `lists` (as on Strapi)

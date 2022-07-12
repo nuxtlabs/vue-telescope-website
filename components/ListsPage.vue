@@ -1,7 +1,63 @@
 <template>
   <AsideContentTemplate v-if="user">
+    <template #aside-content-aside>
+      <div>
+        <CreateListButton class="mb-2" />
+
+        <!-- <transition-group
+          :css="false"
+          @enter="enterAnimation"
+          @leave="leaveAnimation"
+        >
+          <CollectionListItem
+            v-for="collection in sortedCollections"
+            :key="collection.id"
+            class="px-2"
+            :collection="collection"
+            @close-menu="notWorking"
+          />
+        </transition-group> -->
+      </div>
+    </template>
+
+    <template #aside-content-header>
+      <!-- <MobileCollectionsMenu ref="mobile-menu" /> -->
+      <!-- @open-menu="$refs['mobile-menu'].show = true" -->
+      <CollectionsBreadcrumbs class="ml-4 absolute top-0 -mt-6" />
+    </template>
+
     <template #aside-content-main>
-      <div>fuuuuuuuu{{ lists }}</div>
+      <div>
+        <transition name="slide" mode="out-in">
+          <EmptyCollectionsTour v-if="!lists.length" class="mt-0 -mt-4" />
+
+          <!-- navigate between groups -->
+          <div v-else-if="selectedGroup">
+            <transition name="slide" mode="out-in">
+              <ListShowcaseCardsListing
+                v-if="selectedShowcases.length"
+                :key="selectedGroup.id"
+                :showcases="selectedShowcases"
+              />
+
+              <!-- if no showcases, then show tour -->
+              <EmptyListTour v-else key="empty" :list="selectedGroup" />
+            </transition>
+          </div>
+
+          <!-- direct hit, collection overview; create group tour -->
+          <div v-else>
+            <transition name="slide" mode="out-in">
+              <GroupMain
+                v-if="selectedList"
+                :key="selectedList.id"
+                :groups="selectedList.groups"
+                :collection="selectedList"
+              />
+            </transition>
+          </div>
+        </transition>
+      </div>
     </template>
   </AsideContentTemplate>
   <ListsGreeting v-else />
@@ -12,7 +68,15 @@ import AsideContentTemplate from '@/components/templates/AsideContentTemplate.vu
 
 const user = useStrapiUser()
 
-const { lists, updateGroup, updateRemoteGroup } = useLists()
+const {
+  lists,
+  selectedList,
+  selectedGroup,
+  selectedShowcases,
+  sortedLists,
+  setSelectedList,
+  setSelectedGroup
+} = useLists()
 
 setTimeout(async () => {
   // await createList({ name: 'LIST TWO' })
@@ -27,17 +91,12 @@ setTimeout(async () => {
   // })
 })
 
-// ...mapState({
-//   collections: (state) => state.collections.collections,
-//   selectedCollection: (state) => state.collections.selectedCollection,
-//   selectedGroup: (state) => state.collections.selectedGroup,
-//   selectedShowcases: (state) => {
-//     return [...state.collections.selectedGroup.showcases].sort(
-//       (a, b) => a.position - b.position
-//     )
-//   }
-// }),
-// ...mapGetters({ sortedCollections: 'collections/sortedCollections' })
+if (sortedLists.value[0]) {
+  setSelectedList(sortedLists.value[0])
+}
+if (sortedLists.value[0] && sortedLists.value[0].groups.length) {
+  setSelectedGroup(sortedLists.value[0].groups[0])
+}
 </script>
 
 <style>

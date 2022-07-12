@@ -30,6 +30,14 @@ export default defineNuxtConfig({
     {
       path: '~/components',
       global: true
+    },
+    {
+      path: '~/components/lists',
+      global: true
+    },
+    {
+      path: '~/components/showcase',
+      global: true
     }
   ]
 })

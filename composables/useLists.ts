@@ -1,4 +1,4 @@
-import { useState } from '#imports'
+import { useState, computed } from '#imports'
 
 export const useLists = () => {
   const lists = useState('lists', () => [])
@@ -7,6 +7,21 @@ export const useLists = () => {
 
   const { create, update, delete: _delete } = useStrapi3()
   const client = useStrapiClient()
+
+  const sortedLists = computed(() => {
+    const l = [...lists.value]
+    return l.sort(
+      (a, b) =>
+        a.position - b.position ||
+        new Date(a.created_at) - new Date(b.created_at)
+    )
+  })
+
+  const selectedShowcases = computed(() => {
+    return [...selectedGroup.value.showcases].sort(
+      (a, b) => a.position - b.position
+    )
+  })
 
   function setLists(payload) {
     lists.value = payload
@@ -136,9 +151,7 @@ export const useLists = () => {
       await _delete('lists', list.id)
       deleteList(list)
       // TODO
-      setSelectedList(
-        getters.sortedCollections[0] ? getters.sortedCollections[0] : null
-      )
+      setSelectedList(sortedLists.value[0] ? sortedLists.value[0] : null)
       setSelectedGroup(selectedList.value ? selectedList.value.groups[0] : null)
       return list
     } catch (err) {
@@ -163,7 +176,7 @@ export const useLists = () => {
       setSelectedGroup(newGroup)
       return newGroup
     } catch (err) {
-      // console.log(err)
+      console.log(err)
     }
   }
 
@@ -315,9 +328,18 @@ export const useLists = () => {
             Number(showcases[showcaseIndex - 1].position)) /
           2
       }
-      const updatedShowcase = await this.$strapi.$http.$put(
+      // const updatedShowcase = await this.$strapi.$http.$put(
+      //   `lists/${list.id}/groups/${group.id}/showcases/${showcase.id}`,
+      //   { position }
+      // )
+      const updatedShowcase = await client(
         `lists/${list.id}/groups/${group.id}/showcases/${showcase.id}`,
-        { position }
+        {
+          method: 'PUT',
+          body: {
+            position
+          }
+        }
       )
       updateShowcase({
         showcase: updatedShowcase,
@@ -328,6 +350,7 @@ export const useLists = () => {
   }
 
   async function moveDownRemoteShowcase({ showcase, group, list }) {
+    console.log('moveDownRemoteShowcase')
     try {
       const showcases = [...group.showcases].sort(
         (a, b) => a.position - b.position
@@ -345,22 +368,35 @@ export const useLists = () => {
             Number(showcases[showcaseIndex + 1].position)) /
           2
       }
-      const updatedShowcase = await this.$strapi.$http.$put(
+      // const updatedShowcase = await this.$strapi.$http.$put(
+      //   `lists/${list.id}/groups/${group.id}/showcases/${showcase.id}`,
+      //   { position }
+      // )
+      const updatedShowcase = await client(
         `lists/${list.id}/groups/${group.id}/showcases/${showcase.id}`,
-        { position }
+        {
+          method: 'PUT',
+          body: {
+            position
+          }
+        }
       )
       updateShowcase({
         showcase: updatedShowcase,
         group,
         list
       })
-    } catch (err) {}
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return {
     lists,
     selectedList,
     selectedGroup,
+    selectedShowcases,
+    sortedLists,
     setLists,
     addList,
     updateList,

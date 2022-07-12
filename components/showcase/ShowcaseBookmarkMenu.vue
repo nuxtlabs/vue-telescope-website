@@ -1,0 +1,343 @@
+<template>
+  <div v-click-outside="() => $emit('close')">
+    <div ref="scrim" class="bg-white absolute top-0 left-0 w-full h-full"></div>
+    <!-- <div
+      v-if="!compact"
+      ref="bg"
+      style="opacity: 0"
+      class="absolute top-0 left-0 w-full h-full xl:rounded-xl"
+    ></div> -->
+
+    <transition name="fade">
+      <div
+        v-if="showLists"
+        class="absolute top-0 left-0 w-full h-full overflow-auto cursor-default"
+      >
+        <div
+          v-if="user"
+          class="w-full h-full"
+          :class="compact ? 'p-3' : 'p-8'"
+          @click.stop.prevent
+        >
+          <div v-if="listsWithGroups.length">
+            <!-- <div
+              class="font-bold-body-weight"
+              :class="[
+                compact
+                  ? 'text-base leading-base mb-1'
+                  : 'text-six leading-six mb-4'
+              ]"
+            >
+              Save to:
+            </div> -->
+
+            <div class="label">
+              <div
+                :class="[
+                  compact
+                    ? 'text-sm leading-sm mb-1'
+                    : 'text-eight leading-eight mb-2'
+                ]"
+                class="flex items-center font-display-weight text-primary-500 uppercase"
+              >
+                <SaveIcon class="h-5 mr-2 opacity-50" />Save
+              </div>
+            </div>
+
+            <ul class="ml-1">
+              <li
+                v-for="list in listsWithGroups"
+                :key="list.id"
+                class="root w-full flex flex-col mb-2"
+              >
+                <div class="flex items-center mb-1">
+                  <OpenedFolderIcon
+                    class="mr-2 mt-1"
+                    :class="[
+                      compact ? 'w-4 h-4' : 'w-5 h-5',
+                      isBookmarkedList(list) && 'text-primary-500'
+                    ]"
+                  />
+                  <span
+                    class="font-bold-body-weight"
+                    :class="[
+                      isBookmarkedList(list) && 'text-primary-500',
+                      compact ? '' : 'text-seven leading-seven'
+                    ]"
+                  >
+                    {{ list.name }}
+                  </span>
+                </div>
+                <ul>
+                  <li
+                    v-for="(group, i) in list.groups"
+                    :key="group.id"
+                    class="flex items-center"
+                  >
+                    <!-- <span>
+                {{ list.groups.length === i + 1 ? 'last' : 'regular' }}
+              </span> -->
+                    <span
+                      class="inline-flex text-grey-200 mr-2"
+                      :class="[compact ? 'w-4 h-5' : 'w-6 h-6']"
+                    >
+                      <svg
+                        v-if="list.groups.length === i + 1"
+                        preserveAspectRatio="none"
+                        class="w-full h-full"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M12 0V12H24"
+                          stroke="currentColor"
+                          vector-effect="non-scaling-stroke"
+                        />
+                      </svg>
+                      <svg
+                        v-else
+                        preserveAspectRatio="none"
+                        class="w-full h-full"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M12 0V12M12 12H24M12 12V24"
+                          stroke="currentColor"
+                          vector-effect="non-scaling-stroke"
+                        />
+                      </svg>
+                    </span>
+                    <button
+                      class="focus:outline-none text-left text-base"
+                      :class="[
+                        isBookmarked(group)
+                          ? 'text-primary-500 has-hover:hover:text-primary-200'
+                          : 'has-hover:hover:text-grey-400',
+                        compact
+                          ? 'text-sm leading-sm'
+                          : 'text-base leading-base'
+                      ]"
+                      @click.stop.prevent="onBookmarkClicked(list, group)"
+                    >
+                      <span>{{ group.name }}</span>
+                    </button>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+
+          <div
+            v-else
+            class="w-full h-full p-4 flex items-center justify-center"
+          >
+            <div
+              :class="[
+                compact
+                  ? 'text-eight leading-eight'
+                  : 'text-seven leading-seven md:text-six md:leading-six'
+              ]"
+              class="text-center"
+            >
+              To save website into List you need to
+              <NuxtLink to="/lists" class="text-primary-500">
+                create a List
+              </NuxtLink>
+            </div>
+          </div>
+        </div>
+
+        <div
+          v-else
+          class="w-full h-full p-3 flex flex-col items-center justify-center"
+          @click.stop.prevent
+        >
+          <div
+            class="text-center"
+            :class="[
+              compact
+                ? 'text-sm leading-sm mb-2'
+                : 'text-seven leading-seven sm:text-five sm:leading-five mb-4'
+            ]"
+          >
+            Register with one click <br />to save websites into Lists
+          </div>
+          <GithubLoginButton
+            :size="compact ? 'small' : 'base'"
+            redirect="/lists"
+            text="Login"
+          />
+        </div>
+      </div>
+    </transition>
+  </div>
+</template>
+
+<script>
+import OpenedFolderIcon from '@/assets/icons/opened-folder.svg'
+import SaveIcon from '@/assets/icons/save.svg'
+// import UnorderedListIcon from '@/assets/icons/unordered-list.svg'
+
+export default {
+  setup() {
+    const { lists, bookmarkRemoteShowcase, unbookmarkRemoteShowcase } =
+      useLists()
+    const user = useStrapiUser()
+    return { lists, bookmarkRemoteShowcase, unbookmarkRemoteShowcase, user }
+  },
+  emits: ['close'],
+  components: {
+    OpenedFolderIcon,
+    SaveIcon
+    // UnorderedListIcon
+  },
+  props: {
+    showcase: {
+      type: Object,
+      default: null
+    },
+    compact: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data() {
+    return {
+      showLists: false
+    }
+  },
+  computed: {
+    listsWithGroups() {
+      return this.lists.filter((list) => list.groups.length)
+    }
+  },
+  mounted() {
+    setTimeout(() => {
+      this.showLists = true
+    }, 200)
+
+    // if (!this.compact) {
+    //   const bg = this.$refs.bg
+    //   this.$gsap.fromTo(
+    //     bg,
+    //     {
+    //       scale: 0.95,
+    //       opacity: 0
+    //     },
+    //     {
+    //       scale: 1,
+    //       opacity: 1,
+    //       delay: 0.2,
+    //       duration: 0.3,
+    //       clearProps: true
+    //       // ease: 'power4.inOut'
+    //     }
+    //   )
+    // }
+
+    const scrim = this.$refs.scrim
+    this.$gsap.set(scrim, {
+      transformOrigin: 'top'
+    })
+    this.$gsap.fromTo(
+      scrim,
+      {
+        scaleY: 0
+      },
+      {
+        scaleY: 1,
+        duration: 0.4,
+        clearProps: true,
+        ease: 'power4.inOut'
+        // onComplete: () => {
+
+        // }
+      }
+    )
+  },
+  methods: {
+    isBookmarkedList(list) {
+      return Boolean(
+        list.groups.map((g) => this.isBookmarked(g)).filter(Boolean).length
+      )
+    },
+    isBookmarked(group) {
+      return group.showcases.find((s) => s.id === this.showcase.id)
+    },
+    onBookmarkClicked(list, group) {
+      group.showcases?.find((s) => s.id === this.showcase.id)
+        ? this.unbookmark(list, group)
+        : this.bookmark(list, group)
+    },
+    async bookmark(list, group) {
+      try {
+        await this.bookmarkRemoteShowcase({
+          showcase: this.showcase,
+          group,
+          list
+        })
+      } catch (e) {}
+    },
+    async unbookmark(list, group) {
+      try {
+        await this.unbookmarkRemoteShowcase({
+          showcase: this.showcase,
+          group,
+          list
+        })
+      } catch (e) {}
+    }
+  }
+}
+</script>
+
+<style lang="postcss" scoped>
+/* .root {
+  & ul {
+    margin-left: 1.5rem;
+    & li {
+      position: relative;
+    }
+    & li:before {
+      position: absolute;
+      left: -1rem;
+      top: 0%;
+      content: '';
+      display: block;
+      border-left: 1px solid theme('colors.grey.100');
+      height: 50%;
+      border-bottom: 1px solid theme('colors.grey.100');
+      width: 10px;
+    }
+    & li:after {
+      position: absolute;
+      left: -1rem;
+      bottom: -7px;
+      content: '';
+      display: block;
+      border-left: 1px solid theme('colors.grey.100');
+      height: 100%;
+    }
+    & li:last-child:after {
+      display: none;
+    }
+  }
+} */
+</style>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 200ms
+      theme('transitionTimingFunction.ease-in-out-material-sharp'),
+    transform 200ms theme('transitionTimingFunction.ease-in-out-material-sharp');
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(-5px);
+}
+</style>

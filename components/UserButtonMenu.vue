@@ -16,11 +16,11 @@
     <ul class="text-base p-2">
       <li class="flex">
         <NuxtLink
-          to="/collections"
+          to="/lists"
           class="text-left font-bold-body-weight w-full px-2 py-1 has-hover:hover:bg-grey-100 rounded"
           @click.native="closeMenu"
         >
-          Collections
+          Lists
         </NuxtLink>
       </li>
       <li class="flex">

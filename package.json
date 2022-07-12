@@ -20,6 +20,7 @@
     "gsap": "file:assets/js/gsap-bonus.tgz",
     "nuxt": "npm:nuxt3@latest",
     "nuxt-svgo": "^1.0.0",
-    "qs": "^6.11.0"
+    "qs": "^6.11.0",
+    "to-px": "^1.1.0"
   }
 }

@@ -161,7 +161,6 @@ async function makeChoice(choice) {
   if (choice) {
     // if user agrees on Terms
     localStorage.setItem('privacyAware', 'true')
-    console.log('sukaaaa', privacyAwarenessCb)
     await privacyAwarenessCb.value()
     setPrivacyAwarenessCb(null)
   } else {

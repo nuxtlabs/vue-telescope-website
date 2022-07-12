@@ -6,7 +6,7 @@
   >
     <slot :popper-instance="popperInstance"></slot>
 
-    <div ref="arrowEl" class="arrow w-4 h-4 relative">
+    <div v-if="arrow" ref="arrowEl" class="arrow w-4 h-4 relative">
       <div class="arrow-icon w-full h-full relative">
         <svg
           class="w-full absolute top-0 left-0 text-grey-300"
