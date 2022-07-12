@@ -5,9 +5,6 @@
       :fetched="activeShowcase ? true : false"
       @close="activeShowcase = false"
     >
-      <!-- <pre v-if="activeShowcase">
-              {{ activeShowcase }}
-            </pre> -->
       <ShowcaseSection :website="activeShowcase" class="twitter-like mb-12" />
       <CtaSection />
     </FloatingViewModal>
@@ -26,31 +23,20 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    showcases: {
-      type: Array,
-      default: null
-    }
-  },
-  data() {
-    return {
-      activeShowcase: null
-    }
-  },
-  methods: {
-    async openLinkHandler(showcase) {
-      console.log('openLinkHandler')
-      // // fetch full showcase data
-      // const fullShowcase = await this.$strapi.findOne(
-      //   'showcases',
-      //   showcase.slug
-      // )
-      // // proceed
-      // this.$store.commit('SET_MODAL', true)
-      // this.activeShowcase = fullShowcase
-    }
+<script setup lang="ts">
+defineProps({
+  showcases: {
+    type: Array,
+    default: null
   }
+})
+
+const { findOne } = useStrapi3()
+
+const activeShowcase = ref(null)
+
+async function openLinkHandler(showcase) {
+  const fullShowcase = await findOne('showcases', showcase.slug)
+  activeShowcase.value = fullShowcase
 }
 </script>

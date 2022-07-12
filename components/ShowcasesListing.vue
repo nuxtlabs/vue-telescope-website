@@ -12,6 +12,7 @@
 </template>
 
 <script setup lang="ts">
+const router = useRouter()
 defineProps({
   showcases: {
     type: Array,
@@ -20,8 +21,6 @@ defineProps({
 })
 
 function openLinkHandler(showcase) {
-  // TODO: seems to work without it
-  // this.$store.commit('SET_MODAL', true)
-  // this.$router.push(`/explore/${showcase.slug}`)
+  router.push(`/explore/${showcase.slug}`)
 }
 </script>

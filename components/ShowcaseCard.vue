@@ -1,7 +1,8 @@
 <template>
   <div class="p-2">
     <NuxtLink
-      event
+      custom
+      v-slot="{ navigate, href }"
       class="group block hover-effect relative p-3 cursor-pointer"
       :to="{
         name: 'explore-website',
@@ -9,9 +10,9 @@
           website: showcase.slug
         }
       }"
-      @click.native.prevent="open"
+      @click.native="emit('open-link')"
     >
-      <div class="rounded-lg overflow-hidden mb-4 relative">
+      <div @click.prevent class="rounded-lg overflow-hidden mb-4 relative">
         <ResponsiveCloudinaryImage
           :url="showcase.screenshotUrl"
           ratio="4:3"
@@ -54,6 +55,7 @@
           </div>
         </div>
       </div>
+      <!-- </a> -->
     </NuxtLink>
   </div>
 </template>
@@ -71,13 +73,6 @@ defineProps({
 })
 
 const emit = defineEmits(['open-link'])
-
-function open(e) {
-  // TODO: not working
-  e.preventDefault()
-  // TODO: seems to work without it
-  emit('open-link')
-}
 </script>
 
 <style scoped>
