@@ -2,14 +2,14 @@
   <div class="h-10 flex items-center mx-2 relative">
     <div class="h-full flex flex-1 items-center relative mr-1 truncate">
       <transition :css="false" @enter="enter" @leave="leave">
-        <div v-if="creatingCollection" class="w-full h-full absolute z-10">
+        <div v-if="creatingList" class="w-full h-full absolute z-10">
           <AppAutosizeTextarea
-            ref="create-collection-tour"
+            ref="create-list-tour"
             v-model="name"
-            v-click-outside="() => (creatingCollection = false)"
+            v-click-outside="() => (creatingList = false)"
             placeholder="Name Your List"
             class="rounded-2lg py-2 px-4 text-base leading-base font-bold-body-weight placeholder-grey-500"
-            @submit="createCollection"
+            @submit="createList"
             @keydown.esc.native="clearActions"
             @click.stop.native
           />
@@ -18,7 +18,7 @@
           v-else
           ref="create-button"
           class="group focus:outline-none w-full h-10 flex items-center py-1 px-4 text-base leading-base font-bold-body-weight bg-primary-50 border-2 border-transparent hover:border-primary-500 rounded-2lg text-primary-500 transition-colors duration-200 truncate"
-          @click="initCollectionCreation"
+          @click="initListCreation"
         >
           <PlusIcon
             class="w-4 h-4 mr-2 opacity-100 has-hover:group-hover:opacity-100"
@@ -43,10 +43,10 @@
 
     <div class="w-10 h-10">
       <button
-        v-if="creatingCollection && name"
+        v-if="creatingList && name"
         title="Save"
         class="focus:outline-none border-2 border-transparent bg-grey-50 rounded-lg p-2"
-        @click.stop="createCollection"
+        @click.stop="createList"
       >
         <AppLoader
           v-if="loading"
@@ -76,21 +76,15 @@ export default {
     SaveIcon,
     XmarkIcon
   },
-  // props: {
-  //   collection: {
-  //     type: Object,
-  //     default: null
-  //   }
-  // },
   data() {
     return {
       name: '',
       loading: false,
-      creatingCollection: false
+      creatingList: false
     }
   },
   watch: {
-    creatingCollection(value) {
+    creatingList(value) {
       if (!value) this.name = ''
     }
   },
@@ -99,40 +93,36 @@ export default {
       this.name = ''
       this.$emit('cleanup')
     },
-    initCollectionCreation() {
-      // this.$store.commit('collections/setSelectedCollection', this.collection)
-      this.creatingCollection = true
+    initListCreation() {
+      this.creatingList = true
       this.$nextTick(() => {
-        this.$refs['create-collection-tour'].$el.focus()
+        this.$refs['create-list-tour'].$el.focus()
       })
     },
     clearInput() {
       this.name = ''
-      this.$refs['create-collection-tour'].$el.focus()
+      this.$refs['create-list-tour'].$el.focus()
     },
-    async createCollection() {
-      console.log('createCollection')
+    async createList() {
+      console.log('createList')
       if (!this.name || this.loading) return
       try {
         this.loading = true
-        // await this.$store.dispatch('collections/createCollection', {
-        //   name: this.name
-        // })
         await this.createRemoteList({
           name: this.name
         })
         this.name = ''
         this.clearActions()
         this.loading = false
-        this.creatingCollection = false
+        this.creatingList = false
       } catch (e) {
         this.loading = false
         // TODO: display toast with error
       }
     },
     enter(el, done) {
-      this.$refs['create-collection-tour'] &&
-        this.$refs['create-collection-tour'].$el.focus()
+      this.$refs['create-list-tour'] &&
+        this.$refs['create-list-tour'].$el.focus()
       this.$nextTick(() => {
         this.$gsap.set(el, { position: 'absolute', transformOrigin: 'left' })
         this.$gsap.from(el, {
@@ -144,8 +134,8 @@ export default {
           ease: 'power1.out',
           onComplete: () => {
             this.$gsap.set(el, { position: 'relative' })
-            this.$refs['create-collection-tour'] &&
-              this.$refs['create-collection-tour'].$el.focus()
+            this.$refs['create-list-tour'] &&
+              this.$refs['create-list-tour'].$el.focus()
           }
         })
       })

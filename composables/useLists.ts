@@ -299,10 +299,6 @@ export const useLists = () => {
       ...group,
       showcases: group.showcases.filter((it) => it.id !== showcase.id)
     }
-    // commit('updateGroup', {
-    //   group: updatedGroup,
-    //   collection
-    // })
     updateGroup({
       group: updatedGroup,
       list

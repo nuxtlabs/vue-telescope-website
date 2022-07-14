@@ -1,7 +1,7 @@
 <template>
   <div class="el relative flex flex-col items-center justify-center px-4">
     <h2 class="text-center text-four leading-four font-bold-body-weight mb-2">
-      You don't have any Lists {{ newCollectionName }}
+      You don't have any Lists
     </h2>
     <p class="text-center text-seven leading-seven mb-8">
       Create a List to start saving websites into Groups
@@ -10,10 +10,10 @@
     <div class="relative w-full h-16 mb-24 flex items-center justify-center">
       <transition :css="false" @enter="enter" @leave="leave">
         <button
-          v-if="!creatingCollection"
+          v-if="!creatingList"
           ref="create-button"
           class="absolute top-0 focus:outline-none text-seven leading-seven flex items-center py-4 px-8 rounded-xl border-2 border-transparent has-hover:hover:border-primary-500 bg-primary-50 text-primary-500 font-bold-body-weight transition-colors duration-200 truncate"
-          @click="initCollectionCreation"
+          @click="initListCreation"
         >
           <div class="mr-2">
             <PlusIcon class="w-5 h-5" style="stroke-width: 2.5px" />
@@ -27,24 +27,24 @@
           :style="{ maxWidth: maxWidthStyles + 'px' }"
         >
           <AppAutosizeTextarea
-            v-if="creatingCollection"
-            ref="create-collection-tour"
-            v-model="newCollectionName"
-            v-click-outside="() => (creatingCollection = false)"
-            placeholder="Type Collection name"
+            v-if="creatingList"
+            ref="create-list-tour"
+            v-model="newListName"
+            v-click-outside="() => (creatingList = false)"
+            placeholder="Type List name"
             class="w-full text-seven leading-seven font-bold-body-weight flex py-4 px-8 rounded-xl border-2 border-transparent text-grey-900 transition-colors duration-200 placeholder-grey-400"
-            @submit="createCollection"
+            @submit="createList"
             @keydown.esc.native="clearActions"
             @click.stop.native
           />
           <div
-            v-if="creatingCollection && newCollectionName"
+            v-if="creatingList && newListName"
             class="absolute top-0 right-0 p-3"
           >
             <button
               title="Save"
               class="focus:outline-none bg-grey-50 border-2 border-grey-200 rounded-3lg p-2 has-hover:hover:text-grey-700"
-              @click.stop="createCollection"
+              @click.stop="createList"
             >
               <SaveIcon class="w-5 h-5" />
             </button>
@@ -71,44 +71,39 @@ export default {
   },
   data() {
     return {
-      newCollectionName: '',
-      creatingCollection: false,
+      newListName: '',
+      creatingList: false,
       maxWidthStyles: ''
     }
   },
   methods: {
     clearActions() {
-      this.newCollectionName = ''
+      this.newListName = ''
       this.$emit('cleanup')
     },
-    initCollectionCreation() {
+    initListCreation() {
       this.maxWidthStyles =
         this.$refs['create-button'].getBoundingClientRect().width
-      // this.$store.commit('collections/setSelectedCollection', this.collection)
-      this.creatingCollection = true
+      this.creatingList = true
       this.$nextTick(() => {
-        this.$refs['create-collection-tour'].$el.focus()
+        this.$refs['create-list-tour'].$el.focus()
       })
     },
-    async createCollection() {
+    async createList() {
       try {
-        // console.log('createCollection', createList)
-        if (!this.newCollectionName) return
-        // await this.$store.dispatch('collections/createCollection', {
-        //   name: this.newCollectionName
-        // })
+        if (!this.newListName) return
         await this.createRemoteList({
-          name: this.newCollectionName
+          name: this.newListName
         })
         this.clearActions()
-        this.creatingCollection = false
+        this.creatingList = false
       } catch (e) {
         console.log(e)
       }
     },
     enter(el, done) {
-      this.$refs['create-collection-tour'] &&
-        this.$refs['create-collection-tour'].$el.focus()
+      this.$refs['create-list-tour'] &&
+        this.$refs['create-list-tour'].$el.focus()
       this.$nextTick(() => {
         this.$gsap.set(el, { position: 'absolute', transformOrigin: 'center' })
         this.$gsap.from(el, {
@@ -123,8 +118,8 @@ export default {
               // position: 'relative',
               maxWidth: this.maxWidthStyles + 'px'
             })
-            this.$refs['create-collection-tour'] &&
-              this.$refs['create-collection-tour'].$el.focus()
+            this.$refs['create-list-tour'] &&
+              this.$refs['create-list-tour'].$el.focus()
           }
         })
       })

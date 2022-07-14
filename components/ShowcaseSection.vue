@@ -47,8 +47,7 @@
               class=""
             />
             <ClientOnly>
-              <!-- TODO -->
-              <!-- <BookmarkShowcase :showcase="website" /> -->
+              <ShowcaseBookmark :showcase="website" />
             </ClientOnly>
           </div>
         </div>

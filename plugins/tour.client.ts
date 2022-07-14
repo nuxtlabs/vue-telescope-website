@@ -1,15 +1,15 @@
 import { defineNuxtPlugin, ref, useState } from '#imports'
 
 export default defineNuxtPlugin(() => {
-  const collectionsFeature = useState('collectionsFeature', () => false)
-  collectionsFeature.value = Boolean(
-    window.localStorage.getItem('collectionsFeatureSeen') === 'true'
+  const listsFeature = useState('listsFeature', () => false)
+  listsFeature.value = Boolean(
+    window.localStorage.getItem('listsFeatureSeen') === 'true'
   )
 
   return {
     provide: {
       tour: {
-        collectionsFeature
+        listsFeature
       }
     }
   }

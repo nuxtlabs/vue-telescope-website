@@ -82,7 +82,7 @@ defineExpose({
 
 const showTour = computed(() => {
   return process.client
-    ? !user.value && showLocal.value && !$tour.collectionsFeature.value
+    ? !user.value && showLocal.value && !$tour.listsFeature.value
     : false
 })
 </script>

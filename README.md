@@ -36,7 +36,7 @@ watch: {
 
 ---
 
-- `ListShowcaseCardsListing` not working Showcase modal open without URL change because e.preventDefault on NuxtLink does not work
+- replace `prismjs` for `ShareCollectionModal`
 
 ---
 
@@ -49,3 +49,4 @@ watch: {
 - blocked by CORS issues
 
 - add fathom
+- check all TODO's

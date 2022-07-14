@@ -4,55 +4,53 @@
       <div>
         <CreateListButton class="mb-2" />
 
-        <!-- <transition-group
-          :css="false"
-          @enter="enterAnimation"
-          @leave="leaveAnimation"
-        >
-          <CollectionListItem
-            v-for="collection in sortedCollections"
-            :key="collection.id"
-            class="px-2"
-            :collection="collection"
-            @close-menu="notWorking"
-          />
-        </transition-group> -->
+        <!-- ListsNav -->
+        <span>
+          <transition-group
+            :css="false"
+            @enter="enterAnimation"
+            @leave="leaveAnimation"
+          >
+            <ListNavItem
+              v-for="list in sortedLists"
+              :key="list.id"
+              class="px-2"
+              :list="list"
+              @close-menu="notWorking"
+            />
+          </transition-group>
+        </span>
       </div>
     </template>
 
     <template #aside-content-header>
-      <!-- <MobileCollectionsMenu ref="mobile-menu" /> -->
-      <!-- @open-menu="$refs['mobile-menu'].show = true" -->
-      <CollectionsBreadcrumbs class="ml-4 absolute top-0 -mt-6" />
+      <MobileListsNav />
+      <ListsBreadcrumbs class="ml-4 absolute top-0 -mt-6" />
     </template>
 
     <template #aside-content-main>
       <div>
         <transition name="slide" mode="out-in">
-          <EmptyCollectionsTour v-if="!lists.length" class="mt-0 -mt-4" />
+          <NoListTour v-if="!lists.length" class="mt-0 -mt-4" />
 
-          <!-- navigate between groups -->
           <div v-else-if="selectedGroup">
             <transition name="slide" mode="out-in">
-              <ListShowcaseCardsListing
+              <ListShowcaseItem
                 v-if="selectedShowcases.length"
                 :key="selectedGroup.id"
                 :showcases="selectedShowcases"
               />
 
-              <!-- if no showcases, then show tour -->
-              <EmptyListTour v-else key="empty" :list="selectedGroup" />
+              <NoShowcaseTour v-else key="empty" :list="selectedGroup" />
             </transition>
           </div>
 
-          <!-- direct hit, collection overview; create group tour -->
           <div v-else>
             <transition name="slide" mode="out-in">
-              <GroupMain
-                v-if="selectedList"
-                :key="selectedList.id"
-                :groups="selectedList.groups"
-                :collection="selectedList"
+              <NoGroupTour
+                v-if="!selectedList.groups || !selectedList.groups.length"
+                class="-mt-4"
+                :list="selectedList"
               />
             </transition>
           </div>
@@ -67,6 +65,7 @@
 import AsideContentTemplate from '@/components/templates/AsideContentTemplate.vue'
 
 const user = useStrapiUser()
+const { $gsap } = useNuxtApp()
 
 const {
   lists,
@@ -78,24 +77,44 @@ const {
   setSelectedGroup
 } = useLists()
 
-setTimeout(async () => {
-  // await createList({ name: 'LIST TWO' })
-  // await createRemoteGroup({
-  //   name: 'CHECK REMOTE GROUP CREATE',
-  //   list: { id: 1125 }
-  // })
-  // await updateRemoteGroup({
-  //   group: { id: 959 },
-  //   name: 'UPDATED GROUP',
-  //   list: { id: 1125 }
-  // })
-})
-
 if (sortedLists.value[0]) {
   setSelectedList(sortedLists.value[0])
 }
 if (sortedLists.value[0] && sortedLists.value[0].groups.length) {
   setSelectedGroup(sortedLists.value[0].groups[0])
+}
+
+function enterAnimation(el, done) {
+  $gsap.fromTo(
+    el,
+    {
+      opacity: 0,
+      y: -10
+    },
+    {
+      opacity: 1,
+      y: 0,
+      clearProps: true,
+      duration: 0.25,
+      onComplete: done
+    }
+  )
+}
+function leaveAnimation(el, done) {
+  // this.$gsap.set(el, {
+  //   transformOrigin: 'left'
+  // })
+  $gsap.to(el, {
+    height: 0,
+    // y: 10,
+    opacity: 0,
+    duration: 0.25,
+    onComplete: done
+  })
+}
+
+function notWorking() {
+  console.log('NOT WORKING')
 }
 </script>
 

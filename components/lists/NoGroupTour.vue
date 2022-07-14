@@ -24,7 +24,7 @@
         <div v-else class="max-w-24rem absolute top-0 w-full">
           <AppAutosizeTextarea
             v-if="creatingList"
-            ref="create-list-tour"
+            ref="create-group-tour"
             v-model="newListName"
             v-click-outside="() => (creatingList = false)"
             placeholder="Type List name"
@@ -83,20 +83,15 @@ export default {
       this.$emit('cleanup')
     },
     initGroupCreation() {
-      // this.$store.commit('collections/setSelectedCollection', this.list)
       this.setSelectedList(this.list)
       this.creatingList = true
       this.$nextTick(() => {
-        this.$refs['create-list-tour'].$el.focus()
+        this.$refs['create-group-tour'].$el.focus()
       })
     },
     async createGroupMethod() {
       try {
         if (!this.newListName) return
-        // await this.$store.dispatch('collections/createGroup', {
-        //   name: this.newListName,
-        //   collection: this.list
-        // })
         await this.createRemoteGroup({
           name: this.newListName,
           list: this.list
@@ -108,8 +103,8 @@ export default {
       }
     },
     enter(el, done) {
-      this.$refs['create-collection-tour'] &&
-        this.$refs['create-collection-tour'].$el.focus()
+      this.$refs['create-group-tour'] &&
+        this.$refs['create-group-tour'].$el.focus()
       this.$nextTick(() => {
         this.$gsap.set(el, { position: 'absolute', transformOrigin: 'center' })
         this.$gsap.from(el, {
@@ -121,8 +116,8 @@ export default {
           ease: 'power1.out',
           onComplete: () => {
             this.$gsap.set(el, { position: 'absolute' })
-            this.$refs['create-collection-tour'] &&
-              this.$refs['create-collection-tour'].$el.focus()
+            this.$refs['create-group-tour'] &&
+              this.$refs['create-group-tour'].$el.focus()
           }
         })
       })

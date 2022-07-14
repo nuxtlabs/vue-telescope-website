@@ -73,7 +73,7 @@
         >
           <div class="p-4">
             <div class="mb-4 font-bold-body-weight">
-              Save websites to your own Collections.
+              Save websites to your own Lists.
             </div>
             <div class="flex items-center justify-end">
               <button
@@ -82,7 +82,7 @@
               >
                 Not interested
               </button>
-              <GithubLoginButton size="small" redirect="/collections" />
+              <GithubLoginButton size="small" redirect="/lists" />
             </div>
           </div>
         </Popper>
@@ -90,10 +90,6 @@
     </div>
   </div>
 </template>
-
-<!-- <script setup>
-
-</script> -->
 
 <script>
 export default {
@@ -137,7 +133,7 @@ export default {
       }, 16)
     },
     featureSeenHandler() {
-      window.localStorage.setItem('collectionsFeatureSeen', true)
+      window.localStorage.setItem('listsFeatureSeen', true)
       this.closeTour()
     }
   }
