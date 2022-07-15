@@ -7,7 +7,7 @@
       <div>
         <span>Endpoint to request:</span>
         <AppInput
-          ref="request-data"
+          ref="endpointEl"
           :value="listUrl"
           class="mt-2 cursor-pointer"
           readonly
@@ -28,39 +28,37 @@
   </FloatingViewModal>
 </template>
 
-<script>
-export default {
-  emits: ['close'],
-  props: {
-    list: {
-      type: Object,
-      default: null
-    }
-  },
-  computed: {
-    listUrl() {
-      return `${this.$config.strapiURL}/lists/${this.list.id}`
-    },
-    code() {
-      return `await fetch('${this.listUrl}').then(response => response.json())`
-    }
-  },
-  methods: {
-    selectRequest() {
-      // this.$refs['request-data'].$el.select()
-      const el = this.$refs['request-data'].$el
-      this.selectText(el)
-    },
-    // selectResponse() {
-    //   const el = this.$refs['response-data']
-    //   this.selectText(el)
-    // },
-    selectText(el) {
-      const range = document.createRange()
-      range.selectNode(el)
-      window.getSelection().removeAllRanges()
-      window.getSelection().addRange(range)
-    }
+<script setup lang="ts">
+const { $config } = useNuxtApp()
+
+defineEmits(['close'])
+
+const endpointEl = ref(null)
+
+const props = defineProps({
+  list: {
+    type: Object,
+    default: null
   }
+})
+
+const listUrl = computed(() => {
+  return `${$config.strapiURL}/lists/${props.list.id}`
+})
+
+const code = computed(() => {
+  return `await fetch('${listUrl.value}').then(response => response.json())`
+})
+
+function selectRequest() {
+  const el = endpointEl.value.$el
+  selectText(el)
+}
+
+function selectText(el) {
+  const range = document.createRange()
+  range.selectNode(el)
+  window.getSelection().removeAllRanges()
+  window.getSelection().addRange(range)
 }
 </script>

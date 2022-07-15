@@ -28,7 +28,7 @@
         />
         <button
           v-if="newGroupName"
-          class="focus:outline-none absolute top-0 right-0 z-10 p-1 m-1 bg-grey-100 rounded-md"
+          class="focus:outline-none absolute top-0 right-0 z-10 p-1 m-1 bg-grey-100 bg-opacity-80 rounded-md"
           @click="clearInput"
         >
           <XmarkIcon class="w-4 h-4" />

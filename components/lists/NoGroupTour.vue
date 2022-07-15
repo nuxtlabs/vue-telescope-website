@@ -24,7 +24,7 @@
         <div v-else class="max-w-24rem absolute top-0 w-full">
           <AppAutosizeTextarea
             v-if="creatingList"
-            ref="create-group-tour"
+            ref="inputEl"
             v-model="newListName"
             v-click-outside="() => (creatingList = false)"
             placeholder="Type List name"
@@ -51,91 +51,84 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import PlusIcon from '@/assets/icons/plus-circle.svg'
 import SaveIcon from '@/assets/icons/save.svg'
 
-export default {
-  emits: ['cleanup'],
-  setup() {
-    const { setSelectedList, createRemoteGroup } = useLists()
-    return { setSelectedList, createRemoteGroup }
-  },
-  components: {
-    PlusIcon,
-    SaveIcon
-  },
-  props: {
-    list: {
-      type: Object,
-      default: null
-    }
-  },
-  data() {
-    return {
-      newListName: '',
-      creatingList: false
-    }
-  },
-  methods: {
-    clearActions() {
-      this.newListName = ''
-      this.$emit('cleanup')
-    },
-    initGroupCreation() {
-      this.setSelectedList(this.list)
-      this.creatingList = true
-      this.$nextTick(() => {
-        this.$refs['create-group-tour'].$el.focus()
-      })
-    },
-    async createGroupMethod() {
-      try {
-        if (!this.newListName) return
-        await this.createRemoteGroup({
-          name: this.newListName,
-          list: this.list
-        })
-        this.clearActions()
-        this.creatingList = false
-      } catch (e) {
-        console.log(e)
-      }
-    },
-    enter(el, done) {
-      this.$refs['create-group-tour'] &&
-        this.$refs['create-group-tour'].$el.focus()
-      this.$nextTick(() => {
-        this.$gsap.set(el, { position: 'absolute', transformOrigin: 'center' })
-        this.$gsap.from(el, {
-          scale: 0.9,
-          autoAlpha: 0,
-          clearProps: true,
-          // y: -5,
-          duration: 0.25,
-          ease: 'power1.out',
-          onComplete: () => {
-            this.$gsap.set(el, { position: 'absolute' })
-            this.$refs['create-group-tour'] &&
-              this.$refs['create-group-tour'].$el.focus()
-          }
-        })
-      })
-    },
-    leave(el, done) {
-      this.$gsap.set(el, { transformOrigin: 'center' })
-      this.$gsap.to(el, {
-        // position: 'absolute',
-        scale: 0.9,
-        autoAlpha: 0,
-        // y: -5,
-        clearProps: true,
-        duration: 0.25,
-        ease: 'power1.out',
-        onComplete: done
-      })
-    }
+const inputEl = ref(null)
+
+const newListName = ref('')
+const creatingList = ref(false)
+
+const emit = defineEmits(['cleanup'])
+
+const { setSelectedList, createRemoteGroup } = useLists()
+const { $gsap } = useNuxtApp()
+
+const props = defineProps({
+  list: {
+    type: Object,
+    default: null
   }
+})
+
+function clearActions() {
+  newListName.value = ''
+  emit('cleanup')
+}
+
+function initGroupCreation() {
+  setSelectedList(props.list)
+  creatingList.value = true
+  nextTick(() => {
+    inputEl.value.$el.focus()
+  })
+}
+
+async function createGroupMethod() {
+  try {
+    if (!newListName.value) return
+    await createRemoteGroup({
+      name: newListName.value,
+      list: props.list
+    })
+    clearActions()
+    creatingList.value = false
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+function enter(el, done) {
+  inputEl.value && inputEl.value.$el.focus()
+  nextTick(() => {
+    $gsap.set(el, { position: 'absolute', transformOrigin: 'center' })
+    $gsap.from(el, {
+      scale: 0.9,
+      autoAlpha: 0,
+      clearProps: true,
+      // y: -5,
+      duration: 0.25,
+      ease: 'power1.out',
+      onComplete: () => {
+        $gsap.set(el, { position: 'absolute' })
+        inputEl.value && inputEl.value.$el.focus()
+      }
+    })
+  })
+}
+function leave(el, done) {
+  $gsap.set(el, { transformOrigin: 'center' })
+  $gsap.to(el, {
+    // position: 'absolute',
+    scale: 0.9,
+    autoAlpha: 0,
+    // y: -5,
+    clearProps: true,
+    duration: 0.25,
+    ease: 'power1.out',
+    onComplete: done
+  })
 }
 </script>
 

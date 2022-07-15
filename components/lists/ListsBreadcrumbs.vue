@@ -29,20 +29,12 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import FolderIcon from '@/assets/icons/folder.svg'
 import ChevronRightIcon from '@/assets/icons/chevron-right.svg'
 
-export default {
-  setup() {
-    const { selectedList, selectedGroup } = useLists()
-    const { isMobile } = useUserAgent()
-    return { selectedList, selectedGroup, isMobile }
-  },
-  emits: ['open-menu'],
-  components: {
-    FolderIcon,
-    ChevronRightIcon
-  }
-}
+const { selectedList, selectedGroup } = useLists()
+const { isMobile } = useUserAgent()
+
+defineEmits(['open-menu'])
 </script>

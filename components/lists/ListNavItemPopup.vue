@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col items-start">
-    <ul ref="menu">
+    <ul ref="menuEl">
       <li class="py-2px">
         <button
           title="Share"
@@ -41,41 +41,35 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import ShareIcon from '@/assets/icons/share.svg'
 import EditIcon from '@/assets/icons/edit.svg'
 import DeleteIcon from '@/assets/icons/trash.svg'
 
-export default {
-  emits: ['share', 'rename', 'delete'],
-  components: {
-    ShareIcon,
-    EditIcon,
-    DeleteIcon
-  },
-  data() {
-    return {
-      confirmedDeletion: false,
-      deleting: false
+defineEmits(['share', 'rename', 'delete'])
+
+const { $gsap } = useNuxtApp()
+
+const deleting = false
+
+const menuEl = ref(null)
+
+onMounted(() => {
+  $gsap.fromTo(
+    menuEl.value.children,
+    {
+      opacity: 0,
+      scale: 0.8,
+      x: -5
+    },
+    {
+      opacity: 1,
+      scale: 1,
+      x: 0,
+      stagger: 0.05,
+      duration: 0.6,
+      ease: 'elastic.out(1.5, 0.5)'
     }
-  },
-  mounted() {
-    this.$gsap.fromTo(
-      this.$refs.menu.children,
-      {
-        opacity: 0,
-        scale: 0.8,
-        x: -5
-      },
-      {
-        opacity: 1,
-        scale: 1,
-        x: 0,
-        stagger: 0.05,
-        duration: 0.6,
-        ease: 'elastic.out(1.5, 0.5)'
-      }
-    )
-  }
-}
+  )
+})
 </script>

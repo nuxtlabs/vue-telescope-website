@@ -11,7 +11,7 @@
       <transition :css="false" @enter="enter" @leave="leave">
         <button
           v-if="!creatingList"
-          ref="create-button"
+          ref="buttonEl"
           class="absolute top-0 focus:outline-none text-seven leading-seven flex items-center py-4 px-8 rounded-xl border-2 border-transparent has-hover:hover:border-primary-500 bg-primary-50 text-primary-500 font-bold-body-weight transition-colors duration-200 truncate"
           @click="initListCreation"
         >
@@ -28,7 +28,7 @@
         >
           <AppAutosizeTextarea
             v-if="creatingList"
-            ref="create-list-tour"
+            ref="inputEl"
             v-model="newListName"
             v-click-outside="() => (creatingList = false)"
             placeholder="Type List name"
@@ -55,89 +55,83 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import PlusIcon from '@/assets/icons/plus-circle.svg'
 import SaveIcon from '@/assets/icons/save.svg'
 
-export default {
-  setup() {
-    const { createRemoteList } = useLists()
-    return { createRemoteList }
-  },
-  emits: ['cleanup'],
-  components: {
-    PlusIcon,
-    SaveIcon
-  },
-  data() {
-    return {
-      newListName: '',
-      creatingList: false,
-      maxWidthStyles: ''
-    }
-  },
-  methods: {
-    clearActions() {
-      this.newListName = ''
-      this.$emit('cleanup')
-    },
-    initListCreation() {
-      this.maxWidthStyles =
-        this.$refs['create-button'].getBoundingClientRect().width
-      this.creatingList = true
-      this.$nextTick(() => {
-        this.$refs['create-list-tour'].$el.focus()
-      })
-    },
-    async createList() {
-      try {
-        if (!this.newListName) return
-        await this.createRemoteList({
-          name: this.newListName
-        })
-        this.clearActions()
-        this.creatingList = false
-      } catch (e) {
-        console.log(e)
-      }
-    },
-    enter(el, done) {
-      this.$refs['create-list-tour'] &&
-        this.$refs['create-list-tour'].$el.focus()
-      this.$nextTick(() => {
-        this.$gsap.set(el, { position: 'absolute', transformOrigin: 'center' })
-        this.$gsap.from(el, {
-          scale: 0.9,
-          autoAlpha: 0,
-          clearProps: true,
-          // y: -5,
-          duration: 0.25,
-          ease: 'power1.out',
-          onComplete: () => {
-            this.$gsap.set(el, {
-              // position: 'relative',
-              maxWidth: this.maxWidthStyles + 'px'
-            })
-            this.$refs['create-list-tour'] &&
-              this.$refs['create-list-tour'].$el.focus()
-          }
-        })
-      })
-    },
-    leave(el, done) {
-      this.$gsap.set(el, { position: 'absolute', transformOrigin: 'center' })
-      this.$gsap.to(el, {
-        // position: 'absolute',
-        scale: 0.9,
-        autoAlpha: 0,
-        // y: -5,
-        clearProps: true,
-        duration: 0.25,
-        ease: 'power1.out',
-        onComplete: done
-      })
-    }
+const emit = defineEmits(['cleanup'])
+
+const inputEl = ref(null)
+const buttonEl = ref(null)
+
+const { createRemoteList } = useLists()
+const { $gsap } = useNuxtApp()
+
+const newListName = ref('')
+const creatingList = ref(false)
+const maxWidthStyles = ref('')
+
+function clearActions() {
+  newListName.value = ''
+  emit('cleanup')
+}
+
+function initListCreation() {
+  maxWidthStyles.value = buttonEl.value.getBoundingClientRect().width
+  creatingList.value = true
+  nextTick(() => {
+    inputEl.value.$el.focus()
+  })
+}
+
+async function createList() {
+  try {
+    if (!newListName.value) return
+    await createRemoteList({
+      name: newListName.value
+    })
+    clearActions()
+    creatingList.value = false
+  } catch (e) {
+    console.log(e)
   }
+}
+
+function enter(el, done) {
+  inputEl.value && inputEl.value.$el.focus()
+  nextTick(() => {
+    $gsap.set(el, { position: 'absolute', transformOrigin: 'center' })
+    $gsap.from(el, {
+      scale: 0.9,
+      autoAlpha: 0,
+      clearProps: true,
+      // y: -5,
+      duration: 0.25,
+      ease: 'power1.out',
+      onComplete: () => {
+        $gsap.set(el, {
+          // position: 'relative',
+          maxWidth: maxWidthStyles.value + 'px'
+        })
+        inputEl.value && inputEl.value.$el.focus()
+        done()
+      }
+    })
+  })
+}
+
+function leave(el, done) {
+  $gsap.set(el, { position: 'absolute', transformOrigin: 'center' })
+  $gsap.to(el, {
+    // position: 'absolute',
+    scale: 0.9,
+    autoAlpha: 0,
+    // y: -5,
+    clearProps: true,
+    duration: 0.25,
+    ease: 'power1.out',
+    onComplete: done
+  })
 }
 </script>
 

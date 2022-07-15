@@ -6,7 +6,7 @@
       </AppButton>
     </div>
 
-    <MobileModalWrapper v-if="show" label="Your Lists:" @close="show = false">
+    <MobileModalWrapper v-if="show" label="My Lists:" @close="show = false">
       <CreateListButton class="mb-2" />
 
       <span class="relative block overflow-hidden px-2 pb-4">
@@ -27,46 +27,38 @@
   </div>
 </template>
 
-<script>
-export default {
-  setup() {
-    const { sortedLists } = useLists()
-    return { sortedLists }
-  },
-  data() {
-    return {
-      show: false
-    }
-  },
-  methods: {
-    enterAnimation(el, done) {
-      this.$gsap.fromTo(
-        el,
-        {
-          opacity: 0,
-          y: -10
-        },
-        {
-          opacity: 1,
-          y: 0,
-          clearProps: true,
-          duration: 0.25,
-          onComplete: done
-        }
-      )
+<script setup lang="ts">
+const { sortedLists } = useLists()
+const { $gsap } = useNuxtApp()
+
+const show = ref(false)
+
+function enterAnimation(el, done) {
+  $gsap.fromTo(
+    el,
+    {
+      opacity: 0,
+      y: -10
     },
-    leaveAnimation(el, done) {
-      // this.$gsap.set(el, {
-      //   transformOrigin: 'left'
-      // })
-      this.$gsap.to(el, {
-        height: 0,
-        // scale: 0.9,
-        opacity: 0,
-        duration: 0.25,
-        onComplete: done
-      })
+    {
+      opacity: 1,
+      y: 0,
+      clearProps: true,
+      duration: 0.25,
+      onComplete: done
     }
-  }
+  )
+}
+function leaveAnimation(el, done) {
+  // this.$gsap.set(el, {
+  //   transformOrigin: 'left'
+  // })
+  $gsap.to(el, {
+    height: 0,
+    // scale: 0.9,
+    opacity: 0,
+    duration: 0.25,
+    onComplete: done
+  })
 }
 </script>

@@ -16,15 +16,13 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    list: {
-      type: Object,
-      default: null
-    }
+<script setup lang="ts">
+defineProps({
+  list: {
+    type: Object,
+    default: null
   }
-}
+})
 </script>
 
 <style lang="postcss" scoped>
