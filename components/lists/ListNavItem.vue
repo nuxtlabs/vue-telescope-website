@@ -2,7 +2,7 @@
   <div class="relative flex flex-col">
     <div v-click-outside="clickOutsideHandler" class="relative flex group">
       <div
-        ref="name-handler"
+        ref="nameEl"
         class="focus:outline-none flex flex-1 cursor-pointer py-2"
         tabindex="0"
         @click="clickOnNameHandler"
@@ -21,7 +21,7 @@
         <span class="relative flex flex-1 text-eight leading-eight">
           <AppAutosizeTextarea
             v-if="updatingList"
-            ref="update-list-input"
+            ref="inputEl"
             v-model="newListName"
             class="font-bold-body-weight p-1 rounded-md mr-1"
             @submit="updateList"
@@ -46,8 +46,8 @@
           ref="anchor"
           class="focus:outline-none has-hover:group-hover:flex items-center justify-center rounded-lg w-full h-full"
           :class="[
-            openCollapse || showDropdown ? 'flex' : 'hidden',
-            showDropdown ? 'bg-grey-50' : 'has-hover:hover:bg-grey-50'
+            openCollapse || showPopup ? 'flex' : 'hidden',
+            showPopup ? 'bg-grey-50' : 'has-hover:hover:bg-grey-50'
           ]"
           @click="openDropdown"
         >
@@ -71,7 +71,7 @@
       </div>
 
       <Popper
-        v-if="showDropdown"
+        v-if="showPopup"
         :offset-x="4"
         :offset-y="-2"
         placement="right-start"
@@ -115,186 +115,177 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import DotsVerticalIcon from '@/assets/icons/dots-vertical.svg'
 import FolderIcon from '@/assets/icons/folder.svg'
 import OpenedFolderIcon from '@/assets/icons/opened-folder.svg'
 import SaveIcon from '@/assets/icons/save.svg'
 
-export default {
-  emits: ['close-menu'],
-  setup() {
-    const {
-      selectedList,
-      selectedGroup,
-      setSelectedList,
-      setSelectedGroup,
-      deleteRemoteList,
-      updateRemoteList
-    } = useLists()
-    const { isMobile } = useUserAgent()
-    return {
-      selectedList,
-      selectedGroup,
-      setSelectedList,
-      setSelectedGroup,
-      deleteRemoteList,
-      updateRemoteList,
-      isMobile
-    }
-  },
-  components: {
-    DotsVerticalIcon,
-    FolderIcon,
-    OpenedFolderIcon,
-    SaveIcon
-  },
-  props: {
-    list: {
-      type: Object,
-      default: null
-    }
-  },
-  data() {
-    return {
-      loading: false,
-      // clicked: 0,
-      openCollapse: false,
-      showDropdown: false,
-      newListName: '',
-      updatingList: false,
-      shareList: false
-    }
-  },
-  computed: {
-    isSelected() {
-      return this.selectedList && this.selectedList.id === this.list.id
-    },
-    reversedListGroups() {
-      const r = [...this.list.groups]
-      return r.sort(
-        (a, b) =>
-          a.position - b.position ||
-          new Date(a.created_at) - new Date(b.created_at)
-      )
-    }
-  },
-  watch: {
-    selectedList(newValue) {
-      if (newValue && newValue.id !== this.list.id && this.openCollapse) {
-        this.openCollapse = false
-      }
-    }
-  },
-  mounted() {
-    if (this.selectedList.id === this.list.id) {
-      this.openCollapse = true
-    }
-  },
-  methods: {
-    openDropdown() {
-      this.showDropdown = !this.showDropdown
-    },
-    clickOutsideHandler() {
-      this.showDropdown = false
-      this.clearActions()
-    },
-    clickOnNameHandler() {
-      this.setSelectedList(this.list)
-      this.setSelectedGroup(this.list.groups[0])
-      if (!this.openCollapse) {
-        this.openCollapse = true
-      }
+const emit = defineEmits(['close-menu'])
 
-      // // more nice behaviour
-      // if (!this.openCollapse) {
-      //   this.openCollapse = true
-      // } else {
-      //   if (this.clicked === 0) {
-      //     this.clicked++
-      //   } else if (this.clicked === 1) {
-      //     this.openCollapse = !this.openCollapse
-      //     this.clicked = 0
-      //   } else {
-      //     this.clicked = 0
-      //   }
-      // }
-      this.clearActions()
-      // this.clicked = 0
-      // this.creatingGroup = false
-    },
-    clearActions() {
-      this.showDropdown = false
-      this.newListName = ''
-      this.updatingList = false
-    },
-    async deleteList() {
-      try {
-        this.showDropdown = false
-        await this.deleteRemoteList({
-          list: this.list
-        })
-      } catch (e) {
-        console.log(e)
-      }
-    },
-    initUpdateList() {
-      // popperInstance.forceUpdate()
-      this.updatingList = true
-      // this.creatingGroup = false
-      this.newListName = this.list.name
-      this.$nextTick(() => {
-        this.$refs['update-list-input'].$el.focus()
-      })
-    },
-    async updateList() {
-      try {
-        if (!this.newListName || this.loading) return
-        this.loading = true
-        await this.updateRemoteList({
-          name: this.newListName,
-          list: this.list
-        })
-        this.loading = false
-        this.clearActions()
-        this.$refs['name-handler'].focus()
-      } catch (e) {
-        this.loading = false
-        console.log(e)
-      }
-    },
-    groupSelectionHandler($event, group) {
-      this.setSelectedGroup($event ? group : null)
-      this.setSelectedList($event ? this.list : null)
-      if (this.isMobile) {
-        this.$emit('close-menu')
-      }
-    },
-    enter(el, done) {
-      this.$nextTick(() => {
-        this.$gsap.set(el, { height: 'auto' })
-        this.$gsap.from(el, {
-          height: 0,
-          autoAlpha: 0,
-          clearProps: true,
-          // y: -5,
-          duration: 0.25,
-          ease: 'power1.out',
-          onComplete: done
-        })
-      })
-    },
-    leave(el, done) {
-      this.$gsap.to(el, {
-        height: 0,
-        autoAlpha: 0,
-        // y: -5,
-        clearProps: true,
-        duration: 0.25,
-        ease: 'power1.out',
-        onComplete: done
-      })
-    }
+const nameEl = ref(null)
+const inputEl = ref(null)
+
+const {
+  selectedList,
+  setSelectedList,
+  setSelectedGroup,
+  deleteRemoteList,
+  updateRemoteList
+} = useLists()
+const { isMobile } = useUserAgent()
+const { $gsap } = useNuxtApp()
+
+const loading = ref(false)
+// const clicked = 0
+const openCollapse = ref(false)
+const showPopup = ref(false)
+const newListName = ref('')
+const updatingList = ref(false)
+const shareList = ref(false)
+
+const props = defineProps({
+  list: {
+    type: Object,
+    default: null
   }
+})
+
+const isSelected = computed(() => {
+  return selectedList.value && selectedList.value.id === props.list.id
+})
+
+const reversedListGroups = computed(() => {
+  const r = [...props.list.groups]
+  return r.sort(
+    (a, b) =>
+      a.position - b.position || new Date(a.created_at) - new Date(b.created_at)
+  )
+})
+
+watch(selectedList, (newValue) => {
+  if (newValue && newValue.id !== props.list.id && openCollapse.value) {
+    openCollapse.value = false
+  }
+})
+
+onMounted(() => {
+  if (selectedList.value.id === props.list.id) {
+    openCollapse.value = true
+  }
+})
+
+function openDropdown() {
+  showPopup.value = !showPopup.value
+}
+
+function clickOutsideHandler() {
+  showPopup.value = false
+  clearActions()
+}
+
+function clickOnNameHandler() {
+  setSelectedList(props.list)
+  setSelectedGroup(props.list.groups[0])
+  if (!openCollapse.value) {
+    openCollapse.value = true
+  }
+
+  // // more nice behaviour
+  // if (!openCollapse.value) {
+  //   openCollapse.value = true
+  // } else {
+  //   if (this.clicked === 0) {
+  //     this.clicked++
+  //   } else if (this.clicked === 1) {
+  //     openCollapse.value = !openCollapse.value
+  //     this.clicked = 0
+  //   } else {
+  //     this.clicked = 0
+  //   }
+  // }
+  clearActions()
+  // this.clicked = 0
+  // this.creatingGroup = false
+}
+
+function clearActions() {
+  showPopup.value = false
+  newListName.value = ''
+  updatingList.value = false
+}
+
+async function deleteList() {
+  console.log('!!!!')
+  try {
+    showPopup.value = false
+    await deleteRemoteList({
+      list: props.list
+    })
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+function initUpdateList() {
+  // popperInstance.forceUpdate()
+  updatingList.value = true
+  // this.creatingGroup = false
+  newListName.value = props.list.name
+  nextTick(() => {
+    inputEl.value.$el.focus()
+  })
+}
+
+async function updateList() {
+  try {
+    if (!newListName.value || loading.value) return
+    loading.value = true
+    await updateRemoteList({
+      name: newListName.value,
+      list: props.list
+    })
+    loading.value = false
+    clearActions()
+    nameEl.value.focus()
+  } catch (e) {
+    loading.value = false
+    console.log(e)
+  }
+}
+
+function groupSelectionHandler($event, group) {
+  setSelectedGroup($event ? group : null)
+  setSelectedList($event ? props.list : null)
+  if (isMobile.value) {
+    emit('close-menu')
+  }
+}
+
+function enter(el, done) {
+  nextTick(() => {
+    $gsap.set(el, { height: 'auto' })
+    $gsap.from(el, {
+      height: 0,
+      autoAlpha: 0,
+      clearProps: true,
+      // y: -5,
+      duration: 0.25,
+      ease: 'power1.out',
+      onComplete: done
+    })
+  })
+}
+
+function leave(el, done) {
+  $gsap.to(el, {
+    height: 0,
+    autoAlpha: 0,
+    // y: -5,
+    clearProps: true,
+    duration: 0.25,
+    ease: 'power1.out',
+    onComplete: done
+  })
 }
 </script>

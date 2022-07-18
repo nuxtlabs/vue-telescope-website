@@ -1,6 +1,9 @@
 <template>
   <div v-click-outside="() => $emit('close')">
-    <div ref="scrim" class="bg-white absolute top-0 left-0 w-full h-full"></div>
+    <div
+      ref="scrimEl"
+      class="bg-white absolute top-0 left-0 w-full h-full"
+    ></div>
     <!-- <div
       v-if="!compact"
       ref="bg"
@@ -176,121 +179,112 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import OpenedFolderIcon from '@/assets/icons/opened-folder.svg'
 import SaveIcon from '@/assets/icons/save.svg'
 // import UnorderedListIcon from '@/assets/icons/unordered-list.svg'
 
-export default {
-  setup() {
-    const { lists, bookmarkRemoteShowcase, unbookmarkRemoteShowcase } =
-      useLists()
-    const user = useStrapiUser()
-    return { lists, bookmarkRemoteShowcase, unbookmarkRemoteShowcase, user }
-  },
-  emits: ['close'],
-  components: {
-    OpenedFolderIcon,
-    SaveIcon
-    // UnorderedListIcon
-  },
-  props: {
-    showcase: {
-      type: Object,
-      default: null
-    },
-    compact: {
-      type: Boolean,
-      default: false
-    }
-  },
-  data() {
-    return {
-      showLists: false
-    }
-  },
-  computed: {
-    listsWithGroups() {
-      return this.lists.filter((list) => list.groups.length)
-    }
-  },
-  mounted() {
-    setTimeout(() => {
-      this.showLists = true
-    }, 200)
+const { lists, bookmarkRemoteShowcase, unbookmarkRemoteShowcase } = useLists()
+const user = useStrapiUser()
+const { $gsap } = useNuxtApp()
 
-    // if (!this.compact) {
-    //   const bg = this.$refs.bg
-    //   this.$gsap.fromTo(
-    //     bg,
-    //     {
-    //       scale: 0.95,
-    //       opacity: 0
-    //     },
-    //     {
-    //       scale: 1,
-    //       opacity: 1,
-    //       delay: 0.2,
-    //       duration: 0.3,
-    //       clearProps: true
-    //       // ease: 'power4.inOut'
-    //     }
-    //   )
-    // }
+const scrimEl = ref(null)
 
-    const scrim = this.$refs.scrim
-    this.$gsap.set(scrim, {
-      transformOrigin: 'top'
-    })
-    this.$gsap.fromTo(
-      scrim,
-      {
-        scaleY: 0
-      },
-      {
-        scaleY: 1,
-        duration: 0.4,
-        clearProps: true,
-        ease: 'power4.inOut'
-        // onComplete: () => {
+defineEmits(['close'])
 
-        // }
-      }
-    )
+const props = defineProps({
+  showcase: {
+    type: Object,
+    default: null
   },
-  methods: {
-    isBookmarkedList(list) {
-      return Boolean(
-        list.groups.map((g) => this.isBookmarked(g)).filter(Boolean).length
-      )
-    },
-    isBookmarked(group) {
-      return group.showcases.find((s) => s.id === this.showcase.id)
-    },
-    onBookmarkClicked(list, group) {
-      group.showcases?.find((s) => s.id === this.showcase.id)
-        ? this.unbookmark(list, group)
-        : this.bookmark(list, group)
-    },
-    async bookmark(list, group) {
-      try {
-        await this.bookmarkRemoteShowcase({
-          showcase: this.showcase,
-          group,
-          list
-        })
-      } catch (e) {}
-    },
-    async unbookmark(list, group) {
-      try {
-        await this.unbookmarkRemoteShowcase({
-          showcase: this.showcase,
-          group,
-          list
-        })
-      } catch (e) {}
-    }
+  compact: {
+    type: Boolean,
+    default: false
   }
+})
+
+const showLists = ref(false)
+
+const listsWithGroups = computed(() => {
+  return lists.value.filter((list) => list.groups.length)
+})
+
+onMounted(() => {
+  setTimeout(() => {
+    showLists.value = true
+  }, 200)
+
+  // if (!this.compact) {
+  //   const bg = this.$refs.bg
+  //   $gsap.fromTo(
+  //     bg,
+  //     {
+  //       scale: 0.95,
+  //       opacity: 0
+  //     },
+  //     {
+  //       scale: 1,
+  //       opacity: 1,
+  //       delay: 0.2,
+  //       duration: 0.3,
+  //       clearProps: true
+  //       // ease: 'power4.inOut'
+  //     }
+  //   )
+  // }
+
+  $gsap.set(scrimEl.value, {
+    transformOrigin: 'top'
+  })
+  $gsap.fromTo(
+    scrimEl.value,
+    {
+      scaleY: 0
+    },
+    {
+      scaleY: 1,
+      duration: 0.4,
+      clearProps: true,
+      ease: 'power4.inOut'
+      // onComplete: () => {
+
+      // }
+    }
+  )
+})
+
+function isBookmarkedList(list) {
+  return Boolean(list.groups.map((g) => isBookmarked(g)).filter(Boolean).length)
+}
+
+function isBookmarked(group) {
+  return group.showcases.find((s) => s.id === props.showcase.id)
+}
+
+function onBookmarkClicked(list, group) {
+  group.showcases?.find((s) => s.id === props.showcase.id)
+    ? unbookmark(list, group)
+    : bookmark(list, group)
+}
+
+async function bookmark(list, group) {
+  try {
+    await bookmarkRemoteShowcase({
+      showcase: props.showcase,
+      group,
+      list
+    })
+  } catch (e) {}
+}
+
+async function unbookmark(list, group) {
+  try {
+    await unbookmarkRemoteShowcase({
+      showcase: props.showcase,
+      group,
+      list
+    })
+  } catch (e) {}
 }
 </script>
 

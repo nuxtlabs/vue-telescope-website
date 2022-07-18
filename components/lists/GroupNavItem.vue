@@ -10,7 +10,7 @@
     >
       <AppAutosizeTextarea
         v-if="updatingGroup"
-        ref="update-group-input"
+        ref="inputEl"
         v-model="newGroupName"
         class="p-1 rounded-md"
         @submit="updateGroup"
@@ -24,7 +24,7 @@
         :class="[isSelected && 'text-primary-500']"
       >
         <span
-          ref="deleting-scrim"
+          ref="deletingScrimEl"
           class="deleting-scrim absolute top-0 left-0 w-full h-full pointer-events-none"
           style="opacity: 0"
         ></span>
@@ -65,7 +65,7 @@
       placement="right-start"
       :anchor="$refs.anchor"
     >
-      <GroupListItemMenu
+      <GroupNavItemPopup
         v-if="!updatingGroup"
         :up="canMoveUp"
         :down="canMoveDown"
@@ -78,154 +78,151 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import DotsVerticalIcon from '@/assets/icons/dots-vertical.svg'
 import SaveIcon from '@/assets/icons/save.svg'
 
-export default {
-  emits: ['group-selected'],
-  setup() {
-    const {
-      selectedGroup,
-      updateRemoteGroup,
-      deleteRemoteGroup,
-      moveUpRemoteGroup,
-      moveDownRemoteGroup
-    } = useLists()
-    return {
-      selectedGroup,
-      updateRemoteGroup,
-      deleteRemoteGroup,
-      moveUpRemoteGroup,
-      moveDownRemoteGroup
-    }
+const emit = defineEmits(['group-selected'])
+
+const { $gsap } = useNuxtApp()
+
+const {
+  selectedGroup,
+  updateRemoteGroup,
+  deleteRemoteGroup,
+  moveUpRemoteGroup,
+  moveDownRemoteGroup,
+  setSelectedGroup
+} = useLists()
+
+const deletingScrimEl = ref(null)
+const inputEl = ref(null)
+
+const props = defineProps({
+  group: {
+    type: Object,
+    default: null
   },
-  components: {
-    DotsVerticalIcon,
-    SaveIcon
-  },
-  props: {
-    group: {
-      type: Object,
-      default: null
-    },
-    list: {
-      type: Object,
-      default: null
-    }
-  },
-  data() {
-    return {
-      loading: false,
-      openCollapse: false,
-      showPopup: false,
-      newGroupName: '',
-      creatingGroup: false,
-      updatingGroup: false,
-      deletingGroup: false
-    }
-  },
-  computed: {
-    isSelected() {
-      return this.selectedGroup && this.selectedGroup.id === this.group.id
-    },
-    canMoveUp() {
-      return this.isSelected && this.list.groups[0].id !== this.group.id
-    },
-    canMoveDown() {
-      return (
-        this.isSelected &&
-        this.list.groups[this.list.groups.length - 1].id !== this.group.id
-      )
-    }
-  },
-  methods: {
-    clickOutsideHandler() {
-      this.showDropdown = false
-      this.clearActions()
-    },
-    clickOnNameHandler() {
-      this.$emit('group-selected', this.group.id)
-      this.showPopup = false
-      // this.openCollapse = !this.openCollapse
-      // this.clearActions()
-      // this.creatingGroup = false
-    },
-    openPopup() {
-      this.$emit('group-selected', this.group.id)
-      this.showPopup = !this.showPopup
-    },
-    clearActions() {
-      this.showPopup = false
-      this.newGroupName = ''
-      this.updatingGroup = false
-    },
-    async updateGroup() {
-      try {
-        if (!this.newGroupName || this.loading) return
-        this.loading = true
-        await this.updateRemoteGroup({
-          name: this.newGroupName,
-          group: this.group,
-          list: this.list
-        })
-        this.loading = false
-        this.clearActions()
-      } catch (e) {
-        this.loading = false
-      }
-    },
-    async deleteGroup() {
-      try {
-        this.deletingGroup = true
-        this.$gsap.to(this.$refs['deleting-scrim'], {
-          opacity: 1,
-          duration: 0.5,
-          ease: 'none'
-        })
-        await this.deleteRemoteGroup({
-          group: this.group,
-          list: this.list
-        })
-        this.deletingGroup = false
-        this.setSelectedGroup(this.list.groups[0])
-      } catch (e) {
-        console.log(e)
-      }
-    },
-    initUpdateGroup() {
-      this.updatingGroup = true
-      this.newGroupName = this.group.name
-      this.$nextTick(() => {
-        const updateInput = this.$refs['update-group-input'].$el
-        updateInput.focus()
-      })
-    },
-    async moveUpGroup() {
-      try {
-        this.loading = true
-        await this.moveUpRemoteGroup({
-          group: this.group,
-          list: this.list
-        })
-        this.clearActions()
-      } catch (e) {}
-      this.loading = false
-    },
-    async moveDownGroup() {
-      try {
-        this.loading = true
-        await this.moveDownRemoteGroup({
-          group: this.group,
-          list: this.list
-        })
-        this.clearActions()
-      } catch (e) {
-        console.log(e)
-      }
-      this.loading = false
-    }
+  list: {
+    type: Object,
+    default: null
   }
+})
+
+const loading = ref(false)
+const openCollapse = ref(false)
+const showPopup = ref(false)
+const newGroupName = ref('')
+// const creatingGroup = ref(false)
+const updatingGroup = ref(false)
+const deletingGroup = ref(false)
+
+const isSelected = computed(() => {
+  return selectedGroup.value && selectedGroup.value.id === props.group.id
+})
+
+const canMoveUp = computed(() => {
+  return isSelected.value && props.list.groups[0].id !== props.group.id
+})
+
+const canMoveDown = computed(() => {
+  return (
+    isSelected.value &&
+    props.list.groups[props.list.groups.length - 1].id !== props.group.id
+  )
+})
+
+function clickOutsideHandler() {
+  // this.showDropdown = false
+  clearActions()
+}
+
+function clickOnNameHandler() {
+  emit('group-selected', props.group.id)
+  showPopup.value = false
+  // this.openCollapse = !this.openCollapse
+  // this.clearActions()
+  // this.creatingGroup = false
+}
+
+function openPopup() {
+  emit('group-selected', props.group.id)
+  showPopup.value = !showPopup.value
+}
+
+function clearActions() {
+  showPopup.value = false
+  newGroupName.value = ''
+  updatingGroup.value = false
+}
+
+async function updateGroup() {
+  try {
+    if (!newGroupName.value || loading.value) return
+    loading.value = true
+    await updateRemoteGroup({
+      name: newGroupName.value,
+      group: props.group,
+      list: props.list
+    })
+    loading.value = false
+    clearActions()
+  } catch (e) {
+    loading.value = false
+  }
+}
+
+async function deleteGroup() {
+  try {
+    deletingGroup.value = true
+    $gsap.to(deletingScrimEl.value, {
+      opacity: 1,
+      duration: 0.5,
+      ease: 'none'
+    })
+    await deleteRemoteGroup({
+      group: props.group,
+      list: props.list
+    })
+    deletingGroup.value = false
+    setSelectedGroup(props.list.groups[0])
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+function initUpdateGroup() {
+  updatingGroup.value = true
+  newGroupName.value = props.group.name
+  nextTick(() => {
+    inputEl.value.$el.focus()
+  })
+}
+
+async function moveUpGroup() {
+  try {
+    loading.value = true
+    await moveUpRemoteGroup({
+      group: props.group,
+      list: props.list
+    })
+    clearActions()
+  } catch (e) {}
+  loading.value = false
+}
+
+async function moveDownGroup() {
+  try {
+    loading.value = true
+    await moveDownRemoteGroup({
+      group: props.group,
+      list: props.list
+    })
+    clearActions()
+  } catch (e) {
+    console.log(e)
+  }
+  loading.value = false
 }
 </script>
 

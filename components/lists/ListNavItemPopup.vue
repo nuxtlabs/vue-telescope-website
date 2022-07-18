@@ -50,7 +50,7 @@ defineEmits(['share', 'rename', 'delete'])
 
 const { $gsap } = useNuxtApp()
 
-const deleting = false
+const deleting = ref(false)
 
 const menuEl = ref(null)
 
