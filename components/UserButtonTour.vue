@@ -91,51 +91,49 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'UserButtonTour',
-  data() {
-    return {
-      showTooltip: false
-    }
-  },
-  mounted() {
-    this.blockBodyScroll()
-    setTimeout(() => {
-      this.showTooltip = true
-    }, 200)
-  },
-  methods: {
-    blockBodyScroll() {
-      const scrollBarGap =
-        window.innerWidth - document.documentElement.clientWidth
-      document.body.style.overflow = 'hidden'
-      document.body.style.paddingRight = `${scrollBarGap}px`
-      document.querySelector(
-        '#main-header'
-      ).style.paddingRight = `${scrollBarGap}px`
-      document.querySelector(
-        '#tour-main-header'
-      ).style.paddingRight = `${scrollBarGap}px`
-    },
-    unblockBodyScroll() {
-      setTimeout(() => {
-        document.body.style.overflow = null
-        document.body.style.paddingRight = null
-        document.querySelector('#main-header').style.paddingRight = null
-        // document.querySelector('#tour-main-header').style.paddingRight = null
-      }, 16)
-    },
-    closeTour() {
-      this.unblockBodyScroll()
-      setTimeout(() => {
-        this.$emit('close')
-      }, 16)
-    },
-    featureSeenHandler() {
-      window.localStorage.setItem('listsFeatureSeen', true)
-      this.closeTour()
-    }
-  }
+<script setup lang="ts">
+const emit = defineEmits(['close'])
+
+const showTooltip = ref(false)
+
+onMounted(() => {
+  blockBodyScroll()
+  setTimeout(() => {
+    showTooltip.value = true
+  }, 200)
+})
+
+// TODO: move to composable
+function blockBodyScroll() {
+  const scrollBarGap = window.innerWidth - document.documentElement.clientWidth
+  document.body.style.overflow = 'hidden'
+  document.body.style.paddingRight = `${scrollBarGap}px`
+  document.querySelector(
+    '#main-header'
+  ).style.paddingRight = `${scrollBarGap}px`
+  document.querySelector(
+    '#tour-main-header'
+  ).style.paddingRight = `${scrollBarGap}px`
+}
+
+function unblockBodyScroll() {
+  setTimeout(() => {
+    document.body.style.overflow = null
+    document.body.style.paddingRight = null
+    document.querySelector('#main-header').style.paddingRight = null
+    // document.querySelector('#tour-main-header').style.paddingRight = null
+  }, 16)
+}
+
+function closeTour() {
+  unblockBodyScroll()
+  setTimeout(() => {
+    emit('close')
+  }, 16)
+}
+
+function featureSeenHandler() {
+  window.localStorage.setItem('listsFeatureSeen', true)
+  closeTour()
 }
 </script>

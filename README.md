@@ -1,6 +1,7 @@
 ## TODO
 
 - not sure how to implement properly `changelog` plugin
+- `ShowcasesSorting` with Composition
 
 ---
 

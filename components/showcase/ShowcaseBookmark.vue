@@ -58,72 +58,56 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import StarIcon from '@/assets/icons/star.svg'
 import DownIcon from '@/assets/icons/arrow-down.svg'
 
-export default {
-  setup() {
-    const {
-      lists,
-      selectedList,
-      selectedGroup,
-      moveUpRemoteShowcase,
-      moveDownRemoteShowcase
-    } = useLists()
-    return {
-      lists,
-      selectedList,
-      selectedGroup,
-      moveUpRemoteShowcase,
-      moveDownRemoteShowcase
-    }
+const {
+  lists,
+  selectedList,
+  selectedGroup,
+  moveUpRemoteShowcase,
+  moveDownRemoteShowcase
+} = useLists()
+
+const props = defineProps({
+  showcase: {
+    type: Object,
+    default: () => {}
   },
-  components: {
-    StarIcon,
-    DownIcon
+  compact: {
+    type: Boolean,
+    default: false
   },
-  props: {
-    showcase: {
-      type: Object,
-      default: () => {}
-    },
-    compact: {
-      type: Boolean,
-      default: false
-    },
-    sortable: {
-      type: Boolean,
-      default: false
-    }
-  },
-  data() {
-    return {
-      isBookmarking: false,
-      hovered: false
-    }
-  },
-  computed: {
-    isBookmarkedAtLeastOnce() {
-      const showcases = this.lists
-        .flatMap((list) => list.groups)
-        .flatMap((group) => group.showcases)
-      return showcases?.find((s) => s && s.id === this.showcase.id)
-    }
-  },
-  methods: {
-    mouseEnterHandler() {
-      this.hovered = true
-      clearTimeout(this.timer)
-    },
-    mouseLeaveHandler() {
-      this.hovered = false
-      this.timer = setTimeout(this.closeMenu, 1000)
-    },
-    closeMenu() {
-      if (this.compact) this.isBookmarking = false
-    }
+  sortable: {
+    type: Boolean,
+    default: false
   }
+})
+
+const isBookmarking = ref(false)
+const hovered = ref(false)
+const timer = ref(null)
+
+const isBookmarkedAtLeastOnce = computed(() => {
+  const showcases = lists.value
+    .flatMap((list) => list.groups)
+    .flatMap((group) => group.showcases)
+  return showcases?.find((s) => s && s.id === props.showcase.id)
+})
+
+function mouseEnterHandler() {
+  hovered.value = true
+  clearTimeout(timer.value)
+}
+
+function mouseLeaveHandler() {
+  hovered.value = false
+  timer.value = setTimeout(closeMenu, 1000)
+}
+
+function closeMenu() {
+  if (props.compact) isBookmarking.value = false
 }
 </script>
 

@@ -4,7 +4,7 @@
       <transition :css="false" @enter="enter" @leave="leave">
         <div v-if="creatingList" class="w-full h-full absolute z-10">
           <AppAutosizeTextarea
-            ref="create-list-tour"
+            ref="inputEl"
             v-model="name"
             v-click-outside="() => (creatingList = false)"
             placeholder="Name Your List"
@@ -16,7 +16,6 @@
         </div>
         <button
           v-else
-          ref="create-button"
           class="group focus:outline-none w-full h-10 flex items-center py-1 px-4 text-base leading-base font-bold-body-weight bg-primary-50 border-2 border-transparent hover:border-primary-500 rounded-2lg text-primary-500 transition-colors duration-200 truncate"
           @click="initListCreation"
         >
@@ -60,99 +59,91 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import PlusIcon from '@/assets/icons/plus-circle.svg'
 import SaveIcon from '@/assets/icons/save.svg'
 import XmarkIcon from '@/assets/icons/xmark.svg'
 
-export default {
-  setup() {
-    const { createRemoteList } = useLists()
-    return { createRemoteList }
-  },
-  emits: ['cleanup'],
-  components: {
-    PlusIcon,
-    SaveIcon,
-    XmarkIcon
-  },
-  data() {
-    return {
-      name: '',
-      loading: false,
-      creatingList: false
-    }
-  },
-  watch: {
-    creatingList(value) {
-      if (!value) this.name = ''
-    }
-  },
-  methods: {
-    clearActions() {
-      this.name = ''
-      this.$emit('cleanup')
-    },
-    initListCreation() {
-      this.creatingList = true
-      this.$nextTick(() => {
-        this.$refs['create-list-tour'].$el.focus()
-      })
-    },
-    clearInput() {
-      this.name = ''
-      this.$refs['create-list-tour'].$el.focus()
-    },
-    async createList() {
-      console.log('createList')
-      if (!this.name || this.loading) return
-      try {
-        this.loading = true
-        await this.createRemoteList({
-          name: this.name
-        })
-        this.name = ''
-        this.clearActions()
-        this.loading = false
-        this.creatingList = false
-      } catch (e) {
-        this.loading = false
-        // TODO: display toast with error
-      }
-    },
-    enter(el, done) {
-      this.$refs['create-list-tour'] &&
-        this.$refs['create-list-tour'].$el.focus()
-      this.$nextTick(() => {
-        this.$gsap.set(el, { position: 'absolute', transformOrigin: 'left' })
-        this.$gsap.from(el, {
-          scale: 0.9,
-          autoAlpha: 0,
-          clearProps: true,
-          // y: -5,
-          duration: 0.25,
-          ease: 'power1.out',
-          onComplete: () => {
-            this.$gsap.set(el, { position: 'relative' })
-            this.$refs['create-list-tour'] &&
-              this.$refs['create-list-tour'].$el.focus()
-          }
-        })
-      })
-    },
-    leave(el, done) {
-      this.$gsap.set(el, { transformOrigin: 'left' })
-      this.$gsap.to(el, {
-        // position: 'absolute',
-        scale: 0.9,
-        autoAlpha: 0,
-        // y: -5,
-        clearProps: true,
-        duration: 0.25,
-        ease: 'power1.out',
-        onComplete: done
-      })
-    }
+const { createRemoteList } = useLists()
+const { $gsap } = useNuxtApp()
+
+const inputEl = ref(null)
+
+const emit = defineEmits(['cleanup'])
+
+const name = ref('')
+const loading = ref(false)
+const creatingList = ref(false)
+
+watch(creatingList, (value) => {
+  if (!value) name.value = ''
+})
+
+function clearActions() {
+  name.value = ''
+  emit('cleanup')
+}
+
+function initListCreation() {
+  creatingList.value = true
+  nextTick(() => {
+    inputEl.value.$el.focus()
+  })
+}
+
+function clearInput() {
+  name.value = ''
+  inputEl.value.$el.focus()
+}
+
+async function createList() {
+  if (!name.value || loading.value) return
+  try {
+    loading.value = true
+    await createRemoteList({
+      name: name.value
+    })
+    name.value = ''
+    clearActions()
+    loading.value = false
+    creatingList.value = false
+  } catch (e) {
+    loading.value = false
+    // TODO: display toast with error
   }
+}
+
+function enter(el, done) {
+  inputEl.value && inputEl.value.$el.focus()
+  nextTick(() => {
+    $gsap.set(el, { position: 'absolute', transformOrigin: 'left' })
+    $gsap.from(el, {
+      scale: 0.9,
+      autoAlpha: 0,
+      clearProps: true,
+      // y: -5,
+      duration: 0.25,
+      ease: 'power1.out',
+      onComplete: () => {
+        $gsap.set(el, { position: 'relative' })
+        inputEl.value && inputEl.value.$el.focus()
+        done()
+      }
+    })
+  })
+}
+
+function leave(el, done) {
+  $gsap.set(el, { transformOrigin: 'left' })
+  $gsap.to(el, {
+    // position: 'absolute',
+    scale: 0.9,
+    autoAlpha: 0,
+    // y: -5,
+    clearProps: true,
+    duration: 0.25,
+    ease: 'power1.out',
+    onComplete: done
+  })
 }
 </script>

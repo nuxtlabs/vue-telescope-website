@@ -18,7 +18,7 @@
     <div v-if="creatingGroup" class="flex">
       <div class="flex-1 mr-1 relative">
         <AppAutosizeTextarea
-          ref="create-group-input"
+          ref="inputEl"
           v-model="newGroupName"
           v-click-outside="() => (creatingGroup = false)"
           class="p-1 rounded-md"
@@ -55,66 +55,59 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import PlusIcon from '@/assets/icons/plus-circle.svg'
 import XmarkIcon from '@/assets/icons/xmark.svg'
 import SaveIcon from '@/assets/icons/save.svg'
 
-export default {
-  setup() {
-    const { setSelectedList, createRemoteGroup } = useLists()
-    return { setSelectedList, createRemoteGroup }
-  },
-  emits: ['cleanup'],
-  components: {
-    PlusIcon,
-    XmarkIcon,
-    SaveIcon
-  },
-  props: {
-    list: {
-      type: Object,
-      default: null
-    }
-  },
-  data() {
-    return {
-      loading: false,
-      newGroupName: '',
-      creatingGroup: false
-    }
-  },
-  methods: {
-    clearActions() {
-      this.newGroupName = ''
-      this.$emit('cleanup')
-    },
-    initGroupCreation() {
-      this.setSelectedList(this.list)
-      this.creatingGroup = true
-      this.$nextTick(() => {
-        this.$refs['create-group-input'].$el.focus()
-      })
-    },
-    clearInput() {
-      this.newGroupName = ''
-      this.$refs['create-group-input'].$el.focus()
-    },
-    async createGroup() {
-      try {
-        if (!this.newGroupName || this.loading) return
-        this.loading = true
-        await this.createRemoteGroup({
-          name: this.newGroupName,
-          list: this.list
-        })
-        this.loading = false
-        this.clearActions()
-        this.creatingGroup = false
-      } catch (e) {
-        this.loading = false
-      }
-    }
+const { setSelectedList, createRemoteGroup } = useLists()
+
+const inputEl = ref(null)
+
+const emit = defineEmits(['cleanup'])
+
+const props = defineProps({
+  list: {
+    type: Object,
+    default: null
+  }
+})
+
+const loading = ref(false)
+const newGroupName = ref('')
+const creatingGroup = ref(false)
+
+function clearActions() {
+  newGroupName.value = ''
+  emit('cleanup')
+}
+
+function initGroupCreation() {
+  setSelectedList(props.list)
+  creatingGroup.value = true
+  nextTick(() => {
+    inputEl.value.$el.focus()
+  })
+}
+
+function clearInput() {
+  newGroupName.value = ''
+  inputEl.value.$el.focus()
+}
+
+async function createGroup() {
+  try {
+    if (!newGroupName.value || loading.value) return
+    loading.value = true
+    await createRemoteGroup({
+      name: newGroupName.value,
+      list: props.list
+    })
+    loading.value = false
+    clearActions()
+    creatingGroup.value = false
+  } catch (e) {
+    loading.value = false
   }
 }
 </script>
