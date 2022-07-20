@@ -6,13 +6,9 @@
     >
       <FilterIcon class="h-7 w-7 overflow-visible" />
     </button>
-    <MobileModalWrapper
-      v-if="show"
-      label="Select filters:"
-      @close="show = false"
-    >
+    <MobileSlideModal v-if="show" label="Select filters:" @close="show = false">
       <ShowcasesSearchFilters @searching="show = false" />
-    </MobileModalWrapper>
+    </MobileSlideModal>
   </div>
 </template>
 

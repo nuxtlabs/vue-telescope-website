@@ -101,14 +101,14 @@ defineProps({
   width: 100%;
 }
 
-.twitter-like header {
+.floating-view header {
   @apply px-8;
 }
-/* .twitter-like .description {
+/* .floating-view .description {
   @apply px-8;
 } */
 
-.twitter-like .image {
+.floating-view .image {
   @apply rounded-none;
   @screen xl {
     @apply rounded-xl ml-8;

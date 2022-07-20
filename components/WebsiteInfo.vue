@@ -108,10 +108,10 @@ defineProps({
 </script>
 
 <style scoped>
-.twitter-like .data-wrapper {
+.floating-view .data-wrapper {
   @apply px-8;
 }
-.twitter-like .label {
+.floating-view .label {
   @apply px-8;
 }
 </style>

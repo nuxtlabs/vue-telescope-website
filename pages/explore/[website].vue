@@ -12,7 +12,7 @@
         :fetched="website ? true : false"
         @close="onCloseModal"
       >
-        <ShowcaseSection :website="website" class="twitter-like mb-12" />
+        <ShowcaseSection :website="website" class="floating-view mb-12" />
         <CtaSection />
       </FloatingViewModal>
     </div>

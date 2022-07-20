@@ -72,7 +72,7 @@ const showMenu = ref(false)
 
 <style scoped>
 .app-header {
-  backdrop-filter: blur(12px);
+  backdrop-filter: var(--scrim-filter);
   background-color: rgba(255, 255, 255, 0.75);
 }
 </style>

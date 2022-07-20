@@ -1,12 +1,16 @@
 <template>
   <div class="block md:hidden">
     <div class="fixed bottom-0 left-1/2 z-10 transform -translate-x-1/2 pb-4">
-      <AppButton appearance="primary" class="" @click.native="show = true">
+      <AppButton
+        appearance="primary"
+        class="min-w-[8rem]"
+        @click.native="show = true"
+      >
         My Lists
       </AppButton>
     </div>
 
-    <MobileModalWrapper v-if="show" label="My Lists:" @close="show = false">
+    <MobileSlideModal v-if="show" label="My Lists:" @close="show = false">
       <CreateListButton class="mb-2" />
 
       <span class="relative block overflow-hidden px-2 pb-4">
@@ -23,7 +27,7 @@
           />
         </transition-group>
       </span>
-    </MobileModalWrapper>
+    </MobileSlideModal>
   </div>
 </template>
 

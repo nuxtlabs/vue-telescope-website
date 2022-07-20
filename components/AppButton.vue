@@ -13,7 +13,7 @@
       color.outline,
       color.hoverState
     ]"
-    class="inline-flex items-center font-bold-body-weight focus:outline-none border-2 border-transparent transition-colors duration-200"
+    class="inline-flex justify-center items-center font-bold-body-weight focus:outline-none border-2 border-transparent transition-colors duration-200"
   >
     <slot></slot>
   </component>

@@ -19,3 +19,7 @@
   font-style: normal;
   font-display: swap;
 }
+
+:root {
+  --scrim-filter: saturate(200%) blur(20px);
+}

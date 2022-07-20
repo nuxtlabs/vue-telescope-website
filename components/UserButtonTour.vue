@@ -2,7 +2,10 @@
   <div class="fixed top-0 left-0 z-50 w-full h-full">
     <div
       class="absolute top-0 left-0 w-full h-full"
-      style="background-color: rgba(0, 0, 0, 0.2); backdrop-filter: blur(12px)"
+      style="
+        background-color: rgba(0, 0, 0, 0.2);
+        backdrop-filter: var(--scrim-filter);
+      "
     />
     <div
       id="tour-main-header"

@@ -71,6 +71,7 @@ const { $gsap } = useNuxtApp()
 const scrimEl = ref(null)
 const modalContainerEl = ref(null)
 
+// TODO
 function blockBodyScroll() {
   const scrollBarGap = window.innerWidth - document.documentElement.clientWidth
   // document.querySelector('#explore-showcases-section').style.filter =
@@ -177,7 +178,7 @@ onBeforeUnmount(() => {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.2);
   z-index: -1;
-  backdrop-filter: blur(18px);
+  backdrop-filter: var(--scrim-filter);
   pointer-events: none;
 }
 </style>

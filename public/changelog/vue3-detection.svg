@@ -2322,7 +2322,7 @@
                                                                 <rect width="1264" height="878" x="328" y="48" fill="#ffffff"/>
                                                             </mask>
                                                             <g data-tag="div" id="div5" data-z-index="auto" data-stacking-context="true" aria-owns="pointer-events-auto2 py-121">
-                                                                <g data-tag="div" id="pointer-events-auto2" class="pointer-events-auto twitter-like mb-12" data-z-index="auto" data-stacking-context="true" aria-owns="relative78 flex25">
+                                                                <g data-tag="div" id="pointer-events-auto2" class="pointer-events-auto floating-view mb-12" data-z-index="auto" data-stacking-context="true" aria-owns="relative78 flex25">
                                                                     <g data-tag="header" id="relative78" class="relative pt-14 pb-6 flex justify-between items-center" data-z-index="auto" data-stacking-context="true" aria-owns="relative79">
                                                                         <g data-tag="div" id="relative79" class="relative" data-z-index="auto" data-stacking-context="true" aria-owns="truncate-multiline-21 description1 h-61">
                                                                             <g data-tag="h1" id="truncate-multiline-21" class="truncate-multiline-2 pr-4 mb-2 text-five leading-five md:text-five md:leading-five font-display-weight" data-z-index="auto" data-stacking-context="true" role="heading" aria-level="1" mask="url(#mask-for-truncate-multiline-211)">

@@ -5,7 +5,7 @@
       :fetched="activeShowcase ? true : false"
       @close="activeShowcase = false"
     >
-      <ShowcaseSection :website="activeShowcase" class="twitter-like mb-12" />
+      <ShowcaseSection :website="activeShowcase" class="floating-view mb-12" />
       <CtaSection />
     </FloatingViewModal>
 

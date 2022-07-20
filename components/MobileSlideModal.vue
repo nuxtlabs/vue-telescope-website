@@ -220,7 +220,7 @@ function animateLeave() {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.2);
   /* z-index: 1000; */
-  backdrop-filter: blur(18px);
+  backdrop-filter: var(--scrim-filter);
   pointer-events: none;
 }
 
