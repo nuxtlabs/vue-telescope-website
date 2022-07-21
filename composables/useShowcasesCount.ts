@@ -4,7 +4,7 @@ export const useShowcasesCount = () => {
   const showcasesCount = useState('showcasesCount', () => null)
   const { find } = useStrapi3()
 
-  async function fetch() {
+  async function fetch () {
     if (showcasesCount.value) {
       return
     }

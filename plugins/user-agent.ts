@@ -15,7 +15,7 @@ export default defineNuxtPlugin(() => {
     isSafari.value = /Safari/i.test(ua) && !/Chrome/i.test(ua)
   }
 
-  if (process.client) refresh()
+  if (process.client) { refresh() }
 
   return {
     provide: {

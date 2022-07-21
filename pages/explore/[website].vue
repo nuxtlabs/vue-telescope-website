@@ -31,7 +31,7 @@ const { data: website } = await useAsyncData(
   () => findOne('showcases', route.params.website)
 )
 
-function onCloseModal() {
+function onCloseModal () {
   // setModal(false)
   router.push('/explore')
 }

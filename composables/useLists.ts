@@ -23,35 +23,34 @@ export const useLists = () => {
     )
   })
 
-  function setLists(payload) {
+  function setLists (payload) {
     lists.value = payload
   }
-  function addList(list) {
+  function addList (list) {
     lists.value.push(list)
   }
 
-  function updateList(list) {
-    const index = lists.value.findIndex((item) => item.id === list.id)
-    if (index >= 0) Object.assign(lists.value[index], list)
-    else lists.value.push(list)
+  function updateList (list) {
+    const index = lists.value.findIndex(item => item.id === list.id)
+    if (index >= 0) { Object.assign(lists.value[index], list) } else { lists.value.push(list) }
   }
 
-  function deleteList(list) {
-    const index = lists.value.findIndex((item) => item.id === list.id)
-    if (index >= 0) lists.value.splice(index, 1)
+  function deleteList (list) {
+    const index = lists.value.findIndex(item => item.id === list.id)
+    if (index >= 0) { lists.value.splice(index, 1) }
   }
 
-  function addGroup({ group, list }) {
-    const listIndex = lists.value.findIndex((item) => item.id === list.id)
-    if (listIndex >= 0) lists.value[listIndex].groups.push(group)
+  function addGroup ({ group, list }) {
+    const listIndex = lists.value.findIndex(item => item.id === list.id)
+    if (listIndex >= 0) { lists.value[listIndex].groups.push(group) }
   }
 
-  function updateGroup({ group, list }) {
+  function updateGroup ({ group, list }) {
     // Lists
-    const listIndex = lists.value.findIndex((item) => item.id === list.id)
+    const listIndex = lists.value.findIndex(item => item.id === list.id)
     if (listIndex >= 0) {
       const groupIndex = lists.value[listIndex].groups.findIndex(
-        (item) => item.id === group.id
+        item => item.id === group.id
       )
       if (groupIndex >= 0) {
         Object.assign(lists.value[listIndex].groups[groupIndex], group)
@@ -64,7 +63,7 @@ export const useLists = () => {
     // Selected List
     if (selectedList.value && selectedList.value.id === list.id) {
       const groupIndex = selectedList.value.groups.findIndex(
-        (item) => item.id === group.id
+        item => item.id === group.id
       )
       if (groupIndex >= 0) {
         Object.assign(selectedList.value.groups[groupIndex], group)
@@ -78,36 +77,36 @@ export const useLists = () => {
     }
   }
 
-  function deleteGroup({ group, list }) {
-    const listIndex = lists.value.findIndex((item) => item.id === list.id)
+  function deleteGroup ({ group, list }) {
+    const listIndex = lists.value.findIndex(item => item.id === list.id)
     if (listIndex >= 0) {
       const groupIndex = lists.value[listIndex].groups.findIndex(
-        (item) => item.id === group.id
+        item => item.id === group.id
       )
-      if (groupIndex >= 0) lists.value[listIndex].groups.splice(groupIndex, 1)
+      if (groupIndex >= 0) { lists.value[listIndex].groups.splice(groupIndex, 1) }
     }
   }
-  function setSelectedList(list) {
+  function setSelectedList (list) {
     selectedList.value = list
     // if (typeof list !== 'undefined') {
     //   selectedList.value = list
     // }
   }
-  function setSelectedGroup(group) {
+  function setSelectedGroup (group) {
     selectedGroup.value = group
   }
 
-  function updateShowcase({ showcase, group, list }) {
+  function updateShowcase ({ showcase, group, list }) {
     // groups
-    const listIndex = lists.value.findIndex((item) => item.id === list.id)
+    const listIndex = lists.value.findIndex(item => item.id === list.id)
     if (listIndex >= 0) {
       const groupIndex = lists.value[listIndex].groups.findIndex(
-        (item) => item.id === group.id
+        item => item.id === group.id
       )
       if (groupIndex >= 0) {
         const showcaseIndex = lists.value[listIndex].groups[
           groupIndex
-        ].showcases.findIndex((item) => item.id === showcase.id)
+        ].showcases.findIndex(item => item.id === showcase.id)
         if (showcaseIndex >= 0) {
           Object.assign(
             lists.value[listIndex].groups[groupIndex].showcases[showcaseIndex],
@@ -119,7 +118,7 @@ export const useLists = () => {
     // Selected Group
     if (selectedGroup.value?.id === group.id) {
       const showcaseIndex = selectedGroup.value.showcases.findIndex(
-        (item) => item.id === showcase.id
+        item => item.id === showcase.id
       )
       if (showcaseIndex >= 0) {
         Object.assign(selectedGroup.value.showcases[showcaseIndex], showcase)
@@ -127,7 +126,7 @@ export const useLists = () => {
     }
   }
 
-  async function createRemoteList({ name }) {
+  async function createRemoteList ({ name }) {
     const newList = await create('lists', {
       name
     })
@@ -137,7 +136,7 @@ export const useLists = () => {
     return newList
   }
 
-  async function updateRemoteList({ name, list }) {
+  async function updateRemoteList ({ name, list }) {
     const updatedList = await update('lists', list.id, {
       name
     })
@@ -146,7 +145,7 @@ export const useLists = () => {
     return updatedList
   }
 
-  async function deleteRemoteList({ list }) {
+  async function deleteRemoteList ({ list }) {
     try {
       await _delete('lists', list.id)
       deleteList(list)
@@ -160,7 +159,7 @@ export const useLists = () => {
     }
   }
 
-  async function createRemoteGroup({ name, list }) {
+  async function createRemoteGroup ({ name, list }) {
     try {
       const newGroup = await client(`lists/${list.id}/groups`, {
         method: 'POST',
@@ -180,7 +179,7 @@ export const useLists = () => {
     }
   }
 
-  async function updateRemoteGroup({ name, group, list }) {
+  async function updateRemoteGroup ({ name, group, list }) {
     try {
       const updatedGroup = await client(`lists/${list.id}/groups/${group.id}`, {
         method: 'PUT',
@@ -201,10 +200,10 @@ export const useLists = () => {
     }
   }
 
-  async function moveUpRemoteGroup({ group, list }) {
+  async function moveUpRemoteGroup ({ group, list }) {
     try {
       const groups = [...list.groups].sort((a, b) => a.position - b.position)
-      const groupIndex = groups.findIndex((g) => g.id === group.id)
+      const groupIndex = groups.findIndex(g => g.id === group.id)
       if (groupIndex < 1) {
         return
       }
@@ -230,10 +229,10 @@ export const useLists = () => {
     } catch (err) {}
   }
 
-  async function moveDownRemoteGroup({ group, list }) {
+  async function moveDownRemoteGroup ({ group, list }) {
     try {
       const groups = [...list.groups].sort((a, b) => a.position - b.position)
-      const groupIndex = groups.findIndex((g) => g.id === group.id)
+      const groupIndex = groups.findIndex(g => g.id === group.id)
       if (groupIndex === -1 || groupIndex === groups.length - 1) {
         return
       }
@@ -259,7 +258,7 @@ export const useLists = () => {
     } catch (err) {}
   }
 
-  async function deleteRemoteGroup({ group, list }) {
+  async function deleteRemoteGroup ({ group, list }) {
     await _delete(`lists/${list.id}/groups/${group.id}`)
 
     deleteGroup({
@@ -270,7 +269,7 @@ export const useLists = () => {
     return group
   }
 
-  async function bookmarkRemoteShowcase({ showcase, group, list }) {
+  async function bookmarkRemoteShowcase ({ showcase, group, list }) {
     await client(`/lists/${list.id}/groups/${group.id}/showcases`, {
       method: 'POST',
       body: {
@@ -291,13 +290,13 @@ export const useLists = () => {
     return updatedGroup
   }
 
-  async function unbookmarkRemoteShowcase({ showcase, group, list }) {
+  async function unbookmarkRemoteShowcase ({ showcase, group, list }) {
     await _delete(
       `/lists/${list.id}/groups/${group.id}/showcases/${showcase.id}`
     )
     const updatedGroup = {
       ...group,
-      showcases: group.showcases.filter((it) => it.id !== showcase.id)
+      showcases: group.showcases.filter(it => it.id !== showcase.id)
     }
     updateGroup({
       group: updatedGroup,
@@ -306,12 +305,12 @@ export const useLists = () => {
     return updatedGroup
   }
 
-  async function moveUpRemoteShowcase({ showcase, group, list }) {
+  async function moveUpRemoteShowcase ({ showcase, group, list }) {
     try {
       const showcases = [...group.showcases].sort(
         (a, b) => a.position - b.position
       )
-      const showcaseIndex = showcases.findIndex((s) => s.id === showcase.id)
+      const showcaseIndex = showcases.findIndex(s => s.id === showcase.id)
       if (showcaseIndex < 1) {
         return
       }
@@ -345,13 +344,13 @@ export const useLists = () => {
     } catch (err) {}
   }
 
-  async function moveDownRemoteShowcase({ showcase, group, list }) {
+  async function moveDownRemoteShowcase ({ showcase, group, list }) {
     console.log('moveDownRemoteShowcase')
     try {
       const showcases = [...group.showcases].sort(
         (a, b) => a.position - b.position
       )
-      const showcaseIndex = showcases.findIndex((s) => s.id === showcase.id)
+      const showcaseIndex = showcases.findIndex(s => s.id === showcase.id)
       if (showcaseIndex === -1 || showcaseIndex === showcases.length - 1) {
         return
       }

@@ -1,6 +1,6 @@
 const HANDLER = 'click_outside'
 
-function bind(el, binding) {
+function bind (el, binding) {
   unbind(el)
   const callback = binding.value
   if (typeof callback !== 'function') {
@@ -35,20 +35,20 @@ function bind(el, binding) {
   document.documentElement.addEventListener('click', el[HANDLER], false)
 }
 
-function unbind(el) {
+function unbind (el) {
   document.documentElement.removeEventListener('click', el[HANDLER], false)
   delete el[HANDLER]
 }
 
 export default {
-  created(el, binding) {
+  created (el, binding) {
     bind(el, binding)
   },
-  updated(el, binding) {
-    if (binding.value === binding.oldValue) return
+  updated (el, binding) {
+    if (binding.value === binding.oldValue) { return }
     bind(el, binding)
   },
-  beforeUnmount(el) {
+  beforeUnmount (el) {
     unbind(el)
   }
 }

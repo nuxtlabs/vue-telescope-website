@@ -1,4 +1,4 @@
-import { defineNuxtPlugin, ref, useState } from '#imports'
+import { defineNuxtPlugin, useState } from '#imports'
 
 export default defineNuxtPlugin(() => {
   const listsFeature = useState('listsFeature', () => false)

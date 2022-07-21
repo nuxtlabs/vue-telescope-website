@@ -5,7 +5,7 @@ export const useSort = () => {
     _sort: 'lastDetectedAt:desc'
   }))
 
-  function setSort(sort) {
+  function setSort (sort) {
     selectedSort.value = sort
   }
   return {

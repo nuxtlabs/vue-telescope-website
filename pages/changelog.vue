@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-container px-4 mx-auto pt-12">
     <div class="flex flex-wrap">
-      <div class="w-full md:w-1/4"></div>
+      <div class="w-full md:w-1/4" />
       <h1
         class="w-full md:w-3/4 text-center md:text-left text-four leading-four font-display-weight mb-8"
       >

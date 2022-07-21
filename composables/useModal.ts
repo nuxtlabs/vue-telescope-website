@@ -3,7 +3,7 @@ import { useState } from '#imports'
 export const useModal = () => {
   const isModal = useState('isModal', () => false)
 
-  function setModal(state) {
+  function setModal (state) {
     isModal.value = state
   }
 
