@@ -10,7 +10,9 @@
       </h1>
       <InstallExtensionButton size="large" class="mb-4" />
       <div>
-        <p class="text-center mb-1 text-base leading-base">Available on:</p>
+        <p class="text-center mb-1 text-base leading-base">
+          Available on:
+        </p>
         <div class="flex">
           <AppButton
             tag="a"

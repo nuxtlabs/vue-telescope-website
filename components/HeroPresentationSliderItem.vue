@@ -21,7 +21,7 @@
               :srcset="srcset(showcase.screenshotUrl)"
               :src="`https://res.cloudinary.com/nuxt/image/upload/w_1200,h_900,f_auto,q_auto/${showcase.screenshotUrl}`"
               alt=""
-            />
+            >
           </div>
         </div>
 
@@ -52,14 +52,13 @@
 
 <script setup lang="ts">
 import {
-  defineProps,
   computed,
   watch,
-  defineEmits,
   ref,
   nextTick,
   onMounted
 } from '#imports'
+
 const { $gsap, $SplitText } = useNuxtApp()
 
 const sliderMatrix = [
@@ -103,7 +102,7 @@ const intristicRatio = computed(() => {
   if (!imageRatio) {
     return 0
   } else {
-    const sizes = imageRatio.split(':').map((i) => parseInt(i))
+    const sizes = imageRatio.split(':').map(i => parseInt(i))
     const ratio = sizes[1] / sizes[0]
     return ratio
   }
@@ -156,7 +155,7 @@ watch(
   }
 )
 
-function clickMain(showcase) {
+function clickMain (showcase) {
   setModal(true)
   router.push({
     name: 'explore-website',
@@ -164,11 +163,11 @@ function clickMain(showcase) {
   })
 }
 
-function changeSlider() {
-  if (activeShowcases.value.length > 1) return
+function changeSlider () {
+  if (activeShowcases.value.length > 1) { return }
   emit('change-slide', activeShowcases.value[0].index)
 }
-function getNextSlide() {
+function getNextSlide () {
   const i = sliderMatrix
     .map((m) => {
       if (m[2] === props.activeIndex) {
@@ -180,7 +179,7 @@ function getNextSlide() {
   return i || 0
 }
 
-function getDirection() {
+function getDirection () {
   const activeMatrix = sliderMatrix
     .map((m) => {
       // get current slide matrix, before nextSlide
@@ -190,12 +189,12 @@ function getDirection() {
       return null
     })
     .filter(Boolean)[0]
-  return activeMatrix.findIndex((i) => i === props.activeIndex) >= 2
+  return activeMatrix.findIndex(i => i === props.activeIndex) >= 2
     ? 'left'
     : 'right'
 }
 
-function leaveTitleAnimation() {
+function leaveTitleAnimation () {
   if (props.staticIndex === 2) {
     $gsap.set(showcaseTitle.value[0], {
       opacity: 1
@@ -226,7 +225,7 @@ function leaveTitleAnimation() {
     })
   }
 }
-function enterTitleAnimation(initial = false) {
+function enterTitleAnimation (initial = false) {
   if (props.staticIndex === 2) {
     const splitted = new $SplitText(showcaseTitle.value[initial ? 0 : 1], {
       type: 'lines'
@@ -251,12 +250,12 @@ function enterTitleAnimation(initial = false) {
 // function src(screenshot) {
 //   return generateSrc(screenshot, 1200)
 // }
-function srcset(screenshot) {
+function srcset (screenshot) {
   return [160, 240, 320, 560, 800, 920, 1040, 1200]
-    .map((size) => generateSrc(screenshot, size, true))
+    .map(size => generateSrc(screenshot, size, true))
     .join(',')
 }
-function generateSrc(screenshot, size, displayRatio = false) {
+function generateSrc (screenshot, size, displayRatio = false) {
   return `https://res.cloudinary.com/nuxt/image/upload/w_${size},${
     imageRatio ? `h_${Math.round(size * intristicRatio.value)}` : ''
   },f_auto,q_auto/${screenshot}${displayRatio ? ` ${size}w` : ''}`

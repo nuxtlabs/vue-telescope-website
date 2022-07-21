@@ -175,16 +175,16 @@ onMounted(() => {
   }
 })
 
-function openDropdown() {
+function openDropdown () {
   showPopup.value = !showPopup.value
 }
 
-function clickOutsideHandler() {
+function clickOutsideHandler () {
   showPopup.value = false
   clearActions()
 }
 
-function clickOnNameHandler() {
+function clickOnNameHandler () {
   setSelectedList(props.list)
   setSelectedGroup(props.list.groups[0])
   if (!openCollapse.value) {
@@ -209,14 +209,13 @@ function clickOnNameHandler() {
   // this.creatingGroup = false
 }
 
-function clearActions() {
+function clearActions () {
   showPopup.value = false
   newListName.value = ''
   updatingList.value = false
 }
 
-async function deleteList() {
-  console.log('!!!!')
+async function deleteList () {
   try {
     showPopup.value = false
     await deleteRemoteList({
@@ -227,7 +226,7 @@ async function deleteList() {
   }
 }
 
-function initUpdateList() {
+function initUpdateList () {
   // popperInstance.forceUpdate()
   updatingList.value = true
   // this.creatingGroup = false
@@ -237,9 +236,9 @@ function initUpdateList() {
   })
 }
 
-async function updateList() {
+async function updateList () {
   try {
-    if (!newListName.value || loading.value) return
+    if (!newListName.value || loading.value) { return }
     loading.value = true
     await updateRemoteList({
       name: newListName.value,
@@ -254,7 +253,7 @@ async function updateList() {
   }
 }
 
-function groupSelectionHandler($event, group) {
+function groupSelectionHandler ($event, group) {
   setSelectedGroup($event ? group : null)
   setSelectedList($event ? props.list : null)
   if (isMobile.value) {
@@ -262,7 +261,7 @@ function groupSelectionHandler($event, group) {
   }
 }
 
-function enter(el, done) {
+function enter (el, done) {
   nextTick(() => {
     $gsap.set(el, { height: 'auto' })
     $gsap.from(el, {
@@ -277,7 +276,7 @@ function enter(el, done) {
   })
 }
 
-function leave(el, done) {
+function leave (el, done) {
   $gsap.to(el, {
     height: 0,
     autoAlpha: 0,

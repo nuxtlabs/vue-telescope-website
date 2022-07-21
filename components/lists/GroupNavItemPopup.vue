@@ -70,7 +70,7 @@ const menuEl = ref(null)
 
 const emit = defineEmits(['rename', 'delete', 'up', 'down'])
 
-const props = defineProps({
+defineProps({
   up: {
     type: Boolean,
     default: false

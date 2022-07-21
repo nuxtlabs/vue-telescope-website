@@ -24,7 +24,7 @@
                 frameworks.find((framework) => framework.slug === value).imgPath
               }`"
               alt=""
-            />
+            >
             <img
               v-else-if="key === 'ui.slug'"
               class="w-4 h-4 inline-block"
@@ -32,7 +32,7 @@
                 uis.find((ui) => ui.slug === value).imgPath
               }`"
               alt=""
-            />
+            >
             <span>{{ content({ key, value }) }}</span>
           </div>
           <button
@@ -74,7 +74,7 @@ defineProps({
   }
 })
 
-function title(key) {
+function title (key) {
   if (key === 'vueVersion_gte') {
     return 'Vue 3 only'
   } else if (key === 'isStatic') {
@@ -93,7 +93,7 @@ function title(key) {
     return 'Keyword'
   }
 }
-function content({ key, value }) {
+function content ({ key, value }) {
   if (key === 'isStatic' || key === 'hasSSR') {
     if (value.length > 1) {
       return 'Any'

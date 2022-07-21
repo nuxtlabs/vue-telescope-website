@@ -31,7 +31,7 @@ const props = defineProps({
   }
 })
 
-function login() {
+function login () {
   const redirect = useCookie('redirect')
   redirect.value = props.redirect || route.fullPath
 

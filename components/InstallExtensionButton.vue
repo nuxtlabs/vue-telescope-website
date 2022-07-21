@@ -16,12 +16,12 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineExpose, ref, computed } from '#imports'
+import { ref, computed } from '#imports'
 
 const el = ref(null)
 
 defineExpose({
-  el: el
+  el
 })
 
 defineProps({
@@ -55,16 +55,18 @@ const linkToExtention = computed(() => {
   }
 })
 
-async function processLinkNavigation(e) {
+async function processLinkNavigation (e) {
   e.preventDefault()
   await processPrivacyAwareness(linkNavigation)
 }
-function linkNavigation() {
+
+function linkNavigation () {
   window.open(linkToExtention.value, '_blank').focus()
   trackGoal()
 }
+
 // TODO
-function trackGoal() {
+function trackGoal () {
   window.fathom && window.fathom.trackGoal('13CDY7TC', 0)
 }
 </script>

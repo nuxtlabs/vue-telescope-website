@@ -76,28 +76,28 @@ const loading = ref(false)
 const creatingList = ref(false)
 
 watch(creatingList, (value) => {
-  if (!value) name.value = ''
+  if (!value) { name.value = '' }
 })
 
-function clearActions() {
+function clearActions () {
   name.value = ''
   emit('cleanup')
 }
 
-function initListCreation() {
+function initListCreation () {
   creatingList.value = true
   nextTick(() => {
     inputEl.value.$el.focus()
   })
 }
 
-function clearInput() {
+function clearInput () {
   name.value = ''
   inputEl.value.$el.focus()
 }
 
-async function createList() {
-  if (!name.value || loading.value) return
+async function createList () {
+  if (!name.value || loading.value) { return }
   try {
     loading.value = true
     await createRemoteList({
@@ -113,7 +113,7 @@ async function createList() {
   }
 }
 
-function enter(el, done) {
+function enter (el, done) {
   inputEl.value && inputEl.value.$el.focus()
   nextTick(() => {
     $gsap.set(el, { position: 'absolute', transformOrigin: 'left' })
@@ -133,7 +133,7 @@ function enter(el, done) {
   })
 }
 
-function leave(el, done) {
+function leave (el, done) {
   $gsap.set(el, { transformOrigin: 'left' })
   $gsap.to(el, {
     // position: 'absolute',

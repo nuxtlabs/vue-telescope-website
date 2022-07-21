@@ -71,12 +71,12 @@ const newListName = ref('')
 const creatingList = ref(false)
 const maxWidthStyles = ref('')
 
-function clearActions() {
+function clearActions () {
   newListName.value = ''
   emit('cleanup')
 }
 
-function initListCreation() {
+function initListCreation () {
   maxWidthStyles.value = buttonEl.value.getBoundingClientRect().width
   creatingList.value = true
   nextTick(() => {
@@ -84,9 +84,9 @@ function initListCreation() {
   })
 }
 
-async function createList() {
+async function createList () {
   try {
-    if (!newListName.value) return
+    if (!newListName.value) { return }
     await createRemoteList({
       name: newListName.value
     })
@@ -97,7 +97,7 @@ async function createList() {
   }
 }
 
-function enter(el, done) {
+function enter (el, done) {
   inputEl.value && inputEl.value.$el.focus()
   nextTick(() => {
     $gsap.set(el, { position: 'absolute', transformOrigin: 'center' })
@@ -120,7 +120,7 @@ function enter(el, done) {
   })
 }
 
-function leave(el, done) {
+function leave (el, done) {
   $gsap.set(el, { position: 'absolute', transformOrigin: 'center' })
   $gsap.to(el, {
     // position: 'absolute',

@@ -3,7 +3,9 @@
     <ShowcasesSearchInput class="mb-4" @searching="$emit('searching')" />
 
     <div class="mb-4 flex items-center">
-      <div class="mr-2 text-grey-700">Vue 3 only</div>
+      <div class="mr-2 text-grey-700">
+        Vue 3 only
+      </div>
       <AppSwitch
         :value="selectedFilters.vueVersion_gte ? true : false"
         @input="setVueThreeOnly($event)"
@@ -24,7 +26,7 @@
               class="w-4 h-4 mr-1"
               :src="`${$config.iconsURL}/vue.svg`"
               alt="Vue"
-            />
+            >
             <span>Vue</span>
           </div>
         </AppRadio>
@@ -33,7 +35,7 @@
             :id="`framework-${framework.slug}`"
             :checked="
               selectedFilters['framework.slug'] &&
-              selectedFilters['framework.slug'].includes(framework.slug)
+                selectedFilters['framework.slug'].includes(framework.slug)
             "
             class="mb-1"
             @input="radioFilter('framework.slug', framework.slug)"
@@ -43,7 +45,7 @@
                 class="w-4 h-4 mr-1"
                 :src="`${$config.iconsURL}${framework.imgPath}`"
                 :alt="framework.name"
-              />
+              >
               <span>{{ framework.name }}</span>
             </div>
           </AppRadio>
@@ -67,7 +69,7 @@
             :id="`ui-${ui.slug}`"
             :checked="
               selectedFilters['ui.slug'] &&
-              selectedFilters['ui.slug'].includes(ui.slug)
+                selectedFilters['ui.slug'].includes(ui.slug)
             "
             class="mb-1"
             @input="radioFilter('ui.slug', ui.slug)"
@@ -77,7 +79,7 @@
                 class="w-4 h-4 mr-1"
                 :src="`${$config.iconsURL}${ui.imgPath}`"
                 :alt="ui.name"
-              />
+              >
               <span>{{ ui.name }}</span>
             </div>
           </AppRadio>
@@ -93,7 +95,7 @@
             :id="`plugin-${plugin.slug}`"
             :checked="
               selectedFilters['plugins.slug'] &&
-              selectedFilters['plugins.slug'].includes(plugin.slug)
+                selectedFilters['plugins.slug'].includes(plugin.slug)
             "
             class="mb-1"
             :label="plugin.name"
@@ -111,7 +113,7 @@
             :id="`module-${module.slug}`"
             :checked="
               selectedFilters['modules.slug'] &&
-              selectedFilters['modules.slug'].includes(module.slug)
+                selectedFilters['modules.slug'].includes(module.slug)
             "
             class="mb-1"
             :label="module.name"
@@ -133,7 +135,7 @@ defineExpose({
   clearFilters
 })
 
-function setVueThreeOnly(value) {
+function setVueThreeOnly (value) {
   if (value) {
     setFilterKey({
       key: 'vueVersion_gte',
@@ -144,7 +146,7 @@ function setVueThreeOnly(value) {
   }
 }
 
-function selectNoFramework() {
+function selectNoFramework () {
   deleteFilterKey('framework.slug')
   setFilterKey({
     key: 'framework_null',
@@ -152,7 +154,7 @@ function selectNoFramework() {
   })
 }
 
-function selectNoUIFramework() {
+function selectNoUIFramework () {
   deleteFilterKey('ui.slug')
   setFilterKey({
     key: 'ui_null',
@@ -160,7 +162,7 @@ function selectNoUIFramework() {
   })
 }
 
-function radioFilter(key, value) {
+function radioFilter (key, value) {
   if (selectedFilters[key] === value) {
     deleteFilterKey(key)
   } else {
@@ -179,7 +181,7 @@ function radioFilter(key, value) {
   }
 }
 
-function checkboxFilter(key, value) {
+function checkboxFilter (key, value) {
   console.log('DUPLICATE', selectedFilters.value)
   if (!selectedFilters.value[key]) {
     console.log('111')
@@ -188,7 +190,7 @@ function checkboxFilter(key, value) {
       value: [value]
     })
   } else if (selectedFilters.value[key].includes(value)) {
-    const filteredArray = selectedFilters.value[key].filter((i) => i !== value)
+    const filteredArray = selectedFilters.value[key].filter(i => i !== value)
     console.log('222')
     setFilterKey({
       key,
@@ -208,11 +210,11 @@ function checkboxFilter(key, value) {
   }
 }
 
-function clearFilter(key) {
+function clearFilter (key) {
   deleteFilterKey(key)
 }
 
-function clearFilters(key) {
+function clearFilters (key) {
   resetFilters()
 }
 </script>

@@ -72,12 +72,12 @@ const props = defineProps({
   }
 })
 
-function clearActions() {
+function clearActions () {
   newListName.value = ''
   emit('cleanup')
 }
 
-function initGroupCreation() {
+function initGroupCreation () {
   setSelectedList(props.list)
   creatingList.value = true
   nextTick(() => {
@@ -85,9 +85,9 @@ function initGroupCreation() {
   })
 }
 
-async function createGroupMethod() {
+async function createGroupMethod () {
   try {
-    if (!newListName.value) return
+    if (!newListName.value) { return }
     await createRemoteGroup({
       name: newListName.value,
       list: props.list
@@ -99,7 +99,7 @@ async function createGroupMethod() {
   }
 }
 
-function enter(el, done) {
+function enter (el, done) {
   inputEl.value && inputEl.value.$el.focus()
   nextTick(() => {
     $gsap.set(el, { position: 'absolute', transformOrigin: 'center' })
@@ -113,11 +113,12 @@ function enter(el, done) {
       onComplete: () => {
         $gsap.set(el, { position: 'absolute' })
         inputEl.value && inputEl.value.$el.focus()
+        done()
       }
     })
   })
 }
-function leave(el, done) {
+function leave (el, done) {
   $gsap.set(el, { transformOrigin: 'center' })
   $gsap.to(el, {
     // position: 'absolute',

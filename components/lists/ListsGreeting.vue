@@ -6,8 +6,8 @@
     <h1
       class="mx-auto text-four leading-four max-w-readable md:text-three md:leading-three text-center mt-8 md:mt-16 px-12 font-bold-body-weight mb-6"
     >
-      Create <br />
-      your own Lists <br />and bookmark any website!
+      Create <br>
+      your own Lists <br>and bookmark any website!
     </h1>
     <p
       class="mx-auto text-eight leading-eight text-center mb-10 md:w-3/4 text-grey-700 px-8"

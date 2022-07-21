@@ -17,7 +17,7 @@
           {{ benefit.description }}
         </p>
         <div class="flex flex-col mb-4 text-center md:text-left">
-          <template v-for="(link, i) in benefit.links">
+          <template v-for="(link) in benefit.links">
             <a
               v-if="link.type === 'external'"
               :key="link.text"
@@ -47,7 +47,7 @@
           :src="`https://res.cloudinary.com/nuxt/image/upload/f_auto,q_auto/remote/vt${benefit.image}`"
           alt=""
           class="w-full max-w-sm md:max-w-full m-auto"
-        />
+        >
       </div>
     </div>
   </section>

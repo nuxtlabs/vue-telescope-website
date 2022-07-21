@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { useNuxtApp, useAsyncData, ref, computed, onMounted } from '#imports'
+import { useNuxtApp, useAsyncData, ref, onMounted } from '#imports'
 const { $gsap } = useNuxtApp()
 
 const activeIndex = ref(2)
@@ -45,7 +45,7 @@ const featured = featuredData.value.map((item, index) => {
   return { ...item, index }
 })
 
-function changeSlide(i) {
+function changeSlide (i) {
   activeIndex.value = i
 }
 

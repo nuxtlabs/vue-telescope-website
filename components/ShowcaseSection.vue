@@ -15,7 +15,9 @@
             {{ website.siteName || website.title }}
           </h1>
           <div class="description">
-            <p class="text-eight leading-eight">{{ website.description }}</p>
+            <p class="text-eight leading-eight">
+              {{ website.description }}
+            </p>
           </div>
           <a
             v-if="!website.isAdultContent"

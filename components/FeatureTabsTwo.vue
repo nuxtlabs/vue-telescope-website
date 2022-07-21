@@ -69,13 +69,13 @@
         ref="imageEl"
         class="absolute top-0 left-0 w-full h-full bg-100 bg-no-repeat bg-top"
         :style="`background-image: url('https://res.cloudinary.com/nuxt/image/upload/f_auto,q_auto/remote/vt${image}');`"
-      ></div>
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineProps, ref, onMounted, useNuxtApp, defineExpose } from '#imports'
+import { ref, onMounted, useNuxtApp } from '#imports'
 const { $gsap, $SplitText } = useNuxtApp()
 
 const props = defineProps({
@@ -108,7 +108,7 @@ defineExpose({
   leave
 })
 
-function wrap(el, wrapper?) {
+function wrap (el, wrapper?) {
   wrapper = document.createElement('div')
   wrapper.className = 'overflow-hidden'
   el.parentNode.insertBefore(wrapper, el)
@@ -192,7 +192,7 @@ onMounted(() => {
   )
 })
 
-function leave() {
+function leave () {
   return new Promise((resolve, reject) => {
     try {
       // // background

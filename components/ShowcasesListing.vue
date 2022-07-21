@@ -20,7 +20,7 @@ defineProps({
   }
 })
 
-function openLinkHandler(showcase) {
+function openLinkHandler (showcase) {
   router.push(`/explore/${showcase.slug}`)
 }
 </script>

@@ -12,7 +12,9 @@
       @click="selectSorting(option)"
     >
       <div :ref="option._sort" class="flex justify-between items-center">
-        <div class="text-sm leading-sm mr-2">{{ option.name }}</div>
+        <div class="text-sm leading-sm mr-2">
+          {{ option.name }}
+        </div>
         <component :is="option.icon" class="w-2" />
       </div>
     </div>
@@ -26,11 +28,11 @@ export default {
   components: {
     ArrowDownIcon
   },
-  setup() {
+  setup () {
     const { selectedSort, setSort } = useSort()
     return { selectedSort, setSort }
   },
-  data() {
+  data () {
     return {
       isOpened: false,
       optionHeight: 28,
@@ -52,22 +54,22 @@ export default {
   watch: {
     selectedSort: {
       immediate: true,
-      handler(value) {
+      handler (value) {
         // handle on on page load
         if (value._sort) {
           this.options = [
-            this.options.find((option) => option._sort === value._sort),
-            ...this.options.filter((option) => option._sort !== value._sort)
+            this.options.find(option => option._sort === value._sort),
+            ...this.options.filter(option => option._sort !== value._sort)
           ]
         }
       }
     }
   },
-  mounted() {
+  mounted () {
     this.revealAnimation()
   },
   methods: {
-    revealAnimation() {
+    revealAnimation () {
       const wrapper = this.$refs.wrapper
       this.$gsap.set(wrapper, {
         height: this.optionHeight + 2 * this.borderWidth
@@ -88,7 +90,7 @@ export default {
         }
       )
     },
-    selectSorting(sort) {
+    selectSorting (sort) {
       if (sort._sort === this.selectedSort._sort) {
         if (!this.isOpened) {
           this.openDropdown()
@@ -101,11 +103,11 @@ export default {
         this.closeDropdown()
       }
     },
-    clickOutsideHandler() {
+    clickOutsideHandler () {
       // this.closeDropdown()
-      if (this.isOpened) this.closeDropdown()
+      if (this.isOpened) { this.closeDropdown() }
     },
-    openDropdown() {
+    openDropdown () {
       this.isOpened = true
       const wrapperNode = this.$refs.wrapper
       const nameNode = this.$refs[this.options[1]._sort]
@@ -141,7 +143,7 @@ export default {
         }
       )
     },
-    closeDropdown() {
+    closeDropdown () {
       this.isOpened = false
       this.wrapperAnimation.kill()
       this.nodeAnimation.kill()

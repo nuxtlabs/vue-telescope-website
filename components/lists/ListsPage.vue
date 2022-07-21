@@ -84,7 +84,7 @@ if (sortedLists.value[0] && sortedLists.value[0].groups.length) {
   setSelectedGroup(sortedLists.value[0].groups[0])
 }
 
-function enterAnimation(el, done) {
+function enterAnimation (el, done) {
   $gsap.fromTo(
     el,
     {
@@ -100,7 +100,7 @@ function enterAnimation(el, done) {
     }
   )
 }
-function leaveAnimation(el, done) {
+function leaveAnimation (el, done) {
   // this.$gsap.set(el, {
   //   transformOrigin: 'left'
   // })
@@ -113,7 +113,7 @@ function leaveAnimation(el, done) {
   })
 }
 
-function notWorking() {
+function notWorking () {
   console.log('NOT WORKING')
 }
 </script>

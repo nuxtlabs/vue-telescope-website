@@ -8,7 +8,7 @@
       fill="none"
       stroke-width="5"
       :class="[background]"
-    ></circle>
+    />
     <circle
       class="spinner-path"
       cx="25"
@@ -17,7 +17,7 @@
       fill="none"
       stroke-width="5"
       :class="[path]"
-    ></circle>
+    />
   </svg>
 </template>
 

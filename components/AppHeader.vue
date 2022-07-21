@@ -32,8 +32,7 @@
         >
           <span
             class="has-hover:hover:opacity-50 transition-opacity duration-200"
-            >Explore</span
-          >
+          >Explore</span>
         </NuxtLink>
 
         <!-- TODO -->
@@ -61,7 +60,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from '#imports'
 import TheLogo from '@/assets/logo/logo.svg'
 import TheLogoMobile from '@/assets/logo/square-logo.svg'
 

@@ -13,16 +13,14 @@
               rel="noopener nofollow noreferrer"
               class="text-primary-500 font-medium has-hover:hover:underline"
             >
-              Netlify </a
-            >, API made with
+              Netlify </a>, API made with
             <a
               href="https://strapi.io"
               target="_blank"
               rel="noopener nofollow noreferrer"
               class="text-primary-500 font-medium has-hover:hover:underline"
             >
-              Strapi </a
-            >.
+              Strapi </a>.
           </li>
           <li class="text-grey-900">
             Images served by
@@ -40,8 +38,7 @@
               target="_blank"
               rel="noopener nofollow noreferrer"
               class="text-primary-500 font-medium has-hover:hover:underline"
-              >Icons8</a
-            >.
+            >Icons8</a>.
           </li>
         </ul>
 
@@ -95,8 +92,7 @@
               target="_blank"
               rel="noopener"
               class="text-primary-500 font-medium transition ease-linear duration-150 has-hover:hover:underline"
-              >NuxtLabs Team</a
-            >
+            >NuxtLabs Team</a>
             for the VueJS Community
           </div>
         </div>

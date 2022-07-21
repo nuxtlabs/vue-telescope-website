@@ -19,7 +19,7 @@
         <pre
           class="flex overflow-auto cursor-pointer bg-grey-200 rounded-2lg p-4 text-sm leading-sm mt-2 focus:outline-none focus:border-grey-300 border-2 border-transparent"
         >
-          <code>{{code}}</code>
+          <code>{{ code }}</code>
         </pre>
       </div>
 
@@ -50,12 +50,12 @@ const code = computed(() => {
   return `await fetch('${listUrl.value}').then(response => response.json())`
 })
 
-function selectRequest() {
+function selectRequest () {
   const el = endpointEl.value.$el
   selectText(el)
 }
 
-function selectText(el) {
+function selectText (el) {
   const range = document.createRange()
   range.selectNode(el)
   window.getSelection().removeAllRanges()

@@ -3,7 +3,7 @@
     <div
       ref="scrimEl"
       class="bg-white absolute top-0 left-0 w-full h-full"
-    ></div>
+    />
     <!-- <div
       v-if="!compact"
       ref="bg"
@@ -166,7 +166,7 @@
                 : 'text-seven leading-seven sm:text-five sm:leading-five mb-4'
             ]"
           >
-            Register with one click <br />to save websites into Lists
+            Register with one click <br>to save websites into Lists
           </div>
           <GithubLoginButton
             :size="compact ? 'small' : 'base'"
@@ -206,7 +206,7 @@ const props = defineProps({
 const showLists = ref(false)
 
 const listsWithGroups = computed(() => {
-  return lists.value.filter((list) => list.groups.length)
+  return lists.value.filter(list => list.groups.length)
 })
 
 onMounted(() => {
@@ -253,21 +253,21 @@ onMounted(() => {
   )
 })
 
-function isBookmarkedList(list) {
-  return Boolean(list.groups.map((g) => isBookmarked(g)).filter(Boolean).length)
+function isBookmarkedList (list) {
+  return Boolean(list.groups.map(g => isBookmarked(g)).filter(Boolean).length)
 }
 
-function isBookmarked(group) {
-  return group.showcases.find((s) => s.id === props.showcase.id)
+function isBookmarked (group) {
+  return group.showcases.find(s => s.id === props.showcase.id)
 }
 
-function onBookmarkClicked(list, group) {
-  group.showcases?.find((s) => s.id === props.showcase.id)
+function onBookmarkClicked (list, group) {
+  group.showcases?.find(s => s.id === props.showcase.id)
     ? unbookmark(list, group)
     : bookmark(list, group)
 }
 
-async function bookmark(list, group) {
+async function bookmark (list, group) {
   try {
     await bookmarkRemoteShowcase({
       showcase: props.showcase,
@@ -277,7 +277,7 @@ async function bookmark(list, group) {
   } catch (e) {}
 }
 
-async function unbookmark(list, group) {
+async function unbookmark (list, group) {
   try {
     await unbookmarkRemoteShowcase({
       showcase: props.showcase,

@@ -9,7 +9,9 @@
           We Respect Your Privacy
         </h2>
         <div class="flex-1 p-4 overflow-auto">
-          <p class="mb-4">Hello, fellow Vue.js developer 👋</p>
+          <p class="mb-4">
+            Hello, fellow Vue.js developer 👋
+          </p>
           <p class="mb-4">
             We started Vue Telescope project with one goal in mind: provide
             developers the best tool to explore Vue.js ecosystem for
@@ -62,16 +64,14 @@
               class="text-primary-500 has-hover:hover:underline"
               rel="noopener nofollow noreferrer"
               target="_blank"
-              >Vue Telescope analyzer</a
-            >
+            >Vue Telescope analyzer</a>
             and
             <a
               href="https://github.com/nuxt-company/vue-telescope-extensions"
               class="text-primary-500 has-hover:hover:underline"
               rel="noopener nofollow noreferrer"
               target="_blank"
-              >Vue Telescope extension</a
-            >
+            >Vue Telescope extension</a>
             is open source, so you are free to explore it and participate in
             it's development. You can also read our
             <NuxtLink
@@ -85,10 +85,10 @@
                 }
               "
             >
-              Privacy Policy</NuxtLink
-            >.
+              Privacy Policy
+            </NuxtLink>.
           </p>
-          <p></p>
+          <p />
           <p>
             By clicking Agree & Proceed button you agree with our
             <NuxtLink
@@ -102,8 +102,8 @@
                 }
               "
             >
-              Terms</NuxtLink
-            >.
+              Terms
+            </NuxtLink>.
           </p>
         </div>
         <div class="p-4 flex justify-end">
@@ -121,7 +121,7 @@
 
 <script setup lang="ts">
 const { privacyAwarenessCb, setPrivacyAwarenessCb } = usePrivacyAwareness()
-const { isModal, setModal } = useModal()
+const { isModal } = useModal()
 const { $gsap } = useNuxtApp()
 
 const modalWrapperEl = ref(null)
@@ -157,7 +157,7 @@ onBeforeUnmount(() => {
   }
 })
 
-async function makeChoice(choice) {
+async function makeChoice (choice) {
   if (choice) {
     // if user agrees on Terms
     localStorage.setItem('privacyAware', 'true')

@@ -26,15 +26,15 @@ const q = ref('')
 const emit = defineEmits(['searching'])
 
 const computedQ = computed({
-  get() {
+  get () {
     return selectedFilters.value._q
   },
-  set(value) {
+  set (value) {
     q.value = value
   }
 })
 
-function searchQ(v) {
+function searchQ (v) {
   emit('searching')
   if (!q.value) {
     deleteFilterKey('_q')

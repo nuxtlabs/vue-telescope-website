@@ -4,7 +4,7 @@
     class="relative z-[100]"
     :class="[arrow && 'bg-white rounded-md border border-grey-300']"
   >
-    <slot :popper-instance="popperInstance"></slot>
+    <slot :popper-instance="popperInstance" />
 
     <div v-if="arrow" ref="arrowEl" class="arrow w-4 h-4 relative">
       <div class="arrow-icon w-full h-full relative">
@@ -22,26 +22,26 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, ref, onMounted } from '#imports'
 import { createPopper } from '@popperjs/core'
+import { ref, onMounted } from '#imports'
 
-const placements = [
-  'auto',
-  'auto-start',
-  'auto-end',
-  'top',
-  'top-start',
-  'top-end',
-  'bottom',
-  'bottom-start',
-  'bottom-end',
-  'right',
-  'right-start',
-  'right-end',
-  'left',
-  'left-start',
-  'left-end'
-]
+// const placements = [
+//   'auto',
+//   'auto-start',
+//   'auto-end',
+//   'top',
+//   'top-start',
+//   'top-end',
+//   'bottom',
+//   'bottom-start',
+//   'bottom-end',
+//   'right',
+//   'right-start',
+//   'right-end',
+//   'left',
+//   'left-start',
+//   'left-end'
+// ]
 
 const props = defineProps({
   anchor: {

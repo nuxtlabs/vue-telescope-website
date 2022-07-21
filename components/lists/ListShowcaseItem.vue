@@ -35,7 +35,7 @@ const { findOne } = useStrapi3()
 
 const activeShowcase = ref(null)
 
-async function openLinkHandler(showcase) {
+async function openLinkHandler (showcase) {
   const fullShowcase = await findOne('showcases', showcase.slug)
   activeShowcase.value = fullShowcase
 }

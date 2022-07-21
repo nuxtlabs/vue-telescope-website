@@ -41,8 +41,8 @@
 </template>
 
 <script setup lang="ts">
-import AsideContentTemplate from '@/components/templates/AsideContentTemplate.vue'
 import qs from 'qs'
+import AsideContentTemplate from '@/components/templates/AsideContentTemplate.vue'
 import GithubIcon from '@/assets/icons/github.svg'
 
 const allowedFilters = [
@@ -56,25 +56,25 @@ const allowedFilters = [
   'vueVersion_gte'
 ]
 
-function filterFilters(raw) {
+function filterFilters (raw) {
   return Object.keys(raw)
-    .filter((key) => allowedFilters.includes(key))
+    .filter(key => allowedFilters.includes(key))
     .reduce((obj, key) => {
       obj[key] = raw[key]
       return obj
     }, {})
 }
 
-function filterSort(raw) {
+function filterSort (raw) {
   return Object.keys(raw)
-    .filter((key) => key === '_sort')
+    .filter(key => key === '_sort')
     .reduce((obj, key) => {
       obj[key] = raw[key]
       return obj
     }, {})
 }
 
-function setShowcases() {
+function setShowcases () {
   showcases.value = [...showcases.value, ...showcasesData.value]
 
   // if (
@@ -85,7 +85,7 @@ function setShowcases() {
   // }
 }
 
-function updateListing() {
+function updateListing () {
   window.scrollTo(0, 0)
   router.push({
     query: {
@@ -167,15 +167,15 @@ const filterQueryString = computed(() => {
 const { find } = useStrapi3()
 const user = useStrapiUser()
 
-function clearFilter($event) {
+function clearFilter ($event) {
   filtersEl.value && filtersEl.value.clearFilter($event)
 }
 
-function clearFilters() {
+function clearFilters () {
   filtersEl.value && filtersEl.value.clearFilters()
 }
 
-function login() {
+function login () {
   const redirect = useCookie('redirect')
   redirect.value = redirect.value || route.fullPath
 
@@ -221,7 +221,6 @@ const {
 setShowcases()
 
 watch(showcasesData, () => {
-  console.log('watch showcasesData')
   setShowcases()
 })
 
@@ -232,14 +231,12 @@ onMounted(() => {
   // })
 
   watch(currentPage, () => {
-    console.log('watch currentPage')
     showcasesRefresh()
   })
 
   watch(
     selectedFilters,
     () => {
-      console.log('watch selectedFilters')
       updateListing()
       totalCountRefresh()
     },
@@ -250,7 +247,7 @@ onMounted(() => {
     updateListing()
   })
 
-  watch(route, (newValue, oldValue) => {
+  watch(route, (newValue) => {
     if (newValue.name === 'explore') {
       // set query params when close showcase modal and have filters selected
       router.push({

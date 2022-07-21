@@ -14,7 +14,7 @@
         v-if="user"
         :src="`https://github.com/${user.username}.png?size=64`"
         class="absolute top-0 left-0 w-8 h-8 mr-1 rounded-full"
-      />
+      >
     </ClientOnly>
 
     <svg
@@ -68,7 +68,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineExpose, ref, useNuxtApp, computed } from '#imports'
+import { ref, useNuxtApp, computed } from '#imports'
 const user = useStrapiUser()
 
 const { $tour } = useNuxtApp()

@@ -12,7 +12,7 @@
         type="radio"
         :checked="checked"
         @change="$emit('input', checked)"
-      />
+      >
       <div
         ref="radiomarkWrapperEl"
         class="relative shadow radiomark-wrapper w-4 h-4 mr-2 pointer-events-none text-white rounded-full overflow-hidden border transition-colors duration-200"
@@ -25,11 +25,11 @@
           ref="colorMarkEl"
           class="absolute top-0 left-0 w-full h-full rounded-full"
           :class="[checked ? 'bg-primary-500 ' : 'bg-grey-300']"
-        ></div>
+        />
         <div
           ref="whiteMarkEl"
           class="absolute top-0 left-0 bg-white w-full h-full rounded-full"
-        ></div>
+        />
       </div>
     </div>
 
@@ -64,7 +64,7 @@ const radiomarkWrapperEl = ref(null)
 const colorMarkEl = ref(null)
 const whiteMarkEl = ref(null)
 
-function animateRadiomark(value) {
+function animateRadiomark (value) {
   if (value) {
     $gsap.fromTo(
       whiteMarkEl.value,

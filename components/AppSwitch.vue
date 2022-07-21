@@ -12,7 +12,7 @@
           ? ' transform translate-x-full border-primary-500'
           : 'border-grey-200 has-hover:group-hover:border-grey-600'
       ]"
-    ></span>
+    />
   </button>
 </template>
 
@@ -26,7 +26,7 @@ const props = defineProps({
 
 const emit = defineEmits(['input'])
 
-function processSelection() {
+function processSelection () {
   emit('input', !props.value)
 }
 </script>

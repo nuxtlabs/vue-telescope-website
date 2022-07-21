@@ -23,7 +23,7 @@
             (activeTabs.length > 1
               ? activeTabs[1].id === tab.id
               : activeTabs[0].id === tab.id) &&
-            `background-color: ${tab.surfaceColor}`
+              `background-color: ${tab.surfaceColor}`
           "
           class="h-12 text-grey-500 text-base leading-base font-bold-body-weight px-4 rounded-xl focus:outline-none border-2 border-transparent select-none mb-2 has-hover:hover:bg-grey-50 transition-colors duration-200"
           @click="startManualTransition(tab)"
@@ -103,9 +103,9 @@ const autoInterval = ref(null)
 //  refs
 const contentEl = ref([])
 
-async function startManualTransition(tab) {
-  if (activeTabs.value.length >= 2) return
-  if (!activeTabs.value.some((t) => t.id === tab.id)) {
+async function startManualTransition (tab) {
+  if (activeTabs.value.length >= 2) { return }
+  if (!activeTabs.value.some(t => t.id === tab.id)) {
     clearInterval(autoInterval.value)
     await animateSwitchTabs(tab)
     setTimeout(() => {
@@ -116,16 +116,16 @@ async function startManualTransition(tab) {
     }, 2000)
   }
 }
-async function animateSwitchTabs(tab) {
-  if (document.hidden) return
-  if (!contentEl.value[0]) return
+async function animateSwitchTabs (tab) {
+  if (document.hidden) { return }
+  if (!contentEl.value[0]) { return }
   activeTabs.value.push(tab)
   transitioning.value = true
   await contentEl.value[0].leave()
   transitioning.value = false
   activeTabs.value.shift()
 }
-function getNextTab() {
+function getNextTab () {
   return activeTabs.value[0].id === tabs.length
     ? tabs[0]
     : tabs[activeTabs.value[0].id]

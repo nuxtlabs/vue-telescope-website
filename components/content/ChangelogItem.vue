@@ -5,8 +5,7 @@
         :datetime="dateToIso(date)"
         class="block w-full text-center md:text-right text-grey-900 mb-4 font-bold-body-weight"
       >
-        {{ formatDateByLocale(date) }}</time
-      >
+        {{ formatDateByLocale(date) }}</time>
     </div>
     <div class="w-full md:w-3/4 rounded-lg" :class="[projectColors.bg]">
       <div
@@ -27,7 +26,7 @@ const props = defineProps({
   project: {
     type: String,
     default: null,
-    validator(value) {
+    validator (value) {
       return ['website', 'extension', 'analyzer'].includes(value)
     }
   },
@@ -62,19 +61,19 @@ const projectColors = computed(() => {
   }
 })
 
-function formatDateByLocale(d) {
+function formatDateByLocale (d) {
   const currentLocale = 'en'
   const options = { year: 'numeric', month: 'long', day: 'numeric' }
 
   return new Date(d).toLocaleDateString(currentLocale, options)
 }
 
-function dateToIso(date) {
+function dateToIso (date) {
   return new Date(date).toISOString()
 }
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 .website a {
   @apply text-blue-600;
 }

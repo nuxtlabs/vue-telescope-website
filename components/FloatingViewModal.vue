@@ -1,6 +1,6 @@
 <template>
   <div class="modal-wrapper">
-    <div ref="scrimEl" class="scrim" style="opacity: 0"></div>
+    <div ref="scrimEl" class="scrim" style="opacity: 0" />
     <div class="w-full h-full overflow-auto" @click.self="emit('close')">
       <!-- <div class="w-full flex pointer-events-none">
         <div
@@ -29,7 +29,7 @@
             <XmarkCircleIcon class="text-grey-900 w-6 h-6" />
           </div>
           <div class="">
-            <slot></slot>
+            <slot />
           </div>
         </div>
       </div>
@@ -72,7 +72,7 @@ const scrimEl = ref(null)
 const modalContainerEl = ref(null)
 
 // TODO
-function blockBodyScroll() {
+function blockBodyScroll () {
   const scrollBarGap = window.innerWidth - document.documentElement.clientWidth
   // document.querySelector('#explore-showcases-section').style.filter =
   //   'blur(18px)'
@@ -84,7 +84,7 @@ function blockBodyScroll() {
     '#main-header'
   ).style.paddingRight = `${scrollBarGap}px`
 }
-function unblockBodyScroll() {
+function unblockBodyScroll () {
   // document.querySelector('#explore-showcases-section').style.filter = null
   // document.querySelector('#main-footer').style.filter = null
   // document.querySelector('#main-header').style.filter = null
@@ -94,7 +94,7 @@ function unblockBodyScroll() {
     document.querySelector('#main-header').style.paddingRight = null
   }, 16)
 }
-function activateEscapeListener() {
+function activateEscapeListener () {
   const escapeHandler = (e) => {
     if (e.key === 'Escape') {
       // this.$router.push('/explore')
@@ -107,7 +107,7 @@ function activateEscapeListener() {
   //   document.removeEventListener('keydown', escapeHandler)
   // })
 }
-function animateEnter() {
+function animateEnter () {
   if (!isMobile.value) {
     $gsap.fromTo(
       scrimEl.value,

@@ -12,7 +12,7 @@
       </span>
       <span v-else>Hello, stranger 👀</span>
     </div>
-    <hr class="text-grey-100" />
+    <hr class="text-grey-100">
     <ul class="text-base p-2">
       <li class="flex">
         <NuxtLink
@@ -44,7 +44,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, defineEmits, useNuxtApp, useCookie } from '#imports'
+import { onMounted, ref, useNuxtApp, useCookie } from '#imports'
 
 const { getProviderAuthenticationUrl, logout } = useStrapiAuth()
 const user = useStrapiUser()
@@ -55,7 +55,7 @@ const el = ref(null)
 
 const emit = defineEmits(['close-menu'])
 
-function login() {
+function login () {
   closeMenu()
   const redirect = useCookie('redirect')
   redirect.value = redirect.value || route.fullPath
@@ -63,13 +63,14 @@ function login() {
   const location = getProviderAuthenticationUrl('github')
   window.location = location
 }
-async function onLogout() {
+
+async function onLogout () {
   try {
     logout()
     closeMenu()
   } catch (e) {}
 }
-function openMenuAnimation() {
+function openMenuAnimation () {
   $gsap.set(el.value, {
     transformOrigin: 'top right'
   })
@@ -92,7 +93,7 @@ function openMenuAnimation() {
     }
   )
 }
-function closeMenu() {
+function closeMenu () {
   $gsap.to(el.value, {
     // borderRadius: '20px',
     opacity: 0,

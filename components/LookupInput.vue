@@ -55,7 +55,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, defineProps, useNuxtApp } from '#imports'
+import { ref, computed, useNuxtApp } from '#imports'
 const EventSourcePolyfill = () => import('event-source-polyfill')
 
 const { $config } = useNuxtApp()
@@ -94,9 +94,8 @@ const protocolPadding = computed(() => {
   }
 })
 
-function formatUrlInput(u) {
-  console.log('formatUrlInput', u)
-  if (!u) return
+function formatUrlInput (u) {
+  if (!u) { return }
   url.value = u.includes('://') ? u.split('://')[1] : u
   errorMessage.value = ''
   const parsedURL = new URL('https://' + url.value)

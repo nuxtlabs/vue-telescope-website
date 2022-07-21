@@ -13,7 +13,7 @@
       :alt="alt"
       class="w-full"
       :class="[ratio && 'absolute top-0 left-0']"
-    />
+    >
   </div>
 </template>
 
@@ -74,11 +74,11 @@ const src = computed(() => {
 })
 const srcset = computed(() => {
   return [160, 240, 320, 560, 800, 920, 1040, 1200]
-    .map((size) => generateSrc(size, true))
+    .map(size => generateSrc(size, true))
     .join(',')
 })
 
-function generateSrc(size, displayRatio = false) {
+function generateSrc (size, displayRatio = false) {
   return `https://res.cloudinary.com/nuxt/image/upload/w_${size},${
     props.ratio ? `h_${Math.round(size * intristicRatio.value)}` : ''
   },f_auto,q_auto${props.pixelate ? '/e_pixelate:10' : ''}/vue-telemetry/${
@@ -86,7 +86,7 @@ function generateSrc(size, displayRatio = false) {
   }${displayRatio ? ` ${size}w` : ''}`
 }
 
-function lazyLoadImage() {
+function lazyLoadImage () {
   show.value = true
   nextTick(() => {
     const lazyImage = imgEl.value

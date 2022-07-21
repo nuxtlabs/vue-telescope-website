@@ -91,23 +91,23 @@ const timer = ref(null)
 
 const isBookmarkedAtLeastOnce = computed(() => {
   const showcases = lists.value
-    .flatMap((list) => list.groups)
-    .flatMap((group) => group.showcases)
-  return showcases?.find((s) => s && s.id === props.showcase.id)
+    .flatMap(list => list.groups)
+    .flatMap(group => group.showcases)
+  return showcases?.find(s => s && s.id === props.showcase.id)
 })
 
-function mouseEnterHandler() {
+function mouseEnterHandler () {
   hovered.value = true
   clearTimeout(timer.value)
 }
 
-function mouseLeaveHandler() {
+function mouseLeaveHandler () {
   hovered.value = false
   timer.value = setTimeout(closeMenu, 1000)
 }
 
-function closeMenu() {
-  if (props.compact) isBookmarking.value = false
+function closeMenu () {
+  if (props.compact) { isBookmarking.value = false }
 }
 </script>
 

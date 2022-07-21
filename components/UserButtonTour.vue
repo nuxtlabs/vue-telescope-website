@@ -107,7 +107,7 @@ onMounted(() => {
 })
 
 // TODO: move to composable
-function blockBodyScroll() {
+function blockBodyScroll () {
   const scrollBarGap = window.innerWidth - document.documentElement.clientWidth
   document.body.style.overflow = 'hidden'
   document.body.style.paddingRight = `${scrollBarGap}px`
@@ -119,7 +119,7 @@ function blockBodyScroll() {
   ).style.paddingRight = `${scrollBarGap}px`
 }
 
-function unblockBodyScroll() {
+function unblockBodyScroll () {
   setTimeout(() => {
     document.body.style.overflow = null
     document.body.style.paddingRight = null
@@ -128,14 +128,14 @@ function unblockBodyScroll() {
   }, 16)
 }
 
-function closeTour() {
+function closeTour () {
   unblockBodyScroll()
   setTimeout(() => {
     emit('close')
   }, 16)
 }
 
-function featureSeenHandler() {
+function featureSeenHandler () {
   window.localStorage.setItem('listsFeatureSeen', true)
   closeTour()
 }

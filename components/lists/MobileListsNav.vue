@@ -37,7 +37,7 @@ const { $gsap } = useNuxtApp()
 
 const show = ref(false)
 
-function enterAnimation(el, done) {
+function enterAnimation (el, done) {
   $gsap.fromTo(
     el,
     {
@@ -53,7 +53,7 @@ function enterAnimation(el, done) {
     }
   )
 }
-function leaveAnimation(el, done) {
+function leaveAnimation (el, done) {
   // this.$gsap.set(el, {
   //   transformOrigin: 'left'
   // })

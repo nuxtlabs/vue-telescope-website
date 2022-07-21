@@ -1,7 +1,7 @@
 <template>
   <component
-    ref="el"
     :is="tag"
+    ref="el"
     :href="href"
     :class="[
       sizing.height,
@@ -15,12 +15,12 @@
     ]"
     class="inline-flex justify-center items-center font-bold-body-weight focus:outline-none border-2 border-transparent transition-colors duration-200"
   >
-    <slot></slot>
+    <slot />
   </component>
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineExpose, computed, ref } from '#imports'
+import { computed, ref } from '#imports'
 
 const el = ref(null)
 

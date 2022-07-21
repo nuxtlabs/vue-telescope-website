@@ -77,12 +77,12 @@ const loading = ref(false)
 const newGroupName = ref('')
 const creatingGroup = ref(false)
 
-function clearActions() {
+function clearActions () {
   newGroupName.value = ''
   emit('cleanup')
 }
 
-function initGroupCreation() {
+function initGroupCreation () {
   setSelectedList(props.list)
   creatingGroup.value = true
   nextTick(() => {
@@ -90,14 +90,14 @@ function initGroupCreation() {
   })
 }
 
-function clearInput() {
+function clearInput () {
   newGroupName.value = ''
   inputEl.value.$el.focus()
 }
 
-async function createGroup() {
+async function createGroup () {
   try {
-    if (!newGroupName.value || loading.value) return
+    if (!newGroupName.value || loading.value) { return }
     loading.value = true
     await createRemoteGroup({
       name: newGroupName.value,

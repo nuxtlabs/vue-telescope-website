@@ -34,7 +34,7 @@ defineProps({
 const emit = defineEmits(['update'])
 const el = ref(null)
 
-function lazyLoadShowcases() {
+function lazyLoadShowcases () {
   el.value.$el.blur()
   emit('update') // this.currentPage++
 }

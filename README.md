@@ -6,6 +6,7 @@
 ---
 
 - replace `prismjs` for `ShareCollectionModal`
+- `ShowcasesSearchFilters` messy highlightning
 
 ---
 

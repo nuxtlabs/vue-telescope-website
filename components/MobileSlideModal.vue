@@ -1,6 +1,6 @@
 <template>
   <div class="modal-wrapper">
-    <div ref="scrimEl" class="scrim" style="opacity: 0"></div>
+    <div ref="scrimEl" class="scrim" style="opacity: 0" />
     <!-- <div class="fixed top-0 bg-white">{{ test }}</div> -->
     <div
       class="w-full h-full overflow-auto"
@@ -27,7 +27,7 @@
               @touchstart="touchStartHandler"
             >
               <!-- <XmarkCircleIcon class="w-6 h-6 text-grey-900" /> -->
-              <div class="w-24 h-1 rounded bg-grey-300"></div>
+              <div class="w-24 h-1 rounded bg-grey-300" />
             </div>
             <div
               class="relative flex items-center justify-between mt-2 mb-4 pointer-events-none"
@@ -37,7 +37,7 @@
               </div>
             </div>
             <div ref="modal-content" class="">
-              <slot></slot>
+              <slot />
             </div>
           </div>
         </div>
@@ -49,7 +49,6 @@
 <script setup lang="ts">
 import XmarkCircleIcon from '@/assets/icons/xmark-circle.svg'
 
-const { isModal } = useModal()
 const { isMobile, isSafari } = useUserAgent()
 const { setModal } = useModal()
 const { $gsap } = useNuxtApp()
@@ -88,7 +87,7 @@ onUnmounted(() => {
   })
 })
 
-function activateEscapeListener() {
+function activateEscapeListener () {
   const escapeHandler = (e) => {
     if (e.key === 'Escape') {
       // eslint-disable-next-line no-unused-expressions
@@ -102,7 +101,7 @@ function activateEscapeListener() {
   // })
 }
 
-function blockBodyScroll() {
+function blockBodyScroll () {
   const scrollBarGap = window.innerWidth - document.documentElement.clientWidth
   document.body.style.overflow = 'hidden'
   document.body.style.paddingRight = `${scrollBarGap}px`
@@ -113,12 +112,12 @@ function blockBodyScroll() {
   modalContainerEl.value.style.paddingRight = `calc(1rem + ${scrollBarGap}px)`
 }
 
-function touchStartHandler(e) {
+function touchStartHandler (e) {
   yStart.value = e.touches[0].clientY
   xStart.value = e.touches[0].clientX
 }
 
-function touchMoveHandler(e) {
+function touchMoveHandler (e) {
   if (!yStart.value || !xStart.value) {
     return
   }
@@ -147,7 +146,7 @@ function touchMoveHandler(e) {
   yStart.value = null
 }
 
-function animateEnter() {
+function animateEnter () {
   $gsap.fromTo(
     scrimEl.value,
     {
@@ -179,7 +178,7 @@ function animateEnter() {
   )
 }
 
-function animateLeave() {
+function animateLeave () {
   $gsap.to(scrimEl.value, {
     opacity: 0,
     duration: 0.25

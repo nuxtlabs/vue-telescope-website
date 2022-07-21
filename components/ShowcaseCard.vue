@@ -1,8 +1,8 @@
 <template>
   <div class="p-2">
     <NuxtLink
-      custom
       v-slot="{ navigate, href }"
+      custom
       class="group block hover-effect relative p-3 cursor-pointer"
       :to="{
         name: 'explore-website',
@@ -12,7 +12,7 @@
       }"
       @click.native="emit('open-link')"
     >
-      <div @click.prevent class="rounded-lg overflow-hidden mb-4 relative">
+      <div class="rounded-lg overflow-hidden mb-4 relative" @click.prevent>
         <ResponsiveCloudinaryImage
           :url="showcase.screenshotUrl"
           ratio="4:3"
@@ -39,19 +39,19 @@
               class="inline-block w-4 h-4 mr-1"
               :src="`${$config.iconsURL}${showcase.ui.imgPath}`"
               alt=""
-            />
+            >
             <img
               v-if="!showcase.framework"
               class="inline-block w-4 h-4 mr-1"
               :src="`${$config.iconsURL}/vue.svg`"
               alt=""
-            />
+            >
             <img
               v-if="showcase.framework"
               class="inline-block w-4 h-4 mr-1"
               :src="`${$config.iconsURL}${showcase.framework.imgPath}`"
               alt=""
-            />
+            >
           </div>
         </div>
       </div>

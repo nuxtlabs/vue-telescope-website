@@ -27,7 +27,7 @@
           ref="deletingScrimEl"
           class="deleting-scrim absolute top-0 left-0 w-full h-full pointer-events-none"
           style="opacity: 0"
-        ></span>
+        />
         {{ group.name }}
       </span>
     </span>
@@ -132,12 +132,12 @@ const canMoveDown = computed(() => {
   )
 })
 
-function clickOutsideHandler() {
+function clickOutsideHandler () {
   // this.showDropdown = false
   clearActions()
 }
 
-function clickOnNameHandler() {
+function clickOnNameHandler () {
   emit('group-selected', props.group.id)
   showPopup.value = false
   // this.openCollapse = !this.openCollapse
@@ -145,20 +145,20 @@ function clickOnNameHandler() {
   // this.creatingGroup = false
 }
 
-function openPopup() {
+function openPopup () {
   emit('group-selected', props.group.id)
   showPopup.value = !showPopup.value
 }
 
-function clearActions() {
+function clearActions () {
   showPopup.value = false
   newGroupName.value = ''
   updatingGroup.value = false
 }
 
-async function updateGroup() {
+async function updateGroup () {
   try {
-    if (!newGroupName.value || loading.value) return
+    if (!newGroupName.value || loading.value) { return }
     loading.value = true
     await updateRemoteGroup({
       name: newGroupName.value,
@@ -172,7 +172,7 @@ async function updateGroup() {
   }
 }
 
-async function deleteGroup() {
+async function deleteGroup () {
   try {
     deletingGroup.value = true
     $gsap.to(deletingScrimEl.value, {
@@ -191,7 +191,7 @@ async function deleteGroup() {
   }
 }
 
-function initUpdateGroup() {
+function initUpdateGroup () {
   updatingGroup.value = true
   newGroupName.value = props.group.name
   nextTick(() => {
@@ -199,7 +199,7 @@ function initUpdateGroup() {
   })
 }
 
-async function moveUpGroup() {
+async function moveUpGroup () {
   try {
     loading.value = true
     await moveUpRemoteGroup({
@@ -211,7 +211,7 @@ async function moveUpGroup() {
   loading.value = false
 }
 
-async function moveDownGroup() {
+async function moveDownGroup () {
   try {
     loading.value = true
     await moveDownRemoteGroup({

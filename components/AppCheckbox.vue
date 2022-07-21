@@ -12,7 +12,7 @@
         type="checkbox"
         :checked="checked"
         @change="$emit('input', checked)"
-      />
+      >
       <div
         style="border-radius: 4px"
         :class="[isHovered ? 'border-grey-500' : 'border-grey-300']"
@@ -67,7 +67,7 @@ const isHovered = ref(false)
 
 const checkmark = ref(null)
 
-function animateCheckmark(value) {
+function animateCheckmark (value) {
   if (value) {
     $gsap.set(checkmark.value, {
       opacity: 1

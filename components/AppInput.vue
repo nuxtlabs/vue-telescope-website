@@ -13,11 +13,11 @@
     :type="type"
     :value="modelValue"
     @input="$emit('update:modelValue', $event.target.value)"
-  />
+  >
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits, ref, computed } from '#imports'
+import { computed } from '#imports'
 
 defineEmits(['update:modelValue'])
 

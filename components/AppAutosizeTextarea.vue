@@ -7,7 +7,7 @@
     :placeholder="placeholder"
     @input="emit('update:modelValue', $event.target.value)"
     @keypress.enter.prevent="emit('submit')"
-  ></textarea>
+  />
 </template>
 
 <script setup lang="ts">
@@ -50,8 +50,8 @@ onMounted(() => {
   }, 16)
 })
 
-function calculateInputHeight(el) {
-  if (!el) return
+function calculateInputHeight (el) {
+  if (!el) { return }
   const styles = window.getComputedStyle(el)
   // const fontSize = toPx(styles.fontSize)
   const paddingTop = toPx(styles.paddingTop)

@@ -4,8 +4,12 @@
       ref="heading"
       class="inline-flex flex-col items-center text-center text-two leading-two md:text-one md:leading-one font-bold-body-weight -tracking-4 mb-12"
     >
-      <div class="opacity-0">Discover websites</div>
-      <div class="opacity-0">made with</div>
+      <div class="opacity-0">
+        Discover websites
+      </div>
+      <div class="opacity-0">
+        made with
+      </div>
       <div class="opacity-0 w-full -z-1">
         <HeroPropositionBrandsRotator />
       </div>
@@ -72,7 +76,7 @@ onMounted(() => {
       delay: 0.5,
       ease: 'power4.inOut',
       clearProps: true,
-      onComplete() {
+      onComplete () {
         lookupInput.value.classList.remove('opacity-0')
       }
     }

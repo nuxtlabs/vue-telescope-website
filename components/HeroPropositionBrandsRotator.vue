@@ -36,10 +36,10 @@ const brands = ref([
 ])
 
 const activeBrands = computed(() => {
-  return brands.value.filter((b) => b.active)
+  return brands.value.filter(b => b.active)
 })
 
-function enterTransition(el, done = () => {}) {
+function enterTransition (el, done = () => {}) {
   $gsap.fromTo(
     el,
     {
@@ -77,7 +77,7 @@ function enterTransition(el, done = () => {}) {
   // image.addEventListener('error', () => {})
 }
 
-function leaveTransition(el, done) {
+function leaveTransition (el, done) {
   $gsap.fromTo(
     el,
     {
@@ -96,12 +96,12 @@ function leaveTransition(el, done) {
   )
 }
 
-function rotateBrands() {
+function rotateBrands () {
   let currentEl = 0
   let el = brands.value[currentEl]
 
   rotationInterval.value = setInterval(() => {
-    if (document.hidden) return
+    if (document.hidden) { return }
     el.active = false
     currentEl = (currentEl + 1) % brands.value.length
 
@@ -127,8 +127,8 @@ onMounted(() => {
     >
       <div
         ref="brand"
-        class="brand"
         :key="activeBrands[0].slug"
+        class="brand"
         :class="`text-${activeBrands[0].slug}-base`"
       >
         <span>{{ activeBrands[0].name }}</span>
@@ -139,7 +139,7 @@ onMounted(() => {
             class="brand-icon"
             :class="[num % 2 && 'hidden md:block']"
             :style="`background-image: url(${$config.iconsURL}/${activeBrands[0].imgPath})`"
-          ></div>
+          />
         </div>
       </div>
     </Transition>
