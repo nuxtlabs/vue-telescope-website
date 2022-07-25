@@ -2,6 +2,8 @@
 
 - not sure how to implement properly `changelog` plugin
 - `ShowcasesSorting` with Composition
+- new solution for preloader placeholders
+- how to not wait fetching when navigate from index to /explore
 
 ---
 

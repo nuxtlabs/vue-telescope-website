@@ -29,27 +29,8 @@ export default defineNuxtConfig({
   components: [
     {
       path: '~/components',
-      global: true
-    },
-    {
-      path: '~/components/landing',
-      global: true
-    },
-    {
-      path: '~/components/lists',
-      global: true
-    },
-    {
-      path: '~/components/showcase',
-      global: true
-    },
-    {
-      path: '~/components/shooowcases',
-      global: true
+      global: true,
+      pathPrefix: false
     }
   ]
-  // components: {
-  //   global: true,
-  //   dirs: ['~/components']
-  // }
 })
