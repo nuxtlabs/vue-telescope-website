@@ -1,9 +1,9 @@
 import { onMounted } from '#imports'
 
-export const useEsc = (action) => {
+export const useEsc = (handler) => {
   const escapeHandler = (e) => {
     if (e.key === 'Escape') {
-      action()
+      handler()
     }
   }
 

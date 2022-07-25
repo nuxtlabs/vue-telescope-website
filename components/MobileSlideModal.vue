@@ -17,7 +17,7 @@
           <div
             ref="modalContainerEl"
             style="transform: translateY(100%)"
-            class="modal-container relative h-full px-4 bg-white rounded-b-none pointer-events-auto modal-container rounded-4xl"
+            class="modal-container overflow-auto relative h-full px-4 bg-white rounded-b-none pointer-events-auto rounded-4xl"
           >
             <div
               ref="close-button"
@@ -52,6 +52,7 @@ import XmarkCircleIcon from '@/assets/icons/xmark-circle.svg'
 const { isMobile, isSafari } = useUserAgent()
 const { setModal } = useModal()
 const { $gsap } = useNuxtApp()
+const { bodyLock, bodyUnlock } = useBodyLock()
 
 defineProps({
   label: {
@@ -68,49 +69,21 @@ const scrimEl = ref(null)
 const yStart = ref(null)
 const xStart = ref(null)
 
+useEsc(animateLeave)
+
 onMounted(() => {
-  activateEscapeListener()
-
   setModal(true)
-  animateEnter()
+  setTimeout(() => {
+    animateEnter()
+  })
 
-  blockBodyScroll()
+  bodyLock()
 })
 
 onUnmounted(() => {
   setModal(false)
-
-  setTimeout(() => {
-    document.body.style.overflow = null
-    document.body.style.paddingRight = null
-    document.querySelector('#main-header').style.paddingRight = null
-  })
+  bodyUnlock()
 })
-
-function activateEscapeListener () {
-  const escapeHandler = (e) => {
-    if (e.key === 'Escape') {
-      // eslint-disable-next-line no-unused-expressions
-      animateLeave
-    }
-  }
-  document.addEventListener('keydown', escapeHandler)
-  // TODO: move to composable
-  // this.$once('hook:destroyed', () => {
-  //   document.removeEventListener('keydown', escapeHandler)
-  // })
-}
-
-function blockBodyScroll () {
-  const scrollBarGap = window.innerWidth - document.documentElement.clientWidth
-  document.body.style.overflow = 'hidden'
-  document.body.style.paddingRight = `${scrollBarGap}px`
-  document.querySelector(
-    '#main-header'
-  ).style.paddingRight = `${scrollBarGap}px`
-
-  modalContainerEl.value.style.paddingRight = `calc(1rem + ${scrollBarGap}px)`
-}
 
 function touchStartHandler (e) {
   yStart.value = e.touches[0].clientY
@@ -147,35 +120,34 @@ function touchMoveHandler (e) {
 }
 
 function animateEnter () {
-  $gsap.fromTo(
-    scrimEl.value,
-    {
-      opacity: 0
-    },
-    {
-      opacity: 1,
-      duration: 0.2,
-      ease: 'none',
-      onComplete: () => {
-        if (isSafari.value) {
-          modalContainerEl.value.style.height = 'calc(100vh - 4rem)'
-        }
-        $gsap.to(modalContainerEl.value, {
-          y: 0,
-          // opacity: 0,
-          duration: 1,
-          ease: 'expo.out',
-          clearProps: true,
-          onComplete: () => {
-            // this.$refs['hack-safari'].style.height = '100%'
-            // modalContainerEl.value.style.height = '100%'
-            modalContainerEl.value.style.paddingRight = null
-            modalContainerEl.value.classList.add('overflow-auto') // md:overflow-hidden overflow-x-hidden
+  setTimeout(() => {
+    $gsap.fromTo(
+      scrimEl.value,
+      {
+        opacity: 0
+      },
+      {
+        opacity: 1,
+        duration: 0.2,
+        ease: 'none',
+        onComplete: () => {
+          if (isSafari.value) {
+            modalContainerEl.value.style.height = 'calc(100vh - 4rem)'
           }
-        })
+          $gsap.to(modalContainerEl.value, {
+            y: 0,
+            // opacity: 0,
+            duration: 1,
+            ease: 'expo.out',
+            clearProps: true,
+            onComplete: () => {
+
+            }
+          })
+        }
       }
-    }
-  )
+    )
+  }, 100)
 }
 
 function animateLeave () {

@@ -67,46 +67,13 @@ defineProps({
 
 const { isMobile } = useUserAgent()
 const { $gsap } = useNuxtApp()
+const { bodyLock, bodyUnlock } = useBodyLock()
+
+useEsc(() => emit('close'))
 
 const scrimEl = ref(null)
 const modalContainerEl = ref(null)
 
-// TODO move to composable
-function blockBodyScroll () {
-  const scrollBarGap = window.innerWidth - document.documentElement.clientWidth
-  // document.querySelector('#explore-showcases-section').style.filter =
-  //   'blur(18px)'
-  // document.querySelector('#main-footer').style.filter = 'blur(18px)'
-  // document.querySelector('#main-header').style.filter = 'blur(18px)'
-  document.body.style.overflow = 'hidden'
-  document.body.style.paddingRight = `${scrollBarGap}px`
-  document.querySelector(
-    '#main-header'
-  ).style.paddingRight = `${scrollBarGap}px`
-}
-function unblockBodyScroll () {
-  // document.querySelector('#explore-showcases-section').style.filter = null
-  // document.querySelector('#main-footer').style.filter = null
-  // document.querySelector('#main-header').style.filter = null
-  setTimeout(() => {
-    document.body.style.overflow = null
-    document.body.style.paddingRight = null
-    document.querySelector('#main-header').style.paddingRight = null
-  }, 16)
-}
-function activateEscapeListener () {
-  const escapeHandler = (e) => {
-    if (e.key === 'Escape') {
-      // this.$router.push('/explore')
-      emit('close')
-    }
-  }
-  document.addEventListener('keydown', escapeHandler)
-  // TODO
-  // this.$once('hook:deactivated', () => {
-  //   document.removeEventListener('keydown', escapeHandler)
-  // })
-}
 function animateEnter () {
   if (!isMobile.value) {
     $gsap.fromTo(
@@ -141,16 +108,15 @@ function animateEnter () {
 }
 
 onMounted(() => {
-  activateEscapeListener()
   setTimeout(() => {
     animateEnter()
   }, 32)
 
-  blockBodyScroll()
+  bodyLock()
 })
 
 onBeforeUnmount(() => {
-  unblockBodyScroll()
+  bodyUnlock()
 })
 </script>
 

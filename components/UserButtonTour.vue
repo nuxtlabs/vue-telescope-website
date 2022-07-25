@@ -9,7 +9,7 @@
     />
     <div
       id="tour-main-header"
-      class="h-16 absolute top-0 left-0 w-full min-w-body"
+      class="h-16 fixed top-0 left-0 w-full min-w-body"
     >
       <div
         class="w-full h-full flex justify-end items-center max-w-container m-auto px-4"
@@ -99,44 +99,24 @@ const emit = defineEmits(['close'])
 
 const showTooltip = ref(false)
 
+const { bodyLock, bodyUnlock } = useBodyLock()
+
 onMounted(() => {
-  blockBodyScroll()
+  bodyLock()
   setTimeout(() => {
     showTooltip.value = true
   }, 200)
 })
 
-// TODO: move to composable
-function blockBodyScroll () {
-  const scrollBarGap = window.innerWidth - document.documentElement.clientWidth
-  document.body.style.overflow = 'hidden'
-  document.body.style.paddingRight = `${scrollBarGap}px`
-  document.querySelector(
-    '#main-header'
-  ).style.paddingRight = `${scrollBarGap}px`
-  document.querySelector(
-    '#tour-main-header'
-  ).style.paddingRight = `${scrollBarGap}px`
-}
-
-function unblockBodyScroll () {
-  setTimeout(() => {
-    document.body.style.overflow = null
-    document.body.style.paddingRight = null
-    document.querySelector('#main-header').style.paddingRight = null
-    // document.querySelector('#tour-main-header').style.paddingRight = null
-  }, 16)
-}
-
 function closeTour () {
-  unblockBodyScroll()
+  bodyUnlock()
   setTimeout(() => {
     emit('close')
   }, 16)
 }
 
 function featureSeenHandler () {
-  window.localStorage.setItem('listsFeatureSeen', true)
+  window.localStorage.setItem('listsFeatureSeen', 'true')
   closeTour()
 }
 </script>

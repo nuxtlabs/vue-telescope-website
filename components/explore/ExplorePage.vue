@@ -223,7 +223,6 @@ watch(showcasesData, () => {
 
 onMounted(() => {
   // watch(filterQueryString, () => {
-  //   console.log('filterQueryString')
   //   showcasesRefresh()
   // })
 
