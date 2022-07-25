@@ -112,7 +112,6 @@ function rotateBrands () {
 
 onMounted(() => {
   rotateBrands()
-  // TODO: temp fix, since `appear` is broken
   enterTransition(brand.value)
 })
 </script>

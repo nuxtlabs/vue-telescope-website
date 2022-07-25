@@ -32,6 +32,10 @@ export default defineNuxtConfig({
       global: true
     },
     {
+      path: '~/components/landing',
+      global: true
+    },
+    {
       path: '~/components/lists',
       global: true
     },

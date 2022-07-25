@@ -149,7 +149,6 @@ export const useLists = () => {
     try {
       await _delete('lists', list.id)
       deleteList(list)
-      // TODO
       setSelectedList(sortedLists.value[0] ? sortedLists.value[0] : null)
       setSelectedGroup(selectedList.value ? selectedList.value.groups[0] : null)
       return list

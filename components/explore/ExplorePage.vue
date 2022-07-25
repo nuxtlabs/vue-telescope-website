@@ -97,7 +97,6 @@ function updateListing () {
   // hasMoreShowcases.value = true
   setTimeout(() => {
     showcases.value = []
-    // TODO: count
     showcasesRefresh()
   })
 }

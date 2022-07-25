@@ -25,24 +25,6 @@
 import { createPopper } from '@popperjs/core'
 import { ref, onMounted } from '#imports'
 
-// const placements = [
-//   'auto',
-//   'auto-start',
-//   'auto-end',
-//   'top',
-//   'top-start',
-//   'top-end',
-//   'bottom',
-//   'bottom-start',
-//   'bottom-end',
-//   'right',
-//   'right-start',
-//   'right-end',
-//   'left',
-//   'left-start',
-//   'left-end'
-// ]
-
 const props = defineProps({
   anchor: {
     default: null
@@ -57,11 +39,27 @@ const props = defineProps({
   },
   placement: {
     type: String,
-    default: 'top'
-    // TODO
-    // validator(value) {
-    //   return placements.includes(value)
-    // }
+    default: 'top',
+    validator (value) {
+      const placements = [
+        'auto',
+        'auto-start',
+        'auto-end',
+        'top',
+        'top-start',
+        'top-end',
+        'bottom',
+        'bottom-start',
+        'bottom-end',
+        'right',
+        'right-start',
+        'right-end',
+        'left',
+        'left-start',
+        'left-end'
+      ]
+      return placements.includes(value)
+    }
   },
   arrow: {
     type: Boolean,

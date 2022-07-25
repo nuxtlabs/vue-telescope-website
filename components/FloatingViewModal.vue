@@ -71,7 +71,7 @@ const { $gsap } = useNuxtApp()
 const scrimEl = ref(null)
 const modalContainerEl = ref(null)
 
-// TODO
+// TODO move to composable
 function blockBodyScroll () {
   const scrollBarGap = window.innerWidth - document.documentElement.clientWidth
   // document.querySelector('#explore-showcases-section').style.filter =

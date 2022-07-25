@@ -35,25 +35,21 @@
           >Explore</span>
         </NuxtLink>
 
-        <!-- TODO -->
-        <!-- <ClientOnly> -->
         <UserButton ref="userButtonEl" @click.native="showMenu = true" />
-        <!-- </ClientOnly> -->
 
-        <!-- TODO -->
-        <!-- <ClientOnly> -->
-        <teleport to="body">
-          <Popper
-            v-if="showMenu"
-            :offset-x="12"
-            :offset-y="-2"
-            placement="bottom-end"
-            :anchor="userButtonEl.el"
-          >
-            <UserButtonMenu @close-menu="showMenu = false" />
-          </Popper>
-        </teleport>
-        <!-- </ClientOnly> -->
+        <ClientOnly>
+          <teleport to="body">
+            <Popper
+              v-if="showMenu"
+              :offset-x="12"
+              :offset-y="-2"
+              placement="bottom-end"
+              :anchor="userButtonEl.el"
+            >
+              <UserButtonPopup @close-menu="showMenu = false" />
+            </Popper>
+          </teleport>
+        </ClientOnly>
       </div>
     </div>
   </header>
