@@ -36,4 +36,10 @@ function onCloseModal () {
   // setModal(false)
   router.push('/explore')
 }
+
+useFrontMatter({
+  title: (showcase.value && showcase.value.title) || 'Loading...',
+  description: `Reveal the Vue plugins and technology stack powering ${showcase.value ? showcase.value.domain : 'any website'}`,
+  noindex: true
+})
 </script>

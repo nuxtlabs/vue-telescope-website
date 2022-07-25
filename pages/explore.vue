@@ -12,7 +12,6 @@
 const { $directHit: directHit } = useNuxtApp()
 
 useFrontMatter({
-  title: 'Explore Vue.js showcases',
-  noindex: false
+  title: 'Explore Vue.js showcases'
 })
 </script>

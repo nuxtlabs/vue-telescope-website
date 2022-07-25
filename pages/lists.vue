@@ -3,3 +3,10 @@
     <ListsPage />
   </div>
 </template>
+
+<script setup lang="ts">
+useFrontMatter({
+  title: 'Lists',
+  noindex: true
+})
+</script>

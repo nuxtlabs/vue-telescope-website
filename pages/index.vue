@@ -14,7 +14,5 @@
 const { fetch: fetchShowcasesCount } = useShowcasesCount()
 await fetchShowcasesCount()
 
-useFrontMatter({
-  noindex: false
-})
+useFrontMatter()
 </script>

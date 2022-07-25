@@ -9,14 +9,19 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const { name } = useRoute()
 const {
   data: {
-    value: { title }
+    value: { title, description }
   }
 } = await useAsyncData(name, () => {
-  return queryContent(name).only(['title']).findOne()
+  return queryContent(name).only(['title', 'description']).findOne()
+})
+
+useFrontMatter({
+  title,
+  description
 })
 </script>
 

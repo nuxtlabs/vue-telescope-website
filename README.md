@@ -14,4 +14,3 @@
 
 - add fathom
 - check all TODO's
-- use https://github.com/vueuse/schema-org/tree/main/packages/nuxt for meta tags

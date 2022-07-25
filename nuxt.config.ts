@@ -1,7 +1,5 @@
 import { defineNuxtConfig } from 'nuxt'
 
-console.log('process.env', process.env.STRAPI_URL)
-
 export default defineNuxtConfig({
   modules: [
     '@nuxt/content',

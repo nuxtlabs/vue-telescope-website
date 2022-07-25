@@ -1,5 +1,6 @@
 ---
-title: Changelog
+title: Vue Telescope Changelog
+description: Lastest news from Vue Telescope
 updatedAt: 2021-01-25
 ---
 
@@ -15,15 +16,15 @@ You can now bookmark websites and organize them into collections and lists!
 We built this feature to gather beautiful showcase that we will list on nuxtjs.org very soon.
 
 
-[:img{src="/changelog/collections.jpg" alt="vue telescope collections" class="m-auto rounded-md shadow"}](/collections)
+[:img{src="/changelog/collections.jpg" alt="vue telescope collections" class="m-auto rounded-md shadow"}](/lists)
 
 You can also share your Collections with community and use provided data in own apps.
 
-[:img{src="/changelog/collections-sharing.jpg" alt="vue telescope sharing" class="m-auto rounded-md shadow"}](/collections)
+[:img{src="/changelog/collections-sharing.jpg" alt="vue telescope sharing" class="m-auto rounded-md shadow"}](/lists)
 
 We are looking forward your feedback and thank you again for everyone using our [browser extensions 🧩](/extensions).
 
-[📚&nbsp; Start gathering websites with collections](/collections).
+[📚&nbsp; Start gathering websites with collections](/lists).
 ::
 
 ::changelog-item{project="analyzer" date="2020-01-25"}

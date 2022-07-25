@@ -4,7 +4,7 @@
       <h1 class="text-four leading-four font-display-weight text-center mb-12">
         Check out Vue Telescope browser integrations
       </h1>
-      <div class="flex flex-wrap max-w-readable m-auto">
+      <div class="flex flex-wrap max-w-[24rem] m-auto">
         <div
           class="w-full sm:w-1/2 flex flex-col items-center justify-center mb-8"
         >
@@ -39,6 +39,8 @@
 <script setup lang="ts">
 import ChromeColorIcon from '@/assets/icons/chrome-color.svg'
 import FirefoxColorIcon from '@/assets/icons/firefox-color.svg'
+
+useFrontMatter({ title: 'Browser Extensions' })
 </script>
 
 <style scoped>
