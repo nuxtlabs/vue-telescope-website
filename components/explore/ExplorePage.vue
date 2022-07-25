@@ -75,7 +75,9 @@ function filterSort (raw) {
 }
 
 function setShowcases () {
-  showcases.value = [...showcases.value, ...showcasesData.value]
+  if (showcasesData.value) {
+    showcases.value = [...showcases.value, ...showcasesData.value]
+  }
 
   // if (
   //   showcasesData.value.length < showcasesPerPage ||
@@ -104,14 +106,6 @@ function updateListing () {
 const route = useRoute()
 const router = useRouter()
 
-// TODO: weird stuff, if I remove next line it breaks,
-// while it isn't used in this component
-const { frameworks, modules, plugins, uis } = await useTechnologies()
-// console.log('frameworks', frameworks)
-// console.log('modules', modules)
-// console.log('plugins', plugins)
-// console.log('uis', uis)
-
 const { selectedFilters, setFilters } = useFilters()
 const { isModal } = useModal()
 const { getProviderAuthenticationUrl } = useStrapiAuth()
@@ -139,8 +133,8 @@ const totalCount = computed(() => {
 
 const hasMoreShowcases = computed(() => {
   if (
-    showcasesData.value.length < showcasesPerPage ||
-    (showcases.value.length >= maxShowCount && !user.value)
+    (showcasesData.value && showcasesData.value.length < showcasesPerPage) ||
+    (showcases.value && showcases.value.length >= maxShowCount && !user.value)
   ) {
     return false
   } else {
@@ -197,6 +191,8 @@ const {
     return []
   }
   return find(`showcases${filterQueryString.value}`)
+}, {
+  lazy: true
 })
 
 const {
@@ -210,6 +206,8 @@ const {
     return 0
   }
   return find(`showcases/count${filterQueryString.value}`)
+}, {
+  lazy: true
 })
 
 // const totalCount = await this.$strapi.find(

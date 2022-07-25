@@ -1,4 +1,4 @@
-import { useState, useAsyncData } from '#imports'
+import { useState } from '#imports'
 
 export const useFilters = () => {
   const selectedFilters = useState('selectedFilters', () => ({}))
@@ -12,7 +12,6 @@ export const useFilters = () => {
   }
 
   function setFilterKey ({ key, value }) {
-    console.log('setFilterKey', key, value)
     selectedFilters.value = { ...selectedFilters.value, [key]: value }
   }
 

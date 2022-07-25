@@ -37,12 +37,16 @@ const heroPresentationSlider = ref(null)
 
 const { find } = useStrapi3()
 
-// TODO: fetchOnServer: false
 const { data: featuredData } = await useAsyncData('showcases/featured', () =>
-  find('showcases?isFeatured=true&_limit=5')
+  find('showcases?isFeatured=true&_limit=5'), { lazy: true, server: false }
 )
-const featured = featuredData.value.map((item, index) => {
-  return { ...item, index }
+
+const featured = computed(() => {
+  return featuredData.value
+    ? featuredData.value.map((item, index) => {
+      return { ...item, index }
+    })
+    : []
 })
 
 function changeSlide (i) {

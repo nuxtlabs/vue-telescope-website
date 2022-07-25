@@ -95,7 +95,7 @@ function activateEscapeListener () {
     }
   }
   document.addEventListener('keydown', escapeHandler)
-  // TODO
+  // TODO: move to composable
   // this.$once('hook:destroyed', () => {
   //   document.removeEventListener('keydown', escapeHandler)
   // })

@@ -1,4 +1,4 @@
-import { useState, useAsyncData } from '#imports'
+import { useState } from '#imports'
 
 export const useSort = () => {
   const selectedSort = useState('selectedSort', () => ({
