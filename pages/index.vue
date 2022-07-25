@@ -13,4 +13,8 @@
 <script setup lang="ts">
 const { fetch: fetchShowcasesCount } = useShowcasesCount()
 await fetchShowcasesCount()
+
+useFrontMatter({
+  noindex: false
+})
 </script>

@@ -1,5 +1,7 @@
 import { defineNuxtConfig } from 'nuxt'
 
+console.log('process.env', process.env.STRAPI_URL)
+
 export default defineNuxtConfig({
   modules: [
     '@nuxt/content',
@@ -15,6 +17,9 @@ export default defineNuxtConfig({
     }
   },
   publicRuntimeConfig: {
+    baseUrl: (process.env.CONTEXT === 'production'
+      ? process.env.URL
+      : process.env.DEPLOY_PRIME_URL) || 'http://localhost:3000',
     strapiURL: process.env.STRAPI_URL || 'http://localhost:1337',
     serviceURL: process.env.SERVICE_URL || 'http://localhost:3001',
     iconsURL: process.env.ICONS_URL,

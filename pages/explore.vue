@@ -10,4 +10,9 @@
 
 <script setup lang="ts">
 const { $directHit: directHit } = useNuxtApp()
+
+useFrontMatter({
+  title: 'Explore Vue.js showcases',
+  noindex: false
+})
 </script>
