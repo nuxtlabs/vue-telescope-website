@@ -2,17 +2,17 @@
   <div>
     <div v-if="directHit" class="px-4 xl:px-8">
       <ShowcaseSection
-        :website="website"
+        :showcase="showcase"
         class="max-w-readable xl:max-w-container m-auto"
       />
     </div>
 
     <div v-else>
       <FloatingViewModal
-        :fetched="website ? true : false"
+        :fetched="showcase ? true : false"
         @close="onCloseModal"
       >
-        <ShowcaseSection :website="website" class="floating-view mb-12" />
+        <ShowcaseSection :showcase="showcase" class="floating-view mb-12" />
         <CtaSection />
       </FloatingViewModal>
     </div>
@@ -26,9 +26,9 @@ const { $directHit: directHit } = useNuxtApp()
 const { findOne } = useStrapi3()
 // const { setModal } = useModal()
 
-const { data: website } = await useAsyncData(
-  `showcases:${route.params.website}`,
-  () => findOne('showcases', route.params.website)
+const { data: showcase } = await useAsyncData(
+  `showcases:${route.params.showcase}`,
+  () => findOne('showcases', route.params.showcase)
 )
 
 function onCloseModal () {

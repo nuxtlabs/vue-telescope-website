@@ -2,65 +2,65 @@
   <div>
     <div class="mb-10 mt-8">
       <div class="label mb-4 xl:px-8">
-        <AppWebsiteDataLabel>
+        <ShowcaseInfoLabel>
           <InfoIcon class="h-5 mr-2 opacity-50" />Info
-        </AppWebsiteDataLabel>
+        </ShowcaseInfoLabel>
       </div>
       <div class="data-wrapper flex flex-wrap xl:px-8">
-        <ExploreDataItem
+        <ShowcaseInfoItem
           label="Vue Version"
           tag="a"
           href="https://vuejs.org"
           target="_blank"
           rel="noreferrer noopener"
           :image="`${$config.iconsURL}/vue.svg`"
-          :text="website.vueVersion"
+          :text="showcase.vueVersion"
         />
 
-        <ExploreDataItem
-          v-if="website.framework"
+        <ShowcaseInfoItem
+          v-if="showcase.framework"
           label="Framework"
           tag="a"
-          :href="website.framework.url"
+          :href="showcase.framework.url"
           target="_blank"
           rel="noreferrer noopener"
-          :image="`${$config.iconsURL}${website.framework.imgPath}`"
-          :text="website.framework.name"
+          :image="`${$config.iconsURL}${showcase.framework.imgPath}`"
+          :text="showcase.framework.name"
         />
 
-        <ExploreDataItem
-          v-if="website.ui"
+        <ShowcaseInfoItem
+          v-if="showcase.ui"
           label="UI Framework"
           tag="a"
-          :href="website.ui.url"
+          :href="showcase.ui.url"
           target="_blank"
           rel="noreferrer noopener"
-          :image="`${$config.iconsURL}${website.ui.imgPath}`"
-          :text="website.ui.name"
+          :image="`${$config.iconsURL}${showcase.ui.imgPath}`"
+          :text="showcase.ui.name"
         />
 
-        <ExploreDataItem
+        <ShowcaseInfoItem
           label="Rendering"
-          :text="website.hasSSR ? 'Universal' : 'Client-side'"
+          :text="showcase.hasSSR ? 'Universal' : 'Client-side'"
         />
 
-        <ExploreDataItem
-          v-if="website.framework && website.framework.slug === 'nuxtjs'"
+        <ShowcaseInfoItem
+          v-if="showcase.framework && showcase.framework.slug === 'nuxtjs'"
           label="Deployment"
-          :text="website.isStatic ? 'Static' : 'Server'"
+          :text="showcase.isStatic ? 'Static' : 'Server'"
         />
       </div>
     </div>
 
-    <div v-if="website.plugins.length" class="mb-10">
+    <div v-if="showcase.plugins.length" class="mb-10">
       <div class="label mb-4 xl:px-8">
-        <AppWebsiteDataLabel>
+        <ShowcaseInfoLabel>
           <PluginsIcon class="h-6 mr-2 opacity-50" />Plugins
-        </AppWebsiteDataLabel>
+        </ShowcaseInfoLabel>
       </div>
       <div class="data-wrapper flex flex-wrap xl:px-8">
-        <ExploreDataItem
-          v-for="{ name, id, url } in website.plugins"
+        <ShowcaseInfoItem
+          v-for="{ name, id, url } in showcase.plugins"
           :key="id"
           :href="url"
           tag="a"
@@ -71,17 +71,17 @@
       </div>
     </div>
 
-    <div v-if="website.modules.length" class="mb-10">
+    <div v-if="showcase.modules.length" class="mb-10">
       <div class="label mb-4 xl:px-8">
-        <AppWebsiteDataLabel>
+        <ShowcaseInfoLabel>
           <ModulesIcon class="h-6 mr-2 opacity-50" />
           <span>Nuxt Modules</span>
-        </AppWebsiteDataLabel>
+        </ShowcaseInfoLabel>
       </div>
 
       <div class="data-wrapper flex flex-wrap xl:px-8">
-        <ExploreDataItem
-          v-for="{ name, id, url } in website.modules"
+        <ShowcaseInfoItem
+          v-for="{ name, id, url } in showcase.modules"
           :key="id"
           :href="url"
           tag="a"
@@ -100,7 +100,7 @@ import PluginsIcon from '@/assets/icons/plugins.svg'
 import InfoIcon from '@/assets/icons/info.svg'
 
 defineProps({
-  website: {
+  showcase: {
     type: Object,
     default: () => {}
   }

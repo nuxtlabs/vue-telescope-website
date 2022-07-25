@@ -13,7 +13,7 @@
     </div>
 
     <div class="mb-4">
-      <AppFilterLabel>Framework</AppFilterLabel>
+      <ShowcasesFilterLabel>Framework</ShowcasesFilterLabel>
       <div class="flex flex-col">
         <AppRadio
           :id="`framework-null`"
@@ -54,7 +54,7 @@
     </div>
 
     <div class="mb-4">
-      <AppFilterLabel>UI Framework</AppFilterLabel>
+      <ShowcasesFilterLabel>UI Framework</ShowcasesFilterLabel>
       <div class="flex flex-col">
         <AppRadio
           :id="`ui-null`"
@@ -88,7 +88,7 @@
     </div>
 
     <div class="mb-4">
-      <AppFilterLabel>Plugins</AppFilterLabel>
+      <ShowcasesFilterLabel>Plugins</ShowcasesFilterLabel>
       <div class="flex flex-col">
         <template v-for="plugin in plugins" :key="plugin.id">
           <AppCheckbox
@@ -106,7 +106,7 @@
     </div>
 
     <div v-show="selectedFilters['framework.slug'] === 'nuxtjs'" class="mb-4">
-      <AppFilterLabel>Modules</AppFilterLabel>
+      <ShowcasesFilterLabel>Modules</ShowcasesFilterLabel>
       <div class="flex flex-col">
         <template v-for="module in modules" :key="module.id">
           <AppCheckbox

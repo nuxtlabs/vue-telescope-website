@@ -32,8 +32,8 @@
               :key="showcase.id"
               class="absolute top-0 left-0 mt-4"
               :to="{
-                name: 'explore-website',
-                params: { website: showcase.slug }
+                name: 'explore-showcase',
+                params: { showcase: showcase.slug }
               }"
             >
               <h2
@@ -158,8 +158,8 @@ watch(
 function clickMain (showcase) {
   setModal(true)
   router.push({
-    name: 'explore-website',
-    params: { website: showcase.slug }
+    name: 'explore-showcase',
+    params: { showcase: showcase.slug }
   })
 }
 

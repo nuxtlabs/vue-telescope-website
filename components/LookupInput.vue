@@ -127,9 +127,9 @@ const analyzeWebsite = async () => {
       if (!res.error && !res.isAdultContent) {
         setModal(true)
         router.push({
-          name: 'explore-website',
+          name: 'explore-showcase',
           params: {
-            website: res.slug
+            showcase: res.slug
           }
         })
       } else if (!res.error && res.isAdultContent) {

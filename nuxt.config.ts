@@ -42,6 +42,14 @@ export default defineNuxtConfig({
     {
       path: '~/components/showcase',
       global: true
+    },
+    {
+      path: '~/components/shooowcases',
+      global: true
     }
   ]
+  // components: {
+  //   global: true,
+  //   dirs: ['~/components']
+  // }
 })

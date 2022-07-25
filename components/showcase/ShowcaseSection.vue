@@ -1,37 +1,37 @@
 <template>
   <div class="pointer-events-auto min-h-screen">
     <!-- <div
-      v-if="!website"
+      v-if="!showcase"
       class="w-full h-full flex items-center justify-center pt-12 text-seven font-display-weight"
     >
       LOADING!!!
     </div> -->
-    <template v-if="website">
+    <template v-if="showcase">
       <header class="relative pt-14 pb-6 flex justify-between items-center">
         <div class="relative">
           <h1
             class="truncate-multiline-2 pr-4 mb-2 text-five leading-five md:text-five md:leading-five font-display-weight"
           >
-            {{ website.siteName || website.title }}
+            {{ showcase.siteName || showcase.title }}
           </h1>
           <div class="description">
             <p class="text-eight leading-eight">
-              {{ website.description }}
+              {{ showcase.description }}
             </p>
           </div>
           <a
-            v-if="!website.isAdultContent"
-            :href="website.url"
+            v-if="!showcase.isAdultContent"
+            :href="showcase.url"
             target="_blank"
             class="h-6 absolute top-0 left-0 flex -mt-7 text-primary-300 has-hover:hover:opacity-50 font-bold-body-weight"
           >
             <LinkIcon class="w-3 mr-2" />
-            <span class style="width: max-content">{{ website.hostname }}</span>
+            <span class style="width: max-content">{{ showcase.hostname }}</span>
           </a>
         </div>
 
         <div
-          v-if="website.isAdultContent"
+          v-if="showcase.isAdultContent"
           class="flex items-center font-display-weight text-orange-500"
         >
           <ExclamationIcon class="w-5 h-5 mr-2" />18+
@@ -41,21 +41,21 @@
       <div class="flex flex-wrap">
         <div class="w-full xl:w-1/2 mb-8">
           <div class="image relative rounded-xl overflow-hidden">
-            <ResponsiveCloudinaryImage
-              :url="website.screenshotUrl"
-              :pixelate="website.isAdultContent"
+            <AppResponsiveCloudinaryImage
+              :url="showcase.screenshotUrl"
+              :pixelate="showcase.isAdultContent"
               ratio="4:3"
               sizes="100vw"
               class=""
             />
             <ClientOnly>
-              <ShowcaseBookmark :showcase="website" />
+              <ShowcaseBookmark :showcase="showcase" />
             </ClientOnly>
           </div>
         </div>
 
         <div class="w-full xl:w-1/2">
-          <WebsiteInfo :website="website" />
+          <ShowcaseInfo :showcase="showcase" />
         </div>
       </div>
     </template>
@@ -68,7 +68,7 @@ import LinkIcon from '@/assets/icons/link.svg'
 // import CancelIcon from '@/assets/icons/xmark-circle.svg'
 
 defineProps({
-  website: {
+  showcase: {
     type: Object,
     default: () => {}
   }

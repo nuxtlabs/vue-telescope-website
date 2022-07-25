@@ -1,19 +1,17 @@
 <template>
   <div class="p-2">
     <NuxtLink
-      v-slot="{ navigate, href }"
-      custom
       class="group block hover-effect relative p-3 cursor-pointer"
       :to="{
-        name: 'explore-website',
+        name: 'explore-showcase',
         params: {
-          website: showcase.slug
+          showcase: showcase.slug
         }
       }"
       @click.native="emit('open-link')"
     >
       <div class="rounded-lg overflow-hidden mb-4 relative" @click.prevent>
-        <ResponsiveCloudinaryImage
+        <AppResponsiveCloudinaryImage
           :url="showcase.screenshotUrl"
           ratio="4:3"
           sizes="(min-width: 834px) 33vw, (min-width: 640px) 50vw, 100vw"
