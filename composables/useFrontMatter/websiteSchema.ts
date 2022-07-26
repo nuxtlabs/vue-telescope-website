@@ -1,13 +1,3 @@
-// export default ({ baseUrl, name, description }) => {
-//   return {
-//     '@context': 'http://schema.org',
-//     '@type': 'WebSite',
-//     url: baseUrl,
-//     name,
-//     description
-//   }
-// }
-
 type WebsiteSchemaParams = {
   baseUrl: string;
   name: string;

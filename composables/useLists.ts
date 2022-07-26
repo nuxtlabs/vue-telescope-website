@@ -72,7 +72,6 @@ export const useLists = () => {
     }
     // Selected Group
     if (selectedGroup.value && selectedGroup.value.id === group.id) {
-      console.log('DO NOT FIRE', selectedGroup.value)
       Object.assign(selectedGroup.value, group)
     }
   }
@@ -344,7 +343,6 @@ export const useLists = () => {
   }
 
   async function moveDownRemoteShowcase ({ showcase, group, list }) {
-    console.log('moveDownRemoteShowcase')
     try {
       const showcases = [...group.showcases].sort(
         (a, b) => a.position - b.position

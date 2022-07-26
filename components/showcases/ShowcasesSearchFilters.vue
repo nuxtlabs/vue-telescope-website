@@ -182,16 +182,13 @@ function radioFilter (key, value) {
 }
 
 function checkboxFilter (key, value) {
-  console.log('DUPLICATE', selectedFilters.value)
   if (!selectedFilters.value[key]) {
-    console.log('111')
     setFilterKey({
       key,
       value: [value]
     })
   } else if (selectedFilters.value[key].includes(value)) {
     const filteredArray = selectedFilters.value[key].filter(i => i !== value)
-    console.log('222')
     setFilterKey({
       key,
       value: [...filteredArray]
@@ -201,8 +198,6 @@ function checkboxFilter (key, value) {
       deleteFilterKey(key)
     }
   } else {
-    console.log('333')
-
     setFilterKey({
       key,
       value: [...selectedFilters.value[key], value]
@@ -214,7 +209,7 @@ function clearFilter (key) {
   deleteFilterKey(key)
 }
 
-function clearFilters (key) {
+function clearFilters () {
   resetFilters()
 }
 </script>
