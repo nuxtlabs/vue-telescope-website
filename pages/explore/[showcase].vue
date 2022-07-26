@@ -26,10 +26,11 @@ const { $directHit: directHit } = useNuxtApp()
 const { findOne } = useStrapi3()
 // const { setModal } = useModal()
 
-// TODO: server, lazy?
 const { data: showcase } = await useAsyncData(
   `showcases:${route.params.showcase}`,
-  () => findOne('showcases', route.params.showcase)
+  () => findOne('showcases', route.params.showcase), {
+    server: false, lazy: true
+  }
 )
 
 function onCloseModal () {

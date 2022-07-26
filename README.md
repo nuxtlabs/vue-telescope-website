@@ -11,6 +11,5 @@
 
 ---
 
-- add fathom
 - check all TODO's
 - new solution for preloader placeholders

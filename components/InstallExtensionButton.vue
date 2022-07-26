@@ -65,7 +65,6 @@ function linkNavigation () {
   trackGoal()
 }
 
-// TODO
 function trackGoal () {
   window.fathom && window.fathom.trackGoal('13CDY7TC', 0)
 }

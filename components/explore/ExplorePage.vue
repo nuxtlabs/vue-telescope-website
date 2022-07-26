@@ -192,7 +192,8 @@ const {
   }
   return find(`showcases${filterQueryString.value}`)
 }, {
-  lazy: true
+  lazy: true,
+  server: false
 })
 
 const {
@@ -207,7 +208,8 @@ const {
   }
   return find(`showcases/count${filterQueryString.value}`)
 }, {
-  lazy: true
+  lazy: true,
+  server: false
 })
 
 // const totalCount = await this.$strapi.find(

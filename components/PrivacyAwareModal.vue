@@ -131,7 +131,7 @@ useEsc(() => makeChoice(false))
 onMounted(() => {
   if (!isModal.value) {
     document.body.style.overflow = 'hidden'
-    // TODO: bug
+    // TODO: bug?
     // setModal(true)
   }
   $gsap.fromTo(
@@ -152,7 +152,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
   if (!isModal.value) {
     document.body.style.overflow = null
-    // TODO: bug
+    // TODO: bug?
     // setModal(false)
   }
 })
