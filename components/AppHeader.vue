@@ -12,18 +12,18 @@
         <TheLogoMobile class="h-10 sm:hidden" />
       </NuxtLink>
       <div class="flex items-center">
-        <!-- TODO -->
-        <!-- <ChangelogLink
-          ref="changelog"
-          class="mr-2 sm:mr-4 hidden sm:inline-flex"
-        >
-          <span
-            v-if="!$changelog.hasSeen"
-            class="has-hover:hover:opacity-50 transition-opacity duration-200"
+        <ClientOnly>
+          <ChangelogLink
+            class="mr-2 sm:mr-4 hidden sm:inline-flex"
           >
-            What's New
-          </span>
-        </ChangelogLink> -->
+            <span
+              v-if="!$changelog.hasSeen.value"
+              class="has-hover:hover:opacity-50 transition-opacity duration-200"
+            >
+              What's New
+            </span>
+          </ChangelogLink>
+        </ClientOnly>
 
         <NuxtLink
           ref="explore-link"
@@ -62,6 +62,7 @@ import TheLogoMobile from '@/assets/logo/square-logo.svg'
 const userButtonEl = ref(null)
 
 const showMenu = ref(false)
+
 </script>
 
 <style scoped>

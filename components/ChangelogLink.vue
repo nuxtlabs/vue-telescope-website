@@ -2,11 +2,12 @@
   <NuxtLink
     to="/changelog"
     class="relative"
-    :class="[!$changelog.hasSeen && 'text-primary-500']"
+    :class="[!$changelog.hasSeen.value && 'text-primary-500']"
   >
     <slot />
+    <!-- Duplicate slot for blurry animation -->
     <div
-      v-if="!$changelog.hasSeen"
+      v-if="!$changelog.hasSeen.value"
       class="absolute top-0 left-0 animate-notification pointer-events-none"
     >
       <slot />

@@ -24,9 +24,15 @@ const {
   return queryContent(name).only(['title', 'description']).findOne()
 })
 
+const { $changelog } = useNuxtApp()
+
 useFrontMatter({
   title,
   description
+})
+
+onMounted(() => {
+  $changelog.saw()
 })
 </script>
 

@@ -61,20 +61,13 @@
               Privacy
             </NuxtLink>
           </li>
-          <li>
-            <NuxtLink
-              to="/changelog"
-              class="has-hover:hover:text-primary-500 font-medium"
-            >
-              Changelog
-            </NuxtLink>
-          </li>
-          <!-- TODO: once we setup the plugins/changelog.ts -->
-          <!-- <li>
-            <ChangelogLink class="has-hover:hover:text-primary-500 font-medium">
-              <span class="">Changelog</span>
-            </ChangelogLink>
-          </li> -->
+          <ClientOnly>
+            <li>
+              <ChangelogLink class="has-hover:hover:text-primary-500 font-medium">
+                <span class="">Changelog</span>
+              </ChangelogLink>
+            </li>
+          </ClientOnly>
         </ul>
       </div>
 
