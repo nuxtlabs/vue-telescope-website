@@ -3,22 +3,20 @@ import { useState } from '#imports'
 export default defineNuxtPlugin(async () => {
   const lastSeenAt = useState('lastSeenAt', () => null)
 
-  const {
-    data: {
-      value: { updatedAt }
-    }
-  } = await useAsyncData('changelog', () => {
-    return queryContent('changelog').only(['updatedAt']).findOne()
-  })
+  const updatedAt = useState('updatedAt', () => null)
+
+  if (!updatedAt.value) {
+    const data = await queryContent('changelog').only(['updatedAt']).findOne()
+    updatedAt.value = data.updatedAt
+  }
 
   const hasSeen = computed(() => {
     if (!lastSeenAt.value) { return false }
-
-    return new Date(lastSeenAt.value) >= new Date(updatedAt)
+    return new Date(lastSeenAt.value) >= new Date(updatedAt.value)
   })
 
   function saw () {
-    lastSeenAt.value = updatedAt
+    lastSeenAt.value = updatedAt.value
     localStorage.setItem('changelog_seen_at', lastSeenAt.value)
   }
 

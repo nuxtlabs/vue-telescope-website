@@ -1,6 +1,5 @@
 ## TODO
 
-- `[Vue warn]: onServerPrefetch is called` warn in `changelog` plugin
 - bug: `ShowcasesSelectedFilters` `transition-group` SSR error
 
 ---
