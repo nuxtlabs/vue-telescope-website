@@ -31,7 +31,7 @@
             :pending="showcasesPending"
             @update="currentPage++"
           />
-          <AppButton v-else-if="!showcasesPending" @click="login">
+          <AppButton v-else-if="!showcasesPending && showcases.length > 24 && !user" @click="login">
             Login with <GithubIcon class="h-6 w-6 mx-1" /> to see all
           </AppButton>
         </div>

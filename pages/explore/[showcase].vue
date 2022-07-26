@@ -28,9 +28,7 @@ const { findOne } = useStrapi3()
 
 const { data: showcase } = await useAsyncData(
   `showcases:${route.params.showcase}`,
-  () => findOne('showcases', route.params.showcase), {
-    server: false, lazy: true
-  }
+  () => findOne('showcases', route.params.showcase)
 )
 
 function onCloseModal () {
