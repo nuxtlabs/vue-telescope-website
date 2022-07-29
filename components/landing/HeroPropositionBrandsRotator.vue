@@ -112,7 +112,7 @@ function rotateBrands () {
 
 onMounted(() => {
   rotateBrands()
-  enterTransition(brand.value)
+  setTimeout(() => enterTransition(brand.value), 100)
 })
 </script>
 
