@@ -15,4 +15,11 @@ const { fetch: fetchShowcasesCount } = useShowcasesCount()
 await fetchShowcasesCount()
 
 useFrontMatter()
+
+// TODO: temp solution
+if (process.client) {
+  setTimeout(() => {
+    window.scrollTo({ top: 0 })
+  }, 0)
+}
 </script>

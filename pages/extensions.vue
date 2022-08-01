@@ -41,6 +41,13 @@ import ChromeColorIcon from '@/assets/icons/chrome-color.svg'
 import FirefoxColorIcon from '@/assets/icons/firefox-color.svg'
 
 useFrontMatter({ title: 'Browser Extensions' })
+
+// TODO: temp solution
+if (process.client) {
+  setTimeout(() => {
+    window.scrollTo({ top: 0 })
+  }, 0)
+}
 </script>
 
 <style scoped>

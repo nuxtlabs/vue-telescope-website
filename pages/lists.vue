@@ -9,4 +9,11 @@ useFrontMatter({
   title: 'Lists',
   noindex: true
 })
+
+// TODO: temp solution
+if (process.client) {
+  setTimeout(() => {
+    window.scrollTo({ top: 0 })
+  }, 0)
+}
 </script>

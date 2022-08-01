@@ -34,6 +34,13 @@ useFrontMatter({
 onMounted(() => {
   $changelog.saw()
 })
+
+// TODO: temp solution
+if (process.client) {
+  setTimeout(() => {
+    window.scrollTo({ top: 0 })
+  }, 0)
+}
 </script>
 
 <style lang="postcss" scoped>
