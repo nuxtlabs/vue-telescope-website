@@ -2,31 +2,20 @@ import type { RouterConfig } from '@nuxt/schema'
 
 // // https://router.vuejs.org/api/#routeroptions
 export default <RouterConfig>{
-//   scrollBehavior: (to, _, savedPosition) => {
-//     // Scroll to heading on click
-//     if (to.hash) {
-//       const el = document.querySelector(to.hash)
-//       // vue-router does not incorporate scroll-margin-top on its own.
-//       if (el) {
-//         const top = parseFloat(getComputedStyle(el).scrollMarginTop)
-//         return {
-//           el: to.hash,
-//           behavior: 'smooth',
-//           top
-//         }
-//       }
-
-  //       return {
-  //         el: to.hash,
-  //         behavior: 'smooth'
+  // scrollBehavior (to, _from, savedPosition) {
+  //   return new Promise((resolve, _reject) => {
+  //     setTimeout(() => {
+  //       if (savedPosition) {
+  //         resolve(savedPosition)
+  //       } else if (to.hash) {
+  //         resolve({
+  //           el: to.hash,
+  //           top: 80
+  //         })
+  //       } else {
+  //         resolve({ top: 0 })
   //       }
-  //     }
-
-//     // Scroll to top of window
-//     if (savedPosition) {
-//       return savedPosition
-//     } else {
-//       return { top: 0 }
-//     }
-//   }
+  //     })
+  //   })
+  // }
 }
