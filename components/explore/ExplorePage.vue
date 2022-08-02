@@ -45,35 +45,6 @@ import qs from 'qs'
 import AsideContentTemplate from '@/components/templates/AsideContentTemplate.vue'
 import GithubIcon from '@/assets/icons/github.svg'
 
-const allowedFilters = [
-  '_q',
-  'framework.slug',
-  'framework_null',
-  'ui.slug',
-  'ui_null',
-  'plugins.slug',
-  'modules.slug',
-  'vueVersion_gte'
-]
-
-function filterFilters (raw) {
-  return Object.keys(raw)
-    .filter(key => allowedFilters.includes(key))
-    .reduce((obj, key) => {
-      obj[key] = raw[key]
-      return obj
-    }, {})
-}
-
-function filterSort (raw) {
-  return Object.keys(raw)
-    .filter(key => key === '_sort')
-    .reduce((obj, key) => {
-      obj[key] = raw[key]
-      return obj
-    }, {})
-}
-
 function setShowcases () {
   if (showcasesData.value) {
     showcases.value = [...showcases.value, ...showcasesData.value]
@@ -106,11 +77,11 @@ function updateListing () {
 const route = useRoute()
 const router = useRouter()
 
-const { selectedFilters, setFilters } = useFilters()
+const { selectedFilters } = useFilters()
 const { isModal } = useModal()
 const { getProviderAuthenticationUrl } = useStrapiAuth()
 
-const { selectedSort, setSort } = useSort()
+const { selectedSort } = useSort()
 
 const filtersEl = ref(null)
 
@@ -175,10 +146,6 @@ function login () {
   const location = getProviderAuthenticationUrl('github')
   window.location = location
 }
-
-// init filters
-setFilters(filterFilters({ ...selectedFilters.value, ...route.query }))
-setSort(filterSort({ ...selectedSort.value, ...route.query }))
 
 const {
   data: showcasesData,

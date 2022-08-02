@@ -11,8 +11,42 @@
 <script setup lang="ts">
 const { $directHit: directHit } = useNuxtApp()
 
+const { frameworks, uis } = await useTechnologies()
+const { selectedFilters } = useFilters()
+
+watch(selectedFilters, () => {
+  useFrontMatter({
+    title: title.value
+  })
+})
+
+const title = computed(() => {
+  if (!selectedFilters.value['framework.slug'] && !selectedFilters.value['ui.slug']) {
+    return 'Explore Vue.js websites'
+  } else {
+    let selectedFrameworkName
+    let selectedUiName
+
+    if (selectedFilters.value['framework.slug']) {
+      const { name } = frameworks.value.find(f => f.slug === selectedFilters.value['framework.slug'])
+      selectedFrameworkName = name
+    }
+    if (selectedFilters.value['ui.slug']) {
+      const { name } = uis.value.find(u => u.slug === selectedFilters.value['ui.slug'])
+      selectedUiName = name
+    }
+    return `Explore Vue.js websites made with ${
+      selectedFrameworkName && selectedUiName
+      ? (selectedFrameworkName + ' & ' + selectedUiName)
+      : !selectedFrameworkName && selectedUiName
+      ? selectedUiName
+      : selectedFrameworkName
+    }`
+  }
+})
+
 useFrontMatter({
-  title: 'Explore Vue.js showcases'
+  title: title.value
 })
 
 // TODO: temp solution
