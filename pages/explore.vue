@@ -14,12 +14,6 @@ const { $directHit: directHit } = useNuxtApp()
 const { frameworks, uis } = await useTechnologies()
 const { selectedFilters } = useFilters()
 
-watch(selectedFilters, () => {
-  useFrontMatter({
-    title: title.value
-  })
-})
-
 const title = computed(() => {
   if (!selectedFilters.value['framework.slug'] && !selectedFilters.value['ui.slug']) {
     return 'Explore Vue.js websites'
@@ -43,6 +37,12 @@ const title = computed(() => {
       : selectedFrameworkName
     }`
   }
+})
+
+watch(title, (newValue) => {
+  useFrontMatter({
+    title: newValue
+  })
 })
 
 useFrontMatter({
