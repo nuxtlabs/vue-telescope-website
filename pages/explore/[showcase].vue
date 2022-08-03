@@ -39,6 +39,7 @@ function onCloseModal () {
 useFrontMatter({
   title: (showcase.value && showcase.value.title) || 'Loading...',
   description: `Reveal the Vue plugins and technology stack powering ${showcase.value ? showcase.value.domain : 'any website'}`,
-  noindex: true
+  noindex: true,
+  image: `https://res.cloudinary.com/nuxt/image/upload/w_1200,h_630,f_auto,q_auto,c_fill,g_north/${showcase.value.screenshotUrl}`
 })
 </script>
