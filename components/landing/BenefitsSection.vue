@@ -17,7 +17,7 @@
           {{ benefit.description }}
         </p>
         <div class="flex flex-col mb-4 text-center md:text-left">
-          <template v-for="(link) in benefit.links">
+          <template v-for="(link, i) in benefit.links">
             <a
               v-if="link.type === 'external'"
               :key="link.text"
@@ -31,7 +31,7 @@
             </a>
             <NuxtLink
               v-else
-              :key="link.text"
+              :key="link.text + i"
               :class="[benefit.styles && benefit.styles.text]"
               :to="link.route"
               class="font-bold-body-weight has-hover:hover:opacity-50"
@@ -56,7 +56,27 @@
 <script setup lang="ts">
 const { showcasesCount } = useShowcasesCount()
 
-const benefits = [
+type BenefitLink = {
+  type: 'external' | 'internal',
+  text: string,
+  href?: string,
+  route?: {
+    name: string
+  }
+}
+
+type Benefit = {
+  id: number,
+  title: string,
+  description: string,
+  links: BenefitLink[],
+  styles: {
+    text: string
+  },
+  image: string
+}
+
+const benefits: Benefit[] = [
   {
     id: 1,
     title: 'Free To Use',

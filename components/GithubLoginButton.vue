@@ -36,6 +36,6 @@ function login () {
   redirect.value = props.redirect || route.fullPath
 
   const location = getProviderAuthenticationUrl('github')
-  window.location = location
+  window.location = location as unknown as Location
 }
 </script>

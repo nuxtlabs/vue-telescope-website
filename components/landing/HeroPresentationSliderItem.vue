@@ -107,6 +107,7 @@ const intristicRatio = computed(() => {
     return ratio
   }
 })
+
 const intristicRatioPadding = computed(() => {
   return {
     'padding-bottom': `${intristicRatio.value * 100}%`
@@ -167,6 +168,7 @@ function changeSlider () {
   if (activeShowcases.value.length > 1) { return }
   emit('change-slide', activeShowcases.value[0].index)
 }
+
 function getNextSlide () {
   const i = sliderMatrix
     .map((m) => {
@@ -210,7 +212,7 @@ function leaveTitleAnimation () {
       delay: 0.15,
       stagger: {
         each: 0.05,
-        onStart: (i) => {
+        onStart: () => {
           currentStagger++
           if (currentStagger === splitted.lines.length) {
             nextTick(() => {
@@ -255,6 +257,7 @@ function srcset (screenshot) {
     .map(size => generateSrc(screenshot, size, true))
     .join(',')
 }
+
 function generateSrc (screenshot, size, displayRatio = false) {
   return `https://res.cloudinary.com/nuxt/image/upload/w_${size},${
     imageRatio ? `h_${Math.round(size * intristicRatio.value)}` : ''

@@ -42,6 +42,7 @@
 
 <script setup lang="ts">
 import qs from 'qs'
+import type { Showcase } from '~/types'
 import AsideContentTemplate from '@/components/templates/AsideContentTemplate.vue'
 import GithubIcon from '@/assets/icons/github.svg'
 
@@ -144,20 +145,19 @@ function login () {
   redirect.value = redirect.value || route.fullPath
 
   const location = getProviderAuthenticationUrl('github')
-  window.location = location
+  window.location = location as unknown as Location
 }
 
 const {
   data: showcasesData,
   pending: showcasesPending,
-  error,
   refresh: showcasesRefresh
-} = await useAsyncData(`showcases${filterQueryString.value}`, () => {
+} = await useAsyncData(`showcases${filterQueryString.value}`, () => { // TODO: ts
   // do not fetch showcases if modal open
   if (isModal.value) {
     return []
   }
-  return find(`showcases${filterQueryString.value}`)
+  return find<Showcase[]>(`showcases${filterQueryString.value}`)
 }, {
   lazy: true,
   server: false
@@ -165,24 +165,17 @@ const {
 
 const {
   data: totalCountData,
-  pending: totalCountPending,
-  error: totalCountError,
   refresh: totalCountRefresh
-} = await useAsyncData(`showcases/count${filterQueryString.value}`, () => {
+} = await useAsyncData(`showcases/count${filterQueryString.value}`, () => { // TODO: ts
   // do not fetch showcases count if modal open
   if (isModal.value) {
     return 0
   }
-  return find(`showcases/count${filterQueryString.value}`)
+  return find<number>(`showcases/count${filterQueryString.value}`)
 }, {
   lazy: true,
   server: false
 })
-
-// const totalCount = await this.$strapi.find(
-//         `showcases/count${this.filterQueryString}`
-//       )
-// totalCount.value = totalCountData.value
 
 setShowcases()
 

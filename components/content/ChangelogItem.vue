@@ -26,7 +26,7 @@ const props = defineProps({
   project: {
     type: String,
     default: null,
-    validator (value) {
+    validator (value: string) {
       return ['website', 'extension', 'analyzer'].includes(value)
     }
   },
@@ -61,14 +61,14 @@ const projectColors = computed(() => {
   }
 })
 
-function formatDateByLocale (d) {
+function formatDateByLocale (date: string) {
   const currentLocale = 'en'
-  const options = { year: 'numeric', month: 'long', day: 'numeric' }
+  const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' }
 
-  return new Date(d).toLocaleDateString(currentLocale, options)
+  return new Date(date).toLocaleDateString(currentLocale, options)
 }
 
-function dateToIso (date) {
+function dateToIso (date: string) {
   return new Date(date).toISOString()
 }
 </script>

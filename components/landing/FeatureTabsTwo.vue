@@ -193,7 +193,7 @@ onMounted(() => {
 })
 
 function leave () {
-  return new Promise((resolve, reject) => {
+  return new Promise<void>((resolve) => {
     try {
       // // background
       // $gsap.to(backgroundEl.value, {
@@ -214,7 +214,7 @@ function leave () {
         duration: 0.2,
         onComplete: () => {
           $gsap.to(searchEl.value.children, {
-            drawSVG: 0,
+            drawSVG: '0',
             duration: 0.5,
             ease: 'power1.out'
             // onComplete: () => {

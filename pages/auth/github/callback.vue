@@ -3,6 +3,8 @@
 </template>
 
 <script setup lang="ts">
+import type { StrapiAuthProvider } from '@nuxtjs/strapi/dist/runtime/types'
+
 const { authenticateProvider } = useStrapiAuth()
 const user = useStrapiUser()
 const route = useRoute()
@@ -11,7 +13,7 @@ const { setLists } = useLists()
 
 onMounted(async () => {
   try {
-    await authenticateProvider('github', route.query.access_token)
+    await authenticateProvider('github' as StrapiAuthProvider, route.query.access_token as string)
 
     const redirect = useCookie('redirect')
     if (redirect.value) {

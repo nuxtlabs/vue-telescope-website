@@ -24,6 +24,7 @@
 
 <script setup lang="ts">
 import { useNuxtApp, useAsyncData, ref, onMounted } from '#imports'
+import type { Showcase } from '~/types'
 const { $gsap } = useNuxtApp()
 
 const activeIndex = ref(2)
@@ -38,7 +39,7 @@ const heroPresentationSlider = ref(null)
 const { find } = useStrapi3()
 
 const { data: featuredData } = await useAsyncData('showcases/featured', () =>
-  find('showcases?isFeatured=true&_limit=5'), { lazy: true, server: false }
+  find<Showcase[]>('showcases?isFeatured=true&_limit=5'), { lazy: true, server: false }
 )
 
 const featured = computed(() => {

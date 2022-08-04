@@ -147,7 +147,7 @@ onMounted(() => {
 })
 
 function leave () {
-  return new Promise((resolve) => {
+  return new Promise<void>((resolve) => {
     try {
       // // background
       // $gsap.to(backgroundEl.value, {
@@ -160,7 +160,7 @@ function leave () {
         fill: 'transparent'
       })
       $gsap.to(fingerprintEl.value, {
-        drawSVG: 0,
+        drawSVG: false,
         duration: 0.5,
         ease: 'power1.out',
         onComplete: () => {

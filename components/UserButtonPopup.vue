@@ -61,15 +61,16 @@ function login () {
   redirect.value = redirect.value || route.fullPath
 
   const location = getProviderAuthenticationUrl('github')
-  window.location = location
+  window.location = location as unknown as Location
 }
 
-async function onLogout () {
+function onLogout () {
   try {
     logout()
     closeMenu()
   } catch (e) {}
 }
+
 function openMenuAnimation () {
   $gsap.set(el.value, {
     transformOrigin: 'top right'
