@@ -11,7 +11,7 @@
       :srcset="srcset"
       :sizes="sizes"
       :alt="alt"
-      class="w-full"
+      class="lazy w-full"
       :class="[ratio && 'absolute top-0 left-0']"
     >
   </div>
@@ -58,7 +58,7 @@ const intristicRatio = computed(() => {
     return 0
   } else {
     const sizes = props.ratio.split(':')
-    const ratio = sizes[1] / sizes[0]
+    const ratio = parseInt(sizes[1]) / parseInt(sizes[0])
     return ratio
   }
 })
@@ -91,30 +91,9 @@ function lazyLoadImage () {
   nextTick(() => {
     const lazyImage = imgEl.value
     lazyImage.addEventListener('load', () => {
-      // lazyImage.classList.add('lazy-loaded')
+      lazyImage.classList.add('lazy-loaded')
       loaded.value = true
-      // this.$gsap.to(this.$refs.scrim, {
-      //   opacity: 0,
-      //   duration: 0.3,
-      //   ease: 'none'
-      // })
-      // this.$gsap.fromTo(
-      //   lazyImage,
-      //   {
-      //     opacity: 0
-      //     // scale: 1.05
-      //   },
-      //   {
-      //     opacity: 1,
-      //     // scale: 1,
-      //     duration: 0.2,
-      //     ease: 'power4.easeOut'
-      //   }
-      // )
     })
-    // lazyImage.addEventListener('error', () => {
-    //   lazyImage.classList.add('lazy-load-error')
-    // })
   })
 }
 
@@ -127,11 +106,25 @@ const { stop } = useIntersectionObserver(el, ([{ isIntersecting }]) => {
 </script>
 
 <style scoped>
-/* .lazy {
+.lazy {
   opacity: 0;
-  transition: opacity 3000ms;
 }
 .lazy.lazy-loaded {
-  opacity: 1;
-} */
+  animation: appear 1000ms forwards;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    filter: brightness(1) blur(20px);
+  }
+  10% {
+    opacity: 1;
+    filter: brightness(2) blur(10px);
+  }
+  100% {
+    opacity: 1;
+    filter: brightness(1) blur(0);
+  }
+}
 </style>

@@ -68,8 +68,11 @@
 </template>
 
 <script setup lang="ts">
+import type { Ref } from 'vue'
+import type { User } from '~/types'
 import { ref, useNuxtApp, computed } from '#imports'
-const user = useStrapiUser()
+
+const user = useStrapiUser() as Ref<User>
 
 const { $tour } = useNuxtApp()
 

@@ -74,23 +74,23 @@ function animateCheckmark (value) {
     })
     $gsap.fromTo(
       checkmark.value,
-      0.4,
       {
         drawSVG: '0%'
       },
       {
-        drawSVG: '100%'
+        drawSVG: '100%',
+        duration: 0.4
       }
     )
   } else {
     $gsap.fromTo(
       checkmark.value,
-      0.4,
       {
         drawSVG: '0 100%'
       },
       {
-        drawSVG: '100% 100%'
+        drawSVG: '100% 100%',
+        duration: 0.4
       }
     )
   }

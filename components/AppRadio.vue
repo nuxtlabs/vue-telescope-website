@@ -64,7 +64,7 @@ const radiomarkWrapperEl = ref(null)
 const colorMarkEl = ref(null)
 const whiteMarkEl = ref(null)
 
-function animateRadiomark (value) {
+function animateRadiomark (value: boolean) {
   if (value) {
     $gsap.fromTo(
       whiteMarkEl.value,
@@ -92,12 +92,14 @@ function animateRadiomark (value) {
       }
     )
   } else {
-    $gsap.to(colorMarkEl.value, 0.2, {
+    $gsap.to(colorMarkEl.value, {
       scale: 1,
+      duration: 0.2,
       ease: 'power2.inOut',
       onComplete: () => {
-        $gsap.to(whiteMarkEl.value, 0.2, {
+        $gsap.to(whiteMarkEl.value, {
           scale: 1,
+          duration: 0.2,
           ease: 'power2.inOut'
         })
       }

@@ -139,10 +139,7 @@ function animateEnter () {
             // opacity: 0,
             duration: 1,
             ease: 'expo.out',
-            clearProps: true,
-            onComplete: () => {
-
-            }
+            clearProps: true
           })
         }
       }

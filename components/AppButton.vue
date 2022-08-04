@@ -24,6 +24,7 @@ import { computed, ref } from '#imports'
 
 const el = ref(null)
 
+// TODO: wrong, replace with method/data
 defineExpose({
   el
 })
@@ -31,19 +32,21 @@ defineExpose({
 const props = defineProps({
   size: {
     type: String,
-    default: 'base'
+    default: 'base',
+    validator (value) {
+      return ['small', 'base', 'large'].includes(value as string)
+    }
   },
   appearance: {
     type: String,
-    default: ''
+    default: 'regular',
+    validator (value) {
+      return ['regular', 'transparent', 'primary', 'danger', 'warning', 'success', 'info', 'github'].includes(value as string)
+    }
   },
   tag: {
     type: String,
     default: 'button'
-  },
-  outlined: {
-    type: Boolean,
-    default: false
   },
   href: {
     type: String,
@@ -51,98 +54,74 @@ const props = defineProps({
   }
 })
 
-const sizing = computed(() => {
-  if (props.size === 'small') {
-    return {
-      height: 'h-8',
-      fontSize: 'text-sm',
-      rounded: 'rounded-md',
-      padding: 'px-2'
-    }
-  } else if (props.size === 'large') {
-    return {
-      height: 'h-12',
-      fontSize: 'text-eight',
-      rounded: 'rounded-3lg',
-      padding: 'px-6'
-    }
-  } else {
-    return {
-      height: 'h-10',
-      fontSize: 'text-base',
-      rounded: 'rounded-2lg',
-      padding: 'px-4'
-    }
-  }
-})
-
-const color = computed(() => {
-  if (props.appearance === 'transparent') {
-    return {
-      bg: '',
-      text: '',
-      outline: '',
-      hoverState: 'has-hover:hover:text-primary-500'
-    }
-  } else if (props.appearance === 'primary') {
-    if (props.outlined) {
-      return {
-        // bg: 'bg-primary-500',
-        text: 'text-primary-500',
-        outline: 'border-primary-500',
-        hoverState:
-          'has-hover:hover:bg-primary-50 has-hover:hover:border-primary-300'
+const sizing = computed(
+  () =>
+    ({
+      small: {
+        height: 'h-8',
+        fontSize: 'text-sm',
+        rounded: 'rounded-md',
+        padding: 'px-2'
+      },
+      base: {
+        height: 'h-10',
+        fontSize: 'text-base',
+        rounded: 'rounded-2lg',
+        padding: 'px-4'
+      },
+      large: {
+        height: 'h-12',
+        fontSize: 'text-eight',
+        rounded: 'rounded-3lg',
+        padding: 'px-6'
       }
-    } else {
-      return {
+    }[props.size])
+)
+
+const color = computed(
+  () =>
+    ({
+      transparent: {
+        bg: '',
+        text: '',
+        outline: '',
+        hoverState: 'has-hover:hover:text-primary-500'
+      },
+      primary: {
         bg: 'bg-primary-500',
         text: 'text-white',
         outline: 'focus:border-primary-700',
         hoverState: 'has-hover:hover:bg-primary-400'
-      }
-    }
-  } else if (props.appearance === 'danger') {
-    return {
-      bg: 'bg-red-500',
-      text: 'text-white'
-    }
-  } else if (props.appearance === 'warning') {
-    return {
-      bg: 'bg-yellow-500',
-      text: 'text-grey-900'
-    }
-  } else if (props.appearance === 'success') {
-    return {
-      bg: 'bg-green-500',
-      text: 'text-white'
-    }
-  } else if (props.appearance === 'info') {
-    if (props.outlined) {
-      return {
-        // bg: 'bg-blue-500',
-        text: 'text-blue-900',
-        outline: 'border-blue-900'
-      }
-    } else {
-      return {
+      },
+      danger: {
+        bg: 'bg-red-500',
+        text: 'text-white'
+      },
+      warning: {
+        bg: 'bg-yellow-500',
+        text: 'text-grey-900'
+      },
+      success: {
+        bg: 'bg-green-500',
+        text: 'text-white'
+      },
+      info: {
         bg: 'bg-blue-500',
         text: 'text-white',
         outline: 'focus:border-blue-800',
         hoverState: 'has-hover:hover:bg-blue-400'
+      },
+      github: {
+        bg: 'bg-github-base',
+        text: 'text-white',
+        hoverState: 'has-hover:hover:bg-grey-800'
+      },
+      regular: {
+        bg: 'bg-grey-50 has-hover:hover:bg-grey-200',
+        text: 'text-grey-800',
+        outline: 'focus:border-grey-700'
       }
-    }
-  } else if (props.appearance === 'github') {
-    return {
-      bg: 'bg-github-base',
-      text: 'text-white',
-      hoverState: 'has-hover:hover:bg-grey-800'
-    }
-  } else {
-    return {
-      bg: 'bg-grey-50 has-hover:hover:bg-grey-200',
-      text: 'text-grey-800',
-      outline: 'focus:border-grey-700'
-    }
-  }
-})
+    }[props.appearance])
+)
+
 </script>

@@ -35,7 +35,7 @@ const emit = defineEmits(['update'])
 const el = ref(null)
 
 function lazyLoadShowcases () {
-  el.value.$el.blur()
+  el.value?.$el.blur()
   emit('update') // this.currentPage++
 }
 </script>

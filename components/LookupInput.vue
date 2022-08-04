@@ -9,14 +9,14 @@
     <span
       class="absolute top-0 left-0 h-full flex items-center pl-4 font-bold-body-weight text-grey-400"
       :class="[protocolTextSize]"
-      @click="$refs.input.$el.focus()"
+      @click="inputRef.$el.focus()"
     >
       https://
     </span>
     <label class="">
       <span class="absolute opacity-0 pointer-events-none">Lookup</span>
       <AppInput
-        ref="input"
+        ref="inputRef"
         type="url"
         :size="size"
         class="rounded-r-none border-r-0"
@@ -63,6 +63,8 @@ const { processPrivacyAwareness } = usePrivacyAwareness()
 const router = useRouter()
 const { setModal } = useModal()
 
+const inputRef = ref(null)
+
 const props = defineProps({
   size: {
     type: String,
@@ -75,9 +77,9 @@ const errorMessage = ref('')
 const pending = ref(false)
 
 const protocolTextSize = computed(() => {
-  if (props.size.value === 'large') {
+  if (props.size === 'large') {
     return 'text-eight'
-  } else if (props.size.value === 'small') {
+  } else if (props.size === 'small') {
     return 'text-sm'
   } else {
     return 'text-base'
@@ -85,16 +87,16 @@ const protocolTextSize = computed(() => {
 })
 
 const protocolPadding = computed(() => {
-  if (props.size.value === 'large') {
+  if (props.size === 'large') {
     return 'pl-20'
-  } else if (props.size.value === 'small') {
+  } else if (props.size === 'small') {
     return 'pl-16'
   } else {
     return 'pl-18'
   }
 })
 
-function formatUrlInput (u) {
+function formatUrlInput (u: string) {
   if (!u) { return }
   url.value = u.includes('://') ? u.split('://')[1] : u
   errorMessage.value = ''

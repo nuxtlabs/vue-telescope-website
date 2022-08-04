@@ -61,7 +61,7 @@ export const useLists = () => {
     }
 
     // Selected List
-    if (selectedList.value && selectedList.value.id === list.id) {
+    if (selectedList.value?.id === list.id) {
       const groupIndex = selectedList.value.groups.findIndex(
         item => item.id === group.id
       )
@@ -71,7 +71,7 @@ export const useLists = () => {
       }
     }
     // Selected Group
-    if (selectedGroup.value && selectedGroup.value.id === group.id) {
+    if (selectedGroup.value?.id === group.id) {
       Object.assign(selectedGroup.value, group)
     }
   }

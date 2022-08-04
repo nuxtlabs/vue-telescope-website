@@ -81,7 +81,7 @@ function initGroupCreation () {
   setSelectedList(props.list)
   creatingList.value = true
   nextTick(() => {
-    inputEl.value.$el.focus()
+    inputEl.value?.$el.focus()
   })
 }
 
@@ -100,7 +100,7 @@ async function createGroupMethod () {
 }
 
 function enter (el, done) {
-  inputEl.value && inputEl.value.$el.focus()
+  inputEl.value?.$el.focus()
   nextTick(() => {
     $gsap.set(el, { position: 'absolute', transformOrigin: 'center' })
     $gsap.from(el, {
@@ -112,7 +112,7 @@ function enter (el, done) {
       ease: 'power1.out',
       onComplete: () => {
         $gsap.set(el, { position: 'absolute' })
-        inputEl.value && inputEl.value.$el.focus()
+        inputEl.value?.$el.focus()
         done()
       }
     })

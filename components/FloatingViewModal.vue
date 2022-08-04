@@ -44,6 +44,7 @@
 
 <script setup lang="ts">
 import XmarkCircleIcon from '@/assets/icons/xmark-circle.svg'
+
 const { setModal } = useModal()
 
 const emit = defineEmits(['close'])
@@ -102,7 +103,6 @@ function animateEnter () {
     scale: 0.97,
     // x: 10,
     duration: 0.2,
-    // ease: biggerThanMd ? 'back.out(1.7)' : 'expo.outIn',
     ease: 'none'
   })
 }

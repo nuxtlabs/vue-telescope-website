@@ -5,7 +5,7 @@
     :rows="rows"
     :value="modelValue"
     :placeholder="placeholder"
-    @input="emit('update:modelValue', $event.target.value)"
+    @input="emit('update:modelValue', ($event.target as HTMLInputElement)?.value)"
     @keypress.enter.prevent="emit('submit')"
   />
 </template>

@@ -47,7 +47,7 @@ const { showcasesCount } = useShowcasesCount()
 
 onMounted(() => {
   $gsap.fromTo(
-    heading.value.children,
+    heading.value?.children,
     {
       opacity: 0,
       scale: 0.75

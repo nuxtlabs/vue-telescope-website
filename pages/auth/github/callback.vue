@@ -3,10 +3,12 @@
 </template>
 
 <script setup lang="ts">
+import type { Ref } from 'vue'
 import type { StrapiAuthProvider } from '@nuxtjs/strapi/dist/runtime/types'
+import type { User } from '~/types'
 
 const { authenticateProvider } = useStrapiAuth()
-const user = useStrapiUser()
+const user = useStrapiUser() as Ref<User>
 const route = useRoute()
 const router = useRouter()
 const { setLists } = useLists()

@@ -58,10 +58,10 @@ function enterTransition (el, done = () => {}) {
   )
 
   const image = new Image()
-  image.src = `${$config.iconsURL}/${activeBrands.value[0].imgPath}`
+  image.src = `${$config.iconsURL}/${activeBrands.value[0]?.imgPath}`
 
   image.addEventListener('load', () => {
-    Array.from(el.children[1].children).forEach((c: object, i) => {
+    Array.from(el.children[1]?.children).forEach((c: object, i) => {
       $gsap.to(c, {
         x: `${$gsap.utils.random(-50, 50)}vw`,
         y: `${$gsap.utils.random(-50, 50)}vh`,

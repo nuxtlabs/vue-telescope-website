@@ -56,7 +56,7 @@ const menuEl = ref(null)
 
 onMounted(() => {
   $gsap.fromTo(
-    menuEl.value.children,
+    menuEl.value?.children,
     {
       opacity: 0,
       scale: 0.8,

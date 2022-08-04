@@ -80,7 +80,7 @@ function initListCreation () {
   maxWidthStyles.value = buttonEl.value.getBoundingClientRect().width
   creatingList.value = true
   nextTick(() => {
-    inputEl.value.$el.focus()
+    inputEl.value?.$el.focus()
   })
 }
 
@@ -98,7 +98,7 @@ async function createList () {
 }
 
 function enter (el, done) {
-  inputEl.value && inputEl.value.$el.focus()
+  inputEl.value?.$el.focus()
   nextTick(() => {
     $gsap.set(el, { position: 'absolute', transformOrigin: 'center' })
     $gsap.from(el, {
@@ -113,7 +113,7 @@ function enter (el, done) {
           // position: 'relative',
           maxWidth: maxWidthStyles.value + 'px'
         })
-        inputEl.value && inputEl.value.$el.focus()
+        inputEl.value?.$el.focus()
         done()
       }
     })

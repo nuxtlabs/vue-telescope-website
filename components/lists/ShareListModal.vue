@@ -51,7 +51,7 @@ const code = computed(() => {
 })
 
 function selectRequest () {
-  const el = endpointEl.value.$el
+  const el = endpointEl.value?.$el
   selectText(el)
 }
 

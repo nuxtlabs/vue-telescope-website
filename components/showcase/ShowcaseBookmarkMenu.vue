@@ -180,12 +180,14 @@
 </template>
 
 <script setup lang="ts">
+import type { Ref } from 'vue'
+import type { User } from '~/types'
 import OpenedFolderIcon from '@/assets/icons/opened-folder.svg'
 import SaveIcon from '@/assets/icons/save.svg'
 // import UnorderedListIcon from '@/assets/icons/unordered-list.svg'
 
 const { lists, bookmarkRemoteShowcase, unbookmarkRemoteShowcase } = useLists()
-const user = useStrapiUser()
+const user = useStrapiUser() as Ref<User>
 const { $gsap } = useNuxtApp()
 
 const scrimEl = ref(null)

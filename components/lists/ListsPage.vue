@@ -16,7 +16,6 @@
               :key="list.id"
               class="px-2"
               :list="list"
-              @close-menu="notWorking"
             />
           </transition-group>
         </span>
@@ -62,9 +61,11 @@
 </template>
 
 <script setup lang="ts">
+import type { Ref } from 'vue'
 import AsideContentTemplate from '@/components/templates/AsideContentTemplate.vue'
+import type { User } from '~/types'
 
-const user = useStrapiUser()
+const user = useStrapiUser() as Ref<User>
 const { $gsap } = useNuxtApp()
 
 const {
@@ -80,7 +81,8 @@ const {
 if (sortedLists.value[0]) {
   setSelectedList(sortedLists.value[0])
 }
-if (sortedLists.value[0] && sortedLists.value[0].groups.length) {
+
+if (sortedLists.value[0]?.groups.length) {
   setSelectedGroup(sortedLists.value[0].groups[0])
 }
 
@@ -113,9 +115,6 @@ function leaveAnimation (el, done) {
   })
 }
 
-function notWorking () {
-  console.log('NOT WORKING')
-}
 </script>
 
 <style>

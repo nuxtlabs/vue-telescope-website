@@ -27,6 +27,7 @@ import { ref, onMounted } from '#imports'
 
 const props = defineProps({
   anchor: {
+    // TODO: ts
     default: null
   },
   offsetX: {
@@ -58,7 +59,7 @@ const props = defineProps({
         'left-start',
         'left-end'
       ]
-      return placements.includes(value)
+      return placements.includes(value as string)
     }
   },
   arrow: {
@@ -75,6 +76,7 @@ const arrowEl = ref(null)
 
 onMounted(() => {
   popperInstance.value = createPopper(props.anchor, el.value, {
+    // TODO: ts
     placement: props.placement,
     strategy: 'fixed',
     modifiers: [

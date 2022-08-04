@@ -5,14 +5,11 @@
       sizing.fontSize,
       sizing.rounded,
       sizing.padding,
-      border.size,
-      border.color,
-      border.focusState
     ]"
-    class="w-full placeholder-grey-400 bg-grey-100 has-hover:hover:bg-grey-50 font-bold-body-weight focus:bg-grey-50 focus:outline-none transition-colors duration-200"
+    class="appearance-none border-2 border-transparent focus:border-grey-300 w-full placeholder-grey-400 bg-grey-100 has-hover:hover:bg-grey-50 font-bold-body-weight focus:bg-grey-50 focus:outline-none transition-colors duration-200"
     :type="type"
     :value="modelValue"
-    @input="$emit('update:modelValue', $event.target.value)"
+    @input="$emit('update:modelValue', ($event.target as HTMLInputElement)?.value)"
   >
 </template>
 
@@ -32,58 +29,34 @@ const props = defineProps({
   },
   size: {
     type: String,
-    default: 'base'
-  },
-  appearance: {
-    type: String,
-    default: ''
-  }
-})
-
-const sizing = computed(() => {
-  if (props.size === 'small') {
-    return {
-      height: 'h-8',
-      fontSize: 'text-sm',
-      rounded: 'rounded-md',
-      padding: 'px-2'
-    }
-  } else if (props.size === 'large') {
-    return {
-      height: 'h-12',
-      fontSize: 'text-eight',
-      rounded: 'rounded-3lg',
-      padding: 'px-2'
-    }
-  } else {
-    return {
-      height: 'h-10',
-      fontSize: 'text-base',
-      rounded: 'rounded-2lg',
-      padding: 'px-2'
+    default: 'base',
+    validator (value) {
+      return ['small', 'base', 'large'].includes(value as string)
     }
   }
 })
 
-const border = computed(() => {
-  if (props.appearance.value === 'transparent') {
-    return {
-      size: 'border-0',
-      color: 'border-transparent',
-      focusState: 'focus:border-transparent'
-    }
-  } else {
-    return {
-      size: 'border-2',
-      color: 'border-transparent',
-      focusState: 'focus:border-grey-300'
-    }
-  }
-})
+const sizing = computed(
+  () =>
+    ({
+      small: {
+        height: 'h-8',
+        fontSize: 'text-sm',
+        rounded: 'rounded-md',
+        padding: 'px-2'
+      },
+      base: {
+        height: 'h-10',
+        fontSize: 'text-base',
+        rounded: 'rounded-2lg',
+        padding: 'px-2'
+      },
+      large: {
+        height: 'h-12',
+        fontSize: 'text-eight',
+        rounded: 'rounded-3lg',
+        padding: 'px-2'
+      }
+    }[props.size])
+)
 </script>
-
-<style scoped>
-input {
-  -webkit-appearance: none;
-}
-</style>

@@ -87,13 +87,13 @@ function clearActions () {
 function initListCreation () {
   creatingList.value = true
   nextTick(() => {
-    inputEl.value.$el.focus()
+    inputEl.value?.$el.focus()
   })
 }
 
 function clearInput () {
   name.value = ''
-  inputEl.value.$el.focus()
+  inputEl.value?.$el.focus()
 }
 
 async function createList () {
@@ -114,7 +114,7 @@ async function createList () {
 }
 
 function enter (el, done) {
-  inputEl.value && inputEl.value.$el.focus()
+  inputEl.value?.$el.focus()
   nextTick(() => {
     $gsap.set(el, { position: 'absolute', transformOrigin: 'left' })
     $gsap.from(el, {
@@ -126,7 +126,7 @@ function enter (el, done) {
       ease: 'power1.out',
       onComplete: () => {
         $gsap.set(el, { position: 'relative' })
-        inputEl.value && inputEl.value.$el.focus()
+        inputEl.value?.$el.focus()
         done()
       }
     })

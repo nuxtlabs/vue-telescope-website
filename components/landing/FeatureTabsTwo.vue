@@ -132,17 +132,17 @@ onMounted(() => {
     }
   )
   // SVG animation
-  $gsap.from(searchEl.value.children, {
+  $gsap.from(searchEl.value?.children, {
     drawSVG: '0% 0%',
     duration: 0.5,
     ease: 'power4.in',
     delay: 0.4,
     onComplete: () => {
-      $gsap.to(searchEl.value.children, {
+      $gsap.to(searchEl.value?.children, {
         fill: props.onSurfaceColor
       })
       $gsap.fromTo(
-        contentEl.value.children,
+        contentEl.value?.children,
         {
           opacity: 0,
           scale: 0.5
@@ -202,18 +202,18 @@ function leave () {
       //   ease: 'none'
       // })
       // svg
-      $gsap.to(contentEl.value.children, {
+      $gsap.to(contentEl.value?.children, {
         opacity: 0,
         scale: 0.5,
         stagger: 0.025,
         duration: 0.1,
         ease: 'power2.inOut'
       })
-      $gsap.to(searchEl.value.children, {
+      $gsap.to(searchEl.value?.children, {
         fill: 'transparent',
         duration: 0.2,
         onComplete: () => {
-          $gsap.to(searchEl.value.children, {
+          $gsap.to(searchEl.value?.children, {
             drawSVG: '0',
             duration: 0.5,
             ease: 'power1.out'

@@ -42,7 +42,8 @@
 
 <script setup lang="ts">
 import qs from 'qs'
-import type { Showcase } from '~/types'
+import type { Ref } from 'vue'
+import type { Showcase, User } from '~/types'
 import AsideContentTemplate from '@/components/templates/AsideContentTemplate.vue'
 import GithubIcon from '@/assets/icons/github.svg'
 
@@ -130,14 +131,14 @@ const filterQueryString = computed(() => {
 })
 
 const { find } = useStrapi3()
-const user = useStrapiUser()
+const user = useStrapiUser() as Ref<User>
 
 function clearFilter ($event) {
-  filtersEl.value && filtersEl.value.clearFilter($event)
+  filtersEl.value?.clearFilter($event)
 }
 
 function clearFilters () {
-  filtersEl.value && filtersEl.value.clearFilters()
+  filtersEl.value?.clearFilters()
 }
 
 function login () {

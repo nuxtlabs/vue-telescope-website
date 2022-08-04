@@ -118,7 +118,7 @@ const updatingGroup = ref(false)
 const deletingGroup = ref(false)
 
 const isSelected = computed(() => {
-  return selectedGroup.value && selectedGroup.value.id === props.group.id
+  return selectedGroup.value?.id === props.group.id
 })
 
 const canMoveUp = computed(() => {
@@ -195,7 +195,7 @@ function initUpdateGroup () {
   updatingGroup.value = true
   newGroupName.value = props.group.name
   nextTick(() => {
-    inputEl.value.$el.focus()
+    inputEl.value?.$el.focus()
   })
 }
 

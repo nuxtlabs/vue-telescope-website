@@ -8,7 +8,7 @@
     >
       <div class="w-full md:w-1/2 px-4 flex flex-col justify-center">
         <h3
-          :class="[benefit.styles && benefit.styles.text]"
+          :class="[benefit.styles?.text]"
           class="text-four leading-four font-display-weight mb-4 md:mb-2 text-center md:text-left"
         >
           {{ benefit.title }}
@@ -21,7 +21,7 @@
             <a
               v-if="link.type === 'external'"
               :key="link.text"
-              :class="[benefit.styles && benefit.styles.text]"
+              :class="[benefit.styles?.text]"
               :href="link.href"
               class="font-bold-body-weight has-hover:hover:opacity-50"
               rel="noopener nofollow noreferrer"
@@ -32,7 +32,7 @@
             <NuxtLink
               v-else
               :key="link.text + i"
-              :class="[benefit.styles && benefit.styles.text]"
+              :class="[benefit.styles?.text]"
               :to="link.route"
               class="font-bold-body-weight has-hover:hover:opacity-50"
             >

@@ -232,7 +232,7 @@ function initUpdateList () {
   // this.creatingGroup = false
   newListName.value = props.list.name
   nextTick(() => {
-    inputEl.value.$el.focus()
+    inputEl.value?.$el.focus()
   })
 }
 

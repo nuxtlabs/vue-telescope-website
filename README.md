@@ -12,3 +12,7 @@
 
 - check all TODO's
 - new solution for preloader placeholders
+
+- rename refs
+- check `defineExpose` usage
+- scoped styles to Tailwind

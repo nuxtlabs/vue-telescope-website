@@ -86,13 +86,13 @@ function initGroupCreation () {
   setSelectedList(props.list)
   creatingGroup.value = true
   nextTick(() => {
-    inputEl.value.$el.focus()
+    inputEl.value?.$el.focus()
   })
 }
 
 function clearInput () {
   newGroupName.value = ''
-  inputEl.value.$el.focus()
+  inputEl.value?.$el.focus()
 }
 
 async function createGroup () {
