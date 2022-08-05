@@ -16,7 +16,7 @@
     </h1>
 
     <div ref="lookupInput" class="opacity-0 max-w-readable m-auto mb-12">
-      <LookupInput class="" />
+      <LookupInput />
     </div>
 
     <p

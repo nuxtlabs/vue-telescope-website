@@ -28,7 +28,7 @@
           >
             <XmarkCircleIcon class="text-grey-900 w-6 h-6" />
           </div>
-          <div class="">
+          <div>
             <slot />
           </div>
         </div>

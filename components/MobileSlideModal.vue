@@ -36,7 +36,7 @@
                 {{ label }}
               </div>
             </div>
-            <div ref="modal-content" class="">
+            <div>
               <slot />
             </div>
           </div>
@@ -47,7 +47,7 @@
 </template>
 
 <script setup lang="ts">
-import XmarkCircleIcon from '@/assets/icons/xmark-circle.svg'
+// import XmarkCircleIcon from '@/assets/icons/xmark-circle.svg'
 
 const { isMobile, isSafari } = useUserAgent()
 const { setModal } = useModal()

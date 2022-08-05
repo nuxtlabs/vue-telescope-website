@@ -64,7 +64,7 @@
           <ClientOnly>
             <li>
               <ChangelogLink class="has-hover:hover:text-primary-500 font-medium">
-                <span class="">Changelog</span>
+                <span>Changelog</span>
               </ChangelogLink>
             </li>
           </ClientOnly>
@@ -101,7 +101,7 @@
               <TwitterIcon class="h-6 w-6" />
             </a>
           </li>
-          <li class="">
+          <li>
             <a
               href="https://github.com/nuxt-company/vue-telescope-analyzer"
               class="text-grey-900 has-hover:hover:text-primary-500 transition ease-in duration-150"

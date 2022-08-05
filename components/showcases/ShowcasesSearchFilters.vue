@@ -30,26 +30,26 @@
             <span>Vue</span>
           </div>
         </AppRadio>
-        <template v-for="framework in frameworks" :key="framework.id" class="">
-          <AppRadio
-            :id="`framework-${framework.slug}`"
-            :checked="
-              selectedFilters['framework.slug'] &&
-                selectedFilters['framework.slug'].includes(framework.slug)
-            "
-            class="mb-1"
-            @input="radioFilter('framework.slug', framework.slug)"
-          >
-            <div class="flex items-center">
-              <img
-                class="w-4 h-4 mr-1"
-                :src="`${config.iconsURL}${framework.imgPath}`"
-                :alt="framework.name"
-              >
-              <span>{{ framework.name }}</span>
-            </div>
-          </AppRadio>
-        </template>
+        <AppRadio
+          v-for="framework in frameworks"
+          :id="`framework-${framework.slug}`"
+          :key="framework.id"
+          :checked="
+            selectedFilters['framework.slug'] &&
+              selectedFilters['framework.slug'].includes(framework.slug)
+          "
+          class="mb-1"
+          @input="radioFilter('framework.slug', framework.slug)"
+        >
+          <div class="flex items-center">
+            <img
+              class="w-4 h-4 mr-1"
+              :src="`${config.iconsURL}${framework.imgPath}`"
+              :alt="framework.name"
+            >
+            <span>{{ framework.name }}</span>
+          </div>
+        </AppRadio>
       </div>
     </div>
 
@@ -64,62 +64,64 @@
         >
           <span>None</span>
         </AppRadio>
-        <template v-for="ui in uis" :key="ui.id">
-          <AppRadio
-            :id="`ui-${ui.slug}`"
-            :checked="
-              selectedFilters['ui.slug'] &&
-                selectedFilters['ui.slug'].includes(ui.slug)
-            "
-            class="mb-1"
-            @input="radioFilter('ui.slug', ui.slug)"
-          >
-            <div class="flex items-center">
-              <img
-                class="w-4 h-4 mr-1"
-                :src="`${config.iconsURL}${ui.imgPath}`"
-                :alt="ui.name"
-              >
-              <span>{{ ui.name }}</span>
-            </div>
-          </AppRadio>
-        </template>
+        <!-- <template > -->
+        <AppRadio
+          v-for="ui in uis"
+          :id="`ui-${ui.slug}`"
+          :key="ui.id"
+          :checked="
+            selectedFilters['ui.slug'] &&
+              selectedFilters['ui.slug'].includes(ui.slug)
+          "
+          class="mb-1"
+          @input="radioFilter('ui.slug', ui.slug)"
+        >
+          <div class="flex items-center">
+            <img
+              class="w-4 h-4 mr-1"
+              :src="`${config.iconsURL}${ui.imgPath}`"
+              :alt="ui.name"
+            >
+            <span>{{ ui.name }}</span>
+          </div>
+        </AppRadio>
+        <!-- </template> -->
       </div>
     </div>
 
     <div class="mb-4">
       <ShowcasesFilterLabel>Plugins</ShowcasesFilterLabel>
       <div class="flex flex-col">
-        <template v-for="plugin in plugins" :key="plugin.id">
-          <AppCheckbox
-            :id="`plugin-${plugin.slug}`"
-            :checked="
-              selectedFilters['plugins.slug'] &&
-                selectedFilters['plugins.slug'].includes(plugin.slug)
-            "
-            class="mb-1"
-            :label="plugin.name"
-            @input="checkboxFilter('plugins.slug', plugin.slug)"
-          />
-        </template>
+        <AppCheckbox
+          v-for="plugin in plugins"
+          :id="`plugin-${plugin.slug}`"
+          :key="plugin.id"
+          :checked="
+            selectedFilters['plugins.slug'] &&
+              selectedFilters['plugins.slug'].includes(plugin.slug)
+          "
+          class="mb-1"
+          :label="plugin.name"
+          @input="checkboxFilter('plugins.slug', plugin.slug)"
+        />
       </div>
     </div>
 
     <div v-show="selectedFilters['framework.slug'] === 'nuxtjs'" class="mb-4">
       <ShowcasesFilterLabel>Modules</ShowcasesFilterLabel>
       <div class="flex flex-col">
-        <template v-for="module in modules" :key="module.id">
-          <AppCheckbox
-            :id="`module-${module.slug}`"
-            :checked="
-              selectedFilters['modules.slug'] &&
-                selectedFilters['modules.slug'].includes(module.slug)
-            "
-            class="mb-1"
-            :label="module.name"
-            @input="checkboxFilter('modules.slug', module.slug)"
-          />
-        </template>
+        <AppCheckbox
+          v-for="module in modules"
+          :id="`module-${module.slug}`"
+          :key="module.id"
+          :checked="
+            selectedFilters['modules.slug'] &&
+              selectedFilters['modules.slug'].includes(module.slug)
+          "
+          class="mb-1"
+          :label="module.name"
+          @input="checkboxFilter('modules.slug', module.slug)"
+        />
       </div>
     </div>
   </div>

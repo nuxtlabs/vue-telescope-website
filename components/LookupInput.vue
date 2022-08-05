@@ -13,7 +13,7 @@
     >
       https://
     </span>
-    <label class="">
+    <label>
       <span class="absolute opacity-0 pointer-events-none">Lookup</span>
       <AppInput
         ref="inputRef"

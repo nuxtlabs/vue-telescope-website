@@ -76,7 +76,7 @@ const {
 const props = defineProps({
   showcase: {
     type: Object as PropType<Showcase>,
-    default: () => {}
+    default: null
   },
   compact: {
     type: Boolean,

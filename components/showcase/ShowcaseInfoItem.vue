@@ -27,7 +27,7 @@
         >
           {{ label }}
         </div>
-        <div class="flex items-center px-4">
+        <div class="flex items-center px-4 min-h-[2rem]">
           <img v-if="image" class="w-6 h-6 mr-2" :src="image">
           <div class="text-eight font-bold-body-weight leading-none truncate">
             {{ text }}

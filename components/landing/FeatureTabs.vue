@@ -51,7 +51,6 @@
           :on-surface-color="activeTab.onSurfaceColor"
           :description="activeTab.description"
           :image="activeTab.image"
-          class=""
         />
       </transition-group>
     </div>

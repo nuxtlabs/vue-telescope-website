@@ -9,40 +9,40 @@
     </div>
 
     <transition-group name="scale" appear>
-      <template v-for="(value, key) in selectedFilters" :key="key">
+      <div
+        v-for="(value, key) in selectedFilters"
+        :key="key"
+        class="scale-item rounded-lg mx-1 mb-2 mt-0 px-2 py-1 inline-flex items-center bg-primary-50 text-primary-500 border border-primary-100"
+      >
         <div
-          class="scale-item rounded-lg mx-1 mb-2 mt-0 px-2 py-1 inline-flex items-center bg-primary-50 text-primary-500 border border-primary-100"
+          class="font-bold-body-weight text-sm leading-sm px-2 flex items-center"
         >
-          <div
-            class="font-bold-body-weight text-sm leading-sm px-2 flex items-center"
+          <span class="mr-1">{{ title(key) }}</span>
+          <img
+            v-if="key === 'framework.slug'"
+            class="w-4 h-4 inline-block"
+            :src="`${config.iconsURL}${
+              frameworks.find((framework) => framework.slug === value).imgPath
+            }`"
+            alt=""
           >
-            <span class="mr-1">{{ title(key) }}</span>
-            <img
-              v-if="key === 'framework.slug'"
-              class="w-4 h-4 inline-block"
-              :src="`${config.iconsURL}${
-                frameworks.find((framework) => framework.slug === value).imgPath
-              }`"
-              alt=""
-            >
-            <img
-              v-else-if="key === 'ui.slug'"
-              class="w-4 h-4 inline-block"
-              :src="`${config.iconsURL}${
-                uis.find((ui) => ui.slug === value).imgPath
-              }`"
-              alt=""
-            >
-            <span>{{ content({ key, value }) }}</span>
-          </div>
-          <button
-            class="focus:outline-none has-hover:hover:opacity-75"
-            @click="$emit('clear-filter', key)"
+          <img
+            v-else-if="key === 'ui.slug'"
+            class="w-4 h-4 inline-block"
+            :src="`${config.iconsURL}${
+              uis.find((ui) => ui.slug === value).imgPath
+            }`"
+            alt=""
           >
-            <XmarkCircleFill class="w-4 h-4 text-primary-500" />
-          </button>
+          <span>{{ content({ key, value }) }}</span>
         </div>
-      </template>
+        <button
+          class="focus:outline-none has-hover:hover:opacity-75"
+          @click="$emit('clear-filter', key)"
+        >
+          <XmarkCircleFill class="w-4 h-4 text-primary-500" />
+        </button>
+      </div>
       <button
         v-if="Object.entries(selectedFilters).length > 1"
         key="clear-button"
@@ -59,6 +59,9 @@
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue'
+import type { Filters } from '~/types'
+
 import XmarkCircleFill from '@/assets/icons/xmark-circle-fill.svg'
 
 const { frameworks, uis } = await useTechnologies()
@@ -67,8 +70,8 @@ const config = useRuntimeConfig().public
 
 defineProps({
   selectedFilters: {
-    type: Object,
-    default: () => {}
+    type: Object as PropType<Filters>,
+    default: () => ({})
   },
   totalCount: {
     type: Number,
@@ -127,7 +130,7 @@ function content ({ key, value }) {
 .scale-move,
 .scale-enter-active,
 .scale-leave-active {
-  transition: all 100ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .scale-enter-from,
 .scale-leave-to {

@@ -34,7 +34,7 @@ const computedQ = computed({
   }
 })
 
-function searchQ (v) {
+function searchQ () {
   emit('searching')
   if (!q.value) {
     deleteFilterKey('_q')

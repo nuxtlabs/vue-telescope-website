@@ -107,7 +107,7 @@ const config = useRuntimeConfig().public
 defineProps({
   showcase: {
     type: Object as PropType<Showcase>,
-    default: () => {}
+    default: null
   }
 })
 </script>

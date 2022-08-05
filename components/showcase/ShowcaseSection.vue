@@ -46,7 +46,6 @@
               :pixelate="showcase.isAdultContent"
               ratio="4:3"
               sizes="100vw"
-              class=""
             />
             <ClientOnly>
               <ShowcaseBookmark :showcase="showcase" />
@@ -73,7 +72,7 @@ import LinkIcon from '@/assets/icons/link.svg'
 defineProps({
   showcase: {
     type: Object as PropType<Showcase>,
-    default: () => {}
+    default: null
   }
 })
 </script>
