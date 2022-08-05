@@ -23,13 +23,11 @@
 </template>
 
 <script setup lang="ts">
-import { useNuxtApp, useAsyncData, ref, onMounted } from '#imports'
 import type { Showcase } from '~/types'
 const { $gsap } = useNuxtApp()
 
 const activeIndex = ref(2)
 
-// refs
 const heroPresentationSlider = ref(null)
 
 // const activeShowcase = computed(() => {

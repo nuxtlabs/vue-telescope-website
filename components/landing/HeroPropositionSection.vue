@@ -35,8 +35,6 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, useNuxtApp, ref } from '#imports'
-
 const heading = ref()
 const lookupInput = ref()
 const subheading = ref()

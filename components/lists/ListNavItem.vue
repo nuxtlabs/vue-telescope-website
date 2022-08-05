@@ -116,6 +116,9 @@
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue'
+import type { List } from '~/types'
+
 import DotsVerticalIcon from '@/assets/icons/dots-vertical.svg'
 import FolderIcon from '@/assets/icons/folder.svg'
 import OpenedFolderIcon from '@/assets/icons/opened-folder.svg'
@@ -146,7 +149,7 @@ const shareList = ref(false)
 
 const props = defineProps({
   list: {
-    type: Object,
+    type: Object as PropType<List>,
     default: null
   }
 })
@@ -159,7 +162,7 @@ const reversedListGroups = computed(() => {
   const r = [...props.list.groups]
   return r.sort(
     (a, b) =>
-      a.position - b.position || new Date(a.created_at) - new Date(b.created_at)
+      a.position - b.position || new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
   )
 })
 

@@ -1,5 +1,3 @@
-import { useState, useAsyncData } from '#imports'
-
 export const useShowcasesCount = () => {
   const showcasesCount = useState('showcasesCount', () => null)
   const { find } = useStrapi3()

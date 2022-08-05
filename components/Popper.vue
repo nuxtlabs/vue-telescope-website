@@ -22,12 +22,13 @@
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue'
 import { createPopper } from '@popperjs/core'
-import { ref, onMounted } from '#imports'
 
 const props = defineProps({
   anchor: {
-    // TODO: ts
+    // TODO: ts, is this correct?
+    type: (process.server ? Object : HTMLElement) as PropType<HTMLElement>,
     default: null
   },
   offsetX: {
@@ -104,9 +105,9 @@ onMounted(() => {
   bottom: -15px;
   width: 1rem;
   height: 1rem;
-  & .arrow-icon {
-    /* display: block; */
-  }
+  /* & .arrow-icon {
+    display: block;
+  } */
 }
 [data-popper-placement^='bottom'] .arrow {
   top: -15px;

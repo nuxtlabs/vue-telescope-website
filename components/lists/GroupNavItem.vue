@@ -79,6 +79,9 @@
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue'
+import type { List, Group } from '~/types'
+
 import DotsVerticalIcon from '@/assets/icons/dots-vertical.svg'
 import SaveIcon from '@/assets/icons/save.svg'
 
@@ -100,11 +103,11 @@ const inputEl = ref(null)
 
 const props = defineProps({
   group: {
-    type: Object,
+    type: Object as PropType<Group>,
     default: null
   },
   list: {
-    type: Object,
+    type: Object as PropType<List>,
     default: null
   }
 })

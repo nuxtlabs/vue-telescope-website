@@ -63,13 +63,16 @@
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue'
+import type { Showcase } from '~/types'
+
 import ExclamationIcon from '@/assets/icons/exclamation.svg'
 import LinkIcon from '@/assets/icons/link.svg'
 // import CancelIcon from '@/assets/icons/xmark-circle.svg'
 
 defineProps({
   showcase: {
-    type: Object,
+    type: Object as PropType<Showcase>,
     default: () => {}
   }
 })

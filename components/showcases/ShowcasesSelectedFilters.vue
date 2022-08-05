@@ -20,7 +20,7 @@
             <img
               v-if="key === 'framework.slug'"
               class="w-4 h-4 inline-block"
-              :src="`${$config.iconsURL}${
+              :src="`${config.iconsURL}${
                 frameworks.find((framework) => framework.slug === value).imgPath
               }`"
               alt=""
@@ -28,7 +28,7 @@
             <img
               v-else-if="key === 'ui.slug'"
               class="w-4 h-4 inline-block"
-              :src="`${$config.iconsURL}${
+              :src="`${config.iconsURL}${
                 uis.find((ui) => ui.slug === value).imgPath
               }`"
               alt=""
@@ -62,6 +62,8 @@
 import XmarkCircleFill from '@/assets/icons/xmark-circle-fill.svg'
 
 const { frameworks, uis } = await useTechnologies()
+
+const config = useRuntimeConfig().public
 
 defineProps({
   selectedFilters: {

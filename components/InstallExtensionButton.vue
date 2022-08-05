@@ -16,8 +16,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from '#imports'
-
 const el = ref(null)
 
 defineExpose({
@@ -66,7 +64,6 @@ function linkNavigation () {
 }
 
 function trackGoal () {
-  // TODO: ts
   window.fathom?.trackGoal('13CDY7TC', 0)
 }
 </script>

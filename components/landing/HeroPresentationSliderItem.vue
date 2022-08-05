@@ -51,14 +51,6 @@
 </template>
 
 <script setup lang="ts">
-import {
-  computed,
-  watch,
-  ref,
-  nextTick,
-  onMounted
-} from '#imports'
-
 const { $gsap, $SplitText } = useNuxtApp()
 
 const sliderMatrix = [

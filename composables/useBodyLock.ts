@@ -1,5 +1,3 @@
-import { useState } from '#imports'
-
 export const useBodyLock = () => {
   const isBodyLocked = useState('isBodyLocked', () => false)
 
@@ -10,7 +8,7 @@ export const useBodyLock = () => {
     document.body.style.paddingRight = `${scrollBarGap}px`
 
     const fixedEls = document.querySelectorAll('.fixed')
-    fixedEls.forEach((el) => {
+    fixedEls.forEach((el: HTMLElement) => {
       el.style.paddingRight = `${scrollBarGap}px`
     })
     // document.querySelector(
@@ -29,7 +27,7 @@ export const useBodyLock = () => {
       document.body.style.paddingRight = null
       // document.querySelector('#main-header').style.paddingRight = null
       const fixedEls = document.querySelectorAll('.fixed')
-      fixedEls.forEach((el) => {
+      fixedEls.forEach((el: HTMLElement) => {
         el.style.paddingRight = null
       })
       isBodyLocked.value = false

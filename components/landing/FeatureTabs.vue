@@ -59,8 +59,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from '#imports'
-
 const tabs = [
   {
     id: 1,

@@ -17,9 +17,12 @@
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue'
+import type { List } from '~/types'
+
 defineProps({
   list: {
-    type: Object,
+    type: Object as PropType<List>,
     default: null
   }
 })

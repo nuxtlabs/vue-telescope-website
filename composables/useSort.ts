@@ -1,5 +1,3 @@
-import { useState } from '#imports'
-
 function filterSort (raw) {
   return Object.keys(raw)
     .filter(key => key === '_sort')

@@ -24,7 +24,7 @@
           <div class="flex items-center">
             <img
               class="w-4 h-4 mr-1"
-              :src="`${$config.iconsURL}/vue.svg`"
+              :src="`${config.iconsURL}/vue.svg`"
               alt="Vue"
             >
             <span>Vue</span>
@@ -43,7 +43,7 @@
             <div class="flex items-center">
               <img
                 class="w-4 h-4 mr-1"
-                :src="`${$config.iconsURL}${framework.imgPath}`"
+                :src="`${config.iconsURL}${framework.imgPath}`"
                 :alt="framework.name"
               >
               <span>{{ framework.name }}</span>
@@ -64,7 +64,7 @@
         >
           <span>None</span>
         </AppRadio>
-        <template v-for="ui in uis" :key="ui.id" class="">
+        <template v-for="ui in uis" :key="ui.id">
           <AppRadio
             :id="`ui-${ui.slug}`"
             :checked="
@@ -77,7 +77,7 @@
             <div class="flex items-center">
               <img
                 class="w-4 h-4 mr-1"
-                :src="`${$config.iconsURL}${ui.imgPath}`"
+                :src="`${config.iconsURL}${ui.imgPath}`"
                 :alt="ui.name"
               >
               <span>{{ ui.name }}</span>
@@ -129,6 +129,8 @@
 const { selectedFilters, setFilterKey, deleteFilterKey, resetFilters } =
   useFilters()
 const { frameworks, modules, plugins, uis } = await useTechnologies()
+
+const config = useRuntimeConfig().public
 
 defineExpose({
   clearFilter,

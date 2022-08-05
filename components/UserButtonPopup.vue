@@ -45,7 +45,6 @@
 
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import { onMounted, ref, useNuxtApp, useCookie } from '#imports'
 import type { User } from '~/types'
 
 const { getProviderAuthenticationUrl, logout } = useStrapiAuth()

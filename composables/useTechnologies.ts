@@ -1,5 +1,3 @@
-import { useState, useAsyncData } from '#imports'
-
 export const useTechnologies = async () => {
   const frameworks = useState('frameworks', () => [])
   const modules = useState('modules', () => [])

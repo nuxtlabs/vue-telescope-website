@@ -1,5 +1,3 @@
-import { useState } from '#imports'
-
 const allowedFilters = [
   '_q',
   'framework.slug',

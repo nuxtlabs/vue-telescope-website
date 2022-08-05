@@ -14,8 +14,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from '#imports'
-
 defineEmits(['update:modelValue'])
 
 const props = defineProps({

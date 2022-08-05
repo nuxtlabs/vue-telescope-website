@@ -56,6 +56,9 @@
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue'
+import type { List } from '~/types'
+
 import PlusIcon from '@/assets/icons/plus-circle.svg'
 import XmarkIcon from '@/assets/icons/xmark.svg'
 import SaveIcon from '@/assets/icons/save.svg'
@@ -68,7 +71,7 @@ const emit = defineEmits(['cleanup'])
 
 const props = defineProps({
   list: {
-    type: Object,
+    type: Object as PropType<List>,
     default: null
   }
 })

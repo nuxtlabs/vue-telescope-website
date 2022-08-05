@@ -29,7 +29,10 @@
 </template>
 
 <script setup lang="ts">
-const { $config } = useNuxtApp()
+import type { PropType } from 'vue'
+import type { List } from '~/types'
+
+const config = useRuntimeConfig().public
 
 defineEmits(['close'])
 
@@ -37,13 +40,13 @@ const endpointEl = ref(null)
 
 const props = defineProps({
   list: {
-    type: Object,
+    type: Object as PropType<List>,
     default: null
   }
 })
 
 const listUrl = computed(() => {
-  return `${$config.strapiURL}/lists/${props.list.id}`
+  return `${config.strapiURL}/lists/${props.list.id}`
 })
 
 const code = computed(() => {
@@ -55,7 +58,7 @@ function selectRequest () {
   selectText(el)
 }
 
-function selectText (el) {
+function selectText (el: HTMLElement) {
   const range = document.createRange()
   range.selectNode(el)
   window.getSelection().removeAllRanges()

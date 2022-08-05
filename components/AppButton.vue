@@ -20,8 +20,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from '#imports'
-
 const el = ref(null)
 
 // TODO: wrong, replace with method/data

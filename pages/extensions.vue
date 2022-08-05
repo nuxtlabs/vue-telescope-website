@@ -11,7 +11,7 @@
           <ChromeColorIcon class="h-32 mb-8" />
           <AppButton
             tag="a"
-            :href="$config.googleStoreUrl"
+            :href="config.googleStoreUrl"
             size="base"
             appearance="primary"
           >
@@ -24,7 +24,7 @@
           <FirefoxColorIcon class="h-32 mb-8" />
           <AppButton
             tag="a"
-            :href="$config.firefoxStoreUrl"
+            :href="config.firefoxStoreUrl"
             size="base"
             appearance="primary"
           >
@@ -41,6 +41,8 @@ import ChromeColorIcon from '@/assets/icons/chrome-color.svg'
 import FirefoxColorIcon from '@/assets/icons/firefox-color.svg'
 
 useFrontMatter({ title: 'Browser Extensions' })
+
+const config = useRuntimeConfig().public
 
 // TODO: temp solution
 if (process.client) {

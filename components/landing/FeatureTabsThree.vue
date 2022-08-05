@@ -47,7 +47,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, useNuxtApp } from '#imports'
 const { $gsap, $SplitText } = useNuxtApp()
 
 const props = defineProps({

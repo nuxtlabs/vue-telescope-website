@@ -1,5 +1,3 @@
-import { useState } from '#imports'
-
 export const usePrivacyAwareness = () => {
   const privacyAwarenessCb = useState('privacyAwarenessCb', () => null)
 
@@ -8,7 +6,7 @@ export const usePrivacyAwareness = () => {
   }
 
   function processPrivacyAwareness (cb) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       if (localStorage.getItem('privacyAware') !== 'true') {
         setPrivacyAwarenessCb(cb)
         resolve(false)

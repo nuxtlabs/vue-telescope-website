@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { useNuxtApp, computed, ref, onMounted } from '#imports'
-
 const brand = ref()
 
-const { $gsap, $config } = useNuxtApp()
+const { $gsap } = useNuxtApp()
+
+const config = useRuntimeConfig().public
 
 const timeout = 5000
 const rotationInterval = ref(null)
@@ -58,7 +58,7 @@ function enterTransition (el, done = () => {}) {
   )
 
   const image = new Image()
-  image.src = `${$config.iconsURL}/${activeBrands.value[0]?.imgPath}`
+  image.src = `${config.iconsURL}/${activeBrands.value[0]?.imgPath}`
 
   image.addEventListener('load', () => {
     Array.from(el.children[1]?.children).forEach((c: object, i) => {
@@ -137,7 +137,7 @@ onMounted(() => {
             :key="num"
             class="brand-icon"
             :class="[num % 2 && 'hidden md:block']"
-            :style="`background-image: url(${$config.iconsURL}/${activeBrands[0].imgPath})`"
+            :style="`background-image: url(${config.iconsURL}/${activeBrands[0].imgPath})`"
           />
         </div>
       </div>

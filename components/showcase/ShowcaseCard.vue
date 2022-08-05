@@ -35,19 +35,19 @@
             <img
               v-if="showcase.ui"
               class="inline-block w-4 h-4 mr-1"
-              :src="`${$config.iconsURL}${showcase.ui.imgPath}`"
+              :src="`${config.iconsURL}${showcase.ui.imgPath}`"
               alt=""
             >
             <img
               v-if="!showcase.framework"
               class="inline-block w-4 h-4 mr-1"
-              :src="`${$config.iconsURL}/vue.svg`"
+              :src="`${config.iconsURL}/vue.svg`"
               alt=""
             >
             <img
               v-if="showcase.framework"
               class="inline-block w-4 h-4 mr-1"
-              :src="`${$config.iconsURL}${showcase.framework.imgPath}`"
+              :src="`${config.iconsURL}${showcase.framework.imgPath}`"
               alt=""
             >
           </div>
@@ -59,9 +59,14 @@
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue'
+import type { Showcase } from '~/types'
+
+const config = useRuntimeConfig().public
+
 defineProps({
   showcase: {
-    type: Object,
+    type: Object as PropType<Showcase>,
     default: () => {}
   },
   sortable: {

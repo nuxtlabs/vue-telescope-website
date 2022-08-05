@@ -16,7 +16,7 @@
         <div class="flex">
           <AppButton
             tag="a"
-            :href="$config.googleStoreUrl"
+            :href="config.googleStoreUrl"
             appearance="transparent"
             size="small"
             class="mr-1"
@@ -26,7 +26,7 @@
           </AppButton>
           <AppButton
             tag="a"
-            :href="$config.firefoxStoreUrl"
+            :href="config.firefoxStoreUrl"
             appearance="transparent"
             size="small"
             class="ml-1"
@@ -43,4 +43,7 @@
 <script setup lang="ts">
 import ChromeColorIcon from '@/assets/icons/chrome-color.svg'
 import FirefoxColorIcon from '@/assets/icons/firefox-color.svg'
+
+const config = useRuntimeConfig().public
+
 </script>

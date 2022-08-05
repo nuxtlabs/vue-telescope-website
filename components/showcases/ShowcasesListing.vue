@@ -12,15 +12,18 @@
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue'
+import type { Showcase } from '~/types'
+
 const router = useRouter()
 defineProps({
   showcases: {
-    type: Array,
+    type: Array as PropType<Showcase[]>,
     default: null
   }
 })
 
-function openLinkHandler (showcase) {
+function openLinkHandler (showcase: Showcase) {
   router.push(`/explore/${showcase.slug}`)
 }
 </script>

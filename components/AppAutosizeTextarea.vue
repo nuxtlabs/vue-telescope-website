@@ -11,9 +11,10 @@
 </template>
 
 <script setup lang="ts">
+import type { Ref } from 'vue'
 import toPx from 'to-px'
 
-const textarea = ref(null)
+const textarea = ref(null) as Ref<HTMLTextAreaElement>
 
 const emit = defineEmits(['update:modelValue', 'submit'])
 
@@ -46,11 +47,11 @@ watch(
 
 onMounted(() => {
   setTimeout(() => {
-    textarea.value.focus()
+    textarea.value?.focus()
   }, 16)
 })
 
-function calculateInputHeight (el) {
+function calculateInputHeight (el: HTMLTextAreaElement) {
   if (!el) { return }
   const styles = window.getComputedStyle(el)
   // const fontSize = toPx(styles.fontSize)

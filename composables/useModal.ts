@@ -1,5 +1,3 @@
-import { useState } from '#imports'
-
 export const useModal = () => {
   const isModal = useState('isModal', () => false)
 

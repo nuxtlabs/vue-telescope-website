@@ -1,5 +1,3 @@
-import { useState, computed } from '#imports'
-
 export const useLists = () => {
   const lists = useState('lists', () => [])
   const selectedList = useState('selectedList', () => null)

@@ -62,8 +62,8 @@
 
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import AsideContentTemplate from '@/components/templates/AsideContentTemplate.vue'
 import type { User } from '~/types'
+import AsideContentTemplate from '@/components/templates/AsideContentTemplate.vue'
 
 const user = useStrapiUser() as Ref<User>
 const { $gsap } = useNuxtApp()
