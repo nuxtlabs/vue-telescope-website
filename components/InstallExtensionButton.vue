@@ -1,0 +1,72 @@
+<template>
+  <AppButton
+    ref="el"
+    tag="a"
+    :href="linkToExtention"
+    :size="size"
+    :class="[(isMobile || isExtensionInstalled) && 'hidden']"
+    class="cursor-pointer"
+    target="_blank"
+    rel="noopener noreferrer nofollow"
+    appearance="primary"
+    @click.native="processLinkNavigation"
+  >
+    <ClientOnly>{{ buttonText }}</ClientOnly>
+  </AppButton>
+</template>
+
+<script setup lang="ts">
+import { ref, computed } from '#imports'
+
+const el = ref(null)
+
+defineExpose({
+  el
+})
+
+defineProps({
+  size: {
+    type: String,
+    default: 'base'
+  }
+})
+
+const { isMobile, isChrome, isFirefox } = useUserAgent()
+const { isExtensionInstalled } = useExtensionInstalled()
+const { processPrivacyAwareness } = usePrivacyAwareness()
+
+const buttonText = computed(() => {
+  if (isChrome.value) {
+    return 'Add to Chrome'
+  } else if (isFirefox.value) {
+    return 'Add to Firefox'
+  } else {
+    return 'Install Extension'
+  }
+})
+
+const linkToExtention = computed(() => {
+  if (isChrome.value) {
+    return 'https://chrome.google.com/webstore/detail/vue-telemetry/neaebjphlfplgdhedjdhcnpjkndddbpd'
+  } else if (isFirefox.value) {
+    return 'https://addons.mozilla.org/en-GB/firefox/addon/vue-telemetry/'
+  } else {
+    return '/extensions'
+  }
+})
+
+async function processLinkNavigation (e) {
+  e.preventDefault()
+  await processPrivacyAwareness(linkNavigation)
+}
+
+function linkNavigation () {
+  window.open(linkToExtention.value, '_blank').focus()
+  trackGoal()
+}
+
+function trackGoal () {
+  // TODO: ts
+  window.fathom?.trackGoal('13CDY7TC', 0)
+}
+</script>

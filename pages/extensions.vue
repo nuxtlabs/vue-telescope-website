@@ -4,7 +4,7 @@
       <h1 class="text-four leading-four font-display-weight text-center mb-12">
         Check out Vue Telescope browser integrations
       </h1>
-      <div class="flex flex-wrap max-w-readable m-auto">
+      <div class="flex flex-wrap max-w-[24rem] m-auto">
         <div
           class="w-full sm:w-1/2 flex flex-col items-center justify-center mb-8"
         >
@@ -36,15 +36,17 @@
   </div>
 </template>
 
-<script>
-import ChromeColorIcon from '@/assets/icons/chrome-color.svg?inline'
-import FirefoxColorIcon from '@/assets/icons/firefox-color.svg?inline'
+<script setup lang="ts">
+import ChromeColorIcon from '@/assets/icons/chrome-color.svg'
+import FirefoxColorIcon from '@/assets/icons/firefox-color.svg'
 
-export default {
-  components: {
-    ChromeColorIcon,
-    FirefoxColorIcon
-  }
+useFrontMatter({ title: 'Browser Extensions' })
+
+// TODO: temp solution
+if (process.client) {
+  setTimeout(() => {
+    window.scrollTo({ top: 0 })
+  }, 0)
 }
 </script>
 

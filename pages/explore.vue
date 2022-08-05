@@ -1,43 +1,58 @@
 <template>
   <div class="pt-12 md:pt-8 mb-8">
     <ExplorePage
-      v-if="!$route.params.website || ($route.params.website && !directHit)"
+      v-if="!$route.params.showcase || ($route.params.showcase && !directHit)"
     />
-    <NuxtChild :key="$route.params.website" />
+
+    <NuxtPage :key="$route.params.showcase" />
   </div>
 </template>
 
-<script>
-import { mapState } from 'vuex'
-import frontMatter from '@/utils/front-matter'
+<script setup lang="ts">
+const { $directHit: directHit } = useNuxtApp()
 
-export default {
-  name: 'ExploreP',
-  // scrollToTop: true,
-  beforeRouteEnter(to, from, next) {
-    if (process.browser) {
-      setTimeout(() => {
-        window.scrollTo(0, 0)
-      }, 50)
+const { frameworks, uis } = await useTechnologies()
+const { selectedFilters } = useFilters()
+
+const title = computed(() => {
+  if (!selectedFilters.value['framework.slug'] && !selectedFilters.value['ui.slug']) {
+    return 'Explore Vue.js websites'
+  } else {
+    let selectedFrameworkName
+    let selectedUiName
+
+    if (selectedFilters.value['framework.slug']) {
+      const { name } = frameworks.value.find(f => f.slug === selectedFilters.value['framework.slug'])
+      selectedFrameworkName = name
     }
-    next()
-  },
-  data() {
-    return {
-      newTwitterLike: false
+    if (selectedFilters.value['ui.slug']) {
+      const { name } = uis.value.find(u => u.slug === selectedFilters.value['ui.slug'])
+      selectedUiName = name
     }
-  },
-  head() {
-    return frontMatter({
-      path: this.$route.path,
-      title: 'Explore Vue.js showcases',
-      noindex: false
-    })
-  },
-  computed: {
-    ...mapState({
-      directHit: (state) => state.directHit
-    })
+    return `Explore Vue.js websites made with ${
+      selectedFrameworkName && selectedUiName
+      ? (selectedFrameworkName + ' & ' + selectedUiName)
+      : !selectedFrameworkName && selectedUiName
+      ? selectedUiName
+      : selectedFrameworkName
+    }`
   }
+})
+
+watch(title, (newValue) => {
+  useFrontMatter({
+    title: newValue
+  })
+})
+
+useFrontMatter({
+  title: title.value
+})
+
+// TODO: temp solution
+if (process.client) {
+  setTimeout(() => {
+    window.scrollTo({ top: 0 })
+  }, 0)
 }
 </script>

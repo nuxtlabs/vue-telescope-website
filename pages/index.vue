@@ -3,40 +3,23 @@
     <HeroPropositionSection
       class="mt-24 md:mt-32 max-w-readable px-4 mx-auto"
     />
-    <HeroPresentationSlider :featured="featured" class="my-24" />
+    <HeroPresentationSlider class="my-24" />
     <FeaturesSection class="px-4 max-w-container m-auto" />
     <BenefitsSection class="px-4 max-w-container m-auto" />
-    <CtaSection class="" />
+    <CtaSection />
   </div>
 </template>
 
-<script>
-import frontMatter from '@/utils/front-matter'
+<script setup lang="ts">
+const { fetch: fetchShowcasesCount } = useShowcasesCount()
+await fetchShowcasesCount()
 
-export default {
-  name: 'IndexPage',
-  transition: 'fade',
-  data() {
-    return {
-      featured: []
-    }
-  },
-  async fetch() {
-    const featured = await this.$strapi.find(
-      'showcases?isFeatured=true&_limit=5'
-    )
-    this.featured = featured.map((item, index) => {
-      return { ...item, index }
-    })
-  },
-  fetchOnServer: false,
-  head() {
-    return frontMatter({
-      path: this.$route.path,
-      noindex: false
-    })
-  }
+useFrontMatter()
+
+// TODO: temp solution
+if (process.client) {
+  setTimeout(() => {
+    window.scrollTo({ top: 0 })
+  }, 0)
 }
 </script>
-
-<style></style>

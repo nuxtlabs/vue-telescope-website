@@ -1,13 +1,16 @@
-// Docs: https://tailwindcss.com/docs/configuration
-// Default: https://github.com/tailwindcss/tailwindcss/blob/master/stubs/defaultConfig.stub.js
 const defaultTheme = require('tailwindcss/defaultTheme')
-const breakpoints = require('./utils/styles/breakpoints')
+// const breakpoints = require('./utils/styles/breakpoints')
+
+const breakpoints = {
+  xs: '320px',
+  sm: '640px',
+  md: '834px',
+  lg: '1024px',
+  xl: '1280px',
+  '2xl': '1536px'
+}
 
 module.exports = {
-  future: {
-    purgeLayersByDefault: true,
-    removeDeprecatedGapUtilities: true
-  },
   theme: {
     screens: {
       ...breakpoints,
@@ -201,8 +204,11 @@ module.exports = {
     },
     extend: {
       fontFamily: {
+        // @ts-expect-error
         display: ['PTRootUI', ...defaultTheme.fontFamily.sans],
+        // @ts-expect-error
         body: ['PTRootUI', ...defaultTheme.fontFamily.sans],
+        // @ts-expect-error
         monospace: [...defaultTheme.fontFamily.mono]
       },
       maxWidth: {
@@ -300,34 +306,5 @@ module.exports = {
     textColor: ['responsive', 'hover', 'focus', 'group-hover'],
     backgroundColor: ['responsive', 'hover', 'focus', 'group-hover'],
     borderColor: ['responsive', 'hover', 'focus', 'group-hover']
-  },
-  // plugins: [],
-  purge: {
-    // Learn more on https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
-    enabled: process.env.NODE_ENV === 'production',
-    content: [
-      'content/**/*.md',
-      'components/**/*.vue',
-      'layouts/**/*.vue',
-      'pages/**/*.vue',
-      'plugins/**/*.js',
-      'nuxt.config.js'
-    ],
-    options: {
-      whitelist: [
-        'bg-nuxtjs-light',
-        'bg-nuxtjs-base',
-        'text-nuxtjs-base',
-        'bg-quasar-base',
-        'text-quasar-base',
-        'bg-gridsome-base',
-        'text-gridsome-base',
-        'bg-vuepress-base',
-        'text-vuepress-base',
-        'bg-vue-base',
-        'text-vue-base',
-        'bg-tailwind-css-light'
-      ]
-    }
   }
 }
