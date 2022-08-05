@@ -113,7 +113,7 @@ async function createList () {
   }
 }
 
-function enter (el, done) {
+function enter (el: HTMLElement, done: Function) {
   inputEl.value?.$el.focus()
   nextTick(() => {
     $gsap.set(el, { position: 'absolute', transformOrigin: 'left' })
@@ -133,7 +133,7 @@ function enter (el, done) {
   })
 }
 
-function leave (el, done) {
+function leave (el: HTMLElement, done: Function) {
   $gsap.set(el, { transformOrigin: 'left' })
   $gsap.to(el, {
     // position: 'absolute',
@@ -143,7 +143,7 @@ function leave (el, done) {
     clearProps: true,
     duration: 0.25,
     ease: 'power1.out',
-    onComplete: done
+    onComplete: () => done()
   })
 }
 </script>

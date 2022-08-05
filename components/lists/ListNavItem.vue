@@ -206,7 +206,6 @@ function clickOnNameHandler () {
   // }
   clearActions()
   // this.clicked = 0
-  // this.creatingGroup = false
 }
 
 function clearActions () {
@@ -222,14 +221,16 @@ async function deleteList () {
       list: props.list
     })
   } catch (e) {
-    console.log(e)
+    if (process.env.NODE_ENV !== 'production') {
+      // eslint-disable-next-line no-console
+      console.error(e)
+    }
   }
 }
 
 function initUpdateList () {
   // popperInstance.forceUpdate()
   updatingList.value = true
-  // this.creatingGroup = false
   newListName.value = props.list.name
   nextTick(() => {
     inputEl.value?.$el.focus()
@@ -249,7 +250,10 @@ async function updateList () {
     nameEl.value.focus()
   } catch (e) {
     loading.value = false
-    console.log(e)
+    if (process.env.NODE_ENV !== 'production') {
+      // eslint-disable-next-line no-console
+      console.error(e)
+    }
   }
 }
 

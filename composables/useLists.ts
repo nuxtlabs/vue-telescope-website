@@ -152,7 +152,10 @@ export const useLists = () => {
       setSelectedGroup(selectedList.value ? selectedList.value.groups[0] : null)
       return list
     } catch (err) {
-      console.log(err)
+      if (process.env.NODE_ENV !== 'production') {
+        // eslint-disable-next-line no-console
+        console.error(err)
+      }
       return false
     }
   }
@@ -173,7 +176,10 @@ export const useLists = () => {
       setSelectedGroup(newGroup)
       return newGroup
     } catch (err) {
-      console.log(err)
+      if (process.env.NODE_ENV !== 'production') {
+        // eslint-disable-next-line no-console
+        console.error(err)
+      }
     }
   }
 
@@ -194,7 +200,10 @@ export const useLists = () => {
       })
       return updatedGroup
     } catch (err) {
-      // console.log(err)
+      if (process.env.NODE_ENV !== 'production') {
+        // eslint-disable-next-line no-console
+        console.error(err)
+      }
     }
   }
 
@@ -379,7 +388,10 @@ export const useLists = () => {
         list
       })
     } catch (err) {
-      console.log(err)
+      if (process.env.NODE_ENV !== 'production') {
+        // eslint-disable-next-line no-console
+        console.error(err)
+      }
     }
   }
 

@@ -187,7 +187,10 @@ async function deleteGroup () {
     deletingGroup.value = false
     setSelectedGroup(props.list.groups[0])
   } catch (e) {
-    console.log(e)
+    if (process.env.NODE_ENV !== 'production') {
+      // eslint-disable-next-line no-console
+      console.error(e)
+    }
   }
 }
 
@@ -220,7 +223,10 @@ async function moveDownGroup () {
     })
     clearActions()
   } catch (e) {
-    console.log(e)
+    if (process.env.NODE_ENV !== 'production') {
+      // eslint-disable-next-line no-console
+      console.error(e)
+    }
   }
   loading.value = false
 }

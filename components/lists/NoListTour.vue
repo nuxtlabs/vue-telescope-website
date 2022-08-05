@@ -93,7 +93,10 @@ async function createList () {
     clearActions()
     creatingList.value = false
   } catch (e) {
-    console.log(e)
+    if (process.env.NODE_ENV !== 'production') {
+      // eslint-disable-next-line no-console
+      console.error(e)
+    }
   }
 }
 
