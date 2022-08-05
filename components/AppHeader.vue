@@ -35,7 +35,7 @@
           >Explore</span>
         </NuxtLink>
 
-        <UserButton ref="userButtonEl" @click.native="showMenu = true" />
+        <UserButton ref="userButtonRef" @click.native="showMenu = true" />
 
         <ClientOnly>
           <teleport to="body">
@@ -44,7 +44,7 @@
               :offset-x="12"
               :offset-y="-2"
               placement="bottom-end"
-              :anchor="userButtonEl.el"
+              :anchor="userButtonRef.$el"
             >
               <UserButtonPopup @close-menu="showMenu = false" />
             </Popper>
@@ -59,7 +59,7 @@
 import TheLogo from '@/assets/logo/logo.svg'
 import TheLogoMobile from '@/assets/logo/square-logo.svg'
 
-const userButtonEl = ref(null)
+const userButtonRef = ref(null)
 
 const showMenu = ref(false)
 

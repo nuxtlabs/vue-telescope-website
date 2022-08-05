@@ -1,6 +1,5 @@
 <template>
   <button
-    ref="el"
     class="relative rounded-full overflow-hidden focus:outline-none"
   >
     <ClientOnly>
@@ -75,12 +74,7 @@ const user = useStrapiUser() as Ref<User>
 
 const { $tour } = useNuxtApp()
 
-const el = ref(null)
 const showLocal = ref(true)
-
-defineExpose({
-  el
-})
 
 const showTour = computed(() => {
   return process.client

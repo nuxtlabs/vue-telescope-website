@@ -49,7 +49,7 @@
       </button>
       <button
         v-else
-        ref="anchor"
+        ref="anchorRef"
         class="focus:outline-none has-hover:group-hover:flex has-hover:hover:bg-grey-50 rounded-lg w-full h-full items-center justify-center"
         :class="[openCollapse || showPopup || isSelected ? 'flex' : 'hidden']"
         @click="openPopup"
@@ -63,7 +63,7 @@
       :offset-x="4"
       :offset-y="-2"
       placement="right-start"
-      :anchor="$refs.anchor"
+      :anchor="anchorRef"
     >
       <GroupNavItemPopup
         v-if="!updatingGroup"
@@ -86,6 +86,8 @@ import DotsVerticalIcon from '@/assets/icons/dots-vertical.svg'
 import SaveIcon from '@/assets/icons/save.svg'
 
 const emit = defineEmits(['group-selected'])
+
+const anchorRef = ref(null)
 
 const { $gsap } = useNuxtApp()
 

@@ -35,10 +35,10 @@
 </template>
 
 <script setup lang="ts">
-const heading = ref()
-const lookupInput = ref()
-const subheading = ref()
-const installExtensionButton = ref()
+const heading = ref(null)
+const lookupInput = ref(null)
+const subheading = ref(null)
+const installExtensionButton = ref(null)
 
 const { $gsap, $SplitText } = useNuxtApp()
 const { showcasesCount } = useShowcasesCount()
@@ -106,7 +106,7 @@ onMounted(() => {
   )
 
   $gsap.fromTo(
-    installExtensionButton.value.el.el,
+    installExtensionButton.value.$el,
     {
       opacity: 0,
       scale: 0.75,

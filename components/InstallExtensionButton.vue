@@ -1,6 +1,5 @@
 <template>
   <AppButton
-    ref="el"
     tag="a"
     :href="linkToExtention"
     :size="size"
@@ -16,12 +15,6 @@
 </template>
 
 <script setup lang="ts">
-const el = ref(null)
-
-defineExpose({
-  el
-})
-
 defineProps({
   size: {
     type: String,

@@ -43,7 +43,7 @@
       <div class="w-8 h-8 ml-auto my-2">
         <button
           v-if="!updatingList"
-          ref="anchor"
+          ref="anchorRef"
           class="focus:outline-none has-hover:group-hover:flex items-center justify-center rounded-lg w-full h-full"
           :class="[
             openCollapse || showPopup ? 'flex' : 'hidden',
@@ -75,7 +75,7 @@
         :offset-x="4"
         :offset-y="-2"
         placement="right-start"
-        :anchor="$refs.anchor"
+        :anchor="anchorRef"
       >
         <ListNavItemPopup
           v-if="!updatingList"
@@ -128,6 +128,7 @@ const emit = defineEmits(['close-menu'])
 
 const nameEl = ref(null)
 const inputEl = ref(null)
+const anchorRef = ref(null)
 
 const {
   selectedList,
