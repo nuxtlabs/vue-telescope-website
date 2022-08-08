@@ -47,8 +47,6 @@ See more [on GitHub](https://github.com/nuxt-company/vue-telescope-extensions).
 
 We now support Vue 3 in the [vue-telemetry-analyzer](https://github.com/nuxt-company/vue-telemetry-analyzer), making it available today in the [Chrome](https://chrome.google.com/webstore/detail/vue-telemetry/neaebjphlfplgdhedjdhcnpjkndddbpd) and [Firefox](https://addons.mozilla.org/en-US/firefox/addon/vue-telemetry/) extensions.
 
-[:img{src="https://res.cloudinary.com/nuxt/image/upload/v1608057034/vue-telemetry/vue-telemetry-vue3_mzilty.svg" alt="vue telemetry vue 3 support" class="m-auto rounded-md shadow"}](/explore/vitepress-vuejs-org)
-
 On top of it, we also added support for [PrimeVue](https://www.primefaces.org/primevue/showcase/#/) and [Vuesax](https://vuesax.com) UI frameworks.
 
 Thank you to [@cagataycivici](https://github.com/cagataycivici), [@alfonsobries](https://github.com/alfonsobries), [@antfu](https://github.com/antfu) and our [contributors](https://github.com/nuxt-company/vue-telemetry-analyzer/graphs/contributors) for their help 🙌
