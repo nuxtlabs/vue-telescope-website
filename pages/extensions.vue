@@ -1,5 +1,5 @@
 <template>
-  <div class="page-wrapper">
+  <div class="min-h-(screen-header)">
     <div class="px-4 max-w-container m-auto pt-12">
       <h1 class="text-four leading-four font-display-weight text-center mb-12">
         Check out Vue Telescope browser integrations
@@ -51,9 +51,3 @@ if (process.client) {
   }, 0)
 }
 </script>
-
-<style scoped>
-.page-wrapper {
-  min-height: calc(100vh - (10.25rem + 4rem));
-}
-</style>

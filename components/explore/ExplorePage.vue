@@ -3,14 +3,14 @@
     <template #aside-content-aside>
       <ShowcasesSearchFilters
         ref="filtersEl"
-        class="h-full overflow-x-hidden overflow-y-auto"
+        class="h-full overflow-x-hidden overflow-y-auto pt-8"
         @click.native="filtersTouched = true"
       />
     </template>
 
     <template #aside-content-header>
       <ShowcasesMobileSearchFilters />
-      <ShowcasesSorting class="mr-12 -mt-9 md:-mt-8 md:mr-6" />
+      <ShowcasesSorting class="mr-12 mt-3 md:mt-0 md:mr-6" />
       <ShowcasesSelectedFilters
         :selected-filters="selectedFilters"
         :total-count="totalCount"

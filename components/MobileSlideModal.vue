@@ -1,7 +1,6 @@
 <template>
-  <div class="modal-wrapper">
-    <div ref="scrimEl" class="scrim" style="opacity: 0" />
-    <!-- <div class="fixed top-0 bg-white">{{ test }}</div> -->
+  <div class="fixed top-0 left-0 w-full h-full z-[1000]">
+    <div ref="scrimEl" class="scrim fixed top-0 left-0 w-full h-full pointer-events-none" style="opacity: 0" />
     <div
       class="w-full h-full overflow-auto"
       @click.self="animateLeave"
@@ -10,8 +9,7 @@
     >
       <div class="flex flex-col justify-end h-full pt-16 pointer-events-none">
         <div
-          ref="hack-safari"
-          class="hack-safari overflow-hidden rounded-b-none rounded-4xl"
+          class="overflow-hidden rounded-b-none rounded-4xl"
           :class="isSafari && 'h-full'"
         >
           <div
@@ -20,8 +18,7 @@
             class="modal-container overflow-auto relative h-full px-4 bg-white rounded-b-none pointer-events-auto rounded-4xl"
           >
             <div
-              ref="close-button"
-              class="sticky top-0 left-0 z-10 flex items-center justify-center w-full py-4 bg-white rounded-md cursor-pointer pointer-events-auto sticky-edge"
+              class="sticky-edge sticky top-0 left-0 z-10 flex items-center justify-center w-full py-4 bg-white rounded-md cursor-pointer pointer-events-auto"
               @click="isMobile ? null : animateLeave()"
               @touchmove="touchMoveHandler"
               @touchstart="touchStartHandler"
@@ -132,7 +129,7 @@ function animateEnter () {
         ease: 'none',
         onComplete: () => {
           if (isSafari.value) {
-            modalContainerEl.value.style.height = 'calc(100vh - 4rem)'
+            modalContainerEl.value.style.height = 'calc(100vh - var(--header-height))'
           }
           $gsap.to(modalContainerEl.value, {
             y: 0,
@@ -165,36 +162,12 @@ function animateLeave () {
 </script>
 
 <style lang="postcss" scoped>
-.modal-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* background: rgba(255, 255, 255, 0.42); */
-  /* background-color: rgba(0, 0, 0, 0.4); */
-  z-index: 1000;
-  /* backdrop-filter: blur(18px); */
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
-}
-
 .scrim {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   background-color: rgba(0, 0, 0, 0.2);
-  /* z-index: 1000; */
   backdrop-filter: var(--scrim-filter);
-  pointer-events: none;
 }
 
 .sticky-edge {
-  /* position: relative; */
-  /* background: white; */
   &:before {
     content: '';
     position: absolute;

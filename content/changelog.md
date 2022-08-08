@@ -1,5 +1,5 @@
 ---
-title: Vue Telescope Changelog
+title: Changelog
 description: Lastest news from Vue Telescope
 updatedAt: 2021-01-25
 ---

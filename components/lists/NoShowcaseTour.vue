@@ -1,5 +1,5 @@
 <template>
-  <div class="el relative flex flex-col items-center justify-center px-4">
+  <div class="h-(screen-top-position) relative flex flex-col items-center justify-center px-4">
     <h2 class="text-center text-four leading-four font-bold-body-weight mb-4">
       There's no websites saved in "{{ group.name }}"
     </h2>
@@ -27,9 +27,3 @@ defineProps({
   }
 })
 </script>
-
-<style lang="postcss" scoped>
-.el {
-  height: calc(100vh - calc(theme('spacing.16') + theme('spacing.8')));
-}
-</style>

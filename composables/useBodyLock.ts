@@ -7,7 +7,7 @@ export const useBodyLock = () => {
     document.body.style.overflow = 'hidden'
     document.body.style.paddingRight = `${scrollBarGap}px`
 
-    const fixedEls = document.querySelectorAll('.fixed')
+    const fixedEls = document.querySelectorAll('.body-lock-hack')
     fixedEls.forEach((el: HTMLElement) => {
       el.style.paddingRight = `${scrollBarGap}px`
     })
@@ -26,7 +26,7 @@ export const useBodyLock = () => {
       document.body.style.overflow = null
       document.body.style.paddingRight = null
       // document.querySelector('#main-header').style.paddingRight = null
-      const fixedEls = document.querySelectorAll('.fixed')
+      const fixedEls = document.querySelectorAll('.body-lock-hack')
       fixedEls.forEach((el: HTMLElement) => {
         el.style.paddingRight = null
       })

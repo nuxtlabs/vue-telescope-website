@@ -1,3 +1,33 @@
+<template>
+  <span class="block relative w-full h-18">
+    <Transition
+      appear
+      :css="false"
+      @enter="enterTransition"
+      @leave="leaveTransition"
+    >
+      <div
+        ref="brand"
+        :key="activeBrands[0].slug"
+        class="w-full absolute top-0 left-0"
+        :class="`text-${activeBrands[0].slug}-base`"
+      >
+        <span>{{ activeBrands[0].name }}</span>
+
+        <div class="absolute -z-[1] w-[2rem] h-[2rem] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          <div
+            v-for="num in 20"
+            :key="num"
+            class="absolute w-[2rem] h-[2rem] top-0 left-0 bg-no-repeat bg-center bg-contain opacity-0"
+            :class="[num % 2 && 'hidden md:block']"
+            :style="`background-image: url(${config.iconsURL}/${activeBrands[0].imgPath})`"
+          />
+        </div>
+      </div>
+    </Transition>
+  </span>
+</template>
+
 <script setup lang="ts">
 const brand = ref()
 
@@ -115,63 +145,3 @@ onMounted(() => {
   setTimeout(() => enterTransition(brand.value), 100)
 })
 </script>
-
-<template>
-  <span class="block relative w-full h-18">
-    <Transition
-      appear
-      :css="false"
-      @enter="enterTransition"
-      @leave="leaveTransition"
-    >
-      <div
-        ref="brand"
-        :key="activeBrands[0].slug"
-        class="brand"
-        :class="`text-${activeBrands[0].slug}-base`"
-      >
-        <span>{{ activeBrands[0].name }}</span>
-        <div class="brand-icon-wrapper">
-          <div
-            v-for="num in 20"
-            :key="num"
-            class="brand-icon"
-            :class="[num % 2 && 'hidden md:block']"
-            :style="`background-image: url(${config.iconsURL}/${activeBrands[0].imgPath})`"
-          />
-        </div>
-      </div>
-    </Transition>
-  </span>
-</template>
-
-<style scoped>
-.brand {
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.brand-icon-wrapper {
-  position: absolute;
-  z-index: -1;
-  width: 2rem;
-  height: 2rem;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.brand-icon {
-  position: absolute;
-  width: 2rem;
-  height: 2rem;
-  top: 0;
-  left: 0;
-  /* transform: translate(-50%, -50%); */
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  opacity: 0;
-}
-</style>

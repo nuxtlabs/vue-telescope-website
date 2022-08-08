@@ -9,7 +9,7 @@
     />
     <div
       id="tour-main-header"
-      class="h-16 fixed top-0 left-0 w-full min-w-body"
+      class="h-16 fixed body-lock-hack top-0 left-0 w-full min-w-body"
     >
       <div
         class="w-full h-full flex justify-end items-center max-w-container m-auto px-4"

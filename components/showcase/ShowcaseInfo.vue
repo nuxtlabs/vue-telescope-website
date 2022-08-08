@@ -113,6 +113,7 @@ defineProps({
 </script>
 
 <style scoped lang="postcss">
+/* Styles for usage in Floating View Modal */
 .floating-view .data-wrapper {
   @apply px-8;
 }

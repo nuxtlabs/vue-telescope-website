@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-12 md:pt-8 mb-8">
+  <div class="mb-8">
     <ExplorePage
       v-if="!$route.params.showcase || ($route.params.showcase && !directHit)"
     />
@@ -18,8 +18,8 @@ const title = computed(() => {
   if (!selectedFilters.value['framework.slug'] && !selectedFilters.value['ui.slug']) {
     return 'Explore Vue.js websites'
   } else {
-    let selectedFrameworkName
-    let selectedUiName
+    let selectedFrameworkName: string
+    let selectedUiName: string
 
     if (selectedFilters.value['framework.slug']) {
       const { name } = frameworks.value.find(f => f.slug === selectedFilters.value['framework.slug'])

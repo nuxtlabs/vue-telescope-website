@@ -1,5 +1,5 @@
 <template>
-  <div class="el relative flex flex-col items-center justify-center px-4">
+  <div class="h-(screen-top-position) relative flex flex-col items-center justify-center px-4">
     <h2 class="text-center text-four leading-four font-bold-body-weight mb-2">
       There's no Groups in "{{ list.name }}"
     </h2>
@@ -138,9 +138,3 @@ function leave (el, done) {
   })
 }
 </script>
-
-<style lang="postcss" scoped>
-.el {
-  height: calc(100vh - calc(theme('spacing.16') + theme('spacing.8')));
-}
-</style>

@@ -25,7 +25,7 @@
       >
         <span
           ref="deletingScrimEl"
-          class="deleting-scrim absolute top-0 left-0 w-full h-full pointer-events-none"
+          class="backdrop-blur-sm absolute top-0 left-0 w-full h-full pointer-events-none"
           style="opacity: 0"
         />
         {{ group.name }}
@@ -236,9 +236,3 @@ async function moveDownGroup () {
   loading.value = false
 }
 </script>
-
-<style scoped>
-.deleting-scrim {
-  backdrop-filter: blur(3px);
-}
-</style>

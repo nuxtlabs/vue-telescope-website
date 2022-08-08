@@ -1,6 +1,6 @@
 <template>
-  <div class="modal-wrapper">
-    <div ref="scrimEl" class="scrim" style="opacity: 0" />
+  <div class="fixed top-0 left-0 w-full h-full z-[1000]">
+    <div ref="scrimEl" class="scrim fixed top-0 left-0 w-full h-full -z-[1] pointer-events-none" style="opacity: 0" />
     <div class="w-full h-full overflow-auto" @click.self="emit('close')">
       <!-- <div class="w-full flex pointer-events-none">
         <div
@@ -121,30 +121,8 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-.modal-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* background: rgba(255, 255, 255, 0.42); */
-  /*background-color: rgba(0, 0, 0, 0.2);*/
-  z-index: 1000;
-  /*backdrop-filter: blur(18px);*/
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
-}
-
 .scrim {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
-  z-index: -1;
   backdrop-filter: var(--scrim-filter);
-  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 </style>

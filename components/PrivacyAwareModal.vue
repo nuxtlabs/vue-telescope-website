@@ -1,5 +1,5 @@
 <template>
-  <div class="modal-wrapper">
+  <div class="modal-wrapper fixed top-0 left-0 w-full h-full z-[1000]">
     <div class="w-full h-full py-8 px-4" @click.self="makeChoice(false)">
       <div
         ref="modalWrapperEl"
@@ -173,17 +173,7 @@ async function makeChoice (choice) {
 
 <style scoped>
 .modal-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* background: rgba(255, 255, 255, 0.42); */
   background-color: rgba(0, 0, 0, 0.2);
-  z-index: 1000;
   backdrop-filter: var(--scrim-filter);
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
 }
 </style>

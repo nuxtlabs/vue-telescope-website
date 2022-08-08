@@ -2,7 +2,7 @@
   <header
     id="main-header"
     ref="main-header"
-    class="app-header h-16 fixed top-0 left-0 w-full z-50 overflow-hidden min-w-body"
+    class="app-header h-header fixed body-lock-hack top-0 left-0 w-full z-50 overflow-hidden min-w-body"
   >
     <div
       class="w-full h-full flex justify-between items-center max-w-container m-auto px-4"

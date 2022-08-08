@@ -241,9 +241,6 @@ function enterTitleAnimation (initial = false) {
   }
 }
 
-// function src(screenshot) {
-//   return generateSrc(screenshot, 1200)
-// }
 function srcset (screenshot) {
   return [160, 240, 320, 560, 800, 920, 1040, 1200]
     .map(size => generateSrc(screenshot, size, true))
