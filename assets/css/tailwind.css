@@ -33,11 +33,16 @@
       @apply underline;
     }
   }
-  & h2 {
-    @apply text-five leading-five mb-4 mt-8 font-display-weight;
+  & h2, h3 {
     a {
       @apply text-grey-900 pointer-events-none;
     }
+  }
+  & h2 {
+    @apply text-five leading-five mb-4 mt-6 font-display-weight;
+  }
+  & h3 {
+    @apply text-six leading-six mb-4 mt-6 font-display-weight;
   }
   & p {
     @apply mb-4;
@@ -46,10 +51,13 @@
     @apply list-disc list-inside mb-4;
 
     & > li {
-      @apply mb-2;
+      @apply mb-1;
     }
   }
   & img {
     @apply mb-4;
+  }
+  & code {
+    @apply bg-white bg-opacity-50 px-1 py-1 rounded-lg text-sm;
   }
 }

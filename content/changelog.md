@@ -4,12 +4,30 @@ description: Lastest news from Vue Telescope
 updatedAt: 2021-01-25
 ---
 
+::changelog-item{project="website" date="2022-08-08"}
+
+## Big update for Vue Telescope website
+
+We've updated Vue Telescope website to show you whole power of new web technologies!
+
+- Vue 3 with Composition API ✨
+- Nuxt 3 🚀
+- Nuxt Content 2 ✍️
+- Tailwind 3 🎨
+- Typescript 🤖
+
+Moreover, we love our community so much, that we decided to give back, by open sourcing it 🤟
+
+Oh, and we also renamed `Collections` to `Lists` and `Lists` to `Groups`, sorry for little bit of confusion. 
+
+::
+
 ::changelog-item{project="website" date="2020-01-25"}
 ## Vue Telemetry is now Vue Telescope 🔭
 
 After discussions with the Vue.js community, we decided to rename Vue Telemetry to Vue telescope to avoid unnecessary associations and concerns about privacy.
 
-## Introducting Collections 📚
+### Introducting Collections 📚
 
 You can now bookmark websites and organize them into collections and lists!
 
