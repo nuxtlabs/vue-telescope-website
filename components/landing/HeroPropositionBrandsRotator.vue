@@ -7,7 +7,7 @@
       @leave="leaveTransition"
     >
       <div
-        ref="brand"
+        ref="brandRef"
         :key="activeBrands[0].slug"
         class="w-full absolute top-0 left-0"
         :class="`text-${activeBrands[0].slug}-base`"
@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-const brand = ref()
+const brandRef = ref()
 
 const { $gsap } = useNuxtApp()
 
@@ -142,6 +142,6 @@ function rotateBrands () {
 
 onMounted(() => {
   rotateBrands()
-  setTimeout(() => enterTransition(brand.value), 100)
+  setTimeout(() => enterTransition(brandRef.value), 100)
 })
 </script>

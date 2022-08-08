@@ -1,6 +1,6 @@
 <template>
   <div
-    ref="backgroundEl"
+    ref="backgroundRef"
     class="absolute top-0 left-0 w-full h-full flex flex-col rounded-xl"
   >
     <div class="flex p-4 pb-0">
@@ -13,7 +13,7 @@
           viewBox="0 0 512 512"
         >
           <path
-            ref="fingerprintEl"
+            ref="fingerprintRef"
             stroke-width="10"
             :stroke="onSurfaceColor"
             fill="rgba(247, 213, 14, 0.01)"
@@ -22,7 +22,7 @@
         </svg>
       </div>
       <h3
-        ref="headlineEl"
+        ref="headlineRef"
         class="h-auto relative p-4 sm:ml-24 text-eight leading-eight"
       >
         {{ description }}
@@ -30,7 +30,7 @@
     </div>
     <div class="flex-1 relative w-full h-full overflow-hidden">
       <div
-        ref="imageEl"
+        ref="imageRef"
         class="absolute top-0 left-0 w-full h-full bg-100 bg-no-repeat bg-top"
         :style="`background-image: url('https://res.cloudinary.com/nuxt/image/upload/f_auto,q_auto/remote/vt${image}');`"
       />
@@ -61,10 +61,10 @@ const props = defineProps({
 })
 
 // refs
-const backgroundEl = ref(null)
-const fingerprintEl = ref(null)
-const headlineEl = ref(null)
-const imageEl = ref(null)
+const backgroundRef = ref(null)
+const fingerprintRef = ref(null)
+const headlineRef = ref(null)
+const imageRef = ref(null)
 
 defineExpose({
   leave
@@ -82,7 +82,7 @@ const enterBgDuration = 0.75
 onMounted(() => {
   // Background animation
   $gsap.fromTo(
-    backgroundEl.value,
+    backgroundRef.value,
     {
       backgroundColor: 'transparent'
     },
@@ -95,13 +95,13 @@ onMounted(() => {
   )
 
   // SVG animation
-  $gsap.from(fingerprintEl.value, {
+  $gsap.from(fingerprintRef.value, {
     drawSVG: '0% 0%',
     duration: 0.5,
     ease: 'power4.in',
     delay: 0.4,
     onComplete: () => {
-      $gsap.to(fingerprintEl.value, {
+      $gsap.to(fingerprintRef.value, {
         fill: props.onSurfaceColor,
         duration: 0.25,
         ease: 'none'
@@ -110,7 +110,7 @@ onMounted(() => {
   })
 
   // Text animation
-  const splitted = new $SplitText(headlineEl.value, {
+  const splitted = new $SplitText(headlineRef.value, {
     type: ' lines'
   })
   splitted.lines.forEach((line) => {
@@ -130,7 +130,7 @@ onMounted(() => {
 
   // Image animation
   $gsap.fromTo(
-    imageEl.value,
+    imageRef.value,
     {
       y: '25px',
       opacity: 0
@@ -149,16 +149,16 @@ function leave () {
   return new Promise<void>((resolve) => {
     try {
       // // background
-      // $gsap.to(backgroundEl.value, {
+      // $gsap.to(backgroundRef.value, {
       //   backgroundColor: 'transparent',
       //   duration: 0.75,
       //   ease: 'none'
       // })
       // svg
-      $gsap.to(fingerprintEl.value, {
+      $gsap.to(fingerprintRef.value, {
         fill: 'transparent'
       })
-      $gsap.to(fingerprintEl.value, {
+      $gsap.to(fingerprintRef.value, {
         drawSVG: false,
         duration: 0.5,
         ease: 'power1.out',
@@ -167,7 +167,7 @@ function leave () {
         }
       })
       // text
-      const splitted = new $SplitText(headlineEl.value, {
+      const splitted = new $SplitText(headlineRef.value, {
         type: ' lines'
       })
       splitted.lines.forEach((line) => {
@@ -185,7 +185,7 @@ function leave () {
         }
       })
       // image
-      $gsap.to(imageEl.value, {
+      $gsap.to(imageRef.value, {
         y: '25px',
         opacity: 0,
         duration: 0.75,

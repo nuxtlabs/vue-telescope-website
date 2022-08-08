@@ -1,6 +1,6 @@
 <template>
   <div class="fixed top-0 left-0 w-full h-full z-[1000]">
-    <div ref="scrimEl" class="scrim fixed top-0 left-0 w-full h-full -z-[1] pointer-events-none" style="opacity: 0" />
+    <div ref="scrimRef" class="scrim fixed top-0 left-0 w-full h-full -z-[1] pointer-events-none" style="opacity: 0" />
     <div class="w-full h-full overflow-auto" @click.self="emit('close')">
       <!-- <div class="w-full flex pointer-events-none">
         <div
@@ -13,7 +13,7 @@
 
       <div class="h-full md:h-auto md:m-4 pointer-events-none">
         <div
-          ref="modalContainerEl"
+          ref="modalContainerRef"
           style="opacity: 0"
           :class="[
             compact
@@ -72,13 +72,13 @@ const { bodyLock, bodyUnlock } = useBodyLock()
 
 useEsc(() => emit('close'))
 
-const scrimEl = ref(null)
-const modalContainerEl = ref(null)
+const scrimRef = ref(null)
+const modalContainerRef = ref(null)
 
 function animateEnter () {
   if (!isMobile.value) {
     $gsap.fromTo(
-      scrimEl.value,
+      scrimRef.value,
       {
         opacity: 0
       },
@@ -92,11 +92,11 @@ function animateEnter () {
   }
 
   // old
-  $gsap.set(modalContainerEl.value, {
+  $gsap.set(modalContainerRef.value, {
     transformOrigin: 'bottom',
     opacity: 1
   })
-  $gsap.from(modalContainerEl.value, {
+  $gsap.from(modalContainerRef.value, {
     // scaleY: 0.99,
     opacity: 0,
     y: -10,

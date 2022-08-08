@@ -25,7 +25,7 @@
           fill="transparent"
         >
           <path
-            ref="checkmark"
+            ref="checkmarkRef"
             class="opacity-0"
             d="M1 7L5 11L15 1"
             stroke="currentColor"
@@ -65,15 +65,15 @@ defineEmits(['input'])
 
 const isHovered = ref(false)
 
-const checkmark = ref(null)
+const checkmarkRef = ref(null)
 
 function animateCheckmark (value) {
   if (value) {
-    $gsap.set(checkmark.value, {
+    $gsap.set(checkmarkRef.value, {
       opacity: 1
     })
     $gsap.fromTo(
-      checkmark.value,
+      checkmarkRef.value,
       {
         drawSVG: '0%'
       },
@@ -84,7 +84,7 @@ function animateCheckmark (value) {
     )
   } else {
     $gsap.fromTo(
-      checkmark.value,
+      checkmarkRef.value,
       {
         drawSVG: '0 100%'
       },

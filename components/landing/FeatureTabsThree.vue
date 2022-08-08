@@ -1,6 +1,6 @@
 <template>
   <div
-    ref="backgroundEl"
+    ref="backgroundRef"
     class="absolute top-0 left-0 w-full h-full flex flex-col rounded-xl"
   >
     <div class="flex p-4 pb-0">
@@ -14,12 +14,12 @@
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            ref="arrowEl"
+            ref="arrowRef"
             d="M48.3628 17.6839C47.6749 16.8512 46.4501 16.7152 45.5962 17.3766L42.5369 19.7462C41.2226 20.7642 39.3122 19.8275 39.3122 18.1651V2C39.3122 0.895429 38.4167 0 37.3122 0H36.6872C35.5826 0 34.6872 0.89543 34.6872 2V18.1576C34.6872 19.8214 32.7741 20.7577 31.4602 19.737L28.4267 17.3805C27.5729 16.7172 26.3465 16.8525 25.6579 17.6861L25.3164 18.0994C24.5978 18.9692 24.7405 20.2609 25.6316 20.9529L35.7741 28.8287C36.4954 29.3888 37.5043 29.3892 38.226 28.8298L48.3884 20.9526C49.2806 20.261 49.424 18.9684 48.7049 18.098L48.3628 17.6839Z"
             fill="rgb(187, 130, 255, 0.01)"
           />
           <path
-            ref="boxEl"
+            ref="boxRef"
             :stroke="onSurfaceColor"
             stroke-width="1"
             d="M50.3314 1.43518C49.4233 0.848391 48.2132 1.08954 47.5995 1.97964L47.3038 2.40837C46.6636 3.33676 46.9172 4.61059 47.8641 5.22306L64.928 16.2602C66.1466 17.0484 66.1463 18.8313 64.9276 19.6192L38.0858 36.9714C37.425 37.3986 36.575 37.3986 35.9142 36.9714L9.07242 19.6192C7.85367 18.8313 7.85345 17.0484 9.07201 16.2602L26.1432 5.21835C27.0873 4.60768 27.3427 3.33897 26.7083 2.41061L26.4211 1.99039C25.8094 1.09527 24.5959 0.850504 23.6851 1.43852L0.915251 16.1382C0.344662 16.5066 0 17.1394 0 17.8185V47.2135C0 47.8924 0.344419 48.525 0.91468 48.8934L35.9147 71.5055C36.5753 71.9323 37.4247 71.9323 38.0853 71.5055L73.0853 48.8934C73.6556 48.525 74 47.8924 74 47.2135V17.818C74 17.1391 73.6556 16.5066 73.0854 16.1382L50.3314 1.43518ZM4.625 25.8086C4.625 24.2238 6.38034 23.2686 7.71109 24.1292L33.7736 40.9841C34.3434 41.3526 34.6875 41.9849 34.6875 42.6635V61.6673C34.6875 63.2526 32.9312 64.2077 31.6005 63.3462L5.53802 46.4718C4.96871 46.1032 4.625 45.4712 4.625 44.7929V25.8086ZM42.3977 63.3295C41.0669 64.1892 39.3125 63.2338 39.3125 61.6495V42.6635C39.3125 41.9849 39.6566 41.3526 40.2264 40.9841L66.2889 24.1292C67.6197 23.2686 69.375 24.2238 69.375 25.8086V44.814C69.375 45.493 69.0305 46.1256 68.4602 46.494L42.3977 63.3295Z"
@@ -29,7 +29,7 @@
       </div>
 
       <h3
-        ref="textEl"
+        ref="textRef"
         class="h-auto relative p-4 sm:ml-24 text-eight leading-eight"
       >
         {{ description }}
@@ -38,7 +38,7 @@
 
     <div class="flex-1 relative w-full h-full overflow-hidden">
       <div
-        ref="imageEl"
+        ref="imageRef"
         class="absolute top-0 left-0 w-full h-full bg-100 bg-no-repeat bg-top"
         :style="`background-image: url('https://res.cloudinary.com/nuxt/image/upload/f_auto,q_auto/remote/vt${image}');`"
       />
@@ -69,11 +69,11 @@ const props = defineProps({
 })
 
 // refs
-const backgroundEl = ref(null)
-const arrowEl = ref(null)
-const boxEl = ref(null)
-const textEl = ref(null)
-const imageEl = ref(null)
+const backgroundRef = ref(null)
+const arrowRef = ref(null)
+const boxRef = ref(null)
+const textRef = ref(null)
+const imageRef = ref(null)
 
 defineExpose({
   leave
@@ -91,7 +91,7 @@ const enterBgDuration = 0.75
 onMounted(() => {
   // Background animation
   $gsap.fromTo(
-    backgroundEl.value,
+    backgroundRef.value,
     {
       backgroundColor: 'transparent'
     },
@@ -103,17 +103,17 @@ onMounted(() => {
     }
   )
   // SVG animation
-  $gsap.from(boxEl.value, {
+  $gsap.from(boxRef.value, {
     drawSVG: '0% 0%',
     duration: 0.5,
     ease: 'power4.in',
     delay: 0.4,
     onComplete: () => {
-      $gsap.to(boxEl.value, {
+      $gsap.to(boxRef.value, {
         fill: props.onSurfaceColor
       })
       $gsap.fromTo(
-        arrowEl.value,
+        arrowRef.value,
         {
           y: '-10px'
         },
@@ -122,7 +122,7 @@ onMounted(() => {
     }
   })
   // Text animation
-  const splitted = new $SplitText(textEl.value, {
+  const splitted = new $SplitText(textRef.value, {
     type: ' lines'
   })
   splitted.lines.forEach((line) => {
@@ -141,7 +141,7 @@ onMounted(() => {
   })
   // Image animation
   $gsap.fromTo(
-    imageEl.value,
+    imageRef.value,
     {
       y: '25px',
       opacity: 0
@@ -160,11 +160,11 @@ function leave () {
   return new Promise<void>((resolve) => {
     try {
       // SVG
-      $gsap.to([boxEl.value], {
+      $gsap.to([boxRef.value], {
         fill: 'transparent',
         duration: 0.2,
         onComplete: () => {
-          $gsap.to([boxEl.value], {
+          $gsap.to([boxRef.value], {
             drawSVG: '0',
             duration: 0.5,
             ease: 'power1.out'
@@ -174,14 +174,14 @@ function leave () {
           })
         }
       })
-      $gsap.to(arrowEl.value, {
+      $gsap.to(arrowRef.value, {
         y: '-10px',
         fill: 'transparent',
         duration: 0.5,
         ease: 'power4.in'
       })
       // text
-      const splitted = new $SplitText(textEl.value, {
+      const splitted = new $SplitText(textRef.value, {
         type: ' lines'
       })
       splitted.lines.forEach((line) => {
@@ -200,7 +200,7 @@ function leave () {
         }
       })
       // image
-      $gsap.to(imageEl.value, {
+      $gsap.to(imageRef.value, {
         y: '25px',
         opacity: 0,
         duration: 0.75,

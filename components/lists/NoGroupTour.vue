@@ -11,7 +11,6 @@
       <transition :css="false" @enter="enter" @leave="leave">
         <button
           v-if="!creatingList"
-          ref="create-button"
           class="absolute top-0 focus:outline-none text-seven leading-seven flex items-center py-4 px-8 rounded-xl border-2 border-transparent has-hover:hover:border-primary-500 bg-primary-50 text-primary-500 font-bold-body-weight transition-colors duration-200 truncate"
           @click="initGroupCreation"
         >
@@ -24,7 +23,7 @@
         <div v-else class="max-w-24rem absolute top-0 w-full">
           <AppAutosizeTextarea
             v-if="creatingList"
-            ref="inputEl"
+            ref="inputRef"
             v-model="newListName"
             v-click-outside="() => (creatingList = false)"
             placeholder="Type List name"
@@ -58,7 +57,7 @@ import type { List } from '~/types'
 import PlusIcon from '@/assets/icons/plus-circle.svg'
 import SaveIcon from '@/assets/icons/save.svg'
 
-const inputEl = ref(null)
+const inputRef = ref(null)
 
 const newListName = ref('')
 const creatingList = ref(false)
@@ -84,7 +83,7 @@ function initGroupCreation () {
   setSelectedList(props.list)
   creatingList.value = true
   nextTick(() => {
-    inputEl.value?.$el.focus()
+    inputRef.value?.$el.focus()
   })
 }
 
@@ -106,7 +105,7 @@ async function createGroupMethod () {
 }
 
 function enter (el, done) {
-  inputEl.value?.$el.focus()
+  inputRef.value?.$el.focus()
   nextTick(() => {
     $gsap.set(el, { position: 'absolute', transformOrigin: 'center' })
     $gsap.from(el, {
@@ -118,7 +117,7 @@ function enter (el, done) {
       ease: 'power1.out',
       onComplete: () => {
         $gsap.set(el, { position: 'absolute' })
-        inputEl.value?.$el.focus()
+        inputRef.value?.$el.focus()
         done()
       }
     })

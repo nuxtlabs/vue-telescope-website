@@ -1,6 +1,6 @@
 <template>
   <div
-    ref="backgroundEl"
+    ref="backgroundRef"
     class="absolute top-0 left-0 w-full h-full flex flex-col rounded-xl"
   >
     <div class="flex p-4 pb-0">
@@ -13,7 +13,7 @@
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <g ref="contentEl">
+          <g ref="contentRef">
             <path
               class="opacity-0"
               d="M48.2888 21.4482H33.8647C32.384 21.4482 31.1836 22.6486 31.1836 24.1293C31.1836 25.61 32.384 26.8104 33.8647 26.8104H48.2888C49.7696 26.8104 50.9699 25.61 50.9699 24.1293C50.9699 22.6486 49.7696 21.4482 48.2888 21.4482Z"
@@ -40,7 +40,7 @@
               :fill="onSurfaceColor"
             />
           </g>
-          <g ref="searchEl">
+          <g ref="searchRef">
             <path
               stroke-width="2"
               :stroke="onSurfaceColor"
@@ -57,7 +57,7 @@
         </svg>
       </div>
       <h3
-        ref="textEl"
+        ref="textRef"
         class="h-auto relative p-4 sm:ml-24 text-eight leading-eight"
       >
         {{ description }}
@@ -66,7 +66,7 @@
 
     <div class="flex-1 relative w-full h-full overflow-hidden">
       <div
-        ref="imageEl"
+        ref="imageRef"
         class="absolute top-0 left-0 w-full h-full bg-100 bg-no-repeat bg-top"
         :style="`background-image: url('https://res.cloudinary.com/nuxt/image/upload/f_auto,q_auto/remote/vt${image}');`"
       />
@@ -97,11 +97,11 @@ const props = defineProps({
 })
 
 // refs
-const backgroundEl = ref(null)
-const contentEl = ref(null)
-const searchEl = ref(null)
-const textEl = ref(null)
-const imageEl = ref(null)
+const backgroundRef = ref(null)
+const contentRef = ref(null)
+const searchRef = ref(null)
+const textRef = ref(null)
+const imageRef = ref(null)
 
 defineExpose({
   leave
@@ -119,7 +119,7 @@ const enterBgDuration = 0.75
 onMounted(() => {
   // Background animation
   $gsap.fromTo(
-    backgroundEl.value,
+    backgroundRef.value,
     {
       backgroundColor: 'transparent'
     },
@@ -131,17 +131,17 @@ onMounted(() => {
     }
   )
   // SVG animation
-  $gsap.from(searchEl.value?.children, {
+  $gsap.from(searchRef.value?.children, {
     drawSVG: '0% 0%',
     duration: 0.5,
     ease: 'power4.in',
     delay: 0.4,
     onComplete: () => {
-      $gsap.to(searchEl.value?.children, {
+      $gsap.to(searchRef.value?.children, {
         fill: props.onSurfaceColor
       })
       $gsap.fromTo(
-        contentEl.value?.children,
+        contentRef.value?.children,
         {
           opacity: 0,
           scale: 0.5
@@ -157,7 +157,7 @@ onMounted(() => {
     }
   })
   // text
-  const splitted = new $SplitText(textEl.value, {
+  const splitted = new $SplitText(textRef.value, {
     type: ' lines'
   })
   splitted.lines.forEach((line) => {
@@ -176,7 +176,7 @@ onMounted(() => {
   })
   // image
   $gsap.fromTo(
-    imageEl.value,
+    imageRef.value,
     {
       y: '25px',
       opacity: 0
@@ -195,24 +195,24 @@ function leave () {
   return new Promise<void>((resolve) => {
     try {
       // // background
-      // $gsap.to(backgroundEl.value, {
+      // $gsap.to(backgroundRef.value, {
       //   backgroundColor: 'transparent',
       //   duration: 0.75,
       //   ease: 'none'
       // })
       // svg
-      $gsap.to(contentEl.value?.children, {
+      $gsap.to(contentRef.value?.children, {
         opacity: 0,
         scale: 0.5,
         stagger: 0.025,
         duration: 0.1,
         ease: 'power2.inOut'
       })
-      $gsap.to(searchEl.value?.children, {
+      $gsap.to(searchRef.value?.children, {
         fill: 'transparent',
         duration: 0.2,
         onComplete: () => {
-          $gsap.to(searchEl.value?.children, {
+          $gsap.to(searchRef.value?.children, {
             drawSVG: '0',
             duration: 0.5,
             ease: 'power1.out'
@@ -223,7 +223,7 @@ function leave () {
         }
       })
       // text
-      const splitted = new $SplitText(textEl.value, {
+      const splitted = new $SplitText(textRef.value, {
         type: ' lines'
       })
       splitted.lines.forEach((line) => {
@@ -242,7 +242,7 @@ function leave () {
         }
       })
       // image
-      $gsap.to(imageEl.value, {
+      $gsap.to(imageRef.value, {
         y: '25px',
         opacity: 0,
         duration: 0.75,

@@ -1,6 +1,6 @@
 <template>
   <div class="fixed top-0 left-0 w-full h-full z-[1000]">
-    <div ref="scrimEl" class="scrim fixed top-0 left-0 w-full h-full pointer-events-none" style="opacity: 0" />
+    <div ref="scrimRef" class="scrim fixed top-0 left-0 w-full h-full pointer-events-none" style="opacity: 0" />
     <div
       class="w-full h-full overflow-auto"
       @click.self="animateLeave"
@@ -13,7 +13,7 @@
           :class="isSafari && 'h-full'"
         >
           <div
-            ref="modalContainerEl"
+            ref="modalContainerRef"
             style="transform: translateY(100%)"
             class="modal-container overflow-auto relative h-full px-4 bg-white rounded-b-none pointer-events-auto rounded-4xl"
           >
@@ -60,8 +60,8 @@ defineProps({
 
 const emit = defineEmits(['close'])
 
-const modalContainerEl = ref(null)
-const scrimEl = ref(null)
+const modalContainerRef = ref(null)
+const scrimRef = ref(null)
 
 const yStart = ref(null)
 const xStart = ref(null)
@@ -119,7 +119,7 @@ function touchMoveHandler (e) {
 function animateEnter () {
   setTimeout(() => {
     $gsap.fromTo(
-      scrimEl.value,
+      scrimRef.value,
       {
         opacity: 0
       },
@@ -129,9 +129,9 @@ function animateEnter () {
         ease: 'none',
         onComplete: () => {
           if (isSafari.value) {
-            modalContainerEl.value.style.height = 'calc(100vh - var(--header-height))'
+            modalContainerRef.value.style.height = 'calc(100vh - var(--header-height))'
           }
-          $gsap.to(modalContainerEl.value, {
+          $gsap.to(modalContainerRef.value, {
             y: 0,
             // opacity: 0,
             duration: 1,
@@ -145,12 +145,12 @@ function animateEnter () {
 }
 
 function animateLeave () {
-  $gsap.to(scrimEl.value, {
+  $gsap.to(scrimRef.value, {
     opacity: 0,
     duration: 0.25
   })
 
-  $gsap.to(modalContainerEl.value, {
+  $gsap.to(modalContainerRef.value, {
     y: '100%',
     duration: 0.25,
     ease: 'expo.out',

@@ -7,7 +7,7 @@
       <div>
         <span>Endpoint to request:</span>
         <AppInput
-          ref="endpointEl"
+          ref="endpointRef"
           :value="listUrl"
           class="mt-2 cursor-pointer"
           readonly
@@ -36,7 +36,7 @@ const config = useRuntimeConfig().public
 
 defineEmits(['close'])
 
-const endpointEl = ref(null)
+const endpointRef = ref(null)
 
 const props = defineProps({
   list: {
@@ -54,7 +54,7 @@ const code = computed(() => {
 })
 
 function selectRequest () {
-  const el = endpointEl.value?.$el
+  const el = endpointRef.value?.$el
   selectText(el)
 }
 

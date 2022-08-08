@@ -10,7 +10,7 @@
     >
       <AppAutosizeTextarea
         v-if="updatingGroup"
-        ref="inputEl"
+        ref="inputRef"
         v-model="newGroupName"
         class="p-1 rounded-md"
         @submit="updateGroup"
@@ -24,7 +24,7 @@
         :class="[isSelected && 'text-primary-500']"
       >
         <span
-          ref="deletingScrimEl"
+          ref="deletingScrimRef"
           class="backdrop-blur-sm absolute top-0 left-0 w-full h-full pointer-events-none"
           style="opacity: 0"
         />
@@ -88,6 +88,8 @@ import SaveIcon from '@/assets/icons/save.svg'
 const emit = defineEmits(['group-selected'])
 
 const anchorRef = ref(null)
+const deletingScrimRef = ref(null)
+const inputRef = ref(null)
 
 const { $gsap } = useNuxtApp()
 
@@ -99,9 +101,6 @@ const {
   moveDownRemoteGroup,
   setSelectedGroup
 } = useLists()
-
-const deletingScrimEl = ref(null)
-const inputEl = ref(null)
 
 const props = defineProps({
   group: {
@@ -180,7 +179,7 @@ async function updateGroup () {
 async function deleteGroup () {
   try {
     deletingGroup.value = true
-    $gsap.to(deletingScrimEl.value, {
+    $gsap.to(deletingScrimRef.value, {
       opacity: 1,
       duration: 0.5,
       ease: 'none'
@@ -203,7 +202,7 @@ function initUpdateGroup () {
   updatingGroup.value = true
   newGroupName.value = props.group.name
   nextTick(() => {
-    inputEl.value?.$el.focus()
+    inputRef.value?.$el.focus()
   })
 }
 

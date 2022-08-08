@@ -1,7 +1,7 @@
 <template>
   <div v-click-outside="() => $emit('close')">
     <div
-      ref="scrimEl"
+      ref="scrimRef"
       class="bg-white absolute top-0 left-0 w-full h-full"
     />
     <!-- <div
@@ -191,7 +191,7 @@ const { lists, bookmarkRemoteShowcase, unbookmarkRemoteShowcase } = useLists()
 const user = useStrapiUser() as Ref<User>
 const { $gsap } = useNuxtApp()
 
-const scrimEl = ref(null)
+const scrimRef = ref(null)
 
 defineEmits(['close'])
 
@@ -236,11 +236,11 @@ onMounted(() => {
   //   )
   // }
 
-  $gsap.set(scrimEl.value, {
+  $gsap.set(scrimRef.value, {
     transformOrigin: 'top'
   })
   $gsap.fromTo(
-    scrimEl.value,
+    scrimRef.value,
     {
       scaleY: 0
     },

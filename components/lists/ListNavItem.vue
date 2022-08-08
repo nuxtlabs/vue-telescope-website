@@ -2,7 +2,7 @@
   <div class="relative flex flex-col">
     <div v-click-outside="clickOutsideHandler" class="relative flex group">
       <div
-        ref="nameEl"
+        ref="nameRef"
         class="focus:outline-none flex flex-1 cursor-pointer py-2"
         tabindex="0"
         @click="clickOnNameHandler"
@@ -21,7 +21,7 @@
         <span class="relative flex flex-1 text-eight leading-eight">
           <AppAutosizeTextarea
             v-if="updatingList"
-            ref="inputEl"
+            ref="inputRef"
             v-model="newListName"
             class="font-bold-body-weight p-1 rounded-md mr-1"
             @submit="updateList"
@@ -126,8 +126,8 @@ import SaveIcon from '@/assets/icons/save.svg'
 
 const emit = defineEmits(['close-menu'])
 
-const nameEl = ref(null)
-const inputEl = ref(null)
+const nameRef = ref(null)
+const inputRef = ref(null)
 const anchorRef = ref(null)
 
 const {
@@ -237,7 +237,7 @@ function initUpdateList () {
   updatingList.value = true
   newListName.value = props.list.name
   nextTick(() => {
-    inputEl.value?.$el.focus()
+    inputRef.value?.$el.focus()
   })
 }
 
@@ -251,7 +251,7 @@ async function updateList () {
     })
     loading.value = false
     clearActions()
-    nameEl.value.focus()
+    nameRef.value.focus()
   } catch (e) {
     loading.value = false
     if (process.env.NODE_ENV !== 'production') {

@@ -1,6 +1,6 @@
 <template>
   <textarea
-    ref="textarea"
+    ref="textAreaRef"
     class="block resize-none overflow-hidden w-full bg-grey-100 focus:outline-none"
     :rows="rows"
     :value="modelValue"
@@ -14,7 +14,7 @@
 import type { Ref } from 'vue'
 import toPx from 'to-px'
 
-const textarea = ref(null) as Ref<HTMLTextAreaElement>
+const textAreaRef = ref(null) as Ref<HTMLTextAreaElement>
 
 const emit = defineEmits(['update:modelValue', 'submit'])
 
@@ -34,20 +34,20 @@ const props = defineProps({
 })
 
 nextTick(() => {
-  calculateInputHeight(textarea.value)
+  calculateInputHeight(textAreaRef.value)
 })
 
 watch(
   () => props.modelValue,
   () =>
     nextTick(() => {
-      calculateInputHeight(textarea.value)
+      calculateInputHeight(textAreaRef.value)
     })
 )
 
 onMounted(() => {
   setTimeout(() => {
-    textarea.value?.focus()
+    textAreaRef.value?.focus()
   }, 16)
 })
 

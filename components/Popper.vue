@@ -1,12 +1,12 @@
 <template>
   <div
-    ref="el"
+    ref="wrapperRef"
     class="relative z-[100]"
     :class="[arrow && 'bg-white rounded-md border border-grey-300']"
   >
     <slot :popper-instance="popperInstance" />
 
-    <div v-if="arrow" ref="arrowEl" class="arrow w-4 h-4 relative">
+    <div v-if="arrow" ref="arrowRef" class="arrow w-4 h-4 relative">
       <div class="arrow-icon w-full h-full relative">
         <svg
           class="w-full absolute top-0 left-0 text-grey-300"
@@ -72,11 +72,11 @@ const props = defineProps({
 const popperInstance = ref(null)
 
 // refs
-const el = ref(null)
-const arrowEl = ref(null)
+const wrapperRef = ref(null)
+const arrowRef = ref(null)
 
 onMounted(() => {
-  popperInstance.value = createPopper(props.anchor, el.value, {
+  popperInstance.value = createPopper(props.anchor, wrapperRef.value, {
     // TODO: ts
     placement: props.placement,
     strategy: 'fixed',
@@ -91,7 +91,7 @@ onMounted(() => {
         ? {
             name: 'arrow',
             options: {
-              element: arrowEl.value
+              element: arrowRef.value
             }
           }
         : false

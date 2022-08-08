@@ -1,6 +1,6 @@
 <template>
   <div
-    ref="el"
+    ref="wrapperRef"
     v-click-outside="closeMenu"
     class="bg-grey-50 rounded-lg opacity-0"
   >
@@ -52,7 +52,7 @@ const user = useStrapiUser() as Ref<User>
 const { $gsap } = useNuxtApp()
 const route = useRoute()
 
-const el = ref(null)
+const wrapperRef = ref(null)
 
 const emit = defineEmits(['close-menu'])
 
@@ -73,11 +73,11 @@ function onLogout () {
 }
 
 function openMenuAnimation () {
-  $gsap.set(el.value, {
+  $gsap.set(wrapperRef.value, {
     transformOrigin: 'top right'
   })
   $gsap.fromTo(
-    el.value,
+    wrapperRef.value,
     {
       // borderRadius: '20px',
       opacity: 0,
@@ -96,7 +96,7 @@ function openMenuAnimation () {
   )
 }
 function closeMenu () {
-  $gsap.to(el.value, {
+  $gsap.to(wrapperRef.value, {
     // borderRadius: '20px',
     opacity: 0,
     scale: 0.75,
