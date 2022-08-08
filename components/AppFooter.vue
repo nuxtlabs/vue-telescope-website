@@ -8,12 +8,12 @@
           <li class="text-grey-900">
             Frontend hosted on
             <a
-              href="https://www.netlify.com/"
+              href="https://vercel.com/"
               target="_blank"
               rel="noopener nofollow noreferrer"
               class="text-primary-500 font-medium has-hover:hover:underline"
             >
-              Netlify </a>, API made with
+              Vercel </a>, API made with
             <a
               href="https://strapi.io"
               target="_blank"
