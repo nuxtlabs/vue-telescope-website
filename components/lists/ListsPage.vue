@@ -34,13 +34,13 @@
 
           <div v-else-if="selectedGroup">
             <transition name="slide" mode="out-in">
-              <ListShowcaseItem
+              <ListShowcasesListing
                 v-if="selectedShowcases.length"
                 :key="selectedGroup.id"
                 :showcases="selectedShowcases"
               />
 
-              <NoShowcaseTour v-else key="empty" :list="selectedGroup" />
+              <NoShowcaseTour v-else key="empty" :group="selectedGroup" />
             </transition>
           </div>
 

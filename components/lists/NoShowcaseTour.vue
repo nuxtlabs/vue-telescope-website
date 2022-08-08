@@ -1,7 +1,7 @@
 <template>
   <div class="el relative flex flex-col items-center justify-center px-4">
     <h2 class="text-center text-four leading-four font-bold-body-weight mb-4">
-      There's no websites saved in "{{ list.name }}"
+      There's no websites saved in "{{ group.name }}"
     </h2>
     <p class="text-center text-seven leading-seven mb-48">
       Visit
@@ -18,12 +18,12 @@
 
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import type { List } from '~/types'
+import type { Group } from '~/types'
 
 defineProps({
-  list: {
-    type: Object as PropType<List>,
-    default: null
+  group: {
+    type: Object as PropType<Group>,
+    default: () => ({})
   }
 })
 </script>

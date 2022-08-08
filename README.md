@@ -11,5 +11,7 @@
 - new solution for preloader placeholders
 - replace `prismjs` for `ShareCollectionModal`
 
-- rename refs
+- rename refs and add TS
 - scoped styles to Tailwind
+
+- Strapi TS in useLists

@@ -5,6 +5,7 @@ export interface List {
   groups: Group[]
   id: number
   name: string
+  position: number
   published_at: string
   updated_at: string
   // user: null
