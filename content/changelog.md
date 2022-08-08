@@ -1,7 +1,7 @@
 ---
 title: Changelog
 description: Lastest news from Vue Telescope
-updatedAt: 2021-01-25
+updatedAt: 2022-08-08
 ---
 
 ::changelog-item{project="website" date="2022-08-08"}

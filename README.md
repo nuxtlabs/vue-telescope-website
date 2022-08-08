@@ -12,6 +12,3 @@
 
 - new solution for preloader placeholders
 - replace `prismjs` for `ShareCollectionModal`
-
-- rename all refs 
-
