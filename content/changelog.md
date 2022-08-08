@@ -8,7 +8,7 @@ updatedAt: 2021-01-25
 
 ## Big update for Vue Telescope website
 
-We've updated Vue Telescope website to show you whole power of new web technologies!
+We've updated Vue Telescope website to embrace the whole power of new web technologies!
 
 - Vue 3 with Composition API ✨
 - Nuxt 3 🚀
