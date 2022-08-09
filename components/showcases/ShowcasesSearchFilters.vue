@@ -64,7 +64,6 @@
         >
           <span>None</span>
         </AppRadio>
-        <!-- <template > -->
         <AppRadio
           v-for="ui in uis"
           :id="`ui-${ui.slug}`"
@@ -85,7 +84,6 @@
             <span>{{ ui.name }}</span>
           </div>
         </AppRadio>
-        <!-- </template> -->
       </div>
     </div>
 
@@ -111,16 +109,16 @@
       <ShowcasesFilterLabel>Modules</ShowcasesFilterLabel>
       <div class="flex flex-col">
         <AppCheckbox
-          v-for="module in modules"
-          :id="`module-${module.slug}`"
-          :key="module.id"
+          v-for="_module in modules"
+          :id="`module-${_module.slug}`"
+          :key="_module.id"
           :checked="
             selectedFilters['modules.slug'] &&
-              selectedFilters['modules.slug'].includes(module.slug)
+              selectedFilters['modules.slug'].includes(_module.slug)
           "
           class="mb-1"
-          :label="module.name"
-          @input="checkboxFilter('modules.slug', module.slug)"
+          :label="_module.name"
+          @input="checkboxFilter('modules.slug', _module.slug)"
         />
       </div>
     </div>
