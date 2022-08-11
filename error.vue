@@ -1,7 +1,7 @@
 <template>
   <div>
     <NuxtLayout>
-      <ErrorPage :error="error" />
+      <LazyErrorPage :error="error" />
     </NuxtLayout>
   </div>
 </template>
