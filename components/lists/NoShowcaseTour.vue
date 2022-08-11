@@ -1,7 +1,7 @@
 <template>
-  <div class="el relative flex flex-col items-center justify-center px-4">
+  <div class="h-(screen-top-position) relative flex flex-col items-center justify-center px-4">
     <h2 class="text-center text-four leading-four font-bold-body-weight mb-4">
-      There's no websites saved in "{{ list.name }}"
+      There's no websites saved in "{{ group.name }}"
     </h2>
     <p class="text-center text-seven leading-seven mb-48">
       Visit
@@ -17,16 +17,13 @@
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue'
+import type { Group } from '~/types'
+
 defineProps({
-  list: {
-    type: Object,
-    default: null
+  group: {
+    type: Object as PropType<Group>,
+    default: () => ({})
   }
 })
 </script>
-
-<style lang="postcss" scoped>
-.el {
-  height: calc(100vh - calc(theme('spacing.16') + theme('spacing.8')));
-}
-</style>

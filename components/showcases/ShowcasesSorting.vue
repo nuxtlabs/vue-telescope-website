@@ -98,7 +98,6 @@ export default {
           this.closeDropdown()
         }
       } else {
-        // this.$store.commit('setSort', { _sort: sort._sort })
         this.setSort({ _sort: sort._sort })
         this.closeDropdown()
       }

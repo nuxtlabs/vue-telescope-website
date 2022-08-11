@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center">
+  <div class="h-10 flex items-center">
     <button
       v-if="selectedList"
       class="flex items-center focus:outline-none"

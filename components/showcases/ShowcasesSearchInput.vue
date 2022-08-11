@@ -17,6 +17,7 @@
 </template>
 
 <script setup lang="ts">
+import type { WritableComputedRef } from 'vue'
 import SearchIcon from '@/assets/icons/search.svg'
 
 const { selectedFilters, setFilterKey, deleteFilterKey } = useFilters()
@@ -25,7 +26,7 @@ const q = ref('')
 
 const emit = defineEmits(['searching'])
 
-const computedQ = computed({
+const computedQ: WritableComputedRef<string> = computed({
   get () {
     return selectedFilters.value._q
   },
@@ -34,7 +35,7 @@ const computedQ = computed({
   }
 })
 
-function searchQ (v) {
+function searchQ () {
   emit('searching')
   if (!q.value) {
     deleteFilterKey('_q')

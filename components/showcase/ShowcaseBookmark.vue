@@ -59,6 +59,9 @@
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue'
+import type { Showcase } from '~/types'
+
 import StarIcon from '@/assets/icons/star.svg'
 import DownIcon from '@/assets/icons/arrow-down.svg'
 
@@ -72,8 +75,8 @@ const {
 
 const props = defineProps({
   showcase: {
-    type: Object,
-    default: () => {}
+    type: Object as PropType<Showcase>,
+    default: null
   },
   compact: {
     type: Boolean,

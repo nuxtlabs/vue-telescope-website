@@ -1,7 +1,6 @@
 <template>
   <component
     :is="tag"
-    ref="el"
     :href="href"
     :class="[
       sizing.height,
@@ -20,15 +19,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from '#imports'
-
-const el = ref(null)
-
-// TODO: wrong, replace with method/data
-defineExpose({
-  el
-})
-
 const props = defineProps({
   size: {
     type: String,

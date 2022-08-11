@@ -1,5 +1,5 @@
 <template>
-  <div class="page-wrapper">
+  <div class="min-h-(screen-header)">
     <div class="px-4 max-w-container m-auto pt-12">
       <h1 class="text-four leading-four font-display-weight text-center mb-12">
         Check out Vue Telescope browser integrations
@@ -11,7 +11,7 @@
           <ChromeColorIcon class="h-32 mb-8" />
           <AppButton
             tag="a"
-            :href="$config.googleStoreUrl"
+            :href="config.googleStoreUrl"
             size="base"
             appearance="primary"
           >
@@ -24,7 +24,7 @@
           <FirefoxColorIcon class="h-32 mb-8" />
           <AppButton
             tag="a"
-            :href="$config.firefoxStoreUrl"
+            :href="config.firefoxStoreUrl"
             size="base"
             appearance="primary"
           >
@@ -42,6 +42,8 @@ import FirefoxColorIcon from '@/assets/icons/firefox-color.svg'
 
 useFrontMatter({ title: 'Browser Extensions' })
 
+const config = useRuntimeConfig().public
+
 // TODO: temp solution
 if (process.client) {
   setTimeout(() => {
@@ -49,9 +51,3 @@ if (process.client) {
   }, 0)
 }
 </script>
-
-<style scoped>
-.page-wrapper {
-  min-height: calc(100vh - (10.25rem + 4rem));
-}
-</style>

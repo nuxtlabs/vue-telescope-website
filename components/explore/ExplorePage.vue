@@ -2,15 +2,15 @@
   <AsideContentTemplate>
     <template #aside-content-aside>
       <ShowcasesSearchFilters
-        ref="filtersEl"
-        class="h-full overflow-x-hidden overflow-y-auto"
+        ref="filtersRef"
+        class="h-full overflow-x-hidden overflow-y-auto pt-8"
         @click.native="filtersTouched = true"
       />
     </template>
 
     <template #aside-content-header>
       <ShowcasesMobileSearchFilters />
-      <ShowcasesSorting class="mr-12 -mt-9 md:-mt-8 md:mr-6" />
+      <ShowcasesSorting class="mr-12 mt-3 md:mt-0 md:mr-6" />
       <ShowcasesSelectedFilters
         :selected-filters="selectedFilters"
         :total-count="totalCount"
@@ -85,7 +85,7 @@ const { getProviderAuthenticationUrl } = useStrapiAuth()
 
 const { selectedSort } = useSort()
 
-const filtersEl = ref(null)
+const filtersRef = ref(null)
 
 const showcases = ref([])
 const currentPage = ref(0)
@@ -134,11 +134,11 @@ const { find } = useStrapi3()
 const user = useStrapiUser() as Ref<User>
 
 function clearFilter ($event) {
-  filtersEl.value?.clearFilter($event)
+  filtersRef.value?.clearFilter($event)
 }
 
 function clearFilters () {
-  filtersEl.value?.clearFilters()
+  filtersRef.value?.clearFilters()
 }
 
 function login () {

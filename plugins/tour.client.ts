@@ -1,5 +1,3 @@
-import { defineNuxtPlugin, useState } from '#imports'
-
 export default defineNuxtPlugin(() => {
   const listsFeature = useState('listsFeature', () => false)
   listsFeature.value = Boolean(

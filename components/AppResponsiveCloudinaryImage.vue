@@ -1,12 +1,12 @@
 <template>
   <div
-    ref="el"
+    ref="wrapperRef"
     :style="[intristicRatioPadding]"
     class="overflow-hidden relative bg-grey-50"
   >
     <img
       v-if="show"
-      ref="imgEl"
+      ref="imgRef"
       :src="src"
       :srcset="srcset"
       :sizes="sizes"
@@ -46,8 +46,8 @@ const props = defineProps({
 const show = ref(false)
 const loaded = ref(false)
 
-const el = ref(null)
-const imgEl = ref(null)
+const wrapperRef = ref(null)
+const imgRef = ref(null)
 
 const cloudinaryId = computed(() => {
   return props.url.split('/').pop()
@@ -89,7 +89,7 @@ function generateSrc (size, displayRatio = false) {
 function lazyLoadImage () {
   show.value = true
   nextTick(() => {
-    const lazyImage = imgEl.value
+    const lazyImage = imgRef.value
     lazyImage.addEventListener('load', () => {
       lazyImage.classList.add('lazy-loaded')
       loaded.value = true
@@ -97,7 +97,7 @@ function lazyLoadImage () {
   })
 }
 
-const { stop } = useIntersectionObserver(el, ([{ isIntersecting }]) => {
+const { stop } = useIntersectionObserver(wrapperRef, ([{ isIntersecting }]) => {
   if (isIntersecting) {
     lazyLoadImage()
     stop()

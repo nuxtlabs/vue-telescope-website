@@ -18,7 +18,7 @@
     <div v-if="creatingGroup" class="flex">
       <div class="flex-1 mr-1 relative">
         <AppAutosizeTextarea
-          ref="inputEl"
+          ref="inputRef"
           v-model="newGroupName"
           v-click-outside="() => (creatingGroup = false)"
           class="p-1 rounded-md"
@@ -56,19 +56,22 @@
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue'
+import type { List } from '~/types'
+
 import PlusIcon from '@/assets/icons/plus-circle.svg'
 import XmarkIcon from '@/assets/icons/xmark.svg'
 import SaveIcon from '@/assets/icons/save.svg'
 
 const { setSelectedList, createRemoteGroup } = useLists()
 
-const inputEl = ref(null)
+const inputRef = ref(null)
 
 const emit = defineEmits(['cleanup'])
 
 const props = defineProps({
   list: {
-    type: Object,
+    type: Object as PropType<List>,
     default: null
   }
 })
@@ -86,13 +89,13 @@ function initGroupCreation () {
   setSelectedList(props.list)
   creatingGroup.value = true
   nextTick(() => {
-    inputEl.value?.$el.focus()
+    inputRef.value?.$el.focus()
   })
 }
 
 function clearInput () {
   newGroupName.value = ''
-  inputEl.value?.$el.focus()
+  inputRef.value?.$el.focus()
 }
 
 async function createGroup () {

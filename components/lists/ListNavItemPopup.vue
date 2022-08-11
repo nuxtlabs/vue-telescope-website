@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col items-start">
-    <ul ref="menuEl">
+    <ul ref="menuRef">
       <li class="py-2px">
         <button
           title="Share"
@@ -52,11 +52,11 @@ const { $gsap } = useNuxtApp()
 
 const deleting = ref(false)
 
-const menuEl = ref(null)
+const menuRef = ref(null)
 
 onMounted(() => {
   $gsap.fromTo(
-    menuEl.value?.children,
+    menuRef.value?.children,
     {
       opacity: 0,
       scale: 0.8,

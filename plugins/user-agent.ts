@@ -1,5 +1,3 @@
-import { defineNuxtPlugin, ref } from '#imports'
-
 export default defineNuxtPlugin(() => {
   const isMobile = ref(false)
   const isSafari = ref(false)

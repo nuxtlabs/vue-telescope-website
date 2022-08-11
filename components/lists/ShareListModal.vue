@@ -7,7 +7,7 @@
       <div>
         <span>Endpoint to request:</span>
         <AppInput
-          ref="endpointEl"
+          ref="endpointRef"
           :value="listUrl"
           class="mt-2 cursor-pointer"
           readonly
@@ -29,21 +29,24 @@
 </template>
 
 <script setup lang="ts">
-const { $config } = useNuxtApp()
+import type { PropType } from 'vue'
+import type { List } from '~/types'
+
+const config = useRuntimeConfig().public
 
 defineEmits(['close'])
 
-const endpointEl = ref(null)
+const endpointRef = ref(null)
 
 const props = defineProps({
   list: {
-    type: Object,
+    type: Object as PropType<List>,
     default: null
   }
 })
 
 const listUrl = computed(() => {
-  return `${$config.strapiURL}/lists/${props.list.id}`
+  return `${config.strapiURL}/lists/${props.list.id}`
 })
 
 const code = computed(() => {
@@ -51,11 +54,11 @@ const code = computed(() => {
 })
 
 function selectRequest () {
-  const el = endpointEl.value?.$el
+  const el = endpointRef.value?.$el
   selectText(el)
 }
 
-function selectText (el) {
+function selectText (el: HTMLElement) {
   const range = document.createRange()
   range.selectNode(el)
   window.getSelection().removeAllRanges()

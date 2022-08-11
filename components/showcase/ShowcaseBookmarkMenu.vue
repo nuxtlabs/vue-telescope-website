@@ -1,7 +1,7 @@
 <template>
   <div v-click-outside="() => $emit('close')">
     <div
-      ref="scrimEl"
+      ref="scrimRef"
       class="bg-white absolute top-0 left-0 w-full h-full"
     />
     <!-- <div
@@ -180,8 +180,9 @@
 </template>
 
 <script setup lang="ts">
-import type { Ref } from 'vue'
-import type { User } from '~/types'
+import type { Ref, PropType } from 'vue'
+import type { User, Showcase, List, Group } from '~/types'
+
 import OpenedFolderIcon from '@/assets/icons/opened-folder.svg'
 import SaveIcon from '@/assets/icons/save.svg'
 // import UnorderedListIcon from '@/assets/icons/unordered-list.svg'
@@ -190,13 +191,13 @@ const { lists, bookmarkRemoteShowcase, unbookmarkRemoteShowcase } = useLists()
 const user = useStrapiUser() as Ref<User>
 const { $gsap } = useNuxtApp()
 
-const scrimEl = ref(null)
+const scrimRef = ref(null)
 
 defineEmits(['close'])
 
 const props = defineProps({
   showcase: {
-    type: Object,
+    type: Object as PropType<Showcase>,
     default: null
   },
   compact: {
@@ -235,11 +236,11 @@ onMounted(() => {
   //   )
   // }
 
-  $gsap.set(scrimEl.value, {
+  $gsap.set(scrimRef.value, {
     transformOrigin: 'top'
   })
   $gsap.fromTo(
-    scrimEl.value,
+    scrimRef.value,
     {
       scaleY: 0
     },
@@ -255,21 +256,21 @@ onMounted(() => {
   )
 })
 
-function isBookmarkedList (list) {
+function isBookmarkedList (list: List) {
   return Boolean(list.groups.map(g => isBookmarked(g)).filter(Boolean).length)
 }
 
-function isBookmarked (group) {
+function isBookmarked (group: Group) {
   return group.showcases.find(s => s.id === props.showcase.id)
 }
 
-function onBookmarkClicked (list, group) {
+function onBookmarkClicked (list: List, group: Group) {
   group.showcases?.find(s => s.id === props.showcase.id)
     ? unbookmark(list, group)
     : bookmark(list, group)
 }
 
-async function bookmark (list, group) {
+async function bookmark (list: List, group: Group) {
   try {
     await bookmarkRemoteShowcase({
       showcase: props.showcase,
@@ -279,7 +280,7 @@ async function bookmark (list, group) {
   } catch (e) {}
 }
 
-async function unbookmark (list, group) {
+async function unbookmark (list: List, group: Group) {
   try {
     await unbookmarkRemoteShowcase({
       showcase: props.showcase,

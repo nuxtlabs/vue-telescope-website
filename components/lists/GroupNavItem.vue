@@ -10,7 +10,7 @@
     >
       <AppAutosizeTextarea
         v-if="updatingGroup"
-        ref="inputEl"
+        ref="inputRef"
         v-model="newGroupName"
         class="p-1 rounded-md"
         @submit="updateGroup"
@@ -24,8 +24,8 @@
         :class="[isSelected && 'text-primary-500']"
       >
         <span
-          ref="deletingScrimEl"
-          class="deleting-scrim absolute top-0 left-0 w-full h-full pointer-events-none"
+          ref="deletingScrimRef"
+          class="backdrop-blur-sm absolute top-0 left-0 w-full h-full pointer-events-none"
           style="opacity: 0"
         />
         {{ group.name }}
@@ -49,7 +49,7 @@
       </button>
       <button
         v-else
-        ref="anchor"
+        ref="anchorRef"
         class="focus:outline-none has-hover:group-hover:flex has-hover:hover:bg-grey-50 rounded-lg w-full h-full items-center justify-center"
         :class="[openCollapse || showPopup || isSelected ? 'flex' : 'hidden']"
         @click="openPopup"
@@ -63,7 +63,7 @@
       :offset-x="4"
       :offset-y="-2"
       placement="right-start"
-      :anchor="$refs.anchor"
+      :anchor="anchorRef"
     >
       <GroupNavItemPopup
         v-if="!updatingGroup"
@@ -79,10 +79,17 @@
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue'
+import type { List, Group } from '~/types'
+
 import DotsVerticalIcon from '@/assets/icons/dots-vertical.svg'
 import SaveIcon from '@/assets/icons/save.svg'
 
 const emit = defineEmits(['group-selected'])
+
+const anchorRef = ref(null)
+const deletingScrimRef = ref(null)
+const inputRef = ref(null)
 
 const { $gsap } = useNuxtApp()
 
@@ -95,16 +102,13 @@ const {
   setSelectedGroup
 } = useLists()
 
-const deletingScrimEl = ref(null)
-const inputEl = ref(null)
-
 const props = defineProps({
   group: {
-    type: Object,
+    type: Object as PropType<Group>,
     default: null
   },
   list: {
-    type: Object,
+    type: Object as PropType<List>,
     default: null
   }
 })
@@ -175,7 +179,7 @@ async function updateGroup () {
 async function deleteGroup () {
   try {
     deletingGroup.value = true
-    $gsap.to(deletingScrimEl.value, {
+    $gsap.to(deletingScrimRef.value, {
       opacity: 1,
       duration: 0.5,
       ease: 'none'
@@ -187,7 +191,10 @@ async function deleteGroup () {
     deletingGroup.value = false
     setSelectedGroup(props.list.groups[0])
   } catch (e) {
-    console.log(e)
+    if (process.env.NODE_ENV !== 'production') {
+      // eslint-disable-next-line no-console
+      console.error(e)
+    }
   }
 }
 
@@ -195,7 +202,7 @@ function initUpdateGroup () {
   updatingGroup.value = true
   newGroupName.value = props.group.name
   nextTick(() => {
-    inputEl.value?.$el.focus()
+    inputRef.value?.$el.focus()
   })
 }
 
@@ -220,14 +227,11 @@ async function moveDownGroup () {
     })
     clearActions()
   } catch (e) {
-    console.log(e)
+    if (process.env.NODE_ENV !== 'production') {
+      // eslint-disable-next-line no-console
+      console.error(e)
+    }
   }
   loading.value = false
 }
 </script>
-
-<style scoped>
-.deleting-scrim {
-  backdrop-filter: blur(3px);
-}
-</style>

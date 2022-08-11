@@ -4,7 +4,7 @@
       <transition :css="false" @enter="enter" @leave="leave">
         <div v-if="creatingList" class="w-full h-full absolute z-10">
           <AppAutosizeTextarea
-            ref="inputEl"
+            ref="inputRef"
             v-model="name"
             v-click-outside="() => (creatingList = false)"
             placeholder="Name Your List"
@@ -67,7 +67,7 @@ import XmarkIcon from '@/assets/icons/xmark.svg'
 const { createRemoteList } = useLists()
 const { $gsap } = useNuxtApp()
 
-const inputEl = ref(null)
+const inputRef = ref(null)
 
 const emit = defineEmits(['cleanup'])
 
@@ -87,13 +87,13 @@ function clearActions () {
 function initListCreation () {
   creatingList.value = true
   nextTick(() => {
-    inputEl.value?.$el.focus()
+    inputRef.value?.$el.focus()
   })
 }
 
 function clearInput () {
   name.value = ''
-  inputEl.value?.$el.focus()
+  inputRef.value?.$el.focus()
 }
 
 async function createList () {
@@ -113,8 +113,8 @@ async function createList () {
   }
 }
 
-function enter (el, done) {
-  inputEl.value?.$el.focus()
+function enter (el: HTMLElement, done: Function) {
+  inputRef.value?.$el.focus()
   nextTick(() => {
     $gsap.set(el, { position: 'absolute', transformOrigin: 'left' })
     $gsap.from(el, {
@@ -126,14 +126,14 @@ function enter (el, done) {
       ease: 'power1.out',
       onComplete: () => {
         $gsap.set(el, { position: 'relative' })
-        inputEl.value?.$el.focus()
+        inputRef.value?.$el.focus()
         done()
       }
     })
   })
 }
 
-function leave (el, done) {
+function leave (el: HTMLElement, done: Function) {
   $gsap.set(el, { transformOrigin: 'left' })
   $gsap.to(el, {
     // position: 'absolute',
@@ -143,7 +143,7 @@ function leave (el, done) {
     clearProps: true,
     duration: 0.25,
     ease: 'power1.out',
-    onComplete: done
+    onComplete: () => done()
   })
 }
 </script>

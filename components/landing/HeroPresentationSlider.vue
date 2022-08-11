@@ -1,5 +1,5 @@
 <template>
-  <div ref="heroPresentationSlider" class="w-full relative opacity-0">
+  <div ref="heroPresentationSliderRef" class="w-full relative opacity-0">
     <div class="w-full relative flex items-center justify-center px-4">
       <div
         v-for="({ id }, i) in featured"
@@ -23,14 +23,12 @@
 </template>
 
 <script setup lang="ts">
-import { useNuxtApp, useAsyncData, ref, onMounted } from '#imports'
 import type { Showcase } from '~/types'
 const { $gsap } = useNuxtApp()
 
 const activeIndex = ref(2)
 
-// refs
-const heroPresentationSlider = ref(null)
+const heroPresentationSliderRef = ref(null)
 
 // const activeShowcase = computed(() => {
 //   return this.featured[this.activeIndex ? this.activeIndex : 2]
@@ -56,7 +54,7 @@ function changeSlide (i) {
 
 onMounted(() => {
   $gsap.fromTo(
-    heroPresentationSlider.value,
+    heroPresentationSliderRef.value,
     {
       opacity: 0,
       scale: 0.75,

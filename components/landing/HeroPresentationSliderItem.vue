@@ -9,12 +9,12 @@
           <div
             v-for="showcase in activeShowcases"
             :key="showcase.id"
-            ref="showcaseImageWrapper"
+            ref="showcaseImageWrapperRef"
             class="showcase-image-wrapper absolute top-0 left-0 w-full h-full cursor-pointer overflow-hidden"
             @click="staticIndex === 2 ? clickMain(showcase) : changeSlider()"
           >
             <img
-              ref="showcaseImg"
+              ref="showcaseImgRef"
               loading="lazy"
               class="h-full"
               sizes="(min-width: 834px) 50vw, 100vw"
@@ -37,7 +37,7 @@
               }"
             >
               <h2
-                ref="showcaseTitle"
+                ref="showcaseTitleRef"
                 class="opacity-0 text-six leading-six font-display-weight overflow-hidden"
               >
                 {{ showcase.siteName || showcase.title }}
@@ -51,14 +51,6 @@
 </template>
 
 <script setup lang="ts">
-import {
-  computed,
-  watch,
-  ref,
-  nextTick,
-  onMounted
-} from '#imports'
-
 const { $gsap, $SplitText } = useNuxtApp()
 
 const sliderMatrix = [
@@ -90,9 +82,9 @@ const emit = defineEmits(['change-slide'])
 
 const activeShowcases = ref([])
 
-const showcaseImageWrapper = ref([])
-const showcaseImg = ref([])
-const showcaseTitle = ref([])
+const showcaseImageWrapperRef = ref([])
+const showcaseImgRef = ref([])
+const showcaseTitleRef = ref([])
 
 const router = useRouter()
 
@@ -119,13 +111,13 @@ watch(
   () => {
     leaveTitleAnimation()
 
-    $gsap.to(showcaseImageWrapper.value[0], {
+    $gsap.to(showcaseImageWrapperRef.value[0], {
       x: getDirection() === 'left' ? '-100%' : '100%',
       duration: 1,
       ease: 'expo.inOut',
       onComplete: () => {}
     })
-    $gsap.to(showcaseImg.value[0], {
+    $gsap.to(showcaseImgRef.value[0], {
       x: getDirection() === 'left' ? '100%' : '-100%',
       scale: 1.05,
       duration: 1,
@@ -137,7 +129,7 @@ watch(
 
     nextTick(() => {
       // enterTitleAnimation()
-      $gsap.from(showcaseImageWrapper.value[1], {
+      $gsap.from(showcaseImageWrapperRef.value[1], {
         x: getDirection() === 'left' ? '100%' : '-100%',
         duration: 1,
         ease: 'expo.inOut',
@@ -145,7 +137,7 @@ watch(
           activeShowcases.value.shift()
         }
       })
-      $gsap.from(showcaseImg.value[1], {
+      $gsap.from(showcaseImgRef.value[1], {
         x: getDirection() === 'left' ? '-100%' : '100%',
         scale: 1.05,
         duration: 1,
@@ -198,10 +190,10 @@ function getDirection () {
 
 function leaveTitleAnimation () {
   if (props.staticIndex === 2) {
-    $gsap.set(showcaseTitle.value[0], {
+    $gsap.set(showcaseTitleRef.value[0], {
       opacity: 1
     })
-    const splitted = new $SplitText(showcaseTitle.value[0], {
+    const splitted = new $SplitText(showcaseTitleRef.value[0], {
       type: ' lines'
     })
 
@@ -229,10 +221,10 @@ function leaveTitleAnimation () {
 }
 function enterTitleAnimation (initial = false) {
   if (props.staticIndex === 2) {
-    const splitted = new $SplitText(showcaseTitle.value[initial ? 0 : 1], {
+    const splitted = new $SplitText(showcaseTitleRef.value[initial ? 0 : 1], {
       type: 'lines'
     })
-    $gsap.set(showcaseTitle.value[initial ? 0 : 1], {
+    $gsap.set(showcaseTitleRef.value[initial ? 0 : 1], {
       opacity: 1
     })
     $gsap.from(splitted.lines, {
@@ -249,9 +241,6 @@ function enterTitleAnimation (initial = false) {
   }
 }
 
-// function src(screenshot) {
-//   return generateSrc(screenshot, 1200)
-// }
 function srcset (screenshot) {
   return [160, 240, 320, 560, 800, 920, 1040, 1200]
     .map(size => generateSrc(screenshot, size, true))

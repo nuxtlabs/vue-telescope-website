@@ -20,8 +20,8 @@ const {
   data: {
     value: { title, description }
   }
-} = await useAsyncData(name, () => {
-  return queryContent(name).only(['title', 'description']).findOne()
+} = await useAsyncData(name as string, () => {
+  return queryContent(name as string).only(['title', 'description']).findOne()
 })
 
 const { $changelog } = useNuxtApp()
@@ -42,33 +42,3 @@ if (process.client) {
   }, 0)
 }
 </script>
-
-<style lang="postcss" scoped>
-::v-deep(.prose) {
-  & a {
-    @apply text-primary-500;
-    &:hover {
-      @apply underline;
-    }
-  }
-  & h2 {
-    @apply text-five leading-five mb-4 mt-8 font-display-weight;
-    a {
-      @apply text-grey-900 pointer-events-none;
-    }
-  }
-  & p {
-    @apply mb-4;
-  }
-  & ul {
-    @apply list-disc list-inside mb-4;
-
-    & > li {
-      @apply mb-2;
-    }
-  }
-  & img {
-    @apply mb-4;
-  }
-}
-</style>

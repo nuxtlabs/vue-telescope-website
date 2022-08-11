@@ -48,6 +48,7 @@ export interface Showcase {
   language: string,
   lastDetectedAt: string
   modules: NuxtModule[]
+  position: number
   plugins: Plugin[]
   rank: string
   siteName: string,

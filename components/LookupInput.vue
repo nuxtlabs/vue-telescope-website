@@ -13,7 +13,7 @@
     >
       https://
     </span>
-    <label class="">
+    <label>
       <span class="absolute opacity-0 pointer-events-none">Lookup</span>
       <AppInput
         ref="inputRef"
@@ -55,10 +55,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, useNuxtApp } from '#imports'
 const EventSourcePolyfill = () => import('event-source-polyfill')
 
-const { $config } = useNuxtApp()
+const config = useRuntimeConfig().public
+
 const { processPrivacyAwareness } = usePrivacyAwareness()
 const router = useRouter()
 const { setModal } = useModal()
@@ -119,7 +119,7 @@ const analyzeWebsite = async () => {
   }
   pending.value = true
   const sse = new EventSource(
-    `${$config.serviceURL}?url=${url.value}&isPublic=true`
+    `${config.serviceURL}?url=${url.value}&isPublic=true`
   )
   sse.addEventListener('message', (event) => {
     pending.value = false

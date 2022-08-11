@@ -9,13 +9,13 @@
     />
     <div
       id="tour-main-header"
-      class="h-16 fixed top-0 left-0 w-full min-w-body"
+      class="h-16 fixed body-lock-hack top-0 left-0 w-full min-w-body"
     >
       <div
         class="w-full h-full flex justify-end items-center max-w-container m-auto px-4"
       >
         <button
-          ref="anchor"
+          ref="buttonRef"
           class="rounded-full overflow-hidden focus:outline-none"
         >
           <svg
@@ -72,7 +72,7 @@
           arrow
           :offset-y="12"
           placement="bottom-end"
-          :anchor="$refs.anchor"
+          :anchor="buttonRef"
         >
           <div class="p-4">
             <div class="mb-4 font-bold-body-weight">
@@ -98,6 +98,8 @@
 const emit = defineEmits(['close'])
 
 const showTooltip = ref(false)
+
+const buttonRef = ref(null)
 
 const { bodyLock, bodyUnlock } = useBodyLock()
 

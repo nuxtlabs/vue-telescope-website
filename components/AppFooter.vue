@@ -8,12 +8,12 @@
           <li class="text-grey-900">
             Frontend hosted on
             <a
-              href="https://www.netlify.com/"
+              href="https://vercel.com/"
               target="_blank"
               rel="noopener nofollow noreferrer"
               class="text-primary-500 font-medium has-hover:hover:underline"
             >
-              Netlify </a>, API made with
+              Vercel </a>, API made with
             <a
               href="https://strapi.io"
               target="_blank"
@@ -64,7 +64,7 @@
           <ClientOnly>
             <li>
               <ChangelogLink class="has-hover:hover:text-primary-500 font-medium">
-                <span class="">Changelog</span>
+                <span>Changelog</span>
               </ChangelogLink>
             </li>
           </ClientOnly>
@@ -101,7 +101,7 @@
               <TwitterIcon class="h-6 w-6" />
             </a>
           </li>
-          <li class="">
+          <li>
             <a
               href="https://github.com/nuxt-company/vue-telescope-analyzer"
               class="text-grey-900 has-hover:hover:text-primary-500 transition ease-in duration-150"

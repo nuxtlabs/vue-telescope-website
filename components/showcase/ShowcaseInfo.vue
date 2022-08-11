@@ -13,7 +13,7 @@
           href="https://vuejs.org"
           target="_blank"
           rel="noreferrer noopener"
-          :image="`${$config.iconsURL}/vue.svg`"
+          :image="`${config.iconsURL}/vue.svg`"
           :text="showcase.vueVersion"
         />
 
@@ -24,7 +24,7 @@
           :href="showcase.framework.url"
           target="_blank"
           rel="noreferrer noopener"
-          :image="`${$config.iconsURL}${showcase.framework.imgPath}`"
+          :image="`${config.iconsURL}${showcase.framework.imgPath}`"
           :text="showcase.framework.name"
         />
 
@@ -35,7 +35,7 @@
           :href="showcase.ui.url"
           target="_blank"
           rel="noreferrer noopener"
-          :image="`${$config.iconsURL}${showcase.ui.imgPath}`"
+          :image="`${config.iconsURL}${showcase.ui.imgPath}`"
           :text="showcase.ui.name"
         />
 
@@ -95,19 +95,25 @@
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue'
+import type { Showcase } from '~/types'
+
 import ModulesIcon from '@/assets/icons/modules.svg'
 import PluginsIcon from '@/assets/icons/plugins.svg'
 import InfoIcon from '@/assets/icons/info.svg'
 
+const config = useRuntimeConfig().public
+
 defineProps({
   showcase: {
-    type: Object,
-    default: () => {}
+    type: Object as PropType<Showcase>,
+    default: null
   }
 })
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
+/* Styles for usage in Floating View Modal */
 .floating-view .data-wrapper {
   @apply px-8;
 }

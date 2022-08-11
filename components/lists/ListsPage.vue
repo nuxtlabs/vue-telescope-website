@@ -1,7 +1,7 @@
 <template>
   <AsideContentTemplate v-if="user">
     <template #aside-content-aside>
-      <div>
+      <div class="pt-8">
         <CreateListButton class="mb-2" />
 
         <!-- ListsNav -->
@@ -24,7 +24,7 @@
 
     <template #aside-content-header>
       <MobileListsNav />
-      <ListsBreadcrumbs class="ml-4 absolute top-0 -mt-6" />
+      <ListsBreadcrumbs class="ml-4 absolute top-0 mt-4 md:mt-0" />
     </template>
 
     <template #aside-content-main>
@@ -34,13 +34,13 @@
 
           <div v-else-if="selectedGroup">
             <transition name="slide" mode="out-in">
-              <ListShowcaseItem
+              <ListsShowcasesListing
                 v-if="selectedShowcases.length"
                 :key="selectedGroup.id"
                 :showcases="selectedShowcases"
               />
 
-              <NoShowcaseTour v-else key="empty" :list="selectedGroup" />
+              <NoShowcaseTour v-else key="empty" :group="selectedGroup" />
             </transition>
           </div>
 
@@ -62,8 +62,8 @@
 
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import AsideContentTemplate from '@/components/templates/AsideContentTemplate.vue'
 import type { User } from '~/types'
+import AsideContentTemplate from '@/components/templates/AsideContentTemplate.vue'
 
 const user = useStrapiUser() as Ref<User>
 const { $gsap } = useNuxtApp()

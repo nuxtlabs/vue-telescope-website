@@ -1,5 +1,5 @@
 <template>
-  <div class="el relative flex flex-col items-center justify-center px-4">
+  <div class="h-(screen-top-position) relative flex flex-col items-center justify-center px-4">
     <h2 class="text-center text-four leading-four font-bold-body-weight mb-2">
       There's no Groups in "{{ list.name }}"
     </h2>
@@ -11,7 +11,6 @@
       <transition :css="false" @enter="enter" @leave="leave">
         <button
           v-if="!creatingList"
-          ref="create-button"
           class="absolute top-0 focus:outline-none text-seven leading-seven flex items-center py-4 px-8 rounded-xl border-2 border-transparent has-hover:hover:border-primary-500 bg-primary-50 text-primary-500 font-bold-body-weight transition-colors duration-200 truncate"
           @click="initGroupCreation"
         >
@@ -24,7 +23,7 @@
         <div v-else class="max-w-24rem absolute top-0 w-full">
           <AppAutosizeTextarea
             v-if="creatingList"
-            ref="inputEl"
+            ref="inputRef"
             v-model="newListName"
             v-click-outside="() => (creatingList = false)"
             placeholder="Type List name"
@@ -52,10 +51,13 @@
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue'
+import type { List } from '~/types'
+
 import PlusIcon from '@/assets/icons/plus-circle.svg'
 import SaveIcon from '@/assets/icons/save.svg'
 
-const inputEl = ref(null)
+const inputRef = ref(null)
 
 const newListName = ref('')
 const creatingList = ref(false)
@@ -67,7 +69,7 @@ const { $gsap } = useNuxtApp()
 
 const props = defineProps({
   list: {
-    type: Object,
+    type: Object as PropType<List>,
     default: null
   }
 })
@@ -81,7 +83,7 @@ function initGroupCreation () {
   setSelectedList(props.list)
   creatingList.value = true
   nextTick(() => {
-    inputEl.value?.$el.focus()
+    inputRef.value?.$el.focus()
   })
 }
 
@@ -95,12 +97,15 @@ async function createGroupMethod () {
     clearActions()
     creatingList.value = false
   } catch (e) {
-    console.log(e)
+    if (process.env.NODE_ENV !== 'production') {
+      // eslint-disable-next-line no-console
+      console.error(e)
+    }
   }
 }
 
 function enter (el, done) {
-  inputEl.value?.$el.focus()
+  inputRef.value?.$el.focus()
   nextTick(() => {
     $gsap.set(el, { position: 'absolute', transformOrigin: 'center' })
     $gsap.from(el, {
@@ -112,7 +117,7 @@ function enter (el, done) {
       ease: 'power1.out',
       onComplete: () => {
         $gsap.set(el, { position: 'absolute' })
-        inputEl.value?.$el.focus()
+        inputRef.value?.$el.focus()
         done()
       }
     })
@@ -132,9 +137,3 @@ function leave (el, done) {
   })
 }
 </script>
-
-<style lang="postcss" scoped>
-.el {
-  height: calc(100vh - calc(theme('spacing.16') + theme('spacing.8')));
-}
-</style>

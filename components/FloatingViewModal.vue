@@ -1,6 +1,6 @@
 <template>
-  <div class="modal-wrapper">
-    <div ref="scrimEl" class="scrim" style="opacity: 0" />
+  <div class="fixed top-0 left-0 w-full h-full z-[1000]">
+    <div ref="scrimRef" class="scrim fixed top-0 left-0 w-full h-full -z-[1] pointer-events-none" style="opacity: 0" />
     <div class="w-full h-full overflow-auto" @click.self="emit('close')">
       <!-- <div class="w-full flex pointer-events-none">
         <div
@@ -13,7 +13,7 @@
 
       <div class="h-full md:h-auto md:m-4 pointer-events-none">
         <div
-          ref="modalContainerEl"
+          ref="modalContainerRef"
           style="opacity: 0"
           :class="[
             compact
@@ -28,7 +28,7 @@
           >
             <XmarkCircleIcon class="text-grey-900 w-6 h-6" />
           </div>
-          <div class="">
+          <div>
             <slot />
           </div>
         </div>
@@ -72,13 +72,13 @@ const { bodyLock, bodyUnlock } = useBodyLock()
 
 useEsc(() => emit('close'))
 
-const scrimEl = ref(null)
-const modalContainerEl = ref(null)
+const scrimRef = ref(null)
+const modalContainerRef = ref(null)
 
 function animateEnter () {
   if (!isMobile.value) {
     $gsap.fromTo(
-      scrimEl.value,
+      scrimRef.value,
       {
         opacity: 0
       },
@@ -92,11 +92,11 @@ function animateEnter () {
   }
 
   // old
-  $gsap.set(modalContainerEl.value, {
+  $gsap.set(modalContainerRef.value, {
     transformOrigin: 'bottom',
     opacity: 1
   })
-  $gsap.from(modalContainerEl.value, {
+  $gsap.from(modalContainerRef.value, {
     // scaleY: 0.99,
     opacity: 0,
     y: -10,
@@ -121,30 +121,8 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-.modal-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* background: rgba(255, 255, 255, 0.42); */
-  /*background-color: rgba(0, 0, 0, 0.2);*/
-  z-index: 1000;
-  /*backdrop-filter: blur(18px);*/
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
-}
-
 .scrim {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
-  z-index: -1;
   backdrop-filter: var(--scrim-filter);
-  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 </style>

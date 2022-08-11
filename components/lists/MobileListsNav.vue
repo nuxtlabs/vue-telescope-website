@@ -1,6 +1,6 @@
 <template>
   <div class="block md:hidden">
-    <div class="fixed bottom-0 left-1/2 z-10 transform -translate-x-1/2 pb-4">
+    <div class="fixed body-lock-hack bottom-0 left-1/2 z-10 transform -translate-x-1/2 pb-4">
       <AppButton
         appearance="primary"
         class="min-w-[8rem]"

@@ -1,5 +1,5 @@
 <template>
-  <div class="el relative flex flex-col items-center justify-center px-4">
+  <div class="h-(screen-top-position) relative flex flex-col items-center justify-center px-4">
     <h2 class="text-center text-four leading-four font-bold-body-weight mb-2">
       You don't have any Lists
     </h2>
@@ -11,7 +11,7 @@
       <transition :css="false" @enter="enter" @leave="leave">
         <button
           v-if="!creatingList"
-          ref="buttonEl"
+          ref="buttonRef"
           class="absolute top-0 focus:outline-none text-seven leading-seven flex items-center py-4 px-8 rounded-xl border-2 border-transparent has-hover:hover:border-primary-500 bg-primary-50 text-primary-500 font-bold-body-weight transition-colors duration-200 truncate"
           @click="initListCreation"
         >
@@ -28,7 +28,7 @@
         >
           <AppAutosizeTextarea
             v-if="creatingList"
-            ref="inputEl"
+            ref="inputRef"
             v-model="newListName"
             v-click-outside="() => (creatingList = false)"
             placeholder="Type List name"
@@ -61,8 +61,8 @@ import SaveIcon from '@/assets/icons/save.svg'
 
 const emit = defineEmits(['cleanup'])
 
-const inputEl = ref(null)
-const buttonEl = ref(null)
+const inputRef = ref(null)
+const buttonRef = ref(null)
 
 const { createRemoteList } = useLists()
 const { $gsap } = useNuxtApp()
@@ -77,10 +77,10 @@ function clearActions () {
 }
 
 function initListCreation () {
-  maxWidthStyles.value = buttonEl.value.getBoundingClientRect().width
+  maxWidthStyles.value = buttonRef.value.getBoundingClientRect().width
   creatingList.value = true
   nextTick(() => {
-    inputEl.value?.$el.focus()
+    inputRef.value?.$el.focus()
   })
 }
 
@@ -93,12 +93,15 @@ async function createList () {
     clearActions()
     creatingList.value = false
   } catch (e) {
-    console.log(e)
+    if (process.env.NODE_ENV !== 'production') {
+      // eslint-disable-next-line no-console
+      console.error(e)
+    }
   }
 }
 
 function enter (el, done) {
-  inputEl.value?.$el.focus()
+  inputRef.value?.$el.focus()
   nextTick(() => {
     $gsap.set(el, { position: 'absolute', transformOrigin: 'center' })
     $gsap.from(el, {
@@ -113,7 +116,7 @@ function enter (el, done) {
           // position: 'relative',
           maxWidth: maxWidthStyles.value + 'px'
         })
-        inputEl.value?.$el.focus()
+        inputRef.value?.$el.focus()
         done()
       }
     })
@@ -134,9 +137,3 @@ function leave (el, done) {
   })
 }
 </script>
-
-<style lang="postcss" scoped>
-.el {
-  height: calc(100vh - calc(theme('spacing.16') + theme('spacing.8')));
-}
-</style>

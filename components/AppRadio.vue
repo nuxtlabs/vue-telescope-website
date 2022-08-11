@@ -14,7 +14,7 @@
         @change="$emit('input', checked)"
       >
       <div
-        ref="radiomarkWrapperEl"
+        ref="radiomarkWrapperRef"
         class="relative shadow radiomark-wrapper w-4 h-4 mr-2 pointer-events-none text-white rounded-full overflow-hidden border transition-colors duration-200"
         :class="[
           checked ? 'border-primary-500 ' : 'border-grey-300',
@@ -22,12 +22,12 @@
         ]"
       >
         <div
-          ref="colorMarkEl"
+          ref="colorMarkRef"
           class="absolute top-0 left-0 w-full h-full rounded-full"
           :class="[checked ? 'bg-primary-500 ' : 'bg-grey-300']"
         />
         <div
-          ref="whiteMarkEl"
+          ref="whiteMarkRef"
           class="absolute top-0 left-0 bg-white w-full h-full rounded-full"
         />
       </div>
@@ -60,14 +60,14 @@ defineEmits(['input'])
 
 const isHovered = ref(false)
 
-const radiomarkWrapperEl = ref(null)
-const colorMarkEl = ref(null)
-const whiteMarkEl = ref(null)
+const radiomarkWrapperRef = ref(null)
+const colorMarkRef = ref(null)
+const whiteMarkRef = ref(null)
 
 function animateRadiomark (value: boolean) {
   if (value) {
     $gsap.fromTo(
-      whiteMarkEl.value,
+      whiteMarkRef.value,
       {
         scale: 1
       },
@@ -77,7 +77,7 @@ function animateRadiomark (value: boolean) {
         ease: 'power2.inOut',
         onComplete: () => {
           $gsap.fromTo(
-            colorMarkEl.value,
+            colorMarkRef.value,
             {
               scale: 1
             },
@@ -92,12 +92,12 @@ function animateRadiomark (value: boolean) {
       }
     )
   } else {
-    $gsap.to(colorMarkEl.value, {
+    $gsap.to(colorMarkRef.value, {
       scale: 1,
       duration: 0.2,
       ease: 'power2.inOut',
       onComplete: () => {
-        $gsap.to(whiteMarkEl.value, {
+        $gsap.to(whiteMarkRef.value, {
           scale: 1,
           duration: 0.2,
           ease: 'power2.inOut'

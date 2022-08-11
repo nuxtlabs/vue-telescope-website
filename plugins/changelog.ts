@@ -1,5 +1,3 @@
-import { useState } from '#imports'
-
 export default defineNuxtPlugin(async () => {
   const lastSeenAt = useState('lastSeenAt', () => null)
 

@@ -46,12 +46,11 @@
           :is="activeTab.component"
           v-for="activeTab in activeTabs"
           :key="activeTab.id + activeTab.component"
-          ref="contentEl"
+          ref="contentRef"
           :surface-color="activeTab.surfaceColor"
           :on-surface-color="activeTab.onSurfaceColor"
           :description="activeTab.description"
           :image="activeTab.image"
-          class=""
         />
       </transition-group>
     </div>
@@ -59,8 +58,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from '#imports'
-
 const tabs = [
   {
     id: 1,
@@ -101,7 +98,7 @@ const activeTabs = ref([tabs[0]])
 const autoInterval = ref(null)
 
 //  refs
-const contentEl = ref([])
+const contentRef = ref([])
 
 async function startManualTransition (tab) {
   if (activeTabs.value.length >= 2) { return }
@@ -118,10 +115,10 @@ async function startManualTransition (tab) {
 }
 async function animateSwitchTabs (tab) {
   if (document.hidden) { return }
-  if (!contentEl.value[0]) { return }
+  if (!contentRef.value[0]) { return }
   activeTabs.value.push(tab)
   transitioning.value = true
-  await contentEl.value[0].leave()
+  await contentRef.value[0].leave()
   transitioning.value = false
   activeTabs.value.shift()
 }

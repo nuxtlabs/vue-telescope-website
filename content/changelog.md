@@ -1,15 +1,33 @@
 ---
-title: Vue Telescope Changelog
+title: Changelog
 description: Lastest news from Vue Telescope
-updatedAt: 2021-01-25
+updatedAt: 2022-08-08
 ---
+
+::changelog-item{project="website" date="2022-08-08"}
+
+## Big update for Vue Telescope website
+
+We've updated Vue Telescope website to embrace the whole power of new web technologies!
+
+- Vue 3 with Composition API ✨
+- Nuxt 3 🚀
+- Nuxt Content 2 ✍️
+- Tailwind 3 🎨
+- Typescript 🤖
+
+Moreover, we love our community so much, that we decided to give back, by open sourcing it 🤟
+
+Oh, and we also renamed `Collections` to `Lists` and `Lists` to `Groups`, sorry for little bit of confusion. 
+
+::
 
 ::changelog-item{project="website" date="2020-01-25"}
 ## Vue Telemetry is now Vue Telescope 🔭
 
 After discussions with the Vue.js community, we decided to rename Vue Telemetry to Vue telescope to avoid unnecessary associations and concerns about privacy.
 
-## Introducting Collections 📚
+### Introducting Collections 📚
 
 You can now bookmark websites and organize them into collections and lists!
 
@@ -46,8 +64,6 @@ See more [on GitHub](https://github.com/nuxt-company/vue-telescope-extensions).
 ## Vue 3 detection ✨
 
 We now support Vue 3 in the [vue-telemetry-analyzer](https://github.com/nuxt-company/vue-telemetry-analyzer), making it available today in the [Chrome](https://chrome.google.com/webstore/detail/vue-telemetry/neaebjphlfplgdhedjdhcnpjkndddbpd) and [Firefox](https://addons.mozilla.org/en-US/firefox/addon/vue-telemetry/) extensions.
-
-[:img{src="https://res.cloudinary.com/nuxt/image/upload/v1608057034/vue-telemetry/vue-telemetry-vue3_mzilty.svg" alt="vue telemetry vue 3 support" class="m-auto rounded-md shadow"}](/explore/vitepress-vuejs-org)
 
 On top of it, we also added support for [PrimeVue](https://www.primefaces.org/primevue/showcase/#/) and [Vuesax](https://vuesax.com) UI frameworks.
 

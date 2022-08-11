@@ -2,7 +2,7 @@
   <div class="relative flex flex-col">
     <div v-click-outside="clickOutsideHandler" class="relative flex group">
       <div
-        ref="nameEl"
+        ref="nameRef"
         class="focus:outline-none flex flex-1 cursor-pointer py-2"
         tabindex="0"
         @click="clickOnNameHandler"
@@ -21,7 +21,7 @@
         <span class="relative flex flex-1 text-eight leading-eight">
           <AppAutosizeTextarea
             v-if="updatingList"
-            ref="inputEl"
+            ref="inputRef"
             v-model="newListName"
             class="font-bold-body-weight p-1 rounded-md mr-1"
             @submit="updateList"
@@ -43,7 +43,7 @@
       <div class="w-8 h-8 ml-auto my-2">
         <button
           v-if="!updatingList"
-          ref="anchor"
+          ref="anchorRef"
           class="focus:outline-none has-hover:group-hover:flex items-center justify-center rounded-lg w-full h-full"
           :class="[
             openCollapse || showPopup ? 'flex' : 'hidden',
@@ -75,7 +75,7 @@
         :offset-x="4"
         :offset-y="-2"
         placement="right-start"
-        :anchor="$refs.anchor"
+        :anchor="anchorRef"
       >
         <ListNavItemPopup
           v-if="!updatingList"
@@ -116,6 +116,9 @@
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue'
+import type { List } from '~/types'
+
 import DotsVerticalIcon from '@/assets/icons/dots-vertical.svg'
 import FolderIcon from '@/assets/icons/folder.svg'
 import OpenedFolderIcon from '@/assets/icons/opened-folder.svg'
@@ -123,8 +126,9 @@ import SaveIcon from '@/assets/icons/save.svg'
 
 const emit = defineEmits(['close-menu'])
 
-const nameEl = ref(null)
-const inputEl = ref(null)
+const nameRef = ref(null)
+const inputRef = ref(null)
+const anchorRef = ref(null)
 
 const {
   selectedList,
@@ -146,7 +150,7 @@ const shareList = ref(false)
 
 const props = defineProps({
   list: {
-    type: Object,
+    type: Object as PropType<List>,
     default: null
   }
 })
@@ -159,7 +163,7 @@ const reversedListGroups = computed(() => {
   const r = [...props.list.groups]
   return r.sort(
     (a, b) =>
-      a.position - b.position || new Date(a.created_at) - new Date(b.created_at)
+      a.position - b.position || new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
   )
 })
 
@@ -206,7 +210,6 @@ function clickOnNameHandler () {
   // }
   clearActions()
   // this.clicked = 0
-  // this.creatingGroup = false
 }
 
 function clearActions () {
@@ -222,17 +225,19 @@ async function deleteList () {
       list: props.list
     })
   } catch (e) {
-    console.log(e)
+    if (process.env.NODE_ENV !== 'production') {
+      // eslint-disable-next-line no-console
+      console.error(e)
+    }
   }
 }
 
 function initUpdateList () {
   // popperInstance.forceUpdate()
   updatingList.value = true
-  // this.creatingGroup = false
   newListName.value = props.list.name
   nextTick(() => {
-    inputEl.value?.$el.focus()
+    inputRef.value?.$el.focus()
   })
 }
 
@@ -246,10 +251,13 @@ async function updateList () {
     })
     loading.value = false
     clearActions()
-    nameEl.value.focus()
+    nameRef.value.focus()
   } catch (e) {
     loading.value = false
-    console.log(e)
+    if (process.env.NODE_ENV !== 'production') {
+      // eslint-disable-next-line no-console
+      console.error(e)
+    }
   }
 }
 

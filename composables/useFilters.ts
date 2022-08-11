@@ -1,4 +1,4 @@
-import { useState } from '#imports'
+import type { Filters } from '~/types'
 
 const allowedFilters = [
   '_q',
@@ -23,9 +23,9 @@ function filterFilters (raw) {
 export const useFilters = () => {
   const route = useRoute()
 
-  const selectedFilters = useState('selectedFilters', () => ({}))
+  const selectedFilters = useState('selectedFilters', () => ({} as Filters))
 
-  function setFilters (filters) {
+  function setFilters (filters: Filters) {
     selectedFilters.value = filterFilters(filters)
   }
 
@@ -37,7 +37,7 @@ export const useFilters = () => {
     selectedFilters.value = { ...selectedFilters.value, [key]: value }
   }
 
-  function deleteFilterKey (key) {
+  function deleteFilterKey (key: string) {
     delete selectedFilters.value[key]
   }
 

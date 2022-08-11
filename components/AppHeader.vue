@@ -1,13 +1,12 @@
 <template>
   <header
     id="main-header"
-    ref="main-header"
-    class="app-header h-16 fixed top-0 left-0 w-full z-50 overflow-hidden min-w-body"
+    class="app-header h-header fixed body-lock-hack top-0 left-0 w-full z-50 overflow-hidden min-w-body"
   >
     <div
       class="w-full h-full flex justify-between items-center max-w-container m-auto px-4"
     >
-      <NuxtLink ref="logo" to="/" aria-label="Home Page">
+      <NuxtLink to="/" aria-label="Home Page">
         <TheLogo class="h-8 hidden sm:block" />
         <TheLogoMobile class="h-10 sm:hidden" />
       </NuxtLink>
@@ -26,7 +25,6 @@
         </ClientOnly>
 
         <NuxtLink
-          ref="explore-link"
           to="/explore"
           class="mr-4 sm:mr-6 font-display-weight"
         >
@@ -35,7 +33,7 @@
           >Explore</span>
         </NuxtLink>
 
-        <UserButton ref="userButtonEl" @click.native="showMenu = true" />
+        <UserButton ref="userButtonRef" @click.native="showMenu = true" />
 
         <ClientOnly>
           <teleport to="body">
@@ -44,7 +42,7 @@
               :offset-x="12"
               :offset-y="-2"
               placement="bottom-end"
-              :anchor="userButtonEl.el"
+              :anchor="userButtonRef.$el"
             >
               <UserButtonPopup @close-menu="showMenu = false" />
             </Popper>
@@ -59,7 +57,7 @@
 import TheLogo from '@/assets/logo/logo.svg'
 import TheLogoMobile from '@/assets/logo/square-logo.svg'
 
-const userButtonEl = ref(null)
+const userButtonRef = ref(null)
 
 const showMenu = ref(false)
 

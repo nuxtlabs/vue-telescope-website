@@ -9,8 +9,8 @@ import imageOpenGraph from './useFrontMatter/imageOpenGraph'
 
 import config from '@/config.json'
 
-function getCanonical (path) {
-  let canonical
+function getCanonical (path: string) {
+  let canonical: string
   const cleanPath = path.toLowerCase()
   if (cleanPath.charAt(cleanPath.length - 1) === '/') {
     canonical = cleanPath.substr(0, cleanPath.length - 1)

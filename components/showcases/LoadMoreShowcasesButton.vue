@@ -1,6 +1,6 @@
 <template>
   <AppButton
-    ref="el"
+    ref="buttonRef"
     class="group w-auto sm:w-1/3 flex items-center justify-center"
     @click.native="lazyLoadShowcases"
   >
@@ -32,10 +32,10 @@ defineProps({
 })
 
 const emit = defineEmits(['update'])
-const el = ref(null)
+const buttonRef = ref(null)
 
 function lazyLoadShowcases () {
-  el.value?.$el.blur()
+  buttonRef.value?.$el.blur()
   emit('update') // this.currentPage++
 }
 </script>
