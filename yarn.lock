@@ -2344,9 +2344,9 @@ ee-first@1.1.1:
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
 electron-to-chromium@^1.4.202:
-  version "1.4.217"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.217.tgz#f1f51b319435f4c1587a850806a0dfebe9774598"
-  integrity sha512-iX8GbAMij7cOtJPZo02CClpaPMWjvN5meqXiJXkBgwvraNWTNH0Z7F9tkznI34JRPtWASoPM/xWamq3oNb49GA==
+  version "1.4.218"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.218.tgz#d6b817b5454499a92c85888b42dc2ad075e4493a"
+  integrity sha512-INDylKH//YIf2w67D+IjkfVnGVrZ/D94DAU/FPPm6T4jEPbEDQvo9r2wTj0ncFdtJH8+V8BggZTaN8Rzk5wkgw==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -4997,7 +4997,7 @@ mkdirp@^1.0.3:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
-mlly@^0.5.10, mlly@^0.5.12, mlly@^0.5.2, mlly@^0.5.3, mlly@^0.5.4, mlly@^0.5.5, mlly@^0.5.7:
+mlly@^0.5.12, mlly@^0.5.2, mlly@^0.5.3, mlly@^0.5.4, mlly@^0.5.5, mlly@^0.5.7:
   version "0.5.12"
   resolved "https://registry.yarnpkg.com/mlly/-/mlly-0.5.12.tgz#e68de01b871edb488492da368693fd583e5b74ec"
   integrity sha512-8moXGh6Hfy2Nmys3DDEm4CuxDBk5Y7Lk1jQ4JcwW0djO9b+SCKTpw0enIQeZIuEnPljdxHSGmcbXU9hpIIEYeQ==
@@ -5053,9 +5053,9 @@ negotiator@0.6.3:
   integrity sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==
 
 nitropack@^0.4.22:
-  version "0.4.22"
-  resolved "https://registry.yarnpkg.com/nitropack/-/nitropack-0.4.22.tgz#0eb54fe4b8bda3ed2d7a74b959f44c1f3cedc603"
-  integrity sha512-FGOAsXPzJ//Q+wJuhCcz4OjU3Wx2m4O8Pgg8BBboed4fecizh4QNKcwi7vXLN0T1WqDxatnzEYT55xmaeeXySQ==
+  version "0.4.23"
+  resolved "https://registry.yarnpkg.com/nitropack/-/nitropack-0.4.23.tgz#33b17722d4e7cee6efa83dd25cc24825d941f8a2"
+  integrity sha512-volywbMbtsI125FENmvibpKj2ySqDlQvG3LVSQ3jhHFRXTjblYusnyXHLjW8J9+6elm0S0cUDvjEBgu+RodHKQ==
   dependencies:
     "@cloudflare/kv-asset-handler" "^0.2.0"
     "@netlify/functions" "^1.0.0"
@@ -5092,7 +5092,7 @@ nitropack@^0.4.22:
     klona "^2.0.5"
     listhen "^0.2.15"
     mime "^3.0.0"
-    mlly "^0.5.10"
+    mlly "^0.5.12"
     mri "^1.2.0"
     node-fetch-native "^0.1.4"
     ohash "^0.1.5"
@@ -5112,7 +5112,7 @@ nitropack@^0.4.22:
     source-map-support "^0.5.21"
     std-env "^3.1.1"
     ufo "^0.8.5"
-    unenv "^0.5.3"
+    unenv "^0.5.4"
     unimport "^0.6.7"
     unstorage "^0.5.6"
 
@@ -7113,7 +7113,7 @@ undici@^5.2.0:
   resolved "https://registry.yarnpkg.com/undici/-/undici-5.8.2.tgz#071fc8a6a5d24db0ad510ad442f607d9b09d5eec"
   integrity sha512-3KLq3pXMS0Y4IELV045fTxqz04Nk9Ms7yfBBHum3yxsTR4XNn+ZCaUbf/mWitgYDAhsplQ0B1G4S5D345lMO3A==
 
-unenv@^0.5.3, unenv@^0.5.4:
+unenv@^0.5.4:
   version "0.5.4"
   resolved "https://registry.yarnpkg.com/unenv/-/unenv-0.5.4.tgz#2f6fa717e544dac1c14c3ed53773a072be08156b"
   integrity sha512-TsGsA7/kchJSrzGhnSXwm704qI5/yZ8gF1OnGtoHl778AfTYI/jRL6zQeQJn89VeMHZ+o9AvueSPpfrrSpv6Vg==
