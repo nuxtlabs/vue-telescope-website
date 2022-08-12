@@ -3,7 +3,7 @@
   "slug": "vuetelescope-com",
   "name": "Vue Telescope",
   "title": "Discover websites made with Vue.js",
-  "description": "Reveal the Vue plugins and technology stack powering any website",
+  "description": "Reveal the plugins and technology stack powering any Vue.js website",
   "shortName": "VT",
   "social": {
     "facebook": null,
@@ -17,6 +17,6 @@
   },
   "seo": {
     "title": "Discover websites made with Vue.js",
-    "description": "Reveal the Vue plugins and technology stack powering any website"
+    "description": "Reveal the plugins and technology stack powering any Vue.js website"
   }
 }

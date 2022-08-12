@@ -1,13 +1,29 @@
-## TODO
+# Vue Telescope
 
-- bug: `ShowcasesSelectedFilters` `transition-group` SSR error
+![Vue Telescope](https://vuetelemetry.com/branding/og-image.jpg)
 
-- `ShowcasesSorting` with Composition
-- fix `assets/css/tailwind.css` linting
+Front-end for [Vue Telescope](https://vuetelescope.com/) database. Reveal the plugins and technology stack powering any Vue.js website!
 
----
+Now rebuild with latest web tech:
 
-- check all TODO's
+- Vue 3 with Composition API ✨
+- Nuxt 3 🚀
+- Nuxt Content 2 ✍️
+- Tailwind 3 🎨
+- Typescript 🤖
 
-- new solution for preloader placeholders
-- replace `prismjs` for `ShareCollectionModal`
+## Setup
+
+Make sure to install the dependencies
+
+```bash
+yarn install
+```
+
+Now copy `.env.example` to `.env`.
+
+## Development
+
+Start the development server on http://localhost:3000
+
+yarn dev
