@@ -410,9 +410,9 @@
     tar "^6.1.11"
 
 "@netlify/functions@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@netlify/functions/-/functions-1.0.0.tgz#5b6c02fafc567033c93b15a080cc021e5f10f254"
-  integrity sha512-7fnJv3vr8uyyyOYPChwoec6MjzsCw1CoRUO2DhQ1BD6bOyJRlD4DUaOOGlMILB2LCT8P24p5LexEGx8AJb7xdA==
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@netlify/functions/-/functions-1.1.0.tgz#952fb83080a3da2ca0f5f793d466fd3e47910106"
+  integrity sha512-XUFC5nt4iLMrDK+6WjYrDOW9h6XGIQlEk3o++xglFbDKc6dsP+k6rjfz3vl0w8S9Oiosxj3uLaPW18szJc1UgA==
   dependencies:
     is-promise "^4.0.0"
 
@@ -5053,9 +5053,9 @@ negotiator@0.6.3:
   integrity sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==
 
 nitropack@^0.4.22:
-  version "0.4.23"
-  resolved "https://registry.yarnpkg.com/nitropack/-/nitropack-0.4.23.tgz#33b17722d4e7cee6efa83dd25cc24825d941f8a2"
-  integrity sha512-volywbMbtsI125FENmvibpKj2ySqDlQvG3LVSQ3jhHFRXTjblYusnyXHLjW8J9+6elm0S0cUDvjEBgu+RodHKQ==
+  version "0.4.24"
+  resolved "https://registry.yarnpkg.com/nitropack/-/nitropack-0.4.24.tgz#f54d4cc7337a6ad997de2f2a1528cbdf062205c7"
+  integrity sha512-yL25hsQKU63IyEPxv3CFCtE2TPbIBP1YEpS79D6K2w1YhuKf3NEOkSWtSySnlW74jBG2unFq8u+1RXVlsrYNRg==
   dependencies:
     "@cloudflare/kv-asset-handler" "^0.2.0"
     "@netlify/functions" "^1.0.0"
