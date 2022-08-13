@@ -1,9 +1,9 @@
 <template>
-  <div class="max-w-container px-4 mx-auto pt-12">
+  <div class="px-4 pt-12 mx-auto max-w-container">
     <div class="flex flex-wrap">
       <div class="w-full md:w-1/4" />
       <h1
-        class="w-full md:w-3/4 text-center md:text-left text-four leading-four font-display-weight mb-8"
+        class="w-full mb-8 text-center md:w-3/4 md:text-left text-four leading-four font-display-weight"
       >
         {{ title }}
       </h1>

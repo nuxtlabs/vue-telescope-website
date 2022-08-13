@@ -1,20 +1,20 @@
 <template>
-  <div class="flex flex-wrap mb-8">
+  <div class="flex flex-wrap mb-8" :class="`item-${project}`">
     <div class="w-full md:w-1/4 md:pr-8">
       <time
         :datetime="dateToIso(date)"
-        class="block w-full text-center md:text-right text-grey-900 mb-4 font-bold-body-weight"
+        class="block w-full mb-4 text-center md:text-right text-grey-900 font-bold-body-weight"
       >
         {{ formatDateByLocale(date) }}</time>
     </div>
-    <div class="w-full md:w-3/4 rounded-lg" :class="[projectColors.bg]">
+    <div class="w-full rounded-lg md:w-3/4" :class="[projectColors.bg]">
       <div
-        class="inline-block py-1 px-2 m-5 rounded-md text-xs uppercase font-bold-body-weight border"
+        class="inline-block px-2 py-1 m-5 text-xs uppercase border rounded-md font-bold-body-weight"
         :class="[projectColors.border, projectColors.labelText]"
       >
         {{ project }}
       </div>
-      <div class="-mt-4 px-6" :class="project">
+      <div class="px-6 -mt-4" :class="project">
         <slot />
       </div>
     </div>

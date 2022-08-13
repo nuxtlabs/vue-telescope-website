@@ -35,5 +35,8 @@ export default defineNuxtConfig({
       global: true,
       pathPrefix: false
     }
-  ]
+  ],
+  experimental: {
+    viteNode: true
+  }
 })

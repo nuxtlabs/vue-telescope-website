@@ -1,17 +1,16 @@
 <template>
   <div class="overflow-hidden">
     <HeroPropositionSection
-      class="mt-24 md:mt-32 max-w-readable px-4 mx-auto"
+      class="px-4 mx-auto mt-24 md:mt-32 max-w-readable"
     />
     <HeroPresentationSlider class="my-24" />
-    <FeaturesSection class="px-4 max-w-container m-auto" />
-    <BenefitsSection class="px-4 max-w-container m-auto" />
+    <FeaturesSection class="px-4 m-auto max-w-container" />
+    <BenefitsSection class="px-4 m-auto max-w-container" />
     <CtaSection />
   </div>
 </template>
 
 <script setup lang="ts">
-const { fetch: fetchShowcasesCount } = useShowcasesCount()
 await fetchShowcasesCount()
 
 useFrontMatter()

@@ -8,7 +8,6 @@
 </template>
 
 <script setup lang="ts">
-await useTechnologies()
 const { privacyAwarenessCb } = usePrivacyAwareness()
 </script>
 

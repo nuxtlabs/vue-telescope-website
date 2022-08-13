@@ -10,11 +10,11 @@ updatedAt: 2022-08-08
 
 We've updated Vue Telescope website to embrace the whole power of new web technologies!
 
-- Vue 3 with Composition API ✨
-- Nuxt 3 🚀
-- Nuxt Content 2 ✍️
-- Tailwind 3 🎨
-- Typescript 🤖
+- [Vue 3](https://vuejs.org) with Composition API ✨
+- [Nuxt 3](https://v3.nuxtjs.org) 🚀
+- [Nuxt Content 2](https://content.nuxtjs.org) ✍️
+- [Tailwind 3](https://tailwindcss.com) 🎨
+- [Typescript](https://typescriptlang.org) 🤖
 
 Moreover, we love our community so much, that we decided to give back, by open sourcing it 🤟
 

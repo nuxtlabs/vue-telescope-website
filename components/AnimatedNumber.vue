@@ -16,9 +16,13 @@ const props = defineProps({
 
 const { $gsap } = useNuxtApp()
 
-const tweenedCount = ref(0)
+const tweenedCount = useState('tweenedCount', () => 0)
 
 const animatedNumber = computed(() => tweenedCount.value.toFixed(0))
+
+if (process.server) {
+  tweenedCount.value = props.to
+}
 
 onMounted(() => {
   watch(() => props.to, (newValue) => {

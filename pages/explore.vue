@@ -11,7 +11,9 @@
 <script setup lang="ts">
 const { $directHit: directHit } = useNuxtApp()
 
-const { frameworks, uis } = await useTechnologies()
+await fetchTechnologies()
+
+const { frameworks, uis } = useTechnologies().value
 const { selectedFilters } = useFilters()
 
 const title = computed(() => {
@@ -22,11 +24,11 @@ const title = computed(() => {
     let selectedUiName: string
 
     if (selectedFilters.value['framework.slug']) {
-      const { name } = frameworks.value.find(f => f.slug === selectedFilters.value['framework.slug'])
+      const { name } = frameworks.find(f => f.slug === selectedFilters.value['framework.slug'])
       selectedFrameworkName = name
     }
     if (selectedFilters.value['ui.slug']) {
-      const { name } = uis.value.find(u => u.slug === selectedFilters.value['ui.slug'])
+      const { name } = uis.find(u => u.slug === selectedFilters.value['ui.slug'])
       selectedUiName = name
     }
     return `Explore Vue.js websites made with ${

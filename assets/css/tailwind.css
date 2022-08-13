@@ -33,22 +33,30 @@
       @apply underline;
     }
   }
+  & .item-website li a,
+  & .item-website p a {
+    @apply text-blue-500;
+  }
+  & .item-analyzer li a,
+  & .item-analyzer p a {
+    @apply text-orange-500;
+  }
   & h2, h3 {
     a {
-      @apply text-grey-900 pointer-events-none;
+      @apply pointer-events-none text-grey-900;
     }
   }
   & h2 {
-    @apply text-five leading-five mb-4 mt-6 font-display-weight;
+    @apply mt-6 mb-4 text-five leading-five font-display-weight;
   }
   & h3 {
-    @apply text-six leading-six mb-4 mt-6 font-display-weight;
+    @apply mt-6 mb-4 text-six leading-six font-display-weight;
   }
   & p {
     @apply mb-4;
   }
   & ul {
-    @apply list-disc list-inside mb-4;
+    @apply mb-4 list-disc list-inside;
 
     & > li {
       @apply mb-1;
@@ -58,6 +66,6 @@
     @apply mb-4;
   }
   & code {
-    @apply bg-white bg-opacity-50 px-1 py-1 rounded-lg text-sm;
+    @apply px-1 py-1 text-sm bg-white bg-opacity-50 rounded-lg;
   }
 }

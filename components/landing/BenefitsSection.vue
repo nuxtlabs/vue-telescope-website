@@ -3,17 +3,17 @@
     <div
       v-for="benefit in benefits"
       :key="benefit.id"
-      class="flex flex-wrap mb-12 md:mb-24 max-w-pretty-wide m-auto"
+      class="flex flex-wrap m-auto mb-12 md:mb-24 max-w-pretty-wide"
       :class="[!(benefit.id % 2) && 'flex-row-reverse']"
     >
-      <div class="w-full md:w-1/2 px-4 flex flex-col justify-center">
+      <div class="flex flex-col justify-center w-full px-4 md:w-1/2">
         <h3
           :class="[benefit.styles?.text]"
-          class="text-four leading-four font-display-weight mb-4 md:mb-2 text-center md:text-left"
+          class="mb-4 text-center text-four leading-four font-display-weight md:mb-2 md:text-left"
         >
           {{ benefit.title }}
         </h3>
-        <p class="text-center md:text-left text-eight leading-eight mb-4">
+        <p class="mb-4 text-center md:text-left text-eight leading-eight">
           {{ benefit.description }}
         </p>
         <div class="flex flex-col mb-4 text-center md:text-left">
@@ -41,12 +41,12 @@
           </template>
         </div>
       </div>
-      <div class="w-full md:w-1/2 px-4">
+      <div class="w-full px-4 md:w-1/2">
         <img
           loading="lazy"
           :src="`https://res.cloudinary.com/nuxt/image/upload/f_auto,q_auto/remote/vt${benefit.image}`"
           alt=""
-          class="w-full max-w-sm md:max-w-full m-auto"
+          class="w-full max-w-sm m-auto md:max-w-full"
         >
       </div>
     </div>
@@ -54,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-const { showcasesCount } = useShowcasesCount()
+const showcasesCount = useShowcasesCount()
 
 type BenefitLink = {
   type: 'external' | 'internal',
