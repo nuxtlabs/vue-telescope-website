@@ -1,6 +1,6 @@
 <template>
-  <div ref="heroPresentationSliderRef" class="w-full relative opacity-0">
-    <div class="w-full relative flex items-center justify-center px-4">
+  <div ref="heroPresentationSliderRef" class="relative w-full opacity-0">
+    <div class="relative flex items-center justify-center w-full px-4">
       <div
         v-for="({ id }, i) in featured"
         :key="id"

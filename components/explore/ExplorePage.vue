@@ -3,14 +3,14 @@
     <template #aside-content-aside>
       <ShowcasesSearchFilters
         ref="filtersRef"
-        class="h-full overflow-x-hidden overflow-y-auto pt-8"
+        class="h-full pt-8 overflow-x-hidden overflow-y-auto"
         @click.native="filtersTouched = true"
       />
     </template>
 
     <template #aside-content-header>
       <ShowcasesMobileSearchFilters />
-      <ShowcasesSorting class="mr-12 mt-3 md:mt-0 md:mr-6" />
+      <ShowcasesSorting class="mt-3 mr-12 md:mt-0 md:mr-6" />
       <ShowcasesSelectedFilters
         :selected-filters="selectedFilters"
         :total-count="totalCount"
@@ -32,7 +32,7 @@
             @update="currentPage++"
           />
           <AppButton v-else-if="!showcasesPending && showcases.length > 24 && !user" @click="login">
-            Login with <GithubIcon class="h-6 w-6 mx-1" /> to see all
+            Login with <GithubIcon class="w-6 h-6 mx-1" /> to see all
           </AppButton>
         </div>
       </div>
@@ -160,8 +160,8 @@ const {
   }
   return find<Showcase[]>(`showcases${filterQueryString.value}`)
 }, {
-  lazy: true,
-  server: false
+  lazy: true
+  // server: false
 })
 
 const {
@@ -174,8 +174,8 @@ const {
   }
   return find<number>(`showcases/count${filterQueryString.value}`)
 }, {
-  lazy: true,
-  server: false
+  lazy: true
+  // server: false
 })
 
 setShowcases()
