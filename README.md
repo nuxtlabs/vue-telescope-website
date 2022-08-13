@@ -2,9 +2,9 @@
 
 ![Vue Telescope](https://vuetelemetry.com/branding/og-image.jpg)
 
-Front-end for [Vue Telescope](https://vuetelescope.com/) database. Reveal the plugins and technology stack powering any Vue.js website!
+Front-end for [Vue Telescope](https://vuetelescope.com) database. Reveal the plugins and technology stack powering any Vue.js website!
 
-Now rebuild with latest web tech:
+Now rebuild with latest web technologies:
 
 - Vue 3 with Composition API ✨
 - Nuxt 3 🚀
