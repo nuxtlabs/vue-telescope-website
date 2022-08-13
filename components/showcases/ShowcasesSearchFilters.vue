@@ -2,7 +2,7 @@
   <div class="px-2">
     <ShowcasesSearchInput class="mb-4" @searching="$emit('searching')" />
 
-    <div class="mb-4 flex items-center">
+    <div class="flex items-center mb-4">
       <div class="mr-2 text-grey-700">
         Vue 3 only
       </div>
@@ -128,7 +128,7 @@
 <script setup lang="ts">
 const { selectedFilters, setFilterKey, deleteFilterKey, resetFilters } =
   useFilters()
-const { frameworks, modules, plugins, uis } = await useTechnologies()
+const { frameworks, modules, plugins, uis } = useTechnologies().value
 
 const config = useRuntimeConfig().public
 

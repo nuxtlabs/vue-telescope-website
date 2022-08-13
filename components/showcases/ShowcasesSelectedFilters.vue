@@ -1,26 +1,26 @@
 <template>
-  <div class="relative px-3 flex items-center flex-wrap min-h-6">
+  <div class="relative flex flex-wrap items-center px-3 min-h-6">
     <div
-      class="absolute top-0 left-0 -mt-10 font-bold-body-weight h-10 flex items-center ml-4"
+      class="absolute top-0 left-0 flex items-center h-10 ml-4 -mt-10 font-bold-body-weight"
     >
       <AnimatedNumber :to="totalCount" :from="0" />
 
-      <span class="font-body-weight text-sm">&nbsp;websites found</span>
+      <span class="text-sm font-body-weight">&nbsp;websites found</span>
     </div>
 
     <transition-group name="scale" appear>
       <div
         v-for="(value, key) in selectedFilters"
         :key="key"
-        class="scale-item rounded-lg mx-1 mb-2 mt-0 px-2 py-1 inline-flex items-center bg-primary-50 text-primary-500 border border-primary-100"
+        class="inline-flex items-center px-2 py-1 mx-1 mt-0 mb-2 border rounded-lg scale-item bg-primary-50 text-primary-500 border-primary-100"
       >
         <div
-          class="font-bold-body-weight text-sm leading-sm px-2 flex items-center"
+          class="flex items-center px-2 text-sm font-bold-body-weight leading-sm"
         >
           <span class="mr-1">{{ title(key) }}</span>
           <img
             v-if="key === 'framework.slug'"
-            class="w-4 h-4 inline-block"
+            class="inline-block w-4 h-4"
             :src="`${config.iconsURL}${
               frameworks.find((framework) => framework.slug === value).imgPath
             }`"
@@ -28,7 +28,7 @@
           >
           <img
             v-else-if="key === 'ui.slug'"
-            class="w-4 h-4 inline-block"
+            class="inline-block w-4 h-4"
             :src="`${config.iconsURL}${
               uis.find((ui) => ui.slug === value).imgPath
             }`"
@@ -46,10 +46,10 @@
       <button
         v-if="Object.entries(selectedFilters).length > 1"
         key="clear-button"
-        class="scale-item focus:outline-none rounded-lg mx-1 mb-2 mr-2 mt-0 px-2 py-1 inline-flex items-center bg-grey-50 has-hover:hover:bg-grey-100 text-grey-500 border border-grey-300"
+        class="inline-flex items-center px-2 py-1 mx-1 mt-0 mb-2 mr-2 border rounded-lg scale-item focus:outline-none bg-grey-50 has-hover:hover:bg-grey-100 text-grey-500 border-grey-300"
         @click="$emit('clear-filters')"
       >
-        <div class="font-bold-body-weight text-sm leading-sm px-2">
+        <div class="px-2 text-sm font-bold-body-weight leading-sm">
           Clear all
         </div>
         <XmarkCircleFill class="w-4 h-4 has-hover:hover:opacity-75" />
@@ -64,7 +64,7 @@ import type { Filters } from '~/types'
 
 import XmarkCircleFill from '@/assets/icons/xmark-circle-fill.svg'
 
-const { frameworks, uis } = await useTechnologies()
+const { frameworks, uis } = useTechnologies().value
 
 const config = useRuntimeConfig().public
 
