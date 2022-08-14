@@ -24,7 +24,8 @@ export default defineNuxtConfig({
     firefoxStoreUrl:
       'https://addons.mozilla.org/en-GB/firefox/addon/vue-telescope/',
     googleStoreUrl:
-      'https://chrome.google.com/webstore/detail/vue-telescope/neaebjphlfplgdhedjdhcnpjkndddbpd'
+      'https://chrome.google.com/webstore/detail/vue-telescope/neaebjphlfplgdhedjdhcnpjkndddbpd',
+    edgeStoreUrl: 'https://microsoftedge.microsoft.com/addons/detail/vue-telescope/icgcillpgelpleniodgkmohgdmeogodl'
   },
   svgo: {
     svgo: false

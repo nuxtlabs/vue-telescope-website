@@ -22,7 +22,8 @@ defineProps({
   }
 })
 
-const { isMobile, isChrome, isFirefox } = useUserAgent()
+const config = useRuntimeConfig().public
+const { isMobile, isChrome, isFirefox, isEdge } = useUserAgent()
 const { isExtensionInstalled } = useExtensionInstalled()
 const { processPrivacyAwareness } = usePrivacyAwareness()
 
@@ -31,6 +32,8 @@ const buttonText = computed(() => {
     return 'Add to Chrome'
   } else if (isFirefox.value) {
     return 'Add to Firefox'
+  } else if (isEdge.value) {
+    return 'Add to Edge'
   } else {
     return 'Install Extension'
   }
@@ -38,9 +41,11 @@ const buttonText = computed(() => {
 
 const linkToExtention = computed(() => {
   if (isChrome.value) {
-    return 'https://chrome.google.com/webstore/detail/vue-telemetry/neaebjphlfplgdhedjdhcnpjkndddbpd'
+    return config.googleStoreUrl
   } else if (isFirefox.value) {
-    return 'https://addons.mozilla.org/en-GB/firefox/addon/vue-telemetry/'
+    return config.firefoxStoreUrl
+  } else if (isEdge.value) {
+    return config.edgeStoreUrl
   } else {
     return '/extensions'
   }
