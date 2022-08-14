@@ -11,11 +11,38 @@
           i !== 2 ? 'hidden md:inline-flex' : 'inline-flex'
         ]"
       >
+        <div v-if="i === 2" class="block md:hidden">
+          <button
+            aria-label="Prev"
+            style="top: 50%; transform: translateY(-50%)"
+            class="contrast-blend absolute z-10 w-24 h-full flex items-center justify-center overflow-hidden focus:outline-none"
+            @click="
+              changeSlide(
+                activeIndex === 0 ? 4 : activeIndex === 4 ? 3 : activeIndex - 1
+              )
+            "
+          >
+            <ArrowLeftIcon class="w-12" />
+          </button>
+          <button
+            aria-label="Next"
+            style="top: 50%; transform: translateY(-50%)"
+            class="contrast-blend absolute top-0 right-0 z-10 w-24 h-full flex items-center justify-center overflow-hidden focus:outline-none"
+            @click="
+              changeSlide(
+                activeIndex === 0 ? 1 : activeIndex === 4 ? 0 : activeIndex + 1
+              )
+            "
+          >
+            <ArrowRightIcon class="w-12" />
+          </button>
+        </div>
         <HeroPresentationSliderItem
           :featured="featured"
           :static-index="i"
           :active-index="activeIndex"
           @change-slide="changeSlide"
+          @active-showcases-change="activeShowcases = $event"
         />
       </div>
     </div>
@@ -24,10 +51,14 @@
 
 <script setup lang="ts">
 import type { Showcase } from '~/types'
+
+import ArrowLeftIcon from '@/assets/icons/arrow-left.svg'
+import ArrowRightIcon from '@/assets/icons/arrow-right.svg'
+
 const { $gsap } = useNuxtApp()
 
 const activeIndex = ref(2)
-
+const activeShowcases = ref([])
 const heroPresentationSliderRef = ref(null)
 
 // const activeShowcase = computed(() => {
@@ -48,7 +79,9 @@ const featured = computed(() => {
     : []
 })
 
-function changeSlide (i) {
+function changeSlide (i: number) {
+  // Check for fast prev-next click
+  if (activeShowcases.value.length > 1) { return }
   activeIndex.value = i
 }
 
@@ -106,5 +139,10 @@ onMounted(() => {
 .slide-2,
 .slide-4 {
   transform: scale(0.75);
+}
+
+.contrast-blend {
+  color: white;
+  mix-blend-mode: difference;
 }
 </style>
