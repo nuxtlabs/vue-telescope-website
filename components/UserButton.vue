@@ -4,7 +4,7 @@
   >
     <ClientOnly>
       <teleport to="body">
-        <UserButtonTour v-if="showTour" class="FUCK" @close="showTour = false" />
+        <UserButtonTour v-if="showTour" @close="showTour = false" />
       </teleport>
     </ClientOnly>
 
