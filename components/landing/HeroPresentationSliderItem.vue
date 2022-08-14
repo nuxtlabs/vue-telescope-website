@@ -15,6 +15,8 @@
           >
             <img
               ref="showcaseImgRef"
+              width="1200"
+              height="900"
               loading="lazy"
               class="h-full"
               sizes="(min-width: 834px) 50vw, 100vw"

@@ -1,5 +1,6 @@
 <template>
   <button
+    aria-label="Profile button"
     class="relative rounded-full overflow-hidden focus:outline-none"
   >
     <ClientOnly>
@@ -79,7 +80,7 @@ const showTour = ref(false)
 onMounted(() => {
   setTimeout(() => {
     showTour.value = !user.value && !$tour.listsFeature.value
-  }, 5000)
+  }, 3000)
 })
 
 </script>
