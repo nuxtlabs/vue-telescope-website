@@ -69,3 +69,7 @@
     @apply px-1 py-1 text-sm bg-white bg-opacity-50 rounded-lg;
   }
 }
+
+.safari-rounded-border-hack {
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+}
