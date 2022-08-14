@@ -43,6 +43,8 @@
       </div>
       <div class="w-full px-4 md:w-1/2">
         <img
+          width="1200"
+          height="800"
           loading="lazy"
           :src="`https://res.cloudinary.com/nuxt/image/upload/f_auto,q_auto/remote/vt${benefit.image}`"
           alt=""

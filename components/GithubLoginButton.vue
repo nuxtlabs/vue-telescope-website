@@ -1,6 +1,5 @@
 <template>
   <AppButton
-    tag="a"
     :size="size"
     appearance="github"
     class="cursor-pointer"

@@ -1,12 +1,15 @@
 <template>
   <div class="fixed top-0 left-0 z-50 w-full h-full">
-    <div
-      class="absolute top-0 left-0 w-full h-full"
-      style="
+    <transition name="fade" appear>
+      <div
+        class="absolute top-0 left-0 w-full h-full"
+        style="
         background-color: rgba(0, 0, 0, 0.2);
         backdrop-filter: var(--scrim-filter);
       "
-    />
+      />
+    </transition>
+
     <div
       id="tour-main-header"
       class="h-16 fixed body-lock-hack top-0 left-0 w-full min-w-body"
@@ -16,6 +19,7 @@
       >
         <button
           ref="buttonRef"
+          aria-label="Login with GitHub"
           class="rounded-full overflow-hidden focus:outline-none"
         >
           <svg
@@ -80,6 +84,7 @@
             </div>
             <div class="flex items-center justify-end">
               <button
+                aria-label="Not interested button"
                 class="mr-4 text-sm leading-sm"
                 @click="featureSeenHandler"
               >
@@ -122,3 +127,15 @@ function featureSeenHandler () {
   closeTour()
 }
 </script>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
