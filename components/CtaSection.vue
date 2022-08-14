@@ -13,13 +13,14 @@
         <p class="text-center mb-1 text-base leading-base">
           Available on:
         </p>
-        <div class="flex">
+        <div class="flex flex-col items-start xs:flex-row">
           <AppButton
             tag="a"
             :href="config.googleStoreUrl"
             appearance="transparent"
             size="small"
-            class="mr-1"
+            class="xs:mr-1"
+            target="_blank"
           >
             <ChromeColorIcon class="h-6 mr-2" />
             <span>Chrome</span>
@@ -29,10 +30,22 @@
             :href="config.firefoxStoreUrl"
             appearance="transparent"
             size="small"
-            class="ml-1"
+            class="xs:ml-1"
+            target="_blank"
           >
             <FirefoxColorIcon class="h-6 mr-2" />
             <span>Firefox</span>
+          </AppButton>
+          <AppButton
+            tag="a"
+            :href="config.edgeStoreUrl"
+            appearance="transparent"
+            size="small"
+            class="xs:ml-1"
+            target="_blank"
+          >
+            <EdgeColorIcon class="h-6 mr-2" />
+            <span>Edge</span>
           </AppButton>
         </div>
       </div>
@@ -43,6 +56,7 @@
 <script setup lang="ts">
 import ChromeColorIcon from '@/assets/icons/chrome-color.svg'
 import FirefoxColorIcon from '@/assets/icons/firefox-color.svg'
+import EdgeColorIcon from '@/assets/icons/edge-color.svg'
 
 const config = useRuntimeConfig().public
 

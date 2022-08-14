@@ -4,9 +4,9 @@
       <h1 class="text-four leading-four font-display-weight text-center mb-12">
         Check out Vue Telescope browser integrations
       </h1>
-      <div class="flex flex-wrap max-w-[24rem] m-auto">
+      <div class="flex flex-wrap max-w-[36rem] m-auto">
         <div
-          class="w-full sm:w-1/2 flex flex-col items-center justify-center mb-8"
+          class="w-full sm:w-1/3 flex flex-col items-center justify-center mb-12"
         >
           <ChromeColorIcon class="h-32 mb-8" />
           <AppButton
@@ -19,7 +19,7 @@
           </AppButton>
         </div>
         <div
-          class="w-full sm:w-1/2 flex flex-col items-center justify-center mb-8"
+          class="w-full sm:w-1/3 flex flex-col items-center justify-center mb-12"
         >
           <FirefoxColorIcon class="h-32 mb-8" />
           <AppButton
@@ -31,6 +31,19 @@
             Add to Firefox
           </AppButton>
         </div>
+        <div
+          class="w-full sm:w-1/3 flex flex-col items-center justify-center mb-12"
+        >
+          <EdgeColorIcon class="h-32 mb-8" />
+          <AppButton
+            tag="a"
+            :href="config.edgeStoreUrl"
+            size="base"
+            appearance="primary"
+          >
+            Add to Edge
+          </AppButton>
+        </div>
       </div>
     </div>
   </div>
@@ -39,6 +52,7 @@
 <script setup lang="ts">
 import ChromeColorIcon from '@/assets/icons/chrome-color.svg'
 import FirefoxColorIcon from '@/assets/icons/firefox-color.svg'
+import EdgeColorIcon from '@/assets/icons/edge-color.svg'
 
 useFrontMatter({ title: 'Browser Extensions' })
 
