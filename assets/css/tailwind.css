@@ -26,6 +26,10 @@
   --top-position: calc(var(--header-height) + theme('spacing.8'));
 }
 
+body {
+  -webkit-tap-highlight-color: transparent;
+}
+
 .prose {
   & a {
     @apply text-primary-500;
@@ -71,5 +75,8 @@
 }
 
 .safari-rounded-border-hack {
-  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  /* Breaks shadow */
+  /* -webkit-mask-image: -webkit-radial-gradient(white, black); */
+  /* Seems OK */
+  transform: translate3d(0, 0, 0);
 }

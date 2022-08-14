@@ -4,7 +4,7 @@
       <div class="showcase-wrapper">
         <div
           :style="[intristicRatioPadding]"
-          class="intrinsic w-full h-full relative shadow-xl rounded-xl overflow-hidden bg-grey-200"
+          class="intrinsic w-full h-full relative shadow-xl rounded-xl overflow-hidden safari-rounded-border-hack bg-grey-200"
         >
           <div
             v-for="showcase in activeShowcases"
@@ -80,7 +80,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['change-slide'])
+const emit = defineEmits(['change-slide', 'active-showcases-change'])
 
 const activeShowcases = ref([])
 
@@ -149,6 +149,10 @@ watch(
     })
   }
 )
+
+watch(activeShowcases.value, (value) => {
+  emit('active-showcases-change', value)
+})
 
 function clickMain (showcase) {
   setModal(true)
@@ -261,4 +265,5 @@ onMounted(() => {
     enterTitleAnimation(true)
   })
 })
+
 </script>
