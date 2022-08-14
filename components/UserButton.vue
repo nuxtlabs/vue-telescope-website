@@ -4,7 +4,7 @@
   >
     <ClientOnly>
       <teleport to="body">
-        <UserButtonTour v-if="showTour" @close="showLocal = false" />
+        <UserButtonTour v-if="showTour" class="FUCK" @close="showTour = false" />
       </teleport>
     </ClientOnly>
 
@@ -74,11 +74,12 @@ const user = useStrapiUser() as Ref<User>
 
 const { $tour } = useNuxtApp()
 
-const showLocal = ref(true)
+const showTour = ref(false)
 
-const showTour = computed(() => {
-  return process.client
-    ? !user.value && showLocal.value && !$tour.listsFeature.value
-    : false
+onMounted(() => {
+  setTimeout(() => {
+    showTour.value = !user.value && !$tour.listsFeature.value
+  }, 5000)
 })
+
 </script>
