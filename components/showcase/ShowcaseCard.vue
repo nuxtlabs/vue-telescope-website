@@ -10,7 +10,7 @@
       }"
       @click.native="emit('open-link')"
     >
-      <div class="rounded-lg overflow-hidden mb-4 relative" @click.prevent>
+      <div class="rounded-lg overflow-hidden mb-4 relative safari-rounded-border-hack" @click.prevent>
         <AppResponsiveCloudinaryImage
           :url="showcase.screenshotUrl"
           ratio="4:3"
