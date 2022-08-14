@@ -16,6 +16,7 @@
       >
         <button
           ref="buttonRef"
+          aria-label="Login with GitHub"
           class="rounded-full overflow-hidden focus:outline-none"
         >
           <svg
@@ -80,6 +81,7 @@
             </div>
             <div class="flex items-center justify-end">
               <button
+                aria-label="Not interested button"
                 class="mr-4 text-sm leading-sm"
                 @click="featureSeenHandler"
               >

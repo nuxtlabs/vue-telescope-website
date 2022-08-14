@@ -24,7 +24,7 @@
       class="max-w-2xl mb-12 text-center opacity-0 text-eight leading-eight md:text-seven md:leading-seven text-grey-700"
     >
       Reveal the Vue plugins and technology stack powering any website or
-      explore our database of {{ showcasesCount }} websites.
+      explore our database of <strong>{{ showcasesCount.toLocaleString() }} websites</strong>.
     </p>
     <InstallExtensionButton
       ref="installExtensionButtonRef"
