@@ -1,8 +1,10 @@
 <template>
-  <span>{{ animatedNumber }}</span>
+  <span>{{ tweenedCount }}</span>
 </template>
 
 <script setup lang="ts">
+import { animate } from 'motion'
+
 const props = defineProps({
   to: {
     type: Number,
@@ -14,19 +16,17 @@ const props = defineProps({
   }
 })
 
-const { $gsap } = useNuxtApp()
-
 const tweenedCount = useState('tweenedCount', () => 0)
 
-const animatedNumber = computed(() => tweenedCount.value.toFixed(0))
-
-if (process.server) {
-  tweenedCount.value = props.to
-}
-
 onMounted(() => {
-  watch(() => props.to, (newValue) => {
-    $gsap.to(tweenedCount, { duration: 0.5, value: newValue })
+  watch(() => props.to, (value) => {
+    animate(
+      (progress) => {
+        tweenedCount.value = Math.round(progress * value)
+      },
+      { duration: 0.5, easing: 'ease-out' }
+    )
   }, { immediate: true })
 })
+
 </script>
