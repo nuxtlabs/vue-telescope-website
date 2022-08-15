@@ -4,7 +4,7 @@
       <div class="showcase-wrapper">
         <div
           :style="[intristicRatioPadding]"
-          class="intrinsic w-full h-full relative shadow-xl rounded-xl overflow-hidden safari-rounded-border-hack bg-grey-200"
+          class="intrinsic w-full h-full relative shadow-xl rounded-xl overflow-hidden safari-radii-hack bg-grey-200"
         >
           <div
             v-for="showcase in activeShowcases"

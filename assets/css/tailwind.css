@@ -74,9 +74,6 @@ body {
   }
 }
 
-.safari-rounded-border-hack {
-  /* Breaks shadow */
-  /* -webkit-mask-image: -webkit-radial-gradient(white, black); */
-  /* Seems OK */
-  transform: translate3d(0, 0, 0);
+.safari-radii-hack {
+  isolation: isolate;
 }

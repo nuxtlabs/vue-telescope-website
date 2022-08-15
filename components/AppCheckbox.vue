@@ -16,20 +16,13 @@
       <div
         style="border-radius: 4px"
         :class="[isHovered ? 'border-grey-500' : 'border-grey-300']"
-        class="shadow checkmark w-4 h-4 mr-2 p-3px pointer-events-none text-white border transition-colors duration-400"
+        class="checkmark w-4 h-4 mr-2 p-3px pointer-events-none text-white border transition-colors duration-400"
       >
-        <svg
-          class="w-full h-full"
-          viewBox="0 0 16 13"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="transparent"
-        >
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
           <path
             ref="checkmarkRef"
-            class="opacity-0"
-            d="M1 7L5 11L15 1"
-            stroke="currentColor"
-            stroke-width="2.75"
+            d="M10 108.558L77.6243 170.215L190 29"
+            pathLength="1"
           />
         </svg>
       </div>
@@ -44,7 +37,16 @@
 </template>
 
 <script setup lang="ts">
-const { $gsap } = useNuxtApp()
+import { animate } from 'motion'
+
+const draw = progress => ({
+  // This property makes the line "draw" in when animated
+  strokeDashoffset: 1 - progress,
+  // Each line will be hidden until it starts drawing
+  // to fix a bug in Safari where the line can be
+  // partially visible even when progress is at 0
+  visibility: 'visible'
+})
 
 const props = defineProps({
   checked: {
@@ -67,31 +69,16 @@ const isHovered = ref(false)
 
 const checkmarkRef = ref(null)
 
-function animateCheckmark (value) {
+function animateCheckmark (value: boolean) {
   if (value) {
-    $gsap.set(checkmarkRef.value, {
-      opacity: 1
-    })
-    $gsap.fromTo(
+    animate(
       checkmarkRef.value,
-      {
-        drawSVG: '0%'
-      },
-      {
-        drawSVG: '100%',
-        duration: 0.4
-      }
+      draw(1), { duration: 0.4 }
     )
   } else {
-    $gsap.fromTo(
+    animate(
       checkmarkRef.value,
-      {
-        drawSVG: '0 100%'
-      },
-      {
-        drawSVG: '100% 100%',
-        duration: 0.4
-      }
+      draw(0), { duration: 0.4 }
     )
   }
 }
@@ -118,4 +105,16 @@ onMounted(() => {
 .hover .checkmark {
   border-color: theme('colors.primary.500');
 }
+
+svg path {
+  fill: transparent;
+  stroke: white;
+  stroke-width: 30px;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  visibility: hidden;
+}
+
 </style>
