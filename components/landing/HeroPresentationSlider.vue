@@ -50,12 +50,11 @@
 </template>
 
 <script setup lang="ts">
+import { animate } from 'motion'
 import type { Showcase } from '~/types'
 
 import ArrowLeftIcon from '@/assets/icons/arrow-left.svg'
 import ArrowRightIcon from '@/assets/icons/arrow-right.svg'
-
-const { $gsap } = useNuxtApp()
 
 const activeIndex = ref(2)
 const activeShowcases = ref([])
@@ -86,22 +85,8 @@ function changeSlide (i: number) {
 }
 
 onMounted(() => {
-  $gsap.fromTo(
-    heroPresentationSliderRef.value,
-    {
-      opacity: 0,
-      scale: 0.75,
-      y: '15px'
-    },
-    {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      duration: 0.45,
-      delay: 0.9,
-      ease: 'power4.inOut'
-    }
-  )
+  animate(heroPresentationSliderRef.value, { opacity: 0, scale: 0.75, filter: 'blur(20px)' }, { duration: 0 })
+  animate(heroPresentationSliderRef.value, { opacity: 1, scale: 1, filter: 'blur(0px)' }, { duration: 0.45, delay: 0.75, easing: 'ease-in-out' })
 })
 </script>
 

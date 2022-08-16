@@ -10,7 +10,7 @@
       <div class="opacity-0">
         made with
       </div>
-      <div class="w-full opacity-0 -z-1">
+      <div class="w-full -z-1">
         <HeroPropositionBrandsRotator />
       </div>
     </h1>
@@ -35,91 +35,26 @@
 </template>
 
 <script setup lang="ts">
+import { animate, stagger } from 'motion'
+
 const headingRef = ref(null)
 const lookupInputRef = ref(null)
 const subheadingRef = ref(null)
 const installExtensionButtonRef = ref(null)
 
-const { $gsap, $SplitText } = useNuxtApp()
 const showcasesCount = useShowcasesCount()
 
 onMounted(() => {
-  $gsap.fromTo(
-    headingRef.value?.children,
-    {
-      opacity: 0,
-      scale: 0.75
-    },
-    {
-      opacity: 1,
-      scale: 1,
-      stagger: 0.05,
-      duration: 0.45,
-      ease: 'power4.inOut'
-    }
-  )
+  animate([headingRef.value?.children[0], headingRef.value?.children[1]], { opacity: 0, scale: 0.75 }, { duration: 0 })
+  animate([headingRef.value?.children[0], headingRef.value?.children[1]], { opacity: 1, scale: 1 }, { duration: 0.45, delay: stagger(0.05), easing: 'ease-out' })
 
-  $gsap.fromTo(
-    lookupInputRef.value,
-    {
-      opacity: 0,
-      scale: 0.75,
-      y: '15px'
-    },
-    {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      duration: 0.45,
-      delay: 0.5,
-      ease: 'power4.inOut',
-      clearProps: true,
-      onComplete () {
-        lookupInputRef.value.classList.remove('opacity-0')
-      }
-    }
-  )
+  animate(lookupInputRef.value, { opacity: 0, scale: 0.75, y: '-15px', filter: 'blur(20px)' }, { duration: 0 })
+  animate(lookupInputRef.value, { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }, { delay: 0.3, duration: 0.25, easing: 'ease-out' })
 
-  const splitted = new $SplitText(subheadingRef.value, {
-    type: 'lines'
-  })
-  $gsap.set(subheadingRef.value, {
-    opacity: 1
-  })
-  $gsap.fromTo(
-    splitted.lines,
-    {
-      opacity: 0,
-      scale: 0.75
-    },
-    {
-      opacity: 1,
-      scale: 1,
-      stagger: 0.05,
-      duration: 0.45,
-      delay: 0.6,
-      ease: 'power4.inOut',
-      onComplete: () => {
-        splitted.revert()
-      }
-    }
-  )
+  animate(subheadingRef.value, { opacity: 0, scale: 1, filter: 'blur(20px)' }, { duration: 0 })
+  animate(subheadingRef.value, { opacity: 1, scale: 1, filter: 'blur(0px)' }, { delay: 0.4, duration: 0.25, easing: 'ease-out' })
 
-  $gsap.fromTo(
-    installExtensionButtonRef.value.$el,
-    {
-      opacity: 0,
-      scale: 0.75,
-      y: '15px'
-    },
-    {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      duration: 0.45,
-      delay: 0.6,
-      ease: 'power4.inOut'
-    }
-  )
+  animate(installExtensionButtonRef.value.$el, { opacity: 0, scale: 0.75, y: '-10px', filter: 'blur(20px)' }, { duration: 0 })
+  animate(installExtensionButtonRef.value.$el, { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }, { delay: 0.85, duration: 0.25, easing: 'ease-out' })
 })
 </script>
