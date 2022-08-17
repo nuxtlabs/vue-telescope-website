@@ -71,7 +71,6 @@ const props = defineProps({
 
 const popperInstance = ref(null)
 
-// refs
 const wrapperRef = ref(null)
 const arrowRef = ref(null)
 

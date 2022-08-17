@@ -40,14 +40,16 @@
               :fill="onSurfaceColor"
             />
           </g>
-          <g ref="searchRef">
+          <g ref="searchRef" class="draw">
             <path
+              pathLength="1"
               stroke-width="2"
               :stroke="onSurfaceColor"
               d="M34.854 0C15.6047 0 0 15.6047 0 34.854C0 54.1033 15.6047 69.7079 34.854 69.7079C54.1033 69.7079 69.7079 54.1033 69.7079 34.854C69.7079 25.6101 66.0358 16.7449 59.4994 10.2085C52.9631 3.6721 44.0978 0 34.854 0ZM34.854 64.3458C18.5661 64.3458 5.36215 51.1418 5.36215 34.854C5.36215 18.5661 18.5661 5.36215 34.854 5.36215C51.1418 5.36215 64.3458 18.5661 64.3458 34.854C64.3458 51.1418 51.1418 64.3458 34.854 64.3458Z"
               fill="rgba(79, 196, 255, 0.01)"
             />
             <path
+              pathLength="1"
               stroke-width="2"
               :stroke="onSurfaceColor"
               d="M83.105 79.3045L66.2323 62.4318C65.1853 61.3848 63.4878 61.3848 62.4407 62.4318C61.3937 63.4789 61.3937 65.1764 62.4407 66.2234L79.3134 83.0961C80.3604 84.1431 82.058 84.1431 83.105 83.0961C84.152 82.0491 84.152 80.3515 83.105 79.3045Z"
@@ -75,7 +77,12 @@
 </template>
 
 <script setup lang="ts">
-const { $gsap, $SplitText } = useNuxtApp()
+import { animate, timeline, stagger } from 'motion'
+
+const draw = progress => ({
+  strokeDashoffset: 1 - progress,
+  visibility: 'visible'
+})
 
 const props = defineProps({
   surfaceColor: {
@@ -96,7 +103,6 @@ const props = defineProps({
   }
 })
 
-// refs
 const backgroundRef = ref(null)
 const contentRef = ref(null)
 const searchRef = ref(null)
@@ -107,150 +113,77 @@ defineExpose({
   leave
 })
 
-function wrap (el, wrapper?) {
-  wrapper = document.createElement('div')
-  wrapper.className = 'overflow-hidden'
-  el.parentNode.insertBefore(wrapper, el)
-  wrapper.appendChild(el)
-}
-
 const enterBgDuration = 0.75
 
 onMounted(() => {
-  // Background animation
-  $gsap.fromTo(
-    backgroundRef.value,
-    {
-      backgroundColor: 'transparent'
-    },
-    {
-      backgroundColor: props.surfaceColor,
-      duration: enterBgDuration,
-      // delay: 0.25,
-      ease: 'none'
-    }
-  )
-  // SVG animation
-  $gsap.from(searchRef.value?.children, {
-    drawSVG: '0% 0%',
-    duration: 0.5,
-    ease: 'power4.in',
-    delay: 0.4,
-    onComplete: () => {
-      $gsap.to(searchRef.value?.children, {
-        fill: props.onSurfaceColor
-      })
-      $gsap.fromTo(
-        contentRef.value?.children,
-        {
-          opacity: 0,
-          scale: 0.5
-        },
-        {
-          opacity: 1,
-          scale: 1,
-          stagger: 0.035,
-          duration: 0.1,
-          ease: 'power2.inOut'
-        }
-      )
-    }
-  })
-  // text
-  const splitted = new $SplitText(textRef.value, {
-    type: ' lines'
-  })
-  splitted.lines.forEach((line) => {
-    wrap(line)
-  })
-  $gsap.from(splitted.lines, {
-    opacity: 0,
-    y: '100%',
-    duration: 0.75,
-    delay: 0.15,
-    stagger: 0.05,
-    ease: 'power4.inOut',
-    onComplete: () => {
-      splitted.revert()
-    }
-  })
-  // image
-  $gsap.fromTo(
-    imageRef.value,
-    {
-      y: '25px',
-      opacity: 0
-    },
-    {
+  // Background
+  animate(backgroundRef.value, { backgroundColor: 'transparent' }, { duration: 0 })
+  animate(backgroundRef.value, { backgroundColor: props.surfaceColor }, { duration: enterBgDuration, easing: 'linear' })
+
+  // SVG
+  timeline([
+    [searchRef.value?.children, draw(1), { duration: 0.75, delay: 0.5, easing: 'ease-out' }],
+    [searchRef.value?.children, { fill: props.onSurfaceColor }, { duration: 0.25, easing: 'linear', at: '-0.5' }],
+    [contentRef.value?.children, { opacity: 0, scale: 0.95 }, { duration: 0 }],
+    [contentRef.value?.children, { opacity: 1, scale: 1 }, { duration: 0.1, delay: stagger(0.05), easing: 'ease-out' }]
+  ])
+
+  // Text
+  animate(textRef.value, { opacity: 0, filter: 'blur(20px)' }, { duration: 0 })
+  animate(textRef.value, { opacity: 1, filter: 'blur(0px)' }, { duration: 0.75, easing: 'ease-in' })
+
+  // Image
+  animate(imageRef.value, {
+    y: '25px',
+    opacity: 0
+  }, { duration: 0 })
+
+  nextTick(() => {
+    animate(imageRef.value, {
       y: 0,
-      opacity: 1,
-      duration: 0.75,
-      ease: 'power4.inOut',
-      delay: 0.25
-    }
-  )
+      opacity: 1
+    }, { duration: 0.75, delay: 0.25, easing: 'ease-in-out' })
+  })
 })
 
 function leave () {
   return new Promise<void>((resolve) => {
     try {
-      // // background
-      // $gsap.to(backgroundRef.value, {
-      //   backgroundColor: 'transparent',
-      //   duration: 0.75,
-      //   ease: 'none'
-      // })
-      // svg
-      $gsap.to(contentRef.value?.children, {
-        opacity: 0,
-        scale: 0.5,
-        stagger: 0.025,
-        duration: 0.1,
-        ease: 'power2.inOut'
-      })
-      $gsap.to(searchRef.value?.children, {
-        fill: 'transparent',
-        duration: 0.2,
-        onComplete: () => {
-          $gsap.to(searchRef.value?.children, {
-            drawSVG: '0',
-            duration: 0.5,
-            ease: 'power1.out'
-            // onComplete: () => {
-            //   resolve()
-            // }
-          })
-        }
-      })
-      // text
-      const splitted = new $SplitText(textRef.value, {
-        type: ' lines'
-      })
-      splitted.lines.forEach((line) => {
-        wrap(line)
-      })
-      $gsap.to(splitted.lines, {
-        opacity: 0,
-        y: '100%',
-        duration: 0.75,
-        // delay: 0.15,
-        stagger: 0.05,
-        ease: 'power4.inOut',
-        onComplete: () => {
-          resolve()
-          // splitted.revert()
-        }
-      })
-      // image
-      $gsap.to(imageRef.value, {
+      // SVG
+      animate(contentRef.value?.children, { opacity: 0, scale: 0.5 }, { duration: 0.25, delay: stagger(0.025), easing: 'ease-in' })
+      timeline([
+        [searchRef.value?.children, { fill: 'transparent' }, { duration: 0.2, easing: 'linear' }],
+        [searchRef.value?.children, draw(0), { duration: 0.5, easing: [0, 1, 1, 1] }]
+      ])
+
+      // Text
+      animate(textRef.value, { opacity: 0, filter: 'blur(20px)' }, { duration: 0.5, easing: 'ease-in' })
+      // TODO: real issue with Motion One, how to detect complete event?
+      setTimeout(() => {
+        resolve()
+      }, 500)
+
+      // Image
+      animate(imageRef.value, {
         y: '25px',
-        opacity: 0,
-        duration: 0.75,
-        ease: 'power4.inOut'
-      })
+        opacity: 0
+      }, { duration: 0.25, easing: 'ease-in' })
     } catch (err) {
       resolve()
     }
   })
 }
 </script>
+
+<style scoped>
+.draw path {
+  fill: transparent;
+  /* stroke: white; */
+  stroke-width: 1px;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  visibility: hidden;
+}
+</style>
