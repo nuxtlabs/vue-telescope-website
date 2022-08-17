@@ -1,9 +1,9 @@
 <template>
   <div class="modal-wrapper fixed top-0 left-0 w-full h-full z-[1000]">
-    <div class="w-full h-full py-8 px-4" @click.self="makeChoice(false)">
+    <div class="w-full h-full pb-4 md:pb-8 pt-12 px-4" @click.self="makeChoice(false)">
       <div
         ref="modalWrapperRef"
-        class="flex flex-col pointer-events-auto h-full relative bg-white m-auto max-w-readable md:mt-4 rounded-xl overflow-auto md:overflow-hidden overflow-x-hidden"
+        class="flex flex-col pointer-events-auto h-full relative bg-white m-auto max-w-readable rounded-xl overflow-auto md:overflow-hidden overflow-x-hidden"
       >
         <h2 class="text-five leading-five font-display-weight p-4 text-center">
           We Respect Your Privacy
@@ -120,9 +120,10 @@
 </template>
 
 <script setup lang="ts">
+import { animate } from 'motion'
+
 const { privacyAwarenessCb, setPrivacyAwarenessCb } = usePrivacyAwareness()
 const { isModal } = useModal()
-const { $gsap } = useNuxtApp()
 
 const modalWrapperRef = ref(null)
 
@@ -134,19 +135,8 @@ onMounted(() => {
     // TODO: bug?
     // setModal(true)
   }
-  $gsap.fromTo(
-    modalWrapperRef.value,
-    {
-      scale: 1.2,
-      opacity: 0
-    },
-    {
-      scale: 1,
-      opacity: 1,
-      duration: 0.5,
-      ease: 'power3.inOut'
-    }
-  )
+  animate(modalWrapperRef.value, { scale: 1.2, opacity: 0 }, { duration: 0 })
+  animate(modalWrapperRef.value, { scale: 1, opacity: 1 }, { duration: 0.5, easing: 'ease-in-out' })
 })
 
 onBeforeUnmount(() => {
