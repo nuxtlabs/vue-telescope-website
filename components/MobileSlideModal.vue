@@ -14,8 +14,7 @@
         >
           <div
             ref="modalContainerRef"
-            style="transform: translateY(100%)"
-            class="modal-container overflow-auto relative h-full px-4 bg-white rounded-b-none pointer-events-auto rounded-4xl"
+            class="modal-container translate-y-full overflow-auto relative h-full px-4 bg-white rounded-b-none pointer-events-auto rounded-4xl"
           >
             <div
               class="sticky-edge sticky top-0 left-0 z-10 flex items-center justify-center w-full py-4 bg-white rounded-md cursor-pointer pointer-events-auto"
@@ -44,11 +43,11 @@
 </template>
 
 <script setup lang="ts">
+import { animate, timeline } from 'motion'
 // import XmarkCircleIcon from '@/assets/icons/xmark-circle.svg'
 
 const { isMobile, isSafari } = useUserAgent()
 const { setModal } = useModal()
-const { $gsap } = useNuxtApp()
 const { bodyLock, bodyUnlock } = useBodyLock()
 
 defineProps({
@@ -108,7 +107,7 @@ function touchMoveHandler (e) {
     // up swipe
   } else {
     // down swipe
-    // this.$emit('close')
+    // emit('close')
     animateLeave()
   }
   // reset
@@ -118,46 +117,30 @@ function touchMoveHandler (e) {
 
 function animateEnter () {
   setTimeout(() => {
-    $gsap.fromTo(
-      scrimRef.value,
-      {
-        opacity: 0
-      },
-      {
-        opacity: 1,
-        duration: 0.2,
-        ease: 'none',
-        onComplete: () => {
-          if (isSafari.value) {
-            modalContainerRef.value.style.height = 'calc(100vh - var(--header-height))'
-          }
-          $gsap.to(modalContainerRef.value, {
-            y: 0,
-            // opacity: 0,
-            duration: 1,
-            ease: 'expo.out',
-            clearProps: true
-          })
-        }
+    timeline([
+      [scrimRef.value, { opacity: 0 }, { duration: 0 }],
+      [scrimRef.value, { opacity: 1 }, { duration: 0.2, easing: 'linear' }]
+    ])
+    // TODO: handle complete event
+    setTimeout(() => {
+      if (isSafari.value) {
+        modalContainerRef.value.style.height = 'calc(100vh - var(--header-height))'
       }
-    )
+      timeline([
+        [modalContainerRef.value, { y: '100%' }, { duration: 0 }],
+        [modalContainerRef.value, { y: 0 }, { duration: 1, easing: [0.16, 1, 0.3, 1] }]
+      ])
+    }, 200)
   }, 100)
 }
 
 function animateLeave () {
-  $gsap.to(scrimRef.value, {
-    opacity: 0,
-    duration: 0.25
-  })
-
-  $gsap.to(modalContainerRef.value, {
-    y: '100%',
-    duration: 0.25,
-    ease: 'expo.out',
-    onComplete: () => {
-      emit('close')
-    }
-  })
+  animate(scrimRef.value, { opacity: 0 }, { duration: 0.25, easing: 'linear' })
+  animate(modalContainerRef.value, { y: '100%' }, { duration: 0.25, easing: [0.16, 1, 0.3, 1] })
+  // TODO: handle complete event
+  setTimeout(() => {
+    emit('close')
+  }, 250)
 }
 </script>
 
