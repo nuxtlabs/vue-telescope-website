@@ -131,17 +131,17 @@ function leave () {
       ])
 
       // Text
-      animate(textRef.value, { opacity: 0, filter: 'blur(20px)' }, { duration: 0.75, easing: 'ease-in' })
+      animate(textRef.value, { opacity: 0, filter: 'blur(20px)' }, { duration: 0.5, easing: 'ease-in' })
       // TODO: real issue with Motion One, how to detect complete event?
       setTimeout(() => {
         resolve()
-      }, 750)
+      }, 500)
 
       // Image
       animate(imageRef.value, {
         y: '25px',
         opacity: 0
-      }, { duration: 0.75, easing: 'ease-in-out' })
+      }, { duration: 0.25, easing: 'ease-in' })
     } catch (err) {
       resolve()
     }

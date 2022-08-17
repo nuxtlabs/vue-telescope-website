@@ -150,7 +150,7 @@ function leave () {
   return new Promise<void>((resolve) => {
     try {
       // SVG
-      animate(contentRef.value?.children, { opacity: 0, scale: 0.5 }, { duration: 0.25, delay: stagger(0.025), easing: 'ease-in' })
+      animate(contentRef.value?.children, { opacity: 0, scale: 0.95 }, { duration: 0.25, delay: stagger(0.025), easing: 'ease-in' })
       timeline([
         [searchRef.value?.children, { fill: 'transparent' }, { duration: 0.2, easing: 'linear' }],
         [searchRef.value?.children, draw(0), { duration: 0.5, easing: [0, 1, 1, 1] }]
