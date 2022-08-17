@@ -53,11 +53,11 @@
 </template>
 
 <script setup lang="ts">
-const { $gsap, $SplitText } = useNuxtApp()
+import { animate } from 'motion'
 
 const sliderMatrix = [
   [0, 1, 2, 3, 4],
-  [1, 2, 3, 4, 0],
+  [0, 2, 3, 4, 0],
   [2, 3, 4, 0, 1],
   [3, 4, 0, 1, 2],
   [4, 0, 1, 2, 3]
@@ -113,39 +113,40 @@ watch(
   () => {
     leaveTitleAnimation()
 
-    $gsap.to(showcaseImageWrapperRef.value[0], {
-      x: getDirection() === 'left' ? '-100%' : '100%',
-      duration: 1,
-      ease: 'expo.inOut',
-      onComplete: () => {}
-    })
-    $gsap.to(showcaseImgRef.value[0], {
+    animate(showcaseImageWrapperRef.value[0], {
+      x: getDirection() === 'left' ? '-100%' : '100%'
+    }, { duration: 0.75, easing: [0.85, 0, 0.15, 1] })
+    animate(showcaseImgRef.value[0], {
       x: getDirection() === 'left' ? '100%' : '-100%',
-      scale: 1.05,
-      duration: 1,
-      ease: 'expo.inOut',
-      onComplete: () => {}
-    })
+      scale: 1.05
+    }, { duration: 0.75, easing: [0.85, 0, 0.15, 1] })
 
     activeShowcases.value.push(props.featured[getNextSlide()])
 
     nextTick(() => {
-      // enterTitleAnimation()
-      $gsap.from(showcaseImageWrapperRef.value[1], {
-        x: getDirection() === 'left' ? '100%' : '-100%',
-        duration: 1,
-        ease: 'expo.inOut',
-        onComplete: () => {
-          activeShowcases.value.shift()
-        }
-      })
-      $gsap.from(showcaseImgRef.value[1], {
+      enterTitleAnimation()
+
+      animate(showcaseImageWrapperRef.value[1], {
+        x: getDirection() === 'left' ? '100%' : '-100%'
+      }, { duration: 0 })
+      animate(showcaseImgRef.value[1], {
         x: getDirection() === 'left' ? '-100%' : '100%',
-        scale: 1.05,
-        duration: 1,
-        ease: 'expo.inOut',
-        onComplete: () => {}
-      })
+        scale: 1.05
+      }, { duration: 0 })
+
+      animate(showcaseImageWrapperRef.value[1], {
+        x: 0
+      }, { duration: 0.75, easing: [0.85, 0, 0.15, 1] })
+
+      // TODO: should be in onComplete
+      setTimeout(() => {
+        activeShowcases.value.shift()
+      }, 1000)
+
+      animate(showcaseImgRef.value[1], {
+        x: 0,
+        scale: 1
+      }, { duration: 0.75, easing: [0.85, 0, 0.15, 1] })
     })
   }
 )
@@ -182,7 +183,7 @@ function getNextSlide () {
 function getDirection () {
   const activeMatrix = sliderMatrix
     .map((m) => {
-      // get current slide matrix, before nextSlide
+      // Get current slide matrix, before nextSlide
       if (m[props.staticIndex] === activeShowcases.value[0].index) {
         return m
       }
@@ -196,54 +197,15 @@ function getDirection () {
 
 function leaveTitleAnimation () {
   if (props.staticIndex === 2) {
-    $gsap.set(showcaseTitleRef.value[0], {
-      opacity: 1
-    })
-    const splitted = new $SplitText(showcaseTitleRef.value[0], {
-      type: ' lines'
-    })
-
-    let currentStagger = 0
-    $gsap.to(splitted.lines, {
-      opacity: 0,
-      y: '-100%',
-      delay: 0.15,
-      stagger: {
-        each: 0.05,
-        onStart: () => {
-          currentStagger++
-          if (currentStagger === splitted.lines.length) {
-            nextTick(() => {
-              enterTitleAnimation()
-            })
-          }
-        }
-      },
-      // duration: 1,
-      ease: 'power4.inOut',
-      onComplete: () => {}
-    })
+    animate(showcaseTitleRef.value[0], { transformOrigin: 'top left' }, { duration: 0 })
+    animate(showcaseTitleRef.value[0], { opacity: 0, scale: 0.9, filter: 'blur(40px)' }, { duration: 0.6, easing: 'ease-in' })
+    enterTitleAnimation()
   }
 }
 function enterTitleAnimation (initial = false) {
   if (props.staticIndex === 2) {
-    const splitted = new $SplitText(showcaseTitleRef.value[initial ? 0 : 1], {
-      type: 'lines'
-    })
-    $gsap.set(showcaseTitleRef.value[initial ? 0 : 1], {
-      opacity: 1
-    })
-    $gsap.from(splitted.lines, {
-      opacity: 0,
-      y: '100%',
-      // duration: 1,
-      delay: 0.15,
-      stagger: 0.05,
-      ease: 'power4.inOut',
-      onComplete: () => {
-        splitted.revert()
-      }
-    })
+    animate(showcaseTitleRef.value[initial ? 0 : 1], { opacity: 0, scale: 0.9, transformOrigin: 'top left', filter: 'blur(40px)' }, { duration: 0 })
+    animate(showcaseTitleRef.value[initial ? 0 : 1], { opacity: 1, scale: 1, filter: 'blur(0px)' }, { duration: 0.6, easing: 'ease-out' })
   }
 }
 
@@ -261,9 +223,9 @@ function generateSrc (screenshot, size, displayRatio = false) {
 
 onMounted(() => {
   activeShowcases.value.push(props.featured[props.staticIndex])
-  nextTick(() => {
+  setTimeout(() => {
     enterTitleAnimation(true)
-  })
+  }, 500)
 })
 
 </script>
