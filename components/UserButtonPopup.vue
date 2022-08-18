@@ -75,7 +75,7 @@ function onLogout () {
 function openMenuAnimation () {
   animate(wrapperRef.value, { transformOrigin: 'top right', opacity: 0, scale: 0.75, y: -15 }, { duration: 0 })
   // TODO: why spring does not work
-  animate(wrapperRef.value, { opacity: 1, scale: 1, y: 0 }, { duration: 0.3, easing: [0.2, 1.2, 0.2, 1.2] })
+  animate(wrapperRef.value, { opacity: 1, scale: 1, y: 0 }, { duration: 0.2, easing: [0.2, 1.2, 0.2, 1.2] })
 }
 function closeMenu () {
   // TODO: complete event

@@ -42,34 +42,22 @@
 </template>
 
 <script setup lang="ts">
+import { timeline, stagger } from 'motion'
 import ShareIcon from '@/assets/icons/share.svg'
 import EditIcon from '@/assets/icons/edit.svg'
 import DeleteIcon from '@/assets/icons/trash.svg'
 
 defineEmits(['share', 'rename', 'delete'])
 
-const { $gsap } = useNuxtApp()
-
 const deleting = ref(false)
 
 const menuRef = ref(null)
 
 onMounted(() => {
-  $gsap.fromTo(
-    menuRef.value?.children,
-    {
-      opacity: 0,
-      scale: 0.8,
-      x: -5
-    },
-    {
-      opacity: 1,
-      scale: 1,
-      x: 0,
-      stagger: 0.05,
-      duration: 0.6,
-      ease: 'elastic.out(1.5, 0.5)'
-    }
-  )
+  timeline([
+    [menuRef.value?.children, { opacity: 0, scale: 0.8, x: -5 }, { duration: 0 }],
+    // TODO: spring does not work
+    [menuRef.value?.children, { opacity: 1, scale: 1, x: 0 }, { duration: 0.3, delay: stagger(0.05), easing: [0.16, 1, 0.3, 1] }]
+  ])
 })
 </script>
