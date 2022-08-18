@@ -25,8 +25,7 @@
       >
         <span
           ref="deletingScrimRef"
-          class="backdrop-blur-sm absolute top-0 left-0 w-full h-full pointer-events-none"
-          style="opacity: 0"
+          class="opacity-0 backdrop-blur-sm absolute top-0 left-0 w-full h-full pointer-events-none"
         />
         {{ group.name }}
       </span>
@@ -79,6 +78,7 @@
 </template>
 
 <script setup lang="ts">
+import { animate } from 'motion'
 import type { PropType } from 'vue'
 import type { List, Group } from '~/types'
 
@@ -90,8 +90,6 @@ const emit = defineEmits(['group-selected'])
 const anchorRef = ref(null)
 const deletingScrimRef = ref(null)
 const inputRef = ref(null)
-
-const { $gsap } = useNuxtApp()
 
 const {
   selectedGroup,
@@ -179,11 +177,7 @@ async function updateGroup () {
 async function deleteGroup () {
   try {
     deletingGroup.value = true
-    $gsap.to(deletingScrimRef.value, {
-      opacity: 1,
-      duration: 0.5,
-      ease: 'none'
-    })
+    animate(deletingScrimRef.value, { opacity: 1 }, { duration: 0.25, easing: 'linear' })
     await deleteRemoteGroup({
       group: props.group,
       list: props.list
