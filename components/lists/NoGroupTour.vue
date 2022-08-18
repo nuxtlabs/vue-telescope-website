@@ -51,6 +51,7 @@
 </template>
 
 <script setup lang="ts">
+import { animate } from 'motion'
 import type { PropType } from 'vue'
 import type { List } from '~/types'
 
@@ -65,7 +66,6 @@ const creatingList = ref(false)
 const emit = defineEmits(['cleanup'])
 
 const { setSelectedList, createRemoteGroup } = useLists()
-const { $gsap } = useNuxtApp()
 
 const props = defineProps({
   list: {
@@ -107,33 +107,22 @@ async function createGroupMethod () {
 function enter (el, done) {
   inputRef.value?.$el.focus()
   nextTick(() => {
-    $gsap.set(el, { position: 'absolute', transformOrigin: 'center' })
-    $gsap.from(el, {
-      scale: 0.9,
-      autoAlpha: 0,
-      clearProps: true,
-      // y: -5,
-      duration: 0.25,
-      ease: 'power1.out',
-      onComplete: () => {
-        $gsap.set(el, { position: 'absolute' })
-        inputRef.value?.$el.focus()
-        done()
-      }
-    })
+    animate(el, { position: 'absolute', transformOrigin: 'center', scale: 0.9, opacity: 0 }, { duration: 0 })
+    animate(el, { scale: 1, opacity: 1 }, { duration: 0.25, easing: [0.85, 1.5, 0.15, 1.4] })
+    // TODO: complete event
+    setTimeout(() => {
+      animate(el, { position: 'absolute' }, { duration: 0 })
+      inputRef.value?.$el.focus()
+      done()
+    }, 250)
   })
 }
 function leave (el, done) {
-  $gsap.set(el, { transformOrigin: 'center' })
-  $gsap.to(el, {
-    // position: 'absolute',
-    scale: 0.9,
-    autoAlpha: 0,
-    // y: -5,
-    clearProps: true,
-    duration: 0.25,
-    ease: 'power1.out',
-    onComplete: done
-  })
+  animate(el, { transformOrigin: 'center' }, { duration: 0 })
+  animate(el, { scale: 0.9, opacity: 0 }, { duration: 0.25, easing: [0.85, 0, 0.15, 1] })
+  // TODO: complete event
+  setTimeout(() => {
+    done()
+  }, 250)
 }
 </script>

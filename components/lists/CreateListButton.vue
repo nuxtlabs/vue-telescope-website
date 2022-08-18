@@ -117,7 +117,7 @@ function enter (el: HTMLElement, done: Function) {
   inputRef.value?.$el.focus()
   nextTick(() => {
     animate(el, { position: 'absolute', transformOrigin: 'left', scale: 0.9, opacity: 0 }, { duration: 0 })
-    animate(el, { scale: 1, opacity: 1 }, { duration: 0.25, easing: 'ease-in-out' })
+    animate(el, { scale: 1, opacity: 1 }, { duration: 0.25, easing: [0.76, 0, 0.24, 1] })
     // TODO: handle complete event
     setTimeout(() => {
       animate(el, { position: 'relative' }, { duration: 0 })
@@ -129,7 +129,7 @@ function enter (el: HTMLElement, done: Function) {
 
 function leave (el: HTMLElement, done: Function) {
   animate(el, { transformOrigin: 'left' }, { duration: 0 })
-  animate(el, { scale: 0.9, opacity: 0 }, { duration: 0.25, easing: 'ease-in-out' })
+  animate(el, { scale: 0.9, opacity: 0 }, { duration: 0.25, easing: [0.76, 0, 0.24, 1] })
   // TODO: handle complete event
   setTimeout(() => {
     done()
