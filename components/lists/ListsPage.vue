@@ -5,12 +5,18 @@
         <CreateListButton class="mb-2" />
 
         <span>
-          <ListNavItem
-            v-for="list in sortedLists"
-            :key="list.id"
-            class="px-2"
-            :list="list"
-          />
+          <transition-group
+            :css="false"
+            @enter="enterAnimation"
+            @leave="leaveAnimation"
+          >
+            <ListNavItem
+              v-for="list in sortedLists"
+              :key="list.id"
+              class="px-2"
+              :list="list"
+            />
+          </transition-group>
         </span>
       </div>
     </template>
@@ -54,10 +60,10 @@
 </template>
 
 <script setup lang="ts">
+import { timeline } from 'motion'
 import type { Ref } from 'vue'
 import type { User } from '~/types'
 import AsideContentTemplate from '@/components/templates/AsideContentTemplate.vue'
-
 const user = useStrapiUser() as Ref<User>
 
 const {
@@ -78,6 +84,28 @@ if (sortedLists.value[0]?.groups.length) {
   setSelectedGroup(sortedLists.value[0].groups[0])
 }
 
+function enterAnimation (el, done) {
+  timeline([
+    [el, { opacity: 0, y: -10 }, { duration: 0 }],
+    [el, { opacity: 1, y: 0 }, { duration: 0.25, easing: 'linear' }]
+  ])
+  // TODO: complete event
+  setTimeout(() => {
+    // Fix bug with Popup positioning
+    el.style.transform = null
+    done()
+  }, 250)
+}
+function leaveAnimation (el: HTMLElement, done) {
+  timeline([
+    [el, { height: `${el.offsetHeight}px`, opacity: 1 }, { duration: 0 }],
+    [el, { height: '0px', opacity: 0 }, { duration: 0.25, easing: 'linear' }]
+  ])
+  // TODO: complete event
+  setTimeout(() => {
+    done()
+  }, 250)
+}
 </script>
 
 <style>

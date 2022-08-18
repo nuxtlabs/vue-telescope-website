@@ -269,8 +269,8 @@ function enter (el, done) {
   nextTick(() => {
     const h = el.offsetHeight
     timeline([
-      [el, { height: '0px' }, { duration: 0 }],
-      [el, { height: `${h}px` }, { duration: 0.25 }]
+      [el, { height: '0px', opacity: 0 }, { duration: 0 }],
+      [el, { height: `${h}px`, opacity: 1 }, { duration: 0.25, easing: 'linear' }]
     ])
     // TODO: complete event
     setTimeout(() => {
@@ -282,7 +282,7 @@ function enter (el, done) {
 
 function leave (el, done) {
   timeline([
-    [el, { height: `${el.offsetHeight}px` }, { duration: 0.25 }],
+    [el, { height: `${el.offsetHeight}px`, opacity: 0 }, { duration: 0.25, easing: 'linear' }],
     [el, { height: '0px' }, { duration: 0 }]
   ])
   // TODO: complete event
