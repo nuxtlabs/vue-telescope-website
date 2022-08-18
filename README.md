@@ -11,7 +11,7 @@ Now rebuild with latest web technologies:
 - [Nuxt Content 2](https://content.nuxtjs.org) ✍️
 - [Tailwind 3](https://tailwindcss.com) 🎨
 - [Typescript](https://typescriptlang.org) 🤖
-- WIP: [Motion One](https://motion.dev/) 🪩
+- [Motion One](https://motion.dev/) 🪩
 
 ## Setup
 

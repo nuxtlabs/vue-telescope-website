@@ -16,9 +16,7 @@ We've updated Vue Telescope website to embrace the whole power of new web techno
 - [Tailwind 3](https://tailwindcss.com) 🎨
 - [Typescript](https://typescriptlang.org) 🤖
 
-Moreover, we love our community so much, that we decided to give back, by open sourcing it 🤟
-
-Oh, and we also renamed `Collections` to `Lists` and `Lists` to `Groups`, sorry for little bit of confusion. 
+Another big news, is that Vue Telescope website now **[open source](https://github.com/nuxtlabs/vue-telescope-website)**!
 
 ::
 
