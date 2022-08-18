@@ -50,7 +50,7 @@
 </template>
 
 <script setup lang="ts">
-import { animate } from 'motion'
+import { animate, scroll } from 'motion'
 import type { Showcase } from '~/types'
 
 import ArrowLeftIcon from '@/assets/icons/arrow-left.svg'
@@ -87,6 +87,10 @@ function changeSlide (i: number) {
 onMounted(() => {
   animate(heroPresentationSliderRef.value, { opacity: 0, scale: 0.75, filter: 'blur(20px)' }, { duration: 0 })
   animate(heroPresentationSliderRef.value, { opacity: 1, scale: 1, filter: 'blur(0px)' }, { duration: 0.45, delay: 0.75, easing: 'ease-in-out' })
+  scroll(animate(heroPresentationSliderRef.value, { opacity: [0, 1], y: [-50, 0], scale: [0.9, 1], filter: ['blur(20px)', 'blur(0px)'] }), {
+    target: heroPresentationSliderRef.value,
+    offset: ['start end', 'end end']
+  })
 })
 </script>
 

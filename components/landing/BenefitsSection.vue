@@ -2,6 +2,7 @@
   <section class="py-24">
     <div
       v-for="benefit in benefits"
+      ref="benefitRef"
       :key="benefit.id"
       class="flex flex-wrap m-auto mb-12 md:mb-24 max-w-pretty-wide"
       :class="[!(benefit.id % 2) && 'flex-row-reverse']"
@@ -56,6 +57,8 @@
 </template>
 
 <script setup lang="ts">
+import { animate, scroll } from 'motion'
+
 const showcasesCount = useShowcasesCount()
 
 type BenefitLink = {
@@ -178,4 +181,15 @@ const benefits: Benefit[] = [
     image: '/images/benefits/database.png'
   }
 ]
+
+const benefitRef = ref([])
+
+onMounted(() => {
+  benefitRef.value.forEach((item, i) => {
+    scroll(animate(item, { opacity: [0, 1], x: [i % 2 ? 50 : -50, 0], scale: [0.9, 1], filter: ['blur(20px)', 'blur(0px)'] }), {
+      target: item,
+      offset: ['start end', 'end end']
+    })
+  })
+})
 </script>
