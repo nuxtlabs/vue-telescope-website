@@ -4,20 +4,13 @@
       <div class="pt-8">
         <CreateListButton class="mb-2" />
 
-        <!-- ListsNav -->
         <span>
-          <transition-group
-            :css="false"
-            @enter="enterAnimation"
-            @leave="leaveAnimation"
-          >
-            <ListNavItem
-              v-for="list in sortedLists"
-              :key="list.id"
-              class="px-2"
-              :list="list"
-            />
-          </transition-group>
+          <ListNavItem
+            v-for="list in sortedLists"
+            :key="list.id"
+            class="px-2"
+            :list="list"
+          />
         </span>
       </div>
     </template>
@@ -66,7 +59,6 @@ import type { User } from '~/types'
 import AsideContentTemplate from '@/components/templates/AsideContentTemplate.vue'
 
 const user = useStrapiUser() as Ref<User>
-const { $gsap } = useNuxtApp()
 
 const {
   lists,
@@ -84,35 +76,6 @@ if (sortedLists.value[0]) {
 
 if (sortedLists.value[0]?.groups.length) {
   setSelectedGroup(sortedLists.value[0].groups[0])
-}
-
-function enterAnimation (el, done) {
-  $gsap.fromTo(
-    el,
-    {
-      opacity: 0,
-      y: -10
-    },
-    {
-      opacity: 1,
-      y: 0,
-      clearProps: true,
-      duration: 0.25,
-      onComplete: done
-    }
-  )
-}
-function leaveAnimation (el, done) {
-  // this.$gsap.set(el, {
-  //   transformOrigin: 'left'
-  // })
-  $gsap.to(el, {
-    height: 0,
-    // y: 10,
-    opacity: 0,
-    duration: 0.25,
-    onComplete: done
-  })
 }
 
 </script>
