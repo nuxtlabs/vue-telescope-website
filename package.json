@@ -19,7 +19,6 @@
     "@vueuse/core": "^9.1.0",
     "eslint": "^8.21.0",
     "event-source-polyfill": "^1.0.31",
-    "gsap": "file:assets/js/gsap-bonus.tgz",
     "motion": "^10.13.3",
     "nuxt": "npm:nuxt3@latest",
     "nuxt-svgo": "^1.0.0",
