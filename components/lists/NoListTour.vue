@@ -56,7 +56,7 @@
 </template>
 
 <script setup lang="ts">
-import { animate } from 'motion'
+import { animate, timeline } from 'motion'
 import PlusIcon from '@/assets/icons/plus-circle.svg'
 import SaveIcon from '@/assets/icons/save.svg'
 
@@ -103,8 +103,10 @@ async function createList () {
 function enter (el, done) {
   inputRef.value?.$el.focus()
   nextTick(() => {
-    animate(el, { position: 'absolute', transformOrigin: 'center', scale: 0.9, opacity: 0 }, { duration: 0 })
-    animate(el, { scale: 1, opacity: 1 }, { duration: 0.25, easing: [0.85, 1.5, 0.15, 1.4] })
+    timeline([
+      [el, { position: 'absolute', transformOrigin: 'center', scale: 0.9, opacity: 0 }, { duration: 0 }],
+      [el, { scale: 1, opacity: 1 }, { duration: 0.25, easing: [0.85, 1.5, 0.15, 1.4] }]
+    ])
     // TODO: complete event
     setTimeout(() => {
       animate(el, { position: 'absolute' }, { duration: 0 })
@@ -115,8 +117,10 @@ function enter (el, done) {
 }
 
 function leave (el, done) {
-  animate(el, { transformOrigin: 'center' }, { duration: 0 })
-  animate(el, { scale: 0.9, opacity: 0 }, { duration: 0.25, easing: [0.85, 0, 0.15, 1] })
+  timeline([
+    [el, { transformOrigin: 'center' }, { duration: 0 }],
+    [el, { scale: 0.9, opacity: 0 }, { duration: 0.25, easing: [0.85, 0, 0.15, 1] }]
+  ])
   // TODO: complete event
   setTimeout(() => {
     done()

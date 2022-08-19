@@ -53,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-import { animate } from 'motion'
+import { animate, timeline } from 'motion'
 
 const sliderMatrix = [
   [0, 1, 2, 3, 4],
@@ -113,11 +113,15 @@ watch(
   () => {
     leaveTitleAnimation()
 
+    // Use offsetWidth because of non-Chrome translateX(100%) bug
+    const w0w = showcaseImageWrapperRef.value[0].offsetWidth
+    const i0w = showcaseImgRef.value[0].offsetWidth
+
     animate(showcaseImageWrapperRef.value[0], {
-      x: getDirection() === 'left' ? '-100%' : '100%'
+      x: getDirection() === 'left' ? -w0w : w0w
     }, { duration: 0.75, easing: [0.85, 0, 0.15, 1] })
     animate(showcaseImgRef.value[0], {
-      x: getDirection() === 'left' ? '100%' : '-100%',
+      x: getDirection() === 'left' ? i0w : -i0w,
       scale: 1.05
     }, { duration: 0.75, easing: [0.85, 0, 0.15, 1] })
 
@@ -126,27 +130,33 @@ watch(
     nextTick(() => {
       enterTitleAnimation()
 
-      animate(showcaseImageWrapperRef.value[1], {
-        x: getDirection() === 'left' ? '100%' : '-100%'
-      }, { duration: 0 })
-      animate(showcaseImgRef.value[1], {
-        x: getDirection() === 'left' ? '-100%' : '100%',
-        scale: 1.05
-      }, { duration: 0 })
+      const w1w = showcaseImageWrapperRef.value[1].offsetWidth
+      const i1w = showcaseImgRef.value[1].offsetWidth
 
-      animate(showcaseImageWrapperRef.value[1], {
-        x: 0
-      }, { duration: 0.75, easing: [0.85, 0, 0.15, 1] })
+      timeline([
+        [showcaseImageWrapperRef.value[1], {
+          x: getDirection() === 'left' ? w1w : -w1w
+        }, { duration: 0 }],
+        [showcaseImageWrapperRef.value[1], {
+          x: 0
+        }, { duration: 0.75, easing: [0.85, 0, 0.15, 1] }]
+      ])
+
+      timeline([
+        [showcaseImgRef.value[1], {
+          x: getDirection() === 'left' ? -i1w : i1w,
+          scale: 1.05
+        }, { duration: 0 }],
+        [showcaseImgRef.value[1], {
+          x: 0,
+          scale: 1
+        }, { duration: 0.75, easing: [0.85, 0, 0.15, 1] }]
+      ])
 
       // TODO: should be in onComplete
       setTimeout(() => {
         activeShowcases.value.shift()
-      }, 1000)
-
-      animate(showcaseImgRef.value[1], {
-        x: 0,
-        scale: 1
-      }, { duration: 0.75, easing: [0.85, 0, 0.15, 1] })
+      }, 750)
     })
   }
 )
@@ -197,15 +207,19 @@ function getDirection () {
 
 function leaveTitleAnimation () {
   if (props.staticIndex === 2) {
-    animate(showcaseTitleRef.value[0], { transformOrigin: 'top left' }, { duration: 0 })
-    animate(showcaseTitleRef.value[0], { opacity: 0, scale: 0.9, filter: 'blur(40px)' }, { duration: 0.6, easing: 'ease-in' })
+    timeline([
+      [showcaseTitleRef.value[0], { transformOrigin: 'top left' }, { duration: 0 }],
+      [showcaseTitleRef.value[0], { opacity: 0, scale: 0.9, filter: 'blur(40px)' }, { duration: 0.6, easing: 'ease-in' }]
+    ])
     enterTitleAnimation()
   }
 }
 function enterTitleAnimation (initial = false) {
   if (props.staticIndex === 2) {
-    animate(showcaseTitleRef.value[initial ? 0 : 1], { opacity: 0, scale: 0.9, transformOrigin: 'top left', filter: 'blur(40px)' }, { duration: 0 })
-    animate(showcaseTitleRef.value[initial ? 0 : 1], { opacity: 1, scale: 1, filter: 'blur(0px)' }, { duration: 0.6, easing: 'ease-out' })
+    timeline([
+      [showcaseTitleRef.value[initial ? 0 : 1], { opacity: 0, scale: 0.9, transformOrigin: 'top left', filter: 'blur(40px)' }, { duration: 0 }],
+      [showcaseTitleRef.value[initial ? 0 : 1], { opacity: 1, scale: 1, filter: 'blur(0px)' }, { duration: 0.6, easing: 'ease-out' }]
+    ])
   }
 }
 

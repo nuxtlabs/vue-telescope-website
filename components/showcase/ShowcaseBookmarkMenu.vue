@@ -179,7 +179,7 @@
 
 <script setup lang="ts">
 import type { Ref, PropType } from 'vue'
-import { animate } from 'motion'
+import { timeline } from 'motion'
 import type { User, Showcase, List, Group } from '~/types'
 
 import OpenedFolderIcon from '@/assets/icons/opened-folder.svg'
@@ -215,8 +215,10 @@ onMounted(() => {
     showLists.value = true
   }, 200)
 
-  animate(scrimRef.value, { scaleY: 0, transformOrigin: 'top' }, { duration: 0 })
-  animate(scrimRef.value, { scaleY: 1 }, { duration: 0.4 })
+  timeline([
+    [scrimRef.value, { scaleY: 0, transformOrigin: 'top' }, { duration: 0 }],
+    [scrimRef.value, { scaleY: 1 }, { duration: 0.4 }]
+  ])
 })
 
 function isBookmarkedList (list: List) {

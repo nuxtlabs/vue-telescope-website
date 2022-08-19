@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { animate } from 'motion'
+import { animate, timeline } from 'motion'
 import ArrowDownIcon from '@/assets/icons/arrow-down.svg'
 
 const { selectedSort, setSort } = useSort()
@@ -61,8 +61,10 @@ onMounted(() => {
 })
 
 function revealAnimation () {
-  animate(wrapperRef.value, { height: `${optionHeight + 2 * borderWidth}px`, opacity: 0, scale: 0.9 }, { duration: 0 })
-  animate(wrapperRef.value, { opacity: 1, scale: 1 }, { duration: 0.45 })
+  timeline([
+    [wrapperRef.value, { height: `${optionHeight + 2 * borderWidth}px`, opacity: 0, scale: 0.9 }, { duration: 0 }],
+    [wrapperRef.value, { opacity: 1, scale: 1 }, { duration: 0.45 }]
+  ])
 }
 
 function selectSorting (sort) {

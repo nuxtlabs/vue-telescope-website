@@ -97,19 +97,19 @@
     <!-- Group Collapsible -->
     <transition :css="false" @enter="enter" @leave="leave">
       <div v-if="openCollapse">
-        <div>
-          <GroupNavItem
-            v-for="group in reversedListGroups"
-            :key="group.id"
-            :group="group"
-            :list="list"
-            tabindex="0"
-            class="pl-6"
-            @group-selected="groupSelectionHandler($event, group)"
-          />
+        <!-- <div> -->
+        <GroupNavItem
+          v-for="group in reversedListGroups"
+          :key="group.id"
+          :group="group"
+          :list="list"
+          tabindex="0"
+          class="pl-6"
+          @group-selected="groupSelectionHandler($event, group)"
+        />
 
-          <CreateGroupButton :list="list" @cleanup="clearActions" />
-        </div>
+        <CreateGroupButton :list="list" @cleanup="clearActions" />
+        <!-- </div> -->
       </div>
     </transition>
   </div>
@@ -156,7 +156,7 @@ const props = defineProps({
 })
 
 const isSelected = computed(() => {
-  return selectedList.value && selectedList.value.id === props.list.id
+  return selectedList.value?.id === props.list.id
 })
 
 const reversedListGroups = computed(() => {
@@ -170,7 +170,7 @@ const reversedListGroups = computed(() => {
 watch(selectedList, (newValue) => {
   if (newValue && newValue.id !== props.list.id && openCollapse.value) {
     openCollapse.value = false
-  } else if (selectedList.value.id === props.list.id) {
+  } else if (selectedList.value?.id === props.list.id) {
     openCollapse.value = true
   }
 }, { immediate: true })
@@ -273,10 +273,11 @@ function enter (el, done) {
       [el, { height: `${h}px`, opacity: 1 }, { duration: 0.25, easing: 'linear' }]
     ])
     // TODO: complete event
+    // Weird timing because of Safari bug
     setTimeout(() => {
       animate(el, { height: 'auto' }, { duration: 0 })
-      done()
-    }, 250)
+      done && done()
+    }, 266)
   })
 }
 

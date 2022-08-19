@@ -9,7 +9,7 @@
     >
       <div class="flex flex-col justify-end h-full pt-16 pointer-events-none">
         <div
-          class="overflow-hidden rounded-b-none rounded-4xl"
+          class="overflow-hidden rounded-b-none rounded-4xl flex flex-col justify-end"
           :class="isSafari && 'h-full'"
         >
           <div
@@ -124,10 +124,12 @@ function animateEnter () {
     // TODO: handle complete event
     setTimeout(() => {
       if (isSafari.value) {
-        modalContainerRef.value.style.height = 'calc(100vh - var(--header-height))'
+        // modalContainerRef.value.style.height = 'calc(100vh - var(--header-height))'
+        modalContainerRef.value.style.height = 'auto'
       }
+      // TODO: bug with transform units: '100%' not working
       timeline([
-        [modalContainerRef.value, { y: '100%' }, { duration: 0 }],
+        [modalContainerRef.value, { y: `${modalContainerRef.value.offsetHeight}px` }, { duration: 0 }],
         [modalContainerRef.value, { y: 0 }, { duration: 1, easing: [0.16, 1, 0.3, 1] }]
       ])
     }, 200)

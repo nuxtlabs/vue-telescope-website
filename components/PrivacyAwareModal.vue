@@ -120,7 +120,7 @@
 </template>
 
 <script setup lang="ts">
-import { animate } from 'motion'
+import { timeline } from 'motion'
 
 const { privacyAwarenessCb, setPrivacyAwarenessCb } = usePrivacyAwareness()
 const { isModal } = useModal()
@@ -135,8 +135,10 @@ onMounted(() => {
     // TODO: bug?
     // setModal(true)
   }
-  animate(modalWrapperRef.value, { scale: 1.2, opacity: 0 }, { duration: 0 })
-  animate(modalWrapperRef.value, { scale: 1, opacity: 1 }, { duration: 0.5, easing: 'ease-in-out' })
+  timeline([
+    [modalWrapperRef.value, { scale: 1.2, opacity: 0 }, { duration: 0 }],
+    [modalWrapperRef.value, { scale: 1, opacity: 1 }, { duration: 0.5, easing: 'ease-in-out' }]
+  ])
 })
 
 onBeforeUnmount(() => {

@@ -29,13 +29,13 @@
 </template>
 
 <script setup lang="ts">
-import { animate, stagger } from 'motion'
+import { animate, stagger, timeline } from 'motion'
 
 const brandRef = ref()
 
 const config = useRuntimeConfig().public
 
-const timeout = 5000
+const timeout = 500000
 const rotationInterval = ref(null)
 const brands = ref([
   { slug: 'vue', name: 'Vue.js', active: true, imgPath: '/vue.svg' },
@@ -73,10 +73,11 @@ const activeBrands = computed(() => {
   return brands.value.filter(b => b.active)
 })
 
-function enterTransition (el, done) {
-  // TODO: how to handle done() on complete
-  animate(el, { opacity: 0, scale: 0.5, filter: 'blur(20px)' }, { duration: 0 })
-  animate(el, { opacity: 1, scale: 1, filter: 'blur(0px)' }, { duration: 0.5, easing: 'ease-in-out' })
+function enterTransition (el, done = () => {}) {
+  timeline([
+    [el, { opacity: 0, scale: 0.5, filter: 'blur(20px)' }, { duration: 0 }],
+    [el, { opacity: 1, scale: 1, filter: 'blur(0px)' }, { duration: 0.5, easing: 'ease-in-out' }]
+  ])
 
   const image = new Image()
   image.src = `${config.iconsURL}/${activeBrands.value[0]?.imgPath}`
@@ -92,12 +93,20 @@ function enterTransition (el, done) {
       }, { duration: 0.5, delay: stagger(0.05), easing: 'ease-in-out' })
     })
   })
+
+  // TODO: complete event
+  // setTimeout(() => {
+  //   done()
+  // }, 500)
   // image.addEventListener('error', () => {})
 }
 
 function leaveTransition (el, done) {
-  // TODO: how to handle done() on complete
   animate(el, { opacity: 0, scale: 0.5, filter: 'blur(20px)' }, { duration: 0.5, easing: 'ease-in-out' })
+  // TODO: complete event
+  setTimeout(() => {
+    done()
+  }, 500)
 }
 
 function rotateBrands () {

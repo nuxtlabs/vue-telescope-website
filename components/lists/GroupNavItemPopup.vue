@@ -9,6 +9,24 @@
           <ShareIcon class="w-4 h-4" />
         </button>
       </li> -->
+      <li v-if="up" class="py-2px">
+        <button
+          title="Move up"
+          class="flex items-center justify-center w-8 h-8 p-1 transform rotate-180 rounded-lg focus:outline-none bg-grey-50 has-hover:hover:scale-110"
+          @click="emit('up')"
+        >
+          <DownIcon class="w-3 h-3" />
+        </button>
+      </li>
+      <li v-if="down" class="py-2px">
+        <button
+          title="Move down"
+          class="flex items-center justify-center w-8 h-8 p-1 transform rounded-lg focus:outline-none bg-grey-50 has-hover:hover:scale-110"
+          @click="emit('down')"
+        >
+          <DownIcon class="w-3 h-3" />
+        </button>
+      </li>
       <li class="py-2px">
         <button
           title="Rename"
@@ -34,24 +52,6 @@
           @click="deleting = true"
         >
           <DeleteIcon class="w-4 h-4" />
-        </button>
-      </li>
-      <li v-if="up" class="py-2px">
-        <button
-          title="Move up"
-          class="flex items-center justify-center w-8 h-8 p-1 transform rotate-180 rounded-lg focus:outline-none bg-grey-50 has-hover:hover:scale-110"
-          @click="emit('up')"
-        >
-          <DownIcon class="w-4 h-4" />
-        </button>
-      </li>
-      <li v-if="down" class="py-2px">
-        <button
-          title="Move down"
-          class="flex items-center justify-center w-8 h-8 p-1 transform rounded-lg focus:outline-none bg-grey-50 has-hover:hover:scale-110"
-          @click="emit('down')"
-        >
-          <DownIcon class="w-4 h-4" />
         </button>
       </li>
     </ul>

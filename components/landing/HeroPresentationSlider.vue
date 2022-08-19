@@ -130,6 +130,7 @@ onMounted(() => {
 .slide-2,
 .slide-4 {
   transform: scale(0.75);
+  /* width: 350px; */
 }
 
 .contrast-blend {

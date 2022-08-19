@@ -19,7 +19,7 @@
     "@vueuse/core": "^9.1.0",
     "eslint": "^8.21.0",
     "event-source-polyfill": "^1.0.31",
-    "motion": "^10.13.3",
+    "motion": "^10.14.0",
     "nuxt": "npm:nuxt3@latest",
     "nuxt-svgo": "^1.0.0",
     "qs": "^6.11.0",

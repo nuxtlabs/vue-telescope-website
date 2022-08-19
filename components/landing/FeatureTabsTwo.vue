@@ -117,8 +117,10 @@ const enterBgDuration = 0.75
 
 onMounted(() => {
   // Background
-  animate(backgroundRef.value, { backgroundColor: 'transparent' }, { duration: 0 })
-  animate(backgroundRef.value, { backgroundColor: props.surfaceColor }, { duration: enterBgDuration, easing: 'linear' })
+  timeline([
+    [backgroundRef.value, { backgroundColor: 'transparent' }, { duration: 0 }],
+    [backgroundRef.value, { backgroundColor: props.surfaceColor }, { duration: enterBgDuration, easing: 'linear' }]
+  ])
 
   // SVG
   timeline([
@@ -129,21 +131,16 @@ onMounted(() => {
   ])
 
   // Text
-  animate(textRef.value, { opacity: 0, filter: 'blur(20px)' }, { duration: 0 })
-  animate(textRef.value, { opacity: 1, filter: 'blur(0px)' }, { duration: 0.75, easing: 'ease-in' })
+  timeline([
+    [textRef.value, { opacity: 0, filter: 'blur(20px)' }, { duration: 0 }],
+    [textRef.value, { opacity: 1, filter: 'blur(0px)' }, { duration: 0.75, easing: 'ease-in' }]
+  ])
 
   // Image
-  animate(imageRef.value, {
-    y: '25px',
-    opacity: 0
-  }, { duration: 0 })
-
-  nextTick(() => {
-    animate(imageRef.value, {
-      y: 0,
-      opacity: 1
-    }, { duration: 0.75, delay: 0.25, easing: 'ease-in-out' })
-  })
+  timeline([
+    [imageRef.value, { y: '25px', opacity: 0 }, { duration: 0 }],
+    [imageRef.value, { y: 0, opacity: 1 }, { duration: 0.75, delay: 0.25, easing: 'ease-in-out' }]
+  ])
 })
 
 function leave () {
@@ -158,7 +155,7 @@ function leave () {
 
       // Text
       animate(textRef.value, { opacity: 0, filter: 'blur(20px)' }, { duration: 0.5, easing: 'ease-in' })
-      // TODO: real issue with Motion One, how to detect complete event?
+      // TODO: complete event
       setTimeout(() => {
         resolve()
       }, 500)

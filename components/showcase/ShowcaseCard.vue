@@ -28,25 +28,25 @@
         <div
           class="flex items-center justify-between w-full font-display-weight text-eight leading-eight"
         >
-          <span class="truncate">
+          <span class="truncate mr-auto">
             {{ showcase.hostname }}
           </span>
-          <div class="h-full inline-flex items-center ml-2">
+          <div class="h-full contents">
             <img
               v-if="showcase.ui"
-              class="inline-block w-4 h-4 mr-1"
+              class="inline-block w-6 h-6 ml-1"
               :src="`${config.iconsURL}${showcase.ui.imgPath}`"
               alt=""
             >
             <img
               v-if="!showcase.framework"
-              class="inline-block w-4 h-4 mr-1"
+              class="inline-block w-6 h-6 ml-1"
               :src="`${config.iconsURL}/vue.svg`"
               alt=""
             >
             <img
               v-if="showcase.framework"
-              class="inline-block w-4 h-4 mr-1"
+              class="inline-block w-6 h-6 ml-1"
               :src="`${config.iconsURL}${showcase.framework.imgPath}`"
               alt=""
             >

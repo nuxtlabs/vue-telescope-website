@@ -45,7 +45,7 @@
 
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import { animate } from 'motion'
+import { animate, timeline } from 'motion'
 import type { User } from '~/types'
 
 const { getProviderAuthenticationUrl, logout } = useStrapiAuth()
@@ -73,9 +73,11 @@ function onLogout () {
 }
 
 function openMenuAnimation () {
-  animate(wrapperRef.value, { transformOrigin: 'top right', opacity: 0, scale: 0.75, y: -15 }, { duration: 0 })
   // TODO: why spring does not work
-  animate(wrapperRef.value, { opacity: 1, scale: 1, y: 0 }, { duration: 0.2, easing: [0.2, 1.2, 0.2, 1.2] })
+  timeline([
+    [wrapperRef.value, { transformOrigin: 'top right', opacity: 0, scale: 0.75, y: -15 }, { duration: 0 }],
+    [wrapperRef.value, { opacity: 1, scale: 1, y: 0 }, { duration: 0.2, easing: [0.2, 1.2, 0.2, 1.2] }]
+  ])
 }
 function closeMenu () {
   // TODO: complete event

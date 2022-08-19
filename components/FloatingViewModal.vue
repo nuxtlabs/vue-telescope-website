@@ -42,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import { animate } from 'motion'
+import { animate, timeline } from 'motion'
 import XmarkCircleIcon from '@/assets/icons/xmark-circle.svg'
 
 const { setModal } = useModal()
@@ -76,12 +76,16 @@ const modalContainerRef = ref(null)
 
 function animateEnter () {
   if (!isMobile.value) {
-    animate(scrimRef.value, { opacity: 0 }, { duration: 0 })
-    animate(scrimRef.value, { opacity: 1 }, { duration: 0.2, easing: 'linear' })
+    timeline([
+      [scrimRef.value, { opacity: 0 }, { duration: 0 }],
+      [scrimRef.value, { opacity: 1 }, { duration: 0.2, easing: 'linear' }]
+    ])
   }
 
-  animate(modalContainerRef.value, { transformOrigin: 'bottom', opacity: 0, y: '-10px', scale: 0.98 }, { duration: 0 })
-  animate(modalContainerRef.value, { opacity: 1, y: 0, scale: 1 }, { duration: 0.2, easing: 'linear' })
+  timeline([
+    [modalContainerRef.value, { transformOrigin: 'bottom', opacity: 0, y: '-10px', scale: 0.98 }, { duration: 0 }],
+    [modalContainerRef.value, { opacity: 1, y: 0, scale: 1 }, { duration: 0.2, easing: 'linear' }]
+  ])
 }
 
 onMounted(() => {

@@ -186,9 +186,10 @@ const benefitRef = ref([])
 
 onMounted(() => {
   benefitRef.value.forEach((item, i) => {
-    scroll(animate(item, { opacity: [0, 1], x: [i % 2 ? 50 : -50, 0], scale: [0.9, 1], filter: ['blur(20px)', 'blur(0px)'] }), {
+    scroll(animate(item, { opacity: [0, 1], x: [i % 2 ? 25 : -25, 0], scale: [0.9, 1], filter: ['blur(20px)', 'blur(0px)'] }), {
       target: item,
-      offset: ['start end', 'end end']
+      // offset: ['start end', 'end end']
+      offset: ['0% 100%', '75% 100%']
     })
   })
 })

@@ -14,7 +14,7 @@
   <component
     :is="tag"
     v-else
-    class="flex flex-col items-center w-full sm:w-1/2 md:w-1/3 px-1 pb-2 max-w-sm m-auto sm:m-0"
+    class="flex flex-col items-center w-full max-w-sm m-auto sm:m-0"
   >
     <div class="relative w-full h-full pt-0">
       <div
@@ -23,7 +23,7 @@
       >
         <div
           :class="[tag === 'a' && 'has-hover:group-hover:bg-grey-300']"
-          class="rounded mt-2 ml-2 self-start bg-grey-100 opacity-50 px-3 text-xs tracking-3 uppercase leading-sm font-bold-body-weight mb-2"
+          class="rounded -mt-2 ml-2 self-start bg-grey-100 text-grey-600 px-3 text-xs tracking-3 uppercase leading-sm font-bold-body-weight mb-2"
         >
           {{ label }}
         </div>

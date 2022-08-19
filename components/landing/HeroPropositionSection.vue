@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { animate, stagger } from 'motion'
+import { animate, stagger, timeline } from 'motion'
 
 const headingRef = ref(null)
 const lookupInputRef = ref(null)
@@ -45,16 +45,24 @@ const installExtensionButtonRef = ref(null)
 const showcasesCount = useShowcasesCount()
 
 onMounted(() => {
-  animate([headingRef.value?.children[0], headingRef.value?.children[1]], { opacity: 0, scale: 0.75 }, { duration: 0 })
-  animate([headingRef.value?.children[0], headingRef.value?.children[1]], { opacity: 1, scale: 1 }, { duration: 0.45, delay: stagger(0.05), easing: 'ease-out' })
+  timeline([
+    [[headingRef.value?.children[0], headingRef.value?.children[1]], { opacity: 0, scale: 0.75 }, { duration: 0 }],
+    [[headingRef.value?.children[0], headingRef.value?.children[1]], { opacity: 1, scale: 1 }, { duration: 0.45, delay: stagger(0.05), easing: 'ease-out' }]
+  ])
 
-  animate(lookupInputRef.value, { opacity: 0, scale: 0.75, y: '-15px', filter: 'blur(20px)' }, { duration: 0 })
-  animate(lookupInputRef.value, { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }, { delay: 0.3, duration: 0.25, easing: 'ease-out' })
+  timeline([
+    [lookupInputRef.value, { opacity: 0, scale: 0.75, y: '-15px', filter: 'blur(20px)' }, { duration: 0 }],
+    [lookupInputRef.value, { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }, { delay: 0.3, duration: 0.25, easing: 'ease-out' }]
+  ])
 
-  animate(subheadingRef.value, { opacity: 0, scale: 1, filter: 'blur(20px)' }, { duration: 0 })
-  animate(subheadingRef.value, { opacity: 1, scale: 1, filter: 'blur(0px)' }, { delay: 0.4, duration: 0.25, easing: 'ease-out' })
+  timeline([
+    [subheadingRef.value, { opacity: 0, scale: 0.75, filter: 'blur(20px)' }, { duration: 0 }],
+    [subheadingRef.value, { opacity: 1, scale: 1, filter: 'blur(0px)' }, { delay: 0.4, duration: 0.25, easing: 'ease-out' }]
+  ])
 
-  animate(installExtensionButtonRef.value.$el, { opacity: 0, scale: 0.75, y: '-10px', filter: 'blur(20px)' }, { duration: 0 })
-  animate(installExtensionButtonRef.value.$el, { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }, { delay: 0.85, duration: 0.25, easing: 'ease-out' })
+  timeline([
+    [installExtensionButtonRef.value.$el, { opacity: 0, scale: 0.75, y: '-10px', filter: 'blur(20px)' }, { duration: 0 }],
+    [installExtensionButtonRef.value.$el, { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }, { delay: 0.4, duration: 0.25, easing: 'ease-out' }]
+  ])
 })
 </script>
