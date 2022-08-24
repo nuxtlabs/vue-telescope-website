@@ -15,7 +15,7 @@
       >
       <div
         ref="radiomarkWrapperRef"
-        class="relative shadow radiomark-wrapper w-4 h-4 mr-2 pointer-events-none text-white rounded-full overflow-hidden border transition-colors duration-200"
+        class="relative radiomark-wrapper w-4 h-4 mr-2 pointer-events-none text-white rounded-full overflow-hidden border transition-colors duration-200"
         :class="[
           checked ? 'border-primary-500 ' : 'border-grey-300',
           isHovered && !checked && 'border-grey-500'
@@ -43,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-const { $gsap } = useNuxtApp()
+import { timeline } from 'motion'
 
 const props = defineProps({
   checked: {
@@ -66,44 +66,15 @@ const whiteMarkRef = ref(null)
 
 function animateRadiomark (value: boolean) {
   if (value) {
-    $gsap.fromTo(
-      whiteMarkRef.value,
-      {
-        scale: 1
-      },
-      {
-        scale: 0,
-        duration: 0.2,
-        ease: 'power2.inOut',
-        onComplete: () => {
-          $gsap.fromTo(
-            colorMarkRef.value,
-            {
-              scale: 1
-            },
-            {
-              scale: 0.5,
-              // delay: 0.1,
-              duration: 0.2,
-              ease: 'expo.inOut'
-            }
-          )
-        }
-      }
-    )
+    timeline([
+      [whiteMarkRef.value, { scale: 0 }, { duration: 0.2 }],
+      [colorMarkRef.value, { scale: 0.5 }, { duration: 0.2, at: '0.2' }]
+    ])
   } else {
-    $gsap.to(colorMarkRef.value, {
-      scale: 1,
-      duration: 0.2,
-      ease: 'power2.inOut',
-      onComplete: () => {
-        $gsap.to(whiteMarkRef.value, {
-          scale: 1,
-          duration: 0.2,
-          ease: 'power2.inOut'
-        })
-      }
-    })
+    timeline([
+      [colorMarkRef.value, { scale: 1 }, { duration: 0.2 }],
+      [whiteMarkRef.value, { scale: 1 }, { duration: 0.2, at: '-0.2' }]
+    ])
   }
 }
 

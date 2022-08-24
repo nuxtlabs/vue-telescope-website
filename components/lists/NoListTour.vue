@@ -56,6 +56,7 @@
 </template>
 
 <script setup lang="ts">
+import { animate, timeline } from 'motion'
 import PlusIcon from '@/assets/icons/plus-circle.svg'
 import SaveIcon from '@/assets/icons/save.svg'
 
@@ -65,7 +66,6 @@ const inputRef = ref(null)
 const buttonRef = ref(null)
 
 const { createRemoteList } = useLists()
-const { $gsap } = useNuxtApp()
 
 const newListName = ref('')
 const creatingList = ref(false)
@@ -103,37 +103,27 @@ async function createList () {
 function enter (el, done) {
   inputRef.value?.$el.focus()
   nextTick(() => {
-    $gsap.set(el, { position: 'absolute', transformOrigin: 'center' })
-    $gsap.from(el, {
-      scale: 0.9,
-      autoAlpha: 0,
-      clearProps: true,
-      // y: -5,
-      duration: 0.25,
-      ease: 'power1.out',
-      onComplete: () => {
-        $gsap.set(el, {
-          // position: 'relative',
-          maxWidth: maxWidthStyles.value + 'px'
-        })
-        inputRef.value?.$el.focus()
-        done()
-      }
-    })
+    timeline([
+      [el, { position: 'absolute', transformOrigin: 'center', scale: 0.9, opacity: 0 }, { duration: 0 }],
+      [el, { scale: 1, opacity: 1 }, { duration: 0.25, easing: [0.85, 1.5, 0.15, 1.4] }]
+    ])
+    // TODO: complete event
+    setTimeout(() => {
+      animate(el, { position: 'absolute' }, { duration: 0 })
+      inputRef.value?.$el.focus()
+      done()
+    }, 250)
   })
 }
 
 function leave (el, done) {
-  $gsap.set(el, { position: 'absolute', transformOrigin: 'center' })
-  $gsap.to(el, {
-    // position: 'absolute',
-    scale: 0.9,
-    autoAlpha: 0,
-    // y: -5,
-    clearProps: true,
-    duration: 0.25,
-    ease: 'power1.out',
-    onComplete: done
-  })
+  timeline([
+    [el, { transformOrigin: 'center' }, { duration: 0 }],
+    [el, { scale: 0.9, opacity: 0 }, { duration: 0.25, easing: [0.85, 0, 0.15, 1] }]
+  ])
+  // TODO: complete event
+  setTimeout(() => {
+    done()
+  }, 250)
 }
 </script>

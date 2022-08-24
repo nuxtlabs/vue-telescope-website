@@ -45,11 +45,11 @@
 
 <script setup lang="ts">
 import type { Ref } from 'vue'
+import { animate, timeline } from 'motion'
 import type { User } from '~/types'
 
 const { getProviderAuthenticationUrl, logout } = useStrapiAuth()
 const user = useStrapiUser() as Ref<User>
-const { $gsap } = useNuxtApp()
 const route = useRoute()
 
 const wrapperRef = ref(null)
@@ -73,45 +73,21 @@ function onLogout () {
 }
 
 function openMenuAnimation () {
-  $gsap.set(wrapperRef.value, {
-    transformOrigin: 'top right'
-  })
-  $gsap.fromTo(
-    wrapperRef.value,
-    {
-      // borderRadius: '20px',
-      opacity: 0,
-      scale: 0.75,
-      y: -15
-    },
-    {
-      // borderRadius: '8px',
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      duration: 0.3,
-      ease: 'elastic.out(1.9, 1.7)'
-      // ease: 'expo.outIn'
-    }
-  )
+  // TODO: why spring does not work
+  timeline([
+    [wrapperRef.value, { transformOrigin: 'top right', opacity: 0, scale: 0.75, y: -15 }, { duration: 0 }],
+    [wrapperRef.value, { opacity: 1, scale: 1, y: 0 }, { duration: 0.2, easing: [0.2, 1.2, 0.2, 1.2] }]
+  ])
 }
 function closeMenu () {
-  $gsap.to(wrapperRef.value, {
-    // borderRadius: '20px',
-    opacity: 0,
-    scale: 0.75,
-    y: -15,
-    duration: 0.2,
-    ease: 'none',
-    onComplete: () => {
-      emit('close-menu')
-    }
-  })
+  // TODO: complete event
+  animate(wrapperRef.value, { opacity: 0, scale: 0.75, y: -15 }, { duration: 0.2, easing: 'linear' })
+  setTimeout(() => {
+    emit('close-menu')
+  }, 200)
 }
 
 onMounted(() => {
-  setTimeout(() => {
-    openMenuAnimation()
-  }, 16)
+  openMenuAnimation()
 })
 </script>

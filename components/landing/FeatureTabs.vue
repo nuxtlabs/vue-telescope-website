@@ -91,13 +91,12 @@ const tabs = [
   }
 ]
 
-const timeout = 5000
+const autoSwitchTimeout = 5000
 
 const transitioning = ref(false)
 const activeTabs = ref([tabs[0]])
 const autoInterval = ref(null)
 
-//  refs
 const contentRef = ref([])
 
 async function startManualTransition (tab) {
@@ -109,7 +108,7 @@ async function startManualTransition (tab) {
       clearInterval(autoInterval.value)
       autoInterval.value = setInterval(() => {
         animateSwitchTabs(getNextTab())
-      }, timeout)
+      }, autoSwitchTimeout)
     }, 2000)
   }
 }
@@ -131,6 +130,6 @@ function getNextTab () {
 onMounted(() => {
   autoInterval.value = setInterval(() => {
     animateSwitchTabs(getNextTab())
-  }, timeout)
+  }, autoSwitchTimeout)
 })
 </script>

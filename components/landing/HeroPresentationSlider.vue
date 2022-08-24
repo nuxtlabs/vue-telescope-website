@@ -1,6 +1,6 @@
 <template>
   <div ref="heroPresentationSliderRef" class="relative w-full opacity-0">
-    <div class="relative flex items-center justify-center w-full px-4">
+    <div class="fade-hack relative flex items-center justify-center w-full px-4">
       <div
         v-for="({ id }, i) in featured"
         :key="id"
@@ -50,12 +50,11 @@
 </template>
 
 <script setup lang="ts">
+import { animate, scroll } from 'motion'
 import type { Showcase } from '~/types'
 
 import ArrowLeftIcon from '@/assets/icons/arrow-left.svg'
 import ArrowRightIcon from '@/assets/icons/arrow-right.svg'
-
-const { $gsap } = useNuxtApp()
 
 const activeIndex = ref(2)
 const activeShowcases = ref([])
@@ -86,26 +85,33 @@ function changeSlide (i: number) {
 }
 
 onMounted(() => {
-  $gsap.fromTo(
-    heroPresentationSliderRef.value,
-    {
-      opacity: 0,
-      scale: 0.75,
-      y: '15px'
-    },
-    {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      duration: 0.45,
-      delay: 0.9,
-      ease: 'power4.inOut'
-    }
-  )
+  // timeline([
+  //   [heroPresentationSliderRef.value, { opacity: 0, scale: 0.75, filter: 'blur(20px)' }, { duration: 0 }],
+  //   [heroPresentationSliderRef.value, { opacity: 1, scale: 1, filter: 'blur(0px)' }, { duration: 0.5, easing: 'ease-in-out' }]
+  // ])
+  setTimeout(() => {
+    scroll(animate(heroPresentationSliderRef.value, { opacity: [0, 1], y: [-50, 0], scale: [0.9, 1], filter: ['blur(20px)', 'blur(0px)'] }), {
+      target: heroPresentationSliderRef.value,
+      offset: ['start end', 'end end']
+    })
+  }, 500)
 })
 </script>
 
-<style>
+<style scoped>
+.fade-hack {
+  animation: fade-in 1500ms linear 600ms;
+}
+
+@keyframes fade-in {
+  1% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .slide-1 {
   left: -15%;
   top: 0;
@@ -139,6 +145,7 @@ onMounted(() => {
 .slide-2,
 .slide-4 {
   transform: scale(0.75);
+  /* width: 350px; */
 }
 
 .contrast-blend {

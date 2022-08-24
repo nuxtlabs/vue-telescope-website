@@ -4,7 +4,6 @@
       <div class="pt-8">
         <CreateListButton class="mb-2" />
 
-        <!-- ListsNav -->
         <span>
           <transition-group
             :css="false"
@@ -61,12 +60,11 @@
 </template>
 
 <script setup lang="ts">
+import { timeline } from 'motion'
 import type { Ref } from 'vue'
 import type { User } from '~/types'
 import AsideContentTemplate from '@/components/templates/AsideContentTemplate.vue'
-
 const user = useStrapiUser() as Ref<User>
-const { $gsap } = useNuxtApp()
 
 const {
   lists,
@@ -87,34 +85,27 @@ if (sortedLists.value[0]?.groups.length) {
 }
 
 function enterAnimation (el, done) {
-  $gsap.fromTo(
-    el,
-    {
-      opacity: 0,
-      y: -10
-    },
-    {
-      opacity: 1,
-      y: 0,
-      clearProps: true,
-      duration: 0.25,
-      onComplete: done
-    }
-  )
+  timeline([
+    [el, { opacity: 0, y: -10 }, { duration: 0 }],
+    [el, { opacity: 1, y: 0 }, { duration: 0.25, easing: 'linear' }]
+  ])
+  // TODO: complete event
+  setTimeout(() => {
+    // Fix bug with Popup positioning
+    el.style.transform = null
+    done()
+  }, 250)
 }
-function leaveAnimation (el, done) {
-  // this.$gsap.set(el, {
-  //   transformOrigin: 'left'
-  // })
-  $gsap.to(el, {
-    height: 0,
-    // y: 10,
-    opacity: 0,
-    duration: 0.25,
-    onComplete: done
-  })
+function leaveAnimation (el: HTMLElement, done) {
+  timeline([
+    [el, { height: `${el.offsetHeight}px`, opacity: 1 }, { duration: 0 }],
+    [el, { height: '0px', opacity: 0 }, { duration: 0.25, easing: 'linear' }]
+  ])
+  // TODO: complete event
+  setTimeout(() => {
+    done()
+  }, 250)
 }
-
 </script>
 
 <style>

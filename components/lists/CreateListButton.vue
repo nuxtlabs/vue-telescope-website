@@ -60,12 +60,12 @@
 </template>
 
 <script setup lang="ts">
+import { animate, timeline } from 'motion'
 import PlusIcon from '@/assets/icons/plus-circle.svg'
 import SaveIcon from '@/assets/icons/save.svg'
 import XmarkIcon from '@/assets/icons/xmark.svg'
 
 const { createRemoteList } = useLists()
-const { $gsap } = useNuxtApp()
 
 const inputRef = ref(null)
 
@@ -116,34 +116,27 @@ async function createList () {
 function enter (el: HTMLElement, done: Function) {
   inputRef.value?.$el.focus()
   nextTick(() => {
-    $gsap.set(el, { position: 'absolute', transformOrigin: 'left' })
-    $gsap.from(el, {
-      scale: 0.9,
-      autoAlpha: 0,
-      clearProps: true,
-      // y: -5,
-      duration: 0.25,
-      ease: 'power1.out',
-      onComplete: () => {
-        $gsap.set(el, { position: 'relative' })
-        inputRef.value?.$el.focus()
-        done()
-      }
-    })
+    timeline([
+      [el, { position: 'absolute', transformOrigin: 'left', scale: 0.9, opacity: 0 }, { duration: 0 }],
+      [el, { scale: 1, opacity: 1 }, { duration: 0.25, easing: [0.76, 0, 0.24, 1] }]
+    ])
+    // TODO: handle complete event
+    setTimeout(() => {
+      animate(el, { position: 'relative' }, { duration: 0 })
+      inputRef.value?.$el.focus()
+      done()
+    }, 250)
   })
 }
 
 function leave (el: HTMLElement, done: Function) {
-  $gsap.set(el, { transformOrigin: 'left' })
-  $gsap.to(el, {
-    // position: 'absolute',
-    scale: 0.9,
-    autoAlpha: 0,
-    // y: -5,
-    clearProps: true,
-    duration: 0.25,
-    ease: 'power1.out',
-    onComplete: () => done()
-  })
+  timeline([
+    [el, { transformOrigin: 'left' }, { duration: 0 }],
+    [el, { scale: 0.9, opacity: 0 }, { duration: 0.25, easing: [0.76, 0, 0.24, 1] }]
+  ])
+  // TODO: handle complete event
+  setTimeout(() => {
+    done()
+  }, 250)
 }
 </script>

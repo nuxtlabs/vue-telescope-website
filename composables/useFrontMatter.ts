@@ -84,7 +84,7 @@ export const useFrontMatter = ({
       ...themeMeta({
         primaryColor: color.primary,
         secondaryColor: color.secondary,
-        themeColor: color.primary
+        themeColor: color.secondary
       }),
       ...msAppleMeta({ name }),
       ...baseOpenGraph({

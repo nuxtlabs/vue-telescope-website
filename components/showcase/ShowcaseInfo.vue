@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div class="xl:px-8">
     <div class="mb-10 mt-8">
-      <div class="label mb-4 xl:px-8">
+      <div class="label mb-4">
         <ShowcaseInfoLabel>
           <InfoIcon class="h-5 mr-2 opacity-50" />Info
         </ShowcaseInfoLabel>
       </div>
-      <div class="data-wrapper flex flex-wrap xl:px-8">
+      <div class="showcase-info-item-wrapper grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-2 gap-4">
         <ShowcaseInfoItem
           label="Vue Version"
           tag="a"
@@ -58,7 +58,7 @@
           <PluginsIcon class="h-6 mr-2 opacity-50" />Plugins
         </ShowcaseInfoLabel>
       </div>
-      <div class="data-wrapper flex flex-wrap xl:px-8">
+      <div class="showcase-info-item-wrapper flex flex-wrap xl:px-8">
         <ShowcaseInfoItem
           v-for="{ name, id, url } in showcase.plugins"
           :key="id"
@@ -79,7 +79,7 @@
         </ShowcaseInfoLabel>
       </div>
 
-      <div class="data-wrapper flex flex-wrap xl:px-8">
+      <div class="showcase-info-item-wrapper flex flex-wrap xl:px-8">
         <ShowcaseInfoItem
           v-for="{ name, id, url } in showcase.modules"
           :key="id"
@@ -114,7 +114,7 @@ defineProps({
 
 <style scoped lang="postcss">
 /* Styles for usage in Floating View Modal */
-.floating-view .data-wrapper {
+.floating-view .showcase-info-item-wrapper {
   @apply px-8;
 }
 .floating-view .label {

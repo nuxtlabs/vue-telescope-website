@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex flex-col">
+  <div class="relative flex flex-col overflow-hidden">
     <div v-click-outside="clickOutsideHandler" class="relative flex group">
       <div
         ref="nameRef"
@@ -97,25 +97,26 @@
     <!-- Group Collapsible -->
     <transition :css="false" @enter="enter" @leave="leave">
       <div v-if="openCollapse">
-        <div>
-          <GroupNavItem
-            v-for="group in reversedListGroups"
-            :key="group.id"
-            :group="group"
-            :list="list"
-            tabindex="0"
-            class="pl-6"
-            @group-selected="groupSelectionHandler($event, group)"
-          />
+        <!-- <div> -->
+        <GroupNavItem
+          v-for="group in reversedListGroups"
+          :key="group.id"
+          :group="group"
+          :list="list"
+          tabindex="0"
+          class="pl-6"
+          @group-selected="groupSelectionHandler($event, group)"
+        />
 
-          <CreateGroupButton :list="list" @cleanup="clearActions" />
-        </div>
+        <CreateGroupButton :list="list" @cleanup="clearActions" />
+        <!-- </div> -->
       </div>
     </transition>
   </div>
 </template>
 
 <script setup lang="ts">
+import { animate, timeline } from 'motion'
 import type { PropType } from 'vue'
 import type { List } from '~/types'
 
@@ -138,7 +139,6 @@ const {
   updateRemoteList
 } = useLists()
 const { isMobile } = useUserAgent()
-const { $gsap } = useNuxtApp()
 
 const loading = ref(false)
 // const clicked = 0
@@ -156,7 +156,7 @@ const props = defineProps({
 })
 
 const isSelected = computed(() => {
-  return selectedList.value && selectedList.value.id === props.list.id
+  return selectedList.value?.id === props.list.id
 })
 
 const reversedListGroups = computed(() => {
@@ -170,14 +170,10 @@ const reversedListGroups = computed(() => {
 watch(selectedList, (newValue) => {
   if (newValue && newValue.id !== props.list.id && openCollapse.value) {
     openCollapse.value = false
-  }
-})
-
-onMounted(() => {
-  if (selectedList.value.id === props.list.id) {
+  } else if (selectedList.value?.id === props.list.id) {
     openCollapse.value = true
   }
-})
+}, { immediate: true })
 
 function openDropdown () {
   showPopup.value = !showPopup.value
@@ -271,28 +267,28 @@ function groupSelectionHandler ($event, group) {
 
 function enter (el, done) {
   nextTick(() => {
-    $gsap.set(el, { height: 'auto' })
-    $gsap.from(el, {
-      height: 0,
-      autoAlpha: 0,
-      clearProps: true,
-      // y: -5,
-      duration: 0.25,
-      ease: 'power1.out',
-      onComplete: done
-    })
+    const h = el.offsetHeight
+    timeline([
+      [el, { height: '0px', opacity: 0 }, { duration: 0 }],
+      [el, { height: `${h}px`, opacity: 1 }, { duration: 0.25, easing: 'linear' }]
+    ])
+    // TODO: complete event
+    // Weird timing because of Safari bug
+    setTimeout(() => {
+      animate(el, { height: 'auto' }, { duration: 0 })
+      done && done()
+    }, 266)
   })
 }
 
 function leave (el, done) {
-  $gsap.to(el, {
-    height: 0,
-    autoAlpha: 0,
-    // y: -5,
-    clearProps: true,
-    duration: 0.25,
-    ease: 'power1.out',
-    onComplete: done
-  })
+  timeline([
+    [el, { height: `${el.offsetHeight}px`, opacity: 0 }, { duration: 0.25, easing: 'linear' }],
+    [el, { height: '0px' }, { duration: 0 }]
+  ])
+  // TODO: complete event
+  setTimeout(() => {
+    done()
+  }, 250)
 }
 </script>

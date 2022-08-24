@@ -14,13 +14,12 @@
       <div class="h-full md:h-auto md:m-4 pointer-events-none">
         <div
           ref="modalContainerRef"
-          style="opacity: 0"
           :class="[
             compact
               ? 'max-w-readable'
               : 'max-w-readable xl:max-w-container min-h-screen'
           ]"
-          class="pointer-events-auto h-full relative md:h-auto bg-white m-auto md:mt-12 md:rounded-xl overflow-auto md:overflow-hidden overflow-x-hidden shadow-lg"
+          class="opacity-0 pointer-events-auto h-full relative md:h-auto bg-white m-auto md:mt-12 md:rounded-xl overflow-auto md:overflow-hidden overflow-x-hidden shadow-lg"
         >
           <div
             class="absolute top-0 right-0 z-10 p-4 cursor-pointer pointer-events-auto"
@@ -43,6 +42,7 @@
 </template>
 
 <script setup lang="ts">
+import { animate, timeline } from 'motion'
 import XmarkCircleIcon from '@/assets/icons/xmark-circle.svg'
 
 const { setModal } = useModal()
@@ -67,7 +67,6 @@ defineProps({
 })
 
 const { isMobile } = useUserAgent()
-const { $gsap } = useNuxtApp()
 const { bodyLock, bodyUnlock } = useBodyLock()
 
 useEsc(() => emit('close'))
@@ -77,34 +76,16 @@ const modalContainerRef = ref(null)
 
 function animateEnter () {
   if (!isMobile.value) {
-    $gsap.fromTo(
-      scrimRef.value,
-      {
-        opacity: 0
-      },
-      {
-        opacity: 1,
-        duration: 0.2,
-        ease: 'none',
-        onComplete: () => {}
-      }
-    )
+    timeline([
+      [scrimRef.value, { opacity: 0 }, { duration: 0 }],
+      [scrimRef.value, { opacity: 1 }, { duration: 0.2, easing: 'linear' }]
+    ])
   }
 
-  // old
-  $gsap.set(modalContainerRef.value, {
-    transformOrigin: 'bottom',
-    opacity: 1
-  })
-  $gsap.from(modalContainerRef.value, {
-    // scaleY: 0.99,
-    opacity: 0,
-    y: -10,
-    scale: 0.97,
-    // x: 10,
-    duration: 0.2,
-    ease: 'none'
-  })
+  timeline([
+    [modalContainerRef.value, { transformOrigin: 'bottom', opacity: 0, y: '-10px', scale: 0.98 }, { duration: 0 }],
+    [modalContainerRef.value, { opacity: 1, y: 0, scale: 1 }, { duration: 0.2, easing: 'linear' }]
+  ])
 }
 
 onMounted(() => {

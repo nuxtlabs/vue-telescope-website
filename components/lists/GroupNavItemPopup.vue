@@ -9,6 +9,24 @@
           <ShareIcon class="w-4 h-4" />
         </button>
       </li> -->
+      <li v-if="up" class="py-2px">
+        <button
+          title="Move up"
+          class="flex items-center justify-center w-8 h-8 p-1 transform rotate-180 rounded-lg focus:outline-none bg-grey-50 has-hover:hover:scale-110"
+          @click="emit('up')"
+        >
+          <DownIcon class="w-3 h-3" />
+        </button>
+      </li>
+      <li v-if="down" class="py-2px">
+        <button
+          title="Move down"
+          class="flex items-center justify-center w-8 h-8 p-1 transform rounded-lg focus:outline-none bg-grey-50 has-hover:hover:scale-110"
+          @click="emit('down')"
+        >
+          <DownIcon class="w-3 h-3" />
+        </button>
+      </li>
       <li class="py-2px">
         <button
           title="Rename"
@@ -36,35 +54,16 @@
           <DeleteIcon class="w-4 h-4" />
         </button>
       </li>
-      <li v-if="up" class="py-2px">
-        <button
-          title="Move up"
-          class="flex items-center justify-center w-8 h-8 p-1 transform rotate-180 rounded-lg focus:outline-none bg-grey-50 has-hover:hover:scale-110"
-          @click="emit('up')"
-        >
-          <DownIcon class="w-4 h-4" />
-        </button>
-      </li>
-      <li v-if="down" class="py-2px">
-        <button
-          title="Move down"
-          class="flex items-center justify-center w-8 h-8 p-1 transform rounded-lg focus:outline-none bg-grey-50 has-hover:hover:scale-110"
-          @click="emit('down')"
-        >
-          <DownIcon class="w-4 h-4" />
-        </button>
-      </li>
     </ul>
   </div>
 </template>
 
 <script setup lang="ts">
+import { timeline, stagger } from 'motion'
 // import ShareIcon from '@/assets/icons/share.svg'
 import EditIcon from '@/assets/icons/edit.svg'
 import DeleteIcon from '@/assets/icons/trash.svg'
 import DownIcon from '@/assets/icons/arrow-down.svg'
-
-const { $gsap } = useNuxtApp()
 
 const menuRef = ref(null)
 
@@ -84,21 +83,10 @@ defineProps({
 const deleting = ref(false)
 
 onMounted(() => {
-  $gsap.fromTo(
-    menuRef.value?.children,
-    {
-      opacity: 0,
-      scale: 0.8,
-      x: -5
-    },
-    {
-      opacity: 1,
-      scale: 1,
-      x: 0,
-      stagger: 0.075,
-      duration: 0.5,
-      ease: 'elastic.out(1.5, 0.5)'
-    }
-  )
+  timeline([
+    [menuRef.value?.children, { opacity: 0, scale: 0.8, x: -5 }, { duration: 0 }],
+    // TODO: spring does not work
+    [menuRef.value?.children, { opacity: 1, scale: 1, x: 0 }, { duration: 0.3, delay: stagger(0.05), easing: [0.16, 1, 0.3, 1] }]
+  ])
 })
 </script>

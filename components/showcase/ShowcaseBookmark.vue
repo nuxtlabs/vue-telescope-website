@@ -47,14 +47,12 @@
       </button>
     </div>
 
-    <!-- <transition name="fade"> -->
     <ShowcaseBookmarkMenu
       v-if="isBookmarking"
       :showcase="showcase"
       :compact="compact"
       @close="isBookmarking = false"
     />
-    <!-- </transition> -->
   </div>
 </template>
 
@@ -113,22 +111,3 @@ function closeMenu () {
   if (props.compact) { isBookmarking.value = false }
 }
 </script>
-
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition-duration: 250ms;
-  transition-property: opacity, transform;
-  transition-timing-function: ease;
-}
-
-.fade-enter {
-  opacity: 0;
-  /*transform: scale(0.98);*/
-}
-
-.fade-leave-active {
-  opacity: 0;
-  /*transform: scale(0.98);*/
-}
-</style>

@@ -32,37 +32,32 @@
 </template>
 
 <script setup lang="ts">
+import { timeline } from 'motion'
+
 const { sortedLists } = useLists()
-const { $gsap } = useNuxtApp()
 
 const show = ref(false)
 
 function enterAnimation (el, done) {
-  $gsap.fromTo(
-    el,
-    {
-      opacity: 0,
-      y: -10
-    },
-    {
-      opacity: 1,
-      y: 0,
-      clearProps: true,
-      duration: 0.25,
-      onComplete: done
-    }
-  )
+  timeline([
+    [el, { opacity: 0, y: -10 }, { duration: 0 }],
+    [el, { opacity: 1, y: 0 }, { duration: 0.25, easing: 'linear' }]
+  ])
+  // TODO: complete event
+  setTimeout(() => {
+    // Fix bug with Popup positioning
+    el.style.transform = null
+    done()
+  }, 250)
 }
 function leaveAnimation (el, done) {
-  // this.$gsap.set(el, {
-  //   transformOrigin: 'left'
-  // })
-  $gsap.to(el, {
-    height: 0,
-    // scale: 0.9,
-    opacity: 0,
-    duration: 0.25,
-    onComplete: done
-  })
+  timeline([
+    [el, { height: `${el.offsetHeight}px`, opacity: 1 }, { duration: 0 }],
+    [el, { height: '0px', opacity: 0 }, { duration: 0.25, easing: 'linear' }]
+  ])
+  // TODO: complete event
+  setTimeout(() => {
+    done()
+  }, 250)
 }
 </script>
