@@ -109,7 +109,7 @@ function leave () {
       animate(fingerprintRef.value, { fill: 'transparent' }, { duration: 0.25, easing: 'linear' })
       animate(fingerprintRef.value, draw(0), { duration: 0.5, easing: [0, 1, 1, 1] })
 
-      // TODO: real issue with Motion One, how to detect complete event?
+      // TODO: complete event
       setTimeout(() => {
         resolve()
       }, 500)

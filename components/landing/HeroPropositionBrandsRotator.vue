@@ -35,7 +35,7 @@ const brandRef = ref()
 
 const config = useRuntimeConfig().public
 
-const timeout = 500000
+const timeout = 5000
 const rotationInterval = ref(null)
 const brands = ref([
   { slug: 'vue', name: 'Vue.js', active: true, imgPath: '/vue.svg' },

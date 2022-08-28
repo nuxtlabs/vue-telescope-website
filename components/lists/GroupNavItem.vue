@@ -124,12 +124,12 @@ const isSelected = computed(() => {
 })
 
 const canMoveUp = computed(() => {
-  // TODO: fix
+  // TODO: fix asap
   return isSelected.value && props.list.groups[0].id !== props.group.id
 })
 
 const canMoveDown = computed(() => {
-  // TODO: fix
+  // TODO: fix asap
   return (
     isSelected.value &&
     props.list.groups[props.list.groups.length - 1].id !== props.group.id

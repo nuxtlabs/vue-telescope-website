@@ -120,7 +120,7 @@ function enter (el: HTMLElement, done: Function) {
       [el, { position: 'absolute', transformOrigin: 'left', scale: 0.9, opacity: 0 }, { duration: 0 }],
       [el, { scale: 1, opacity: 1 }, { duration: 0.25, easing: [0.76, 0, 0.24, 1] }]
     ])
-    // TODO: handle complete event
+    // TODO: complete event
     setTimeout(() => {
       animate(el, { position: 'relative' }, { duration: 0 })
       inputRef.value?.$el.focus()
@@ -134,7 +134,7 @@ function leave (el: HTMLElement, done: Function) {
     [el, { transformOrigin: 'left' }, { duration: 0 }],
     [el, { scale: 0.9, opacity: 0 }, { duration: 0.25, easing: [0.76, 0, 0.24, 1] }]
   ])
-  // TODO: handle complete event
+  // TODO: complete event
   setTimeout(() => {
     done()
   }, 250)

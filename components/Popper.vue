@@ -27,7 +27,6 @@ import { createPopper } from '@popperjs/core'
 
 const props = defineProps({
   anchor: {
-    // TODO: ts, correct?
     type: (process.server ? Object : HTMLElement) as PropType<HTMLElement>,
     default: null
   },

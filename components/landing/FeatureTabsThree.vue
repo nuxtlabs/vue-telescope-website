@@ -129,7 +129,7 @@ function leave () {
 
       // Text
       animate(textRef.value, { opacity: 0, filter: 'blur(20px)' }, { duration: 0.5, easing: 'ease-in' })
-      // TODO: real issue with Motion One, how to detect complete event?
+      // TODO: complete event
       setTimeout(() => {
         resolve()
       }, 500)

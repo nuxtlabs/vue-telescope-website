@@ -153,7 +153,7 @@ watch(
         }, { duration: 0.75, easing: [0.85, 0, 0.15, 1] }]
       ])
 
-      // TODO: should be in onComplete
+      // TODO: complete event
       setTimeout(() => {
         activeShowcases.value.shift()
       }, 750)

@@ -20,7 +20,6 @@ export const useLists = () => {
 
   const selectedShowcases = computed(() => {
     // TODO: bug when update group name
-    // console.log('selectedShowcases', selectedGroup.value.showcases[0])
     return [...selectedGroup.value.showcases].sort(
       (a, b) => a.position - b.position
     )

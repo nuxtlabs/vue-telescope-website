@@ -121,7 +121,7 @@ function animateEnter () {
       [scrimRef.value, { opacity: 0 }, { duration: 0 }],
       [scrimRef.value, { opacity: 1 }, { duration: 0.2, easing: 'linear' }]
     ])
-    // TODO: handle complete event
+    // TODO: complete event
     setTimeout(() => {
       if (isSafari.value) {
         // modalContainerRef.value.style.height = 'calc(100vh - var(--header-height))'
@@ -139,7 +139,7 @@ function animateEnter () {
 function animateLeave () {
   animate(scrimRef.value, { opacity: 0 }, { duration: 0.25, easing: 'linear' })
   animate(modalContainerRef.value, { y: '100%' }, { duration: 0.25, easing: [0.16, 1, 0.3, 1] })
-  // TODO: handle complete event
+  // TODO: complete event
   setTimeout(() => {
     emit('close')
   }, 250)
