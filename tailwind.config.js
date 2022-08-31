@@ -1,13 +1,16 @@
-// Docs: https://tailwindcss.com/docs/configuration
-// Default: https://github.com/tailwindcss/tailwindcss/blob/master/stubs/defaultConfig.stub.js
 const defaultTheme = require('tailwindcss/defaultTheme')
-const breakpoints = require('./utils/styles/breakpoints')
+// const breakpoints = require('./utils/styles/breakpoints')
+
+const breakpoints = {
+  xs: '320px',
+  sm: '640px',
+  md: '834px',
+  lg: '1024px',
+  xl: '1280px',
+  '2xl': '1536px'
+}
 
 module.exports = {
-  future: {
-    purgeLayersByDefault: true,
-    removeDeprecatedGapUtilities: true
-  },
   theme: {
     screens: {
       ...breakpoints,
@@ -201,8 +204,11 @@ module.exports = {
     },
     extend: {
       fontFamily: {
+        // @ts-expect-error
         display: ['PTRootUI', ...defaultTheme.fontFamily.sans],
+        // @ts-expect-error
         body: ['PTRootUI', ...defaultTheme.fontFamily.sans],
+        // @ts-expect-error
         monospace: [...defaultTheme.fontFamily.mono]
       },
       maxWidth: {
@@ -221,6 +227,12 @@ module.exports = {
         10: '0.1'
       },
       spacing: {
+        header: 'var(--header-height)',
+        'top-position': 'var(--top-position)',
+        '(full-header)': 'calc(100% - var(--header-height))',
+        '(screen-header)': 'calc(100vh - var(--header-height))',
+        '(full-top-position)': 'calc(100% - var(--top-position))',
+        '(screen-top-position)': 'calc(100vh - var(--top-position))',
         '2px': '2px',
         '3px': '3px',
         '4px': '4px',
@@ -285,10 +297,10 @@ module.exports = {
         '24dp':
           '0 24px 38px 3px rgba(0,0,0,0.13), 0 9px 46px 8px rgba(0,0,0,0.11), 0 11px 15px -7px rgba(0,0,0,0.10)'
       },
-      stroke: (theme) => ({
+      stroke: theme => ({
         primary: theme('colors.primary.500')
       }),
-      fill: (theme) => ({
+      fill: theme => ({
         primary: theme('colors.primary.500')
       })
     }
@@ -301,33 +313,18 @@ module.exports = {
     backgroundColor: ['responsive', 'hover', 'focus', 'group-hover'],
     borderColor: ['responsive', 'hover', 'focus', 'group-hover']
   },
-  // plugins: [],
-  purge: {
-    // Learn more on https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
-    enabled: process.env.NODE_ENV === 'production',
-    content: [
-      'content/**/*.md',
-      'components/**/*.vue',
-      'layouts/**/*.vue',
-      'pages/**/*.vue',
-      'plugins/**/*.js',
-      'nuxt.config.js'
-    ],
-    options: {
-      whitelist: [
-        'bg-nuxtjs-light',
-        'bg-nuxtjs-base',
-        'text-nuxtjs-base',
-        'bg-quasar-base',
-        'text-quasar-base',
-        'bg-gridsome-base',
-        'text-gridsome-base',
-        'bg-vuepress-base',
-        'text-vuepress-base',
-        'bg-vue-base',
-        'text-vue-base',
-        'bg-tailwind-css-light'
-      ]
-    }
-  }
+  safelist: [
+    'bg-nuxtjs-light',
+    'bg-nuxtjs-base',
+    'text-nuxtjs-base',
+    'bg-quasar-base',
+    'text-quasar-base',
+    'bg-gridsome-base',
+    'text-gridsome-base',
+    'bg-vuepress-base',
+    'text-vuepress-base',
+    'bg-vue-base',
+    'text-vue-base',
+    'bg-tailwind-css-light'
+  ]
 }

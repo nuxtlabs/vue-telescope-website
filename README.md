@@ -1,35 +1,34 @@
-# vue-telescope-website
+# Vue Telescope
 
-> Curated list of Vue websites on [vuetelescope.com](https://vuetelescope.com)
+![Vue Telescope](https://vuetelemetry.com/branding/og-image.jpg)
 
-## Installation
+Front-end for [Vue Telescope](https://vuetelescope.com) database. Reveal the plugins and technology stack powering any Vue.js website!
 
-Make sure to have [Yarn](https://classic.yarnpkg.com/en/) installed.
+Now rebuild with latest web technologies:
 
-After cloning the repository, install the dependencies:
+- [Vue 3](https://vuejs.org) with Composition API ✨
+- [Nuxt 3](https://v3.nuxtjs.org) 🚀
+- [Nuxt Content 2](https://content.nuxtjs.org) ✍️
+- [Tailwind 3](https://tailwindcss.com) 🎨
+- [Typescript](https://typescriptlang.org) 🤖
+- [Motion One](https://motion.dev/) 🪩
+
+## Setup
+
+Make sure to install the dependencies
 
 ```bash
 yarn install
 ```
 
-You also need to have Netlify CLI installed:
-
-```bash
-yarn global add netlify-cli
-```
+Now copy `.env.example` to `.env`.
 
 ## Development
 
-```bash
-netlify dev
-```
-
-Then go to [http://localhost:8888](http://localhost:8888).
-
-## Build Setup
+Start the development server on http://localhost:3000
 
 ```bash
-yarn generate
+yarn dev
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+NOTE: If you need to use authentication features, you will need to manually replace `https://vuetelescope.com` with `http://localhost:3000` on GitHub URL callback.

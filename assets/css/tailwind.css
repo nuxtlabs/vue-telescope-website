@@ -1,13 +1,11 @@
-/* purgecss start ignore */
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-/* purgecss end ignore */
-@import 'tailwindcss/utilities';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @font-face {
   font-family: 'PTRootUI';
-  src: url('~assets/fonts/PTRootUI/PTRootUI-Regular.woff2') format('woff2'),
-    url('~assets/fonts/PTRootUI/PTRootUI-Regular.woff') format('woff');
+  src: url('/assets/fonts/PTRootUI/PTRootUI-Regular.woff2') format('woff2'),
+    url('/assets/fonts/PTRootUI/PTRootUI-Regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -15,66 +13,67 @@
 
 @font-face {
   font-family: 'PTRootUI';
-  src: url('~assets/fonts/PTRootUI/PTRootUI-Bold.woff2') format('woff2'),
-    url('~assets/fonts/PTRootUI/PTRootUI-Bold.woff') format('woff');
+  src: url('/assets/fonts/PTRootUI/PTRootUI-Bold.woff2') format('woff2'),
+    url('/assets/fonts/PTRootUI/PTRootUI-Bold.woff') format('woff');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
-html {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+:root {
+  --scrim-filter: saturate(200%) blur(20px);
+  --header-height: theme('spacing.16');
+  --top-position: calc(var(--header-height) + theme('spacing.8'));
 }
 
-.truncate-multiline-2 {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+body {
+  -webkit-tap-highlight-color: transparent;
 }
 
-.truncate-multiline-3 {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-}
-
-.custom .vue-content-placeholders-text__line {
-  height: 100% !important;
-  width: 100% !important;
-  margin-bottom: 0 !important;
-}
-
-.custom.relative .vue-content-placeholders-text__line {
-  position: absolute;
-  height: 100% !important;
-  width: 100% !important;
-  margin-bottom: 0 !important;
-}
-
-.vue-content-placeholders-text__line {
-  background: theme('colors.grey.50') !important;
-  overflow: hidden !important;
-}
-
-.vue-content-placeholders-is-animated
-  .vue-content-placeholders-text__line::before {
-  background: linear-gradient(
-    to right,
-    theme('colors.grey.50') 0%,
-    /* #dafdf4 15%, */ theme('colors.grey.50') 15%,
-    theme('colors.grey.50') 30%
-  ) !important;
-}
-
-@keyframes scale {
-  from {
-    transform: scale(0.75) translateY(15px);
-    opacity: 0;
+.prose {
+  & a {
+    @apply text-primary-500;
+    &:hover {
+      @apply underline;
+    }
   }
-  to {
-    transform: scale(1);
-    opacity: 1;
+  & .item-website li a,
+  & .item-website p a {
+    @apply text-blue-500;
   }
+  & .item-analyzer li a,
+  & .item-analyzer p a {
+    @apply text-orange-500;
+  }
+  & h2, h3 {
+    a {
+      @apply pointer-events-none text-grey-900;
+    }
+  }
+  & h2 {
+    @apply mt-6 mb-4 text-five leading-five font-display-weight;
+  }
+  & h3 {
+    @apply mt-6 mb-4 text-six leading-six font-display-weight;
+  }
+  & p {
+    @apply mb-4;
+  }
+  & ul {
+    @apply mb-4 list-disc list-inside;
+
+    & > li {
+      @apply mb-1;
+    }
+  }
+  & img {
+    @apply mb-4;
+  }
+  & code {
+    @apply px-1 py-1 text-sm bg-white bg-opacity-50 rounded-lg;
+  }
+}
+
+.safari-radii-hack {
+  isolation: isolate;
 }

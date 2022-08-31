@@ -53,8 +53,10 @@ typings/
 # Output of 'npm pack'
 # *.tgz
 
-# Yarn Integrity file
+# Yarn
 .yarn-integrity
+.yarn/cache
+.yarn/*state*
 
 # dotenv environment variables file
 .env
@@ -65,11 +67,11 @@ typings/
 # next.js build output
 .next
 
-# nuxt.js build output
+# nuxt.js
 .nuxt
-
-# Nuxt generate
+nuxt.d.ts
 dist
+.output
 
 # vuepress build output
 .vuepress/dist
@@ -89,3 +91,10 @@ sw.*
 
 # Vim swap files
 *.swp
+
+package-lock.json
+framework
+
+.turbo
+
+.history

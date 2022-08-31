@@ -1,27 +1,34 @@
 <template>
-  <div></div>
+  <div />
 </template>
 
-<script>
-export default {
-  layout: 'empty',
-  middleware: 'guest',
-  fetchOnServer: false,
-  async fetch() {
-    try {
-      const { jwt } = await this.$strapi.$http.$get('/auth/github/callback', {
-        searchParams: {
-          access_token: this.$route.query.access_token
-        }
-      })
+<script setup lang="ts">
+import type { Ref } from 'vue'
+import type { StrapiAuthProvider } from '@nuxtjs/strapi/dist/runtime/types'
+import type { User } from '~/types'
 
-      this.$strapi.setToken(jwt)
+const { authenticateProvider } = useStrapiAuth()
+const user = useStrapiUser() as Ref<User>
+const route = useRoute()
+const router = useRouter()
+const { setLists } = useLists()
 
-      await this.$strapi.fetchUser()
-      this.$store.commit('collections/setCollections', this.$strapi.user.lists)
+onMounted(async () => {
+  try {
+    await authenticateProvider('github' as StrapiAuthProvider, route.query.access_token as string)
 
-      this.$router.push(this.$strapi.$cookies.get('redirect') || '/explore')
-    } catch (e) {}
+    const redirect = useCookie('redirect')
+    if (redirect.value) {
+      if (user.value) {
+        setLists(user.value.lists)
+      }
+      router.push(redirect.value)
+      redirect.value = null
+    } else {
+      router.push('/')
+    }
+  } catch (e) {
+    router.push('/')
   }
-}
+})
 </script>
