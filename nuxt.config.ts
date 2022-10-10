@@ -5,7 +5,8 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/strapi',
-    'nuxt-svgo'
+    'nuxt-svgo',
+    'vue-plausible'
   ],
   strapi: {
     prefix: '',
@@ -25,7 +26,10 @@ export default defineNuxtConfig({
       'https://addons.mozilla.org/en-GB/firefox/addon/vue-telescope/',
     googleStoreUrl:
       'https://chrome.google.com/webstore/detail/vue-telescope/neaebjphlfplgdhedjdhcnpjkndddbpd',
-    edgeStoreUrl: 'https://microsoftedge.microsoft.com/addons/detail/vue-telescope/icgcillpgelpleniodgkmohgdmeogodl'
+    edgeStoreUrl: 'https://microsoftedge.microsoft.com/addons/detail/vue-telescope/icgcillpgelpleniodgkmohgdmeogodl',
+    plausible: {
+      domain: 'vuetelescope.com'
+    }
   },
   svgo: {
     svgo: false
