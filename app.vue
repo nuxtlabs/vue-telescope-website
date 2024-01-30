@@ -1,18 +1,27 @@
-<template>
-  <div>
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
-    <PrivacyAwareModal v-if="privacyAwarenessCb" />
-  </div>
-</template>
-
 <script setup lang="ts">
-const { privacyAwarenessCb } = usePrivacyAwareness()
+useServerSeoMeta({
+  ogSiteName: 'NuxtLabs',
+  ogType: 'website',
+  twitterCard: 'summary_large_image',
+  twitterSite: 'nuxtlabs'
+})
+
+useHead({
+  meta: [
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+  ],
+  link: [
+    { rel: 'icon', type: 'image/png', href: '/icon.png' }
+  ],
+  htmlAttrs: {
+    lang: 'en'
+  },
+  bodyAttrs: {
+    class: 'bg-slate-950'
+  }
+})
 </script>
 
-<style lang="postcss">
-body {
-  @apply font-body antialiased overflow-x-hidden overflow-y-scroll text-grey-900 min-w-body;
-}
-</style>
+<template>
+    <NuxtPage />
+</template>

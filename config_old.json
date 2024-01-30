@@ -1,0 +1,22 @@
+{
+  "domain": "vuetelescope.com",
+  "slug": "vuetelescope-com",
+  "name": "Vue Telescope",
+  "title": "Discover websites made with Vue.js",
+  "description": "Reveal the plugins and technology stack powering any Vue.js website",
+  "shortName": "VT",
+  "social": {
+    "facebook": null,
+    "twitter": "VueTelescope"
+  },
+  "appearance": {
+    "color": {
+      "primary": "#0BDCA0",
+      "secondary": "#E6FCF6"
+    }
+  },
+  "seo": {
+    "title": "Discover websites made with Vue.js",
+    "description": "Reveal the plugins and technology stack powering any Vue.js website"
+  }
+}
