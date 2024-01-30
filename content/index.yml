@@ -1,0 +1,37 @@
+navigation: false
+hero:
+  title: 'Discover websites<br/>made with <span class="text-green-400">Nuxt</span>'
+  description: Reveal the Vue plugins and technology stack powering any website or<br/>explore our database of 183 170 websites.
+feature:
+  title: 'Lorem ipsum dolor sit amet'
+  features:
+  - icon: 'i-simple-icons-vuedotjs'
+    title: 'Free To Use'
+    description: "Made for the Vue community by the Vue community! Join other Vue.js devs and explore websites for free."
+  - icon: 'i-ph-puzzle-piece'
+    title: 'Browser Extension'
+    description: "By clicking on the extention icon and you will see what framework the page is using, what UI/CSS library and so much more."
+  - icon: 'i-simple-icons-github'
+    title: 'Open Source'
+    description: "Vue Telescope is open source which means anyone can contribute as well as add new plugins."
+  - icon: 'i-ph-shield-check'
+    title: 'Respect Privacy'
+    description: "We highly respect your privacy and we don't collect any personal data."
+  - icon: 'i-ph-database'
+    title: 'Huge Database'
+    description: "Wonder what other sites are using Vue.js and it's ecosystem? You can use our database, that already has 183170 websites."
+  - icon: 'i-ph-plug'
+    title: 'Lorem ipsum dolor sit amet'
+    description: "Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam."
+extension:
+  title: Must-have tool for any Vue.js developer
+  description: "Vue Telescope can detect any website built with Vue.js frameworks, like Nuxt, Gridsome, Quasar or VuePress. It can also tell you which UI/CSS framework was used: TailwindCSS, Vuetify, Buefy etc. And much more!"
+  img:
+    width: '585'
+    height: '529'
+    src: '/images/extension.svg'
+showcase:
+  title: 'Suspendisse lectus tortor, dignissim sit.'
+  description: "Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor."
+cta:
+  title: Trusted and supported by our amazing community
