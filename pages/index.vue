@@ -53,7 +53,7 @@ const { data: page } = await useAsyncData('/', () => queryContent('/').findOne()
       <div class="grid grid-cols-4 gap-4 sm:grid-cols-5 lg:grid-cols-5 sm:gap-5 lg:gap-8">
         <NuxtLink v-for="(showcase, index) in page.showcase.showcases" :key="index" :to="showcase.to" target="_blank"
           class="flex justify-center block transition lg:hover:scale-110">
-          <img :src="showcase.src" :alt="showcase.alt" loading="lazy" class="rounded-xl" width="90" height="90">
+          <NuxtImg :src="showcase.src" :alt="showcase.alt" loading="lazy" class="rounded-xl" height="90" width="90" :placeholder="[90, 90, 75, 5]" />
         </NuxtLink>
       </div>
     </ULandingSection>
