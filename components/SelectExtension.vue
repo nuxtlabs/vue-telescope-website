@@ -23,7 +23,7 @@ const onChange = async (value: Extension) => {
 </script>
 
 <template>
-  <USelectMenu v-model="selected" :options="extensions" size="lg" class="w-60" :selected-icon="''" @change="onChange">
+  <USelectMenu v-model="selected" :options="extensions" size="lg" class="min-w-60" :selected-icon="''" @change="onChange">
     <UButton color="gray"
       class="justify-between flex-1 bg-transparent dark:bg-transparent hover:bg-transparent dark:hover:bg-transparent"
       :icon="selected.href" :leading-icon="selected.icon" size="lg">
